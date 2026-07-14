@@ -3,6 +3,7 @@ import { AuthProvider } from "@/lib/auth";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bobbleshelf.com"),
   title: "MLB Bobblehead Collection",
   description: "Every SGA bobblehead, every team. Track your collection.",
 };
