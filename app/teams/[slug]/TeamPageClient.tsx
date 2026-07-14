@@ -3,11 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { AuthWidget } from "@/components/AuthWidget";
+import { useApprovedPhotos } from "@/lib/approvedPhotos";
+import { useAuth } from "@/lib/auth";
 import type { Giveaway } from "@/lib/bobbleheads";
-import { useCustomBobbleheads } from "@/lib/customBobbleheads";
+import { useCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { publicAsset } from "@/lib/paths";
+import { submitNewBobblehead } from "@/lib/submissions";
 import type { Team } from "@/lib/teams";
-import { GiveawayCard, OwnedCount, OwnershipProvider } from "./GiveawayCard";
+import { GiveawayCard, OwnedCount, OwnershipProvider, type ResolvedGiveaway } from "./GiveawayCard";
 
 function Stat({
   icon,
@@ -29,26 +33,50 @@ function Stat({
   );
 }
 
-function AddBobbleheadForm({
-  onAdd,
+function SubmitBobbleheadForm({
+  teamSlug,
+  onDone,
 }: {
-  onAdd: (input: { title: string; year: string; date: string; owned: boolean }) => void;
+  teamSlug: string;
+  onDone: () => void;
 }) {
+  const { user } = useAuth();
   const [title, setTitle] = useState("");
   const [year, setYear] = useState("");
   const [date, setDate] = useState("");
-  const [owned, setOwned] = useState(true);
+  const [file, setFile] = useState<File | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  if (!user) {
+    return (
+      <div className="mb-5 rounded-lg border border-amber-400/35 bg-amber-400/10 p-4 text-sm text-zinc-100">
+        Log in to submit a bobblehead for review.
+      </div>
+    );
+  }
 
   return (
     <form
-      className="mb-5 grid gap-3 rounded-lg border border-amber-400/35 bg-amber-400/10 p-4 sm:grid-cols-[minmax(0,1.35fr)_110px_minmax(0,1fr)_auto]"
-      onSubmit={(event) => {
+      className="mb-5 grid gap-3 rounded-lg border border-amber-400/35 bg-amber-400/10 p-4 sm:grid-cols-[minmax(0,1.1fr)_100px_minmax(0,1fr)_minmax(0,1fr)_auto]"
+      onSubmit={async (event) => {
         event.preventDefault();
-        onAdd({ title, year, date, owned });
-        setTitle("");
-        setYear("");
-        setDate("");
-        setOwned(true);
+        if (!file) {
+          setError("A photo is required.");
+          return;
+        }
+
+        setIsSubmitting(true);
+        setError(null);
+
+        try {
+          await submitNewBobblehead({ user, teamSlug, title, year, date, file });
+          onDone();
+        } catch (submitError) {
+          setError(submitError instanceof Error ? submitError.message : "Could not submit bobblehead.");
+        } finally {
+          setIsSubmitting(false);
+        }
       }}
     >
       <label className="min-w-0">
@@ -79,23 +107,29 @@ function AddBobbleheadForm({
           className="mt-1 w-full rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
         />
       </label>
+      <label className="min-w-0">
+        <span className="text-xs font-black uppercase tracking-wide text-amber-300">Photo</span>
+        <input
+          required
+          type="file"
+          accept="image/*"
+          onChange={(event) => setFile(event.target.files?.[0] ?? null)}
+          className="mt-1 w-full text-xs text-zinc-200 file:mr-2 file:rounded file:border-0 file:bg-amber-500 file:px-2 file:py-1.5 file:text-xs file:font-black file:uppercase file:text-[#07111d]"
+        />
+      </label>
       <div className="flex items-end gap-3">
-        <label className="flex min-h-10 items-center gap-2 rounded border border-white/15 px-3 text-sm font-bold text-zinc-100">
-          <input
-            type="checkbox"
-            checked={owned}
-            onChange={(event) => setOwned(event.target.checked)}
-            className="h-4 w-4 accent-amber-400"
-          />
-          Owned
-        </label>
         <button
           type="submit"
-          className="min-h-10 rounded bg-amber-500 px-4 text-sm font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300"
+          disabled={isSubmitting}
+          className="min-h-10 rounded bg-amber-500 px-4 text-sm font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300 disabled:opacity-60"
         >
-          Add
+          {isSubmitting ? "Submitting…" : "Submit"}
         </button>
       </div>
+      {error ? <p className="text-xs font-semibold text-red-400 sm:col-span-5">{error}</p> : null}
+      <p className="text-xs leading-5 text-zinc-300 sm:col-span-5">
+        Submitted bobbleheads are reviewed by the site admin before they appear for everyone.
+      </p>
     </form>
   );
 }
@@ -103,23 +137,39 @@ function AddBobbleheadForm({
 export function TeamPageClient({
   established,
   giveaways,
-  photoCount,
   team,
 }: {
   established: string;
   giveaways: Giveaway[];
-  photoCount: number;
   team: Team;
 }) {
-  const { customBobbleheads, addCustomBobblehead } = useCustomBobbleheads(team.slug);
   const [isAdding, setIsAdding] = useState(false);
-  const allGiveaways = useMemo(
-    () => [...customBobbleheads, ...giveaways],
-    [customBobbleheads, giveaways],
+  const [justSubmitted, setJustSubmitted] = useState(false);
+  const { communityBobbleheads } = useCommunityBobbleheads(team.slug);
+  const { photoUrlById } = useApprovedPhotos(team.slug);
+
+  const allGiveaways = useMemo<ResolvedGiveaway[]>(() => {
+    const curated: ResolvedGiveaway[] = giveaways.map((giveaway) => ({
+      ...giveaway,
+      imageUrl: photoUrlById[giveaway.id] ?? giveaway.imageUrl,
+      source: "curated",
+    }));
+    const community: ResolvedGiveaway[] = communityBobbleheads.map((giveaway) => ({
+      ...giveaway,
+      imageUrl: photoUrlById[giveaway.id] ?? giveaway.imageUrl,
+      source: "community",
+    }));
+
+    return [...community, ...curated];
+  }, [giveaways, communityBobbleheads, photoUrlById]);
+
+  const photoCount = useMemo(
+    () => allGiveaways.filter((giveaway) => giveaway.imageUrl).length,
+    [allGiveaways],
   );
 
   return (
-    <OwnershipProvider giveaways={allGiveaways}>
+    <OwnershipProvider teamSlug={team.slug}>
       <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
         <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border border-black bg-[#08131f] shadow-2xl">
           <section
@@ -129,13 +179,18 @@ export function TeamPageClient({
             }}
           >
             <aside className="lg:border-r lg:border-white/10 lg:pr-5">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
-              >
-                <span aria-hidden>←</span>
-                Back to shelf
-              </Link>
+              <div className="flex items-center justify-between gap-3">
+                <Link
+                  href="/"
+                  className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
+                >
+                  <span aria-hidden>←</span>
+                  Back to shelf
+                </Link>
+              </div>
+              <div className="mt-3">
+                <AuthWidget />
+              </div>
 
               <div className="mt-5 rounded border border-white/15 bg-black/25 p-3 text-center">
                 <div className="flex h-48 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
@@ -208,10 +263,13 @@ export function TeamPageClient({
                 <button
                   type="button"
                   className="inline-flex items-center justify-center gap-2 rounded border border-amber-400 px-4 py-2 text-sm font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
-                  onClick={() => setIsAdding((current) => !current)}
+                  onClick={() => {
+                    setJustSubmitted(false);
+                    setIsAdding((current) => !current);
+                  }}
                 >
                   <span>{isAdding ? "-" : "+"}</span>
-                  Add bobblehead
+                  Submit a bobblehead
                 </button>
                 <button
                   type="button"
@@ -224,12 +282,16 @@ export function TeamPageClient({
             </div>
 
             {isAdding ? (
-              <AddBobbleheadForm
-                onAdd={(input) => {
-                  addCustomBobblehead(input);
-                  setIsAdding(false);
-                }}
-              />
+              justSubmitted ? (
+                <div className="mb-5 rounded-lg border border-amber-400/35 bg-amber-400/10 p-4 text-sm font-semibold text-amber-200">
+                  Submitted — the admin will review it before it appears for everyone.
+                </div>
+              ) : (
+                <SubmitBobbleheadForm
+                  teamSlug={team.slug}
+                  onDone={() => setJustSubmitted(true)}
+                />
+              )
             ) : null}
 
             {allGiveaways.length > 0 ? (
@@ -249,14 +311,14 @@ export function TeamPageClient({
                   No bobbleheads added yet
                 </p>
                 <p className="mt-2 text-sm leading-6 text-zinc-400">
-                  Add the first bobblehead for this team.
+                  Submit the first bobblehead for this team.
                 </p>
                 <button
                   type="button"
                   className="mt-5 rounded bg-amber-500 px-5 py-3 text-sm font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300"
                   onClick={() => setIsAdding(true)}
                 >
-                  Add bobblehead
+                  Submit a bobblehead
                 </button>
               </div>
             )}

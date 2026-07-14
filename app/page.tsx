@@ -1,3 +1,4 @@
+import { AuthWidget } from "@/components/AuthWidget";
 import DisplayCase from "@/components/DisplayCase";
 
 export default function Home() {
@@ -9,7 +10,11 @@ export default function Home() {
           "radial-gradient(ellipse 80% 50% at 50% -10%, #1b2a4a 0%, #0e1626 45%, #090e1a 100%)",
       }}
     >
-      <header className="px-4 pb-8 pt-10 text-center sm:pt-14">
+      <div className="flex justify-end px-4 pt-4 sm:px-6">
+        <AuthWidget />
+      </div>
+
+      <header className="px-4 pb-8 pt-6 text-center sm:pt-8">
         <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-amber-500/80 sm:text-xs">
           Click your team. Track your collection.
         </p>

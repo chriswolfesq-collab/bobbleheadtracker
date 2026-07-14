@@ -4,6 +4,9 @@ import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(import.meta.url));
 const isGithubPages = process.env.GITHUB_PAGES === "true";
+const supabaseHostname = process.env.NEXT_PUBLIC_SUPABASE_URL
+  ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname
+  : undefined;
 
 const nextConfig: NextConfig = {
   output: isGithubPages ? "export" : undefined,
@@ -28,6 +31,9 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "images.pristineauction.com" },
       { protocol: "https", hostname: "images.saymedia-content.com" },
       { protocol: "https", hostname: "m.media-amazon.com" },
+      ...(supabaseHostname
+        ? [{ protocol: "https" as const, hostname: supabaseHostname }]
+        : []),
     ],
   },
   turbopack: {

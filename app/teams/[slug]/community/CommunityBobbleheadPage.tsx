@@ -1,80 +1,74 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import {
-  UploadedBobbleheadImage,
-  UploadedPhotoCount,
-  UploadPhotoButton,
-} from "@/components/UploadedBobbleheadImage";
-import { useCustomBobblehead } from "@/lib/customBobbleheads";
+import { useSearchParams } from "next/navigation";
+import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
+import { useApprovedPhotos } from "@/lib/approvedPhotos";
+import { useCommunityBobblehead } from "@/lib/communityBobbleheads";
 import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
+import { useUserCollection } from "@/lib/userCollections";
 
-export function CustomBobbleheadPage({
-  bobbleheadId,
-  team,
-}: {
-  bobbleheadId: string;
-  team: Team;
-}) {
-  const { customBobblehead: giveaway, hasLoaded } = useCustomBobblehead(team.slug, bobbleheadId);
+function Shell({ team, children }: { team: Team; children: React.ReactNode }) {
+  return (
+    <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
+      <div className="mx-auto max-w-3xl rounded-xl border border-black bg-[#08131f] p-6 shadow-2xl">
+        <Link
+          href={`/teams/${team.slug}`}
+          className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
+        >
+          <span aria-hidden>←</span>
+          Back to team
+        </Link>
+        {children}
+      </div>
+    </main>
+  );
+}
 
-  if (!hasLoaded) {
+export function CommunityBobbleheadPage({ team }: { team: Team }) {
+  const bobbleheadId = useSearchParams().get("id") ?? "";
+  const { communityBobblehead, isLoading, notFound } = useCommunityBobblehead(team.slug, bobbleheadId);
+  const { photoUrlById } = useApprovedPhotos(team.slug);
+  const { ownedById, isLoggedIn, setOwned } = useUserCollection(team.slug);
+
+  if (isLoading) {
     return (
-      <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
-        <div className="mx-auto max-w-3xl rounded-xl border border-black bg-[#08131f] p-6 shadow-2xl">
-          <Link
-            href={`/teams/${team.slug}`}
-            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
-          >
-            <span aria-hidden>←</span>
-            Back to team
-          </Link>
-          <div className="mt-8 rounded-lg border border-white/15 bg-black/15 p-8 text-center">
-            <p className="text-sm font-black uppercase tracking-wide text-zinc-100">
-              Loading bobblehead
-            </p>
-          </div>
+      <Shell team={team}>
+        <div className="mt-8 rounded-lg border border-white/15 bg-black/15 p-8 text-center">
+          <p className="text-sm font-black uppercase tracking-wide text-zinc-100">Loading bobblehead</p>
         </div>
-      </main>
+      </Shell>
     );
   }
 
-  if (!giveaway) {
+  if (notFound || !communityBobblehead) {
     return (
-      <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
-        <div className="mx-auto max-w-3xl rounded-xl border border-black bg-[#08131f] p-6 shadow-2xl">
-          <Link
-            href={`/teams/${team.slug}`}
-            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
-          >
-            <span aria-hidden>←</span>
-            Back to team
-          </Link>
-          <div className="mt-8 rounded-lg border border-dashed border-white/15 bg-black/15 p-8 text-center">
-            <p className="text-sm font-black uppercase tracking-wide text-zinc-100">
-              Bobblehead not found
-            </p>
-            <p className="mt-2 text-sm leading-6 text-zinc-400">
-              This custom bobblehead is not saved in this browser.
-            </p>
-          </div>
+      <Shell team={team}>
+        <div className="mt-8 rounded-lg border border-dashed border-white/15 bg-black/15 p-8 text-center">
+          <p className="text-sm font-black uppercase tracking-wide text-zinc-100">Bobblehead not found</p>
+          <p className="mt-2 text-sm leading-6 text-zinc-400">
+            This bobblehead isn&apos;t in the catalog. It may still be pending review.
+          </p>
         </div>
-      </main>
+      </Shell>
     );
   }
 
-  const imageSrc = publicAsset(`/bobbleheads/${team.slug}.png`);
-  const description = `Custom ${giveaway.title} bobblehead saved for the ${team.city} ${team.name}.`;
+  const giveaway = communityBobblehead;
+  const imageSrc = photoUrlById[giveaway.id] ?? giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+  const description = `Community-submitted ${giveaway.title} bobblehead for the ${team.city} ${team.name}.`;
+  const isOwned = ownedById[giveaway.id] ?? false;
   const details = [
     ["Release Date", giveaway.date],
     ["Venue", `${team.city} Ballpark`],
     ["Event", `${giveaway.title} Night`],
-    ["Sculptor", "Custom"],
+    ["Sculptor", "Community"],
     ["Edition Size", "Unknown"],
     ["Team", `${team.city} ${team.name}`],
     ["Theme", giveaway.title],
-    ["Pose", "Custom"],
+    ["Pose", "Unknown"],
   ];
 
   return (
@@ -97,18 +91,18 @@ export function CustomBobbleheadPage({
 
             <div className="mt-5 rounded border border-white/15 bg-black/25 p-3 text-center">
               <div className="flex h-44 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
-                <UploadedBobbleheadImage
-                  bobbleheadId={giveaway.id}
-                  fallbackSrc={imageSrc}
+                <Image
+                  src={imageSrc}
                   alt={`${team.city} ${team.name} ${giveaway.title} bobblehead`}
                   width={268}
                   height={630}
                   priority
+                  unoptimized={imageSrc.startsWith("http")}
                   className="h-40 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.65)]"
                 />
               </div>
               <div className="mt-2 rounded bg-black/45 px-2 py-1 text-sm font-black uppercase tracking-wide">
-                Custom
+                Community
               </div>
             </div>
           </aside>
@@ -137,10 +131,10 @@ export function CustomBobbleheadPage({
 
             <div className="flex flex-col items-start gap-4 xl:items-end">
               <span className="rounded-lg border border-amber-400/60 px-5 py-3 text-sm font-bold uppercase tracking-wide text-amber-300">
-                Custom entry
+                Community submission
               </span>
               <p className="text-sm leading-6 text-zinc-300 xl:text-right">
-                Add photos and ownership details for the bobblehead you saved.
+                Approved by the site admin. Log in to add it to your collection.
               </p>
             </div>
           </div>
@@ -149,22 +143,29 @@ export function CustomBobbleheadPage({
         <section className="m-2 rounded-lg border border-white/10 bg-[#0b1a29] p-4 sm:m-3 sm:p-6">
           <div className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b border-white/15 pb-3">
             <div>
-              <p className="text-sm font-black uppercase tracking-wide text-white">
-                Photos (<UploadedPhotoCount bobbleheadId={giveaway.id} initialCount={0} />)
+              <p className="text-sm font-black uppercase tracking-wide text-white">Photos</p>
+              <p className="mt-1 text-sm text-zinc-400">
+                Have a better photo? Submit it for the admin to review.
               </p>
-              <p className="mt-1 text-sm text-zinc-400">Ownership photos and pickup details</p>
             </div>
           </div>
 
-          <UploadPhotoButton
-            bobbleheadId={giveaway.id}
-            label="Add photos"
-            className="flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-zinc-400/70 px-5 py-5 text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
-          >
-            <span className="text-3xl">▣</span>
-            <span className="mt-1 text-lg font-black uppercase tracking-wide">Add photos</span>
-            <span className="mt-1 text-sm text-zinc-300">Drag and drop or click to upload</span>
-          </UploadPhotoButton>
+          <div className="grid gap-3 sm:grid-cols-[1fr_1fr_56px]">
+            <button
+              type="button"
+              disabled={!isLoggedIn}
+              className="rounded-lg bg-amber-500 px-5 py-4 text-base font-black uppercase tracking-wide text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-50"
+              onClick={() => setOwned(giveaway.id, !isOwned)}
+            >
+              {isOwned ? "Owned" : isLoggedIn ? "Mark as owned" : "Log in to track"}
+            </button>
+            <SubmitPhotoButton
+              bobbleheadId={giveaway.id}
+              teamSlug={team.slug}
+              label="Submit a photo"
+              className="flex min-h-14 w-full cursor-pointer items-center justify-center rounded-lg border border-dashed border-zinc-400/70 px-3 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+            />
+          </div>
         </section>
       </div>
     </main>

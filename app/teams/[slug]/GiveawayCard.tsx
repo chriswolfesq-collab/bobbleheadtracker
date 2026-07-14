@@ -1,17 +1,20 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { createContext, useContext, useMemo, useState } from "react";
-import { UploadedBobbleheadImage, UploadPhotoButton } from "@/components/UploadedBobbleheadImage";
+import { createContext, useContext } from "react";
+import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
+import { useUserCollection } from "@/lib/userCollections";
 
-type OwnershipState = Record<string, boolean>;
+export type ResolvedGiveaway = Giveaway & { source: "curated" | "community" };
 
 type OwnershipContextValue = {
   ownedCount: number;
-  ownedById: OwnershipState;
+  ownedById: Record<string, boolean>;
+  isLoggedIn: boolean;
   toggleOwned: (id: string) => void;
 };
 
@@ -29,31 +32,20 @@ function useOwnership() {
 
 export function OwnershipProvider({
   children,
-  giveaways,
+  teamSlug,
 }: {
   children: React.ReactNode;
-  giveaways: Giveaway[];
+  teamSlug: string;
 }) {
-  const [ownedOverridesById, setOwnedOverridesById] = useState<OwnershipState>({});
+  const { ownedById, isLoggedIn, setOwned } = useUserCollection(teamSlug);
+  const ownedCount = Object.values(ownedById).filter(Boolean).length;
 
-  const value = useMemo<OwnershipContextValue>(() => {
-    const ownedById = {
-      ...Object.fromEntries(giveaways.map((giveaway) => [giveaway.id, giveaway.owned])),
-      ...ownedOverridesById,
-    };
-    const ownedCount = Object.values(ownedById).filter(Boolean).length;
-
-    return {
-      ownedCount,
-      ownedById,
-      toggleOwned: (id: string) => {
-        setOwnedOverridesById((current) => ({
-          ...current,
-          [id]: !ownedById[id],
-        }));
-      },
-    };
-  }, [giveaways, ownedOverridesById]);
+  const value: OwnershipContextValue = {
+    ownedCount,
+    ownedById,
+    isLoggedIn,
+    toggleOwned: (id: string) => setOwned(id, !ownedById[id]),
+  };
 
   return <OwnershipContext.Provider value={value}>{children}</OwnershipContext.Provider>;
 }
@@ -88,15 +80,18 @@ export function GiveawayCard({
   team,
   index,
 }: {
-  giveaway: Giveaway;
+  giveaway: ResolvedGiveaway;
   team: Team;
   index: number;
 }) {
-  const { ownedById, toggleOwned } = useOwnership();
-  const isOwned = ownedById[giveaway.id] ?? giveaway.owned;
-  const href = `/teams/${team.slug}/bobbleheads/${giveaway.id}`;
+  const { ownedById, isLoggedIn, toggleOwned } = useOwnership();
+  const isOwned = ownedById[giveaway.id] ?? false;
+  const href =
+    giveaway.source === "community"
+      ? `/teams/${team.slug}/community?id=${encodeURIComponent(giveaway.id)}`
+      : `/teams/${team.slug}/bobbleheads/${giveaway.id}`;
   const fullTitle = `${team.name} ${giveaway.title}`;
-  const fallbackImageSrc = giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+  const imageSrc = giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
 
   return (
     <article className="relative overflow-hidden rounded-lg border border-white/10 bg-[#102032] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
@@ -114,12 +109,12 @@ export function GiveawayCard({
 
       <Link href={href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">
         <div className="flex h-52 items-end justify-center bg-[radial-gradient(circle_at_50%_22%,rgba(255,255,255,0.14),rgba(255,255,255,0)_42%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.22))] px-4 pt-6">
-          <UploadedBobbleheadImage
-            bobbleheadId={giveaway.id}
-            fallbackSrc={fallbackImageSrc}
+          <Image
+            src={imageSrc}
             alt={`${fullTitle} bobblehead`}
             width={268}
             height={630}
+            unoptimized={imageSrc.startsWith("http")}
             className="h-44 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.6)]"
           />
         </div>
@@ -133,8 +128,9 @@ export function GiveawayCard({
         <p className="mt-3 text-sm text-zinc-300">{giveaway.date}</p>
 
         <div className="mt-3 grid grid-cols-2 gap-1">
-          <UploadPhotoButton
+          <SubmitPhotoButton
             bobbleheadId={giveaway.id}
+            teamSlug={team.slug}
             label="▣"
             className="grid h-9 w-full cursor-pointer place-items-center rounded border border-white/10 bg-white/[0.03] text-lg text-zinc-300 transition hover:border-amber-400/50 hover:text-amber-300"
           />
@@ -146,10 +142,11 @@ export function GiveawayCard({
           <button
             type="button"
             aria-pressed={isOwned}
-            className="col-span-2 rounded border border-amber-400 px-2 py-2 text-xs font-bold uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
+            disabled={!isLoggedIn}
+            className="col-span-2 rounded border border-amber-400 px-2 py-2 text-xs font-bold uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d] disabled:cursor-not-allowed disabled:opacity-50"
             onClick={() => toggleOwned(giveaway.id)}
           >
-            {isOwned ? "Remove as Owned" : "Mark as Owned"}
+            {isLoggedIn ? (isOwned ? "Remove as Owned" : "Mark as Owned") : "Log in to track"}
           </button>
         </div>
       </div>

@@ -51,13 +51,11 @@ export default async function TeamPage({
   if (!team) notFound();
 
   const giveaways = getGiveawaysByTeamSlug(team.slug);
-  const photoCount = giveaways.filter((giveaway) => giveaway.imageUrl).length;
 
   return (
     <TeamPageClient
       established={establishedBySlug[team.slug] ?? "1901"}
       giveaways={giveaways}
-      photoCount={photoCount}
       team={team}
     />
   );
