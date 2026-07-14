@@ -1,6 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import {
+  UploadedBobbleheadImage,
+  UploadedPhotoCount,
+  UploadPhotoButton,
+} from "@/components/UploadedBobbleheadImage";
 import { GIVEAWAYS_BY_TEAM, getGiveawayById } from "@/lib/bobbleheads";
 import { publicAsset } from "@/lib/paths";
 import { getTeamBySlug } from "@/lib/teams";
@@ -73,8 +77,9 @@ export default async function BobbleheadPage({
 
             <div className="mt-5 rounded border border-white/15 bg-black/25 p-3 text-center">
               <div className="flex h-44 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
-                <Image
-                  src={imageSrc}
+                <UploadedBobbleheadImage
+                  bobbleheadId={giveaway.id}
+                  fallbackSrc={imageSrc}
                   alt={`${team.city} ${team.name} ${giveaway.title} bobblehead`}
                   width={268}
                   height={630}
@@ -128,7 +133,9 @@ export default async function BobbleheadPage({
         <section className="m-2 rounded-lg border border-white/10 bg-[#0b1a29] p-4 sm:m-3 sm:p-6">
           <div className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b border-white/15 pb-3">
             <div>
-              <p className="text-sm font-black uppercase tracking-wide text-white">Photos ({uploadedPhotoCount})</p>
+              <p className="text-sm font-black uppercase tracking-wide text-white">
+                Photos (<UploadedPhotoCount bobbleheadId={giveaway.id} initialCount={uploadedPhotoCount} />)
+              </p>
               <p className="mt-1 text-sm text-zinc-400">Ownership photos and pickup details</p>
             </div>
             <button type="button" className="text-sm font-black uppercase tracking-wide text-zinc-300 hover:text-amber-300">
@@ -162,24 +169,24 @@ export default async function BobbleheadPage({
                       <p className="mt-1 text-xs leading-5 text-zinc-400">Photo slot {slot}</p>
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    className="flex min-h-14 w-full items-center justify-center border-t border-white/10 bg-[#0c1826] px-3 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:text-amber-300"
-                  >
-                    Choose photo
-                  </button>
+                  <UploadPhotoButton
+                    bobbleheadId={giveaway.id}
+                    label="Choose photo"
+                    className="flex min-h-14 w-full cursor-pointer items-center justify-center border-t border-white/10 bg-[#0c1826] px-3 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:text-amber-300"
+                  />
                 </div>
               ))}
             </div>
 
-            <button
-              type="button"
-              className="flex w-full flex-col items-center justify-center rounded-lg border border-dashed border-zinc-400/70 px-5 py-5 text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+            <UploadPhotoButton
+              bobbleheadId={giveaway.id}
+              label="Add photos"
+              className="flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-zinc-400/70 px-5 py-5 text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
             >
               <span className="text-3xl">▣</span>
               <span className="mt-1 text-lg font-black uppercase tracking-wide">Add photos</span>
               <span className="mt-1 text-sm text-zinc-300">Drag and drop or click to upload</span>
-            </button>
+            </UploadPhotoButton>
 
             <div className="grid gap-3 sm:grid-cols-[1fr_1fr_56px]">
               <button

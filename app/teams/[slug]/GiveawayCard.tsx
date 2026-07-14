@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { createContext, useContext, useMemo, useState } from "react";
+import { UploadedBobbleheadImage, UploadPhotoButton } from "@/components/UploadedBobbleheadImage";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
@@ -94,7 +94,7 @@ export function GiveawayCard({
   const isOwned = ownedById[giveaway.id] ?? giveaway.owned;
   const href = `/teams/${team.slug}/bobbleheads/${giveaway.id}`;
   const fullTitle = `${team.name} ${giveaway.title}`;
-  const imageSrc = giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+  const fallbackImageSrc = giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
 
   return (
     <article className="relative overflow-hidden rounded-lg border border-white/10 bg-[#102032] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
@@ -112,8 +112,9 @@ export function GiveawayCard({
 
       <Link href={href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">
         <div className="flex h-52 items-end justify-center bg-[radial-gradient(circle_at_50%_22%,rgba(255,255,255,0.14),rgba(255,255,255,0)_42%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.22))] px-4 pt-6">
-          <Image
-            src={imageSrc}
+          <UploadedBobbleheadImage
+            bobbleheadId={giveaway.id}
+            fallbackSrc={fallbackImageSrc}
             alt={`${fullTitle} bobblehead`}
             width={268}
             height={630}
@@ -130,9 +131,11 @@ export function GiveawayCard({
         <p className="mt-3 text-sm text-zinc-300">{giveaway.date}</p>
 
         <div className="mt-3 grid grid-cols-2 gap-1">
-          <CardActionButton label={`Add photos for ${fullTitle}`}>
-            <span className="text-lg">▣</span>
-          </CardActionButton>
+          <UploadPhotoButton
+            bobbleheadId={giveaway.id}
+            label="▣"
+            className="grid h-9 w-full cursor-pointer place-items-center rounded border border-white/10 bg-white/[0.03] text-lg text-zinc-300 transition hover:border-amber-400/50 hover:text-amber-300"
+          />
           {isOwned ? (
             <CardActionButton label={`More actions for ${fullTitle}`}>
               <span className="text-xl leading-none">...</span>
