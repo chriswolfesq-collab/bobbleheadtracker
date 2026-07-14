@@ -40,7 +40,7 @@ Deno.serve(async (req) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "Bobblehead Tracker <onboarding@resend.dev>",
+      from: "Bobble Shelf <alerts@bobbleshelf.com>",
       to: [ADMIN_EMAIL],
       subject: "New bobblehead submission pending review",
       text: `${summary}\n\nReview it at: https://chriswolfesq-collab.github.io/bobbleheadtracker/admin/review`,
