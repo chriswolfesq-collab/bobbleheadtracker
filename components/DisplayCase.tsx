@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { publicAsset } from "@/lib/paths";
 import { TEAMS, type Team } from "@/lib/teams";
 
 const SHELVES: { league: Team["league"]; division: Team["division"]; floor: number }[] = [
@@ -32,7 +33,7 @@ function ShelfBobblehead({ team, x, y }: { team: Team; x: number; y: number }) {
       <div className="origin-bottom transition-transform duration-200 ease-out group-hover:scale-[1.12] group-focus-visible:scale-[1.12]">
         <div className="origin-bottom group-hover:animate-bobble">
           <Image
-            src={`/bobbleheads/${team.slug}.png`}
+            src={publicAsset(`/bobbleheads/${team.slug}.png`)}
             alt=""
             width={677}
             height={1607}
@@ -50,7 +51,7 @@ export default function DisplayCase() {
     <div className="relative mx-auto w-full max-w-2xl px-4 sm:px-6">
       <div className="relative aspect-[1024/1538] w-full">
         <Image
-          src="/shelf-even.jpg"
+          src={publicAsset("/shelf-even.jpg")}
           alt="MLB Bobblehead Shelf"
           fill
           priority

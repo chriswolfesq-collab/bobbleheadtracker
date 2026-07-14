@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
+import { publicAsset } from "@/lib/paths";
 import { TEAMS, getTeamBySlug } from "@/lib/teams";
 import { GiveawayCard, OwnedCount, OwnershipProvider } from "./GiveawayCard";
 
@@ -97,7 +98,7 @@ export default async function TeamPage({
             <div className="mt-5 rounded border border-white/15 bg-black/25 p-3 text-center">
               <div className="flex h-48 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
                 <Image
-                  src={`/bobbleheads/${team.slug}.png`}
+                  src={publicAsset(`/bobbleheads/${team.slug}.png`)}
                   alt={`${team.city} ${team.name} bobblehead`}
                   width={268}
                   height={630}

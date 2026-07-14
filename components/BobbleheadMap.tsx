@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { publicAsset } from "@/lib/paths";
 import { TEAMS } from "@/lib/teams";
 import BobbleheadMarker from "./BobbleheadMarker";
 
@@ -7,7 +8,7 @@ export default function BobbleheadMap() {
     <div className="mx-auto w-full max-w-6xl p-3 sm:p-6">
       <div className="relative aspect-[1536/1024] w-full overflow-visible">
         <Image
-          src="/map/usamap.png"
+          src={publicAsset("/map/usamap.png")}
           alt="MLB Bobblehead Map"
           fill
           priority

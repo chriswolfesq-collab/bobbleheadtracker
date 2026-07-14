@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GIVEAWAYS_BY_TEAM, getGiveawayById } from "@/lib/bobbleheads";
+import { publicAsset } from "@/lib/paths";
 import { getTeamBySlug } from "@/lib/teams";
 
 function IconButton({ children, label }: { children: React.ReactNode; label: string }) {
@@ -37,7 +38,7 @@ export default async function BobbleheadPage({
 
   if (!team || !giveaway) notFound();
 
-  const imageSrc = giveaway.imageUrl ?? `/bobbleheads/${team.slug}.png`;
+  const imageSrc = giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
   const photoSlots = Array.from({ length: 3 }, (_, index) => index + 1);
   const uploadedPhotoCount = giveaway.imageUrl ? 1 : 0;
   const description = `Special ${giveaway.title} giveaway bobblehead featuring the ${team.city} ${team.name}.`;

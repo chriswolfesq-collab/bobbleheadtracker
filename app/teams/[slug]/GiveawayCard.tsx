@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createContext, useContext, useMemo, useState } from "react";
 import type { Giveaway } from "@/lib/bobbleheads";
+import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
 
 type OwnershipState = Record<string, boolean>;
@@ -93,7 +94,7 @@ export function GiveawayCard({
   const isOwned = ownedById[giveaway.id] ?? giveaway.owned;
   const href = `/teams/${team.slug}/bobbleheads/${giveaway.id}`;
   const fullTitle = `${team.name} ${giveaway.title}`;
-  const imageSrc = giveaway.imageUrl ?? `/bobbleheads/${team.slug}.png`;
+  const imageSrc = giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
 
   return (
     <article className="relative overflow-hidden rounded-lg border border-white/10 bg-[#102032] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">

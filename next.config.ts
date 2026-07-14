@@ -3,9 +3,16 @@ import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(import.meta.url));
+const isGithubPages = process.env.GITHUB_PAGES === "true";
 
 const nextConfig: NextConfig = {
+  output: isGithubPages ? "export" : undefined,
+  basePath: isGithubPages ? "/bobbleheadtracker" : undefined,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isGithubPages ? "/bobbleheadtracker" : "",
+  },
   images: {
+    unoptimized: isGithubPages,
     remotePatterns: [
       { protocol: "https", hostname: "img.mlbstatic.com" },
       { protocol: "https", hostname: "bullpenbobbles.com" },

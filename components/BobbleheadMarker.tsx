@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
 
 export default function BobbleheadMarker({ team }: { team: Team }) {
@@ -33,7 +34,7 @@ export default function BobbleheadMarker({ team }: { team: Team }) {
       <div className="relative h-[62px] w-[27px] origin-bottom transition-transform duration-150 group-hover:scale-110 sm:h-[78px] sm:w-[34px]">
         <div className="absolute inset-x-0 bottom-0 h-full origin-bottom group-hover:animate-bobble">
           <Image
-            src={`/bobbleheads/${team.slug}.png`}
+            src={publicAsset(`/bobbleheads/${team.slug}.png`)}
             alt=""
             fill
             sizes="80px"
