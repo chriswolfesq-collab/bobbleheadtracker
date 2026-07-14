@@ -34,24 +34,26 @@ export function OwnershipProvider({
   children: React.ReactNode;
   giveaways: Giveaway[];
 }) {
-  const [ownedById, setOwnedById] = useState<OwnershipState>(() =>
-    Object.fromEntries(giveaways.map((giveaway) => [giveaway.id, giveaway.owned])),
-  );
+  const [ownedOverridesById, setOwnedOverridesById] = useState<OwnershipState>({});
 
   const value = useMemo<OwnershipContextValue>(() => {
+    const ownedById = {
+      ...Object.fromEntries(giveaways.map((giveaway) => [giveaway.id, giveaway.owned])),
+      ...ownedOverridesById,
+    };
     const ownedCount = Object.values(ownedById).filter(Boolean).length;
 
     return {
       ownedCount,
       ownedById,
       toggleOwned: (id: string) => {
-        setOwnedById((current) => ({
+        setOwnedOverridesById((current) => ({
           ...current,
-          [id]: !current[id],
+          [id]: !ownedById[id],
         }));
       },
     };
-  }, [ownedById]);
+  }, [giveaways, ownedOverridesById]);
 
   return <OwnershipContext.Provider value={value}>{children}</OwnershipContext.Provider>;
 }

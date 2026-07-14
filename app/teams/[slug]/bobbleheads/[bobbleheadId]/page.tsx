@@ -8,6 +8,7 @@ import {
 import { GIVEAWAYS_BY_TEAM, getGiveawayById } from "@/lib/bobbleheads";
 import { publicAsset } from "@/lib/paths";
 import { getTeamBySlug } from "@/lib/teams";
+import { CustomBobbleheadPage } from "./CustomBobbleheadPage";
 
 function IconButton({ children, label }: { children: React.ReactNode; label: string }) {
   return (
@@ -40,7 +41,11 @@ export default async function BobbleheadPage({
   const team = getTeamBySlug(slug);
   const giveaway = getGiveawayById(bobbleheadId, slug);
 
-  if (!team || !giveaway) notFound();
+  if (!team) notFound();
+
+  if (!giveaway) {
+    return <CustomBobbleheadPage bobbleheadId={bobbleheadId} team={team} />;
+  }
 
   const imageSrc = giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
   const photoSlots = Array.from({ length: 3 }, (_, index) => index + 1);
