@@ -10,9 +10,10 @@ const supabaseHostname = process.env.NEXT_PUBLIC_SUPABASE_URL
 
 const nextConfig: NextConfig = {
   output: isGithubPages ? "export" : undefined,
-  basePath: isGithubPages ? "/bobbleheadtracker" : undefined,
+  // No basePath: the site is served from the root of the bobbleshelf.com
+  // custom domain (see public/CNAME), not from a /bobbleheadtracker subpath.
   env: {
-    NEXT_PUBLIC_BASE_PATH: isGithubPages ? "/bobbleheadtracker" : "",
+    NEXT_PUBLIC_BASE_PATH: "",
   },
   images: {
     unoptimized: isGithubPages,
