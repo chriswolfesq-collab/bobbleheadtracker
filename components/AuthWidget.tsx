@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useAuth } from "@/lib/auth";
 
@@ -21,7 +22,12 @@ export function AuthWidget({ className }: { className?: string }) {
   if (user) {
     return (
       <div className={`flex items-center gap-3 text-sm ${className ?? ""}`}>
-        <span className="font-semibold text-zinc-200">{user.email}</span>
+        <Link
+          href="/profile"
+          className="font-semibold text-zinc-200 transition hover:text-amber-300"
+        >
+          {user.email}
+        </Link>
         <button
           type="button"
           onClick={() => signOut()}
