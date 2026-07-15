@@ -185,13 +185,11 @@ export function ProfilePageClient() {
                   const team = TEAMS.find((t) => t.slug === submission.teamSlug);
                   const imageSrc =
                     submission.imageUrl ?? publicAsset(`/bobbleheads/${submission.teamSlug}.png`);
-                  return (
-                    <div
-                      key={submission.id}
-                      className={`flex items-center justify-between gap-3 px-4 py-3 text-sm ${
-                        index !== submissions.length - 1 ? "border-b border-white/10" : ""
-                      }`}
-                    >
+                  const rowClassName = `flex items-center justify-between gap-3 px-4 py-3 text-sm ${
+                    index !== submissions.length - 1 ? "border-b border-white/10" : ""
+                  } ${submission.href ? "transition hover:bg-white/5" : ""}`;
+                  const content = (
+                    <>
                       <span className="flex min-w-0 items-center gap-3">
                         <Image
                           src={imageSrc}
@@ -216,6 +214,16 @@ export function ProfilePageClient() {
                       >
                         {submission.status}
                       </span>
+                    </>
+                  );
+
+                  return submission.href ? (
+                    <Link key={submission.id} href={submission.href} className={rowClassName}>
+                      {content}
+                    </Link>
+                  ) : (
+                    <div key={submission.id} className={rowClassName}>
+                      {content}
                     </div>
                   );
                 })}

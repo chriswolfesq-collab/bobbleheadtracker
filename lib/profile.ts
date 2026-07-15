@@ -103,6 +103,7 @@ export type MySubmission = {
   status: "pending" | "approved" | "rejected";
   createdAt: string;
   imageUrl: string | null;
+  href: string | null;
 };
 
 // Pending/rejected photos still live in the private bobblehead-pending bucket
@@ -129,6 +130,37 @@ async function resolveSubmissionImageUrl(
   return data?.signedUrl ?? null;
 }
 
+// A submission only becomes a real listing once it's approved. photo_for_existing
+// points at either a curated bobblehead (static list) or a community one; new_bobblehead
+// becomes a community_bobbleheads row whose generated id ends in the submission's
+// first 8 chars (see approve_submission() in supabase/schema.sql), so we look it up that way.
+async function resolveSubmissionHref(
+  status: MySubmission["status"],
+  kind: MySubmission["kind"],
+  submissionId: string,
+  teamSlug: string,
+  targetBobbleheadId: string | null,
+): Promise<string | null> {
+  if (status !== "approved") return null;
+
+  if (kind === "photo_for_existing") {
+    if (!targetBobbleheadId) return null;
+    const isCurated = getGiveawaysByTeamSlug(teamSlug).some((g) => g.id === targetBobbleheadId);
+    return isCurated
+      ? `/teams/${teamSlug}/bobbleheads/${targetBobbleheadId}`
+      : `/teams/${teamSlug}/community?id=${encodeURIComponent(targetBobbleheadId)}`;
+  }
+
+  const { data } = await supabase
+    .from("community_bobbleheads")
+    .select("id")
+    .eq("team_slug", teamSlug)
+    .like("id", `%-${submissionId.slice(0, 8)}`)
+    .maybeSingle();
+
+  return data ? `/teams/${teamSlug}/community?id=${encodeURIComponent(data.id)}` : null;
+}
+
 export function useMySubmissions() {
   const { user } = useAuth();
   const [submissions, setSubmissions] = useState<MySubmission[]>([]);
@@ -141,7 +173,7 @@ export function useMySubmissions() {
 
     supabase
       .from("submissions")
-      .select("id, kind, team_slug, title, status, created_at, storage_path")
+      .select("id, kind, team_slug, title, status, created_at, storage_path, target_bobblehead_id")
       .eq("submitted_by", user.id)
       .order("created_at", { ascending: false })
       .then(async ({ data, error }) => {
@@ -154,7 +186,7 @@ export function useMySubmissions() {
           return;
         }
 
-        const withUrls = await Promise.all(
+        const withDetails = await Promise.all(
           (data ?? []).map(async (row) => ({
             id: row.id,
             kind: row.kind,
@@ -163,12 +195,19 @@ export function useMySubmissions() {
             status: row.status,
             createdAt: row.created_at,
             imageUrl: await resolveSubmissionImageUrl(row.status, row.id, row.storage_path),
+            href: await resolveSubmissionHref(
+              row.status,
+              row.kind,
+              row.id,
+              row.team_slug,
+              row.target_bobblehead_id,
+            ),
           })),
         );
 
         if (cancelled) return;
 
-        setSubmissions(withUrls);
+        setSubmissions(withDetails);
         setIsLoading(false);
       });
 
