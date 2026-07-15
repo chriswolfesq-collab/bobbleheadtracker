@@ -47,14 +47,12 @@ export async function submitNewBobblehead({
   user,
   teamSlug,
   title,
-  year,
   date,
   file,
 }: {
   user: User;
   teamSlug: string;
   title: string;
-  year: string;
   date: string;
   file: File;
 }) {
@@ -64,7 +62,6 @@ export async function submitNewBobblehead({
     kind: "new_bobblehead",
     team_slug: teamSlug,
     title,
-    year: year || "Unknown",
     date: date || "N/A",
     storage_path: storagePath,
     submitted_by: user.id,

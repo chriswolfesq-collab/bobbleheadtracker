@@ -42,7 +42,6 @@ function SubmitBobbleheadForm({
 }) {
   const { user } = useAuth();
   const [title, setTitle] = useState("");
-  const [year, setYear] = useState("");
   const [date, setDate] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -58,7 +57,7 @@ function SubmitBobbleheadForm({
 
   return (
     <form
-      className="mb-5 grid gap-3 rounded-lg border border-amber-400/35 bg-amber-400/10 p-4 sm:grid-cols-[minmax(0,1.1fr)_100px_minmax(0,1fr)_minmax(0,1fr)_auto]"
+      className="mb-5 grid gap-3 rounded-lg border border-amber-400/35 bg-amber-400/10 p-4 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1fr)_auto]"
       onSubmit={async (event) => {
         event.preventDefault();
         if (!file) {
@@ -70,7 +69,7 @@ function SubmitBobbleheadForm({
         setError(null);
 
         try {
-          await submitNewBobblehead({ user, teamSlug, title, year, date, file });
+          await submitNewBobblehead({ user, teamSlug, title, date, file });
           onDone();
         } catch (submitError) {
           setError(submitError instanceof Error ? submitError.message : "Could not submit bobblehead.");
@@ -86,15 +85,6 @@ function SubmitBobbleheadForm({
           value={title}
           onChange={(event) => setTitle(event.target.value)}
           placeholder="Fernando Valenzuela"
-          className="mt-1 w-full rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
-        />
-      </label>
-      <label>
-        <span className="text-xs font-black uppercase tracking-wide text-amber-300">Year</span>
-        <input
-          value={year}
-          onChange={(event) => setYear(event.target.value)}
-          placeholder="2026"
           className="mt-1 w-full rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
         />
       </label>
@@ -126,8 +116,8 @@ function SubmitBobbleheadForm({
           {isSubmitting ? "Submitting…" : "Submit"}
         </button>
       </div>
-      {error ? <p className="text-xs font-semibold text-red-400 sm:col-span-5">{error}</p> : null}
-      <p className="text-xs leading-5 text-zinc-300 sm:col-span-5">
+      {error ? <p className="text-xs font-semibold text-red-400 sm:col-span-4">{error}</p> : null}
+      <p className="text-xs leading-5 text-zinc-300 sm:col-span-4">
         Submitted bobbleheads are reviewed by the site admin before they appear for everyone.
       </p>
     </form>

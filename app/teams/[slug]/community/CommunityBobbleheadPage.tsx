@@ -139,7 +139,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
                 {team.city} {team.name}
               </p>
               <h1 className="mt-3 text-4xl font-black uppercase leading-none tracking-wide text-white sm:text-5xl 2xl:text-6xl">
-                {title} {year}
+                {title}
               </h1>
               <dl className="mt-6 grid max-w-4xl gap-x-8 gap-y-3 text-sm sm:grid-cols-2 xl:grid-cols-4">
                 {details.map(([label, value]) => (

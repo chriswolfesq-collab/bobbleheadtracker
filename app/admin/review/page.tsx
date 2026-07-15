@@ -12,7 +12,6 @@ type Submission = {
   target_bobblehead_id: string | null;
   team_slug: string;
   title: string | null;
-  year: string | null;
   date: string | null;
   storage_path: string;
   submitted_by: string;
@@ -87,7 +86,7 @@ export default function AdminReviewPage() {
     supabase
       .from("submissions")
       .select(
-        "id, kind, target_bobblehead_id, team_slug, title, year, date, storage_path, submitted_by, created_at",
+        "id, kind, target_bobblehead_id, team_slug, title, date, storage_path, submitted_by, created_at",
       )
       .eq("status", "pending")
       .order("created_at", { ascending: true })
@@ -245,7 +244,7 @@ export default function AdminReviewPage() {
                 </p>
                 {row.kind === "new_bobblehead" ? (
                   <p className="text-zinc-200">
-                    {row.title} · {row.year} · {row.date}
+                    {row.title} · {row.date}
                   </p>
                 ) : (
                   <p className="text-zinc-200">
