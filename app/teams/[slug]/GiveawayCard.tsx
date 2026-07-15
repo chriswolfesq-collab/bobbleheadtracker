@@ -124,7 +124,6 @@ export function GiveawayCard({
         <h2 className="text-base font-bold leading-tight text-white">
           {fullTitle}
         </h2>
-        <p className="mt-0.5 text-base font-bold text-white">{giveaway.year}</p>
         <p className="mt-3 text-sm text-zinc-300">{giveaway.date}</p>
 
         <div className="mt-3 grid grid-cols-2 gap-1">
