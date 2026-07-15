@@ -58,17 +58,10 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
 
   const giveaway = communityBobblehead;
   const imageSrc = photoUrlById[giveaway.id] ?? giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
-  const description = `Community-submitted ${giveaway.title} bobblehead for the ${team.city} ${team.name}.`;
   const isOwned = ownedById[giveaway.id] ?? false;
   const details = [
     ["Release Date", giveaway.date],
-    ["Venue", `${team.city} Ballpark`],
-    ["Event", `${giveaway.title} Night`],
-    ["Sculptor", "Community"],
-    ["Edition Size", "Unknown"],
     ["Team", `${team.city} ${team.name}`],
-    ["Theme", giveaway.title],
-    ["Pose", "Unknown"],
   ];
 
   return (
@@ -122,10 +115,6 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
                     <dd className="mt-1 truncate text-base font-semibold text-zinc-100">{value}</dd>
                   </div>
                 ))}
-                <div className="min-w-0 sm:col-span-2 xl:col-span-4">
-                  <dt className="text-xs font-black uppercase tracking-wide text-zinc-400">Description</dt>
-                  <dd className="mt-1 max-w-3xl text-base leading-6 text-zinc-200">{description}</dd>
-                </div>
               </dl>
             </div>
 

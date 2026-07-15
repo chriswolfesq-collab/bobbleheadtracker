@@ -15,16 +15,9 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
 
   const imageSrc = photoUrlById[giveaway.id] ?? giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
   const isOwned = ownedById[giveaway.id] ?? false;
-  const description = `Special ${giveaway.title} giveaway bobblehead featuring the ${team.city} ${team.name}.`;
   const details = [
     ["Release Date", giveaway.date],
-    ["Venue", team.slug === "dodgers" ? "Dodger Stadium" : `${team.city} Ballpark`],
-    ["Event", `${giveaway.title} Night`],
-    ["Sculptor", "SGA"],
-    ["Edition Size", "12,000"],
     ["Team", `${team.city} ${team.name}`],
-    ["Theme", giveaway.title],
-    ["Pose", "Holding bat"],
   ];
 
   return (
@@ -78,10 +71,6 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
                     <dd className="mt-1 truncate text-base font-semibold text-zinc-100">{value}</dd>
                   </div>
                 ))}
-                <div className="min-w-0 sm:col-span-2 xl:col-span-4">
-                  <dt className="text-xs font-black uppercase tracking-wide text-zinc-400">Description</dt>
-                  <dd className="mt-1 max-w-3xl text-base leading-6 text-zinc-200">{description}</dd>
-                </div>
               </dl>
             </div>
 
