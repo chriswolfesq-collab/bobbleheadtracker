@@ -1,7 +1,7 @@
 import sharp from "sharp";
 import fs from "node:fs";
 
-const SRC_DIR = "images/BobbleheadsNoBackgrounds";
+const SRC_DIR = "images/notrademarkbobbleheads";
 const OUT_DIR = "public/bobbleheads";
 
 // map source filename (without .png) -> our slug
@@ -28,9 +28,9 @@ const FILE_TO_SLUG = {
   pirates: "pirates",
   rangers: "rangers",
   rays: "rays",
-  rcokies: "rockies",
   reds: "reds",
   redsox: "red-sox",
+  rockies: "rockies",
   royals: "royals",
   tigers: "tigers",
   twins: "twins",
