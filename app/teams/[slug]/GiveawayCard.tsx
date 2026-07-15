@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { createContext, useContext } from "react";
-import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
@@ -54,25 +53,6 @@ export function OwnedCount() {
   const { ownedCount } = useOwnership();
 
   return ownedCount;
-}
-
-function CardActionButton({
-  children,
-  label,
-}: {
-  children: React.ReactNode;
-  label: string;
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      title={label}
-      className="grid h-9 w-full place-items-center rounded border border-white/10 bg-white/[0.03] text-zinc-300 transition hover:border-amber-400/50 hover:text-amber-300"
-    >
-      {children}
-    </button>
-  );
 }
 
 export function GiveawayCard({
@@ -126,23 +106,12 @@ export function GiveawayCard({
         </h2>
         <p className="mt-1.5 text-[11px] text-zinc-300 sm:mt-3 sm:text-sm">{giveaway.date}</p>
 
-        <div className="mt-2 grid grid-cols-2 gap-1 sm:mt-3">
-          <SubmitPhotoButton
-            bobbleheadId={giveaway.id}
-            teamSlug={team.slug}
-            label="▣"
-            className="grid h-8 w-full cursor-pointer place-items-center rounded border border-white/10 bg-white/[0.03] text-base text-zinc-300 transition hover:border-amber-400/50 hover:text-amber-300 sm:h-9 sm:text-lg"
-          />
-          {isOwned ? (
-            <CardActionButton label={`More actions for ${fullTitle}`}>
-              <span className="text-xl leading-none">...</span>
-            </CardActionButton>
-          ) : null}
+        <div className="mt-2 sm:mt-3">
           <button
             type="button"
             aria-pressed={isOwned}
             disabled={!isLoggedIn}
-            className="col-span-2 rounded border border-amber-400 px-2 py-2 text-[10px] font-bold uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d] disabled:cursor-not-allowed disabled:opacity-50 sm:text-xs"
+            className="w-full rounded border border-amber-400 px-2 py-2 text-[10px] font-bold uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d] disabled:cursor-not-allowed disabled:opacity-50 sm:text-xs"
             onClick={() => toggleOwned(giveaway.id)}
           >
             {isLoggedIn ? (isOwned ? "Remove as Owned" : "Mark as Owned") : "Log in to track"}

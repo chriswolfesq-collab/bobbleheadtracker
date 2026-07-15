@@ -32,7 +32,7 @@ export const TEAMS: Team[] = [
   // AL West
   { slug: "astros", name: "Astros", city: "Houston", abbr: "HOU", league: "AL", division: "West", primary: "#002D62", secondary: "#EB6E1F", x: 53.18, y: 80.46, labelSide: "right" },
   { slug: "angels", name: "Angels", city: "Anaheim", abbr: "LAA", league: "AL", division: "West", primary: "#BA0021", secondary: "#003263", x: 15.36, y: 64.77, labelSide: "right" },
-  { slug: "athletics", name: "Athletics", city: "Oakland", abbr: "ATH", league: "AL", division: "West", primary: "#003831", secondary: "#EFB21E", x: 6.94, y: 43.3, labelSide: "right" },
+  { slug: "athletics", name: "Athletics", city: "Sacramento", abbr: "ATH", league: "AL", division: "West", primary: "#003831", secondary: "#EFB21E", x: 6.94, y: 43.3, labelSide: "right" },
   { slug: "mariners", name: "Mariners", city: "Seattle", abbr: "SEA", league: "AL", division: "West", primary: "#0C2C56", secondary: "#005C5C", x: 10.01, y: 18.26, labelSide: "right" },
   { slug: "rangers", name: "Rangers", city: "Texas", abbr: "TEX", league: "AL", division: "West", primary: "#003278", secondary: "#C0111F", x: 48.15, y: 71.3, labelSide: "right" },
 
