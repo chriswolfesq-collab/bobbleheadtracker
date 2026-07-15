@@ -151,14 +151,14 @@ export function ProfilePageClient() {
                     index !== teamCounts.length - 1 ? "border-b border-white/10" : ""
                   }`}
                 >
-                  <span className="flex items-center gap-2.5">
+                  <span className="flex items-center gap-3">
                     <Image
                       src={publicAsset(`/bobbleheads/${team.slug}.png`)}
                       alt=""
                       width={677}
                       height={1607}
-                      sizes="32px"
-                      className="h-8 w-auto flex-shrink-0 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]"
+                      sizes="100px"
+                      className="h-14 w-auto flex-shrink-0 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
                     />
                     <span className="font-bold text-zinc-100">{team.name}</span>
                     <span className="text-xs text-zinc-500">{team.city}</span>
