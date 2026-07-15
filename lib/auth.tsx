@@ -11,6 +11,8 @@ type AuthContextValue = {
   isLoading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string) => Promise<{ error: string | null }>;
+  signInWithGoogle: () => Promise<{ error: string | null }>;
+  signInWithGithub: () => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
 };
 
@@ -48,6 +50,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       },
       signUp: async (email, password) => {
         const { error } = await supabase.auth.signUp({ email, password });
+        return { error: error?.message ?? null };
+      },
+      signInWithGoogle: async () => {
+        const { error } = await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: { redirectTo: window.location.origin },
+        });
+        return { error: error?.message ?? null };
+      },
+      signInWithGithub: async () => {
+        const { error } = await supabase.auth.signInWithOAuth({
+          provider: "github",
+          options: { redirectTo: window.location.origin },
+        });
         return { error: error?.message ?? null };
       },
       signOut: async () => {
