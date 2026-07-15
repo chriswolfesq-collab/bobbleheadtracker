@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { RequireDisplayNameGate } from "@/components/RequireDisplayNameGate";
 import { AdminAuthProvider } from "@/lib/adminAuth";
 import { AuthProvider } from "@/lib/auth";
 import "./globals.css";
@@ -18,7 +19,9 @@ export default function RootLayout({
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         <AuthProvider>
-          <AdminAuthProvider>{children}</AdminAuthProvider>
+          <AdminAuthProvider>
+            <RequireDisplayNameGate>{children}</RequireDisplayNameGate>
+          </AdminAuthProvider>
         </AuthProvider>
       </body>
     </html>

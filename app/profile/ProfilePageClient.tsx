@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { AuthWidget } from "@/components/AuthWidget";
-import { useAuth } from "@/lib/auth";
+import { getDisplayName, useAuth } from "@/lib/auth";
 import { useCollectionSummary, useMySubmissions, type MySubmission } from "@/lib/profile";
 import { TEAMS } from "@/lib/teams";
 
@@ -20,9 +21,17 @@ function submissionLabel(submission: MySubmission): string {
 }
 
 export function ProfilePageClient() {
-  const { user, isLoading: isAuthLoading } = useAuth();
+  const { user, isLoading: isAuthLoading, updateDisplayName } = useAuth();
   const { countByTeamSlug, totalOwned, isLoading: isCollectionLoading } = useCollectionSummary();
   const { submissions, isLoading: isSubmissionsLoading } = useMySubmissions();
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [nameDraft, setNameDraft] = useState("");
+  const [isSavingName, setIsSavingName] = useState(false);
+  const [nameError, setNameError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setNameDraft(getDisplayName(user));
+  }, [user]);
 
   const teamCounts = TEAMS.map((team) => ({
     team,
@@ -54,7 +63,60 @@ export function ProfilePageClient() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-amber-500/80 sm:text-xs">
               My Profile
             </p>
-            <h1 className="mt-2 text-2xl font-black text-white">{user.email}</h1>
+            {isEditingName ? (
+              <form
+                className="mt-2 flex items-center justify-center gap-2"
+                onSubmit={async (event) => {
+                  event.preventDefault();
+                  setNameError(null);
+                  setIsSavingName(true);
+                  const result = await updateDisplayName(nameDraft.trim());
+                  setIsSavingName(false);
+                  if (result.error) {
+                    setNameError(result.error);
+                    return;
+                  }
+                  setIsEditingName(false);
+                }}
+              >
+                <input
+                  autoFocus
+                  required
+                  type="text"
+                  value={nameDraft}
+                  onChange={(event) => setNameDraft(event.target.value)}
+                  className="w-48 rounded-lg border border-white/15 bg-[#07111d] px-3 py-2 text-center text-lg font-black text-white outline-none focus:border-amber-400"
+                />
+                <button
+                  type="submit"
+                  disabled={isSavingName}
+                  className="rounded border border-amber-400 px-3 py-2 text-xs font-black uppercase tracking-wide text-amber-300 disabled:opacity-60"
+                >
+                  {isSavingName ? "Saving…" : "Save"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsEditingName(false);
+                    setNameDraft(getDisplayName(user));
+                    setNameError(null);
+                  }}
+                  className="rounded border border-white/20 px-3 py-2 text-xs font-black uppercase tracking-wide text-zinc-300"
+                >
+                  Cancel
+                </button>
+              </form>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsEditingName(true)}
+                className="mt-2 text-2xl font-black text-white transition hover:text-amber-300"
+                title="Edit your name"
+              >
+                {getDisplayName(user)}
+              </button>
+            )}
+            {nameError ? <p className="mt-1 text-xs font-semibold text-red-400">{nameError}</p> : null}
             <p className="mt-3 text-sm font-semibold text-zinc-400">
               {isCollectionLoading ? "Loading…" : `${totalOwned} bobbleheads owned`}
             </p>

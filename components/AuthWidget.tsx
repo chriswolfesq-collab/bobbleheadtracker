@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useAuth } from "@/lib/auth";
+import { getDisplayName, useAuth } from "@/lib/auth";
 
 export function AuthWidget({ className }: { className?: string }) {
   const { user, isLoading, signIn, signUp, signInWithGoogle, signInWithGithub, signOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [mode, setMode] = useState<"sign-in" | "sign-up">("sign-in");
+  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -26,7 +27,7 @@ export function AuthWidget({ className }: { className?: string }) {
           href="/profile"
           className="font-semibold text-zinc-200 transition hover:text-amber-300"
         >
-          {user.email}
+          {getDisplayName(user)}
         </Link>
         <button
           type="button"
@@ -54,6 +55,7 @@ export function AuthWidget({ className }: { className?: string }) {
   const resetAndClose = () => {
     setIsOpen(false);
     setMode("sign-in");
+    setDisplayName("");
     setEmail("");
     setPassword("");
     setError(null);
@@ -141,10 +143,19 @@ export function AuthWidget({ className }: { className?: string }) {
               className="grid gap-3"
               onSubmit={async (event) => {
                 event.preventDefault();
+
+                if (mode === "sign-up" && !displayName.trim()) {
+                  setError("Please enter a name.");
+                  return;
+                }
+
                 setError(null);
                 setIsSubmitting(true);
 
-                const result = mode === "sign-in" ? await signIn(email, password) : await signUp(email, password);
+                const result =
+                  mode === "sign-in"
+                    ? await signIn(email, password)
+                    : await signUp(email, password, displayName.trim());
 
                 setIsSubmitting(false);
 
@@ -161,6 +172,19 @@ export function AuthWidget({ className }: { className?: string }) {
                 resetAndClose();
               }}
             >
+              {mode === "sign-up" ? (
+                <div className="grid gap-1.5">
+                  <label className="text-xs font-bold text-zinc-300">Your name</label>
+                  <input
+                    required
+                    type="text"
+                    value={displayName}
+                    onChange={(event) => setDisplayName(event.target.value)}
+                    placeholder="Enter your name"
+                    className="w-full rounded-lg border border-white/15 bg-[#07111d] px-3 py-2.5 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
+                  />
+                </div>
+              ) : null}
               <div className="grid gap-1.5">
                 <label className="text-xs font-bold text-zinc-300">Email address</label>
                 <input

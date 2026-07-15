@@ -9,13 +9,31 @@ type AuthContextValue = {
   session: Session | null;
   isLoading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
-  signUp: (email: string, password: string) => Promise<{ error: string | null }>;
+  signUp: (email: string, password: string, displayName: string) => Promise<{ error: string | null }>;
   signInWithGoogle: () => Promise<{ error: string | null }>;
   signInWithGithub: () => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
+  updateDisplayName: (displayName: string) => Promise<{ error: string | null }>;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
+
+// display_name is set at sign-up (or defaults from OAuth profile info) and
+// stored in Supabase Auth's user_metadata rather than a separate table, since
+// it's the only per-user profile field the app needs.
+export function getDisplayName(user: User | null): string {
+  if (!user) return "";
+  const metadata = user.user_metadata ?? {};
+  return metadata.display_name || metadata.full_name || metadata.name || user.email || "";
+}
+
+// A username is mandatory for every account, but OAuth sign-ups (Google/
+// GitHub) never get a chance to enter one before landing back signed in —
+// RequireDisplayNameGate uses this to catch that case and block the app
+// until they pick one, rather than silently keeping the provider's name.
+export function hasDisplayName(user: User | null): boolean {
+  return Boolean(user?.user_metadata?.display_name);
+}
 
 // Regular site session only — collection tracking, submitting photos. Admin
 // status is never derived here; see lib/adminAuth.tsx for the separate
@@ -50,8 +68,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         return { error: error?.message ?? null };
       },
-      signUp: async (email, password) => {
-        const { error } = await supabase.auth.signUp({ email, password });
+      signUp: async (email, password, displayName) => {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { data: { display_name: displayName } },
+        });
         return { error: error?.message ?? null };
       },
       signInWithGoogle: async () => {
@@ -70,6 +92,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       },
       signOut: async () => {
         await supabase.auth.signOut();
+      },
+      updateDisplayName: async (displayName) => {
+        const { error } = await supabase.auth.updateUser({ data: { display_name: displayName } });
+        return { error: error?.message ?? null };
       },
     };
   }, [session, isLoading]);
