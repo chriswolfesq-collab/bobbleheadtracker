@@ -24,7 +24,7 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 export function getDisplayName(user: User | null): string {
   if (!user) return "";
   const metadata = user.user_metadata ?? {};
-  return metadata.display_name || metadata.full_name || metadata.name || user.email || "";
+  return metadata.display_name || metadata.full_name || metadata.name || "Member";
 }
 
 // A username is mandatory for every account, but OAuth sign-ups (Google/

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { getDisplayName, useAuth } from "@/lib/auth";
 
-export function AuthWidget({ className }: { className?: string }) {
+export function AuthWidget({ className, hideProfileLink }: { className?: string; hideProfileLink?: boolean }) {
   const { user, isLoading, signIn, signUp, signInWithGoogle, signInWithGithub, signOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [mode, setMode] = useState<"sign-in" | "sign-up">("sign-in");
@@ -23,12 +23,15 @@ export function AuthWidget({ className }: { className?: string }) {
   if (user) {
     return (
       <div className={`flex items-center gap-3 text-sm ${className ?? ""}`}>
-        <Link
-          href="/profile"
-          className="font-semibold text-zinc-200 transition hover:text-amber-300"
-        >
-          {getDisplayName(user)}
-        </Link>
+        <span className="font-semibold text-zinc-200">{getDisplayName(user)}</span>
+        {hideProfileLink ? null : (
+          <Link
+            href="/profile"
+            className="rounded border border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+          >
+            Profile
+          </Link>
+        )}
         <button
           type="button"
           onClick={() => signOut()}

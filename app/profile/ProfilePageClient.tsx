@@ -1,10 +1,17 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AuthWidget } from "@/components/AuthWidget";
 import { getDisplayName, useAuth } from "@/lib/auth";
-import { useCollectionSummary, useMySubmissions, type MySubmission } from "@/lib/profile";
+import { publicAsset } from "@/lib/paths";
+import {
+  useCollectionSummary,
+  useMySubmissions,
+  useSiteBobbleheadCounts,
+  type MySubmission,
+} from "@/lib/profile";
 import { TEAMS } from "@/lib/teams";
 
 const STATUS_STYLES: Record<MySubmission["status"], string> = {
@@ -23,6 +30,7 @@ function submissionLabel(submission: MySubmission): string {
 export function ProfilePageClient() {
   const { user, isLoading: isAuthLoading, updateDisplayName } = useAuth();
   const { countByTeamSlug, totalOwned, isLoading: isCollectionLoading } = useCollectionSummary();
+  const { totalByTeamSlug, siteTotal, isLoading: isSiteTotalLoading } = useSiteBobbleheadCounts();
   const { submissions, isLoading: isSubmissionsLoading } = useMySubmissions();
   const [isEditingName, setIsEditingName] = useState(false);
   const [nameDraft, setNameDraft] = useState("");
@@ -46,8 +54,14 @@ export function ProfilePageClient() {
           "radial-gradient(ellipse 80% 50% at 50% -10%, #1b2a4a 0%, #0e1626 45%, #090e1a 100%)",
       }}
     >
-      <div className="flex justify-end px-4 pt-4 sm:px-6">
-        <AuthWidget />
+      <div className="flex items-center justify-between px-4 pt-4 sm:px-6">
+        <Link
+          href="/"
+          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-300 transition hover:text-amber-300"
+        >
+          <span aria-hidden>←</span> Back to home
+        </Link>
+        <AuthWidget hideProfileLink />
       </div>
 
       {isAuthLoading ? null : !user ? (
@@ -118,7 +132,9 @@ export function ProfilePageClient() {
             )}
             {nameError ? <p className="mt-1 text-xs font-semibold text-red-400">{nameError}</p> : null}
             <p className="mt-3 text-sm font-semibold text-zinc-400">
-              {isCollectionLoading ? "Loading…" : `${totalOwned} bobbleheads owned`}
+              {isCollectionLoading || isSiteTotalLoading
+                ? "Loading…"
+                : `${totalOwned}/${siteTotal} bobbleheads owned`}
             </p>
           </header>
 
@@ -136,14 +152,20 @@ export function ProfilePageClient() {
                   }`}
                 >
                   <span className="flex items-center gap-2.5">
-                    <span
-                      className="h-2.5 w-2.5 flex-shrink-0 rounded-full"
-                      style={{ backgroundColor: team.primary }}
+                    <Image
+                      src={publicAsset(`/bobbleheads/${team.slug}.png`)}
+                      alt=""
+                      width={677}
+                      height={1607}
+                      sizes="32px"
+                      className="h-8 w-auto flex-shrink-0 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]"
                     />
                     <span className="font-bold text-zinc-100">{team.name}</span>
                     <span className="text-xs text-zinc-500">{team.city}</span>
                   </span>
-                  <span className="font-black tabular-nums text-amber-300">{count}</span>
+                  <span className="font-black tabular-nums text-amber-300">
+                    {count}/{totalByTeamSlug[team.slug] ?? 0}
+                  </span>
                 </Link>
               ))}
             </div>
