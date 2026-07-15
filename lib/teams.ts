@@ -34,7 +34,7 @@ export const TEAMS: Team[] = [
   { slug: "angels", name: "Angels", city: "Anaheim", abbr: "LAA", league: "AL", division: "West", primary: "#BA0021", secondary: "#003263", x: 15.36, y: 64.77, labelSide: "right" },
   { slug: "athletics", name: "Athletics", city: "Oakland", abbr: "ATH", league: "AL", division: "West", primary: "#003831", secondary: "#EFB21E", x: 6.94, y: 43.3, labelSide: "right" },
   { slug: "mariners", name: "Mariners", city: "Seattle", abbr: "SEA", league: "AL", division: "West", primary: "#0C2C56", secondary: "#005C5C", x: 10.01, y: 18.26, labelSide: "right" },
-  { slug: "rangers", name: "Rangers", city: "Arlington", abbr: "TEX", league: "AL", division: "West", primary: "#003278", secondary: "#C0111F", x: 48.15, y: 71.3, labelSide: "right" },
+  { slug: "rangers", name: "Rangers", city: "Texas", abbr: "TEX", league: "AL", division: "West", primary: "#003278", secondary: "#C0111F", x: 48.15, y: 71.3, labelSide: "right" },
 
   // NL East
   { slug: "braves", name: "Braves", city: "Atlanta", abbr: "ATL", league: "NL", division: "East", primary: "#CE1141", secondary: "#13274F", x: 73.14, y: 66.07, labelSide: "left" },
