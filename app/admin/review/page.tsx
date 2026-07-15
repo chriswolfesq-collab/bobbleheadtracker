@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { AuthWidget } from "@/components/AuthWidget";
-import { useAuth } from "@/lib/auth";
-import { supabase } from "@/lib/supabase";
+import { useAdminAuth } from "@/lib/adminAuth";
+import { GIVEAWAYS_BY_TEAM } from "@/lib/bobbleheads";
+import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 
 type Submission = {
   id: string;
@@ -46,8 +46,34 @@ async function moveToApproved(storagePath: string, submissionId: string) {
   return publicUrlData.publicUrl;
 }
 
+// The database only knows about approved_photos / community_bobbleheads, not
+// the hardcoded seed photos in lib/bobbleheads.ts, so "does this bobblehead
+// already have a photo" has to be resolved client-side across all three
+// sources before deciding whether an approval becomes the main photo or a
+// gallery addition.
+async function hasExistingPhoto(teamSlug: string, bobbleheadId: string): Promise<boolean> {
+  const { data: approved } = await supabase
+    .from("approved_photos")
+    .select("bobblehead_id")
+    .eq("bobblehead_id", bobbleheadId)
+    .maybeSingle();
+
+  if (approved) return true;
+
+  const curated = GIVEAWAYS_BY_TEAM[teamSlug]?.find((giveaway) => giveaway.id === bobbleheadId);
+  if (curated?.imageUrl) return true;
+
+  const { data: community } = await supabase
+    .from("community_bobbleheads")
+    .select("image_url")
+    .eq("id", bobbleheadId)
+    .maybeSingle();
+
+  return Boolean(community?.image_url);
+}
+
 export default function AdminReviewPage() {
-  const { user, isAdmin, isLoading } = useAuth();
+  const { user, isAdmin, isLoading, signOut } = useAdminAuth();
   const [rows, setRows] = useState<ReviewRow[]>([]);
   const [isLoadingRows, setIsLoadingRows] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -102,9 +128,15 @@ export default function AdminReviewPage() {
 
     try {
       const imageUrl = await moveToApproved(submission.storage_path, submission.id);
+      const hasExisting =
+        submission.kind === "photo_for_existing" && submission.target_bobblehead_id
+          ? await hasExistingPhoto(submission.team_slug, submission.target_bobblehead_id)
+          : false;
+
       const { error: rpcError } = await supabase.rpc("approve_submission", {
         p_submission_id: submission.id,
         p_image_url: imageUrl,
+        p_has_existing_photo: hasExisting,
       });
 
       if (rpcError) throw new Error(rpcError.message);
@@ -146,10 +178,13 @@ export default function AdminReviewPage() {
     return (
       <main className="min-h-full bg-[#15110d] px-4 py-10 text-center text-zinc-100">
         <p className="text-sm font-black uppercase tracking-wide text-zinc-100">Not authorized</p>
-        <p className="mt-2 text-sm text-zinc-400">This page is only visible to the site admin.</p>
-        <div className="mt-6 flex justify-center">
-          <AuthWidget />
-        </div>
+        <p className="mt-2 text-sm text-zinc-400">Log in with an admin-mode account to continue.</p>
+        <Link
+          href="/admin"
+          className="mt-6 inline-block rounded border border-amber-400 px-4 py-2 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
+        >
+          Go to admin login
+        </Link>
       </main>
     );
   }
@@ -163,7 +198,16 @@ export default function AdminReviewPage() {
           </Link>
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">Review submissions</h1>
         </div>
-        <AuthWidget />
+        <div className="flex items-center gap-3 text-sm">
+          <span className="font-semibold text-zinc-200">{user.email}</span>
+          <button
+            type="button"
+            onClick={() => signOut()}
+            className="rounded border border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+          >
+            Log out
+          </button>
+        </div>
       </div>
 
       {error ? <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold text-red-400">{error}</p> : null}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AdminAuthProvider } from "@/lib/adminAuth";
 import { AuthProvider } from "@/lib/auth";
 import "./globals.css";
 
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <AdminAuthProvider>{children}</AdminAuthProvider>
+        </AuthProvider>
       </body>
     </html>
   );

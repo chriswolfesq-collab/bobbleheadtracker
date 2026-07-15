@@ -5,16 +5,45 @@
 -- ---------------------------------------------------------------------------
 -- Admin check
 -- ---------------------------------------------------------------------------
--- Single source of truth for "is this request the site admin". Update the
--- email here if the admin account ever changes; every policy/function below
--- calls this instead of repeating the literal address.
+-- Admin mode is a list of approved emails, not a property of any particular
+-- user's regular account, and it's reached through a separate login at
+-- /admin (see lib/adminAuth.tsx / lib/supabaseAdmin.ts) that keeps its own
+-- session independent from the regular site login — signing in as the same
+-- email on the main site does not grant admin powers there. An email in this
+-- table gets admin-mode powers everywhere is_admin() is checked once signed
+-- in through /admin; every other account (including that same email signed
+-- in via the regular site) is a plain user. RLS on this table has no
+-- policies at all (default deny to anon/authenticated) so only SECURITY
+-- DEFINER functions can read it.
+create table if not exists public.admins (
+  email text primary key,
+  created_at timestamptz not null default now()
+);
+
+alter table public.admins enable row level security;
+
+-- SECURITY DEFINER so it can read public.admins despite that table having no
+-- read policy for anon/authenticated — this is the only sanctioned way to
+-- check admin-mode membership.
 create or replace function public.is_admin()
 returns boolean
 language sql
 stable
+security definer
+set search_path = public
 as $$
-  select coalesce(auth.jwt() ->> 'email', '') = 'chriswolfesq@gmail.com';
+  select exists (
+    select 1 from public.admins where email = coalesce(auth.jwt() ->> 'email', '')
+  );
 $$;
+
+grant execute on function public.is_admin() to anon, authenticated;
+
+-- Seed admin-mode accounts here. The email must already exist as a Supabase
+-- Auth account — sign up for it once at /admin (its "Need admin credentials?
+-- Sign up" link) — then add it below and re-run this file. Safe to re-run.
+insert into public.admins (email) values ('chriswolfesq@gmail.com')
+on conflict (email) do nothing;
 
 -- ---------------------------------------------------------------------------
 -- Tables
@@ -48,6 +77,30 @@ create table if not exists public.community_bobbleheads (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.bobblehead_gallery_photos (
+  id uuid primary key default gen_random_uuid(),
+  bobblehead_id text not null,
+  team_slug text not null,
+  image_url text not null,
+  approved_by uuid references auth.users (id),
+  created_at timestamptz not null default now()
+);
+
+-- Text-field overrides for curated bobbleheads, whose title/year/date live in
+-- the hardcoded lib/bobbleheads.ts rather than a table. Community bobbleheads
+-- don't need this — their title/year/date are already real columns on
+-- community_bobbleheads. A null column here means "not overridden".
+create table if not exists public.bobblehead_overrides (
+  team_slug text not null,
+  bobblehead_id text not null,
+  title text,
+  year text,
+  date text,
+  updated_by uuid references auth.users (id),
+  updated_at timestamptz not null default now(),
+  primary key (team_slug, bobblehead_id)
+);
+
 create table if not exists public.submissions (
   id uuid primary key default gen_random_uuid(),
   kind text not null check (kind in ('photo_for_existing', 'new_bobblehead')),
@@ -70,6 +123,8 @@ create table if not exists public.submissions (
 alter table public.user_collections enable row level security;
 alter table public.approved_photos enable row level security;
 alter table public.community_bobbleheads enable row level security;
+alter table public.bobblehead_gallery_photos enable row level security;
+alter table public.bobblehead_overrides enable row level security;
 alter table public.submissions enable row level security;
 
 -- user_collections: fully private per-user data.
@@ -92,20 +147,68 @@ create policy "user_collections: owner update"
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
 
--- approved_photos / community_bobbleheads: public read, writes only via the
--- SECURITY DEFINER approve_submission() function below (or the SQL editor,
--- which runs as postgres and bypasses RLS).
+-- approved_photos / community_bobbleheads / bobblehead_gallery_photos: public
+-- read. Writes normally happen only via the SECURITY DEFINER
+-- approve_submission() function below (or the SQL editor, which runs as
+-- postgres and bypasses RLS), except where an admin-only write policy is
+-- added explicitly (approved_photos, community_bobbleheads, and
+-- bobblehead_overrides below) to support the admin's direct-edit UI.
 drop policy if exists "approved_photos: public read" on public.approved_photos;
 create policy "approved_photos: public read"
   on public.approved_photos for select
   to anon, authenticated
   using (true);
 
+drop policy if exists "approved_photos: admin insert" on public.approved_photos;
+create policy "approved_photos: admin insert"
+  on public.approved_photos for insert
+  to authenticated
+  with check (public.is_admin());
+
+drop policy if exists "approved_photos: admin update" on public.approved_photos;
+create policy "approved_photos: admin update"
+  on public.approved_photos for update
+  to authenticated
+  using (public.is_admin())
+  with check (public.is_admin());
+
 drop policy if exists "community_bobbleheads: public read" on public.community_bobbleheads;
 create policy "community_bobbleheads: public read"
   on public.community_bobbleheads for select
   to anon, authenticated
   using (true);
+
+drop policy if exists "community_bobbleheads: admin update" on public.community_bobbleheads;
+create policy "community_bobbleheads: admin update"
+  on public.community_bobbleheads for update
+  to authenticated
+  using (public.is_admin())
+  with check (public.is_admin());
+
+drop policy if exists "bobblehead_gallery_photos: public read" on public.bobblehead_gallery_photos;
+create policy "bobblehead_gallery_photos: public read"
+  on public.bobblehead_gallery_photos for select
+  to anon, authenticated
+  using (true);
+
+drop policy if exists "bobblehead_overrides: public read" on public.bobblehead_overrides;
+create policy "bobblehead_overrides: public read"
+  on public.bobblehead_overrides for select
+  to anon, authenticated
+  using (true);
+
+drop policy if exists "bobblehead_overrides: admin insert" on public.bobblehead_overrides;
+create policy "bobblehead_overrides: admin insert"
+  on public.bobblehead_overrides for insert
+  to authenticated
+  with check (public.is_admin());
+
+drop policy if exists "bobblehead_overrides: admin update" on public.bobblehead_overrides;
+create policy "bobblehead_overrides: admin update"
+  on public.bobblehead_overrides for update
+  to authenticated
+  using (public.is_admin())
+  with check (public.is_admin());
 
 -- submissions: anyone logged in can create their own; they can see their own,
 -- the admin can see everything. Status changes only happen via the RPC
@@ -130,8 +233,21 @@ create policy "submissions: submitter or admin select"
 -- this function with the resulting public URL to do the DB bookkeeping
 -- atomically. Both functions re-check admin status server-side, so a client
 -- that lies about being the admin still gets rejected.
+--
+-- p_has_existing_photo is computed by the client (it needs to know about the
+-- hardcoded seed photos in lib/bobbleheads.ts, which the database has no
+-- visibility into): when true, a photo_for_existing submission is the
+-- bobblehead's first photo, it becomes the main/profile photo
+-- (approved_photos). When false, one already exists, so the submission is
+-- added to the gallery instead of overwriting it.
 
-create or replace function public.approve_submission(p_submission_id uuid, p_image_url text)
+drop function if exists public.approve_submission(uuid, text);
+
+create or replace function public.approve_submission(
+  p_submission_id uuid,
+  p_image_url text,
+  p_has_existing_photo boolean default false
+)
 returns void
 language plpgsql
 security definer
@@ -159,12 +275,17 @@ begin
       raise exception 'missing target_bobblehead_id for photo_for_existing submission';
     end if;
 
-    insert into public.approved_photos (bobblehead_id, team_slug, image_url, approved_by, updated_at)
-    values (v_submission.target_bobblehead_id, v_submission.team_slug, p_image_url, auth.uid(), now())
-    on conflict (bobblehead_id) do update
-      set image_url = excluded.image_url,
-          approved_by = excluded.approved_by,
-          updated_at = now();
+    if p_has_existing_photo then
+      insert into public.bobblehead_gallery_photos (bobblehead_id, team_slug, image_url, approved_by)
+      values (v_submission.target_bobblehead_id, v_submission.team_slug, p_image_url, auth.uid());
+    else
+      insert into public.approved_photos (bobblehead_id, team_slug, image_url, approved_by, updated_at)
+      values (v_submission.target_bobblehead_id, v_submission.team_slug, p_image_url, auth.uid(), now())
+      on conflict (bobblehead_id) do update
+        set image_url = excluded.image_url,
+            approved_by = excluded.approved_by,
+            updated_at = now();
+    end if;
 
   elsif v_submission.kind = 'new_bobblehead' then
     v_new_id := 'community-' || v_submission.team_slug || '-' ||
@@ -213,9 +334,9 @@ begin
 end;
 $$;
 
-revoke all on function public.approve_submission(uuid, text) from public, anon;
+revoke all on function public.approve_submission(uuid, text, boolean) from public, anon;
 revoke all on function public.reject_submission(uuid) from public, anon;
-grant execute on function public.approve_submission(uuid, text) to authenticated;
+grant execute on function public.approve_submission(uuid, text, boolean) to authenticated;
 grant execute on function public.reject_submission(uuid) to authenticated;
 
 -- ---------------------------------------------------------------------------

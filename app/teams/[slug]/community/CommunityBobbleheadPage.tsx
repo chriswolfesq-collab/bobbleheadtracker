@@ -3,8 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
+import { PhotoGallery } from "@/components/PhotoGallery";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
+import { useAdminAuth } from "@/lib/adminAuth";
+import { saveCommunityBobblehead } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
+import { useBobbleheadGallery } from "@/lib/bobbleheadGallery";
 import { useCommunityBobblehead } from "@/lib/communityBobbleheads";
 import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
@@ -29,9 +35,15 @@ function Shell({ team, children }: { team: Team; children: React.ReactNode }) {
 
 export function CommunityBobbleheadPage({ team }: { team: Team }) {
   const bobbleheadId = useSearchParams().get("id") ?? "";
+  const { isAdmin, user: adminUser } = useAdminAuth();
   const { communityBobblehead, isLoading, notFound } = useCommunityBobblehead(team.slug, bobbleheadId);
   const { photoUrlById } = useApprovedPhotos(team.slug);
+  const { photos: galleryPhotos } = useBobbleheadGallery(team.slug, bobbleheadId);
   const { ownedById, isLoggedIn, setOwned } = useUserCollection(team.slug);
+
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [localOverride, setLocalOverride] = useState<EditBobbleheadValues | null>(null);
+  const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
 
   if (isLoading) {
     return (
@@ -57,12 +69,33 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
   }
 
   const giveaway = communityBobblehead;
-  const imageSrc = photoUrlById[giveaway.id] ?? giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+  const title = localOverride?.title ?? giveaway.title;
+  const year = localOverride?.year ?? giveaway.year;
+  const date = localOverride?.date ?? giveaway.date;
+  const imageSrc =
+    localImageUrl ?? photoUrlById[giveaway.id] ?? giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
   const isOwned = ownedById[giveaway.id] ?? false;
   const details = [
-    ["Release Date", giveaway.date],
+    ["Release Date", date],
     ["Team", `${team.city} ${team.name}`],
   ];
+
+  const handleEditSave = async (values: EditBobbleheadValues, file: File | null) => {
+    if (!adminUser) return;
+
+    const { imageUrl } = await saveCommunityBobblehead({
+      user: adminUser,
+      teamSlug: team.slug,
+      bobbleheadId: giveaway.id,
+      title: values.title,
+      year: values.year,
+      date: values.date,
+      file: file ?? undefined,
+    });
+
+    setLocalOverride(values);
+    if (imageUrl) setLocalImageUrl(imageUrl);
+  };
 
   return (
     <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
@@ -86,7 +119,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
               <div className="flex h-44 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
                 <Image
                   src={imageSrc}
-                  alt={`${team.city} ${team.name} ${giveaway.title} bobblehead`}
+                  alt={`${team.city} ${team.name} ${title} bobblehead`}
                   width={268}
                   height={630}
                   priority
@@ -106,7 +139,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
                 {team.city} {team.name}
               </p>
               <h1 className="mt-3 text-4xl font-black uppercase leading-none tracking-wide text-white sm:text-5xl 2xl:text-6xl">
-                {giveaway.title} {giveaway.year}
+                {title} {year}
               </h1>
               <dl className="mt-6 grid max-w-4xl gap-x-8 gap-y-3 text-sm sm:grid-cols-2 xl:grid-cols-4">
                 {details.map(([label, value]) => (
@@ -122,6 +155,16 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
               <span className="rounded-lg border border-amber-400/60 px-5 py-3 text-sm font-bold uppercase tracking-wide text-amber-300">
                 Community submission
               </span>
+              {isAdmin ? (
+                <button
+                  type="button"
+                  onClick={() => setIsEditOpen(true)}
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-5 py-3 text-sm font-bold uppercase tracking-wide text-zinc-100 transition hover:border-amber-400 hover:text-amber-300"
+                >
+                  <span>✎</span>
+                  Edit bobblehead
+                </button>
+              ) : null}
               <p className="text-sm leading-6 text-zinc-300 xl:text-right">
                 Approved by the site admin. Log in to add it to your collection.
               </p>
@@ -139,6 +182,12 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
             </div>
           </div>
 
+          {galleryPhotos.length > 0 ? (
+            <div className="mb-5">
+              <PhotoGallery photos={galleryPhotos} />
+            </div>
+          ) : null}
+
           <div className="grid gap-3 sm:grid-cols-[1fr_1fr_56px]">
             <button
               type="button"
@@ -154,9 +203,27 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
               label="Submit a photo"
               className="flex min-h-14 w-full cursor-pointer items-center justify-center rounded-lg border border-dashed border-zinc-400/70 px-3 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
             />
+            {isAdmin ? (
+              <button
+                type="button"
+                onClick={() => setIsEditOpen(true)}
+                title="Edit bobblehead"
+                className="hidden min-h-14 items-center justify-center rounded-lg border border-white/20 text-zinc-200 transition hover:border-amber-400 hover:text-amber-300 sm:flex"
+              >
+                <span>✎</span>
+              </button>
+            ) : null}
           </div>
         </section>
       </div>
+
+      {isEditOpen ? (
+        <EditBobbleheadDialog
+          onClose={() => setIsEditOpen(false)}
+          initial={{ title, year, date }}
+          onSave={handleEditSave}
+        />
+      ) : null}
     </main>
   );
 }

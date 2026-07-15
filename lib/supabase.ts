@@ -15,5 +15,3 @@ export const supabase = createClient(
   supabaseUrl || "https://placeholder.supabase.co",
   supabaseAnonKey || "placeholder-anon-key",
 );
-
-export const ADMIN_EMAIL = "chriswolfesq@gmail.com";

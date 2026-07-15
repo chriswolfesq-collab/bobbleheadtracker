@@ -2,12 +2,11 @@
 
 import type { Session, User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { ADMIN_EMAIL, supabase } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase";
 
 type AuthContextValue = {
   user: User | null;
   session: Session | null;
-  isAdmin: boolean;
   isLoading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string) => Promise<{ error: string | null }>;
@@ -18,6 +17,10 @@ type AuthContextValue = {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
+// Regular site session only — collection tracking, submitting photos. Admin
+// status is never derived here; see lib/adminAuth.tsx for the separate
+// admin-mode session (signed in at /admin), which is what any "is this
+// person an admin" check should use instead.
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -42,7 +45,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return {
       user,
       session,
-      isAdmin: user?.email === ADMIN_EMAIL,
       isLoading,
       signIn: async (email, password) => {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
