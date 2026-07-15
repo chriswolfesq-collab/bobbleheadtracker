@@ -23,11 +23,11 @@ function Stat({
   label: string;
 }) {
   return (
-    <div className="flex items-center gap-3">
-      <div className="grid h-12 w-12 shrink-0 place-items-center text-3xl text-zinc-200">{icon}</div>
+    <div className="flex flex-col items-center gap-1 text-center sm:flex-row sm:items-center sm:gap-3 sm:text-left">
+      <div className="hidden h-12 w-12 shrink-0 place-items-center text-3xl text-zinc-200 sm:grid">{icon}</div>
       <div>
-        <div className="text-3xl font-black leading-none text-amber-400">{value}</div>
-        <div className="mt-1 text-xs font-semibold uppercase tracking-wide text-zinc-200">{label}</div>
+        <div className="text-xl font-black leading-none text-amber-400 sm:text-3xl">{value}</div>
+        <div className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-zinc-200 sm:text-xs">{label}</div>
       </div>
     </div>
   );
@@ -173,7 +173,7 @@ export function TeamPageClient({
       <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
         <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border border-black bg-[#08131f] shadow-2xl">
           <section
-            className="grid gap-6 border-b border-white/10 p-5 lg:grid-cols-[220px_1fr]"
+            className="grid gap-4 border-b border-white/10 p-4 sm:gap-6 sm:p-5 lg:grid-cols-[220px_1fr]"
             style={{
               background: `radial-gradient(circle at 74% 14%, ${team.primary}44, transparent 34%), linear-gradient(135deg, #08131f 0%, #0b1d2e 52%, #07111d 100%)`,
             }}
@@ -192,7 +192,7 @@ export function TeamPageClient({
                 <AuthWidget />
               </div>
 
-              <div className="mt-5 rounded border border-white/15 bg-black/25 p-3 text-center">
+              <div className="mt-5 hidden rounded border border-white/15 bg-black/25 p-3 text-center lg:block">
                 <div className="flex h-48 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
                   <Image
                     src={publicAsset(`/bobbleheads/${team.slug}.png`)}
@@ -209,43 +209,59 @@ export function TeamPageClient({
               </div>
             </aside>
 
-            <div className="grid gap-7 xl:grid-cols-[1fr_210px]">
+            <div className="grid gap-5 xl:grid-cols-[1fr_210px] xl:gap-7">
               <div>
-                <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+                <div className="flex flex-row items-center gap-4 sm:items-start sm:gap-5">
                   <div
-                    className="grid h-24 w-24 shrink-0 place-items-center text-4xl font-black text-white"
+                    className="relative grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded bg-black/25 text-2xl font-black text-white sm:h-24 sm:w-24 sm:bg-transparent sm:text-4xl lg:hidden"
+                    style={{ color: team.secondary === "#FFFFFF" ? "#f8fafc" : team.secondary }}
+                  >
+                    <Image
+                      src={publicAsset(`/bobbleheads/${team.slug}.png`)}
+                      alt={`${team.city} ${team.name} bobblehead`}
+                      width={268}
+                      height={630}
+                      priority
+                      className="absolute inset-0 h-full w-full object-contain sm:hidden"
+                    />
+                    <span className="hidden sm:inline">{team.abbr}</span>
+                  </div>
+                  <div
+                    className="hidden h-24 w-24 shrink-0 place-items-center text-4xl font-black text-white lg:grid"
                     style={{ color: team.secondary === "#FFFFFF" ? "#f8fafc" : team.secondary }}
                   >
                     {team.abbr}
                   </div>
                   <div>
-                    <h1 className="text-4xl font-black uppercase leading-none tracking-wide text-white sm:text-5xl 2xl:text-6xl">
+                    <h1 className="text-2xl font-black uppercase leading-none tracking-wide text-white sm:text-4xl sm:leading-none 2xl:text-6xl">
                       {team.city} {team.name}
                     </h1>
-                    <p className="mt-3 text-xl font-black uppercase tracking-wide text-amber-400">
+                    <p className="mt-2 text-sm font-black uppercase tracking-wide text-amber-400 sm:mt-3 sm:text-xl">
                       {team.league} {team.division}
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-9 grid gap-6 sm:grid-cols-3">
+                <div className="mt-5 grid grid-cols-3 gap-3 sm:mt-9 sm:gap-6">
                   <Stat icon={<span>♟</span>} value={allGiveaways.length} label="Bobbleheads" />
                   <Stat icon={<span>✓</span>} value={<OwnedCount />} label="Owned" />
                   <Stat icon={<span>▣</span>} value={photoCount} label="Photos" />
                 </div>
               </div>
 
-              <div className="flex flex-col items-start gap-6 xl:items-end">
+              <div className="flex flex-row items-center justify-between gap-4 xl:flex-col xl:items-end">
                 <button
                   type="button"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-5 py-3 text-sm font-bold uppercase tracking-wide text-zinc-100 transition hover:border-amber-400 hover:text-amber-300"
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-3 py-2 text-xs font-bold uppercase tracking-wide text-zinc-100 transition hover:border-amber-400 hover:text-amber-300 sm:px-5 sm:py-3 sm:text-sm"
                 >
                   <span>✎</span>
                   Edit team
                 </button>
-                <div className="space-y-3 text-left xl:text-right">
-                  <p className="text-sm font-black uppercase tracking-wide text-zinc-200">ⓘ Team info</p>
-                  <div className="pt-4 text-sm leading-7 text-zinc-200">
+                <div className="space-y-1 text-right xl:space-y-3 xl:text-right">
+                  <p className="hidden text-sm font-black uppercase tracking-wide text-zinc-200 xl:block">
+                    ⓘ Team info
+                  </p>
+                  <div className="text-xs leading-5 text-zinc-300 sm:text-sm sm:leading-7 sm:text-zinc-200 xl:pt-4">
                     <p className="uppercase">Est. {established}</p>
                     <p>
                       {team.city}, {team.league} {team.division}
@@ -295,7 +311,7 @@ export function TeamPageClient({
             ) : null}
 
             {allGiveaways.length > 0 ? (
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6">
+              <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 xl:grid-cols-6">
                 {allGiveaways.map((giveaway, index) => (
                   <GiveawayCard
                     key={giveaway.id}
