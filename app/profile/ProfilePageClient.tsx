@@ -183,6 +183,8 @@ export function ProfilePageClient() {
               <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
                 {submissions.map((submission, index) => {
                   const team = TEAMS.find((t) => t.slug === submission.teamSlug);
+                  const imageSrc =
+                    submission.imageUrl ?? publicAsset(`/bobbleheads/${submission.teamSlug}.png`);
                   return (
                     <div
                       key={submission.id}
@@ -190,13 +192,23 @@ export function ProfilePageClient() {
                         index !== submissions.length - 1 ? "border-b border-white/10" : ""
                       }`}
                     >
-                      <span className="min-w-0">
-                        <span className="block truncate font-bold text-zinc-100">
-                          {submissionLabel(submission)}
-                        </span>
-                        <span className="text-xs text-zinc-500">
-                          {team?.name ?? submission.teamSlug} ·{" "}
-                          {new Date(submission.createdAt).toLocaleDateString()}
+                      <span className="flex min-w-0 items-center gap-3">
+                        <Image
+                          src={imageSrc}
+                          alt=""
+                          width={677}
+                          height={1607}
+                          sizes="100px"
+                          className="h-14 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]"
+                        />
+                        <span className="min-w-0">
+                          <span className="block truncate font-bold text-zinc-100">
+                            {submissionLabel(submission)}
+                          </span>
+                          <span className="text-xs text-zinc-500">
+                            {team?.name ?? submission.teamSlug} ·{" "}
+                            {new Date(submission.createdAt).toLocaleDateString()}
+                          </span>
                         </span>
                       </span>
                       <span

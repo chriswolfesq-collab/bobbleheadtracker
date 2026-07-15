@@ -102,7 +102,32 @@ export type MySubmission = {
   title: string | null;
   status: "pending" | "approved" | "rejected";
   createdAt: string;
+  imageUrl: string | null;
 };
+
+// Pending/rejected photos still live in the private bobblehead-pending bucket
+// (readable by their owner via RLS), while approved photos were copied to the
+// public bobblehead-approved bucket under `${submissionId}-${filename}` (see
+// moveToApproved in app/admin/review/page.tsx) — so the URL has to be derived
+// differently depending on status.
+async function resolveSubmissionImageUrl(
+  status: MySubmission["status"],
+  submissionId: string,
+  storagePath: string,
+): Promise<string | null> {
+  if (status === "approved") {
+    const filename = storagePath.split("/").pop() ?? "photo";
+    const { data } = supabase.storage
+      .from("bobblehead-approved")
+      .getPublicUrl(`${submissionId}-${filename}`);
+    return data.publicUrl ?? null;
+  }
+
+  const { data } = await supabase.storage
+    .from("bobblehead-pending")
+    .createSignedUrl(storagePath, 60 * 10);
+  return data?.signedUrl ?? null;
+}
 
 export function useMySubmissions() {
   const { user } = useAuth();
@@ -116,28 +141,34 @@ export function useMySubmissions() {
 
     supabase
       .from("submissions")
-      .select("id, kind, team_slug, title, status, created_at")
+      .select("id, kind, team_slug, title, status, created_at, storage_path")
       .eq("submitted_by", user.id)
       .order("created_at", { ascending: false })
-      .then(({ data, error }) => {
+      .then(async ({ data, error }) => {
         if (cancelled) return;
 
         if (error) {
           console.error("Failed to load your submissions:", error.message);
           setSubmissions([]);
-        } else {
-          setSubmissions(
-            (data ?? []).map((row) => ({
-              id: row.id,
-              kind: row.kind,
-              teamSlug: row.team_slug,
-              title: row.title,
-              status: row.status,
-              createdAt: row.created_at,
-            })),
-          );
+          setIsLoading(false);
+          return;
         }
 
+        const withUrls = await Promise.all(
+          (data ?? []).map(async (row) => ({
+            id: row.id,
+            kind: row.kind,
+            teamSlug: row.team_slug,
+            title: row.title,
+            status: row.status,
+            createdAt: row.created_at,
+            imageUrl: await resolveSubmissionImageUrl(row.status, row.id, row.storage_path),
+          })),
+        );
+
+        if (cancelled) return;
+
+        setSubmissions(withUrls);
         setIsLoading(false);
       });
 

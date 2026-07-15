@@ -70,7 +70,7 @@ export function GiveawayCard({
     giveaway.source === "community"
       ? `/teams/${team.slug}/community?id=${encodeURIComponent(giveaway.id)}`
       : `/teams/${team.slug}/bobbleheads/${giveaway.id}`;
-  const fullTitle = `${team.name} ${giveaway.title}`;
+  const fullTitle = giveaway.title;
   const imageSrc = giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
 
   return (
