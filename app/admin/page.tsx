@@ -82,6 +82,12 @@ export default function AdminPage() {
           <div>
             <h1 className="text-2xl font-black uppercase tracking-wide">Admin mode</h1>
             <p className="mt-1 text-sm text-zinc-400">Signed in as {user.email}</p>
+            <Link
+              href="/"
+              className="mt-2 inline-block text-xs font-bold text-amber-300 hover:text-amber-200"
+            >
+              ← Back to Bobbleshelf
+            </Link>
           </div>
           <button
             type="button"
