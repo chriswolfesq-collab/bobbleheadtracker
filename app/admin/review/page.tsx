@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { GIVEAWAYS_BY_TEAM } from "@/lib/bobbleheads";
-import { fetchDeletedBobbleheads } from "@/lib/bobbleheadOverrides";
+import { fetchBobbleheadOverrides } from "@/lib/bobbleheadOverrides";
 import { findDuplicateBobblehead, type DuplicateCandidate } from "@/lib/duplicateCheck";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 
@@ -44,33 +44,15 @@ async function moveToApproved(storagePath: string, submissionId: string) {
 
   const { data: publicUrlData } = supabase.storage.from("bobblehead-approved").getPublicUrl(approvedPath);
 
-  return publicUrlData.publicUrl;
+  return { publicUrl: publicUrlData.publicUrl, approvedPath };
 }
 
-// The database only knows about approved_photos / community_bobbleheads, not
-// the hardcoded seed photos in lib/bobbleheads.ts, so "does this bobblehead
-// already have a photo" has to be resolved client-side across all three
-// sources before deciding whether an approval becomes the main photo or a
-// gallery addition.
-async function hasExistingPhoto(teamSlug: string, bobbleheadId: string): Promise<boolean> {
-  const { data: approved } = await supabase
-    .from("approved_photos")
-    .select("bobblehead_id")
-    .eq("bobblehead_id", bobbleheadId)
-    .maybeSingle();
-
-  if (approved) return true;
-
+// approve_submission() decides main-photo-vs-gallery inside the transaction;
+// the only photo source the database can't see is the curated seed photo in
+// the build-time data, so that one static fact is passed along.
+function curatedHasSeedPhoto(teamSlug: string, bobbleheadId: string): boolean {
   const curated = GIVEAWAYS_BY_TEAM[teamSlug]?.find((giveaway) => giveaway.id === bobbleheadId);
-  if (curated?.imageUrl) return true;
-
-  const { data: community } = await supabase
-    .from("community_bobbleheads")
-    .select("image_url")
-    .eq("id", bobbleheadId)
-    .maybeSingle();
-
-  return Boolean(community?.image_url);
+  return Boolean(curated?.imageUrl);
 }
 
 export default function AdminReviewPage() {
@@ -109,7 +91,7 @@ export default function AdminReviewPage() {
         const { data: communityRows } = teamSlugs.length
           ? await supabase.from("community_bobbleheads").select("team_slug, title, date").in("team_slug", teamSlugs)
           : { data: [] as { team_slug: string; title: string; date: string }[] };
-        const { isDeleted } = await fetchDeletedBobbleheads();
+        const { isDeleted } = await fetchBobbleheadOverrides();
         const communityByTeam = new Map<string, DuplicateCandidate[]>();
         for (const row of communityRows ?? []) {
           const list = communityByTeam.get(row.team_slug) ?? [];
@@ -153,19 +135,27 @@ export default function AdminReviewPage() {
     setError(null);
 
     try {
-      const imageUrl = await moveToApproved(submission.storage_path, submission.id);
-      const hasExisting =
+      const { publicUrl, approvedPath } = await moveToApproved(submission.storage_path, submission.id);
+      const curatedHasPhoto =
         submission.kind === "photo_for_existing" && submission.target_bobblehead_id
-          ? await hasExistingPhoto(submission.team_slug, submission.target_bobblehead_id)
+          ? curatedHasSeedPhoto(submission.team_slug, submission.target_bobblehead_id)
           : false;
 
       const { error: rpcError } = await supabase.rpc("approve_submission", {
         p_submission_id: submission.id,
-        p_image_url: imageUrl,
-        p_has_existing_photo: hasExisting,
+        p_image_url: publicUrl,
+        p_curated_has_photo: curatedHasPhoto,
       });
 
-      if (rpcError) throw new Error(rpcError.message);
+      if (rpcError) {
+        // The copy made by moveToApproved is orphaned if the approval didn't
+        // go through — best-effort cleanup, keeping the original error.
+        await supabase.storage
+          .from("bobblehead-approved")
+          .remove([approvedPath])
+          .catch(() => undefined);
+        throw new Error(rpcError.message);
+      }
 
       await supabase.storage.from("bobblehead-pending").remove([submission.storage_path]);
       setRows((current) => current.filter((row) => row.id !== submission.id));
@@ -187,7 +177,9 @@ export default function AdminReviewPage() {
 
       if (rpcError) throw new Error(rpcError.message);
 
-      await supabase.storage.from("bobblehead-pending").remove([submission.storage_path]);
+      // The pending file is kept on purpose: the submitter's profile history
+      // renders rejected submissions from it (see lib/profile.ts), and RLS
+      // limits who can see it to the submitter and the admin.
       setRows((current) => current.filter((row) => row.id !== submission.id));
     } catch (rejectError) {
       setError(rejectError instanceof Error ? rejectError.message : "Could not reject submission.");

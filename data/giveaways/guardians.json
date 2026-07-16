@@ -1,0 +1,805 @@
+[
+  {
+    "id": "tanner-bibee-2025",
+    "title": "Tanner Bibee",
+    "year": "2025",
+    "date": "May 31, 2025"
+  },
+  {
+    "id": "larry-doby-2025",
+    "title": "Larry Doby",
+    "year": "2025",
+    "date": "July 5, 2025"
+  },
+  {
+    "id": "stephen-vogt-2025",
+    "title": "Stephen Vogt",
+    "year": "2025",
+    "date": "July 19, 2025"
+  },
+  {
+    "id": "tom-hamilton-2025",
+    "title": "Tom Hamilton",
+    "year": "2025",
+    "date": "August 16, 2025"
+  },
+  {
+    "id": "jose-ramirez-2024",
+    "title": "Jose Ramirez",
+    "year": "2024",
+    "date": "May 18, 2024"
+  },
+  {
+    "id": "josh-naylor-2024",
+    "title": "Josh Naylor",
+    "year": "2024",
+    "date": "June 22, 2024"
+  },
+  {
+    "id": "triston-mckenzie-2024",
+    "title": "Triston McKenzie",
+    "year": "2024",
+    "date": "July 6, 2024"
+  },
+  {
+    "id": "cc-sabathia-2024",
+    "title": "CC Sabathia",
+    "year": "2024",
+    "date": "August 3, 2024"
+  },
+  {
+    "id": "peanuts-lucy-2023",
+    "title": "Peanuts Lucy",
+    "year": "2023",
+    "date": "June 6, 2023",
+    "imageUrl": null
+  },
+  {
+    "id": "andres-gimenez-2023",
+    "title": "Andrés Giménez",
+    "year": "2023",
+    "date": "June 24, 2023",
+    "imageUrl": null
+  },
+  {
+    "id": "steven-kwan-2023",
+    "title": "Steven Kwan",
+    "year": "2023",
+    "date": "July 22, 2023",
+    "imageUrl": null
+  },
+  {
+    "id": "manny-ramirez-2023",
+    "title": "Manny Ramirez",
+    "year": "2023",
+    "date": "August 19, 2023",
+    "imageUrl": null
+  },
+  {
+    "id": "linus-2023",
+    "title": "Linus",
+    "year": "2023",
+    "date": "August 22, 2023",
+    "imageUrl": null
+  },
+  {
+    "id": "emmanuel-clase-2023",
+    "title": "Emmanuel Clase",
+    "year": "2023",
+    "date": "September 2, 2023",
+    "imageUrl": null
+  },
+  {
+    "id": "kid-cudi-2023",
+    "title": "Kid Cudi",
+    "year": "2023",
+    "date": "September 22, 2023"
+  },
+  {
+    "id": "aaron-civale-2022",
+    "title": "Aaron Civale",
+    "year": "2022",
+    "date": "June 11, 2022",
+    "imageUrl": null
+  },
+  {
+    "id": "charlie-brown-2022",
+    "title": "Charlie Brown",
+    "year": "2022",
+    "date": "June 28, 2022",
+    "imageUrl": null
+  },
+  {
+    "id": "jose-ramirez-2022",
+    "title": "José Ramírez",
+    "year": "2022",
+    "date": "July 16, 2022",
+    "imageUrl": null
+  },
+  {
+    "id": "franmil-reyes-2022",
+    "title": "Franmil Reyes",
+    "year": "2022",
+    "date": "September 3, 2022",
+    "imageUrl": null
+  },
+  {
+    "id": "woodstock-2022",
+    "title": "Woodstock",
+    "year": "2022",
+    "date": "September 13, 2022",
+    "imageUrl": null
+  },
+  {
+    "id": "roberto-perez-2021",
+    "title": "Roberto Perez",
+    "year": "2021",
+    "date": "June 12, 2021",
+    "imageUrl": null
+  },
+  {
+    "id": "shane-bieber-cy-young-award-2021",
+    "title": "Shane Bieber Cy Young Award",
+    "year": "2021",
+    "date": "August 21, 2021",
+    "imageUrl": null
+  },
+  {
+    "id": "jose-ramirez-2019",
+    "title": "Jose Ramirez",
+    "year": "2019",
+    "date": "March 9, 2019",
+    "imageUrl": null
+  },
+  {
+    "id": "francisco-lindor-2019",
+    "title": "Francisco Lindor",
+    "year": "2019",
+    "date": "May 25, 2019",
+    "imageUrl": null
+  },
+  {
+    "id": "mike-clevinger-2019",
+    "title": "Mike Clevinger",
+    "year": "2019",
+    "date": "June 5, 2019",
+    "imageUrl": null
+  },
+  {
+    "id": "trevor-bauer-2019",
+    "title": "Trevor Bauer",
+    "year": "2019",
+    "date": "July 17, 2019",
+    "imageUrl": null
+  },
+  {
+    "id": "sandy-alomar-2019",
+    "title": "Sandy Alomar",
+    "year": "2019",
+    "date": "August 24, 2019",
+    "imageUrl": null
+  },
+  {
+    "id": "trevor-bauer-2018",
+    "title": "Trevor Bauer",
+    "year": "2018",
+    "date": "March 3, 2018",
+    "imageUrl": null
+  },
+  {
+    "id": "corey-kluber-2018",
+    "title": "Corey Kluber",
+    "year": "2018",
+    "date": "May 28, 2018",
+    "imageUrl": null
+  },
+  {
+    "id": "andrew-miller-2018",
+    "title": "Andrew Miller",
+    "year": "2018",
+    "date": "June 16, 2018",
+    "imageUrl": null
+  },
+  {
+    "id": "carlos-carrasco-2018",
+    "title": "Carlos Carrasco",
+    "year": "2018",
+    "date": "July 12, 2018",
+    "imageUrl": null
+  },
+  {
+    "id": "edwin-encarnacion-2018",
+    "title": "Edwin Encarnacion",
+    "year": "2018",
+    "date": "August 29, 2018",
+    "imageUrl": null
+  },
+  {
+    "id": "spring-training-corey-kluber-2017",
+    "title": "Spring Training Corey Kluber",
+    "year": "2017",
+    "date": "March 11, 2017",
+    "imageUrl": null
+  },
+  {
+    "id": "jose-ramirez-2017",
+    "title": "Jose Ramirez",
+    "year": "2017",
+    "date": "May 27, 2017",
+    "imageUrl": null
+  },
+  {
+    "id": "francisco-lindor-2017",
+    "title": "Francisco Lindor",
+    "year": "2017",
+    "date": "July 4, 2017",
+    "imageUrl": null
+  },
+  {
+    "id": "jason-kipnis-2017",
+    "title": "Jason Kipnis",
+    "year": "2017",
+    "date": "July 22, 2017",
+    "imageUrl": null
+  },
+  {
+    "id": "terry-francona-2017",
+    "title": "Terry Francona",
+    "year": "2017",
+    "date": "August 23, 2017",
+    "imageUrl": null
+  },
+  {
+    "id": "jason-kipnis-2016",
+    "title": "Jason Kipnis",
+    "year": "2016",
+    "date": "March 5, 2016",
+    "imageUrl": null
+  },
+  {
+    "id": "yan-gomes-2016",
+    "title": "Yan Gomes",
+    "year": "2016",
+    "date": "July 9, 2016",
+    "imageUrl": null
+  },
+  {
+    "id": "hall-of-fame-inductee-2016",
+    "title": "Hall of Fame Inductee",
+    "year": "2016",
+    "date": "July 30, 2016",
+    "imageUrl": null
+  },
+  {
+    "id": "bob-feller-2016",
+    "title": "Bob Feller",
+    "year": "2016",
+    "date": "August 13, 2016",
+    "imageUrl": null
+  },
+  {
+    "id": "michael-brantley-2015-3-7",
+    "title": "Michael Brantley",
+    "year": "2015",
+    "date": "March 7, 2015",
+    "imageUrl": null
+  },
+  {
+    "id": "corey-kluber-2015",
+    "title": "Corey Kluber",
+    "year": "2015",
+    "date": "June 6, 2015",
+    "imageUrl": null
+  },
+  {
+    "id": "carlos-santana-2015",
+    "title": "Carlos Santana",
+    "year": "2015",
+    "date": "July 8, 2015",
+    "imageUrl": null
+  },
+  {
+    "id": "michael-brantley-2015-8-8",
+    "title": "Michael Brantley",
+    "year": "2015",
+    "date": "August 8, 2015",
+    "imageUrl": null
+  },
+  {
+    "id": "terry-francona-red-scooter-2015",
+    "title": "Terry Francona Red Scooter",
+    "year": "2015",
+    "date": "September 12, 2015",
+    "imageUrl": null
+  },
+  {
+    "id": "orel-hershiser-2014",
+    "title": "Orel Hershiser",
+    "year": "2014",
+    "date": "May 3, 2014",
+    "imageUrl": null
+  },
+  {
+    "id": "brohio-2014",
+    "title": "Brohio",
+    "year": "2014",
+    "date": "May 23, 2014",
+    "imageUrl": null
+  },
+  {
+    "id": "michael-bourn-2014",
+    "title": "Michael Bourn",
+    "year": "2014",
+    "date": "June 3, 2014",
+    "imageUrl": null
+  },
+  {
+    "id": "jason-kipnis-2014",
+    "title": "Jason Kipnis",
+    "year": "2014",
+    "date": "July 8, 2014",
+    "imageUrl": null
+  },
+  {
+    "id": "michael-brantley-2014",
+    "title": "Michael Brantley",
+    "year": "2014",
+    "date": "September 1, 2014",
+    "imageUrl": null
+  },
+  {
+    "id": "albert-belle-2013",
+    "title": "Albert Belle",
+    "year": "2013",
+    "date": "June 1, 2013",
+    "imageUrl": null
+  },
+  {
+    "id": "omar-vizquel-2013",
+    "title": "Omar Vizquel",
+    "year": "2013",
+    "date": "July 8, 2013",
+    "imageUrl": null
+  },
+  {
+    "id": "joe-carter-2012",
+    "title": "Joe Carter",
+    "year": "2012",
+    "date": "May 20, 2012",
+    "imageUrl": null
+  },
+  {
+    "id": "carlos-baerga-2012",
+    "title": "Carlos Baerga",
+    "year": "2012",
+    "date": "June 3, 2012",
+    "imageUrl": null
+  },
+  {
+    "id": "asdrubal-cabrera-2012",
+    "title": "Asdrubal Cabrera",
+    "year": "2012",
+    "date": "June 18, 2012",
+    "imageUrl": null
+  },
+  {
+    "id": "sandy-alomar-jr-2012",
+    "title": "Sandy Alomar Jr.",
+    "year": "2012",
+    "date": "July 4, 2012",
+    "imageUrl": null
+  },
+  {
+    "id": "gaylord-perry-2012",
+    "title": "Gaylord Perry",
+    "year": "2012",
+    "date": "August 12, 2012",
+    "imageUrl": null
+  },
+  {
+    "id": "mike-hargrove-2011",
+    "title": "Mike Hargrove",
+    "year": "2011",
+    "date": "August 13, 2011",
+    "imageUrl": null
+  },
+  {
+    "id": "shin-soo-choo-2010",
+    "title": "Shin-Soo Choo",
+    "year": "2010",
+    "date": "June 12, 2010",
+    "imageUrl": null
+  },
+  {
+    "id": "grady-sizemore-2010",
+    "title": "Grady Sizemore",
+    "year": "2010",
+    "date": "July 24, 2010",
+    "imageUrl": null
+  },
+  {
+    "id": "kenny-lofton-2010",
+    "title": "Kenny Lofton",
+    "year": "2010",
+    "date": "August 7, 2010",
+    "imageUrl": null
+  },
+  {
+    "id": "kerry-wood-2009",
+    "title": "Kerry Wood",
+    "year": "2009",
+    "date": "April 25, 2009",
+    "imageUrl": null
+  },
+  {
+    "id": "cliff-lee-cy-young-2009",
+    "title": "Cliff Lee Cy Young",
+    "year": "2009",
+    "date": "May 9, 2009",
+    "imageUrl": null
+  },
+  {
+    "id": "shin-soo-choo-2009",
+    "title": "Shin-Soo Choo",
+    "year": "2009",
+    "date": "June 13, 2009",
+    "imageUrl": null
+  },
+  {
+    "id": "rick-vaughn-wild-thing-2009",
+    "title": "Rick Vaughn 'Wild Thing'",
+    "year": "2009",
+    "date": "June 15, 2009",
+    "imageUrl": null
+  },
+  {
+    "id": "grady-sizemore-surfer-2009",
+    "title": "Grady Sizemore Surfer",
+    "year": "2009",
+    "date": "July 18, 2009",
+    "imageUrl": null
+  },
+  {
+    "id": "slider-lifeguard-mascot-2009",
+    "title": "Slider (Lifeguard) (Mascot)",
+    "year": "2009",
+    "date": "July 19, 2009",
+    "imageUrl": null
+  },
+  {
+    "id": "victor-martinez-2009",
+    "title": "Victor Martinez",
+    "year": "2009",
+    "date": "August 1, 2009",
+    "imageUrl": null
+  },
+  {
+    "id": "grady-sizemore-diving-catch-2009",
+    "title": "Grady Sizemore Diving Catch",
+    "year": "2009",
+    "date": "September 26, 2009",
+    "imageUrl": null
+  },
+  {
+    "id": "c-c-sabathia-cy-young-2008",
+    "title": "C.C. Sabathia Cy Young",
+    "year": "2008",
+    "date": "May 3, 2008",
+    "imageUrl": null
+  },
+  {
+    "id": "grady-sizemore-gold-glove-2008",
+    "title": "Grady Sizemore Gold Glove",
+    "year": "2008",
+    "date": "May 24, 2008",
+    "imageUrl": null
+  },
+  {
+    "id": "travis-hafner-mini-2008",
+    "title": "Travis Hafner Mini",
+    "year": "2008",
+    "date": "June 24, 2008",
+    "imageUrl": null
+  },
+  {
+    "id": "jhonny-peralta-mini-2008",
+    "title": "Jhonny Peralta Mini",
+    "year": "2008",
+    "date": "August 11, 2008",
+    "imageUrl": null
+  },
+  {
+    "id": "asdrubal-cabrera-2008",
+    "title": "Asdrubal Cabrera",
+    "year": "2008",
+    "date": "August 30, 2008",
+    "imageUrl": null
+  },
+  {
+    "id": "grady-sizemore-in-a-car-2008",
+    "title": "Grady Sizemore In A Car",
+    "year": "2008",
+    "date": "September 13, 2008",
+    "imageUrl": null
+  },
+  {
+    "id": "fausto-carmona-2008",
+    "title": "Fausto Carmona",
+    "year": "2008",
+    "date": "September 14, 2008",
+    "imageUrl": null
+  },
+  {
+    "id": "grady-sizemore-2007-3-9",
+    "title": "Grady Sizemore",
+    "year": "2007",
+    "date": "March 9, 2007",
+    "imageUrl": null
+  },
+  {
+    "id": "grady-sizemore-2007-4-28",
+    "title": "Grady Sizemore",
+    "year": "2007",
+    "date": "April 28, 2007",
+    "imageUrl": null
+  },
+  {
+    "id": "slider-gapper-double-mascots-2007",
+    "title": "Slider/Gapper Double (Mascots)",
+    "year": "2007",
+    "date": "May 20, 2007",
+    "imageUrl": null
+  },
+  {
+    "id": "c-c-sabathia-2007",
+    "title": "C.C. Sabathia",
+    "year": "2007",
+    "date": "June 2, 2007",
+    "imageUrl": null
+  },
+  {
+    "id": "grady-sizemore-2007-6-30",
+    "title": "Grady Sizemore",
+    "year": "2007",
+    "date": "June 30, 2007",
+    "imageUrl": null
+  },
+  {
+    "id": "tom-hamilton-2007",
+    "title": "Tom Hamilton",
+    "year": "2007",
+    "date": "July 28, 2007",
+    "imageUrl": null
+  },
+  {
+    "id": "travis-hafner-2007",
+    "title": "Travis Hafner",
+    "year": "2007",
+    "date": "September 15, 2007",
+    "imageUrl": null
+  },
+  {
+    "id": "spongebob-squarepants-2007",
+    "title": "Spongebob Squarepants",
+    "year": "2007",
+    "date": "September 16, 2007",
+    "imageUrl": null
+  },
+  {
+    "id": "grady-sizemore-2006",
+    "title": "Grady Sizemore",
+    "year": "2006",
+    "date": "April 29, 2006",
+    "imageUrl": null
+  },
+  {
+    "id": "jhonny-peralta-2006",
+    "title": "Jhonny Peralta",
+    "year": "2006",
+    "date": "July 8, 2006",
+    "imageUrl": null
+  },
+  {
+    "id": "john-adams-bobble-arm-2006",
+    "title": "John Adams Bobble Arm",
+    "year": "2006",
+    "date": "July 9, 2006",
+    "imageUrl": null
+  },
+  {
+    "id": "drew-carey-2006",
+    "title": "Drew Carey",
+    "year": "2006",
+    "date": "August 12, 2006",
+    "imageUrl": null
+  },
+  {
+    "id": "bob-feller-2005",
+    "title": "Bob Feller",
+    "year": "2005",
+    "date": "March 7, 2005",
+    "imageUrl": null
+  },
+  {
+    "id": "travis-hafner-2005",
+    "title": "Travis Hafner",
+    "year": "2005",
+    "date": "May 28, 2005",
+    "imageUrl": null
+  },
+  {
+    "id": "victor-martinez-2005",
+    "title": "Victor Martinez",
+    "year": "2005",
+    "date": "June 25, 2005",
+    "imageUrl": null
+  },
+  {
+    "id": "c-c-sabathia-2005",
+    "title": "C.C. Sabathia",
+    "year": "2005",
+    "date": "July 16, 2005",
+    "imageUrl": null
+  },
+  {
+    "id": "coco-crisp-2005",
+    "title": "Coco Crisp",
+    "year": "2005",
+    "date": "August 20, 2005",
+    "imageUrl": null
+  },
+  {
+    "id": "al-rosen-2004",
+    "title": "Al Rosen",
+    "year": "2004",
+    "date": "March 25, 2004",
+    "imageUrl": null
+  },
+  {
+    "id": "jody-gerut-mini-2004",
+    "title": "Jody Gerut Mini",
+    "year": "2004",
+    "date": "April 18, 2004",
+    "imageUrl": null
+  },
+  {
+    "id": "omar-vizquel-dave-concepcion-2004",
+    "title": "Omar Vizquel, Dave Concepcion",
+    "year": "2004",
+    "date": "June 12, 2004",
+    "imageUrl": null
+  },
+  {
+    "id": "slider-bobble-belly-mascot-2003",
+    "title": "Slider - Bobble Belly Mascot",
+    "year": "2003",
+    "date": "March 9, 2003",
+    "imageUrl": null
+  },
+  {
+    "id": "omar-vizquel-2003",
+    "title": "Omar Vizquel",
+    "year": "2003",
+    "date": "March 16, 2003",
+    "imageUrl": null
+  },
+  {
+    "id": "ellis-burks-2003",
+    "title": "Ellis Burks",
+    "year": "2003",
+    "date": "April 13, 2003",
+    "imageUrl": null
+  },
+  {
+    "id": "omar-vizquel-talking-2003",
+    "title": "Omar Vizquel Talking",
+    "year": "2003",
+    "date": "May 18, 2003",
+    "imageUrl": null
+  },
+  {
+    "id": "c-c-sabathia-josh-bard-2003",
+    "title": "C.C. Sabathia, Josh Bard",
+    "year": "2003",
+    "date": "June 1, 2003",
+    "imageUrl": null
+  },
+  {
+    "id": "al-rosen-2003",
+    "title": "Al Rosen",
+    "year": "2003",
+    "date": "July 13, 2003",
+    "imageUrl": null
+  },
+  {
+    "id": "bob-feller-2002",
+    "title": "Bob Feller",
+    "year": "2002",
+    "date": "March 15, 2002",
+    "imageUrl": null
+  },
+  {
+    "id": "c-c-sabathia-2002",
+    "title": "C.C. Sabathia",
+    "year": "2002",
+    "date": "May 27, 2002",
+    "imageUrl": null
+  },
+  {
+    "id": "slider-mascot-2002",
+    "title": "Slider - Mascot",
+    "year": "2002",
+    "date": "June 2, 2002",
+    "imageUrl": null
+  },
+  {
+    "id": "einar-diaz-2002",
+    "title": "Einar Diaz",
+    "year": "2002",
+    "date": "June 12, 2002",
+    "imageUrl": null
+  },
+  {
+    "id": "bob-wickman-2002",
+    "title": "Bob Wickman",
+    "year": "2002",
+    "date": "July 17, 2002",
+    "imageUrl": null
+  },
+  {
+    "id": "jim-thome-hr-king-2002",
+    "title": "Jim Thome HR King",
+    "year": "2002",
+    "date": "August 7, 2002",
+    "imageUrl": null
+  },
+  {
+    "id": "omar-vizquel-2001",
+    "title": "Omar Vizquel",
+    "year": "2001",
+    "date": "April 7, 2001",
+    "imageUrl": null
+  },
+  {
+    "id": "jim-thome-2001",
+    "title": "Jim Thome",
+    "year": "2001",
+    "date": "April 21, 2001",
+    "imageUrl": null
+  },
+  {
+    "id": "dave-burba-2001",
+    "title": "Dave Burba",
+    "year": "2001",
+    "date": "May 26, 2001",
+    "imageUrl": null
+  },
+  {
+    "id": "travis-fryman-2001",
+    "title": "Travis Fryman",
+    "year": "2001",
+    "date": "July 7, 2001",
+    "imageUrl": null
+  },
+  {
+    "id": "kenny-lofton-2001",
+    "title": "Kenny Lofton",
+    "year": "2001",
+    "date": "August 18, 2001",
+    "imageUrl": null
+  },
+  {
+    "id": "bartolo-colon-2001",
+    "title": "Bartolo Colon",
+    "year": "2001",
+    "date": "September 8, 2001",
+    "imageUrl": null
+  },
+  {
+    "id": "roberto-alomar-2001",
+    "title": "Roberto Alomar",
+    "year": "2001",
+    "date": "September 29, 2001",
+    "imageUrl": null
+  }
+]

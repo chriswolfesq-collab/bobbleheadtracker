@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useToast } from "@/components/Toast";
 import { useAuth } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 
@@ -8,6 +9,7 @@ type FavoritedMap = Record<string, boolean>;
 
 export function useUserFavorites(teamSlug: string) {
   const { user } = useAuth();
+  const { showError } = useToast();
   const [favoritedByIdRaw, setFavoritedByIdRaw] = useState<FavoritedMap>({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -47,6 +49,8 @@ export function useUserFavorites(teamSlug: string) {
     async (bobbleheadId: string, favorited: boolean) => {
       if (!user) return;
 
+      // Optimistic update; reverted below if the save fails.
+      const previousFavorited = favoritedByIdRaw[bobbleheadId] ?? false;
       setFavoritedByIdRaw((current) => ({ ...current, [bobbleheadId]: favorited }));
 
       const { error } = await supabase.from("user_favorites").upsert({
@@ -59,9 +63,11 @@ export function useUserFavorites(teamSlug: string) {
 
       if (error) {
         console.error("Failed to save favorite:", error.message);
+        setFavoritedByIdRaw((current) => ({ ...current, [bobbleheadId]: previousFavorited }));
+        showError("Couldn't save that favorite. Please try again.");
       }
     },
-    [user, teamSlug],
+    [user, teamSlug, favoritedByIdRaw, showError],
   );
 
   return { favoritedById, isLoading: user ? isLoading : false, setFavorited, isLoggedIn: Boolean(user) };

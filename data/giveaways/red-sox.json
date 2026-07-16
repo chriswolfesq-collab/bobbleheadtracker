@@ -1,0 +1,386 @@
+[
+  {
+    "id": "garrett-crochet-2026",
+    "title": "Garrett Crochet",
+    "year": "2026",
+    "date": "May 7, 2026"
+  },
+  {
+    "id": "roman-anthony-2026",
+    "title": "Roman Anthony",
+    "year": "2026",
+    "date": "April 6, 2026"
+  },
+  {
+    "id": "rafael-devers-2025",
+    "title": "Rafael Devers",
+    "year": "2025",
+    "date": "May 23, 2025"
+  },
+  {
+    "id": "ceddanne-rafaela-red-2025",
+    "title": "Ceddanne Rafaela (Red)",
+    "year": "2025",
+    "date": "May 6, 2025"
+  },
+  {
+    "id": "ceddanne-rafaela-white-2025",
+    "title": "Ceddanne Rafaela (White)",
+    "year": "2025",
+    "date": "May 6, 2025"
+  },
+  {
+    "id": "jarren-duran-2025",
+    "title": "Jarren Duran",
+    "year": "2025",
+    "date": "April 7, 2025"
+  },
+  {
+    "id": "dave-roberts-2024",
+    "title": "Dave Roberts",
+    "year": "2024",
+    "date": "August 29, 2024"
+  },
+  {
+    "id": "triston-casas-2024",
+    "title": "Triston Casas",
+    "year": "2024",
+    "date": "May 14, 2024"
+  },
+  {
+    "id": "brayan-bello-2024",
+    "title": "Brayan Bello",
+    "year": "2024",
+    "date": "April 12, 2024"
+  },
+  {
+    "id": "rafael-devers-wbc-2023",
+    "title": "Rafael Devers (WBC)",
+    "year": "2023",
+    "date": "September 22, 2023"
+  },
+  {
+    "id": "bad-bunny-2023",
+    "title": "Bad Bunny",
+    "year": "2023",
+    "date": "August 28, 2023"
+  },
+  {
+    "id": "kike-hernandez-wbc-2023",
+    "title": "Kike Hernandez (WBC)",
+    "year": "2023",
+    "date": "August 9, 2023"
+  },
+  {
+    "id": "2013-world-championship-2023",
+    "title": "2013 World Championship",
+    "year": "2023",
+    "date": "May 31, 2023"
+  },
+  {
+    "id": "trevor-story-2022",
+    "title": "Trevor Story",
+    "year": "2022",
+    "date": "September 28, 2022"
+  },
+  {
+    "id": "alex-verdugo-jedi-devers-also-this-month-star-wars-2022",
+    "title": "Alex Verdugo (\"Jedi Devers\" also this month, Star Wars)",
+    "year": "2022",
+    "date": "July 4, 2022"
+  },
+  {
+    "id": "kike-hernandez-bat-flip-2022",
+    "title": "Kike Hernandez (\"Bat Flip\")",
+    "year": "2022",
+    "date": "May 31, 2022"
+  },
+  {
+    "id": "jd-martinez-hr-cart-2021",
+    "title": "J.D. Martinez (HR Cart)",
+    "year": "2021",
+    "date": "September 21, 2021"
+  },
+  {
+    "id": "alex-verdugo-2021",
+    "title": "Alex Verdugo",
+    "year": "2021",
+    "date": "September 8, 2021"
+  },
+  {
+    "id": "rafael-devers-2021",
+    "title": "Rafael Devers",
+    "year": "2021",
+    "date": "June 29, 2021"
+  },
+  {
+    "id": "david-ortiz-hall-of-fame-2021",
+    "title": "David Ortiz (Hall of Fame)",
+    "year": "2021",
+    "date": "June 6, 2021"
+  },
+  {
+    "id": "nathan-eovaldi-world-series-2019",
+    "title": "Nathan Eovaldi (World Series)",
+    "year": "2019",
+    "date": "September 17, 2019"
+  },
+  {
+    "id": "woodstock-peanuts-2019",
+    "title": "Woodstock (Peanuts)",
+    "year": "2019",
+    "date": "September 4, 2019"
+  },
+  {
+    "id": "andrew-benintendi-alcs-catch-2019",
+    "title": "Andrew Benintendi (ALCS Catch)",
+    "year": "2019",
+    "date": "September 3, 2019"
+  },
+  {
+    "id": "mookie-betts-time-to-party-with-sound-2019",
+    "title": "Mookie Betts (\"Time to Party\", with Sound)",
+    "year": "2019",
+    "date": "July 16, 2019"
+  },
+  {
+    "id": "alex-cora-world-series-2019",
+    "title": "Alex Cora (World Series)",
+    "year": "2019",
+    "date": "June 25, 2019"
+  },
+  {
+    "id": "jd-martinez-home-run-counter-2019",
+    "title": "J.D. Martinez (Home Run Counter)",
+    "year": "2019",
+    "date": "May 14, 2019"
+  },
+  {
+    "id": "millennium-falcon-over-fenway-star-wars-2019",
+    "title": "Millennium Falcon over Fenway (Star Wars)",
+    "year": "2019",
+    "date": "April 25, 2019"
+  },
+  {
+    "id": "pedro-martinez-2018",
+    "title": "Pedro Martinez",
+    "year": "2018",
+    "date": "September 25, 2018"
+  },
+  {
+    "id": "mookie-betts-splash-2018",
+    "title": "Mookie Betts (\"Splash\")",
+    "year": "2018",
+    "date": "September 14, 2018"
+  },
+  {
+    "id": "chris-sale-k-slayer-2018",
+    "title": "Chris Sale (\"K Slayer\")",
+    "year": "2018",
+    "date": "August 21, 2018"
+  },
+  {
+    "id": "snoopy-2018",
+    "title": "Snoopy",
+    "year": "2018",
+    "date": "August 20, 2018"
+  },
+  {
+    "id": "xander-bogaerts-splash-2018",
+    "title": "Xander Bogaerts (\"Splash\")",
+    "year": "2018",
+    "date": "July 31, 2018"
+  },
+  {
+    "id": "dustin-pedroia-wwe-themed-2018",
+    "title": "Dustin Pedroia (WWE Themed)",
+    "year": "2018",
+    "date": "July 11, 2018"
+  },
+  {
+    "id": "jackie-bradley-jr-2018",
+    "title": "Jackie Bradley Jr.",
+    "year": "2018",
+    "date": "June 27, 2018"
+  },
+  {
+    "id": "andrew-benintendi-splash-2018",
+    "title": "Andrew Benintendi (\"Splash\")",
+    "year": "2018",
+    "date": "June 6, 2018"
+  },
+  {
+    "id": "mensch-on-a-bench-red-sox-2018",
+    "title": "Mensch on a Bench (Red Sox)",
+    "year": "2018",
+    "date": "June 5, 2018"
+  },
+  {
+    "id": "xando-calrissian-xander-bogaerts-star-wars-2018",
+    "title": "\"Xando Calrissian\" (Xander Bogaerts, Star Wars)",
+    "year": "2018",
+    "date": "May 1, 2018"
+  },
+  {
+    "id": "chris-sale-k-counter-2018",
+    "title": "Chris Sale (\"K-Counter\")",
+    "year": "2018",
+    "date": "April 13, 2018"
+  },
+  {
+    "id": "tuukka-rask-2017",
+    "title": "Tuukka Rask",
+    "year": "2017",
+    "date": "September 12, 2017"
+  },
+  {
+    "id": "jackie-bradley-jr-2017",
+    "title": "Jackie Bradley Jr.",
+    "year": "2017",
+    "date": "August 3, 2017"
+  },
+  {
+    "id": "billy-joel-2017",
+    "title": "Billy Joel",
+    "year": "2017",
+    "date": "August 1, 2017"
+  },
+  {
+    "id": "andrew-benintendi-game-of-thrones-2017",
+    "title": "Andrew Benintendi (Game of Thrones)",
+    "year": "2017",
+    "date": "July 18, 2017"
+  },
+  {
+    "id": "charlie-brown-2017",
+    "title": "Charlie Brown",
+    "year": "2017",
+    "date": "June 29, 2017"
+  },
+  {
+    "id": "manny-ramirez-2017",
+    "title": "Manny Ramirez",
+    "year": "2017",
+    "date": "June 27, 2017"
+  },
+  {
+    "id": "chris-sale-2017",
+    "title": "Chris Sale",
+    "year": "2017",
+    "date": "June 12, 2017"
+  },
+  {
+    "id": "craig-kimbrel-2017",
+    "title": "Craig Kimbrel",
+    "year": "2017",
+    "date": "May 24, 2017"
+  },
+  {
+    "id": "mookie-betts-jedi-star-wars-2017",
+    "title": "Mookie Betts (Jedi, Star Wars)",
+    "year": "2017",
+    "date": "May 4, 2017"
+  },
+  {
+    "id": "mookie-betts-awards-2017",
+    "title": "Mookie Betts (Awards)",
+    "year": "2017",
+    "date": "April 14, 2017"
+  },
+  {
+    "id": "rick-porcello-cy-young-2017",
+    "title": "Rick Porcello (Cy Young)",
+    "year": "2017",
+    "date": "April 5, 2017"
+  },
+  {
+    "id": "xander-bogaerts-2016",
+    "title": "Xander Bogaerts",
+    "year": "2016",
+    "date": "August 30, 2016"
+  },
+  {
+    "id": "wally-tessie-2016",
+    "title": "Wally & Tessie",
+    "year": "2016",
+    "date": "July 10, 2016"
+  },
+  {
+    "id": "jason-varitek-2016",
+    "title": "Jason Varitek",
+    "year": "2016",
+    "date": "June 14, 2016"
+  },
+  {
+    "id": "david-price-2016",
+    "title": "David Price",
+    "year": "2016",
+    "date": "May 10, 2016"
+  },
+  {
+    "id": "mookie-betts-2016",
+    "title": "Mookie Betts",
+    "year": "2016",
+    "date": "April 19, 2016"
+  },
+  {
+    "id": "fred-lynn-2015",
+    "title": "Fred Lynn",
+    "year": "2015",
+    "date": "September 22, 2015"
+  },
+  {
+    "id": "mike-napoli-2015",
+    "title": "Mike Napoli",
+    "year": "2015",
+    "date": "June 2, 2015"
+  },
+  {
+    "id": "luis-tiant-2015",
+    "title": "Luis Tiant",
+    "year": "2015",
+    "date": "May 21, 2015"
+  },
+  {
+    "id": "carlton-fisk-2015",
+    "title": "Carlton Fisk",
+    "year": "2015",
+    "date": "May 5, 2015"
+  },
+  {
+    "id": "wally-2015",
+    "title": "Wally",
+    "year": "2015",
+    "date": "April 14, 2015"
+  },
+  {
+    "id": "pedro-martinez-2014",
+    "title": "Pedro Martinez",
+    "year": "2014",
+    "date": "September 9, 2014"
+  },
+  {
+    "id": "dustin-pedroia-2014",
+    "title": "Dustin Pedroia",
+    "year": "2014",
+    "date": "April 30, 2014"
+  },
+  {
+    "id": "david-ortiz-2014",
+    "title": "David Ortiz",
+    "year": "2014",
+    "date": "April 7, 2014"
+  },
+  {
+    "id": "nomar-garciaparra-2002",
+    "title": "Nomar Garciaparra",
+    "year": "2002",
+    "date": "August 26, 2002"
+  },
+  {
+    "id": "pedro-martinez-2002",
+    "title": "Pedro Martinez",
+    "year": "2002",
+    "date": "2002"
+  }
+]

@@ -10,11 +10,12 @@ import { FavoriteButton } from "@/components/FavoriteButton";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
+import { useToast } from "@/components/Toast";
 import { useAdminAuth } from "@/lib/adminAuth";
-import { deleteBobblehead, saveCuratedBobblehead } from "@/lib/adminEdit";
+import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, saveCuratedBobblehead } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import type { Giveaway } from "@/lib/bobbleheads";
-import { useBobbleheadGallery } from "@/lib/bobbleheadGallery";
+import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { useBobbleheadOverride } from "@/lib/bobbleheadOverrides";
 import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
@@ -24,8 +25,9 @@ import { useUserFavorites } from "@/lib/userFavorites";
 export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; team: Team }) {
   const router = useRouter();
   const { isAdmin, user: adminUser } = useAdminAuth();
+  const { showError } = useToast();
   const { photoUrlById } = useApprovedPhotos(team.slug);
-  const { photos: galleryPhotos } = useBobbleheadGallery(team.slug, giveaway.id);
+  const { photos: galleryPhotos, removePhotoLocally } = useBobbleheadGallery(team.slug, giveaway.id);
   const { override, isLoading: isOverrideLoading } = useBobbleheadOverride(team.slug, giveaway.id);
   const { ownedById, isLoggedIn, setOwned } = useUserCollection(team.slug);
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, setFavorited } = useUserFavorites(team.slug);
@@ -33,6 +35,7 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [localOverride, setLocalOverride] = useState<EditBobbleheadValues | null>(null);
   const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
+  const [mainPhotoRemoved, setMainPhotoRemoved] = useState(false);
 
   // The page itself is statically generated from the hardcoded giveaway list,
   // so a listing the admin deleted still has a route — the tombstone is what
@@ -62,8 +65,11 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
   const title = localOverride?.title ?? override?.title ?? giveaway.title;
   const year = localOverride?.year ?? override?.year ?? giveaway.year;
   const date = localOverride?.date ?? override?.date ?? giveaway.date;
+  // The removable "main photo" is an approved_photos row (or one the admin
+  // just uploaded); the curated seed imageUrl is build-time data and stays.
+  const removableMainPhotoUrl = mainPhotoRemoved ? null : (localImageUrl ?? photoUrlById[giveaway.id] ?? null);
   const imageSrc =
-    localImageUrl ?? photoUrlById[giveaway.id] ?? giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+    removableMainPhotoUrl ?? giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
   const isOwned = ownedById[giveaway.id] ?? false;
   const isFavorited = favoritedById[giveaway.id] ?? false;
   const details = [
@@ -85,12 +91,37 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
     });
 
     setLocalOverride(values);
-    if (imageUrl) setLocalImageUrl(imageUrl);
+    if (imageUrl) {
+      setLocalImageUrl(imageUrl);
+      setMainPhotoRemoved(false);
+    }
   };
 
   const handleDelete = async () => {
     await deleteBobblehead({ teamSlug: team.slug, bobbleheadId: giveaway.id, source: "curated" });
     router.replace(`/teams/${team.slug}`);
+  };
+
+  const handleRemoveMainPhoto = async () => {
+    await deleteMainPhoto({
+      teamSlug: team.slug,
+      bobbleheadId: giveaway.id,
+      source: "curated",
+      imageUrl: removableMainPhotoUrl,
+    });
+    setLocalImageUrl(null);
+    setMainPhotoRemoved(true);
+  };
+
+  const handleDeleteGalleryPhoto = async (photo: GalleryPhoto) => {
+    if (!window.confirm("Remove this photo for everyone?")) return;
+
+    try {
+      await deleteGalleryPhoto(photo);
+      removePhotoLocally(photo.id);
+    } catch (deleteError) {
+      showError(deleteError instanceof Error ? deleteError.message : "Could not remove the photo.");
+    }
   };
 
   return (
@@ -186,7 +217,7 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
           </div>
           {galleryPhotos.length > 0 ? (
             <div className="mb-5">
-              <PhotoGallery photos={galleryPhotos} />
+              <PhotoGallery photos={galleryPhotos} onDelete={isAdmin ? handleDeleteGalleryPhoto : undefined} />
             </div>
           ) : null}
           <div className="space-y-5">
@@ -252,6 +283,7 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
           initial={{ title, year, date }}
           onSave={handleEditSave}
           onDelete={handleDelete}
+          onRemovePhoto={removableMainPhotoUrl ? handleRemoveMainPhoto : undefined}
         />
       ) : null}
     </main>

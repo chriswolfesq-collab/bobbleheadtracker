@@ -1,5 +1,4 @@
 import sharp from "sharp";
-import fs from "node:fs";
 
 const SRC = "images/bobbleheads.png";
 const COLS = 10;

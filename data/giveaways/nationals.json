@@ -1,0 +1,561 @@
+[
+  {
+    "id": "cj-abrams-2026",
+    "title": "CJ Abrams",
+    "year": "2026",
+    "date": "May 30, 2026"
+  },
+  {
+    "id": "alex-ovechkin-2026",
+    "title": "Alex Ovechkin",
+    "year": "2026",
+    "date": "May 16, 2026"
+  },
+  {
+    "id": "grogu-2026",
+    "title": "Grogu",
+    "year": "2026",
+    "date": "May 2, 2026"
+  },
+  {
+    "id": "dylan-crews-2025",
+    "title": "Dylan Crews",
+    "year": "2025",
+    "date": "September 13, 2025"
+  },
+  {
+    "id": "jacob-young-2025",
+    "title": "Jacob Young",
+    "year": "2025",
+    "date": "August 16, 2025"
+  },
+  {
+    "id": "josh-gibson-2025",
+    "title": "Josh Gibson",
+    "year": "2025",
+    "date": "June 18, 2025"
+  },
+  {
+    "id": "ryan-zimmerman-jayson-werth-howie-kendrick-2025",
+    "title": "Ryan Zimmerman, Jayson Werth & Howie Kendrick",
+    "year": "2025",
+    "date": "May 24, 2025"
+  },
+  {
+    "id": "screech-teddy-2025",
+    "title": "Screech & Teddy",
+    "year": "2025",
+    "date": "May 6, 2025"
+  },
+  {
+    "id": "james-wood-2025",
+    "title": "James Wood",
+    "year": "2025",
+    "date": "April 22, 2025"
+  },
+  {
+    "id": "1924-championship-2024",
+    "title": "1924 Championship",
+    "year": "2024",
+    "date": "September 14, 2024"
+  },
+  {
+    "id": "cj-abrams-2024",
+    "title": "CJ Abrams",
+    "year": "2024",
+    "date": "August 31, 2024"
+  },
+  {
+    "id": "mackenzie-gore-2024",
+    "title": "MacKenzie Gore",
+    "year": "2024",
+    "date": "July 20, 2024"
+  },
+  {
+    "id": "mike-rizzo-2024",
+    "title": "Mike Rizzo",
+    "year": "2024",
+    "date": "June 14, 2024"
+  },
+  {
+    "id": "lane-thomas-2024",
+    "title": "Lane Thomas",
+    "year": "2024",
+    "date": "May 25, 2024"
+  },
+  {
+    "id": "kyle-finnegan-2024",
+    "title": "Kyle Finnegan",
+    "year": "2024",
+    "date": "May 4, 2024"
+  },
+  {
+    "id": "keibert-ruiz-2023",
+    "title": "Keibert Ruiz",
+    "year": "2023",
+    "date": "September 22, 2023"
+  },
+  {
+    "id": "racing-presidents-george-tom-2023",
+    "title": "Racing Presidents (George & Tom)",
+    "year": "2023",
+    "date": "August 12, 2023"
+  },
+  {
+    "id": "cj-abrams-2023",
+    "title": "CJ Abrams",
+    "year": "2023",
+    "date": "July 22, 2023"
+  },
+  {
+    "id": "racing-presidents-teddy-abe-2023",
+    "title": "Racing Presidents (Teddy & Abe)",
+    "year": "2023",
+    "date": "June 17, 2023"
+  },
+  {
+    "id": "screech-night-out-2023",
+    "title": "Screech (\"Night OUT\")",
+    "year": "2023",
+    "date": "June 6, 2023"
+  },
+  {
+    "id": "josiah-gray-2023",
+    "title": "Josiah Gray",
+    "year": "2023",
+    "date": "April 15, 2023"
+  },
+  {
+    "id": "wonder-woman-2022",
+    "title": "Wonder Woman",
+    "year": "2022",
+    "date": "August 26, 2022"
+  },
+  {
+    "id": "juan-solo-star-wars-2022",
+    "title": "Juan \"Solo\" (Star Wars)",
+    "year": "2022",
+    "date": "July 16, 2022"
+  },
+  {
+    "id": "josh-bell-the-unstoppable-marvel-2022",
+    "title": "Josh Bell (\"The Unstoppable\", Marvel)",
+    "year": "2022",
+    "date": "June 11, 2022"
+  },
+  {
+    "id": "juan-soto-soto-shuffle-2022",
+    "title": "Juan Soto (\"Soto Shuffle\")",
+    "year": "2022",
+    "date": "May 27, 2022"
+  },
+  {
+    "id": "victor-robles-spring-training-2022",
+    "title": "Victor Robles (Spring Training)",
+    "year": "2022",
+    "date": "April 3, 2022"
+  },
+  {
+    "id": "ryan-zimmerman-spring-training-2022",
+    "title": "Ryan Zimmerman (Spring Training)",
+    "year": "2022",
+    "date": "March 18, 2022"
+  },
+  {
+    "id": "ryan-zimmerman-2021",
+    "title": "Ryan Zimmerman",
+    "year": "2021",
+    "date": "September 3, 2021"
+  },
+  {
+    "id": "victor-robles-2021",
+    "title": "Victor Robles",
+    "year": "2021",
+    "date": "July 30, 2021"
+  },
+  {
+    "id": "davey-martinez-world-series-2021-6-28",
+    "title": "Davey Martinez (World Series)",
+    "year": "2021",
+    "date": "June 28, 2021"
+  },
+  {
+    "id": "daniel-hudson-world-series-2021-5-5",
+    "title": "Daniel Hudson (World Series)",
+    "year": "2021",
+    "date": "May 5, 2021"
+  },
+  {
+    "id": "daniel-hudson-world-series-2021-5-1",
+    "title": "Daniel Hudson (World Series)",
+    "year": "2021",
+    "date": "May 1, 2021"
+  },
+  {
+    "id": "davey-martinez-world-series-2021-4-3",
+    "title": "Davey Martinez (World Series)",
+    "year": "2021",
+    "date": "April 3, 2021"
+  },
+  {
+    "id": "anthony-rendon-2019",
+    "title": "Anthony Rendon",
+    "year": "2019",
+    "date": "September 13, 2019"
+  },
+  {
+    "id": "patrick-corbin-2019",
+    "title": "Patrick Corbin",
+    "year": "2019",
+    "date": "August 17, 2019"
+  },
+  {
+    "id": "adam-eaton-2019",
+    "title": "Adam Eaton",
+    "year": "2019",
+    "date": "July 2, 2019"
+  },
+  {
+    "id": "max-scherzer-2019",
+    "title": "Max Scherzer",
+    "year": "2019",
+    "date": "June 21, 2019"
+  },
+  {
+    "id": "obi-sean-kenobi-2019",
+    "title": "\"Obi 'Sean' Kenobi\" (Sean Doolittle)",
+    "year": "2019",
+    "date": "June 15, 2019"
+  },
+  {
+    "id": "captain-zimmerman-2019",
+    "title": "\"Captain\" Zimmerman",
+    "year": "2019",
+    "date": "May 25, 2019"
+  },
+  {
+    "id": "trea-turner-2019",
+    "title": "Trea Turner",
+    "year": "2019",
+    "date": "May 15, 2019"
+  },
+  {
+    "id": "juan-soto-2019",
+    "title": "Juan Soto",
+    "year": "2019",
+    "date": "April 12, 2019"
+  },
+  {
+    "id": "anthony-rendon-2018",
+    "title": "Anthony Rendon",
+    "year": "2018",
+    "date": "August 3, 2018"
+  },
+  {
+    "id": "bryce-harper-patriotic-2018",
+    "title": "Bryce Harper (Patriotic)",
+    "year": "2018",
+    "date": "July 6, 2018"
+  },
+  {
+    "id": "ryan-zimmerman-ryanaissance-2018",
+    "title": "Ryan Zimmerman (\"Ryanaissance\")",
+    "year": "2018",
+    "date": "June 8, 2018"
+  },
+  {
+    "id": "max-scherzer-cy-young-2018",
+    "title": "Max Scherzer (Cy Young)",
+    "year": "2018",
+    "date": "May 4, 2018"
+  },
+  {
+    "id": "sean-doolittle-2018",
+    "title": "Sean Doolittle",
+    "year": "2018",
+    "date": "April 13, 2018"
+  },
+  {
+    "id": "daniel-murphy-tanner-roark-2018",
+    "title": "Daniel Murphy / Tanner Roark",
+    "year": "2018",
+    "date": "March 8, 2018"
+  },
+  {
+    "id": "tanner-roark-2017",
+    "title": "Tanner Roark",
+    "year": "2017",
+    "date": "June 9, 2017"
+  },
+  {
+    "id": "trea-turner-2017",
+    "title": "Trea Turner",
+    "year": "2017",
+    "date": "May 12, 2017"
+  },
+  {
+    "id": "daniel-murphy-2017",
+    "title": "Daniel Murphy",
+    "year": "2017",
+    "date": "April 14, 2017"
+  },
+  {
+    "id": "michael-a-taylor-fan-choice-2016",
+    "title": "Michael A. Taylor (Fan Choice)",
+    "year": "2016",
+    "date": "September 9, 2016"
+  },
+  {
+    "id": "max-scherzer-no-hitter-2-2016",
+    "title": "Max Scherzer (No-Hitter, #2)",
+    "year": "2016",
+    "date": "August 26, 2016"
+  },
+  {
+    "id": "dusty-baker-2016",
+    "title": "Dusty Baker",
+    "year": "2016",
+    "date": "July 19, 2016"
+  },
+  {
+    "id": "herbert-hoover-racing-president-2016",
+    "title": "Herbert Hoover (Racing President)",
+    "year": "2016",
+    "date": "July 3, 2016"
+  },
+  {
+    "id": "max-scherzer-no-hitter-1-2016",
+    "title": "Max Scherzer (No-Hitter, #1)",
+    "year": "2016",
+    "date": "May 23, 2016"
+  },
+  {
+    "id": "bryce-harper-mvp-2016",
+    "title": "Bryce Harper (MVP)",
+    "year": "2016",
+    "date": "May 11, 2016"
+  },
+  {
+    "id": "jordan-zimmermann-no-hitter-2015",
+    "title": "Jordan Zimmermann (No-Hitter)",
+    "year": "2015",
+    "date": "September 25, 2015"
+  },
+  {
+    "id": "calvin-coolidge-racing-president-2015",
+    "title": "Calvin Coolidge (Racing President)",
+    "year": "2015",
+    "date": "September 21, 2015"
+  },
+  {
+    "id": "jayson-werth-2015",
+    "title": "Jayson Werth",
+    "year": "2015",
+    "date": "August 30, 2015"
+  },
+  {
+    "id": "stephen-strasburg-2015",
+    "title": "Stephen Strasburg",
+    "year": "2015",
+    "date": "July 5, 2015"
+  },
+  {
+    "id": "ryan-zimmerman-2015",
+    "title": "Ryan Zimmerman",
+    "year": "2015",
+    "date": "June 4, 2015"
+  },
+  {
+    "id": "livan-hernandez-2015",
+    "title": "Livan Hernandez",
+    "year": "2015",
+    "date": "May 4, 2015"
+  },
+  {
+    "id": "tyler-clippard-2014",
+    "title": "Tyler Clippard",
+    "year": "2014",
+    "date": "September 27, 2014"
+  },
+  {
+    "id": "ian-desmond-2014",
+    "title": "Ian Desmond",
+    "year": "2014",
+    "date": "August 21, 2014"
+  },
+  {
+    "id": "bill-racing-president-2014",
+    "title": "\"Bill\" (Racing President)",
+    "year": "2014",
+    "date": "August 17, 2014"
+  },
+  {
+    "id": "denard-span-2014",
+    "title": "Denard Span",
+    "year": "2014",
+    "date": "July 20, 2014"
+  },
+  {
+    "id": "bryce-harper-2014",
+    "title": "Bryce Harper",
+    "year": "2014",
+    "date": "June 30, 2014"
+  },
+  {
+    "id": "wilson-ramos-2014",
+    "title": "Wilson Ramos",
+    "year": "2014",
+    "date": "May 26, 2014"
+  },
+  {
+    "id": "jordan-zimmermann-2014",
+    "title": "Jordan Zimmermann",
+    "year": "2014",
+    "date": "April 27, 2014"
+  },
+  {
+    "id": "davey-johnson-2013",
+    "title": "Davey Johnson",
+    "year": "2013",
+    "date": "July 20, 2013"
+  },
+  {
+    "id": "bryce-harper-2013",
+    "title": "Bryce Harper",
+    "year": "2013",
+    "date": "June 23, 2013"
+  },
+  {
+    "id": "gio-gonzalez-2013",
+    "title": "Gio Gonzalez",
+    "year": "2013",
+    "date": "April 13, 2013"
+  },
+  {
+    "id": "ryan-zimmerman-2012",
+    "title": "Ryan Zimmerman",
+    "year": "2012",
+    "date": "September 8, 2012"
+  },
+  {
+    "id": "michael-morse-2012",
+    "title": "Michael Morse",
+    "year": "2012",
+    "date": "August 5, 2012"
+  },
+  {
+    "id": "stephen-strasburg-2012",
+    "title": "Stephen Strasburg",
+    "year": "2012",
+    "date": "June 28, 2012",
+    "imageUrl": "https://i.ebayimg.com/images/g/09IAAOSwuHRim2XG/s-l400.jpg"
+  },
+  {
+    "id": "danny-espinosa-2011",
+    "title": "Danny Espinosa",
+    "year": "2011",
+    "date": "September 10, 2011"
+  },
+  {
+    "id": "ian-desmond-2011",
+    "title": "Ian Desmond",
+    "year": "2011",
+    "date": "August 20, 2011"
+  },
+  {
+    "id": "jayson-werth-2011",
+    "title": "Jayson Werth",
+    "year": "2011",
+    "date": "July 30, 2011"
+  },
+  {
+    "id": "ivan-rodriguez-2010",
+    "title": "Ivan Rodriguez",
+    "year": "2010",
+    "date": "August 28, 2010"
+  },
+  {
+    "id": "nyjer-morgan-2010",
+    "title": "Nyjer Morgan",
+    "year": "2010",
+    "date": "July 31, 2010"
+  },
+  {
+    "id": "ryan-zimmerman-2010",
+    "title": "Ryan Zimmerman",
+    "year": "2010",
+    "date": "June 19, 2010"
+  },
+  {
+    "id": "frank-howard-2009",
+    "title": "Frank Howard",
+    "year": "2009",
+    "date": "August 22, 2009"
+  },
+  {
+    "id": "adam-dunn-2009",
+    "title": "Adam Dunn",
+    "year": "2009",
+    "date": "August 8, 2009"
+  },
+  {
+    "id": "ryan-zimmerman-2008",
+    "title": "Ryan Zimmerman",
+    "year": "2008",
+    "date": "June 5, 2008"
+  },
+  {
+    "id": "dimitri-young-2008",
+    "title": "Dimitri Young",
+    "year": "2008",
+    "date": "May 1, 2008"
+  },
+  {
+    "id": "teddy-roosevelt-racing-president-2007",
+    "title": "Teddy Roosevelt (Racing President)",
+    "year": "2007",
+    "date": "September 1, 2007"
+  },
+  {
+    "id": "abe-lincoln-racing-president-2007",
+    "title": "Abe Lincoln (Racing President)",
+    "year": "2007",
+    "date": "August 18, 2007"
+  },
+  {
+    "id": "thomas-jefferson-racing-president-2007",
+    "title": "Thomas Jefferson (Racing President)",
+    "year": "2007",
+    "date": "August 4, 2007"
+  },
+  {
+    "id": "george-washington-racing-president-2007",
+    "title": "George Washington (Racing President)",
+    "year": "2007",
+    "date": "July 4, 2007"
+  },
+  {
+    "id": "screech-mascot-2006",
+    "title": "Screech (Mascot)",
+    "year": "2006",
+    "date": "August 13, 2006"
+  },
+  {
+    "id": "jose-guillen-2006",
+    "title": "Jose Guillen",
+    "year": "2006",
+    "date": "July 7, 2006"
+  },
+  {
+    "id": "chad-cordero-2006",
+    "title": "Chad Cordero",
+    "year": "2006",
+    "date": "June 10, 2006"
+  },
+  {
+    "id": "brad-wilkerson-2005",
+    "title": "Brad Wilkerson",
+    "year": "2005",
+    "date": "2005"
+  }
+]

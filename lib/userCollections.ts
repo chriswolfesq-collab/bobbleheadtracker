@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useToast } from "@/components/Toast";
 import { useAuth } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 
@@ -8,6 +9,7 @@ type OwnedMap = Record<string, boolean>;
 
 export function useUserCollection(teamSlug: string) {
   const { user } = useAuth();
+  const { showError } = useToast();
   const [ownedByIdRaw, setOwnedByIdRaw] = useState<OwnedMap>({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -47,6 +49,8 @@ export function useUserCollection(teamSlug: string) {
     async (bobbleheadId: string, owned: boolean) => {
       if (!user) return;
 
+      // Optimistic update; reverted below if the save fails.
+      const previousOwned = ownedByIdRaw[bobbleheadId] ?? false;
       setOwnedByIdRaw((current) => ({ ...current, [bobbleheadId]: owned }));
 
       const { error } = await supabase.from("user_collections").upsert({
@@ -59,9 +63,11 @@ export function useUserCollection(teamSlug: string) {
 
       if (error) {
         console.error("Failed to save ownership:", error.message);
+        setOwnedByIdRaw((current) => ({ ...current, [bobbleheadId]: previousOwned }));
+        showError("Couldn't save that ownership change. Please try again.");
       }
     },
-    [user, teamSlug],
+    [user, teamSlug, ownedByIdRaw, showError],
   );
 
   return { ownedById, isLoading: user ? isLoading : false, setOwned, isLoggedIn: Boolean(user) };

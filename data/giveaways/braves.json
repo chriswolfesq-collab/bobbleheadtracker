@@ -1,0 +1,854 @@
+[
+  {
+    "id": "drake-baldwin-nl-rookie-of-the-year-2026",
+    "title": "Drake Baldwin (NL Rookie of the Year)",
+    "year": "2026",
+    "date": "March 31, 2026"
+  },
+  {
+    "id": "michael-harris-ii-cash-2026",
+    "title": "Michael Harris II & \"Cash\"",
+    "year": "2026",
+    "date": "May 13, 2026"
+  },
+  {
+    "id": "david-justice-2026",
+    "title": "David Justice",
+    "year": "2026",
+    "date": "June 2, 2026"
+  },
+  {
+    "id": "ha-seong-kim-2026",
+    "title": "Ha-Seong Kim",
+    "year": "2026",
+    "date": "July 21, 2026"
+  },
+  {
+    "id": "andruw-jones-hall-of-fame-2026",
+    "title": "Andruw Jones (Hall of Fame)",
+    "year": "2026",
+    "date": "July 30, 2026"
+  },
+  {
+    "id": "javy-lopez-2026",
+    "title": "Javy Lopez",
+    "year": "2026",
+    "date": "August 12, 2026"
+  },
+  {
+    "id": "andres-galarraga-2026",
+    "title": "Andres Galarraga",
+    "year": "2026",
+    "date": "August 14, 2026"
+  },
+  {
+    "id": "chris-sale-2025",
+    "title": "Chris Sale",
+    "year": "2025",
+    "date": "April 9, 2025"
+  },
+  {
+    "id": "chipper-jones-2000-all-star-game-2025",
+    "title": "Chipper Jones (2000 All-Star Game)",
+    "year": "2025",
+    "date": "April 22, 2025"
+  },
+  {
+    "id": "raisel-iglesias-2025",
+    "title": "Raisel Iglesias",
+    "year": "2025",
+    "date": "May 8, 2025"
+  },
+  {
+    "id": "marcell-ozuna-2025",
+    "title": "Marcell Ozuna",
+    "year": "2025",
+    "date": "May 14, 2025"
+  },
+  {
+    "id": "spencer-strider-kipnis-2025",
+    "title": "Spencer Strider & Kipnis",
+    "year": "2025",
+    "date": "June 17, 2025"
+  },
+  {
+    "id": "usher-2025",
+    "title": "Usher",
+    "year": "2025",
+    "date": "June 18, 2025"
+  },
+  {
+    "id": "reynaldo-lopez-2025",
+    "title": "Reynaldo Lopez",
+    "year": "2025",
+    "date": "August 4, 2025"
+  },
+  {
+    "id": "ronald-acuna-jr-2025",
+    "title": "Ronald Acuna Jr.",
+    "year": "2025",
+    "date": "September 22, 2025"
+  },
+  {
+    "id": "sean-murphy-2024",
+    "title": "Sean Murphy",
+    "year": "2024",
+    "date": "September 3, 2024"
+  },
+  {
+    "id": "ludacris-2024",
+    "title": "Ludacris",
+    "year": "2024",
+    "date": "September 4, 2024"
+  },
+  {
+    "id": "brush-2023",
+    "title": "\"B'Rush\"",
+    "year": "2023",
+    "date": "April 9, 2023"
+  },
+  {
+    "id": "blooper-bobblebody-2023",
+    "title": "BLOOPER (Bobblebody)",
+    "year": "2023",
+    "date": "April 11, 2023"
+  },
+  {
+    "id": "matt-olson-hometown-series-2023",
+    "title": "Matt Olson (\"Hometown\" Series)",
+    "year": "2023",
+    "date": "April 25, 2023"
+  },
+  {
+    "id": "mandalorian-braves-2023",
+    "title": "Mandalorian Braves",
+    "year": "2023",
+    "date": "May 19, 2023"
+  },
+  {
+    "id": "phil-the-bucket-2023",
+    "title": "\"Phil the Bucket\"",
+    "year": "2023",
+    "date": "May 21, 2023"
+  },
+  {
+    "id": "kyle-wright-2023",
+    "title": "Kyle Wright",
+    "year": "2023",
+    "date": "May 22, 2023"
+  },
+  {
+    "id": "outkast-2023",
+    "title": "OutKast",
+    "year": "2023",
+    "date": "May 25, 2023"
+  },
+  {
+    "id": "austin-riley-2023",
+    "title": "Austin Riley",
+    "year": "2023",
+    "date": "June 7, 2023"
+  },
+  {
+    "id": "hammerin-hank-aaron-2023",
+    "title": "\"Hammerin' Hank\" (Aaron)",
+    "year": "2023",
+    "date": "July 2, 2023"
+  },
+  {
+    "id": "ron-gant-93-pressbox-fire-2023",
+    "title": "Ron Gant ('93 Pressbox Fire)",
+    "year": "2023",
+    "date": "July 19, 2023"
+  },
+  {
+    "id": "two-bit-2023",
+    "title": "\"Two Bit\"",
+    "year": "2023",
+    "date": "July 30, 2023"
+  },
+  {
+    "id": "fred-mcgriff-hall-of-fame-2023",
+    "title": "Fred McGriff (Hall of Fame)",
+    "year": "2023",
+    "date": "August 1, 2023"
+  },
+  {
+    "id": "michael-harris-ii-rookie-of-the-year-2023",
+    "title": "Michael Harris II (Rookie of the Year)",
+    "year": "2023",
+    "date": "August 22, 2023"
+  },
+  {
+    "id": "braves-majorette-2023",
+    "title": "Braves Majorette",
+    "year": "2023",
+    "date": "August 23, 2023"
+  },
+  {
+    "id": "andruw-jones-2023",
+    "title": "Andruw Jones",
+    "year": "2023",
+    "date": "September 9, 2023"
+  },
+  {
+    "id": "ronald-acuna-jr-bat-flip-2023",
+    "title": "Ronald Acuna Jr. (Bat Flip)",
+    "year": "2023",
+    "date": "September 19, 2023"
+  },
+  {
+    "id": "aj-minter-cowboy-2023",
+    "title": "A.J. Minter (Cowboy)",
+    "year": "2023",
+    "date": "September 26, 2023"
+  },
+  {
+    "id": "spencer-strider-2023",
+    "title": "Spencer Strider",
+    "year": "2023",
+    "date": "September 26, 2023"
+  },
+  {
+    "id": "greg-maddux-cy-young-2022",
+    "title": "Greg Maddux (Cy Young)",
+    "year": "2022",
+    "date": "April 26, 2022"
+  },
+  {
+    "id": "john-smoltz-cy-young-2022",
+    "title": "John Smoltz (Cy Young)",
+    "year": "2022",
+    "date": "May 10, 2022"
+  },
+  {
+    "id": "tom-glavine-cy-young-2022",
+    "title": "Tom Glavine (Cy Young)",
+    "year": "2022",
+    "date": "May 13, 2022"
+  },
+  {
+    "id": "beat-the-freeze-2022",
+    "title": "\"Beat the Freeze\"",
+    "year": "2022",
+    "date": "May 26, 2022"
+  },
+  {
+    "id": "dale-murphy-power-alley-2022",
+    "title": "Dale Murphy (\"Power Alley\")",
+    "year": "2022",
+    "date": "June 20, 2022"
+  },
+  {
+    "id": "brian-snitker-world-series-trophy-2022",
+    "title": "Brian Snitker (World Series Trophy)",
+    "year": "2022",
+    "date": "July 6, 2022"
+  },
+  {
+    "id": "dansby-swanson-mini-2022",
+    "title": "Dansby Swanson (Mini)",
+    "year": "2022",
+    "date": "July 10, 2022"
+  },
+  {
+    "id": "tyler-matzek-2022",
+    "title": "Tyler Matzek",
+    "year": "2022",
+    "date": "July 12, 2022"
+  },
+  {
+    "id": "eddie-rosario-nlcs-mvp-2022",
+    "title": "Eddie Rosario (NLCS MVP)",
+    "year": "2022",
+    "date": "August 2, 2022"
+  },
+  {
+    "id": "charlie-morton-2022",
+    "title": "Charlie Morton",
+    "year": "2022",
+    "date": "August 15, 2022"
+  },
+  {
+    "id": "drum-major-2022",
+    "title": "Drum Major",
+    "year": "2022",
+    "date": "August 19, 2022"
+  },
+  {
+    "id": "ian-anderson-2022",
+    "title": "Ian Anderson",
+    "year": "2022",
+    "date": "August 30, 2022"
+  },
+  {
+    "id": "ronald-acuna-jr-bat-flip-2022",
+    "title": "Ronald Acuna Jr. (Bat Flip)",
+    "year": "2022",
+    "date": "September 2, 2022"
+  },
+  {
+    "id": "ronald-acuna-jr-grand-slam-2022",
+    "title": "Ronald Acuna Jr. (Grand Slam)",
+    "year": "2022",
+    "date": "September 16, 2022"
+  },
+  {
+    "id": "blooper-world-series-2022",
+    "title": "BLOOPER (World Series)",
+    "year": "2022",
+    "date": "September 18, 2022"
+  },
+  {
+    "id": "2019-silver-sluggers-2021",
+    "title": "2019 Silver Sluggers",
+    "year": "2021",
+    "date": "April 26, 2021"
+  },
+  {
+    "id": "freddie-freeman-2020-nl-mvp-2021",
+    "title": "Freddie Freeman (2020 NL MVP)",
+    "year": "2021",
+    "date": "May 23, 2021"
+  },
+  {
+    "id": "ronald-acuna-jr-2021",
+    "title": "Ronald Acuna Jr.",
+    "year": "2021",
+    "date": "June 2, 2021"
+  },
+  {
+    "id": "ozzie-albies-2021",
+    "title": "Ozzie Albies",
+    "year": "2021",
+    "date": "June 16, 2021"
+  },
+  {
+    "id": "max-fried-2021",
+    "title": "Max Fried",
+    "year": "2021",
+    "date": "July 1, 2021"
+  },
+  {
+    "id": "ronald-acuna-jr-mini-2021",
+    "title": "Ronald Acuna Jr. (Mini)",
+    "year": "2021",
+    "date": "July 4, 2021"
+  },
+  {
+    "id": "hank-aaron-2021",
+    "title": "Hank Aaron",
+    "year": "2021",
+    "date": "August 1, 2021"
+  },
+  {
+    "id": "travis-darnaud-2021",
+    "title": "Travis d'Arnaud",
+    "year": "2021",
+    "date": "August 12, 2021"
+  },
+  {
+    "id": "mike-soroka-2021",
+    "title": "Mike Soroka",
+    "year": "2021",
+    "date": "August 23, 2021"
+  },
+  {
+    "id": "ozzie-albies-los-bravos-2021",
+    "title": "Ozzie Albies (\"Los Bravos\")",
+    "year": "2021",
+    "date": "September 10, 2021"
+  },
+  {
+    "id": "brian-mccann-2021",
+    "title": "Brian McCann",
+    "year": "2021",
+    "date": "September 28, 2021"
+  },
+  {
+    "id": "austin-riley-2021",
+    "title": "Austin Riley",
+    "year": "2021",
+    "date": "September 30, 2021"
+  },
+  {
+    "id": "phil-the-bucket-2019",
+    "title": "\"Phil the Bucket\"",
+    "year": "2019",
+    "date": "April 14, 2019"
+  },
+  {
+    "id": "ronald-acuna-jr-2019",
+    "title": "Ronald Acuna Jr.",
+    "year": "2019",
+    "date": "April 26, 2019"
+  },
+  {
+    "id": "josh-donaldson-2019",
+    "title": "Josh Donaldson",
+    "year": "2019",
+    "date": "May 16, 2019"
+  },
+  {
+    "id": "b-rush-2019",
+    "title": "\"B-Rush\"",
+    "year": "2019",
+    "date": "May 19, 2019"
+  },
+  {
+    "id": "swanberson-swanson-culberson-2019",
+    "title": "\"Swanberson\" (Swanson & Culberson)",
+    "year": "2019",
+    "date": "June 11, 2019"
+  },
+  {
+    "id": "walter-banks-2019",
+    "title": "Walter Banks",
+    "year": "2019",
+    "date": "July 5, 2019"
+  },
+  {
+    "id": "ozzie-albies-2019",
+    "title": "Ozzie Albies",
+    "year": "2019",
+    "date": "July 23, 2019"
+  },
+  {
+    "id": "hammerin-hank-aaron-2019",
+    "title": "\"Hammerin' Hank\" (Aaron)",
+    "year": "2019",
+    "date": "August 4, 2019"
+  },
+  {
+    "id": "dia-de-los-bravos-2019",
+    "title": "\"Dia de Los Bravos\"",
+    "year": "2019",
+    "date": "September 6, 2019"
+  },
+  {
+    "id": "hank-aaron-2019",
+    "title": "Hank Aaron",
+    "year": "2019",
+    "date": "September 17, 2019"
+  },
+  {
+    "id": "two-bit-2019",
+    "title": "\"Two Bit\"",
+    "year": "2019",
+    "date": "September 27, 2019"
+  },
+  {
+    "id": "ender-inciarte-gold-glove-2018",
+    "title": "Ender Inciarte (Gold Glove)",
+    "year": "2018",
+    "date": "April 20, 2018"
+  },
+  {
+    "id": "blooper-2018",
+    "title": "BLOOPER",
+    "year": "2018",
+    "date": "April 22, 2018"
+  },
+  {
+    "id": "ozzie-calrissian-star-wars-2018",
+    "title": "\"Ozzie Calrissian\" (Star Wars)",
+    "year": "2018",
+    "date": "May 4, 2018"
+  },
+  {
+    "id": "freddie-freeman-freddie-stretch-2018",
+    "title": "Freddie Freeman (\"Freddie Stretch\")",
+    "year": "2018",
+    "date": "June 15, 2018"
+  },
+  {
+    "id": "ham-porter-2018",
+    "title": "\"Ham\" Porter",
+    "year": "2018",
+    "date": "July 14, 2018"
+  },
+  {
+    "id": "chipper-jones-crazy-train-2018",
+    "title": "Chipper Jones (\"Crazy Train\")",
+    "year": "2018",
+    "date": "August 18, 2018"
+  },
+  {
+    "id": "babe-ruth-boston-braves-2018",
+    "title": "Babe Ruth (Boston Braves)",
+    "year": "2018",
+    "date": "September 4, 2018"
+  },
+  {
+    "id": "mike-foltynewicz-player-designed-2018",
+    "title": "Mike Foltynewicz (Player Designed)",
+    "year": "2018",
+    "date": "September 15, 2018"
+  },
+  {
+    "id": "ra-dickey-stormtrooper-2017",
+    "title": "R.A. Dickey (Stormtrooper)",
+    "year": "2017",
+    "date": "May 6, 2017"
+  },
+  {
+    "id": "ender-inciarte-2017",
+    "title": "Ender Inciarte",
+    "year": "2017",
+    "date": "May 19, 2017"
+  },
+  {
+    "id": "bartolo-colon-2017",
+    "title": "Bartolo Colon",
+    "year": "2017",
+    "date": "June 9, 2017"
+  },
+  {
+    "id": "dansby-swanson-2017",
+    "title": "Dansby Swanson",
+    "year": "2017",
+    "date": "June 16, 2017"
+  },
+  {
+    "id": "matt-kemp-2017",
+    "title": "Matt Kemp",
+    "year": "2017",
+    "date": "July 14, 2017"
+  },
+  {
+    "id": "freddie-freeman-2017",
+    "title": "Freddie Freeman",
+    "year": "2017",
+    "date": "August 25, 2017"
+  },
+  {
+    "id": "skip-caray-pete-van-wieren-famous-calls-2016",
+    "title": "Skip Caray & Pete Van Wieren (\"Famous Calls\")",
+    "year": "2016",
+    "date": "April 23, 2016"
+  },
+  {
+    "id": "chipper-jones-freddie-freeman-atv-2016",
+    "title": "Chipper Jones & Freddie Freeman (ATV)",
+    "year": "2016",
+    "date": "May 28, 2016"
+  },
+  {
+    "id": "nick-markakis-2016",
+    "title": "Nick Markakis",
+    "year": "2016",
+    "date": "June 23, 2016"
+  },
+  {
+    "id": "jedi-master-schuerholz-2016",
+    "title": "\"Jedi Master Schuerholz\"",
+    "year": "2016",
+    "date": "July 1, 2016"
+  },
+  {
+    "id": "aj-pierzynski-zombified-2016",
+    "title": "A.J. Pierzynski (Zombified)",
+    "year": "2016",
+    "date": "July 15, 2016"
+  },
+  {
+    "id": "andruw-jones-spider-man-catch-2016",
+    "title": "Andruw Jones (Spider-Man Catch)",
+    "year": "2016",
+    "date": "August 16, 2016"
+  },
+  {
+    "id": "chipper-jones-2000-all-star-game-2016",
+    "title": "Chipper Jones (2000 All-Star Game)",
+    "year": "2016",
+    "date": "September 10, 2016"
+  },
+  {
+    "id": "bobby-cox-carried-off-2016",
+    "title": "Bobby Cox (\"Carried Off\")",
+    "year": "2016",
+    "date": "September 17, 2016"
+  },
+  {
+    "id": "javy-lopez-2015",
+    "title": "Javy Lopez",
+    "year": "2015",
+    "date": "May 20, 2015"
+  },
+  {
+    "id": "david-justice-2015",
+    "title": "David Justice",
+    "year": "2015",
+    "date": "June 9, 2015"
+  },
+  {
+    "id": "jason-grilli-x-wing-fighter-2015",
+    "title": "Jason Grilli (X-Wing Fighter)",
+    "year": "2015",
+    "date": "July 3, 2015"
+  },
+  {
+    "id": "freddie-freeman-jonny-gomes-hugging-2015",
+    "title": "Freddie Freeman & Jonny Gomes (Hugging)",
+    "year": "2015",
+    "date": "July 21, 2015"
+  },
+  {
+    "id": "john-smoltz-hall-of-fame-2015",
+    "title": "John Smoltz (Hall of Fame)",
+    "year": "2015",
+    "date": "August 14, 2015"
+  },
+  {
+    "id": "julio-teheran-2015",
+    "title": "Julio Teheran",
+    "year": "2015",
+    "date": "September 10, 2015"
+  },
+  {
+    "id": "hank-aaron-2014",
+    "title": "Hank Aaron",
+    "year": "2014",
+    "date": "April 14, 2014"
+  },
+  {
+    "id": "andrelton-simmons-2014",
+    "title": "Andrelton Simmons",
+    "year": "2014",
+    "date": "May 22, 2014"
+  },
+  {
+    "id": "greg-maddux-2014",
+    "title": "Greg Maddux",
+    "year": "2014",
+    "date": "June 17, 2014"
+  },
+  {
+    "id": "evan-gattis-2014",
+    "title": "Evan Gattis",
+    "year": "2014",
+    "date": "August 13, 2014"
+  },
+  {
+    "id": "bobby-cox-2014",
+    "title": "Bobby Cox",
+    "year": "2014",
+    "date": "September 1, 2014"
+  },
+  {
+    "id": "tom-glavine-2014",
+    "title": "Tom Glavine",
+    "year": "2014",
+    "date": "September 17, 2014"
+  },
+  {
+    "id": "freddie-freeman-2013",
+    "title": "Freddie Freeman",
+    "year": "2013",
+    "date": "May 30, 2013"
+  },
+  {
+    "id": "bj-upton-2013",
+    "title": "B.J. Upton",
+    "year": "2013",
+    "date": "June 20, 2013"
+  },
+  {
+    "id": "dale-murphy-2013",
+    "title": "Dale Murphy",
+    "year": "2013",
+    "date": "July 11, 2013"
+  },
+  {
+    "id": "sid-bream-2012",
+    "title": "Sid Bream",
+    "year": "2012",
+    "date": "June 9, 2012"
+  },
+  {
+    "id": "craig-kimbrel-2012",
+    "title": "Craig Kimbrel",
+    "year": "2012",
+    "date": "June 13, 2012"
+  },
+  {
+    "id": "chipper-jones-2012",
+    "title": "Chipper Jones",
+    "year": "2012",
+    "date": "August 16, 2012"
+  },
+  {
+    "id": "jason-heyward-2011",
+    "title": "Jason Heyward",
+    "year": "2011",
+    "date": "June 15, 2011"
+  },
+  {
+    "id": "chipper-jones-2011",
+    "title": "Chipper Jones",
+    "year": "2011",
+    "date": "July 28, 2011"
+  },
+  {
+    "id": "dan-uggla-2011",
+    "title": "Dan Uggla",
+    "year": "2011",
+    "date": "August 18, 2011"
+  },
+  {
+    "id": "mark-teixeira-2008",
+    "title": "Mark Teixeira",
+    "year": "2008",
+    "date": "May 21, 2008"
+  },
+  {
+    "id": "brian-mccann-2008",
+    "title": "Brian McCann",
+    "year": "2008",
+    "date": "June 25, 2008"
+  },
+  {
+    "id": "tim-hudson-2008",
+    "title": "Tim Hudson",
+    "year": "2008",
+    "date": "August 27, 2008"
+  },
+  {
+    "id": "bobby-cox-2008",
+    "title": "Bobby Cox",
+    "year": "2008",
+    "date": "September 9, 2008"
+  },
+  {
+    "id": "hank-aaron-statue-2007",
+    "title": "Hank Aaron (Statue)",
+    "year": "2007",
+    "date": "April 12, 2007"
+  },
+  {
+    "id": "brian-mccann-statue-2007",
+    "title": "Brian McCann (Statue)",
+    "year": "2007",
+    "date": "July 19, 2007"
+  },
+  {
+    "id": "john-smoltz-statue-2007",
+    "title": "John Smoltz (Statue)",
+    "year": "2007",
+    "date": "September 20, 2007"
+  },
+  {
+    "id": "andruw-jones-statue-2006",
+    "title": "Andruw Jones (Statue)",
+    "year": "2006",
+    "date": "May 30, 2006"
+  },
+  {
+    "id": "chipper-jones-statue-2006",
+    "title": "Chipper Jones (Statue)",
+    "year": "2006",
+    "date": "June 7, 2006"
+  },
+  {
+    "id": "john-smoltz-statue-2006",
+    "title": "John Smoltz (Statue)",
+    "year": "2006",
+    "date": "July 6, 2006"
+  },
+  {
+    "id": "jeff-francoeur-statue-2006",
+    "title": "Jeff Francoeur (Statue)",
+    "year": "2006",
+    "date": "August 22, 2006"
+  },
+  {
+    "id": "tim-hudson-statue-2006",
+    "title": "Tim Hudson (Statue)",
+    "year": "2006",
+    "date": "September 12, 2006"
+  },
+  {
+    "id": "bobby-cox-2003",
+    "title": "Bobby Cox",
+    "year": "2003",
+    "date": "May 26, 2003"
+  },
+  {
+    "id": "phil-niekro-2003",
+    "title": "Phil Niekro",
+    "year": "2003",
+    "date": "June 20, 2003"
+  },
+  {
+    "id": "dale-murphy-2003",
+    "title": "Dale Murphy",
+    "year": "2003",
+    "date": "July 21, 2003"
+  },
+  {
+    "id": "warren-spahn-2003",
+    "title": "Warren Spahn",
+    "year": "2003",
+    "date": "August 12, 2003"
+  },
+  {
+    "id": "eddie-mathews-2003",
+    "title": "Eddie Mathews",
+    "year": "2003",
+    "date": "August 27, 2003"
+  },
+  {
+    "id": "hank-aaron-2003",
+    "title": "Hank Aaron",
+    "year": "2003",
+    "date": "September 19, 2003"
+  },
+  {
+    "id": "john-smoltz-2002",
+    "title": "John Smoltz",
+    "year": "2002",
+    "date": "April 1, 2002"
+  },
+  {
+    "id": "gary-sheffield-2002",
+    "title": "Gary Sheffield",
+    "year": "2002",
+    "date": "May 27, 2002"
+  },
+  {
+    "id": "tom-glavine-2002",
+    "title": "Tom Glavine",
+    "year": "2002",
+    "date": "June 14, 2002"
+  },
+  {
+    "id": "javy-lopez-2002",
+    "title": "Javy Lopez",
+    "year": "2002",
+    "date": "July 5, 2002"
+  },
+  {
+    "id": "greg-maddux-2002",
+    "title": "Greg Maddux",
+    "year": "2002",
+    "date": "August 14, 2002"
+  },
+  {
+    "id": "rafael-furcal-2002",
+    "title": "Rafael Furcal",
+    "year": "2002",
+    "date": "September 2, 2002"
+  },
+  {
+    "id": "andruw-jones-2001",
+    "title": "Andruw Jones",
+    "year": "2001",
+    "date": "September 28, 2001"
+  },
+  {
+    "id": "chipper-jones-2001",
+    "title": "Chipper Jones",
+    "year": "2001",
+    "date": "October 6, 2001"
+  }
+]

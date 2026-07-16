@@ -74,6 +74,72 @@ export async function saveCuratedBobblehead({
   return { imageUrl };
 }
 
+function approvedStoragePathFromUrl(imageUrl: string): string | null {
+  const marker = "/storage/v1/object/public/bobblehead-approved/";
+  const index = imageUrl.indexOf(marker);
+  return index === -1 ? null : decodeURIComponent(imageUrl.slice(index + marker.length));
+}
+
+// Best-effort: photos uploaded before the admin-delete storage policy existed
+// (or hosted off-Supabase, like curated seed photos) just leave no file to
+// remove, and a failed removal shouldn't undo the DB delete the user asked for.
+async function removeApprovedFile(imageUrl: string) {
+  const path = approvedStoragePathFromUrl(imageUrl);
+  if (path) {
+    await supabase.storage.from("bobblehead-approved").remove([path]);
+  }
+}
+
+export async function deleteGalleryPhoto(photo: { id: string; imageUrl: string }) {
+  const { error } = await supabase.from("bobblehead_gallery_photos").delete().eq("id", photo.id);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  await removeApprovedFile(photo.imageUrl);
+}
+
+// Removes the listing's main photo: the approved_photos row (and, for a
+// community listing, its own image_url column), so the page falls back to the
+// curated seed image or the team placeholder.
+export async function deleteMainPhoto({
+  teamSlug,
+  bobbleheadId,
+  source,
+  imageUrl,
+}: {
+  teamSlug: string;
+  bobbleheadId: string;
+  source: "curated" | "community";
+  imageUrl: string | null;
+}) {
+  const { error } = await supabase
+    .from("approved_photos")
+    .delete()
+    .eq("team_slug", teamSlug)
+    .eq("bobblehead_id", bobbleheadId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  if (source === "community") {
+    const { error: communityError } = await supabase
+      .from("community_bobbleheads")
+      .update({ image_url: null })
+      .eq("id", bobbleheadId);
+
+    if (communityError) {
+      throw new Error(communityError.message);
+    }
+  }
+
+  if (imageUrl) {
+    await removeApprovedFile(imageUrl);
+  }
+}
+
 // Deletes the listing and everything attached to it (photos, gallery,
 // ownership, favorites, reports). Irreversible from the UI: a deleted curated
 // listing can only come back by clearing its `deleted` flag in the SQL editor.

@@ -1,0 +1,560 @@
+[
+  {
+    "id": "colson-montgomery-2026",
+    "title": "Colson Montgomery",
+    "year": "2026",
+    "date": "June 13, 2026"
+  },
+  {
+    "id": "kyle-teel-edgar-quero-2026",
+    "title": "Kyle Teel & Edgar Quero",
+    "year": "2026",
+    "date": "May 30, 2026"
+  },
+  {
+    "id": "chase-meidroth-2026",
+    "title": "Chase Meidroth",
+    "year": "2026",
+    "date": "May 25, 2026"
+  },
+  {
+    "id": "miguel-vargas-2026",
+    "title": "Miguel Vargas",
+    "year": "2026",
+    "date": "April 24, 2026"
+  },
+  {
+    "id": "bobby-jenks-aj-pierzynski-2026",
+    "title": "Bobby Jenks & A.J. Pierzynski",
+    "year": "2026",
+    "date": "April 5, 2026"
+  },
+  {
+    "id": "munetaka-murakami-2026",
+    "title": "Munetaka Murakami",
+    "year": "2026",
+    "date": "2026"
+  },
+  {
+    "id": "ice-cube-2025",
+    "title": "Ice Cube",
+    "year": "2025",
+    "date": "August 28, 2025"
+  },
+  {
+    "id": "ken-griffey-jr-2025",
+    "title": "Ken Griffey Jr.",
+    "year": "2025",
+    "date": "August 24, 2025"
+  },
+  {
+    "id": "ozzie-guillen-2025",
+    "title": "Ozzie Guillen",
+    "year": "2025",
+    "date": "August 10, 2025"
+  },
+  {
+    "id": "bill-veeck-1960-2025",
+    "title": "Bill Veeck (1960)",
+    "year": "2025",
+    "date": "August 9, 2025"
+  },
+  {
+    "id": "mark-buehrle-jon-garland-freddy-garcia-jose-contreras-2025",
+    "title": "Mark Buehrle, Jon Garland, Freddy Garcia & Jose Contreras",
+    "year": "2025",
+    "date": "July 13, 2025"
+  },
+  {
+    "id": "luis-aparicio-2025",
+    "title": "Luis Aparicio",
+    "year": "2025",
+    "date": "June 29, 2025"
+  },
+  {
+    "id": "ray-durham-2025",
+    "title": "Ray Durham",
+    "year": "2025",
+    "date": "June 8, 2025"
+  },
+  {
+    "id": "charles-comiskey-2025",
+    "title": "Charles Comiskey",
+    "year": "2025",
+    "date": "May 25, 2025"
+  },
+  {
+    "id": "dick-allen-1972-mvp-2025",
+    "title": "Dick Allen (1972 MVP)",
+    "year": "2025",
+    "date": "May 3, 2025"
+  },
+  {
+    "id": "la-pantera-alebrije-2024",
+    "title": "\"La Pantera\" Alebrije",
+    "year": "2024",
+    "date": "September 13, 2024"
+  },
+  {
+    "id": "frank-thomas-2024",
+    "title": "Frank Thomas",
+    "year": "2024",
+    "date": "August 31, 2024"
+  },
+  {
+    "id": "la-catrina-2023",
+    "title": "La Catrina",
+    "year": "2023",
+    "date": "September 30, 2023"
+  },
+  {
+    "id": "dylan-cease-2023",
+    "title": "Dylan Cease",
+    "year": "2023",
+    "date": "August 26, 2023"
+  },
+  {
+    "id": "andrew-benintendi-elf-2023",
+    "title": "Andrew Benintendi (Elf)",
+    "year": "2023",
+    "date": "July 30, 2023"
+  },
+  {
+    "id": "luis-robert-2023",
+    "title": "Luis Robert",
+    "year": "2023",
+    "date": "July 8, 2023"
+  },
+  {
+    "id": "indiana-jones-2023",
+    "title": "Indiana Jones",
+    "year": "2023",
+    "date": "June 25, 2023"
+  },
+  {
+    "id": "eloy-jimenez-hi-mom-talking-2023",
+    "title": "Eloy Jimenez (\"Hi Mom!\" Talking)",
+    "year": "2023",
+    "date": "May 13, 2023"
+  },
+  {
+    "id": "lance-lynn-2022",
+    "title": "Lance Lynn",
+    "year": "2022",
+    "date": "August 13, 2022"
+  },
+  {
+    "id": "santa-2022",
+    "title": "Santa",
+    "year": "2022",
+    "date": "July 24, 2022"
+  },
+  {
+    "id": "yasmani-grandal-2022",
+    "title": "Yasmani Grandal",
+    "year": "2022",
+    "date": "July 23, 2022"
+  },
+  {
+    "id": "uncle-sam-2022",
+    "title": "Uncle Sam",
+    "year": "2022",
+    "date": "July 5, 2022"
+  },
+  {
+    "id": "paul-konerko-captain-america-2022",
+    "title": "Paul Konerko (Captain America)",
+    "year": "2022",
+    "date": "July 4, 2022"
+  },
+  {
+    "id": "eloy-jimenez-luis-robert-2022",
+    "title": "Eloy Jimenez & Luis Robert",
+    "year": "2022",
+    "date": "June 25, 2022"
+  },
+  {
+    "id": "tim-anderson-2022",
+    "title": "Tim Anderson",
+    "year": "2022",
+    "date": "May 14, 2022"
+  },
+  {
+    "id": "liam-hendriks-2022",
+    "title": "Liam Hendriks",
+    "year": "2022",
+    "date": "April 16, 2022"
+  },
+  {
+    "id": "jose-abreu-2020-mvp-2021",
+    "title": "Jose Abreu (2020 MVP)",
+    "year": "2021",
+    "date": "September 28, 2021"
+  },
+  {
+    "id": "sugar-skull-2021",
+    "title": "Sugar Skull",
+    "year": "2021",
+    "date": "September 10, 2021"
+  },
+  {
+    "id": "yoan-moncada-2021",
+    "title": "Yoan Moncada",
+    "year": "2021",
+    "date": "July 31, 2021"
+  },
+  {
+    "id": "tim-anderson-bat-flip-2021",
+    "title": "Tim Anderson (Bat Flip)",
+    "year": "2021",
+    "date": "May 28, 2021"
+  },
+  {
+    "id": "southpaw-tommy-hawk-2019",
+    "title": "Southpaw & Tommy Hawk",
+    "year": "2019",
+    "date": "August 28, 2019"
+  },
+  {
+    "id": "spider-man-2019",
+    "title": "Spider-Man",
+    "year": "2019",
+    "date": "July 27, 2019"
+  },
+  {
+    "id": "carlos-rodon-2019",
+    "title": "Carlos Rodon",
+    "year": "2019",
+    "date": "May 18, 2019"
+  },
+  {
+    "id": "r2-d2-2019",
+    "title": "R2-D2",
+    "year": "2019",
+    "date": "May 4, 2019"
+  },
+  {
+    "id": "jose-abreu-silver-slugger-2019",
+    "title": "Jose Abreu (Silver Slugger)",
+    "year": "2019",
+    "date": "April 27, 2019"
+  },
+  {
+    "id": "chewbacca-2019",
+    "title": "Chewbacca",
+    "year": "2019",
+    "date": "April 15, 2019"
+  },
+  {
+    "id": "tommy-hawk-blackhawks-night-2018",
+    "title": "Tommy Hawk (Blackhawks Night)",
+    "year": "2018",
+    "date": "August 21, 2018"
+  },
+  {
+    "id": "tim-anderson-2018",
+    "title": "Tim Anderson",
+    "year": "2018",
+    "date": "August 18, 2018"
+  },
+  {
+    "id": "jim-thome-hall-of-fame-2018",
+    "title": "Jim Thome (Hall of Fame)",
+    "year": "2018",
+    "date": "August 11, 2018"
+  },
+  {
+    "id": "santa-2018",
+    "title": "Santa",
+    "year": "2018",
+    "date": "July 29, 2018"
+  },
+  {
+    "id": "white-sox-iron-man-2018",
+    "title": "White Sox Iron Man",
+    "year": "2018",
+    "date": "July 28, 2018"
+  },
+  {
+    "id": "hawk-solo-star-wars-2018",
+    "title": "Hawk \"Solo\" (Star Wars)",
+    "year": "2018",
+    "date": "May 19, 2018"
+  },
+  {
+    "id": "mark-buehrle-2017",
+    "title": "Mark Buehrle",
+    "year": "2017",
+    "date": "September 2, 2017"
+  },
+  {
+    "id": "stormtrooper-2017",
+    "title": "Stormtrooper",
+    "year": "2017",
+    "date": "August 26, 2017"
+  },
+  {
+    "id": "southpaw-game-of-thrones-2017",
+    "title": "Southpaw (Game of Thrones)",
+    "year": "2017",
+    "date": "July 19, 2017"
+  },
+  {
+    "id": "jose-abreu-super-hero-2017",
+    "title": "Jose Abreu (Super Hero)",
+    "year": "2017",
+    "date": "June 29, 2017"
+  },
+  {
+    "id": "southpaw-birthday-2017",
+    "title": "Southpaw (Birthday)",
+    "year": "2017",
+    "date": "June 25, 2017"
+  },
+  {
+    "id": "charles-tillman-2017",
+    "title": "Charles Tillman",
+    "year": "2017",
+    "date": "June 14, 2017"
+  },
+  {
+    "id": "jim-thome-soxfest-2017",
+    "title": "Jim Thome (SoxFest)",
+    "year": "2017",
+    "date": "January 27, 2017"
+  },
+  {
+    "id": "southpaw-star-wars-2016",
+    "title": "Southpaw (Star Wars)",
+    "year": "2016",
+    "date": "August 27, 2016"
+  },
+  {
+    "id": "chris-sale-k-counter-2016",
+    "title": "Chris Sale (K-Counter)",
+    "year": "2016",
+    "date": "May 7, 2016"
+  },
+  {
+    "id": "chris-sale-soxfest-2016",
+    "title": "Chris Sale (SoxFest)",
+    "year": "2016",
+    "date": "January 29, 2016"
+  },
+  {
+    "id": "adam-wan-kenobi-2015",
+    "title": "\"Adam Wan Kenobi\" (Star Wars)",
+    "year": "2015",
+    "date": "September 13, 2015"
+  },
+  {
+    "id": "jermaine-dye-world-series-moment-2015",
+    "title": "Jermaine Dye (World Series Moment)",
+    "year": "2015",
+    "date": "August 29, 2015"
+  },
+  {
+    "id": "scott-podsednik-world-series-moment-2015",
+    "title": "Scott Podsednik (World Series Moment)",
+    "year": "2015",
+    "date": "August 1, 2015"
+  },
+  {
+    "id": "bobby-jenks-world-series-moment-2015",
+    "title": "Bobby Jenks (World Series Moment)",
+    "year": "2015",
+    "date": "July 4, 2015"
+  },
+  {
+    "id": "tony-la-russa-2014",
+    "title": "Tony La Russa",
+    "year": "2014",
+    "date": "August 30, 2014"
+  },
+  {
+    "id": "frank-thomas-2014",
+    "title": "Frank Thomas",
+    "year": "2014",
+    "date": "August 16, 2014"
+  },
+  {
+    "id": "chris-sale-2014",
+    "title": "Chris Sale",
+    "year": "2014",
+    "date": "May 24, 2014"
+  },
+  {
+    "id": "ron-kittle-2013",
+    "title": "Ron Kittle",
+    "year": "2013",
+    "date": "August 10, 2013"
+  },
+  {
+    "id": "billy-pierce-replica-statue-2013",
+    "title": "Billy Pierce (Replica Statue)",
+    "year": "2013",
+    "date": "June 29, 2013"
+  },
+  {
+    "id": "paul-konerko-2013",
+    "title": "Paul Konerko",
+    "year": "2013",
+    "date": "May 11, 2013"
+  },
+  {
+    "id": "harold-baines-2013",
+    "title": "Harold Baines",
+    "year": "2013",
+    "date": "April 27, 2013"
+  },
+  {
+    "id": "miller-beer-vendor-2012",
+    "title": "Miller Beer Vendor",
+    "year": "2012",
+    "date": "August 4, 2012"
+  },
+  {
+    "id": "carlton-fisk-bronze-statue-2012",
+    "title": "Carlton Fisk (Bronze Statue)",
+    "year": "2012",
+    "date": "June 2, 2012"
+  },
+  {
+    "id": "robin-ventura-2012",
+    "title": "Robin Ventura",
+    "year": "2012",
+    "date": "May 26, 2012"
+  },
+  {
+    "id": "joe-crede-2012",
+    "title": "Joe Crede",
+    "year": "2012",
+    "date": "2012"
+  },
+  {
+    "id": "roger-bossard-2011",
+    "title": "Roger Bossard",
+    "year": "2011",
+    "date": "September 13, 2011"
+  },
+  {
+    "id": "mark-buehrle-2011",
+    "title": "Mark Buehrle",
+    "year": "2011",
+    "date": "August 20, 2011"
+  },
+  {
+    "id": "miller-beer-vendor-2011",
+    "title": "Miller Beer Vendor",
+    "year": "2011",
+    "date": "August 4, 2011"
+  },
+  {
+    "id": "frank-thomas-2011-4-29",
+    "title": "Frank Thomas",
+    "year": "2011",
+    "date": "April 29, 2011"
+  },
+  {
+    "id": "frank-thomas-2011-4-12",
+    "title": "Frank Thomas",
+    "year": "2011",
+    "date": "April 12, 2011"
+  },
+  {
+    "id": "andruw-jones-2010",
+    "title": "Andruw Jones",
+    "year": "2010",
+    "date": "September 28, 2010"
+  },
+  {
+    "id": "nancy-faust-2010",
+    "title": "Nancy Faust",
+    "year": "2010",
+    "date": "September 18, 2010"
+  },
+  {
+    "id": "frank-thomas-2010",
+    "title": "Frank Thomas",
+    "year": "2010",
+    "date": "August 29, 2010"
+  },
+  {
+    "id": "miller-lite-beer-vendor-2010",
+    "title": "Miller Lite Beer Vendor",
+    "year": "2010",
+    "date": "August 14, 2010"
+  },
+  {
+    "id": "nick-swisher-2008",
+    "title": "Nick Swisher",
+    "year": "2008",
+    "date": "August 10, 2008"
+  },
+  {
+    "id": "aj-pierzynski-2008",
+    "title": "A.J. Pierzynski",
+    "year": "2008",
+    "date": "April 1, 2008"
+  },
+  {
+    "id": "jim-thome-2007",
+    "title": "Jim Thome",
+    "year": "2007",
+    "date": "September 16, 2007"
+  },
+  {
+    "id": "ozzie-guillen-2007",
+    "title": "Ozzie Guillen",
+    "year": "2007",
+    "date": "May 27, 2007"
+  },
+  {
+    "id": "esteban-loaiza-2004",
+    "title": "Esteban Loaiza",
+    "year": "2004",
+    "date": "August 21, 2004"
+  },
+  {
+    "id": "paul-konerko-2003",
+    "title": "Paul Konerko",
+    "year": "2003",
+    "date": "July 18, 2003"
+  },
+  {
+    "id": "ken-harrelson-darrin-jackson-2003",
+    "title": "Ken Harrelson & Darrin Jackson",
+    "year": "2003",
+    "date": "June 11, 2003"
+  },
+  {
+    "id": "minnie-minoso-2002",
+    "title": "Minnie Minoso",
+    "year": "2002",
+    "date": "August 11, 2002"
+  },
+  {
+    "id": "carlton-fisk-2002",
+    "title": "Carlton Fisk",
+    "year": "2002",
+    "date": "July 28, 2002"
+  },
+  {
+    "id": "magglio-ordonez-2002",
+    "title": "Magglio Ordonez",
+    "year": "2002",
+    "date": "April 14, 2002"
+  },
+  {
+    "id": "magglio-ordonez-2001",
+    "title": "Magglio Ordonez",
+    "year": "2001",
+    "date": "July 1, 2001"
+  },
+  {
+    "id": "frank-thomas-2001",
+    "title": "Frank Thomas",
+    "year": "2001",
+    "date": "June 1, 2001"
+  }
+]

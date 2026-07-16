@@ -1,5 +1,4 @@
 import sharp from "sharp";
-import fs from "node:fs";
 
 const SRC_DIR = "images/notrademarkbobbleheads";
 const OUT_DIR = "public/bobbleheads";

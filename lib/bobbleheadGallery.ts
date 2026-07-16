@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
+export type GalleryPhoto = { id: string; imageUrl: string };
+
 export function useBobbleheadGallery(teamSlug: string, bobbleheadId: string) {
-  const [photos, setPhotos] = useState<string[]>([]);
+  const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -12,7 +14,7 @@ export function useBobbleheadGallery(teamSlug: string, bobbleheadId: string) {
 
     supabase
       .from("bobblehead_gallery_photos")
-      .select("image_url")
+      .select("id, image_url")
       .eq("team_slug", teamSlug)
       .eq("bobblehead_id", bobbleheadId)
       .order("created_at", { ascending: true })
@@ -23,7 +25,7 @@ export function useBobbleheadGallery(teamSlug: string, bobbleheadId: string) {
           console.error("Failed to load gallery photos:", error.message);
           setPhotos([]);
         } else {
-          setPhotos((data ?? []).map((row) => row.image_url));
+          setPhotos((data ?? []).map((row) => ({ id: row.id, imageUrl: row.image_url })));
         }
 
         setIsLoading(false);
@@ -34,5 +36,10 @@ export function useBobbleheadGallery(teamSlug: string, bobbleheadId: string) {
     };
   }, [teamSlug, bobbleheadId]);
 
-  return { photos, isLoading };
+  // For reflecting an admin deletion (lib/adminEdit.ts) without a refetch.
+  const removePhotoLocally = useCallback((photoId: string) => {
+    setPhotos((current) => current.filter((photo) => photo.id !== photoId));
+  }, []);
+
+  return { photos, isLoading, removePhotoLocally };
 }

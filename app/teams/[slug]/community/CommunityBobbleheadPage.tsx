@@ -10,10 +10,11 @@ import { FavoriteButton } from "@/components/FavoriteButton";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
+import { useToast } from "@/components/Toast";
 import { useAdminAuth } from "@/lib/adminAuth";
-import { deleteBobblehead, saveCommunityBobblehead } from "@/lib/adminEdit";
+import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, saveCommunityBobblehead } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
-import { useBobbleheadGallery } from "@/lib/bobbleheadGallery";
+import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { useCommunityBobblehead } from "@/lib/communityBobbleheads";
 import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
@@ -44,15 +45,17 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
   const router = useRouter();
   const bobbleheadId = useSearchParams().get("id") ?? "";
   const { isAdmin, user: adminUser } = useAdminAuth();
+  const { showError } = useToast();
   const { communityBobblehead, isLoading, notFound } = useCommunityBobblehead(team.slug, bobbleheadId);
   const { photoUrlById } = useApprovedPhotos(team.slug);
-  const { photos: galleryPhotos } = useBobbleheadGallery(team.slug, bobbleheadId);
+  const { photos: galleryPhotos, removePhotoLocally } = useBobbleheadGallery(team.slug, bobbleheadId);
   const { ownedById, isLoggedIn, setOwned } = useUserCollection(team.slug);
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, setFavorited } = useUserFavorites(team.slug);
 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [localOverride, setLocalOverride] = useState<EditBobbleheadValues | null>(null);
   const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
+  const [mainPhotoRemoved, setMainPhotoRemoved] = useState(false);
 
   if (isLoading) {
     return (
@@ -81,8 +84,12 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
   const title = localOverride?.title ?? giveaway.title;
   const year = localOverride?.year ?? giveaway.year;
   const date = localOverride?.date ?? giveaway.date;
-  const imageSrc =
-    localImageUrl ?? photoUrlById[giveaway.id] ?? giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+  // A community listing's photo is always admin-removable: either an
+  // approved_photos row or the row's own image_url.
+  const removableMainPhotoUrl = mainPhotoRemoved
+    ? null
+    : (localImageUrl ?? photoUrlById[giveaway.id] ?? giveaway.imageUrl ?? null);
+  const imageSrc = removableMainPhotoUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
   const isOwned = ownedById[giveaway.id] ?? false;
   const isFavorited = favoritedById[giveaway.id] ?? false;
   const details = [
@@ -104,12 +111,37 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
     });
 
     setLocalOverride(values);
-    if (imageUrl) setLocalImageUrl(imageUrl);
+    if (imageUrl) {
+      setLocalImageUrl(imageUrl);
+      setMainPhotoRemoved(false);
+    }
   };
 
   const handleDelete = async () => {
     await deleteBobblehead({ teamSlug: team.slug, bobbleheadId: giveaway.id, source: "community" });
     router.replace(`/teams/${team.slug}`);
+  };
+
+  const handleRemoveMainPhoto = async () => {
+    await deleteMainPhoto({
+      teamSlug: team.slug,
+      bobbleheadId: giveaway.id,
+      source: "community",
+      imageUrl: removableMainPhotoUrl,
+    });
+    setLocalImageUrl(null);
+    setMainPhotoRemoved(true);
+  };
+
+  const handleDeleteGalleryPhoto = async (photo: GalleryPhoto) => {
+    if (!window.confirm("Remove this photo for everyone?")) return;
+
+    try {
+      await deleteGalleryPhoto(photo);
+      removePhotoLocally(photo.id);
+    } catch (deleteError) {
+      showError(deleteError instanceof Error ? deleteError.message : "Could not remove the photo.");
+    }
   };
 
   return (
@@ -205,7 +237,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
 
           {galleryPhotos.length > 0 ? (
             <div className="mb-5">
-              <PhotoGallery photos={galleryPhotos} />
+              <PhotoGallery photos={galleryPhotos} onDelete={isAdmin ? handleDeleteGalleryPhoto : undefined} />
             </div>
           ) : null}
 
@@ -252,6 +284,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
           initial={{ title, year, date }}
           onSave={handleEditSave}
           onDelete={handleDelete}
+          onRemovePhoto={removableMainPhotoUrl ? handleRemoveMainPhoto : undefined}
         />
       ) : null}
     </main>

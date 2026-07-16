@@ -121,24 +121,35 @@ export type MySubmission = {
 // public bobblehead-approved bucket under `${submissionId}-${filename}` (see
 // moveToApproved in app/admin/review/page.tsx) — so the URL has to be derived
 // differently depending on status.
-async function resolveSubmissionImageUrl(
+function approvedSubmissionImageUrl(
   client: SupabaseClient,
-  status: MySubmission["status"],
   submissionId: string,
   storagePath: string,
-): Promise<string | null> {
-  if (status === "approved") {
-    const filename = storagePath.split("/").pop() ?? "photo";
-    const { data } = client.storage
-      .from("bobblehead-approved")
-      .getPublicUrl(`${submissionId}-${filename}`);
-    return data.publicUrl ?? null;
-  }
+): string | null {
+  const filename = storagePath.split("/").pop() ?? "photo";
+  const { data } = client.storage
+    .from("bobblehead-approved")
+    .getPublicUrl(`${submissionId}-${filename}`);
+  return data.publicUrl ?? null;
+}
+
+// One signed-URL request for all pending/rejected photos rather than one per
+// submission. Paths that fail to sign are simply absent from the map.
+async function signPendingImageUrls(
+  client: SupabaseClient,
+  storagePaths: string[],
+): Promise<Map<string, string>> {
+  if (storagePaths.length === 0) return new Map();
 
   const { data } = await client.storage
     .from("bobblehead-pending")
-    .createSignedUrl(storagePath, 60 * 10);
-  return data?.signedUrl ?? null;
+    .createSignedUrls(storagePaths, 60 * 10);
+
+  return new Map(
+    (data ?? []).flatMap((item) =>
+      item.path && item.signedUrl ? [[item.path, item.signedUrl] as [string, string]] : [],
+    ),
+  );
 }
 
 // A submission only becomes a real listing once it's approved. photo_for_existing
@@ -200,15 +211,26 @@ export function useMySubmissions(source?: ProfileSource) {
           return;
         }
 
+        const rows = data ?? [];
+        const signedUrlByPath = await signPendingImageUrls(
+          client,
+          rows.filter((row) => row.status !== "approved").map((row) => row.storage_path),
+        );
+
+        if (cancelled) return;
+
         const withDetails = await Promise.all(
-          (data ?? []).map(async (row) => ({
+          rows.map(async (row) => ({
             id: row.id,
             kind: row.kind,
             teamSlug: row.team_slug,
             title: row.title,
             status: row.status,
             createdAt: row.created_at,
-            imageUrl: await resolveSubmissionImageUrl(client, row.status, row.id, row.storage_path),
+            imageUrl:
+              row.status === "approved"
+                ? approvedSubmissionImageUrl(client, row.id, row.storage_path)
+                : (signedUrlByPath.get(row.storage_path) ?? null),
             href: await resolveSubmissionHref(
               client,
               row.status,

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BackToTopButton } from "@/components/BackToTopButton";
 import { RequireDisplayNameGate } from "@/components/RequireDisplayNameGate";
+import { ToastProvider } from "@/components/Toast";
 import { AdminAuthProvider } from "@/lib/adminAuth";
 import { AuthProvider } from "@/lib/auth";
 import "./globals.css";
@@ -21,7 +22,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <AuthProvider>
           <AdminAuthProvider>
-            <RequireDisplayNameGate>{children}</RequireDisplayNameGate>
+            <ToastProvider>
+              <RequireDisplayNameGate>{children}</RequireDisplayNameGate>
+            </ToastProvider>
           </AdminAuthProvider>
         </AuthProvider>
         <BackToTopButton />

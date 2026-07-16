@@ -9,7 +9,7 @@ import { SiteSearch } from "@/components/SiteSearch";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { useAuth } from "@/lib/auth";
 import type { Giveaway } from "@/lib/bobbleheads";
-import { useDeletedBobbleheads, type DeletedBobbleheads } from "@/lib/bobbleheadOverrides";
+import { useBobbleheadOverrides, type BobbleheadOverridesLookup } from "@/lib/bobbleheadOverrides";
 import { useCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { findDuplicateBobblehead, type DuplicateCandidate } from "@/lib/duplicateCheck";
 import { publicAsset } from "@/lib/paths";
@@ -45,7 +45,7 @@ function SubmitBobbleheadForm({
 }: {
   teamSlug: string;
   communityBobbleheads: DuplicateCandidate[];
-  isDeleted: DeletedBobbleheads["isDeleted"];
+  isDeleted: BobbleheadOverridesLookup["isDeleted"];
   onDone: () => void;
 }) {
   const { user } = useAuth();
@@ -166,16 +166,22 @@ export function TeamPageClient({
   const [justSubmitted, setJustSubmitted] = useState(false);
   const { communityBobbleheads } = useCommunityBobbleheads(team.slug);
   const { photoUrlById } = useApprovedPhotos(team.slug);
-  const { isDeleted } = useDeletedBobbleheads();
+  const { isDeleted, getOverride } = useBobbleheadOverrides();
 
   const allGiveaways = useMemo<ResolvedGiveaway[]>(() => {
     const curated: ResolvedGiveaway[] = giveaways
       .filter((giveaway) => !isDeleted(team.slug, giveaway.id))
-      .map((giveaway) => ({
-        ...giveaway,
-        imageUrl: photoUrlById[giveaway.id] ?? giveaway.imageUrl,
-        source: "curated",
-      }));
+      .map((giveaway) => {
+        const override = getOverride(team.slug, giveaway.id);
+        return {
+          ...giveaway,
+          title: override?.title ?? giveaway.title,
+          year: override?.year ?? giveaway.year,
+          date: override?.date ?? giveaway.date,
+          imageUrl: photoUrlById[giveaway.id] ?? giveaway.imageUrl,
+          source: "curated",
+        };
+      });
     const community: ResolvedGiveaway[] = communityBobbleheads.map((giveaway) => ({
       ...giveaway,
       imageUrl: photoUrlById[giveaway.id] ?? giveaway.imageUrl,
@@ -183,7 +189,7 @@ export function TeamPageClient({
     }));
 
     return [...community, ...curated];
-  }, [giveaways, communityBobbleheads, photoUrlById, isDeleted, team.slug]);
+  }, [giveaways, communityBobbleheads, photoUrlById, isDeleted, getOverride, team.slug]);
 
   const photoCount = useMemo(
     () => allGiveaways.filter((giveaway) => giveaway.imageUrl).length,

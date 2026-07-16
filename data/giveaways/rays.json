@@ -1,0 +1,644 @@
+[
+  {
+    "id": "josh-lowe-2025",
+    "title": "Josh Lowe",
+    "year": "2025",
+    "date": "July 22, 2025"
+  },
+  {
+    "id": "taj-bradley-2025",
+    "title": "Taj Bradley",
+    "year": "2025",
+    "date": "July 2, 2025"
+  },
+  {
+    "id": "shane-baz-2025",
+    "title": "Shane Baz",
+    "year": "2025",
+    "date": "June 19, 2025"
+  },
+  {
+    "id": "junior-caminero-2025",
+    "title": "Junior Caminero",
+    "year": "2025",
+    "date": "June 5, 2025"
+  },
+  {
+    "id": "fred-mcgriff-2024",
+    "title": "Fred McGriff",
+    "year": "2024",
+    "date": "September 1, 2024"
+  },
+  {
+    "id": "peter-fairbanks-2024",
+    "title": "Peter Fairbanks",
+    "year": "2024",
+    "date": "July 28, 2024"
+  },
+  {
+    "id": "yandy-diaz-2024",
+    "title": "Yandy Diaz",
+    "year": "2024",
+    "date": "June 30, 2024"
+  },
+  {
+    "id": "batman-2023",
+    "title": "Batman",
+    "year": "2023",
+    "date": "September 10, 2023"
+  },
+  {
+    "id": "carl-crawford-mystery-3-poses-2023",
+    "title": "Carl Crawford (Mystery, 3 poses)",
+    "year": "2023",
+    "date": "August 26, 2023"
+  },
+  {
+    "id": "shane-mcclanahan-2023",
+    "title": "Shane McClanahan",
+    "year": "2023",
+    "date": "August 12, 2023"
+  },
+  {
+    "id": "groot-2023",
+    "title": "Groot",
+    "year": "2023",
+    "date": "May 6, 2023"
+  },
+  {
+    "id": "zim-bear-don-zimmer-2023",
+    "title": "\"Zim Bear\" (Don Zimmer)",
+    "year": "2023",
+    "date": "April 2, 2023"
+  },
+  {
+    "id": "wander-franco-2022",
+    "title": "Wander Franco",
+    "year": "2022",
+    "date": "July 16, 2022"
+  },
+  {
+    "id": "mike-zunino-florida-man-2022",
+    "title": "Mike Zunino (\"Florida Man\")",
+    "year": "2022",
+    "date": "June 21, 2022"
+  },
+  {
+    "id": "randy-arozarena-2022",
+    "title": "Randy Arozarena",
+    "year": "2022",
+    "date": "April 23, 2022"
+  },
+  {
+    "id": "tyler-glasnow-2021",
+    "title": "Tyler Glasnow",
+    "year": "2021",
+    "date": "August 21, 2021"
+  },
+  {
+    "id": "austin-meadows-2021",
+    "title": "Austin Meadows",
+    "year": "2021",
+    "date": "July 6, 2021"
+  },
+  {
+    "id": "brandon-lowe-delayed-2021",
+    "title": "Brandon Lowe (Delayed)",
+    "year": "2021",
+    "date": "June 26, 2021"
+  },
+  {
+    "id": "willy-adames-audio-2021",
+    "title": "Willy Adames (Audio)",
+    "year": "2021",
+    "date": "June 9, 2021"
+  },
+  {
+    "id": "willy-adames-2019",
+    "title": "Willy Adames",
+    "year": "2019",
+    "date": "August 17, 2019"
+  },
+  {
+    "id": "tommy-pham-2019",
+    "title": "Tommy Pham",
+    "year": "2019",
+    "date": "June 1, 2019"
+  },
+  {
+    "id": "blake-snell-cy-zilla-2019",
+    "title": "Blake Snell (\"Cy Zilla\")",
+    "year": "2019",
+    "date": "March 30, 2019"
+  },
+  {
+    "id": "jake-bauers-willy-adames-double-season-ticket-holders-2019",
+    "title": "Jake Bauers & Willy Adames (Double, Season Ticket Holders)",
+    "year": "2019",
+    "date": "2019"
+  },
+  {
+    "id": "blake-snell-season-ticket-holders-2019",
+    "title": "Blake Snell (Season Ticket Holders)",
+    "year": "2019",
+    "date": "2019"
+  },
+  {
+    "id": "dan-johnson-2018",
+    "title": "Dan Johnson",
+    "year": "2018",
+    "date": "September 29, 2018"
+  },
+  {
+    "id": "wade-boggs-2018",
+    "title": "Wade Boggs",
+    "year": "2018",
+    "date": "August 25, 2018"
+  },
+  {
+    "id": "akinori-iwamura-2018",
+    "title": "Akinori Iwamura",
+    "year": "2018",
+    "date": "August 4, 2018"
+  },
+  {
+    "id": "fred-mcgriff-tino-martinez-2018",
+    "title": "Fred McGriff & Tino Martinez",
+    "year": "2018",
+    "date": "June 9, 2018"
+  },
+  {
+    "id": "carl-crawford-2018",
+    "title": "Carl Crawford",
+    "year": "2018",
+    "date": "April 14, 2018"
+  },
+  {
+    "id": "evan-longoria-fan-fest-game-162-2018",
+    "title": "Evan Longoria (Fan Fest, Game 162)",
+    "year": "2018",
+    "date": "2018"
+  },
+  {
+    "id": "blake-snell-2017",
+    "title": "Blake Snell",
+    "year": "2017",
+    "date": "September 16, 2017"
+  },
+  {
+    "id": "iron-man-marvel-2017",
+    "title": "Iron Man (Marvel)",
+    "year": "2017",
+    "date": "August 5, 2017"
+  },
+  {
+    "id": "evan-longoria-game-of-thrones-2017",
+    "title": "Evan Longoria (Game of Thrones)",
+    "year": "2017",
+    "date": "July 8, 2017"
+  },
+  {
+    "id": "kevin-kiermaier-star-wars-2017",
+    "title": "Kevin Kiermaier (Star Wars)",
+    "year": "2017",
+    "date": "June 24, 2017"
+  },
+  {
+    "id": "matt-duffy-double-play-2017",
+    "title": "Matt Duffy (Double Play)",
+    "year": "2017",
+    "date": "June 10, 2017"
+  },
+  {
+    "id": "logan-forsythe-2016",
+    "title": "Logan Forsythe",
+    "year": "2016",
+    "date": "September 3, 2016"
+  },
+  {
+    "id": "raymond-dj-kitty-double-2016",
+    "title": "Raymond & DJ Kitty (Double)",
+    "year": "2016",
+    "date": "August 21, 2016"
+  },
+  {
+    "id": "kevin-kiermaier-claus-2016",
+    "title": "Kevin Kiermaier (\"Claus\")",
+    "year": "2016",
+    "date": "July 17, 2016"
+  },
+  {
+    "id": "chris-archer-stormtrooper-2016",
+    "title": "Chris Archer (Stormtrooper)",
+    "year": "2016",
+    "date": "June 11, 2016"
+  },
+  {
+    "id": "chris-archer-k-counter-2016",
+    "title": "Chris Archer (K-Counter)",
+    "year": "2016",
+    "date": "April 30, 2016"
+  },
+  {
+    "id": "kevin-kiermaier-platinum-glove-2016",
+    "title": "Kevin Kiermaier (Platinum Glove)",
+    "year": "2016",
+    "date": "April 16, 2016"
+  },
+  {
+    "id": "jake-odorizzi-2015",
+    "title": "Jake Odorizzi",
+    "year": "2015",
+    "date": "September 19, 2015"
+  },
+  {
+    "id": "han-longo-evan-longoria-star-wars-2015",
+    "title": "\"Han Longo\" (Evan Longoria, Star Wars)",
+    "year": "2015",
+    "date": "September 12, 2015"
+  },
+  {
+    "id": "evan-longoria-walkup-music-2015",
+    "title": "Evan Longoria (Walkup Music)",
+    "year": "2015",
+    "date": "May 9, 2015"
+  },
+  {
+    "id": "chris-archer-2015",
+    "title": "Chris Archer",
+    "year": "2015",
+    "date": "April 25, 2015"
+  },
+  {
+    "id": "evan-longoria-80s-hair-band-2014",
+    "title": "Evan Longoria ('80s Hair Band)",
+    "year": "2014",
+    "date": "September 6, 2014"
+  },
+  {
+    "id": "wil-myers-star-wars-2014",
+    "title": "Wil Myers (Star Wars)",
+    "year": "2014",
+    "date": "August 30, 2014"
+  },
+  {
+    "id": "mr-happy-2014",
+    "title": "\"Mr. Happy\"",
+    "year": "2014",
+    "date": "August 17, 2014"
+  },
+  {
+    "id": "alex-cobb-military-themed-2014",
+    "title": "Alex Cobb (Military Themed)",
+    "year": "2014",
+    "date": "May 23, 2014"
+  },
+  {
+    "id": "wil-myers-rookie-of-the-year-2014",
+    "title": "Wil Myers (Rookie of the Year)",
+    "year": "2014",
+    "date": "April 4, 2014"
+  },
+  {
+    "id": "raymond-bobble-belly-2013",
+    "title": "Raymond (\"Bobble Belly\")",
+    "year": "2013",
+    "date": "September 22, 2013"
+  },
+  {
+    "id": "ben-zobrist-jedi-zo-star-wars-2013",
+    "title": "Ben Zobrist (\"Jedi ZO\", Star Wars)",
+    "year": "2013",
+    "date": "September 21, 2013"
+  },
+  {
+    "id": "evan-longoria-retro-2013",
+    "title": "Evan Longoria (Retro)",
+    "year": "2013",
+    "date": "July 6, 2013"
+  },
+  {
+    "id": "astro-devil-rays-mascot-2013",
+    "title": "Astro (Devil Rays Mascot)",
+    "year": "2013",
+    "date": "April 21, 2013"
+  },
+  {
+    "id": "matt-joyce-2012",
+    "title": "Matt Joyce",
+    "year": "2012",
+    "date": "September 23, 2012"
+  },
+  {
+    "id": "dj-kitty-2012",
+    "title": "DJ Kitty",
+    "year": "2012",
+    "date": "August 5, 2012"
+  },
+  {
+    "id": "matt-moore-2012",
+    "title": "Matt Moore",
+    "year": "2012",
+    "date": "July 22, 2012"
+  },
+  {
+    "id": "james-shields-2012",
+    "title": "James Shields",
+    "year": "2012",
+    "date": "July 1, 2012"
+  },
+  {
+    "id": "joe-maddon-2012",
+    "title": "Joe Maddon",
+    "year": "2012",
+    "date": "June 15, 2012"
+  },
+  {
+    "id": "desmond-jennings-2012",
+    "title": "Desmond Jennings",
+    "year": "2012",
+    "date": "June 3, 2012"
+  },
+  {
+    "id": "kyle-farnsworth-2012",
+    "title": "Kyle Farnsworth",
+    "year": "2012",
+    "date": "May 20, 2012"
+  },
+  {
+    "id": "johnny-damon-2011",
+    "title": "Johnny Damon",
+    "year": "2011",
+    "date": "July 17, 2011"
+  },
+  {
+    "id": "bj-upton-2011",
+    "title": "B.J. Upton",
+    "year": "2011",
+    "date": "June 19, 2011"
+  },
+  {
+    "id": "matt-garza-2010",
+    "title": "Matt Garza",
+    "year": "2010",
+    "date": "August 15, 2010"
+  },
+  {
+    "id": "david-price-2010",
+    "title": "David Price",
+    "year": "2010",
+    "date": "July 11, 2010"
+  },
+  {
+    "id": "evan-longoria-2010",
+    "title": "Evan Longoria",
+    "year": "2010",
+    "date": "June 27, 2010"
+  },
+  {
+    "id": "jason-bartlett-2010",
+    "title": "Jason Bartlett",
+    "year": "2010",
+    "date": "June 13, 2010"
+  },
+  {
+    "id": "scott-kazmir-2009",
+    "title": "Scott Kazmir",
+    "year": "2009",
+    "date": "August 2, 2009"
+  },
+  {
+    "id": "carl-crawford-2009",
+    "title": "Carl Crawford",
+    "year": "2009",
+    "date": "July 12, 2009"
+  },
+  {
+    "id": "james-shields-2009",
+    "title": "James Shields",
+    "year": "2009",
+    "date": "June 28, 2009"
+  },
+  {
+    "id": "dioner-navarro-2009",
+    "title": "Dioner Navarro",
+    "year": "2009",
+    "date": "June 14, 2009"
+  },
+  {
+    "id": "troy-percival-figurine-2008",
+    "title": "Troy Percival (Figurine)",
+    "year": "2008",
+    "date": "September 20, 2008"
+  },
+  {
+    "id": "james-shields-figurine-2008",
+    "title": "James Shields (Figurine)",
+    "year": "2008",
+    "date": "August 30, 2008"
+  },
+  {
+    "id": "bj-upton-figurine-2008",
+    "title": "B.J. Upton (Figurine)",
+    "year": "2008",
+    "date": "August 2, 2008"
+  },
+  {
+    "id": "carlos-pena-figurine-2008",
+    "title": "Carlos Pena (Figurine)",
+    "year": "2008",
+    "date": "May 10, 2008"
+  },
+  {
+    "id": "mickey-mouse-mini-disney-2008",
+    "title": "Mickey Mouse (Mini, Disney)",
+    "year": "2008",
+    "date": "April 24, 2008"
+  },
+  {
+    "id": "goofy-mini-disney-2008",
+    "title": "Goofy (Mini, Disney)",
+    "year": "2008",
+    "date": "April 23, 2008"
+  },
+  {
+    "id": "donald-duck-mini-disney-2008",
+    "title": "Donald Duck (Mini, Disney)",
+    "year": "2008",
+    "date": "April 22, 2008"
+  },
+  {
+    "id": "akinori-iwamura-2007",
+    "title": "Akinori Iwamura",
+    "year": "2007",
+    "date": "September 8, 2007"
+  },
+  {
+    "id": "delmon-young-2007",
+    "title": "Delmon Young",
+    "year": "2007",
+    "date": "August 25, 2007"
+  },
+  {
+    "id": "rocco-baldelli-2007",
+    "title": "Rocco Baldelli",
+    "year": "2007",
+    "date": "August 18, 2007"
+  },
+  {
+    "id": "carl-crawford-2007",
+    "title": "Carl Crawford",
+    "year": "2007",
+    "date": "July 29, 2007"
+  },
+  {
+    "id": "don-zimmer-2007",
+    "title": "Don Zimmer",
+    "year": "2007",
+    "date": "June 23, 2007"
+  },
+  {
+    "id": "jorge-cantu-2006",
+    "title": "Jorge Cantu",
+    "year": "2006",
+    "date": "September 3, 2006"
+  },
+  {
+    "id": "dewayne-staats-joe-magrane-talking-double-2006",
+    "title": "DeWayne Staats & Joe Magrane (Talking, Double)",
+    "year": "2006",
+    "date": "September 2, 2006"
+  },
+  {
+    "id": "scott-kazmir-2006",
+    "title": "Scott Kazmir",
+    "year": "2006",
+    "date": "July 21, 2006"
+  },
+  {
+    "id": "fred-mcgriff-2006",
+    "title": "Fred McGriff",
+    "year": "2006",
+    "date": "June 23, 2006"
+  },
+  {
+    "id": "carl-crawford-2006",
+    "title": "Carl Crawford",
+    "year": "2006",
+    "date": "May 13, 2006"
+  },
+  {
+    "id": "jonny-gomes-2006",
+    "title": "Jonny Gomes",
+    "year": "2006",
+    "date": "April 15, 2006"
+  },
+  {
+    "id": "carl-crawford-sliding-2005",
+    "title": "Carl Crawford (Sliding)",
+    "year": "2005",
+    "date": "October 1, 2005"
+  },
+  {
+    "id": "wade-boggs-2005",
+    "title": "Wade Boggs",
+    "year": "2005",
+    "date": "July 23, 2005"
+  },
+  {
+    "id": "danys-baez-2004",
+    "title": "Danys Baez",
+    "year": "2004",
+    "date": "September 27, 2004"
+  },
+  {
+    "id": "don-zimmer-mini-2004",
+    "title": "Don Zimmer (Mini)",
+    "year": "2004",
+    "date": "August 2, 2004"
+  },
+  {
+    "id": "lou-piniella-mini-2004",
+    "title": "Lou Piniella (Mini)",
+    "year": "2004",
+    "date": "July 19, 2004"
+  },
+  {
+    "id": "toby-hall-mini-2004",
+    "title": "Toby Hall (Mini)",
+    "year": "2004",
+    "date": "June 30, 2004"
+  },
+  {
+    "id": "jose-cruz-jr-mini-2004",
+    "title": "Jose Cruz Jr. (Mini)",
+    "year": "2004",
+    "date": "June 9, 2004"
+  },
+  {
+    "id": "tino-martinez-mini-2004",
+    "title": "Tino Martinez (Mini)",
+    "year": "2004",
+    "date": "May 30, 2004"
+  },
+  {
+    "id": "carl-crawford-mini-2004",
+    "title": "Carl Crawford (Mini)",
+    "year": "2004",
+    "date": "May 23, 2004"
+  },
+  {
+    "id": "rocco-baldelli-mini-2004",
+    "title": "Rocco Baldelli (Mini)",
+    "year": "2004",
+    "date": "May 18, 2004"
+  },
+  {
+    "id": "aubrey-huff-mini-2004",
+    "title": "Aubrey Huff (Mini)",
+    "year": "2004",
+    "date": "April 10, 2004"
+  },
+  {
+    "id": "carl-crawford-mini-2003",
+    "title": "Carl Crawford (Mini)",
+    "year": "2003",
+    "date": "September 27, 2003"
+  },
+  {
+    "id": "aubrey-huff-mini-2003",
+    "title": "Aubrey Huff (Mini)",
+    "year": "2003",
+    "date": "September 19, 2003"
+  },
+  {
+    "id": "rocco-baldelli-mini-2003",
+    "title": "Rocco Baldelli (Mini)",
+    "year": "2003",
+    "date": "September 7, 2003"
+  },
+  {
+    "id": "lou-piniella-2003",
+    "title": "Lou Piniella",
+    "year": "2003",
+    "date": "June 1, 2003"
+  },
+  {
+    "id": "steve-cox-2002",
+    "title": "Steve Cox",
+    "year": "2002",
+    "date": "September 8, 2002"
+  },
+  {
+    "id": "raymond-mascot-2001",
+    "title": "Raymond (Mascot)",
+    "year": "2001",
+    "date": "August 12, 2001"
+  },
+  {
+    "id": "fred-mcgriff-2001",
+    "title": "Fred McGriff",
+    "year": "2001",
+    "date": "June 22, 2001"
+  }
+]

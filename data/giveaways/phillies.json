@@ -1,0 +1,494 @@
+[
+  {
+    "id": "phillie-phanatic-colonial-2026",
+    "title": "Phillie Phanatic (Colonial)",
+    "year": "2026",
+    "date": "April 19, 2026"
+  },
+  {
+    "id": "trea-turner-2025",
+    "title": "Trea Turner",
+    "year": "2025",
+    "date": "August 28, 2025"
+  },
+  {
+    "id": "jt-realmuto-2025",
+    "title": "J.T. Realmuto",
+    "year": "2025",
+    "date": "July 18, 2025"
+  },
+  {
+    "id": "kyle-schwarber-2025",
+    "title": "Kyle Schwarber",
+    "year": "2025",
+    "date": "June 14, 2025"
+  },
+  {
+    "id": "zack-wheeler-2025",
+    "title": "Zack Wheeler",
+    "year": "2025",
+    "date": "May 16, 2025"
+  },
+  {
+    "id": "ranger-suarez-mandalorian-2024",
+    "title": "Ranger Suarez (Mandalorian)",
+    "year": "2024",
+    "date": "August 26, 2024"
+  },
+  {
+    "id": "trea-turner-2024",
+    "title": "Trea Turner",
+    "year": "2024",
+    "date": "July 26, 2024"
+  },
+  {
+    "id": "bryson-stott-2024",
+    "title": "Bryson Stott",
+    "year": "2024",
+    "date": "May 17, 2024"
+  },
+  {
+    "id": "peppermint-patty-2023",
+    "title": "Peppermint Patty",
+    "year": "2023",
+    "date": "September 8, 2023"
+  },
+  {
+    "id": "kyle-schwarber-2023",
+    "title": "Kyle Schwarber",
+    "year": "2023",
+    "date": "August 22, 2023"
+  },
+  {
+    "id": "schwarbie-wan-kenobi-2023",
+    "title": "\"Schwarbie Wan Kenobi\"",
+    "year": "2023",
+    "date": "August 12, 2023"
+  },
+  {
+    "id": "rob-thomson-papa-elf-2023",
+    "title": "Rob Thomson (\"Papa Elf\")",
+    "year": "2023",
+    "date": "July 25, 2023"
+  },
+  {
+    "id": "dick-allen-2023",
+    "title": "Dick Allen",
+    "year": "2023",
+    "date": "June 9, 2023"
+  },
+  {
+    "id": "lucy-2022",
+    "title": "Lucy",
+    "year": "2022",
+    "date": "August 22, 2022"
+  },
+  {
+    "id": "bryce-harper-2022",
+    "title": "Bryce Harper",
+    "year": "2022",
+    "date": "June 10, 2022"
+  },
+  {
+    "id": "miles-teller-rooster-2022",
+    "title": "Miles Teller (Rooster)",
+    "year": "2022",
+    "date": "June 1, 2022"
+  },
+  {
+    "id": "scooby-doo-2021",
+    "title": "Scooby-Doo",
+    "year": "2021",
+    "date": "August 24, 2021"
+  },
+  {
+    "id": "schroeder-peanuts-2021",
+    "title": "Schroeder (Peanuts)",
+    "year": "2021",
+    "date": "May 4, 2021"
+  },
+  {
+    "id": "mystery-bobblehead-2021",
+    "title": "Mystery Bobblehead",
+    "year": "2021",
+    "date": "April 7, 2021"
+  },
+  {
+    "id": "aaron-nola-bobble-figurine-2019",
+    "title": "Aaron Nola (Bobble Figurine)",
+    "year": "2019",
+    "date": "August 18, 2019"
+  },
+  {
+    "id": "spider-man-2019",
+    "title": "Spider-Man",
+    "year": "2019",
+    "date": "August 16, 2019"
+  },
+  {
+    "id": "linus-2019",
+    "title": "Linus",
+    "year": "2019",
+    "date": "July 31, 2019"
+  },
+  {
+    "id": "jake-arrieta-jedi-bobble-figurine-2019",
+    "title": "Jake Arrieta (Jedi, Bobble Figurine)",
+    "year": "2019",
+    "date": "July 17, 2019"
+  },
+  {
+    "id": "ryan-howard-2019",
+    "title": "Ryan Howard",
+    "year": "2019",
+    "date": "July 14, 2019"
+  },
+  {
+    "id": "chase-utley-bobble-figurine-2019",
+    "title": "Chase Utley (Bobble Figurine)",
+    "year": "2019",
+    "date": "June 21, 2019"
+  },
+  {
+    "id": "seranthony-dominguez-bobble-figurine-2019",
+    "title": "Seranthony Dominguez (Bobble Figurine)",
+    "year": "2019",
+    "date": "May 13, 2019"
+  },
+  {
+    "id": "hulk-2018",
+    "title": "Hulk",
+    "year": "2018",
+    "date": "August 29, 2018"
+  },
+  {
+    "id": "brad-lidge-2018",
+    "title": "Brad Lidge",
+    "year": "2018",
+    "date": "August 5, 2018"
+  },
+  {
+    "id": "snoopy-2018",
+    "title": "Snoopy",
+    "year": "2018",
+    "date": "July 3, 2018"
+  },
+  {
+    "id": "phanatic-iron-throne-2018",
+    "title": "Phanatic (Iron Throne)",
+    "year": "2018",
+    "date": "June 18, 2018"
+  },
+  {
+    "id": "ham-porter-2018",
+    "title": "\"Ham\" Porter",
+    "year": "2018",
+    "date": "June 9, 2018"
+  },
+  {
+    "id": "han-nola-aaron-nola-star-wars-2018",
+    "title": "\"Han Nola\" (Aaron Nola, Star Wars)",
+    "year": "2018",
+    "date": "May 23, 2018"
+  },
+  {
+    "id": "star-trek-2017",
+    "title": "Star Trek",
+    "year": "2017",
+    "date": "September 26, 2017"
+  },
+  {
+    "id": "billy-joel-2017",
+    "title": "Billy Joel",
+    "year": "2017",
+    "date": "July 24, 2017"
+  },
+  {
+    "id": "mike-schmidt-2017",
+    "title": "Mike Schmidt",
+    "year": "2017",
+    "date": "July 8, 2017"
+  },
+  {
+    "id": "charlie-brown-50th-anniversary-2017",
+    "title": "Charlie Brown (50th Anniversary)",
+    "year": "2017",
+    "date": "July 5, 2017"
+  },
+  {
+    "id": "phanatic-star-wars-2017",
+    "title": "Phanatic (Star Wars)",
+    "year": "2017",
+    "date": "June 21, 2017"
+  },
+  {
+    "id": "phanatic-band-themed-2016",
+    "title": "Phanatic (Band Themed)",
+    "year": "2016",
+    "date": "2016"
+  },
+  {
+    "id": "phoebe-phanatic-stitch-n-pitch-2016",
+    "title": "Phoebe Phanatic (Stitch 'n Pitch)",
+    "year": "2016",
+    "date": "August 29, 2016"
+  },
+  {
+    "id": "phillie-phanatic-variant-2016",
+    "title": "Phillie Phanatic (Variant)",
+    "year": "2016",
+    "date": "August 21, 2016"
+  },
+  {
+    "id": "phanatic-master-phanatic-star-wars-2016",
+    "title": "Phanatic (\"Master Phanatic\", Star Wars)",
+    "year": "2016",
+    "date": "July 21, 2016"
+  },
+  {
+    "id": "maikel-franco-2016",
+    "title": "Maikel Franco",
+    "year": "2016",
+    "date": "June 18, 2016"
+  },
+  {
+    "id": "larry-bowa-2015",
+    "title": "Larry Bowa",
+    "year": "2015",
+    "date": "August 18, 2015"
+  },
+  {
+    "id": "vintage-phillies-gold-base-variant-2015",
+    "title": "Vintage Phillies (Gold Base Variant)",
+    "year": "2015",
+    "date": "June 19, 2015"
+  },
+  {
+    "id": "vintage-phillies-2015",
+    "title": "Vintage Phillies",
+    "year": "2015",
+    "date": "June 2, 2015"
+  },
+  {
+    "id": "ryan-howard-2014",
+    "title": "Ryan Howard",
+    "year": "2014",
+    "date": "August 19, 2014"
+  },
+  {
+    "id": "roy-halladay-2014",
+    "title": "Roy Halladay",
+    "year": "2014",
+    "date": "August 8, 2014"
+  },
+  {
+    "id": "chase-utley-2014",
+    "title": "Chase Utley",
+    "year": "2014",
+    "date": "June 10, 2014"
+  },
+  {
+    "id": "john-kruk-action-figure-2013",
+    "title": "John Kruk (Action Figure)",
+    "year": "2013",
+    "date": "August 23, 2013"
+  },
+  {
+    "id": "cole-hamels-2013",
+    "title": "Cole Hamels",
+    "year": "2013",
+    "date": "August 21, 2013"
+  },
+  {
+    "id": "carlos-ruiz-2013",
+    "title": "Carlos Ruiz",
+    "year": "2013",
+    "date": "June 4, 2013"
+  },
+  {
+    "id": "hunter-pence-2012",
+    "title": "Hunter Pence",
+    "year": "2012",
+    "date": "August 21, 2012"
+  },
+  {
+    "id": "cliff-lee-2012",
+    "title": "Cliff Lee",
+    "year": "2012",
+    "date": "June 4, 2012"
+  },
+  {
+    "id": "placido-polanco-2011",
+    "title": "Placido Polanco",
+    "year": "2011",
+    "date": "August 16, 2011"
+  },
+  {
+    "id": "roy-oswalt-2011",
+    "title": "Roy Oswalt",
+    "year": "2011",
+    "date": "May 24, 2011"
+  },
+  {
+    "id": "carlos-ruiz-2010",
+    "title": "Carlos Ruiz",
+    "year": "2010",
+    "date": "August 24, 2010"
+  },
+  {
+    "id": "roy-halladay-2010",
+    "title": "Roy Halladay",
+    "year": "2010",
+    "date": "May 18, 2010"
+  },
+  {
+    "id": "brad-lidge-2009",
+    "title": "Brad Lidge",
+    "year": "2009",
+    "date": "August 19, 2009"
+  },
+  {
+    "id": "charlie-manuel-2009",
+    "title": "Charlie Manuel",
+    "year": "2009",
+    "date": "April 28, 2009"
+  },
+  {
+    "id": "chase-utley-2008",
+    "title": "Chase Utley",
+    "year": "2008",
+    "date": "August 20, 2008"
+  },
+  {
+    "id": "shane-victorino-flyin-hawaiian-figurine-2008",
+    "title": "Shane Victorino (\"Flyin' Hawaiian\" Figurine)",
+    "year": "2008",
+    "date": "July 13, 2008"
+  },
+  {
+    "id": "jimmy-rollins-mvp-2008",
+    "title": "Jimmy Rollins (MVP)",
+    "year": "2008",
+    "date": "June 4, 2008"
+  },
+  {
+    "id": "jamie-moyer-nl-east-champions-2008",
+    "title": "Jamie Moyer (NL East Champions)",
+    "year": "2008",
+    "date": "April 30, 2008"
+  },
+  {
+    "id": "cole-hamels-2007",
+    "title": "Cole Hamels",
+    "year": "2007",
+    "date": "July 25, 2007"
+  },
+  {
+    "id": "shane-victorino-hula-figurine-2007",
+    "title": "Shane Victorino (Hula Figurine)",
+    "year": "2007",
+    "date": "June 3, 2007"
+  },
+  {
+    "id": "ryan-howard-mvp-figurine-2007",
+    "title": "Ryan Howard (MVP Figurine)",
+    "year": "2007",
+    "date": "May 16, 2007"
+  },
+  {
+    "id": "phillie-phanatic-2007",
+    "title": "Phillie Phanatic",
+    "year": "2007",
+    "date": "April 29, 2007"
+  },
+  {
+    "id": "ryan-howard-2006",
+    "title": "Ryan Howard",
+    "year": "2006",
+    "date": "July 26, 2006"
+  },
+  {
+    "id": "chase-utley-2006",
+    "title": "Chase Utley",
+    "year": "2006",
+    "date": "May 26, 2006"
+  },
+  {
+    "id": "bobby-abreu-2005",
+    "title": "Bobby Abreu",
+    "year": "2005",
+    "date": "September 5, 2005"
+  },
+  {
+    "id": "jimmy-rollins-2005",
+    "title": "Jimmy Rollins",
+    "year": "2005",
+    "date": "June 21, 2005"
+  },
+  {
+    "id": "jim-thome-2005",
+    "title": "Jim Thome",
+    "year": "2005",
+    "date": "May 12, 2005"
+  },
+  {
+    "id": "mike-lieberthal-2004",
+    "title": "Mike Lieberthal",
+    "year": "2004",
+    "date": "August 29, 2004"
+  },
+  {
+    "id": "randy-wolf-2004",
+    "title": "Randy Wolf",
+    "year": "2004",
+    "date": "August 17, 2004"
+  },
+  {
+    "id": "phil-phillis-original-mascots-2003",
+    "title": "Phil & Phillis (Original Mascots)",
+    "year": "2003",
+    "date": "September 27, 2003"
+  },
+  {
+    "id": "steve-carlton-2003",
+    "title": "Steve Carlton",
+    "year": "2003",
+    "date": "June 22, 2003"
+  },
+  {
+    "id": "mike-schmidt-2003",
+    "title": "Mike Schmidt",
+    "year": "2003",
+    "date": "June 20, 2003"
+  },
+  {
+    "id": "harry-kalas-richie-ashburn-dual-2002",
+    "title": "Harry Kalas & Richie Ashburn (Dual)",
+    "year": "2002",
+    "date": "August 18, 2002"
+  },
+  {
+    "id": "jimmy-rollins-2002",
+    "title": "Jimmy Rollins",
+    "year": "2002",
+    "date": "June 23, 2002"
+  },
+  {
+    "id": "phillie-phanatic-mascot-2002",
+    "title": "Phillie Phanatic (Mascot)",
+    "year": "2002",
+    "date": "May 5, 2002"
+  },
+  {
+    "id": "larry-bowa-2001",
+    "title": "Larry Bowa",
+    "year": "2001",
+    "date": "September 27, 2001"
+  },
+  {
+    "id": "pat-burrell-2001",
+    "title": "Pat Burrell",
+    "year": "2001",
+    "date": "May 20, 2001"
+  }
+]

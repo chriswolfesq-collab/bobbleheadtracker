@@ -1,0 +1,536 @@
+[
+  {
+    "id": "gabriel-moreno-mandalorian-2026",
+    "title": "Gabriel Moreno (Mandalorian)",
+    "year": "2026",
+    "date": "May 9, 2026"
+  },
+  {
+    "id": "geraldo-perdomo-audio-2026",
+    "title": "Geraldo Perdomo (Audio)",
+    "year": "2026",
+    "date": "July 18, 2026"
+  },
+  {
+    "id": "eugenio-suarez-2025",
+    "title": "Eugenio Suarez",
+    "year": "2025",
+    "date": "April 12, 2025"
+  },
+  {
+    "id": "geraldo-perdomo-2025",
+    "title": "Geraldo Perdomo",
+    "year": "2025",
+    "date": "May 31, 2025"
+  },
+  {
+    "id": "hello-kitty-2025",
+    "title": "Hello Kitty",
+    "year": "2025",
+    "date": "June 29, 2025"
+  },
+  {
+    "id": "ketel-marte-2025",
+    "title": "Ketel Marte",
+    "year": "2025",
+    "date": "July 19, 2025"
+  },
+  {
+    "id": "corbin-carroll-2025",
+    "title": "Corbin Carroll",
+    "year": "2025",
+    "date": "August 9, 2025"
+  },
+  {
+    "id": "corbin-carroll-2024",
+    "title": "Corbin Carroll",
+    "year": "2024",
+    "date": "March 30, 2024"
+  },
+  {
+    "id": "gabriel-moreno-2024",
+    "title": "Gabriel Moreno",
+    "year": "2024",
+    "date": "May 4, 2024"
+  },
+  {
+    "id": "ketel-marte-2024",
+    "title": "Ketel Marte",
+    "year": "2024",
+    "date": "June 29, 2024"
+  },
+  {
+    "id": "lourdes-gurriel-jr-2024",
+    "title": "Lourdes Gurriel Jr.",
+    "year": "2024",
+    "date": "July 13, 2024"
+  },
+  {
+    "id": "zac-gallen-scoreless-streak-2023",
+    "title": "Zac Gallen (Scoreless Streak)",
+    "year": "2023",
+    "date": "April 22, 2023"
+  },
+  {
+    "id": "corbin-carroll-2023",
+    "title": "Corbin Carroll",
+    "year": "2023",
+    "date": "August 26, 2023"
+  },
+  {
+    "id": "ketel-marte-switch-hitter-2021",
+    "title": "Ketel Marte (Switch-Hitter)",
+    "year": "2021",
+    "date": "May 14, 2021"
+  },
+  {
+    "id": "christian-walker-sky-walker-2021",
+    "title": "Christian Walker (Sky-Walker)",
+    "year": "2021",
+    "date": "August 14, 2021"
+  },
+  {
+    "id": "archie-bradley-2019",
+    "title": "Archie Bradley",
+    "year": "2019",
+    "date": "April 13, 2019"
+  },
+  {
+    "id": "zack-godley-game-of-thrones-2019",
+    "title": "Zack Godley (Game of Thrones)",
+    "year": "2019",
+    "date": "May 17, 2019"
+  },
+  {
+    "id": "david-peralta-freighttrain-2019",
+    "title": "David Peralta (#FreightTrain)",
+    "year": "2019",
+    "date": "June 22, 2019"
+  },
+  {
+    "id": "nick-ahmed-on-the-moon-2019",
+    "title": "Nick Ahmed (On the Moon)",
+    "year": "2019",
+    "date": "July 20, 2019"
+  },
+  {
+    "id": "archie-bradley-audio-2018",
+    "title": "Archie Bradley (Audio)",
+    "year": "2018",
+    "date": "April 21, 2018"
+  },
+  {
+    "id": "paul-solo-star-wars-2018",
+    "title": "\"Paul Solo\" (Star Wars)",
+    "year": "2018",
+    "date": "June 2, 2018"
+  },
+  {
+    "id": "ice-dragon-2018",
+    "title": "Ice Dragon",
+    "year": "2018",
+    "date": "July 7, 2018"
+  },
+  {
+    "id": "jake-lamb-2018",
+    "title": "Jake Lamb",
+    "year": "2018",
+    "date": "July 21, 2018"
+  },
+  {
+    "id": "ketel-marte-luchador-2018",
+    "title": "Ketel Marte (Luchador)",
+    "year": "2018",
+    "date": "September 8, 2018"
+  },
+  {
+    "id": "jake-lamb-2017",
+    "title": "Jake Lamb",
+    "year": "2017",
+    "date": "April 8, 2017"
+  },
+  {
+    "id": "game-of-thrones-2017",
+    "title": "Game of Thrones",
+    "year": "2017",
+    "date": "July 7, 2017"
+  },
+  {
+    "id": "robbie-ray-strikeout-counter-2017",
+    "title": "Robbie Ray (Strikeout Counter)",
+    "year": "2017",
+    "date": "July 22, 2017"
+  },
+  {
+    "id": "sugar-skull-2017",
+    "title": "Sugar Skull",
+    "year": "2017",
+    "date": "September 9, 2017"
+  },
+  {
+    "id": "aj-pollock-2016",
+    "title": "A.J. Pollock",
+    "year": "2016",
+    "date": "April 23, 2016"
+  },
+  {
+    "id": "paul-goldschmidt-2016",
+    "title": "Paul Goldschmidt",
+    "year": "2016",
+    "date": "July 2, 2016"
+  },
+  {
+    "id": "zack-greinke-2016",
+    "title": "Zack Greinke",
+    "year": "2016",
+    "date": "August 6, 2016"
+  },
+  {
+    "id": "david-peralta-2016",
+    "title": "David Peralta",
+    "year": "2016",
+    "date": "September 17, 2016"
+  },
+  {
+    "id": "dbacks-hello-kitty-2015",
+    "title": "D-backs Hello Kitty",
+    "year": "2015",
+    "date": "April 11, 2015"
+  },
+  {
+    "id": "josh-collmenter-2015",
+    "title": "Josh Collmenter",
+    "year": "2015",
+    "date": "May 9, 2015"
+  },
+  {
+    "id": "tony-la-russa-2015",
+    "title": "Tony La Russa",
+    "year": "2015",
+    "date": "June 6, 2015"
+  },
+  {
+    "id": "aj-pollock-star-wars-2015",
+    "title": "A.J. Pollock (Star Wars)",
+    "year": "2015",
+    "date": "July 18, 2015"
+  },
+  {
+    "id": "randy-johnson-hall-of-fame-2015",
+    "title": "Randy Johnson (Hall of Fame)",
+    "year": "2015",
+    "date": "July 25, 2015"
+  },
+  {
+    "id": "patrick-corbin-2014",
+    "title": "Patrick Corbin",
+    "year": "2014",
+    "date": "April 26, 2014"
+  },
+  {
+    "id": "gerardo-parra-2014",
+    "title": "Gerardo Parra",
+    "year": "2014",
+    "date": "May 17, 2014"
+  },
+  {
+    "id": "martin-prado-2014",
+    "title": "Martin Prado",
+    "year": "2014",
+    "date": "June 7, 2014"
+  },
+  {
+    "id": "josh-collmenter-star-wars-day-2014",
+    "title": "Josh Collmenter (Star Wars Day)",
+    "year": "2014",
+    "date": "July 20, 2014"
+  },
+  {
+    "id": "bob-brenly-2014",
+    "title": "Bob Brenly",
+    "year": "2014",
+    "date": "August 20, 2014"
+  },
+  {
+    "id": "paul-goldschmidt-2014",
+    "title": "Paul Goldschmidt",
+    "year": "2014",
+    "date": "September 13, 2014"
+  },
+  {
+    "id": "wade-miley-garden-gnome-2013",
+    "title": "Wade Miley (Garden Gnome)",
+    "year": "2013",
+    "date": "April 27, 2013"
+  },
+  {
+    "id": "aaron-hill-bicycle-2013",
+    "title": "Aaron Hill (#BiCycle)",
+    "year": "2013",
+    "date": "June 8, 2013"
+  },
+  {
+    "id": "paul-goldschmidt-2013",
+    "title": "Paul Goldschmidt",
+    "year": "2013",
+    "date": "August 10, 2013"
+  },
+  {
+    "id": "miguel-montero-2013",
+    "title": "Miguel Montero",
+    "year": "2013",
+    "date": "September 14, 2013"
+  },
+  {
+    "id": "jj-putz-2012",
+    "title": "J.J. Putz",
+    "year": "2012",
+    "date": "May 26, 2012"
+  },
+  {
+    "id": "ian-kennedy-2012",
+    "title": "Ian Kennedy",
+    "year": "2012",
+    "date": "June 23, 2012"
+  },
+  {
+    "id": "justin-upton-2012",
+    "title": "Justin Upton",
+    "year": "2012",
+    "date": "July 28, 2012"
+  },
+  {
+    "id": "gerardo-parra-2012",
+    "title": "Gerardo Parra",
+    "year": "2012",
+    "date": "August 12, 2012"
+  },
+  {
+    "id": "mark-grace-racing-gracie-2011",
+    "title": "Mark Grace (Racing Gracie)",
+    "year": "2011",
+    "date": "April 24, 2011"
+  },
+  {
+    "id": "kirk-gibson-2011",
+    "title": "Kirk Gibson",
+    "year": "2011",
+    "date": "August 6, 2011"
+  },
+  {
+    "id": "chris-young-2011",
+    "title": "Chris Young",
+    "year": "2011",
+    "date": "August 27, 2011"
+  },
+  {
+    "id": "ryan-roberts-2011",
+    "title": "Ryan Roberts",
+    "year": "2011",
+    "date": "September 24, 2011"
+  },
+  {
+    "id": "justin-upton-2010",
+    "title": "Justin Upton",
+    "year": "2010",
+    "date": "April 24, 2010"
+  },
+  {
+    "id": "dan-haren-2010",
+    "title": "Dan Haren",
+    "year": "2010",
+    "date": "June 12, 2010"
+  },
+  {
+    "id": "greg-schulte-2010",
+    "title": "Greg Schulte",
+    "year": "2010",
+    "date": "July 10, 2010"
+  },
+  {
+    "id": "luis-gonzalez-gonzo-2010",
+    "title": "Luis Gonzalez (Gonzo)",
+    "year": "2010",
+    "date": "August 7, 2010"
+  },
+  {
+    "id": "miguel-montero-2010",
+    "title": "Miguel Montero",
+    "year": "2010",
+    "date": "September 4, 2010"
+  },
+  {
+    "id": "justin-upton-2009",
+    "title": "Justin Upton",
+    "year": "2009",
+    "date": "April 25, 2009"
+  },
+  {
+    "id": "stephen-drew-2009",
+    "title": "Stephen Drew",
+    "year": "2009",
+    "date": "May 30, 2009"
+  },
+  {
+    "id": "chris-snyder-2009",
+    "title": "Chris Snyder",
+    "year": "2009",
+    "date": "July 11, 2009"
+  },
+  {
+    "id": "augie-ojeda-2009",
+    "title": "Augie Ojeda",
+    "year": "2009",
+    "date": "September 12, 2009"
+  },
+  {
+    "id": "mark-reynolds-2009",
+    "title": "Mark Reynolds",
+    "year": "2009",
+    "date": "September 26, 2009"
+  },
+  {
+    "id": "brandon-webb-cy-young-2007",
+    "title": "Brandon Webb (Cy Young)",
+    "year": "2007",
+    "date": "April 14, 2007"
+  },
+  {
+    "id": "orlando-hudson-gold-glove-2007",
+    "title": "Orlando Hudson (Gold Glove)",
+    "year": "2007",
+    "date": "April 28, 2007"
+  },
+  {
+    "id": "randy-johnson-2007",
+    "title": "Randy Johnson",
+    "year": "2007",
+    "date": "June 9, 2007"
+  },
+  {
+    "id": "carlos-quentin-2007",
+    "title": "Carlos Quentin",
+    "year": "2007",
+    "date": "July 28, 2007"
+  },
+  {
+    "id": "mark-grace-2007",
+    "title": "Mark Grace",
+    "year": "2007",
+    "date": "August 25, 2007"
+  },
+  {
+    "id": "conor-jackson-2007",
+    "title": "Conor Jackson",
+    "year": "2007",
+    "date": "September 8, 2007"
+  },
+  {
+    "id": "johnny-estrada-2006",
+    "title": "Johnny Estrada",
+    "year": "2006",
+    "date": "May 20, 2006"
+  },
+  {
+    "id": "luis-gonzalez-2006",
+    "title": "Luis Gonzalez",
+    "year": "2006",
+    "date": "June 10, 2006"
+  },
+  {
+    "id": "brandon-webb-2006",
+    "title": "Brandon Webb",
+    "year": "2006",
+    "date": "June 24, 2006"
+  },
+  {
+    "id": "chad-tracy-2006",
+    "title": "Chad Tracy",
+    "year": "2006",
+    "date": "August 26, 2006"
+  },
+  {
+    "id": "richie-sexson-2004",
+    "title": "Richie Sexson",
+    "year": "2004",
+    "date": "July 17, 2004"
+  },
+  {
+    "id": "maxter-mascot-2003",
+    "title": "Maxter (Mascot)",
+    "year": "2003",
+    "date": "June 7, 2003"
+  },
+  {
+    "id": "junior-spivey-2003",
+    "title": "Junior Spivey",
+    "year": "2003",
+    "date": "June 8, 2003"
+  },
+  {
+    "id": "craig-counsell-2003",
+    "title": "Craig Counsell",
+    "year": "2003",
+    "date": "August 29, 2003"
+  },
+  {
+    "id": "bob-brenly-2002",
+    "title": "Bob Brenly",
+    "year": "2002",
+    "date": "June 15, 2002"
+  },
+  {
+    "id": "luis-gonzalez-hr-derby-2002",
+    "title": "Luis Gonzalez (HR Derby)",
+    "year": "2002",
+    "date": "July 6, 2002"
+  },
+  {
+    "id": "steve-finley-2002",
+    "title": "Steve Finley",
+    "year": "2002",
+    "date": "August 10, 2002"
+  },
+  {
+    "id": "randy-johnson-cy-young-2002",
+    "title": "Randy Johnson (Cy Young)",
+    "year": "2002",
+    "date": "August 24, 2002"
+  },
+  {
+    "id": "curt-schilling-2002",
+    "title": "Curt Schilling",
+    "year": "2002",
+    "date": "August 30, 2002"
+  },
+  {
+    "id": "luis-gonzalez-2001",
+    "title": "Luis Gonzalez",
+    "year": "2001",
+    "date": "July 28, 2001"
+  },
+  {
+    "id": "randy-johnson-2001",
+    "title": "Randy Johnson",
+    "year": "2001",
+    "date": "August 3, 2001"
+  },
+  {
+    "id": "mark-grace-2001",
+    "title": "Mark Grace",
+    "year": "2001",
+    "date": "August 18, 2001"
+  },
+  {
+    "id": "tony-womack-2001",
+    "title": "Tony Womack",
+    "year": "2001",
+    "date": "September 8, 2001"
+  },
+  {
+    "id": "matt-williams-2001",
+    "title": "Matt Williams",
+    "year": "2001",
+    "date": "September 28, 2001"
+  }
+]

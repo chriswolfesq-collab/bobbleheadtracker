@@ -270,6 +270,14 @@ create policy "approved_photos: admin update"
   using (public.is_admin())
   with check (public.is_admin());
 
+-- Lets the admin remove just the main photo (the listing falls back to its
+-- curated seed image or the team placeholder) without deleting the listing.
+drop policy if exists "approved_photos: admin delete" on public.approved_photos;
+create policy "approved_photos: admin delete"
+  on public.approved_photos for delete
+  to authenticated
+  using (public.is_admin());
+
 drop policy if exists "community_bobbleheads: public read" on public.community_bobbleheads;
 create policy "community_bobbleheads: public read"
   on public.community_bobbleheads for select
@@ -288,6 +296,14 @@ create policy "bobblehead_gallery_photos: public read"
   on public.bobblehead_gallery_photos for select
   to anon, authenticated
   using (true);
+
+-- Lets the admin remove a single bad gallery photo without reaching for
+-- admin_delete_bobblehead (which removes the whole listing).
+drop policy if exists "bobblehead_gallery_photos: admin delete" on public.bobblehead_gallery_photos;
+create policy "bobblehead_gallery_photos: admin delete"
+  on public.bobblehead_gallery_photos for delete
+  to authenticated
+  using (public.is_admin());
 
 drop policy if exists "bobblehead_overrides: public read" on public.bobblehead_overrides;
 create policy "bobblehead_overrides: public read"
@@ -348,24 +364,26 @@ create policy "listing_reports: admin update"
 -- Approval / rejection RPCs
 -- ---------------------------------------------------------------------------
 -- Storage can't be touched from SQL, so the client copies the file from the
--- pending bucket to the approved bucket first (see lib/admin.ts), then calls
--- this function with the resulting public URL to do the DB bookkeeping
--- atomically. Both functions re-check admin status server-side, so a client
--- that lies about being the admin still gets rejected.
+-- pending bucket to the approved bucket first (see app/admin/review/page.tsx),
+-- then calls this function with the resulting public URL to do the DB
+-- bookkeeping atomically. Both functions re-check admin status server-side, so
+-- a client that lies about being the admin still gets rejected.
 --
--- p_has_existing_photo is computed by the client (it needs to know about the
--- hardcoded seed photos in lib/bobbleheads.ts, which the database has no
--- visibility into): when true, a photo_for_existing submission is the
--- bobblehead's first photo, it becomes the main/profile photo
--- (approved_photos). When false, one already exists, so the submission is
--- added to the gallery instead of overwriting it.
+-- A photo_for_existing submission becomes the bobblehead's main/profile photo
+-- (approved_photos) when the bobblehead has no photo yet, and a gallery
+-- addition when it already has one. Whether one exists is decided here, inside
+-- the transaction, so two back-to-back approvals can't both think they're
+-- first. The one source the database can't see is the curated seed photo
+-- baked into the site's build-time data (lib/bobbleheads.ts) — the client
+-- passes that single static fact as p_curated_has_photo.
 
 drop function if exists public.approve_submission(uuid, text);
+drop function if exists public.approve_submission(uuid, text, boolean);
 
 create or replace function public.approve_submission(
   p_submission_id uuid,
   p_image_url text,
-  p_has_existing_photo boolean default false
+  p_curated_has_photo boolean default false
 )
 returns void
 language plpgsql
@@ -374,6 +392,7 @@ set search_path = public
 as $$
 declare
   v_submission public.submissions%rowtype;
+  v_has_existing_photo boolean;
   v_new_id text;
 begin
   if not public.is_admin() then
@@ -394,7 +413,17 @@ begin
       raise exception 'missing target_bobblehead_id for photo_for_existing submission';
     end if;
 
-    if p_has_existing_photo then
+    v_has_existing_photo := p_curated_has_photo
+      or exists (
+        select 1 from public.approved_photos ap
+          where ap.bobblehead_id = v_submission.target_bobblehead_id
+      )
+      or exists (
+        select 1 from public.community_bobbleheads cb
+          where cb.id = v_submission.target_bobblehead_id and cb.image_url is not null
+      );
+
+    if v_has_existing_photo then
       insert into public.bobblehead_gallery_photos (bobblehead_id, team_slug, image_url, approved_by)
       values (v_submission.target_bobblehead_id, v_submission.team_slug, p_image_url, auth.uid());
     else
@@ -722,3 +751,11 @@ create policy "approved: admin can upload"
   on storage.objects for insert
   to authenticated
   with check (bucket_id = 'bobblehead-approved' and public.is_admin());
+
+-- Cleanup counterpart to the photo-delete policies above: when the admin
+-- removes a main or gallery photo, the underlying file goes too.
+drop policy if exists "approved: admin can delete" on storage.objects;
+create policy "approved: admin can delete"
+  on storage.objects for delete
+  to authenticated
+  using (bucket_id = 'bobblehead-approved' and public.is_admin());

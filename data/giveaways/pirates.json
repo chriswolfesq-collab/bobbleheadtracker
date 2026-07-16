@@ -1,0 +1,693 @@
+[
+  {
+    "id": "paul-skenes-2026",
+    "title": "Paul Skenes",
+    "year": "2026",
+    "date": "April 18, 2026"
+  },
+  {
+    "id": "paul-skenes-2025",
+    "title": "Paul Skenes",
+    "year": "2025",
+    "date": "April 19, 2025"
+  },
+  {
+    "id": "yeet-2025",
+    "title": "\"Yeet\"",
+    "year": "2025",
+    "date": "May 10, 2025"
+  },
+  {
+    "id": "mac-miller-2025",
+    "title": "Mac Miller",
+    "year": "2025",
+    "date": "July 19, 2025"
+  },
+  {
+    "id": "bryan-reynolds-2025",
+    "title": "Bryan Reynolds",
+    "year": "2025",
+    "date": "September 6, 2025"
+  },
+  {
+    "id": "mitch-keller-2024",
+    "title": "Mitch Keller",
+    "year": "2024",
+    "date": "May 4, 2024"
+  },
+  {
+    "id": "dave-parker-2024",
+    "title": "Dave Parker",
+    "year": "2024",
+    "date": "May 25, 2024"
+  },
+  {
+    "id": "andrew-mccutchen-2024",
+    "title": "Andrew McCutchen",
+    "year": "2024",
+    "date": "June 22, 2024"
+  },
+  {
+    "id": "wiz-khalifa-2024",
+    "title": "Wiz Khalifa",
+    "year": "2024",
+    "date": "July 20, 2024"
+  },
+  {
+    "id": "bryan-reynolds-2022",
+    "title": "Bryan Reynolds",
+    "year": "2022",
+    "date": "June 18, 2022"
+  },
+  {
+    "id": "bill-mazeroski-gold-glove-2022",
+    "title": "Bill Mazeroski (Gold Glove)",
+    "year": "2022",
+    "date": "July 5, 2022"
+  },
+  {
+    "id": "doug-drabek-cy-young-2022",
+    "title": "Doug Drabek (Cy Young)",
+    "year": "2022",
+    "date": "September 24, 2022"
+  },
+  {
+    "id": "wonder-woman-2021",
+    "title": "Wonder Woman",
+    "year": "2021",
+    "date": "May 1, 2021"
+  },
+  {
+    "id": "jameson-taillon-star-wars-2019",
+    "title": "Jameson Taillon (Star Wars)",
+    "year": "2019",
+    "date": "April 5, 2019"
+  },
+  {
+    "id": "chris-archer-2019",
+    "title": "Chris Archer",
+    "year": "2019",
+    "date": "June 1, 2019"
+  },
+  {
+    "id": "vintage-bobblehead-2019",
+    "title": "Vintage Bobblehead",
+    "year": "2019",
+    "date": "July 20, 2019"
+  },
+  {
+    "id": "spider-man-2019",
+    "title": "Spider-Man",
+    "year": "2019",
+    "date": "September 7, 2019"
+  },
+  {
+    "id": "steve-blass-dual-player-broadcaster-2019",
+    "title": "Steve Blass (Dual Player/Broadcaster)",
+    "year": "2019",
+    "date": "September 28, 2019"
+  },
+  {
+    "id": "pirates-vintage-2018",
+    "title": "Pirates Vintage",
+    "year": "2018",
+    "date": "May 19, 2018"
+  },
+  {
+    "id": "sean-rodriguez-walk-off-2018",
+    "title": "Sean Rodriguez (Walk-Off)",
+    "year": "2018",
+    "date": "June 23, 2018"
+  },
+  {
+    "id": "josh-bell-2018",
+    "title": "Josh Bell",
+    "year": "2018",
+    "date": "July 14, 2018"
+  },
+  {
+    "id": "hulk-kids-2018",
+    "title": "Hulk (Kids)",
+    "year": "2018",
+    "date": "July 29, 2018"
+  },
+  {
+    "id": "andy-van-slyke-2018",
+    "title": "Andy Van Slyke",
+    "year": "2018",
+    "date": "August 4, 2018"
+  },
+  {
+    "id": "felipe-vazquez-2018",
+    "title": "Felipe Vazquez",
+    "year": "2018",
+    "date": "September 8, 2018"
+  },
+  {
+    "id": "francisco-cervelli-thats-amore-singing-2017",
+    "title": "Francisco Cervelli (\"That's Amore\" Singing)",
+    "year": "2017",
+    "date": "April 8, 2017"
+  },
+  {
+    "id": "jordy-mercer-2017",
+    "title": "Jordy Mercer",
+    "year": "2017",
+    "date": "June 17, 2017"
+  },
+  {
+    "id": "charlie-brown-2017",
+    "title": "Charlie Brown",
+    "year": "2017",
+    "date": "August 3, 2017"
+  },
+  {
+    "id": "gregory-polanco-el-coffee-2017",
+    "title": "Gregory Polanco (\"El Coffee\")",
+    "year": "2017",
+    "date": "August 19, 2017"
+  },
+  {
+    "id": "raise-the-jolly-roger-2016",
+    "title": "\"Raise the Jolly Roger\"",
+    "year": "2016",
+    "date": "May 21, 2016"
+  },
+  {
+    "id": "gerrit-cole-2016",
+    "title": "Gerrit Cole",
+    "year": "2016",
+    "date": "June 23, 2016"
+  },
+  {
+    "id": "jung-ho-kang-2016",
+    "title": "Jung Ho Kang",
+    "year": "2016",
+    "date": "August 11, 2016"
+  },
+  {
+    "id": "josh-harrison-2015",
+    "title": "Josh Harrison",
+    "year": "2015",
+    "date": "May 23, 2015"
+  },
+  {
+    "id": "starling-marte-2015",
+    "title": "Starling Marte",
+    "year": "2015",
+    "date": "June 27, 2015"
+  },
+  {
+    "id": "pedro-alvarez-silver-slugger-2014",
+    "title": "Pedro Alvarez (Silver Slugger)",
+    "year": "2014",
+    "date": "May 24, 2014"
+  },
+  {
+    "id": "andrew-mccutchen-nl-mvp-2014",
+    "title": "Andrew McCutchen (N.L. MVP)",
+    "year": "2014",
+    "date": "June 28, 2014"
+  },
+  {
+    "id": "honus-wagner-2014",
+    "title": "Honus Wagner",
+    "year": "2014",
+    "date": "August 12, 2014"
+  },
+  {
+    "id": "andrew-mccutchen-awards-2013",
+    "title": "Andrew McCutchen (Awards)",
+    "year": "2013",
+    "date": "April 23, 2013"
+  },
+  {
+    "id": "aj-burnett-camo-jersey-2013",
+    "title": "A.J. Burnett (Camo Jersey)",
+    "year": "2013",
+    "date": "May 18, 2013"
+  },
+  {
+    "id": "joel-hanrahan-2012",
+    "title": "Joel Hanrahan",
+    "year": "2012",
+    "date": "May 12, 2012"
+  },
+  {
+    "id": "andrew-mccutchen-figurine-2011",
+    "title": "Andrew McCutchen (Figurine)",
+    "year": "2011",
+    "date": "April 23, 2011"
+  },
+  {
+    "id": "neil-walker-2011",
+    "title": "Neil Walker",
+    "year": "2011",
+    "date": "May 21, 2011"
+  },
+  {
+    "id": "pirate-parrot-mascot-2011",
+    "title": "Pirate Parrot (Mascot)",
+    "year": "2011",
+    "date": "June 12, 2011"
+  },
+  {
+    "id": "garrett-jones-figurine-2010",
+    "title": "Garrett Jones (Figurine)",
+    "year": "2010",
+    "date": "May 22, 2010"
+  },
+  {
+    "id": "andrew-mccutchen-2010",
+    "title": "Andrew McCutchen",
+    "year": "2010",
+    "date": "August 6, 2010"
+  },
+  {
+    "id": "ryan-doumit-2009",
+    "title": "Ryan Doumit",
+    "year": "2009",
+    "date": "April 18, 2009"
+  },
+  {
+    "id": "nate-mclouth-2009",
+    "title": "Nate McLouth",
+    "year": "2009",
+    "date": "May 16, 2009"
+  },
+  {
+    "id": "honus-wagner-figurine-2009",
+    "title": "Honus Wagner (Figurine)",
+    "year": "2009",
+    "date": "June 13, 2009"
+  },
+  {
+    "id": "arnold-palmer-2009",
+    "title": "Arnold Palmer",
+    "year": "2009",
+    "date": "September 8, 2009"
+  },
+  {
+    "id": "paul-maholm-2009",
+    "title": "Paul Maholm",
+    "year": "2009",
+    "date": "September 25, 2009"
+  },
+  {
+    "id": "manny-sanguillen-2008",
+    "title": "Manny Sanguillen",
+    "year": "2008",
+    "date": "April 11, 2008"
+  },
+  {
+    "id": "tom-gorzelanny-2008",
+    "title": "Tom Gorzelanny",
+    "year": "2008",
+    "date": "April 26, 2008"
+  },
+  {
+    "id": "willie-stargell-2008",
+    "title": "Willie Stargell",
+    "year": "2008",
+    "date": "May 9, 2008"
+  },
+  {
+    "id": "matt-capps-2008",
+    "title": "Matt Capps",
+    "year": "2008",
+    "date": "May 24, 2008"
+  },
+  {
+    "id": "richie-hebner-2008",
+    "title": "Richie Hebner",
+    "year": "2008",
+    "date": "June 6, 2008"
+  },
+  {
+    "id": "dave-parker-2008",
+    "title": "Dave Parker",
+    "year": "2008",
+    "date": "June 27, 2008"
+  },
+  {
+    "id": "al-oliver-2008",
+    "title": "Al Oliver",
+    "year": "2008",
+    "date": "July 25, 2008"
+  },
+  {
+    "id": "richie-zisk-2008",
+    "title": "Richie Zisk",
+    "year": "2008",
+    "date": "August 29, 2008"
+  },
+  {
+    "id": "rennie-stennett-2008",
+    "title": "Rennie Stennett",
+    "year": "2008",
+    "date": "September 12, 2008"
+  },
+  {
+    "id": "jason-bay-2006-all-star-2007",
+    "title": "Jason Bay (2006 All-Star)",
+    "year": "2007",
+    "date": "April 13, 2007"
+  },
+  {
+    "id": "freddy-sanchez-2006-batting-champion-2007",
+    "title": "Freddy Sanchez (2006 Batting Champion)",
+    "year": "2007",
+    "date": "April 28, 2007"
+  },
+  {
+    "id": "ronny-paulino-2007",
+    "title": "Ronny Paulino",
+    "year": "2007",
+    "date": "May 12, 2007"
+  },
+  {
+    "id": "50s-60s-logo-man-2007",
+    "title": "\"50s-60s Logo Man\"",
+    "year": "2007",
+    "date": "May 19, 2007"
+  },
+  {
+    "id": "60s-70s-80s-logo-man-2007",
+    "title": "\"60s-70s-80s Logo Man\"",
+    "year": "2007",
+    "date": "June 16, 2007"
+  },
+  {
+    "id": "bob-walk-2007",
+    "title": "Bob Walk",
+    "year": "2007",
+    "date": "June 30, 2007"
+  },
+  {
+    "id": "80s-90s-logo-man-2007",
+    "title": "\"80s-90s Logo Man\"",
+    "year": "2007",
+    "date": "July 21, 2007"
+  },
+  {
+    "id": "josh-gibson-2007",
+    "title": "Josh Gibson",
+    "year": "2007",
+    "date": "August 3, 2007"
+  },
+  {
+    "id": "roberto-clemente-2007",
+    "title": "Roberto Clemente",
+    "year": "2007",
+    "date": "September 8, 2007"
+  },
+  {
+    "id": "90s-00s-logo-man-2007",
+    "title": "\"90s-00s Logo Man\"",
+    "year": "2007",
+    "date": "September 26, 2007"
+  },
+  {
+    "id": "jason-bay-all-star-2006",
+    "title": "Jason Bay (All-Star)",
+    "year": "2006",
+    "date": "April 15, 2006"
+  },
+  {
+    "id": "zach-duke-2006",
+    "title": "Zach Duke",
+    "year": "2006",
+    "date": "May 12, 2006"
+  },
+  {
+    "id": "jack-wilson-jose-castillo-double-2006",
+    "title": "Jack Wilson & Jose Castillo (Double)",
+    "year": "2006",
+    "date": "May 13, 2006"
+  },
+  {
+    "id": "fire-ice-gonzalez-perez-2006",
+    "title": "\"Fire & Ice\" (Gonzalez & Perez)",
+    "year": "2006",
+    "date": "May 27, 2006"
+  },
+  {
+    "id": "bill-mazeroski-2006",
+    "title": "Bill Mazeroski",
+    "year": "2006",
+    "date": "June 17, 2006"
+  },
+  {
+    "id": "young-guns-duke-doumit-duffy-2006",
+    "title": "\"Young Guns\" (Duke, Doumit, Duffy)",
+    "year": "2006",
+    "date": "July 1, 2006"
+  },
+  {
+    "id": "sean-casey-2006",
+    "title": "Sean Casey",
+    "year": "2006",
+    "date": "July 29, 2006"
+  },
+  {
+    "id": "jolly-roger-mascot-2006",
+    "title": "Jolly Roger (Mascot)",
+    "year": "2006",
+    "date": "July 30, 2006"
+  },
+  {
+    "id": "satchel-paige-2006",
+    "title": "Satchel Paige",
+    "year": "2006",
+    "date": "August 11, 2006"
+  },
+  {
+    "id": "potato-pete-mascot-2006",
+    "title": "\"Potato Pete\" (Mascot)",
+    "year": "2006",
+    "date": "August 13, 2006"
+  },
+  {
+    "id": "jack-wilson-2006",
+    "title": "Jack Wilson",
+    "year": "2006",
+    "date": "September 16, 2006"
+  },
+  {
+    "id": "freddy-sanchez-2006",
+    "title": "Freddy Sanchez",
+    "year": "2006",
+    "date": "September 30, 2006"
+  },
+  {
+    "id": "jason-bay-nl-rookie-of-the-year-2005",
+    "title": "Jason Bay (NL Rookie of the Year)",
+    "year": "2005",
+    "date": "April 15, 2005"
+  },
+  {
+    "id": "honus-wagner-2005",
+    "title": "Honus Wagner",
+    "year": "2005",
+    "date": "April 30, 2005"
+  },
+  {
+    "id": "oliver-perez-2005",
+    "title": "Oliver Perez",
+    "year": "2005",
+    "date": "May 21, 2005"
+  },
+  {
+    "id": "oliver-onion-2005",
+    "title": "\"Oliver Onion\"",
+    "year": "2005",
+    "date": "May 22, 2005"
+  },
+  {
+    "id": "craig-wilson-2005",
+    "title": "Craig Wilson",
+    "year": "2005",
+    "date": "June 4, 2005"
+  },
+  {
+    "id": "bill-mazeroski-2005",
+    "title": "Bill Mazeroski",
+    "year": "2005",
+    "date": "June 11, 2005"
+  },
+  {
+    "id": "willie-stargell-2005",
+    "title": "Willie Stargell",
+    "year": "2005",
+    "date": "July 8, 2005"
+  },
+  {
+    "id": "cheese-chester-mascot-2005",
+    "title": "\"Cheese Chester\" (Mascot)",
+    "year": "2005",
+    "date": "August 7, 2005"
+  },
+  {
+    "id": "roberto-clemente-2005",
+    "title": "Roberto Clemente",
+    "year": "2005",
+    "date": "September 17, 2005"
+  },
+  {
+    "id": "josh-gibson-2004",
+    "title": "Josh Gibson",
+    "year": "2004",
+    "date": "March 8, 2004"
+  },
+  {
+    "id": "jack-wilson-2004",
+    "title": "Jack Wilson",
+    "year": "2004",
+    "date": "March 9, 2004"
+  },
+  {
+    "id": "manny-sanguillen-2004",
+    "title": "Manny Sanguillen",
+    "year": "2004",
+    "date": "March 13, 2004"
+  },
+  {
+    "id": "chuck-tanner-2004",
+    "title": "Chuck Tanner",
+    "year": "2004",
+    "date": "April 24, 2004"
+  },
+  {
+    "id": "jalapeno-hannah-mini-2004",
+    "title": "\"Jalapeno Hannah\" (Mini)",
+    "year": "2004",
+    "date": "May 8, 2004"
+  },
+  {
+    "id": "omar-moreno-2004",
+    "title": "Omar Moreno",
+    "year": "2004",
+    "date": "May 23, 2004"
+  },
+  {
+    "id": "phil-garner-2004",
+    "title": "Phil Garner",
+    "year": "2004",
+    "date": "June 16, 2004"
+  },
+  {
+    "id": "sauerkraut-saul-mini-2004",
+    "title": "\"Sauerkraut Saul\" (Mini)",
+    "year": "2004",
+    "date": "July 18, 2004"
+  },
+  {
+    "id": "willie-stargell-2004",
+    "title": "Willie Stargell",
+    "year": "2004",
+    "date": "July 24, 2004"
+  },
+  {
+    "id": "dave-parker-2004",
+    "title": "Dave Parker",
+    "year": "2004",
+    "date": "August 27, 2004"
+  },
+  {
+    "id": "snoopy-2004",
+    "title": "Snoopy",
+    "year": "2004",
+    "date": "September 19, 2004"
+  },
+  {
+    "id": "kent-tekulve-2004",
+    "title": "Kent Tekulve",
+    "year": "2004",
+    "date": "September 27, 2004"
+  },
+  {
+    "id": "brian-giles-2003",
+    "title": "Brian Giles",
+    "year": "2003",
+    "date": "March 12, 2003"
+  },
+  {
+    "id": "manny-sanguillen-2003",
+    "title": "Manny Sanguillen",
+    "year": "2003",
+    "date": "April 9, 2003"
+  },
+  {
+    "id": "bob-prince-talking-2003",
+    "title": "Bob Prince (Talking)",
+    "year": "2003",
+    "date": "May 21, 2003"
+  },
+  {
+    "id": "jack-wilson-2003",
+    "title": "Jack Wilson",
+    "year": "2003",
+    "date": "August 16, 2003"
+  },
+  {
+    "id": "charlie-brown-2003",
+    "title": "Charlie Brown",
+    "year": "2003",
+    "date": "August 17, 2003"
+  },
+  {
+    "id": "josh-gibson-2003",
+    "title": "Josh Gibson",
+    "year": "2003",
+    "date": "August 29, 2003"
+  },
+  {
+    "id": "kip-wells-2003",
+    "title": "Kip Wells",
+    "year": "2003",
+    "date": "September 20, 2003"
+  },
+  {
+    "id": "willie-stargell-2002",
+    "title": "Willie Stargell",
+    "year": "2002",
+    "date": "April 10, 2002"
+  },
+  {
+    "id": "jason-kendall-2002",
+    "title": "Jason Kendall",
+    "year": "2002",
+    "date": "June 26, 2002"
+  },
+  {
+    "id": "brian-giles-2002",
+    "title": "Brian Giles",
+    "year": "2002",
+    "date": "September 6, 2002"
+  },
+  {
+    "id": "pokey-reese-2002",
+    "title": "Pokey Reese",
+    "year": "2002",
+    "date": "September 21, 2002"
+  },
+  {
+    "id": "pirate-parrot-mascot-2002",
+    "title": "Pirate Parrot (Mascot)",
+    "year": "2002",
+    "date": "September 22, 2002"
+  },
+  {
+    "id": "roberto-clemente-2001",
+    "title": "Roberto Clemente",
+    "year": "2001",
+    "date": "September 8, 2001",
+    "imageUrl": "https://images.saymedia-content.com/.image/t_share/MTk0Nzk4NDYyMDk2MjU0MTE0/the-definitive-pittsburgh-pirates-bobblehead-list.jpg"
+  },
+  {
+    "id": "bill-mazeroski-2000",
+    "title": "Bill Mazeroski",
+    "year": "2000",
+    "date": "July 29, 2000"
+  }
+]

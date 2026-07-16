@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AuthWidget } from "@/components/AuthWidget";
 import { ProfileSections } from "@/components/ProfileSections";
 import { getDisplayName, useAuth } from "@/lib/auth";
@@ -22,10 +22,6 @@ export function ProfilePageClient() {
   const [nameDraft, setNameDraft] = useState("");
   const [isSavingName, setIsSavingName] = useState(false);
   const [nameError, setNameError] = useState<string | null>(null);
-
-  useEffect(() => {
-    setNameDraft(getDisplayName(user));
-  }, [user]);
 
   return (
     <div
@@ -104,7 +100,10 @@ export function ProfilePageClient() {
             ) : (
               <button
                 type="button"
-                onClick={() => setIsEditingName(true)}
+                onClick={() => {
+                  setNameDraft(getDisplayName(user));
+                  setIsEditingName(true);
+                }}
                 className="mt-2 text-2xl font-black text-white transition hover:text-amber-300"
                 title="Edit your name"
               >

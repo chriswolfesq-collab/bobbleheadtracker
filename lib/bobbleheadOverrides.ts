@@ -44,46 +44,57 @@ export function useBobbleheadOverride(teamSlug: string, bobbleheadId: string) {
   return { override, isLoading };
 }
 
-export type DeletedBobbleheads = {
+export type BobbleheadOverridesLookup = {
   isDeleted: (teamSlug: string, bobbleheadId: string) => boolean;
+  getOverride: (teamSlug: string, bobbleheadId: string) => BobbleheadOverride | null;
 };
 
-function deletedKey(teamSlug: string, bobbleheadId: string) {
+function overrideKey(teamSlug: string, bobbleheadId: string) {
   return `${teamSlug}/${bobbleheadId}`;
 }
 
-// Erring towards showing a listing rather than hiding one: if the lookup hasn't
-// loaded (or failed), nothing is treated as deleted.
-const NONE: DeletedBobbleheads = { isDeleted: () => false };
+// Erring towards showing a listing as-is: if the lookup hasn't loaded (or
+// failed), nothing is treated as deleted or overridden.
+const NONE: BobbleheadOverridesLookup = { isDeleted: () => false, getOverride: () => null };
 
-// Curated bobbleheads are hardcoded in lib/bobbleheads.ts, so an admin-deleted
-// one is flagged in bobblehead_overrides rather than removed. Every list built
-// from the hardcoded data has to filter against this. Community bobbleheads
-// are really deleted and never show up here.
-export async function fetchDeletedBobbleheads(): Promise<DeletedBobbleheads> {
+// Curated bobbleheads are baked into the site at build time (see
+// lib/bobbleheads.ts), so an admin edit or delete is recorded in
+// bobblehead_overrides rather than in the data itself. Every list built from
+// the curated data has to filter deletions and apply title/year/date
+// overrides through this lookup. Community bobbleheads are real rows — edits
+// and deletes happen in place and never show up here.
+export async function fetchBobbleheadOverrides(): Promise<BobbleheadOverridesLookup> {
   const { data, error } = await supabase
     .from("bobblehead_overrides")
-    .select("team_slug, bobblehead_id")
-    .eq("deleted", true);
+    .select("team_slug, bobblehead_id, title, year, date, deleted");
 
   if (error) {
-    console.error("Failed to load deleted bobbleheads:", error.message);
+    console.error("Failed to load bobblehead overrides:", error.message);
     return NONE;
   }
 
-  const keys = new Set((data ?? []).map((row) => deletedKey(row.team_slug, row.bobblehead_id)));
+  const byKey = new Map(
+    (data ?? []).map((row) => [
+      overrideKey(row.team_slug, row.bobblehead_id),
+      { title: row.title, year: row.year, date: row.date, deleted: row.deleted },
+    ]),
+  );
 
-  return { isDeleted: (teamSlug, bobbleheadId) => keys.has(deletedKey(teamSlug, bobbleheadId)) };
+  return {
+    isDeleted: (teamSlug, bobbleheadId) =>
+      byKey.get(overrideKey(teamSlug, bobbleheadId))?.deleted ?? false,
+    getOverride: (teamSlug, bobbleheadId) => byKey.get(overrideKey(teamSlug, bobbleheadId)) ?? null,
+  };
 }
 
-export function useDeletedBobbleheads(): DeletedBobbleheads {
-  const [deleted, setDeleted] = useState<DeletedBobbleheads>(NONE);
+export function useBobbleheadOverrides(): BobbleheadOverridesLookup {
+  const [lookup, setLookup] = useState<BobbleheadOverridesLookup>(NONE);
 
   useEffect(() => {
     let cancelled = false;
 
-    fetchDeletedBobbleheads().then((lookup) => {
-      if (!cancelled) setDeleted(lookup);
+    fetchBobbleheadOverrides().then((next) => {
+      if (!cancelled) setLookup(next);
     });
 
     return () => {
@@ -91,5 +102,5 @@ export function useDeletedBobbleheads(): DeletedBobbleheads {
     };
   }, []);
 
-  return deleted;
+  return lookup;
 }

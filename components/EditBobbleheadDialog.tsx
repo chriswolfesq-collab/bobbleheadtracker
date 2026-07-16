@@ -12,11 +12,15 @@ export function EditBobbleheadDialog({
   initial,
   onSave,
   onDelete,
+  onRemovePhoto,
 }: {
   onClose: () => void;
   initial: EditBobbleheadValues;
   onSave: (values: EditBobbleheadValues, file: File | null) => Promise<void>;
   onDelete: () => Promise<void>;
+  // Only passed when the listing has a removable photo (an approved_photos
+  // row or a community image), not for build-time curated seed photos.
+  onRemovePhoto?: () => Promise<void>;
 }) {
   const [title, setTitle] = useState(initial.title);
   const [year, setYear] = useState(initial.year);
@@ -24,10 +28,11 @@ export function EditBobbleheadDialog({
   const [file, setFile] = useState<File | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isRemovingPhoto, setIsRemovingPhoto] = useState(false);
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const isBusy = isSaving || isDeleting;
+  const isBusy = isSaving || isDeleting || isRemovingPhoto;
 
   const close = () => {
     if (isBusy) return;
@@ -99,6 +104,30 @@ export function EditBobbleheadDialog({
               onChange={(event) => setFile(event.currentTarget.files?.[0] ?? null)}
               className="w-full text-xs text-zinc-300 file:mr-3 file:rounded file:border-0 file:bg-amber-500 file:px-3 file:py-1.5 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-[#07111d]"
             />
+            {onRemovePhoto ? (
+              <button
+                type="button"
+                disabled={isBusy}
+                onClick={async () => {
+                  setError(null);
+                  setIsRemovingPhoto(true);
+
+                  try {
+                    await onRemovePhoto();
+                    onClose();
+                  } catch (removeError) {
+                    setError(
+                      removeError instanceof Error ? removeError.message : "Could not remove the photo.",
+                    );
+                  } finally {
+                    setIsRemovingPhoto(false);
+                  }
+                }}
+                className="justify-self-start text-xs font-black uppercase tracking-wide text-red-400 transition hover:text-red-300 disabled:opacity-60"
+              >
+                {isRemovingPhoto ? "Removing photo…" : "Remove current photo"}
+              </button>
+            ) : null}
           </div>
 
           {error ? <p className="text-xs font-semibold text-red-400">{error}</p> : null}

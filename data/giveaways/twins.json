@@ -1,0 +1,741 @@
+[
+  {
+    "id": "byron-buxton-2026",
+    "title": "Byron Buxton",
+    "year": "2026",
+    "date": "June 27, 2026"
+  },
+  {
+    "id": "grogu-star-wars-theme-ticket-2026",
+    "title": "Grogu (Star Wars, Theme Ticket)",
+    "year": "2026",
+    "date": "May 16, 2026"
+  },
+  {
+    "id": "byron-buxton-2025",
+    "title": "Byron Buxton",
+    "year": "2025",
+    "date": "July 12, 2025"
+  },
+  {
+    "id": "royce-lewis-2025",
+    "title": "Royce Lewis",
+    "year": "2025",
+    "date": "May 24, 2025"
+  },
+  {
+    "id": "carlos-correa-2025",
+    "title": "Carlos Correa",
+    "year": "2025",
+    "date": "May 23, 2025"
+  },
+  {
+    "id": "sugar-skull-2024",
+    "title": "Sugar Skull",
+    "year": "2024",
+    "date": "September 15, 2024"
+  },
+  {
+    "id": "pablo-lopez-2024",
+    "title": "Pablo Lopez",
+    "year": "2024",
+    "date": "July 6, 2024"
+  },
+  {
+    "id": "jhoan-duran-2024",
+    "title": "Jhoan Duran",
+    "year": "2024",
+    "date": "May 25, 2024"
+  },
+  {
+    "id": "carlos-correa-2023",
+    "title": "Carlos Correa",
+    "year": "2023",
+    "date": "July 7, 2023"
+  },
+  {
+    "id": "joe-ryan-2023",
+    "title": "Joe Ryan",
+    "year": "2023",
+    "date": "June 3, 2023"
+  },
+  {
+    "id": "batman-2023",
+    "title": "Batman",
+    "year": "2023",
+    "date": "May 12, 2023"
+  },
+  {
+    "id": "byron-buxton-2022",
+    "title": "Byron Buxton",
+    "year": "2022",
+    "date": "August 27, 2022"
+  },
+  {
+    "id": "tony-oliva-2022",
+    "title": "Tony Oliva",
+    "year": "2022",
+    "date": "August 6, 2022"
+  },
+  {
+    "id": "jim-kaat-2022",
+    "title": "Jim Kaat",
+    "year": "2022",
+    "date": "July 16, 2022"
+  },
+  {
+    "id": "big-bird-twins-2022",
+    "title": "Big Bird (Twins)",
+    "year": "2022",
+    "date": "June 25, 2022"
+  },
+  {
+    "id": "mandalorian-2022",
+    "title": "Mandalorian",
+    "year": "2022",
+    "date": "May 11, 2022"
+  },
+  {
+    "id": "justin-morneau-hall-of-fame-2021",
+    "title": "Justin Morneau (Hall of Fame)",
+    "year": "2021",
+    "date": "September 25, 2021"
+  },
+  {
+    "id": "josh-donaldson-bringer-of-rain-2021",
+    "title": "Josh Donaldson (\"Bringer of Rain\")",
+    "year": "2021",
+    "date": "July 23, 2021"
+  },
+  {
+    "id": "30-hr-bomba-club-2021",
+    "title": "\"30 HR Bomba Club\" (Sano, Rosario, Garver, Cruz, Kepler)",
+    "year": "2021",
+    "date": "July 10, 2021"
+  },
+  {
+    "id": "snoopy-2019",
+    "title": "Snoopy",
+    "year": "2019",
+    "date": "September 12, 2019"
+  },
+  {
+    "id": "joe-mauer-2019-9-7",
+    "title": "Joe Mauer",
+    "year": "2019",
+    "date": "September 7, 2019"
+  },
+  {
+    "id": "joe-mauer-2019-8-24",
+    "title": "Joe Mauer",
+    "year": "2019",
+    "date": "August 24, 2019"
+  },
+  {
+    "id": "joe-nathan-hall-of-fame-2019",
+    "title": "Joe Nathan (Hall of Fame)",
+    "year": "2019",
+    "date": "August 3, 2019"
+  },
+  {
+    "id": "joe-mauer-2019-7-19",
+    "title": "Joe Mauer",
+    "year": "2019",
+    "date": "July 19, 2019"
+  },
+  {
+    "id": "tc-mascot-2019",
+    "title": "T.C. (Mascot)",
+    "year": "2019",
+    "date": "June 27, 2019"
+  },
+  {
+    "id": "obi-wan-kepleroni-2019",
+    "title": "\"Obi-Wan Kepleroni\" (Max Kepler)",
+    "year": "2019",
+    "date": "June 26, 2019"
+  },
+  {
+    "id": "joe-mauer-2019-5-24",
+    "title": "Joe Mauer",
+    "year": "2019",
+    "date": "May 24, 2019"
+  },
+  {
+    "id": "jim-thome-babe-dual-2018",
+    "title": "Jim Thome & Babe (Dual)",
+    "year": "2018",
+    "date": "August 25, 2018"
+  },
+  {
+    "id": "johan-santana-hall-of-fame-2018",
+    "title": "Johan Santana (Hall of Fame)",
+    "year": "2018",
+    "date": "August 4, 2018"
+  },
+  {
+    "id": "eddie-rosario-nothing-falls-but-raindrops-2018",
+    "title": "Eddie Rosario (\"Nothing Falls But Raindrops\")",
+    "year": "2018",
+    "date": "July 13, 2018"
+  },
+  {
+    "id": "byron-buxton-nothing-falls-but-raindrops-2018",
+    "title": "Byron Buxton (\"Nothing Falls But Raindrops\")",
+    "year": "2018",
+    "date": "June 22, 2018"
+  },
+  {
+    "id": "max-kepler-nothing-falls-but-raindrops-2018",
+    "title": "Max Kepler (\"Nothing Falls But Raindrops\")",
+    "year": "2018",
+    "date": "June 1, 2018"
+  },
+  {
+    "id": "joe-solo-mauer-star-wars-2018",
+    "title": "Joe \"Solo\" Mauer (Star Wars)",
+    "year": "2018",
+    "date": "May 22, 2018"
+  },
+  {
+    "id": "michael-cuddyer-hall-of-fame-2017",
+    "title": "Michael Cuddyer (Hall of Fame)",
+    "year": "2017",
+    "date": "August 19, 2017"
+  },
+  {
+    "id": "rod-carew-2017",
+    "title": "Rod Carew",
+    "year": "2017",
+    "date": "August 18, 2017"
+  },
+  {
+    "id": "tc-mascot-2017",
+    "title": "T.C. (Mascot)",
+    "year": "2017",
+    "date": "August 6, 2017"
+  },
+  {
+    "id": "brian-dozier-stormtrooper-2017",
+    "title": "Brian Dozier (Stormtrooper)",
+    "year": "2017",
+    "date": "June 21, 2017"
+  },
+  {
+    "id": "rocket-raccoon-2017",
+    "title": "Rocket Raccoon",
+    "year": "2017",
+    "date": "May 6, 2017"
+  },
+  {
+    "id": "twins-vintage-2016",
+    "title": "Twins Vintage",
+    "year": "2016",
+    "date": "July 31, 2016"
+  },
+  {
+    "id": "torii-hunter-hall-of-fame-2016",
+    "title": "Torii Hunter (Hall of Fame)",
+    "year": "2016",
+    "date": "July 16, 2016"
+  },
+  {
+    "id": "ervin-santana-2016",
+    "title": "Ervin Santana",
+    "year": "2016",
+    "date": "July 2, 2016"
+  },
+  {
+    "id": "miguel-sano-2016",
+    "title": "Miguel Sano",
+    "year": "2016",
+    "date": "June 18, 2016"
+  },
+  {
+    "id": "trevor-plouffe-skywalker-star-wars-2016",
+    "title": "Trevor Plouffe (\"Skywalker\", Star Wars)",
+    "year": "2016",
+    "date": "May 19, 2016"
+  },
+  {
+    "id": "twins-1965-vintage-2015",
+    "title": "Twins 1965 Vintage",
+    "year": "2015",
+    "date": "August 1, 2015"
+  },
+  {
+    "id": "brian-dozier-2015",
+    "title": "Brian Dozier",
+    "year": "2015",
+    "date": "July 25, 2015"
+  },
+  {
+    "id": "phil-hughes-2015",
+    "title": "Phil Hughes",
+    "year": "2015",
+    "date": "July 11, 2015"
+  },
+  {
+    "id": "paul-molitor-2015",
+    "title": "Paul Molitor",
+    "year": "2015",
+    "date": "June 19, 2015"
+  },
+  {
+    "id": "phil-hughes-star-wars-2015",
+    "title": "Phil Hughes (Star Wars)",
+    "year": "2015",
+    "date": "May 4, 2015"
+  },
+  {
+    "id": "glen-perkins-2014-all-star-game-2014",
+    "title": "Glen Perkins (2014 All-Star Game)",
+    "year": "2014",
+    "date": "September 6, 2014"
+  },
+  {
+    "id": "tom-brunansky-1985-all-star-game-2014",
+    "title": "Tom Brunansky (1985 All-Star Game)",
+    "year": "2014",
+    "date": "July 5, 2014"
+  },
+  {
+    "id": "lou-gehrig-2014",
+    "title": "Lou Gehrig",
+    "year": "2014",
+    "date": "July 4, 2014"
+  },
+  {
+    "id": "harmon-killebrew-1965-all-star-game-2014",
+    "title": "Harmon Killebrew (1965 All-Star Game)",
+    "year": "2014",
+    "date": "June 20, 2014"
+  },
+  {
+    "id": "snoopy-all-star-game-figurine-2014",
+    "title": "Snoopy (All-Star Game Figurine)",
+    "year": "2014",
+    "date": "June 6, 2014"
+  },
+  {
+    "id": "joe-mauer-justin-morneau-double-2013",
+    "title": "Joe Mauer & Justin Morneau (Double)",
+    "year": "2013",
+    "date": "July 19, 2013"
+  },
+  {
+    "id": "josh-willingham-willing-hammer-2013",
+    "title": "Josh Willingham (\"Willing-Hammer\")",
+    "year": "2013",
+    "date": "May 10, 2013"
+  },
+  {
+    "id": "ron-gant-kent-hrbek-dual-2011",
+    "title": "Ron Gant & Kent Hrbek (Dual)",
+    "year": "2011",
+    "date": "August 5, 2011"
+  },
+  {
+    "id": "kent-hrbek-kirby-puckett-legends-set-of-2-2011",
+    "title": "Kent Hrbek & Kirby Puckett (\"Legends\" Set of 2)",
+    "year": "2011",
+    "date": "March 10, 2011"
+  },
+  {
+    "id": "minnie-paul-shaking-hands-double-2010",
+    "title": "Minnie & Paul (Shaking Hands, Double)",
+    "year": "2010",
+    "date": "July 4, 2010"
+  },
+  {
+    "id": "random-season-ticket-2010-3-30",
+    "title": "Random Season Ticket",
+    "year": "2010",
+    "date": "March 30, 2010"
+  },
+  {
+    "id": "random-season-ticket-2010-3-16",
+    "title": "Random Season Ticket",
+    "year": "2010",
+    "date": "March 16, 2010"
+  },
+  {
+    "id": "kent-hrbek-legends-of-the-dome-2009",
+    "title": "Kent Hrbek (\"Legends of the Dome\")",
+    "year": "2009",
+    "date": "June 19, 2009"
+  },
+  {
+    "id": "kirby-puckett-legends-of-the-dome-2009",
+    "title": "Kirby Puckett (\"Legends of the Dome\")",
+    "year": "2009",
+    "date": "May 3, 2009"
+  },
+  {
+    "id": "random-season-ticket-2009",
+    "title": "Random Season Ticket",
+    "year": "2009",
+    "date": "March 14, 2009"
+  },
+  {
+    "id": "rick-aguilera-2008",
+    "title": "Rick Aguilera",
+    "year": "2008",
+    "date": "September 6, 2008"
+  },
+  {
+    "id": "jack-morris-2008",
+    "title": "Jack Morris",
+    "year": "2008",
+    "date": "August 1, 2008"
+  },
+  {
+    "id": "delmon-young-2008",
+    "title": "Delmon Young",
+    "year": "2008",
+    "date": "July 19, 2008"
+  },
+  {
+    "id": "paul-molitor-2008",
+    "title": "Paul Molitor",
+    "year": "2008",
+    "date": "June 29, 2008"
+  },
+  {
+    "id": "dan-gladden-2008",
+    "title": "Dan Gladden",
+    "year": "2008",
+    "date": "June 20, 2008"
+  },
+  {
+    "id": "ron-gardenhire-2008",
+    "title": "Ron Gardenhire",
+    "year": "2008",
+    "date": "May 4, 2008"
+  },
+  {
+    "id": "random-season-2008",
+    "title": "Random Season",
+    "year": "2008",
+    "date": "March 26, 2008"
+  },
+  {
+    "id": "michael-cuddyer-2007",
+    "title": "Michael Cuddyer",
+    "year": "2007",
+    "date": "September 15, 2007"
+  },
+  {
+    "id": "kirby-puckett-2007",
+    "title": "Kirby Puckett",
+    "year": "2007",
+    "date": "August 31, 2007"
+  },
+  {
+    "id": "gary-gaetti-2007",
+    "title": "Gary Gaetti",
+    "year": "2007",
+    "date": "August 19, 2007"
+  },
+  {
+    "id": "justin-morneau-al-mvp-2007",
+    "title": "Justin Morneau (AL MVP)",
+    "year": "2007",
+    "date": "July 20, 2007"
+  },
+  {
+    "id": "bert-blyleven-2007",
+    "title": "Bert Blyleven",
+    "year": "2007",
+    "date": "June 15, 2007"
+  },
+  {
+    "id": "joe-mauer-al-batting-champ-2007",
+    "title": "Joe Mauer (AL Batting Champ)",
+    "year": "2007",
+    "date": "June 9, 2007"
+  },
+  {
+    "id": "earl-battey-season-ticket-2007",
+    "title": "Earl Battey (Season Ticket)",
+    "year": "2007",
+    "date": "March 15, 2007"
+  },
+  {
+    "id": "zoilo-versalles-season-ticket-2007",
+    "title": "Zoilo Versalles (Season Ticket)",
+    "year": "2007",
+    "date": "March 6, 2007"
+  },
+  {
+    "id": "jack-morris-2006",
+    "title": "Jack Morris",
+    "year": "2006",
+    "date": "September 9, 2006"
+  },
+  {
+    "id": "tony-oliva-2006",
+    "title": "Tony Oliva",
+    "year": "2006",
+    "date": "August 12, 2006"
+  },
+  {
+    "id": "billy-martin-2006",
+    "title": "Billy Martin",
+    "year": "2006",
+    "date": "July 29, 2006"
+  },
+  {
+    "id": "brad-radke-2006",
+    "title": "Brad Radke",
+    "year": "2006",
+    "date": "June 11, 2006"
+  },
+  {
+    "id": "kent-hrbek-2006",
+    "title": "Kent Hrbek",
+    "year": "2006",
+    "date": "May 27, 2006"
+  },
+  {
+    "id": "torii-hunter-gold-glove-2006",
+    "title": "Torii Hunter (Gold Glove)",
+    "year": "2006",
+    "date": "May 5, 2006"
+  },
+  {
+    "id": "harmon-killebrew-sth-red-variant-2006",
+    "title": "Harmon Killebrew (STH Red Variant)",
+    "year": "2006",
+    "date": "April 1, 2006",
+    "imageUrl": "https://i.ebayimg.com/00/s/MTU5OVgxMTk5/z/meMAAOSw8pxnhGQV/$_12.JPG?set_id=880000500F"
+  },
+  {
+    "id": "random-season-2006-3-18",
+    "title": "Random Season",
+    "year": "2006",
+    "date": "March 18, 2006"
+  },
+  {
+    "id": "random-season-2006-3-8",
+    "title": "Random Season",
+    "year": "2006",
+    "date": "March 8, 2006"
+  },
+  {
+    "id": "rod-carew-2005",
+    "title": "Rod Carew",
+    "year": "2005",
+    "date": "October 2, 2005"
+  },
+  {
+    "id": "johan-santana-2005-9-16",
+    "title": "Johan Santana",
+    "year": "2005",
+    "date": "September 16, 2005"
+  },
+  {
+    "id": "johan-santana-2005-7-2",
+    "title": "Johan Santana",
+    "year": "2005",
+    "date": "July 2, 2005"
+  },
+  {
+    "id": "joe-nathan-2005",
+    "title": "Joe Nathan",
+    "year": "2005",
+    "date": "July 1, 2005"
+  },
+  {
+    "id": "harmon-killebrew-2005",
+    "title": "Harmon Killebrew",
+    "year": "2005",
+    "date": "June 19, 2005"
+  },
+  {
+    "id": "jacque-jones-2005",
+    "title": "Jacque Jones",
+    "year": "2005",
+    "date": "May 15, 2005"
+  },
+  {
+    "id": "random-season-2005",
+    "title": "Random Season",
+    "year": "2005",
+    "date": "March 24, 2005"
+  },
+  {
+    "id": "joe-mauer-2004",
+    "title": "Joe Mauer",
+    "year": "2004",
+    "date": "October 2, 2004"
+  },
+  {
+    "id": "walter-johnson-2004",
+    "title": "Walter Johnson",
+    "year": "2004",
+    "date": "September 19, 2004"
+  },
+  {
+    "id": "paul-molitor-2004",
+    "title": "Paul Molitor",
+    "year": "2004",
+    "date": "August 21, 2004"
+  },
+  {
+    "id": "al-newman-2004",
+    "title": "Al Newman",
+    "year": "2004",
+    "date": "July 9, 2004"
+  },
+  {
+    "id": "shannon-stewart-2004",
+    "title": "Shannon Stewart",
+    "year": "2004",
+    "date": "June 6, 2004"
+  },
+  {
+    "id": "random-season-2004-3-16",
+    "title": "Random Season",
+    "year": "2004",
+    "date": "March 16, 2004"
+  },
+  {
+    "id": "random-season-2004-3-5",
+    "title": "Random Season",
+    "year": "2004",
+    "date": "March 5, 2004"
+  },
+  {
+    "id": "brad-radke-torii-hunter-corey-koskie-ron-gardenhire-season-ticket-2004",
+    "title": "Brad Radke, Torii Hunter, Corey Koskie & Ron Gardenhire (Season Ticket)",
+    "year": "2004",
+    "date": "January 1, 2004"
+  },
+  {
+    "id": "aj-pierzynski-2003",
+    "title": "A.J. Pierzynski",
+    "year": "2003",
+    "date": "September 6, 2003"
+  },
+  {
+    "id": "corey-koskie-super-hero-2003",
+    "title": "Corey Koskie (Super Hero)",
+    "year": "2003",
+    "date": "August 22, 2003"
+  },
+  {
+    "id": "corey-koskie-2003",
+    "title": "Corey Koskie",
+    "year": "2003",
+    "date": "August 3, 2003"
+  },
+  {
+    "id": "torii-hunter-2003",
+    "title": "Torii Hunter",
+    "year": "2003",
+    "date": "July 4, 2003"
+  },
+  {
+    "id": "eddie-guardado-2003",
+    "title": "Eddie Guardado",
+    "year": "2003",
+    "date": "June 27, 2003"
+  },
+  {
+    "id": "random-season-2003-3-13",
+    "title": "Random Season",
+    "year": "2003",
+    "date": "March 13, 2003"
+  },
+  {
+    "id": "random-season-2003-3-11",
+    "title": "Random Season",
+    "year": "2003",
+    "date": "March 11, 2003"
+  },
+  {
+    "id": "christian-guzman-2002",
+    "title": "Christian Guzman",
+    "year": "2002",
+    "date": "September 7, 2002"
+  },
+  {
+    "id": "tom-kelly-2002",
+    "title": "Tom Kelly",
+    "year": "2002",
+    "date": "August 4, 2002"
+  },
+  {
+    "id": "jim-kaat-2002",
+    "title": "Jim Kaat",
+    "year": "2002",
+    "date": "July 12, 2002"
+  },
+  {
+    "id": "doug-mientkiewicz-2002",
+    "title": "Doug Mientkiewicz",
+    "year": "2002",
+    "date": "June 9, 2002"
+  },
+  {
+    "id": "random-season-2002-3-16",
+    "title": "Random Season",
+    "year": "2002",
+    "date": "March 16, 2002"
+  },
+  {
+    "id": "random-season-2002-3-9",
+    "title": "Random Season",
+    "year": "2002",
+    "date": "March 9, 2002"
+  },
+  {
+    "id": "kirby-puckett-2001",
+    "title": "Kirby Puckett",
+    "year": "2001",
+    "date": "August 19, 2001"
+  },
+  {
+    "id": "dave-winfield-2001",
+    "title": "Dave Winfield",
+    "year": "2001",
+    "date": "July 22, 2001"
+  },
+  {
+    "id": "rod-carew-2001",
+    "title": "Rod Carew",
+    "year": "2001",
+    "date": "July 6, 2001"
+  },
+  {
+    "id": "bert-blyleven-2001",
+    "title": "Bert Blyleven",
+    "year": "2001",
+    "date": "June 8, 2001"
+  },
+  {
+    "id": "kirby-puckett-2000",
+    "title": "Kirby Puckett",
+    "year": "2000",
+    "date": "August 13, 2000"
+  },
+  {
+    "id": "tony-oliva-2000",
+    "title": "Tony Oliva",
+    "year": "2000",
+    "date": "July 21, 2000"
+  },
+  {
+    "id": "kent-hrbek-2000",
+    "title": "Kent Hrbek",
+    "year": "2000",
+    "date": "June 17, 2000"
+  },
+  {
+    "id": "harmon-killebrew-2000",
+    "title": "Harmon Killebrew",
+    "year": "2000",
+    "date": "June 9, 2000"
+  }
+]

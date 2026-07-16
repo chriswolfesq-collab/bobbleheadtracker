@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bobbleshelf
 
-## Getting Started
+[bobbleshelf.com](https://bobbleshelf.com) — every MLB stadium-giveaway (SGA) bobblehead, every team. Click your team on the shelf, browse its giveaway history, and track which bobbleheads you own.
 
-First, run the development server:
+## How it works
+
+- **Next.js (App Router)**, statically exported and served from GitHub Pages. There is no server of our own.
+- **Supabase** provides everything dynamic: auth, per-user collections/favorites, community submissions, photos (Storage), and admin tooling. The browser talks to Supabase directly with the public anon key; all authorization is enforced by Row Level Security policies and `SECURITY DEFINER` functions in [supabase/schema.sql](supabase/schema.sql).
+- **Curated data** — the giveaway history for all 30 teams — lives in one JSON file per team under [data/giveaways/](data/giveaways) and is baked into the site at build time by [lib/bobbleheads.ts](lib/bobbleheads.ts). Admin edits and deletions of curated listings are recorded in the `bobblehead_overrides` table and applied client-side.
+- **Community data** — user-submitted bobbleheads and photos — goes through a pending-review queue (`submissions` table plus a private Storage bucket) and appears publicly once the admin approves it at `/admin/review`.
+
+## Local development
 
 ```bash
+npm install
+cp .env.local.example .env.local   # fill in the Supabase URL + anon key
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Other scripts:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run lint        # eslint
+npm run typecheck   # tsc --noEmit
+npm test            # vitest unit tests
+npm run build       # production build (same as CI)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Supabase setup
 
-## Learn More
+One-time project setup (buckets, tables, RLS, admin account) is documented in [supabase/SETUP.md](supabase/SETUP.md). The schema in [supabase/schema.sql](supabase/schema.sql) is safe to re-run in the SQL editor after every change to it — that is also how schema changes are deployed.
 
-To learn more about Next.js, take a look at the following resources:
+## Editing curated data
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Fix a title/date or add a newly announced giveaway by editing the team's file in [data/giveaways/](data/giveaways) and deploying. Entry shape:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```json
+{ "id": "player-name-2026", "title": "Player Name", "year": "2026", "date": "July 4, 2026" }
+```
 
-## Deploy on Vercel
+`id` must be unique within the team and never change once shipped — user collections and favorites reference it.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Admin mode
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`/admin` is a separate login (its session is stored apart from the regular site login). Accounts listed in the `admins` table get: the review queue (`/admin/review`), listing reports (`/admin/reports`), user management (`/admin/users`), and inline edit/delete controls on listing pages.
+
+## Deployment
+
+Pushing to `main` runs [.github/workflows/deploy.yml](.github/workflows/deploy.yml): checks (lint, typecheck, tests), then a static export built with `GITHUB_PAGES=true` and the Supabase secrets, published to GitHub Pages under the custom domain in [public/CNAME](public/CNAME).

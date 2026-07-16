@@ -2,19 +2,22 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useDeletedBobbleheads } from "@/lib/bobbleheadOverrides";
+import { useBobbleheadOverrides } from "@/lib/bobbleheadOverrides";
 import { useAllCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { publicAsset } from "@/lib/paths";
 import { CURATED_SEARCH_INDEX, searchGiveaways, type SearchResult } from "@/lib/search";
 import { getTeamBySlug } from "@/lib/teams";
 
 export function SiteSearch({ teamSlug }: { teamSlug?: string } = {}) {
+  const router = useRouter();
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
   const { communityBobbleheads } = useAllCommunityBobbleheads();
-  const { isDeleted } = useDeletedBobbleheads();
+  const { isDeleted, getOverride } = useBobbleheadOverrides();
 
   const index = useMemo<SearchResult[]>(() => {
     const community: SearchResult[] = communityBobbleheads.map((giveaway) => {
@@ -33,13 +36,49 @@ export function SiteSearch({ teamSlug }: { teamSlug?: string } = {}) {
       };
     });
 
-    const curated = CURATED_SEARCH_INDEX.filter((result) => !isDeleted(result.teamSlug, result.id));
+    // Curated entries are indexed from build-time data, so admin edits
+    // (bobblehead_overrides) have to be applied here or search would keep
+    // matching and showing the pre-edit title/year/date.
+    const curated = CURATED_SEARCH_INDEX.filter((result) => !isDeleted(result.teamSlug, result.id)).map(
+      (result) => {
+        const override = getOverride(result.teamSlug, result.id);
+        if (!override) return result;
+        return {
+          ...result,
+          title: override.title ?? result.title,
+          year: override.year ?? result.year,
+          date: override.date ?? result.date,
+        };
+      },
+    );
     const combined = [...curated, ...community];
     return teamSlug ? combined.filter((result) => result.teamSlug === teamSlug) : combined;
-  }, [communityBobbleheads, teamSlug, isDeleted]);
+  }, [communityBobbleheads, teamSlug, isDeleted, getOverride]);
 
   const results = useMemo(() => searchGiveaways(index, query), [index, query]);
   const showResults = isFocused && query.trim().length > 0;
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Escape") {
+      setIsFocused(false);
+      return;
+    }
+
+    if (!showResults || results.length === 0) return;
+
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setActiveIndex((current) => (current + 1 < results.length ? current + 1 : 0));
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setActiveIndex((current) => (current > 0 ? current - 1 : results.length - 1));
+    } else if (event.key === "Enter") {
+      const active = results[activeIndex] ?? results[0];
+      event.preventDefault();
+      setIsFocused(false);
+      router.push(active.href);
+    }
+  };
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -63,10 +102,18 @@ export function SiteSearch({ teamSlug }: { teamSlug?: string } = {}) {
         <input
           type="search"
           value={query}
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={(event) => {
+            setQuery(event.target.value);
+            setActiveIndex(-1);
+          }}
           onFocus={() => setIsFocused(true)}
+          onKeyDown={handleKeyDown}
           placeholder={teamSlug ? "Search this team's players, dates…" : "Search players, teams, dates…"}
           aria-label="Search bobbleheads"
+          role="combobox"
+          aria-expanded={showResults}
+          aria-controls="site-search-results"
+          aria-activedescendant={activeIndex >= 0 ? `site-search-result-${activeIndex}` : undefined}
           className="w-full rounded-full border border-white/15 bg-[#101827]/70 py-2.5 pl-10 pr-4 text-sm text-white outline-none backdrop-blur transition placeholder:text-zinc-500 focus:border-amber-400"
         />
       </div>
@@ -74,13 +121,26 @@ export function SiteSearch({ teamSlug }: { teamSlug?: string } = {}) {
       {showResults ? (
         <div className="absolute left-4 right-4 top-full z-40 mt-2 max-h-96 overflow-y-auto rounded-lg border border-white/15 bg-[#0b1626] shadow-2xl sm:left-0 sm:right-0">
           {results.length > 0 ? (
-            <ul>
-              {results.map((result) => (
-                <li key={`${result.source}-${result.teamSlug}-${result.id}`}>
+            <ul id="site-search-results" role="listbox">
+              {results.map((result, resultIndex) => (
+                <li
+                  key={`${result.source}-${result.teamSlug}-${result.id}`}
+                  id={`site-search-result-${resultIndex}`}
+                  role="option"
+                  aria-selected={resultIndex === activeIndex}
+                  ref={
+                    resultIndex === activeIndex
+                      ? (element) => element?.scrollIntoView({ block: "nearest" })
+                      : undefined
+                  }
+                >
                   <Link
                     href={result.href}
                     onClick={() => setIsFocused(false)}
-                    className="flex items-center gap-3 border-b border-white/5 px-3 py-2 last:border-0 hover:bg-white/5"
+                    onMouseEnter={() => setActiveIndex(resultIndex)}
+                    className={`flex items-center gap-3 border-b border-white/5 px-3 py-2 last:border-0 ${
+                      resultIndex === activeIndex ? "bg-white/5" : ""
+                    }`}
                   >
                     <Image
                       src={result.imageUrl || publicAsset(`/bobbleheads/${result.teamSlug}.png`)}

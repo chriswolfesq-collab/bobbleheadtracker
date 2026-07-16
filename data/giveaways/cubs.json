@@ -1,0 +1,626 @@
+[
+  {
+    "id": "ben-zobrist-2026",
+    "title": "Ben Zobrist",
+    "year": "2026",
+    "date": "April 11, 2026"
+  },
+  {
+    "id": "ron-santo-2026",
+    "title": "Ron Santo",
+    "year": "2026",
+    "date": "April 18, 2026"
+  },
+  {
+    "id": "kerry-wood-2026",
+    "title": "Kerry Wood",
+    "year": "2026",
+    "date": "May 2, 2026"
+  },
+  {
+    "id": "ryne-sandberg-2026",
+    "title": "Ryne Sandberg",
+    "year": "2026",
+    "date": "May 24, 2026"
+  },
+  {
+    "id": "harry-caray-2026",
+    "title": "Harry Caray",
+    "year": "2026",
+    "date": "August 30, 2026"
+  },
+  {
+    "id": "sammy-sosa-2026",
+    "title": "Sammy Sosa",
+    "year": "2026",
+    "date": "September 13, 2026"
+  },
+  {
+    "id": "seiya-suzuki-2026",
+    "title": "Seiya Suzuki",
+    "year": "2026",
+    "date": "September 14, 2026"
+  },
+  {
+    "id": "pete-crow-armstrong-2025",
+    "title": "Pete Crow-Armstrong",
+    "year": "2025",
+    "date": "April 19, 2025"
+  },
+  {
+    "id": "clark-the-cub-2025",
+    "title": "Clark the Cub",
+    "year": "2025",
+    "date": "April 26, 2025"
+  },
+  {
+    "id": "shota-imanaga-2025",
+    "title": "Shota Imanaga",
+    "year": "2025",
+    "date": "June 1, 2025"
+  },
+  {
+    "id": "michael-busch-2025",
+    "title": "Michael Busch",
+    "year": "2025",
+    "date": "June 22, 2025"
+  },
+  {
+    "id": "greg-maddux-2025",
+    "title": "Greg Maddux",
+    "year": "2025",
+    "date": "August 3, 2025"
+  },
+  {
+    "id": "dansby-mallory-swanson-2025",
+    "title": "Dansby & Mallory Swanson",
+    "year": "2025",
+    "date": "August 17, 2025"
+  },
+  {
+    "id": "seiya-suzuki-2025",
+    "title": "Seiya Suzuki",
+    "year": "2025",
+    "date": "September 13, 2025"
+  },
+  {
+    "id": "bill-murray-2025",
+    "title": "Bill Murray",
+    "year": "2025",
+    "date": "September 14, 2025"
+  },
+  {
+    "id": "christopher-morel-2024",
+    "title": "Christopher Morel",
+    "year": "2024",
+    "date": "June 1, 2024"
+  },
+  {
+    "id": "adbert-alzolay-2024",
+    "title": "Adbert Alzolay",
+    "year": "2024",
+    "date": "June 22, 2024"
+  },
+  {
+    "id": "ryne-sandberg-2024",
+    "title": "Ryne Sandberg",
+    "year": "2024",
+    "date": "June 23, 2024"
+  },
+  {
+    "id": "justin-steele-american-flag-2024",
+    "title": "Justin Steele (American Flag)",
+    "year": "2024",
+    "date": "July 6, 2024"
+  },
+  {
+    "id": "ian-happ-2024",
+    "title": "Ian Happ",
+    "year": "2024",
+    "date": "August 1, 2024"
+  },
+  {
+    "id": "cody-bellinger-2024",
+    "title": "Cody Bellinger",
+    "year": "2024",
+    "date": "September 21, 2024"
+  },
+  {
+    "id": "grateful-dead-2023",
+    "title": "Grateful Dead",
+    "year": "2023",
+    "date": "May 23, 2023"
+  },
+  {
+    "id": "billy-williams-statue-2023",
+    "title": "Billy Williams (Statue)",
+    "year": "2023",
+    "date": "May 27, 2023"
+  },
+  {
+    "id": "boog-jd-talking-2023",
+    "title": "Boog & JD (Talking)",
+    "year": "2023",
+    "date": "June 17, 2023"
+  },
+  {
+    "id": "nascar-themed-2023",
+    "title": "NASCAR-Themed",
+    "year": "2023",
+    "date": "June 29, 2023"
+  },
+  {
+    "id": "henry-rowengartner-2023",
+    "title": "Henry Rowengartner",
+    "year": "2023",
+    "date": "July 2, 2023"
+  },
+  {
+    "id": "loki-2023",
+    "title": "Loki",
+    "year": "2023",
+    "date": "July 18, 2023"
+  },
+  {
+    "id": "ernie-banks-statue-2023",
+    "title": "Ernie Banks (Statue)",
+    "year": "2023",
+    "date": "July 19, 2023"
+  },
+  {
+    "id": "nico-hoerner-jedi-2023",
+    "title": "Nico Hoerner (Jedi)",
+    "year": "2023",
+    "date": "August 2, 2023"
+  },
+  {
+    "id": "ron-santo-statue-2023",
+    "title": "Ron Santo (Statue)",
+    "year": "2023",
+    "date": "August 20, 2023"
+  },
+  {
+    "id": "harry-caray-statue-2023",
+    "title": "Harry Caray (Statue)",
+    "year": "2023",
+    "date": "September 9, 2023"
+  },
+  {
+    "id": "david-ross-2022",
+    "title": "David Ross",
+    "year": "2022",
+    "date": "May 7, 2022"
+  },
+  {
+    "id": "patrick-wisdom-2022",
+    "title": "Patrick Wisdom",
+    "year": "2022",
+    "date": "May 21, 2022"
+  },
+  {
+    "id": "nick-madrigal-2022",
+    "title": "Nick Madrigal",
+    "year": "2022",
+    "date": "August 6, 2022"
+  },
+  {
+    "id": "star-wars-mandalorian-2022",
+    "title": "Star Wars Mandalorian",
+    "year": "2022",
+    "date": "August 8, 2022"
+  },
+  {
+    "id": "nico-hoerner-2022",
+    "title": "Nico Hoerner",
+    "year": "2022",
+    "date": "September 10, 2022"
+  },
+  {
+    "id": "marcus-stroman-2022",
+    "title": "Marcus Stroman",
+    "year": "2022",
+    "date": "September 17, 2022"
+  },
+  {
+    "id": "cole-hamels-hang-loose-2019",
+    "title": "Cole Hamels (\"Hang Loose\")",
+    "year": "2019",
+    "date": "May 10, 2019"
+  },
+  {
+    "id": "anthony-rizzo-out-on-the-water-2019",
+    "title": "Anthony Rizzo (\"Out on the Water\")",
+    "year": "2019",
+    "date": "June 21, 2019"
+  },
+  {
+    "id": "kris-bryant-round-of-golf-2019",
+    "title": "Kris Bryant (\"Round of Golf\")",
+    "year": "2019",
+    "date": "July 15, 2019"
+  },
+  {
+    "id": "jon-lester-2019",
+    "title": "Jon Lester",
+    "year": "2019",
+    "date": "July 19, 2019"
+  },
+  {
+    "id": "clark-the-cub-2019",
+    "title": "Clark (the Cub)",
+    "year": "2019",
+    "date": "August 4, 2019"
+  },
+  {
+    "id": "willson-contreras-2018",
+    "title": "Willson Contreras",
+    "year": "2018",
+    "date": "May 11, 2018"
+  },
+  {
+    "id": "jason-heyward-2018",
+    "title": "Jason Heyward",
+    "year": "2018",
+    "date": "June 18, 2018"
+  },
+  {
+    "id": "javier-baez-2018",
+    "title": "Javier Baez",
+    "year": "2018",
+    "date": "July 23, 2018"
+  },
+  {
+    "id": "kyle-hendricks-2018",
+    "title": "Kyle Hendricks",
+    "year": "2018",
+    "date": "August 15, 2018"
+  },
+  {
+    "id": "albert-almora-2018",
+    "title": "Albert Almora",
+    "year": "2018",
+    "date": "August 16, 2018"
+  },
+  {
+    "id": "the-final-out-2017",
+    "title": "\"The Final Out\"",
+    "year": "2017",
+    "date": "May 20, 2017"
+  },
+  {
+    "id": "ben-zobrist-world-series-mvp-2017",
+    "title": "Ben Zobrist (World Series MVP)",
+    "year": "2017",
+    "date": "June 8, 2017"
+  },
+  {
+    "id": "turning-two-2017",
+    "title": "\"Turning Two\"",
+    "year": "2017",
+    "date": "July 5, 2017"
+  },
+  {
+    "id": "starting-aces-2017",
+    "title": "\"Starting Aces\"",
+    "year": "2017",
+    "date": "August 17, 2017"
+  },
+  {
+    "id": "anthony-rizzo-tarp-catch-2016",
+    "title": "Anthony Rizzo (\"Tarp Catch\")",
+    "year": "2016",
+    "date": "July 5, 2016"
+  },
+  {
+    "id": "kris-bryant-2016",
+    "title": "Kris Bryant",
+    "year": "2016",
+    "date": "August 1, 2016"
+  },
+  {
+    "id": "joe-maddon-2016",
+    "title": "Joe Maddon",
+    "year": "2016",
+    "date": "August 16, 2016"
+  },
+  {
+    "id": "kyle-schwarber-home-run-2016",
+    "title": "Kyle Schwarber (Home Run)",
+    "year": "2016",
+    "date": "September 16, 2016"
+  },
+  {
+    "id": "clark-w-flag-2015",
+    "title": "Clark (\"W\" Flag)",
+    "year": "2015",
+    "date": "May 31, 2015"
+  },
+  {
+    "id": "joe-maddon-cubs-debut-2015",
+    "title": "Joe Maddon (Cubs Debut)",
+    "year": "2015",
+    "date": "June 13, 2015"
+  },
+  {
+    "id": "jorge-soler-cubs-debut-2015",
+    "title": "Jorge Soler (Cubs Debut)",
+    "year": "2015",
+    "date": "July 25, 2015"
+  },
+  {
+    "id": "jon-lester-cubs-debut-2015",
+    "title": "Jon Lester (Cubs Debut)",
+    "year": "2015",
+    "date": "August 22, 2015"
+  },
+  {
+    "id": "kris-bryant-cubs-debut-2015",
+    "title": "Kris Bryant (Cubs Debut)",
+    "year": "2015",
+    "date": "August 26, 2015"
+  },
+  {
+    "id": "joe-tinker-2014",
+    "title": "Joe Tinker",
+    "year": "2014",
+    "date": "April 18, 2014"
+  },
+  {
+    "id": "red-grange-2014",
+    "title": "Red Grange",
+    "year": "2014",
+    "date": "May 2, 2014"
+  },
+  {
+    "id": "babe-ruth-called-shot-2014",
+    "title": "Babe Ruth (\"Called Shot\")",
+    "year": "2014",
+    "date": "May 16, 2014"
+  },
+  {
+    "id": "all-american-girls-2014",
+    "title": "All American Girls",
+    "year": "2014",
+    "date": "June 6, 2014"
+  },
+  {
+    "id": "ernie-banks-2014",
+    "title": "Ernie Banks",
+    "year": "2014",
+    "date": "June 20, 2014"
+  },
+  {
+    "id": "gale-sayers-2014",
+    "title": "Gale Sayers",
+    "year": "2014",
+    "date": "July 11, 2014"
+  },
+  {
+    "id": "first-night-game-2014",
+    "title": "\"First Night Game\"",
+    "year": "2014",
+    "date": "August 8, 2014"
+  },
+  {
+    "id": "jedi-rizzo-2014",
+    "title": "\"Jedi Rizzo\"",
+    "year": "2014",
+    "date": "August 20, 2014"
+  },
+  {
+    "id": "kerry-wood-20-strikeout-game-2014",
+    "title": "Kerry Wood (20-Strikeout Game)",
+    "year": "2014",
+    "date": "August 22, 2014"
+  },
+  {
+    "id": "greg-maddux-3-000th-strikeout-2014",
+    "title": "Greg Maddux (3,000th Strikeout)",
+    "year": "2014",
+    "date": "September 5, 2014"
+  },
+  {
+    "id": "darwin-barney-2013",
+    "title": "Darwin Barney",
+    "year": "2013",
+    "date": "June 1, 2013"
+  },
+  {
+    "id": "edwin-jackson-2013",
+    "title": "Edwin Jackson",
+    "year": "2013",
+    "date": "June 22, 2013"
+  },
+  {
+    "id": "kyuji-fujikawa-2013",
+    "title": "Kyuji Fujikawa",
+    "year": "2013",
+    "date": "August 3, 2013"
+  },
+  {
+    "id": "anthony-rizzo-2013",
+    "title": "Anthony Rizzo",
+    "year": "2013",
+    "date": "August 31, 2013"
+  },
+  {
+    "id": "ryan-dempster-2012",
+    "title": "Ryan Dempster",
+    "year": "2012",
+    "date": "May 9, 2012"
+  },
+  {
+    "id": "jeff-samardzija-2012",
+    "title": "Jeff Samardzija",
+    "year": "2012",
+    "date": "May 29, 2012"
+  },
+  {
+    "id": "david-dejesus-2012",
+    "title": "David DeJesus",
+    "year": "2012",
+    "date": "June 25, 2012"
+  },
+  {
+    "id": "starlin-castro-2012",
+    "title": "Starlin Castro",
+    "year": "2012",
+    "date": "August 13, 2012"
+  },
+  {
+    "id": "starlin-castro-2011",
+    "title": "Starlin Castro",
+    "year": "2011",
+    "date": "April 5, 2011"
+  },
+  {
+    "id": "tyler-colvin-2011",
+    "title": "Tyler Colvin",
+    "year": "2011",
+    "date": "April 19, 2011"
+  },
+  {
+    "id": "andrew-cashner-2011",
+    "title": "Andrew Cashner",
+    "year": "2011",
+    "date": "June 17, 2011"
+  },
+  {
+    "id": "geovany-soto-2011",
+    "title": "Geovany Soto",
+    "year": "2011",
+    "date": "July 14, 2011"
+  },
+  {
+    "id": "ryan-theriot-2010",
+    "title": "Ryan Theriot",
+    "year": "2010",
+    "date": "June 17, 2010"
+  },
+  {
+    "id": "carlos-zambrano-2010",
+    "title": "Carlos Zambrano",
+    "year": "2010",
+    "date": "September 3, 2010"
+  },
+  {
+    "id": "carlos-zambrano-no-hitter-statue-2009",
+    "title": "Carlos Zambrano (No-Hitter Statue)",
+    "year": "2009",
+    "date": "April 21, 2009"
+  },
+  {
+    "id": "ernie-banks-2009",
+    "title": "Ernie Banks",
+    "year": "2009",
+    "date": "May 12, 2009"
+  },
+  {
+    "id": "ryne-sandberg-2009",
+    "title": "Ryne Sandberg",
+    "year": "2009",
+    "date": "August 11, 2009"
+  },
+  {
+    "id": "billy-williams-2009",
+    "title": "Billy Williams",
+    "year": "2009",
+    "date": "August 31, 2009"
+  },
+  {
+    "id": "ferguson-jenkins-2009",
+    "title": "Ferguson Jenkins",
+    "year": "2009",
+    "date": "September 29, 2009"
+  },
+  {
+    "id": "derrek-lee-2008",
+    "title": "Derrek Lee",
+    "year": "2008",
+    "date": "April 18, 2008"
+  },
+  {
+    "id": "alfonso-soriano-2008",
+    "title": "Alfonso Soriano",
+    "year": "2008",
+    "date": "May 13, 2008"
+  },
+  {
+    "id": "kosuke-fukudome-2008",
+    "title": "Kosuke Fukudome",
+    "year": "2008",
+    "date": "May 27, 2008"
+  },
+  {
+    "id": "carlos-zambrano-2008",
+    "title": "Carlos Zambrano",
+    "year": "2008",
+    "date": "September 17, 2008"
+  },
+  {
+    "id": "lou-piniella-2007",
+    "title": "Lou Piniella",
+    "year": "2007",
+    "date": "April 15, 2007"
+  },
+  {
+    "id": "alfonso-soriano-2007",
+    "title": "Alfonso Soriano",
+    "year": "2007",
+    "date": "May 30, 2007"
+  },
+  {
+    "id": "michael-barrett-2007",
+    "title": "Michael Barrett",
+    "year": "2007",
+    "date": "July 1, 2007"
+  },
+  {
+    "id": "carlos-zambrano-2007",
+    "title": "Carlos Zambrano",
+    "year": "2007",
+    "date": "July 21, 2007"
+  },
+  {
+    "id": "aramis-ramirez-2007",
+    "title": "Aramis Ramirez",
+    "year": "2007",
+    "date": "August 15, 2007"
+  },
+  {
+    "id": "empire-today-2007",
+    "title": "\"Empire Today\"",
+    "year": "2007",
+    "date": "August 18, 2007"
+  },
+  {
+    "id": "derrek-lee-2007",
+    "title": "Derrek Lee",
+    "year": "2007",
+    "date": "September 5, 2007"
+  },
+  {
+    "id": "sammy-sosa-2002",
+    "title": "Sammy Sosa",
+    "year": "2002",
+    "date": "April 27, 2002"
+  },
+  {
+    "id": "ryne-sandberg-2002",
+    "title": "Ryne Sandberg",
+    "year": "2002",
+    "date": "June 14, 2002"
+  },
+  {
+    "id": "kyle-farnsworth-2002",
+    "title": "Kyle Farnsworth",
+    "year": "2002",
+    "date": "August 15, 2002"
+  },
+  {
+    "id": "sammy-sosa-2001",
+    "title": "Sammy Sosa",
+    "year": "2001",
+    "date": "May 5, 2001"
+  }
+]

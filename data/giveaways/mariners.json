@@ -1,0 +1,586 @@
+[
+  {
+    "id": "bryan-woo-2026",
+    "title": "Bryan Woo",
+    "year": "2026",
+    "date": "September 5, 2026"
+  },
+  {
+    "id": "cal-raleigh-60-home-run-2026",
+    "title": "Cal Raleigh (\"60 Home Run\")",
+    "year": "2026",
+    "date": "March 28, 2026"
+  },
+  {
+    "id": "randy-arozarena-2025",
+    "title": "Randy Arozarena",
+    "year": "2025",
+    "date": "May 27, 2025"
+  },
+  {
+    "id": "cal-raleigh-2025",
+    "title": "Cal Raleigh",
+    "year": "2025",
+    "date": "April 7, 2025"
+  },
+  {
+    "id": "julio-rodriguez-2025",
+    "title": "Julio Rodriguez",
+    "year": "2025",
+    "date": "March 31, 2025"
+  },
+  {
+    "id": "ken-griffey-jr-2024",
+    "title": "Ken Griffey Jr.",
+    "year": "2024",
+    "date": "April 15, 2024"
+  },
+  {
+    "id": "julio-rodriguez-2024",
+    "title": "Julio Rodriguez",
+    "year": "2024",
+    "date": "April 1, 2024"
+  },
+  {
+    "id": "julio-rodriguez-dominican-republic-2023",
+    "title": "Julio Rodriguez (Dominican Republic)",
+    "year": "2023",
+    "date": "September 11, 2023"
+  },
+  {
+    "id": "charlie-brown-2023",
+    "title": "Charlie Brown",
+    "year": "2023",
+    "date": "August 29, 2023"
+  },
+  {
+    "id": "felix-hernandez-2023",
+    "title": "Felix Hernandez",
+    "year": "2023",
+    "date": "August 13, 2023"
+  },
+  {
+    "id": "elmo-2023",
+    "title": "Elmo",
+    "year": "2023",
+    "date": "August 8, 2023"
+  },
+  {
+    "id": "wonder-woman-2023",
+    "title": "Wonder Woman",
+    "year": "2023",
+    "date": "July 19, 2023"
+  },
+  {
+    "id": "ty-france-2023",
+    "title": "Ty France",
+    "year": "2023",
+    "date": "July 18, 2023"
+  },
+  {
+    "id": "logan-gilbert-indiana-jones-2023",
+    "title": "Logan Gilbert (Indiana Jones)",
+    "year": "2023",
+    "date": "June 26, 2023"
+  },
+  {
+    "id": "cal-raleigh-superman-2023",
+    "title": "Cal Raleigh (Superman)",
+    "year": "2023",
+    "date": "May 8, 2023"
+  },
+  {
+    "id": "cal-raleigh-the-clinch-2023",
+    "title": "Cal Raleigh (\"The Clinch\")",
+    "year": "2023",
+    "date": "April 14, 2023"
+  },
+  {
+    "id": "julio-rodriguez-2023",
+    "title": "Julio Rodriguez",
+    "year": "2023",
+    "date": "April 1, 2023"
+  },
+  {
+    "id": "ichiro-suzuki-2022",
+    "title": "Ichiro Suzuki",
+    "year": "2022",
+    "date": "August 28, 2022"
+  },
+  {
+    "id": "batman-2022",
+    "title": "Batman",
+    "year": "2022",
+    "date": "May 6, 2022"
+  },
+  {
+    "id": "jp-crawford-2022",
+    "title": "J.P. Crawford",
+    "year": "2022",
+    "date": "May 6, 2022"
+  },
+  {
+    "id": "ken-griffey-jr-42-2022",
+    "title": "Ken Griffey Jr. (\"42\")",
+    "year": "2022",
+    "date": "April 16, 2022"
+  },
+  {
+    "id": "marco-gonzales-2021",
+    "title": "Marco Gonzales",
+    "year": "2021",
+    "date": "May 27, 2021"
+  },
+  {
+    "id": "edgar-martinez-hall-of-fame-2019",
+    "title": "Edgar Martinez (Hall of Fame)",
+    "year": "2019",
+    "date": "August 9, 2019"
+  },
+  {
+    "id": "fred-hutchinson-2019",
+    "title": "Fred Hutchinson",
+    "year": "2019",
+    "date": "July 7, 2019"
+  },
+  {
+    "id": "ken-griffey-jr-rookie-year-2019",
+    "title": "Ken Griffey Jr. (\"Rookie Year\")",
+    "year": "2019",
+    "date": "May 18, 2019"
+  },
+  {
+    "id": "mitch-haniger-2019",
+    "title": "Mitch Haniger",
+    "year": "2019",
+    "date": "May 16, 2019"
+  },
+  {
+    "id": "mitch-haniger-five-tool-2019",
+    "title": "Mitch Haniger (\"Five-Tool\")",
+    "year": "2019",
+    "date": "April 27, 2019"
+  },
+  {
+    "id": "dee-gordon-2018",
+    "title": "Dee Gordon",
+    "year": "2018",
+    "date": "July 21, 2018"
+  },
+  {
+    "id": "james-paxton-big-maple-2018",
+    "title": "James Paxton (\"Big Maple\")",
+    "year": "2018",
+    "date": "July 1, 2018"
+  },
+  {
+    "id": "felix-hernandez-infield-grass-2018",
+    "title": "Felix Hernandez (\"Infield Grass\")",
+    "year": "2018",
+    "date": "May 19, 2018"
+  },
+  {
+    "id": "chewbacca-2018",
+    "title": "Chewbacca",
+    "year": "2018",
+    "date": "May 4, 2018"
+  },
+  {
+    "id": "han-seago-star-wars-2018",
+    "title": "\"Han Seago\" (Star Wars)",
+    "year": "2018",
+    "date": "May 4, 2018"
+  },
+  {
+    "id": "robinson-cano-2018",
+    "title": "Robinson Cano",
+    "year": "2018",
+    "date": "March 31, 2018"
+  },
+  {
+    "id": "robinson-cano-2017",
+    "title": "Robinson Cano",
+    "year": "2017",
+    "date": "September 9, 2017"
+  },
+  {
+    "id": "edgar-martinez-2017",
+    "title": "Edgar Martinez",
+    "year": "2017",
+    "date": "August 11, 2017"
+  },
+  {
+    "id": "kyle-seager-2017",
+    "title": "Kyle Seager",
+    "year": "2017",
+    "date": "July 8, 2017"
+  },
+  {
+    "id": "nelson-cruz-2017",
+    "title": "Nelson Cruz",
+    "year": "2017",
+    "date": "June 3, 2017"
+  },
+  {
+    "id": "jay-buhner-2017",
+    "title": "Jay Buhner",
+    "year": "2017",
+    "date": "May 20, 2017"
+  },
+  {
+    "id": "felix-hernandez-2017",
+    "title": "Felix Hernandez",
+    "year": "2017",
+    "date": "May 6, 2017"
+  },
+  {
+    "id": "ichiro-dual-2017",
+    "title": "Ichiro (Dual)",
+    "year": "2017",
+    "date": "April 19, 2017"
+  },
+  {
+    "id": "taijuan-walker-sky-walker-2016",
+    "title": "Taijuan Walker (\"Sky Walker\")",
+    "year": "2016",
+    "date": "August 21, 2016"
+  },
+  {
+    "id": "ken-griffey-jr-hall-of-fame-2016",
+    "title": "Ken Griffey Jr. (Hall of Fame)",
+    "year": "2016",
+    "date": "August 5, 2016"
+  },
+  {
+    "id": "robinson-cano-2016",
+    "title": "Robinson Cano",
+    "year": "2016",
+    "date": "July 16, 2016"
+  },
+  {
+    "id": "felix-hernandez-2016",
+    "title": "Felix Hernandez",
+    "year": "2016",
+    "date": "June 24, 2016"
+  },
+  {
+    "id": "kyle-seager-2016",
+    "title": "Kyle Seager",
+    "year": "2016",
+    "date": "May 14, 2016"
+  },
+  {
+    "id": "nelson-cruz-boomstick-2016",
+    "title": "Nelson Cruz (\"Boomstick\")",
+    "year": "2016",
+    "date": "April 30, 2016"
+  },
+  {
+    "id": "robinson-cano-2015",
+    "title": "Robinson Cano",
+    "year": "2015",
+    "date": "August 22, 2015"
+  },
+  {
+    "id": "jamie-moyer-2015",
+    "title": "Jamie Moyer",
+    "year": "2015",
+    "date": "August 8, 2015"
+  },
+  {
+    "id": "nelson-cruz-2015",
+    "title": "Nelson Cruz",
+    "year": "2015",
+    "date": "July 11, 2015"
+  },
+  {
+    "id": "kyle-seager-2015",
+    "title": "Kyle Seager",
+    "year": "2015",
+    "date": "June 2, 2015"
+  },
+  {
+    "id": "fernando-rodney-2015",
+    "title": "Fernando Rodney",
+    "year": "2015",
+    "date": "May 9, 2015"
+  },
+  {
+    "id": "felix-hernandez-2015",
+    "title": "Felix Hernandez",
+    "year": "2015",
+    "date": "April 18, 2015"
+  },
+  {
+    "id": "felix-hernandez-2014",
+    "title": "Felix Hernandez",
+    "year": "2014",
+    "date": "August 30, 2014"
+  },
+  {
+    "id": "lou-piniella-hall-of-fame-2014",
+    "title": "Lou Piniella (Hall of Fame)",
+    "year": "2014",
+    "date": "August 9, 2014"
+  },
+  {
+    "id": "hisashi-iwakuma-2014",
+    "title": "Hisashi Iwakuma",
+    "year": "2014",
+    "date": "July 12, 2014"
+  },
+  {
+    "id": "macklemore-2014",
+    "title": "Macklemore",
+    "year": "2014",
+    "date": "June 12, 2014",
+    "imageUrl": "https://www.stadiumgiveawayexchange.com/wp-content/uploads/2014/06/Seattle-Mariner-Macklemore-Bobblehead-61214.jpg"
+  },
+  {
+    "id": "robinson-cano-2014",
+    "title": "Robinson Cano",
+    "year": "2014",
+    "date": "May 31, 2014"
+  },
+  {
+    "id": "ken-griffey-jr-hall-of-fame-2013",
+    "title": "Ken Griffey Jr. (Hall of Fame)",
+    "year": "2013",
+    "date": "August 9, 2013"
+  },
+  {
+    "id": "felix-hernandez-perfect-game-2013",
+    "title": "Felix Hernandez (\"Perfect Game\")",
+    "year": "2013",
+    "date": "May 25, 2013"
+  },
+  {
+    "id": "randy-johnson-dan-wilson-dual-2012",
+    "title": "Randy Johnson & Dan Wilson (Dual)",
+    "year": "2012",
+    "date": "July 28, 2012"
+  },
+  {
+    "id": "felix-hernandez-2012",
+    "title": "Felix Hernandez",
+    "year": "2012",
+    "date": "June 15, 2012"
+  },
+  {
+    "id": "dustin-ackley-2012",
+    "title": "Dustin Ackley",
+    "year": "2012",
+    "date": "May 25, 2012"
+  },
+  {
+    "id": "ichiro-suzuki-2012",
+    "title": "Ichiro Suzuki",
+    "year": "2012",
+    "date": "April 20, 2012"
+  },
+  {
+    "id": "larry-bernandez-2011",
+    "title": "\"Larry Bernandez\"",
+    "year": "2011",
+    "date": "August 27, 2011"
+  },
+  {
+    "id": "mike-cameron-mark-mclemore-dual-2011",
+    "title": "Mike Cameron & Mark McLemore (Dual)",
+    "year": "2011",
+    "date": "July 15, 2011"
+  },
+  {
+    "id": "ichiro-suzuki-2011",
+    "title": "Ichiro Suzuki",
+    "year": "2011",
+    "date": "May 6, 2011"
+  },
+  {
+    "id": "felix-hernandez-2011",
+    "title": "Felix Hernandez",
+    "year": "2011",
+    "date": "April 9, 2011"
+  },
+  {
+    "id": "ichiro-suzuki-2010",
+    "title": "Ichiro Suzuki",
+    "year": "2010",
+    "date": "August 27, 2010"
+  },
+  {
+    "id": "ken-griffey-jr-ichiro-suzuki-double-2010",
+    "title": "Ken Griffey Jr. & Ichiro Suzuki (Double)",
+    "year": "2010",
+    "date": "June 18, 2010"
+  },
+  {
+    "id": "ken-griffey-jr-95-slide-2010",
+    "title": "Ken Griffey Jr. (\"The '95 Slide\")",
+    "year": "2010",
+    "date": "May 7, 2010"
+  },
+  {
+    "id": "felix-hernandez-2010",
+    "title": "Felix Hernandez",
+    "year": "2010",
+    "date": "April 30, 2010"
+  },
+  {
+    "id": "ken-griffey-jr-the-kid-2010",
+    "title": "Ken Griffey Jr. (\"The Kid\")",
+    "year": "2010",
+    "date": "April 16, 2010"
+  },
+  {
+    "id": "ken-griffey-jr-2009",
+    "title": "Ken Griffey Jr.",
+    "year": "2009",
+    "date": "August 7, 2009"
+  },
+  {
+    "id": "franklin-gutierrez-2009",
+    "title": "Franklin Gutierrez",
+    "year": "2009",
+    "date": "July 24, 2009"
+  },
+  {
+    "id": "brandon-morrow-2009",
+    "title": "Brandon Morrow",
+    "year": "2009",
+    "date": "June 19, 2009"
+  },
+  {
+    "id": "felix-hernandez-2009",
+    "title": "Felix Hernandez",
+    "year": "2009",
+    "date": "May 22, 2009"
+  },
+  {
+    "id": "ichiro-suzuki-2009",
+    "title": "Ichiro Suzuki",
+    "year": "2009",
+    "date": "April 17, 2009"
+  },
+  {
+    "id": "yuniesky-betancourt-2008",
+    "title": "Yuniesky Betancourt",
+    "year": "2008",
+    "date": "August 8, 2008"
+  },
+  {
+    "id": "dave-niehaus-2008",
+    "title": "Dave Niehaus",
+    "year": "2008",
+    "date": "August 3, 2008"
+  },
+  {
+    "id": "felix-hernandez-2008",
+    "title": "Felix Hernandez",
+    "year": "2008",
+    "date": "July 18, 2008"
+  },
+  {
+    "id": "adrian-beltre-2008",
+    "title": "Adrian Beltre",
+    "year": "2008",
+    "date": "June 13, 2008"
+  },
+  {
+    "id": "jj-putz-2008",
+    "title": "J.J. Putz",
+    "year": "2008",
+    "date": "May 16, 2008"
+  },
+  {
+    "id": "ichiro-suzuki-2008",
+    "title": "Ichiro Suzuki",
+    "year": "2008",
+    "date": "April 25, 2008",
+    "imageUrl": "https://images.pristineauction.com/247/2479607/share_1663691668-Ichiro-Suzuki-2008-UW-Medicine-Mariners-Bobblehead-PristineAuction.com.jpg"
+  },
+  {
+    "id": "raul-ibanez-2007",
+    "title": "Raul Ibanez",
+    "year": "2007",
+    "date": "August 17, 2007"
+  },
+  {
+    "id": "kenji-johjima-2007",
+    "title": "Kenji Johjima",
+    "year": "2007",
+    "date": "June 29, 2007"
+  },
+  {
+    "id": "felix-hernandez-2007",
+    "title": "Felix Hernandez",
+    "year": "2007",
+    "date": "May 18, 2007"
+  },
+  {
+    "id": "ichiro-suzuki-2007",
+    "title": "Ichiro Suzuki",
+    "year": "2007",
+    "date": "April 27, 2007"
+  },
+  {
+    "id": "mariner-moose-2006",
+    "title": "Mariner Moose",
+    "year": "2006",
+    "date": "July 1, 2006"
+  },
+  {
+    "id": "richie-sexson-2006",
+    "title": "Richie Sexson",
+    "year": "2006",
+    "date": "May 19, 2006"
+  },
+  {
+    "id": "ichiro-suzuki-2006",
+    "title": "Ichiro Suzuki",
+    "year": "2006",
+    "date": "April 21, 2006"
+  },
+  {
+    "id": "jay-buhner-2005",
+    "title": "Jay Buhner",
+    "year": "2005",
+    "date": "May 31, 2005"
+  },
+  {
+    "id": "edgar-martinez-2005",
+    "title": "Edgar Martinez",
+    "year": "2005",
+    "date": "May 3, 2005"
+  },
+  {
+    "id": "ichiro-suzuki-262-hits-2005",
+    "title": "Ichiro Suzuki (262 Hits)",
+    "year": "2005",
+    "date": "April 22, 2005"
+  },
+  {
+    "id": "ichiro-suzuki-2003",
+    "title": "Ichiro Suzuki",
+    "year": "2003",
+    "date": "August 26, 2003"
+  },
+  {
+    "id": "ichiro-suzuki-2002",
+    "title": "Ichiro Suzuki",
+    "year": "2002",
+    "date": "July 2, 2002"
+  },
+  {
+    "id": "kazuhiro-sasaki-2001",
+    "title": "Kazuhiro Sasaki",
+    "year": "2001",
+    "date": "September 8, 2001"
+  },
+  {
+    "id": "ichiro-suzuki-2001",
+    "title": "Ichiro Suzuki",
+    "year": "2001",
+    "date": "July 28, 2001"
+  }
+]
