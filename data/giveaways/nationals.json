@@ -1,5 +1,23 @@
 [
   {
+    "id": "james-wood-2026",
+    "title": "James Wood",
+    "year": "2026",
+    "date": "August 29, 2026"
+  },
+  {
+    "id": "captain-america-2026",
+    "title": "Captain America",
+    "year": "2026",
+    "date": "July 10, 2026"
+  },
+  {
+    "id": "daylen-lile-2026",
+    "title": "Daylen Lile",
+    "year": "2026",
+    "date": "June 13, 2026"
+  },
+  {
     "id": "cj-abrams-2026",
     "title": "CJ Abrams",
     "year": "2026",
@@ -18,6 +36,12 @@
     "date": "May 2, 2026"
   },
   {
+    "id": "hello-kitty-city-connect-2025",
+    "title": "Hello Kitty (City Connect)",
+    "year": "2025",
+    "date": "September 27, 2025"
+  },
+  {
     "id": "dylan-crews-2025",
     "title": "Dylan Crews",
     "year": "2025",
@@ -28,6 +52,12 @@
     "title": "Jacob Young",
     "year": "2025",
     "date": "August 16, 2025"
+  },
+  {
+    "id": "jacob-young-2025-8-2",
+    "title": "Jacob Young",
+    "year": "2025",
+    "date": "August 2, 2025"
   },
   {
     "id": "josh-gibson-2025",
@@ -54,6 +84,18 @@
     "date": "April 22, 2025"
   },
   {
+    "id": "hello-kitty-red-2025",
+    "title": "Hello Kitty (Red)",
+    "year": "2025",
+    "date": "April 8, 2025"
+  },
+  {
+    "id": "mackenzie-gore-sth-only-2025",
+    "title": "MacKenzie Gore (STH Only)",
+    "year": "2025",
+    "date": "April 1, 2025"
+  },
+  {
     "id": "1924-championship-2024",
     "title": "1924 Championship",
     "year": "2024",
@@ -64,6 +106,12 @@
     "title": "CJ Abrams",
     "year": "2024",
     "date": "August 31, 2024"
+  },
+  {
+    "id": "divine-nine-majorette-2024",
+    "title": "Divine Nine Majorette",
+    "year": "2024",
+    "date": "August 30, 2024"
   },
   {
     "id": "mackenzie-gore-2024",
@@ -90,10 +138,22 @@
     "date": "May 4, 2024"
   },
   {
+    "id": "lane-thomas-sth-only-2024",
+    "title": "Lane Thomas (STH Only)",
+    "year": "2024",
+    "date": "April 1, 2024"
+  },
+  {
     "id": "keibert-ruiz-2023",
     "title": "Keibert Ruiz",
     "year": "2023",
     "date": "September 22, 2023"
+  },
+  {
+    "id": "hbcu-drum-major-2023",
+    "title": "HBCU Drum Major (Special Ticket)",
+    "year": "2023",
+    "date": "August 19, 2023"
   },
   {
     "id": "racing-presidents-george-tom-2023",
@@ -126,6 +186,12 @@
     "date": "April 15, 2023"
   },
   {
+    "id": "josiah-gray-sth-only-2023",
+    "title": "Josiah Gray (STH Only)",
+    "year": "2023",
+    "date": "April 1, 2023"
+  },
+  {
     "id": "wonder-woman-2022",
     "title": "Wonder Woman",
     "year": "2022",
@@ -150,6 +216,12 @@
     "date": "May 27, 2022"
   },
   {
+    "id": "stephen-strasburg-2022",
+    "title": "Stephen Strasburg",
+    "year": "2022",
+    "date": "April 8, 2022"
+  },
+  {
     "id": "victor-robles-spring-training-2022",
     "title": "Victor Robles (Spring Training)",
     "year": "2022",
@@ -160,6 +232,12 @@
     "title": "Ryan Zimmerman (Spring Training)",
     "year": "2022",
     "date": "March 18, 2022"
+  },
+  {
+    "id": "george-mason-screech-2021",
+    "title": "George Mason Screech",
+    "year": "2021",
+    "date": "September 17, 2021"
   },
   {
     "id": "ryan-zimmerman-2021",
@@ -246,10 +324,28 @@
     "date": "April 12, 2019"
   },
   {
+    "id": "ham-porter-2018",
+    "title": "Ham Porter",
+    "year": "2018",
+    "date": "September 30, 2018"
+  },
+  {
+    "id": "michael-a-taylor-game-of-thrones-2018",
+    "title": "Michael A. Taylor (Game of Thrones)",
+    "year": "2018",
+    "date": "August 18, 2018"
+  },
+  {
     "id": "anthony-rendon-2018",
     "title": "Anthony Rendon",
     "year": "2018",
     "date": "August 3, 2018"
+  },
+  {
+    "id": "teddy-roosevelt-garden-gnome-2018",
+    "title": "Teddy Roosevelt (Garden Gnome, MLB Futures Game)",
+    "year": "2018",
+    "date": "July 15, 2018"
   },
   {
     "id": "bryce-harper-patriotic-2018",
@@ -300,6 +396,18 @@
     "date": "April 14, 2017"
   },
   {
+    "id": "election-night-donkey-elephant-2016",
+    "title": "Election Night (Donkey & Elephant)",
+    "year": "2016",
+    "date": "September 30, 2016"
+  },
+  {
+    "id": "ben-revere-gnome-2016",
+    "title": "Ben Revere Gnome",
+    "year": "2016",
+    "date": "September 27, 2016"
+  },
+  {
     "id": "michael-a-taylor-fan-choice-2016",
     "title": "Michael A. Taylor (Fan Choice)",
     "year": "2016",
@@ -322,6 +430,12 @@
     "title": "Herbert Hoover (Racing President)",
     "year": "2016",
     "date": "July 3, 2016"
+  },
+  {
+    "id": "jayson-werth-pet-figurine-2016",
+    "title": "Jayson Werth Pet Figurine",
+    "year": "2016",
+    "date": "June 27, 2016"
   },
   {
     "id": "max-scherzer-no-hitter-1-2016",
@@ -352,6 +466,12 @@
     "title": "Jayson Werth",
     "year": "2015",
     "date": "August 30, 2015"
+  },
+  {
+    "id": "anthony-rendon-gnome-2015",
+    "title": "Anthony Rendon Gnome",
+    "year": "2015",
+    "date": "August 25, 2015"
   },
   {
     "id": "stephen-strasburg-2015",
@@ -388,6 +508,12 @@
     "title": "\"Bill\" (Racing President)",
     "year": "2014",
     "date": "August 17, 2014"
+  },
+  {
+    "id": "jayson-werth-gnome-2014",
+    "title": "Jayson Werth Gnome",
+    "year": "2014",
+    "date": "August 5, 2014"
   },
   {
     "id": "denard-span-2014",
@@ -449,6 +575,18 @@
     "year": "2012",
     "date": "June 28, 2012",
     "imageUrl": "https://i.ebayimg.com/images/g/09IAAOSwuHRim2XG/s-l400.jpg"
+  },
+  {
+    "id": "stephen-strasburg-2012-4-14",
+    "title": "Stephen Strasburg",
+    "year": "2012",
+    "date": "April 14, 2012"
+  },
+  {
+    "id": "screech-kids-club-2012",
+    "title": "Screech (Kids Club)",
+    "year": "2012",
+    "date": "2012"
   },
   {
     "id": "danny-espinosa-2011",
