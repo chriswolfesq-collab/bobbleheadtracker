@@ -82,7 +82,7 @@ export function ProfileSections({
 
         <div className="mb-4 mt-6 flex items-center justify-between gap-3">
           <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
-            Collection by team
+            Collection progress
           </h2>
           <div className="flex items-center gap-3">
             <span className="text-xs font-black tabular-nums text-amber-300">
