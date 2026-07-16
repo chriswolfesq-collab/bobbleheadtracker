@@ -14,7 +14,7 @@ export default function RecentlyAdded() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-5xl px-4 pb-2 sm:px-6">
+    <section className="mx-auto w-full max-w-2xl px-4 pb-2 sm:px-6">
       <div className="flex items-center justify-between gap-3">
         <h2 className="text-[11px] font-semibold uppercase tracking-[0.35em] text-amber-500/80 sm:text-xs">
           Recently added by the community
