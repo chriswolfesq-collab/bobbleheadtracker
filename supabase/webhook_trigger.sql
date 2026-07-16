@@ -33,3 +33,32 @@ create trigger on_submission_created
   after insert on public.submissions
   for each row
   execute function public.notify_new_submission();
+
+-- Same edge function, reused for listing_reports (it branches on the
+-- `table` field below). Requires the function to be redeployed with the
+-- `listing_reports` handling in supabase/functions/notify-new-submission.
+
+create or replace function public.notify_new_report()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  perform net.http_post(
+    url := 'https://mawwzvnlihhsagatmolq.supabase.co/functions/v1/notify-new-submission',
+    headers := jsonb_build_object(
+      'Content-Type', 'application/json',
+      'x-webhook-secret', '<WEBHOOK_SECRET>'
+    ),
+    body := jsonb_build_object('type', 'INSERT', 'table', 'listing_reports', 'record', row_to_json(new))
+  );
+  return new;
+end;
+$$;
+
+drop trigger if exists on_listing_report_created on public.listing_reports;
+create trigger on_listing_report_created
+  after insert on public.listing_reports
+  for each row
+  execute function public.notify_new_report();
