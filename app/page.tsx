@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { AuthWidget } from "@/components/AuthWidget";
 import DisplayCase from "@/components/DisplayCase";
@@ -32,6 +33,15 @@ export default function Home() {
       <div className="mt-6">
         <RecentlyAdded />
       </div>
+
+      <footer className="mt-6 px-4 pb-6 text-center">
+        <Link
+          href="/terms"
+          className="text-[11px] font-medium text-slate-500 underline decoration-slate-700 underline-offset-2 hover:text-slate-300"
+        >
+          Terms of Service
+        </Link>
+      </footer>
 
       <div className="h-16" />
     </div>
