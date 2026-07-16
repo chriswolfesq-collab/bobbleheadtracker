@@ -21,7 +21,7 @@ export default function RecentlyAdded() {
         Recently added by the community
       </h2>
 
-      <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-5">
+      <div className="mt-4 grid grid-cols-2 gap-3">
         {communityBobbleheads.map((bobblehead) => {
           const team = getTeamBySlug(bobblehead.teamSlug);
           const imageSrc = bobblehead.imageUrl ?? publicAsset(`/bobbleheads/${bobblehead.teamSlug}.png`);
