@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useAuth } from "@/lib/auth";
 
@@ -17,6 +18,7 @@ export function AuthModal() {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [oauthLoading, setOauthLoading] = useState<"google" | "github" | null>(null);
@@ -33,6 +35,7 @@ export function AuthModal() {
     setDisplayName("");
     setEmail("");
     setPassword("");
+    setAcceptedTerms(false);
     setError(null);
     setConfirmationSent(false);
   };
@@ -124,6 +127,11 @@ export function AuthModal() {
                   return;
                 }
 
+                if (mode === "sign-up" && !acceptedTerms) {
+                  setError("Please accept the Terms of Service to continue.");
+                  return;
+                }
+
                 setError(null);
                 setIsSubmitting(true);
 
@@ -183,6 +191,28 @@ export function AuthModal() {
                   className="w-full rounded-lg border border-white/15 bg-[#07111d] px-3 py-2.5 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
                 />
               </div>
+              {mode === "sign-up" ? (
+                <label className="flex items-start gap-2 text-xs text-zinc-300">
+                  <input
+                    required
+                    type="checkbox"
+                    checked={acceptedTerms}
+                    onChange={(event) => setAcceptedTerms(event.target.checked)}
+                    className="mt-0.5 h-3.5 w-3.5 shrink-0 rounded border-white/30 bg-[#07111d] accent-amber-400"
+                  />
+                  <span>
+                    I accept the{" "}
+                    <Link
+                      href="/terms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-bold text-amber-300 hover:text-amber-200"
+                    >
+                      Terms of Service
+                    </Link>
+                  </span>
+                </label>
+              ) : null}
               {error ? <p className="text-xs font-semibold text-red-400">{error}</p> : null}
               <button
                 type="submit"
