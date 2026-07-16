@@ -21,6 +21,12 @@ type ProfileUser = {
   last_sign_in_at: string | null;
 };
 
+const BACK_LINKS: Record<string, { href: string; label: string }> = {
+  users: { href: "/admin/users", label: "Back to users" },
+  review: { href: "/admin/review", label: "Back to review" },
+  reports: { href: "/admin/reports", label: "Back to reports" },
+};
+
 function formatDate(value: string | null) {
   return value ? new Date(value).toLocaleDateString() : "Never";
 }
@@ -31,6 +37,7 @@ export function AdminUserProfile() {
   // Empty string when absent so the profile hooks below treat it as "no user"
   // and fetch nothing, rather than falling back to the admin's own session.
   const targetId = searchParams.get("id") ?? "";
+  const backTo = BACK_LINKS[searchParams.get("from") ?? ""] ?? BACK_LINKS.users;
 
   const [profile, setProfile] = useState<ProfileUser | null>(null);
   const [profileError, setProfileError] = useState<string | null>(null);
@@ -92,10 +99,10 @@ export function AdminUserProfile() {
     >
       <div className="flex items-center justify-between px-4 pt-4 sm:px-6">
         <Link
-          href="/admin/users"
+          href={backTo.href}
           className="flex items-center gap-1.5 text-sm font-semibold text-zinc-300 transition hover:text-amber-300"
         >
-          <span aria-hidden>←</span> Back to users
+          <span aria-hidden>←</span> {backTo.label}
         </Link>
         <div className="flex items-center gap-3 text-sm">
           <span className="font-semibold text-zinc-200">{user.email}</span>

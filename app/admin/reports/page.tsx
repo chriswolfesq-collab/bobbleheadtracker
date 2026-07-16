@@ -152,6 +152,12 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="flex flex-col justify-center gap-2">
+                  <Link
+                    href={`/admin/users/view?id=${encodeURIComponent(row.submitted_by)}&from=reports`}
+                    className="rounded border border-white/20 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+                  >
+                    View profile
+                  </Link>
                   <button
                     type="button"
                     disabled={busyId === row.id}
