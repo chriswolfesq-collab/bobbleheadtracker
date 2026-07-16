@@ -1,13 +1,19 @@
 "use client";
 
 import type { Session, User } from "@supabase/supabase-js";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { supabase } from "@/lib/supabase";
+
+export type AuthModalMode = "sign-in" | "sign-up";
 
 type AuthContextValue = {
   user: User | null;
   session: Session | null;
   isLoading: boolean;
+  isAuthModalOpen: boolean;
+  authModalMode: AuthModalMode;
+  openAuthModal: (mode?: AuthModalMode) => void;
+  closeAuthModal: () => void;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string, displayName: string) => Promise<{ error: string | null }>;
   signInWithGoogle: () => Promise<{ error: string | null }>;
@@ -42,6 +48,8 @@ export function hasDisplayName(user: User | null): boolean {
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState<AuthModalMode>("sign-in");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -57,6 +65,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.subscription.unsubscribe();
   }, []);
 
+  const openAuthModal = useCallback((mode: AuthModalMode = "sign-in") => {
+    setAuthModalMode(mode);
+    setIsAuthModalOpen(true);
+  }, []);
+
+  const closeAuthModal = useCallback(() => {
+    setIsAuthModalOpen(false);
+  }, []);
+
   const value = useMemo<AuthContextValue>(() => {
     const user = session?.user ?? null;
 
@@ -64,6 +81,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       user,
       session,
       isLoading,
+      isAuthModalOpen,
+      authModalMode,
+      openAuthModal,
+      closeAuthModal,
       signIn: async (email, password) => {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         return { error: error?.message ?? null };
@@ -98,7 +119,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return { error: error?.message ?? null };
       },
     };
-  }, [session, isLoading]);
+  }, [session, isLoading, isAuthModalOpen, authModalMode, openAuthModal, closeAuthModal]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
