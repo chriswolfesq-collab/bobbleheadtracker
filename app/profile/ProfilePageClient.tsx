@@ -8,6 +8,7 @@ import { getDisplayName, useAuth } from "@/lib/auth";
 import { publicAsset } from "@/lib/paths";
 import {
   useCollectionSummary,
+  useMyFavorites,
   useMySubmissions,
   useSiteBobbleheadCounts,
   type MySubmission,
@@ -32,6 +33,7 @@ export function ProfilePageClient() {
   const { countByTeamSlug, totalOwned, isLoading: isCollectionLoading } = useCollectionSummary();
   const { totalByTeamSlug, siteTotal, isLoading: isSiteTotalLoading } = useSiteBobbleheadCounts();
   const { submissions, isLoading: isSubmissionsLoading } = useMySubmissions();
+  const { favorites, isLoading: isFavoritesLoading } = useMyFavorites();
   const [isEditingName, setIsEditingName] = useState(false);
   const [nameDraft, setNameDraft] = useState("");
   const [isSavingName, setIsSavingName] = useState(false);
@@ -169,6 +171,52 @@ export function ProfilePageClient() {
                 </Link>
               ))}
             </div>
+          </section>
+
+          <section className="mb-10">
+            <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
+              My favorites
+            </h2>
+            {isFavoritesLoading ? (
+              <p className="text-sm text-zinc-400">Loading…</p>
+            ) : favorites.length === 0 ? (
+              <p className="text-sm text-zinc-400">
+                Tap the heart on a bobblehead to add it to your favorites.
+              </p>
+            ) : (
+              <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                {favorites.map((favorite, index) => {
+                  const team = TEAMS.find((t) => t.slug === favorite.teamSlug);
+                  const imageSrc = favorite.imageUrl ?? publicAsset(`/bobbleheads/${favorite.teamSlug}.png`);
+
+                  return (
+                    <Link
+                      key={`${favorite.teamSlug}:${favorite.bobbleheadId}`}
+                      href={favorite.href}
+                      className={`flex items-center gap-3 px-4 py-3 text-sm transition hover:bg-white/5 ${
+                        index !== favorites.length - 1 ? "border-b border-white/10" : ""
+                      }`}
+                    >
+                      <Image
+                        src={imageSrc}
+                        alt=""
+                        width={677}
+                        height={1607}
+                        sizes="100px"
+                        className="h-14 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]"
+                      />
+                      <span className="min-w-0">
+                        <span className="block truncate font-bold text-zinc-100">{favorite.title}</span>
+                        <span className="text-xs text-zinc-500">{team?.name ?? favorite.teamSlug}</span>
+                      </span>
+                      <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-red-400">
+                        ♥
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
           </section>
 
           <section>

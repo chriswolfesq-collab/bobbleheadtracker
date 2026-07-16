@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
+import { FavoriteButton } from "@/components/FavoriteButton";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
@@ -17,6 +18,7 @@ import { useBobbleheadOverride } from "@/lib/bobbleheadOverrides";
 import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
 import { useUserCollection } from "@/lib/userCollections";
+import { useUserFavorites } from "@/lib/userFavorites";
 
 export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; team: Team }) {
   const { isAdmin, user: adminUser } = useAdminAuth();
@@ -24,6 +26,7 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
   const { photos: galleryPhotos } = useBobbleheadGallery(team.slug, giveaway.id);
   const { override } = useBobbleheadOverride(team.slug, giveaway.id);
   const { ownedById, isLoggedIn, setOwned } = useUserCollection(team.slug);
+  const { favoritedById, isLoggedIn: isLoggedInForFavorites, setFavorited } = useUserFavorites(team.slug);
 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [localOverride, setLocalOverride] = useState<EditBobbleheadValues | null>(null);
@@ -35,6 +38,7 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
   const imageSrc =
     localImageUrl ?? photoUrlById[giveaway.id] ?? giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
   const isOwned = ownedById[giveaway.id] ?? false;
+  const isFavorited = favoritedById[giveaway.id] ?? false;
   const details = [
     ["Release Date", date],
     ["Team", `${team.city} ${team.name}`],
@@ -102,8 +106,14 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
               <p className="text-sm font-black uppercase tracking-[0.22em] text-amber-400">
                 {team.city} {team.name}
               </p>
-              <h1 className="mt-3 text-4xl font-black uppercase leading-none tracking-wide text-white sm:text-5xl 2xl:text-6xl">
+              <h1 className="mt-3 flex flex-wrap items-center gap-3 text-4xl font-black uppercase leading-none tracking-wide text-white sm:text-5xl 2xl:text-6xl">
                 {title}
+                <FavoriteButton
+                  isFavorited={isFavorited}
+                  isLoggedIn={isLoggedInForFavorites}
+                  onToggle={() => setFavorited(giveaway.id, !isFavorited)}
+                  className="h-9 w-9 text-xl sm:h-10 sm:w-10 sm:text-2xl"
+                />
               </h1>
               <dl className="mt-6 grid max-w-4xl gap-x-8 gap-y-3 text-sm sm:grid-cols-2 xl:grid-cols-4">
                 {details.map(([label, value]) => (

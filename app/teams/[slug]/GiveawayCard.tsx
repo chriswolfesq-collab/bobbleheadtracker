@@ -3,10 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { createContext, useContext } from "react";
+import { FavoriteButton } from "@/components/FavoriteButton";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
 import { useUserCollection } from "@/lib/userCollections";
+import { useUserFavorites } from "@/lib/userFavorites";
 
 export type ResolvedGiveaway = Giveaway & { source: "curated" | "community" };
 
@@ -55,6 +57,42 @@ export function OwnedCount() {
   return ownedCount;
 }
 
+type FavoritesContextValue = {
+  favoritedById: Record<string, boolean>;
+  isLoggedIn: boolean;
+  toggleFavorited: (id: string) => void;
+};
+
+const FavoritesContext = createContext<FavoritesContextValue | null>(null);
+
+function useFavorites() {
+  const context = useContext(FavoritesContext);
+
+  if (!context) {
+    throw new Error("Favorites components must be used inside FavoritesProvider.");
+  }
+
+  return context;
+}
+
+export function FavoritesProvider({
+  children,
+  teamSlug,
+}: {
+  children: React.ReactNode;
+  teamSlug: string;
+}) {
+  const { favoritedById, isLoggedIn, setFavorited } = useUserFavorites(teamSlug);
+
+  const value: FavoritesContextValue = {
+    favoritedById,
+    isLoggedIn,
+    toggleFavorited: (id: string) => setFavorited(id, !favoritedById[id]),
+  };
+
+  return <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>;
+}
+
 export function GiveawayCard({
   giveaway,
   team,
@@ -65,7 +103,9 @@ export function GiveawayCard({
   index: number;
 }) {
   const { ownedById, isLoggedIn, toggleOwned } = useOwnership();
+  const { favoritedById, isLoggedIn: isLoggedInForFavorites, toggleFavorited } = useFavorites();
   const isOwned = ownedById[giveaway.id] ?? false;
+  const isFavorited = favoritedById[giveaway.id] ?? false;
   const href =
     giveaway.source === "community"
       ? `/teams/${team.slug}/community?id=${encodeURIComponent(giveaway.id)}`
@@ -86,6 +126,13 @@ export function GiveawayCard({
           </span>
         ) : null}
       </div>
+
+      <FavoriteButton
+        isFavorited={isFavorited}
+        isLoggedIn={isLoggedInForFavorites}
+        onToggle={() => toggleFavorited(giveaway.id)}
+        className="absolute right-3 top-3 z-10 h-6 w-6 text-sm"
+      />
 
       <Link href={href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">
         <div className="flex h-32 items-end justify-center bg-[radial-gradient(circle_at_50%_22%,rgba(255,255,255,0.14),rgba(255,255,255,0)_42%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.22))] px-3 pt-4 sm:h-52 sm:px-4 sm:pt-6">
@@ -120,7 +167,7 @@ export function GiveawayCard({
       </div>
 
       {index === 0 ? (
-        <div className="absolute right-3 top-3 rounded bg-amber-400 px-2 py-1 text-[10px] font-black uppercase tracking-wide text-[#07111d]">
+        <div className="absolute right-3 top-11 rounded bg-amber-400 px-2 py-1 text-[10px] font-black uppercase tracking-wide text-[#07111d]">
           New
         </div>
       ) : null}

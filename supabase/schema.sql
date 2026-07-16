@@ -58,6 +58,15 @@ create table if not exists public.user_collections (
   primary key (user_id, bobblehead_id)
 );
 
+create table if not exists public.user_favorites (
+  user_id uuid not null references auth.users (id) on delete cascade,
+  bobblehead_id text not null,
+  team_slug text not null,
+  favorited boolean not null default true,
+  updated_at timestamptz not null default now(),
+  primary key (user_id, bobblehead_id)
+);
+
 create table if not exists public.approved_photos (
   bobblehead_id text primary key,
   team_slug text not null,
@@ -135,6 +144,7 @@ create table if not exists public.listing_reports (
 -- ---------------------------------------------------------------------------
 
 alter table public.user_collections enable row level security;
+alter table public.user_favorites enable row level security;
 alter table public.approved_photos enable row level security;
 alter table public.community_bobbleheads enable row level security;
 alter table public.bobblehead_gallery_photos enable row level security;
@@ -158,6 +168,26 @@ create policy "user_collections: owner upsert"
 drop policy if exists "user_collections: owner update" on public.user_collections;
 create policy "user_collections: owner update"
   on public.user_collections for update
+  to authenticated
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
+
+-- user_favorites: fully private per-user data, same shape as user_collections.
+drop policy if exists "user_favorites: owner select" on public.user_favorites;
+create policy "user_favorites: owner select"
+  on public.user_favorites for select
+  to authenticated
+  using (auth.uid() = user_id);
+
+drop policy if exists "user_favorites: owner upsert" on public.user_favorites;
+create policy "user_favorites: owner upsert"
+  on public.user_favorites for insert
+  to authenticated
+  with check (auth.uid() = user_id);
+
+drop policy if exists "user_favorites: owner update" on public.user_favorites;
+create policy "user_favorites: owner update"
+  on public.user_favorites for update
   to authenticated
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);

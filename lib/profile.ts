@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth";
-import { getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
+import { getGiveawayById, getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
 import { supabase } from "@/lib/supabase";
 import { TEAMS } from "@/lib/teams";
 
@@ -217,4 +217,96 @@ export function useMySubmissions() {
   }, [user]);
 
   return { submissions: user ? submissions : [], isLoading: user ? isLoading : false };
+}
+
+export type MyFavorite = {
+  bobbleheadId: string;
+  teamSlug: string;
+  title: string;
+  imageUrl: string | null;
+  href: string;
+};
+
+// Favorites are stored per-team (like user_collections), so building the
+// cross-team list for the profile page means resolving each row's title and
+// image against either the curated giveaway list or the community_bobbleheads
+// table, the same split used elsewhere for a bobblehead's identity.
+export function useMyFavorites() {
+  const { user } = useAuth();
+  const [favorites, setFavorites] = useState<MyFavorite[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!user) return;
+
+    let cancelled = false;
+
+    supabase
+      .from("user_favorites")
+      .select("bobblehead_id, team_slug")
+      .eq("user_id", user.id)
+      .eq("favorited", true)
+      .then(async ({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load your favorites:", error.message);
+          setFavorites([]);
+          setIsLoading(false);
+          return;
+        }
+
+        const rows = data ?? [];
+
+        if (rows.length === 0) {
+          setFavorites([]);
+          setIsLoading(false);
+          return;
+        }
+
+        const teamSlugs = Array.from(new Set(rows.map((row) => row.team_slug)));
+
+        const [{ data: communityRows }, { data: photoRows }] = await Promise.all([
+          supabase
+            .from("community_bobbleheads")
+            .select("id, team_slug, title, image_url")
+            .in("team_slug", teamSlugs),
+          supabase.from("approved_photos").select("bobblehead_id, team_slug, image_url").in("team_slug", teamSlugs),
+        ]);
+
+        if (cancelled) return;
+
+        const communityByKey = new Map(
+          (communityRows ?? []).map((row) => [`${row.team_slug}:${row.id}`, row]),
+        );
+        const photoByKey = new Map(
+          (photoRows ?? []).map((row) => [`${row.team_slug}:${row.bobblehead_id}`, row.image_url]),
+        );
+
+        const resolved: MyFavorite[] = rows.map((row) => {
+          const key = `${row.team_slug}:${row.bobblehead_id}`;
+          const curated = getGiveawayById(row.bobblehead_id, row.team_slug);
+          const community = communityByKey.get(key);
+
+          return {
+            bobbleheadId: row.bobblehead_id,
+            teamSlug: row.team_slug,
+            title: curated?.title ?? community?.title ?? "Bobblehead",
+            imageUrl: photoByKey.get(key) ?? curated?.imageUrl ?? community?.image_url ?? null,
+            href: curated
+              ? `/teams/${row.team_slug}/bobbleheads/${row.bobblehead_id}`
+              : `/teams/${row.team_slug}/community?id=${encodeURIComponent(row.bobblehead_id)}`,
+          };
+        });
+
+        setFavorites(resolved);
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  return { favorites: user ? favorites : [], isLoading: user ? isLoading : false };
 }
