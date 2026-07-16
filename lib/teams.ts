@@ -51,7 +51,7 @@ export const TEAMS: Team[] = [
   { slug: "cardinals", name: "Cardinals", city: "St. Louis", abbr: "STL", league: "NL", division: "Central", primary: "#C41E3A", secondary: "#0C2340", x: 32.53, y: 52.82, labelSide: "right" },
 
   // NL West
-  { slug: "diamondbacks", name: "Diamondbacks", city: "Phoenix", abbr: "AZ", league: "NL", division: "West", primary: "#A71930", secondary: "#E3D4AD", x: 20.45, y: 65.91, labelSide: "right" },
+  { slug: "diamondbacks", name: "Diamondbacks", city: "Arizona", abbr: "AZ", league: "NL", division: "West", primary: "#A71930", secondary: "#E3D4AD", x: 20.45, y: 65.91, labelSide: "right" },
   { slug: "rockies", name: "Rockies", city: "Colorado", abbr: "COL", league: "NL", division: "West", primary: "#333366", secondary: "#C4CED4", x: 22.44, y: 48.61, labelSide: "right" },
   { slug: "dodgers", name: "Dodgers", city: "Los Angeles", abbr: "LAD", league: "NL", division: "West", primary: "#005A9C", secondary: "#FFFFFF", x: 4.98, y: 60.3, labelSide: "right" },
   { slug: "padres", name: "Padres", city: "San Diego", abbr: "SD", league: "NL", division: "West", primary: "#2F241D", secondary: "#FFC425", x: 10.28, y: 65.46, labelSide: "right" },
