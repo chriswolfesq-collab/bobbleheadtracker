@@ -48,11 +48,15 @@ export function ShareCollectionButton({
   countByTeamSlug,
   totalByTeamSlug,
   stats,
+  variant = "default",
 }: {
   displayName: string;
   countByTeamSlug: Record<string, number>;
   totalByTeamSlug: Record<string, number>;
   stats: ShareStats;
+  /** "overlay" sits on top of the shelf art, so it carries more contrast than the
+   *  default, which sits on the page background. */
+  variant?: "default" | "overlay";
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
@@ -143,7 +147,11 @@ export function ShareCollectionButton({
         type="button"
         onClick={handleShare}
         disabled={isBusy}
-        className="flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] font-black uppercase tracking-wide text-zinc-300 transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-60"
+        className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-black uppercase tracking-wide transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-60 ${
+          variant === "overlay"
+            ? "border-amber-400/40 bg-[#101827]/90 text-amber-100 shadow-lg backdrop-blur-sm"
+            : "border-white/15 bg-white/5 text-zinc-300"
+        }`}
       >
         <span aria-hidden>↗</span>
         {isBusy ? "Preparing…" : "Share"}

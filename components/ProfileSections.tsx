@@ -78,7 +78,23 @@ export function ProfileSections({
       </nav>
 
       <section id="collection" className="mb-10 scroll-mt-6">
-        <DisplayCase countByTeamSlug={countByTeamSlug} totalByTeamSlug={totalByTeamSlug} />
+        {/* The button overlays the shelf rather than living inside DisplayCase:
+            DisplayCase is also what the share card itself renders, so a button in
+            there would recurse and end up baked into the shared image. */}
+        <div className="relative mx-auto w-full max-w-2xl">
+          <DisplayCase countByTeamSlug={countByTeamSlug} totalByTeamSlug={totalByTeamSlug} />
+          {displayName ? (
+            <div className="absolute right-4 top-0 z-30 text-right sm:right-6">
+              <ShareCollectionButton
+                variant="overlay"
+                displayName={displayName}
+                countByTeamSlug={countByTeamSlug}
+                totalByTeamSlug={totalByTeamSlug}
+                stats={{ totalOwned, siteTotal, pctComplete, teamsStarted, teamCount: TEAMS.length }}
+              />
+            </div>
+          ) : null}
+        </div>
 
         <div className="mb-4 mt-6 flex items-center justify-between gap-3">
           <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
