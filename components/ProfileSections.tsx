@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { publicAsset } from "@/lib/paths";
-import { type MyFavorite, type MySubmission } from "@/lib/profile";
+import { type MyFavorite, type MySubmission, type MyWanted } from "@/lib/profile";
 import { TEAMS } from "@/lib/teams";
 
 const STATUS_STYLES: Record<MySubmission["status"], string> = {
@@ -29,6 +29,8 @@ export function ProfileSections({
   totalByTeamSlug,
   favorites,
   isFavoritesLoading,
+  wanted,
+  isWantedLoading,
   submissions,
   isSubmissionsLoading,
 }: {
@@ -36,6 +38,8 @@ export function ProfileSections({
   totalByTeamSlug: Record<string, number>;
   favorites: MyFavorite[];
   isFavoritesLoading: boolean;
+  wanted: MyWanted[];
+  isWantedLoading: boolean;
   submissions: MySubmission[];
   isSubmissionsLoading: boolean;
 }) {
@@ -50,6 +54,7 @@ export function ProfileSections({
         {[
           { id: "collection", label: "Collection" },
           { id: "favorites", label: "Favorites" },
+          { id: "wanted", label: "Wanted" },
           { id: "submissions", label: "Submissions" },
         ].map(({ id, label }) => (
           <button
@@ -134,6 +139,50 @@ export function ProfileSections({
                   </span>
                   <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-red-400">
                     ♥
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </section>
+
+      <section id="wanted" className="mb-10 scroll-mt-6">
+        <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
+          Wanted
+        </h2>
+        {isWantedLoading ? (
+          <p className="text-sm text-zinc-400">Loading…</p>
+        ) : wanted.length === 0 ? (
+          <p className="text-sm text-zinc-400">Nothing on your wanted list yet.</p>
+        ) : (
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+            {wanted.map((item, index) => {
+              const team = TEAMS.find((t) => t.slug === item.teamSlug);
+              const imageSrc = item.imageUrl ?? publicAsset(`/bobbleheads/${item.teamSlug}.png`);
+
+              return (
+                <Link
+                  key={`${item.teamSlug}:${item.bobbleheadId}`}
+                  href={item.href}
+                  className={`flex items-center gap-3 px-4 py-3 text-sm transition hover:bg-white/5 ${
+                    index !== wanted.length - 1 ? "border-b border-white/10" : ""
+                  }`}
+                >
+                  <Image
+                    src={imageSrc}
+                    alt=""
+                    width={677}
+                    height={1607}
+                    sizes="120px"
+                    className="h-20 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
+                  />
+                  <span className="min-w-0">
+                    <span className="block truncate font-bold text-zinc-100">{item.title}</span>
+                    <span className="text-xs text-zinc-500">{team?.name ?? item.teamSlug}</span>
+                  </span>
+                  <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-amber-400">
+                    ★
                   </span>
                 </Link>
               );

@@ -349,3 +349,94 @@ export function useMyFavorites(source?: ProfileSource) {
 
   return { favorites: userId ? favorites : [], isLoading: userId ? isLoading : false };
 }
+
+export type MyWanted = {
+  bobbleheadId: string;
+  teamSlug: string;
+  title: string;
+  imageUrl: string | null;
+  href: string;
+};
+
+// Wanted bobbleheads, same cross-team resolution as useMyFavorites above.
+export function useMyWanted(source?: ProfileSource) {
+  const { user } = useAuth();
+  const client = source?.client ?? supabase;
+  const userId = source?.userId ?? user?.id ?? null;
+  const [wanted, setWanted] = useState<MyWanted[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    let cancelled = false;
+
+    client
+      .from("user_wants")
+      .select("bobblehead_id, team_slug")
+      .eq("user_id", userId)
+      .eq("wanted", true)
+      .then(async ({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load your wanted list:", error.message);
+          setWanted([]);
+          setIsLoading(false);
+          return;
+        }
+
+        const rows = data ?? [];
+
+        if (rows.length === 0) {
+          setWanted([]);
+          setIsLoading(false);
+          return;
+        }
+
+        const teamSlugs = Array.from(new Set(rows.map((row) => row.team_slug)));
+
+        const [{ data: communityRows }, { data: photoRows }] = await Promise.all([
+          client
+            .from("community_bobbleheads")
+            .select("id, team_slug, title, image_url")
+            .in("team_slug", teamSlugs),
+          client.from("approved_photos").select("bobblehead_id, team_slug, image_url").in("team_slug", teamSlugs),
+        ]);
+
+        if (cancelled) return;
+
+        const communityByKey = new Map(
+          (communityRows ?? []).map((row) => [`${row.team_slug}:${row.id}`, row]),
+        );
+        const photoByKey = new Map(
+          (photoRows ?? []).map((row) => [`${row.team_slug}:${row.bobblehead_id}`, row.image_url]),
+        );
+
+        const resolved: MyWanted[] = rows.map((row) => {
+          const key = `${row.team_slug}:${row.bobblehead_id}`;
+          const curated = getGiveawayById(row.bobblehead_id, row.team_slug);
+          const community = communityByKey.get(key);
+
+          return {
+            bobbleheadId: row.bobblehead_id,
+            teamSlug: row.team_slug,
+            title: curated?.title ?? community?.title ?? "Bobblehead",
+            imageUrl: photoByKey.get(key) ?? curated?.imageUrl ?? community?.image_url ?? null,
+            href: curated
+              ? `/teams/${row.team_slug}/bobbleheads/${row.bobblehead_id}`
+              : `/teams/${row.team_slug}/community?id=${encodeURIComponent(row.bobblehead_id)}`,
+          };
+        });
+
+        setWanted(resolved);
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId, client]);
+
+  return { wanted: userId ? wanted : [], isLoading: userId ? isLoading : false };
+}

@@ -9,6 +9,7 @@ import {
   useCollectionSummary,
   useMyFavorites,
   useMySubmissions,
+  useMyWanted,
   useSiteBobbleheadCounts,
 } from "@/lib/profile";
 
@@ -18,6 +19,7 @@ export function ProfilePageClient() {
   const { totalByTeamSlug, siteTotal, isLoading: isSiteTotalLoading } = useSiteBobbleheadCounts();
   const { submissions, isLoading: isSubmissionsLoading } = useMySubmissions();
   const { favorites, isLoading: isFavoritesLoading } = useMyFavorites();
+  const { wanted, isLoading: isWantedLoading } = useMyWanted();
   const [isEditingName, setIsEditingName] = useState(false);
   const [nameDraft, setNameDraft] = useState("");
   const [isSavingName, setIsSavingName] = useState(false);
@@ -123,6 +125,8 @@ export function ProfilePageClient() {
             totalByTeamSlug={totalByTeamSlug}
             favorites={favorites}
             isFavoritesLoading={isFavoritesLoading}
+            wanted={wanted}
+            isWantedLoading={isWantedLoading}
             submissions={submissions}
             isSubmissionsLoading={isSubmissionsLoading}
           />

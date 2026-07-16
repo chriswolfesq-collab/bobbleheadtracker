@@ -67,6 +67,15 @@ create table if not exists public.user_favorites (
   primary key (user_id, bobblehead_id)
 );
 
+create table if not exists public.user_wants (
+  user_id uuid not null references auth.users (id) on delete cascade,
+  bobblehead_id text not null,
+  team_slug text not null,
+  wanted boolean not null default true,
+  updated_at timestamptz not null default now(),
+  primary key (user_id, bobblehead_id)
+);
+
 create table if not exists public.approved_photos (
   bobblehead_id text primary key,
   team_slug text not null,
@@ -182,6 +191,7 @@ alter table public.bobblehead_overrides
 
 alter table public.user_collections enable row level security;
 alter table public.user_favorites enable row level security;
+alter table public.user_wants enable row level security;
 alter table public.approved_photos enable row level security;
 alter table public.community_bobbleheads enable row level security;
 alter table public.bobblehead_gallery_photos enable row level security;
@@ -242,6 +252,33 @@ create policy "user_favorites: owner update"
 drop policy if exists "user_favorites: admin select" on public.user_favorites;
 create policy "user_favorites: admin select"
   on public.user_favorites for select
+  to authenticated
+  using (public.is_admin());
+
+-- user_wants: fully private per-user data, same shape as user_collections.
+drop policy if exists "user_wants: owner select" on public.user_wants;
+create policy "user_wants: owner select"
+  on public.user_wants for select
+  to authenticated
+  using (auth.uid() = user_id);
+
+drop policy if exists "user_wants: owner upsert" on public.user_wants;
+create policy "user_wants: owner upsert"
+  on public.user_wants for insert
+  to authenticated
+  with check (auth.uid() = user_id);
+
+drop policy if exists "user_wants: owner update" on public.user_wants;
+create policy "user_wants: owner update"
+  on public.user_wants for update
+  to authenticated
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
+
+-- Additive admin read policy, same rationale as user_collections above.
+drop policy if exists "user_wants: admin select" on public.user_wants;
+create policy "user_wants: admin select"
+  on public.user_wants for select
   to authenticated
   using (public.is_admin());
 
@@ -544,6 +581,8 @@ begin
     where bobblehead_id = p_bobblehead_id and team_slug = p_team_slug;
   delete from public.user_favorites
     where bobblehead_id = p_bobblehead_id and team_slug = p_team_slug;
+  delete from public.user_wants
+    where bobblehead_id = p_bobblehead_id and team_slug = p_team_slug;
   delete from public.listing_reports
     where bobblehead_id = p_bobblehead_id and team_slug = p_team_slug;
 
@@ -570,6 +609,8 @@ grant execute on function public.admin_delete_bobblehead(text, text, text) to au
 -- is_admin() themselves first, so a non-admin caller gets 'not authorized'
 -- regardless of what the client claims.
 
+drop function if exists public.admin_list_users();
+
 create or replace function public.admin_list_users()
 returns table (
   id uuid,
@@ -579,6 +620,7 @@ returns table (
   last_sign_in_at timestamptz,
   owned_count int,
   favorite_count int,
+  wanted_count int,
   submission_count int,
   report_count int
 )
@@ -601,6 +643,7 @@ begin
     u.last_sign_in_at,
     (select count(*) from public.user_collections uc where uc.user_id = u.id and uc.owned)::int,
     (select count(*) from public.user_favorites uf where uf.user_id = u.id and uf.favorited)::int,
+    (select count(*) from public.user_wants uw where uw.user_id = u.id and uw.wanted)::int,
     (select count(*) from public.submissions s where s.submitted_by = u.id)::int,
     (select count(*) from public.listing_reports lr where lr.submitted_by = u.id)::int
   from auth.users u

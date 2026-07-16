@@ -11,6 +11,7 @@ import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { useToast } from "@/components/Toast";
+import { WantedButton } from "@/components/WantedButton";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, saveCuratedBobblehead } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
@@ -21,6 +22,7 @@ import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
 import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
+import { useUserWanted } from "@/lib/userWanted";
 
 export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; team: Team }) {
   const router = useRouter();
@@ -31,6 +33,7 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
   const { override, isLoading: isOverrideLoading } = useBobbleheadOverride(team.slug, giveaway.id);
   const { ownedById, isLoggedIn, setOwned } = useUserCollection(team.slug);
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, setFavorited } = useUserFavorites(team.slug);
+  const { wantedById, isLoggedIn: isLoggedInForWanted, setWanted } = useUserWanted(team.slug);
 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [localOverride, setLocalOverride] = useState<EditBobbleheadValues | null>(null);
@@ -72,6 +75,7 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
     removableMainPhotoUrl ?? giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
   const isOwned = ownedById[giveaway.id] ?? false;
   const isFavorited = favoritedById[giveaway.id] ?? false;
+  const isWanted = wantedById[giveaway.id] ?? false;
   const details = [
     ["Release Date", date],
     ["Team", `${team.city} ${team.name}`],
@@ -171,6 +175,12 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
               </p>
               <h1 className="mt-3 flex flex-wrap items-center gap-3 text-4xl font-black uppercase leading-none tracking-wide text-white sm:text-5xl 2xl:text-6xl">
                 {title}
+                <WantedButton
+                  isWanted={isWanted}
+                  isLoggedIn={isLoggedInForWanted}
+                  onToggle={() => setWanted(giveaway.id, !isWanted)}
+                  className="h-9 w-9 text-xl sm:h-10 sm:w-10 sm:text-2xl"
+                />
                 <FavoriteButton
                   isFavorited={isFavorited}
                   isLoggedIn={isLoggedInForFavorites}

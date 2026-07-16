@@ -13,6 +13,7 @@ type AdminUser = {
   last_sign_in_at: string | null;
   owned_count: number;
   favorite_count: number;
+  wanted_count: number;
   submission_count: number;
   report_count: number;
 };
@@ -194,8 +195,8 @@ export default function AdminUsersPage() {
                   Joined {formatDate(row.created_at)} · Last sign-in {formatDate(row.last_sign_in_at)}
                 </p>
                 <p className="mt-1 text-xs text-zinc-500">
-                  {row.owned_count} owned · {row.favorite_count} favorited · {row.submission_count} submissions ·{" "}
-                  {row.report_count} reports
+                  {row.owned_count} owned · {row.favorite_count} favorited · {row.wanted_count} wanted ·{" "}
+                  {row.submission_count} submissions · {row.report_count} reports
                 </p>
               </div>
 

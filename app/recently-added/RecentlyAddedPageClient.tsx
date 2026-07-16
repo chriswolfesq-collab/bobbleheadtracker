@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AuthWidget } from "@/components/AuthWidget";
 import { RecentlyAddedCard } from "@/components/RecentlyAddedCard";
+import { ToggleChip } from "@/components/ToggleChip";
 import { useRecentCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { getTeamBySlug } from "@/lib/teams";
+import { useMyWantedLookup } from "@/lib/userWanted";
 
 const RECENT_LIMIT = 200;
 const UNKNOWN_YEAR = "Unknown";
@@ -19,9 +21,11 @@ function extractYear(date: string): string {
 
 export function RecentlyAddedPageClient() {
   const { communityBobbleheads, isLoading } = useRecentCommunityBobbleheads(RECENT_LIMIT);
+  const { wantedByKey, isLoggedIn: isLoggedInForWanted, setWanted } = useMyWantedLookup();
   const [query, setQuery] = useState("");
   const [teamFilter, setTeamFilter] = useState("");
   const [yearFilter, setYearFilter] = useState("");
+  const [wantedOnly, setWantedOnly] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -56,6 +60,7 @@ export function RecentlyAddedPageClient() {
     return communityBobbleheads.filter((bobblehead) => {
       if (teamFilter && bobblehead.teamSlug !== teamFilter) return false;
       if (yearFilter && extractYear(bobblehead.date) !== yearFilter) return false;
+      if (wantedOnly && !wantedByKey[`${bobblehead.teamSlug}:${bobblehead.id}`]) return false;
 
       if (terms.length > 0) {
         const team = getTeamBySlug(bobblehead.teamSlug);
@@ -65,9 +70,10 @@ export function RecentlyAddedPageClient() {
 
       return true;
     });
-  }, [communityBobbleheads, query, teamFilter, yearFilter]);
+  }, [communityBobbleheads, query, teamFilter, yearFilter, wantedOnly, wantedByKey]);
 
-  const hasActiveFilters = query.trim().length > 0 || teamFilter !== "" || yearFilter !== "";
+  const hasActiveFilters =
+    query.trim().length > 0 || teamFilter !== "" || yearFilter !== "" || wantedOnly;
 
   return (
     <div
@@ -96,7 +102,7 @@ export function RecentlyAddedPageClient() {
 
         {!isLoading && communityBobbleheads.length > 0 ? (
           <div className="mb-6">
-            <div className="grid gap-3 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)]">
+            <div className="grid gap-3 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_auto]">
               <label className="min-w-0">
                 {isSearchOpen ? (
                   <>
@@ -174,6 +180,9 @@ export function RecentlyAddedPageClient() {
                   ))}
                 </select>
               </label>
+              <div className="flex items-end">
+                <ToggleChip label="Wanted" active={wantedOnly} onClick={() => setWantedOnly((v) => !v)} />
+              </div>
             </div>
 
             <div className="mt-3 flex items-center justify-between gap-3">
@@ -187,6 +196,7 @@ export function RecentlyAddedPageClient() {
                     setQuery("");
                     setTeamFilter("");
                     setYearFilter("");
+                    setWantedOnly(false);
                   }}
                   className="text-xs font-semibold uppercase tracking-wide text-zinc-400 transition hover:text-amber-300"
                 >
@@ -212,9 +222,18 @@ export function RecentlyAddedPageClient() {
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-            {filtered.map((bobblehead) => (
-              <RecentlyAddedCard key={bobblehead.id} bobblehead={bobblehead} />
-            ))}
+            {filtered.map((bobblehead) => {
+              const key = `${bobblehead.teamSlug}:${bobblehead.id}`;
+              return (
+                <RecentlyAddedCard
+                  key={bobblehead.id}
+                  bobblehead={bobblehead}
+                  isWanted={wantedByKey[key] ?? false}
+                  isLoggedIn={isLoggedInForWanted}
+                  onToggleWanted={() => setWanted(bobblehead.teamSlug, bobblehead.id, !(wantedByKey[key] ?? false))}
+                />
+              );
+            })}
           </div>
         )}
       </div>

@@ -9,6 +9,7 @@ import {
   useCollectionSummary,
   useMyFavorites,
   useMySubmissions,
+  useMyWanted,
   useSiteBobbleheadCounts,
 } from "@/lib/profile";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
@@ -49,6 +50,7 @@ export function AdminUserProfile() {
   const { totalByTeamSlug, siteTotal, isLoading: isSiteTotalLoading } = useSiteBobbleheadCounts();
   const { submissions, isLoading: isSubmissionsLoading } = useMySubmissions(source);
   const { favorites, isLoading: isFavoritesLoading } = useMyFavorites(source);
+  const { wanted, isLoading: isWantedLoading } = useMyWanted(source);
 
   useEffect(() => {
     if (!isAdmin || !targetId) return;
@@ -152,6 +154,8 @@ export function AdminUserProfile() {
             totalByTeamSlug={totalByTeamSlug}
             favorites={favorites}
             isFavoritesLoading={isFavoritesLoading}
+            wanted={wanted}
+            isWantedLoading={isWantedLoading}
             submissions={submissions}
             isSubmissionsLoading={isSubmissionsLoading}
           />

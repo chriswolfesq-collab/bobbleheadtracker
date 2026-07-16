@@ -4,11 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { createContext, useContext } from "react";
 import { FavoriteButton } from "@/components/FavoriteButton";
+import { WantedButton } from "@/components/WantedButton";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
 import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
+import { useUserWanted } from "@/lib/userWanted";
 
 export type ResolvedGiveaway = Giveaway & { source: "curated" | "community" };
 
@@ -21,7 +23,7 @@ type OwnershipContextValue = {
 
 const OwnershipContext = createContext<OwnershipContextValue | null>(null);
 
-function useOwnership() {
+export function useOwnership() {
   const context = useContext(OwnershipContext);
 
   if (!context) {
@@ -65,7 +67,7 @@ type FavoritesContextValue = {
 
 const FavoritesContext = createContext<FavoritesContextValue | null>(null);
 
-function useFavorites() {
+export function useFavorites() {
   const context = useContext(FavoritesContext);
 
   if (!context) {
@@ -93,6 +95,42 @@ export function FavoritesProvider({
   return <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>;
 }
 
+type WantedContextValue = {
+  wantedById: Record<string, boolean>;
+  isLoggedIn: boolean;
+  toggleWanted: (id: string) => void;
+};
+
+const WantedContext = createContext<WantedContextValue | null>(null);
+
+export function useWanted() {
+  const context = useContext(WantedContext);
+
+  if (!context) {
+    throw new Error("Wanted components must be used inside WantedProvider.");
+  }
+
+  return context;
+}
+
+export function WantedProvider({
+  children,
+  teamSlug,
+}: {
+  children: React.ReactNode;
+  teamSlug: string;
+}) {
+  const { wantedById, isLoggedIn, setWanted } = useUserWanted(teamSlug);
+
+  const value: WantedContextValue = {
+    wantedById,
+    isLoggedIn,
+    toggleWanted: (id: string) => setWanted(id, !wantedById[id]),
+  };
+
+  return <WantedContext.Provider value={value}>{children}</WantedContext.Provider>;
+}
+
 export function GiveawayCard({
   giveaway,
   team,
@@ -104,8 +142,10 @@ export function GiveawayCard({
 }) {
   const { ownedById, isLoggedIn, toggleOwned } = useOwnership();
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, toggleFavorited } = useFavorites();
+  const { wantedById, isLoggedIn: isLoggedInForWanted, toggleWanted } = useWanted();
   const isOwned = ownedById[giveaway.id] ?? false;
   const isFavorited = favoritedById[giveaway.id] ?? false;
+  const isWanted = wantedById[giveaway.id] ?? false;
   const href =
     giveaway.source === "community"
       ? `/teams/${team.slug}/community?id=${encodeURIComponent(giveaway.id)}`
@@ -127,12 +167,20 @@ export function GiveawayCard({
         ) : null}
       </div>
 
-      <FavoriteButton
-        isFavorited={isFavorited}
-        isLoggedIn={isLoggedInForFavorites}
-        onToggle={() => toggleFavorited(giveaway.id)}
-        className="absolute right-3 top-3 z-10 h-6 w-6 text-sm"
-      />
+      <div className="absolute right-3 top-3 z-10 flex items-center gap-1.5">
+        <WantedButton
+          isWanted={isWanted}
+          isLoggedIn={isLoggedInForWanted}
+          onToggle={() => toggleWanted(giveaway.id)}
+          className="h-6 w-6 text-sm"
+        />
+        <FavoriteButton
+          isFavorited={isFavorited}
+          isLoggedIn={isLoggedInForFavorites}
+          onToggle={() => toggleFavorited(giveaway.id)}
+          className="h-6 w-6 text-sm"
+        />
+      </div>
 
       <Link href={href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">
         <div className="flex h-32 items-end justify-center bg-[radial-gradient(circle_at_50%_22%,rgba(255,255,255,0.14),rgba(255,255,255,0)_42%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.22))] px-3 pt-4 sm:h-52 sm:px-4 sm:pt-6">

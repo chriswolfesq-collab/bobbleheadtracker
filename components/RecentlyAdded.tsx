@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { RecentlyAddedCard } from "@/components/RecentlyAddedCard";
 import { useRecentCommunityBobbleheads } from "@/lib/communityBobbleheads";
+import { useMyWantedLookup } from "@/lib/userWanted";
 
 const RECENT_LIMIT = 10;
 
 export default function RecentlyAdded() {
   const { communityBobbleheads, isLoading } = useRecentCommunityBobbleheads(RECENT_LIMIT);
+  const { wantedByKey, isLoggedIn, setWanted } = useMyWantedLookup();
 
   if (isLoading || communityBobbleheads.length === 0) {
     return null;
@@ -28,9 +30,18 @@ export default function RecentlyAdded() {
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3">
-        {communityBobbleheads.map((bobblehead) => (
-          <RecentlyAddedCard key={bobblehead.id} bobblehead={bobblehead} />
-        ))}
+        {communityBobbleheads.map((bobblehead) => {
+          const key = `${bobblehead.teamSlug}:${bobblehead.id}`;
+          return (
+            <RecentlyAddedCard
+              key={bobblehead.id}
+              bobblehead={bobblehead}
+              isWanted={wantedByKey[key] ?? false}
+              isLoggedIn={isLoggedIn}
+              onToggleWanted={() => setWanted(bobblehead.teamSlug, bobblehead.id, !(wantedByKey[key] ?? false))}
+            />
+          );
+        })}
       </div>
     </section>
   );

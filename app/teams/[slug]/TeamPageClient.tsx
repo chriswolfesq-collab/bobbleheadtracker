@@ -15,7 +15,8 @@ import { findDuplicateBobblehead, type DuplicateCandidate } from "@/lib/duplicat
 import { publicAsset } from "@/lib/paths";
 import { submitNewBobblehead } from "@/lib/submissions";
 import type { Team } from "@/lib/teams";
-import { FavoritesProvider, GiveawayCard, OwnedCount, OwnershipProvider, type ResolvedGiveaway } from "./GiveawayCard";
+import { BobbleheadCollection } from "./BobbleheadCollection";
+import { FavoritesProvider, OwnedCount, OwnershipProvider, WantedProvider, type ResolvedGiveaway } from "./GiveawayCard";
 
 function Stat({
   icon,
@@ -199,177 +200,170 @@ export function TeamPageClient({
   return (
     <OwnershipProvider teamSlug={team.slug}>
       <FavoritesProvider teamSlug={team.slug}>
-        <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
-          <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border border-black bg-[#08131f] shadow-2xl">
-            <div className="border-b border-white/10 bg-[#08131f] py-3">
-              <SiteSearch teamSlug={team.slug} buttonLabel={`Search ${team.name}`} />
-            </div>
+        <WantedProvider teamSlug={team.slug}>
+          <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
+            <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border border-black bg-[#08131f] shadow-2xl">
+              <div className="border-b border-white/10 bg-[#08131f] py-3">
+                <SiteSearch teamSlug={team.slug} buttonLabel={`Search ${team.name}`} />
+              </div>
 
-            <section
-              className="grid gap-4 border-b border-white/10 p-4 sm:gap-6 sm:p-5 lg:grid-cols-[220px_1fr]"
-              style={{
-                background: `radial-gradient(circle at 74% 14%, ${team.primary}44, transparent 34%), linear-gradient(135deg, #08131f 0%, #0b1d2e 52%, #07111d 100%)`,
-              }}
-            >
-              <aside className="lg:border-r lg:border-white/10 lg:pr-5">
-                <div className="flex items-center justify-between gap-3">
-                  <Link
-                    href="/"
-                    className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
-                  >
-                    <span aria-hidden>←</span>
-                    Back to shelf
-                  </Link>
-                </div>
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <AdminModeBadge />
-                  <AuthWidget />
-                </div>
-
-                <div className="mt-5 hidden rounded border border-white/15 bg-black/25 p-3 text-center lg:block">
-                  <div className="flex h-48 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
-                    <Image
-                      src={publicAsset(`/bobbleheads/${team.slug}.png`)}
-                      alt={`${team.city} ${team.name} bobblehead`}
-                      width={268}
-                      height={630}
-                      priority
-                      className="h-44 w-auto drop-shadow-[0_12px_16px_rgba(0,0,0,0.65)]"
-                    />
-                  </div>
-                  <div className="mt-2 rounded bg-black/45 px-2 py-1 text-sm font-black uppercase tracking-wide">
-                    {team.name}
-                  </div>
-                </div>
-              </aside>
-
-              <div className="grid gap-5 xl:grid-cols-[1fr_210px] xl:gap-7">
-                <div>
-                  <div className="flex flex-row items-center gap-4 sm:items-start sm:gap-5">
-                    <div
-                      className="relative grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded bg-black/25 text-2xl font-black text-white sm:h-24 sm:w-24 sm:bg-transparent sm:text-4xl lg:hidden"
-                      style={{ color: team.secondary === "#FFFFFF" ? "#f8fafc" : team.secondary }}
+              <section
+                className="grid gap-4 border-b border-white/10 p-4 sm:gap-6 sm:p-5 lg:grid-cols-[220px_1fr]"
+                style={{
+                  background: `radial-gradient(circle at 74% 14%, ${team.primary}44, transparent 34%), linear-gradient(135deg, #08131f 0%, #0b1d2e 52%, #07111d 100%)`,
+                }}
+              >
+                <aside className="lg:border-r lg:border-white/10 lg:pr-5">
+                  <div className="flex items-center justify-between gap-3">
+                    <Link
+                      href="/"
+                      className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
                     >
+                      <span aria-hidden>←</span>
+                      Back to shelf
+                    </Link>
+                  </div>
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <AdminModeBadge />
+                    <AuthWidget />
+                  </div>
+
+                  <div className="mt-5 hidden rounded border border-white/15 bg-black/25 p-3 text-center lg:block">
+                    <div className="flex h-48 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
                       <Image
                         src={publicAsset(`/bobbleheads/${team.slug}.png`)}
                         alt={`${team.city} ${team.name} bobblehead`}
                         width={268}
                         height={630}
                         priority
-                        className="absolute inset-0 h-full w-full object-contain sm:hidden"
+                        className="h-44 w-auto drop-shadow-[0_12px_16px_rgba(0,0,0,0.65)]"
                       />
-                      <span className="hidden sm:inline">{team.abbr}</span>
                     </div>
-                    <div
-                      className="hidden h-24 w-24 shrink-0 place-items-center text-4xl font-black text-white lg:grid"
-                      style={{ color: team.secondary === "#FFFFFF" ? "#f8fafc" : team.secondary }}
+                    <div className="mt-2 rounded bg-black/45 px-2 py-1 text-sm font-black uppercase tracking-wide">
+                      {team.name}
+                    </div>
+                  </div>
+                </aside>
+
+                <div className="grid gap-5 xl:grid-cols-[1fr_210px] xl:gap-7">
+                  <div>
+                    <div className="flex flex-row items-center gap-4 sm:items-start sm:gap-5">
+                      <div
+                        className="relative grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded bg-black/25 text-2xl font-black text-white sm:h-24 sm:w-24 sm:bg-transparent sm:text-4xl lg:hidden"
+                        style={{ color: team.secondary === "#FFFFFF" ? "#f8fafc" : team.secondary }}
+                      >
+                        <Image
+                          src={publicAsset(`/bobbleheads/${team.slug}.png`)}
+                          alt={`${team.city} ${team.name} bobblehead`}
+                          width={268}
+                          height={630}
+                          priority
+                          className="absolute inset-0 h-full w-full object-contain sm:hidden"
+                        />
+                        <span className="hidden sm:inline">{team.abbr}</span>
+                      </div>
+                      <div
+                        className="hidden h-24 w-24 shrink-0 place-items-center text-4xl font-black text-white lg:grid"
+                        style={{ color: team.secondary === "#FFFFFF" ? "#f8fafc" : team.secondary }}
+                      >
+                        {team.abbr}
+                      </div>
+                      <div>
+                        <h1 className="text-2xl font-black uppercase leading-none tracking-wide text-white sm:text-4xl sm:leading-none 2xl:text-6xl">
+                          {team.city} {team.name}
+                        </h1>
+                        <p className="mt-2 text-sm font-black uppercase tracking-wide text-amber-400 sm:mt-3 sm:text-xl">
+                          {team.league} {team.division}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-5 grid grid-cols-3 gap-3 sm:mt-9 sm:gap-6">
+                      <Stat icon={<span>♟</span>} value={allGiveaways.length} label="Bobbleheads" />
+                      <Stat icon={<span>✓</span>} value={<OwnedCount />} label="Owned" />
+                      <Stat icon={<span>▣</span>} value={photoCount} label="Photos" />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-row items-center justify-between gap-4 xl:flex-col xl:items-end">
+                    <div className="space-y-1 text-right xl:space-y-3 xl:text-right">
+                      <p className="hidden text-sm font-black uppercase tracking-wide text-zinc-200 xl:block">
+                        ⓘ Team info
+                      </p>
+                      <div className="text-xs leading-5 text-zinc-300 sm:text-sm sm:leading-7 sm:text-zinc-200 xl:pt-4">
+                        <p className="uppercase">Est. {established}</p>
+                        <p>
+                          {team.city}, {team.league} {team.division}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section className="m-2 rounded-lg border border-white/10 bg-[#0b1a29] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] sm:m-3 sm:p-6">
+                <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <h2 className="text-2xl font-black uppercase tracking-wide text-zinc-100">SGA Bobbleheads</h2>
+                  <div className="flex flex-wrap gap-3">
+                    <button
+                      type="button"
+                      className="inline-flex items-center justify-center gap-2 rounded border border-amber-400 px-4 py-2 text-sm font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
+                      onClick={() => {
+                        setJustSubmitted(false);
+                        setIsAdding((current) => !current);
+                      }}
                     >
-                      {team.abbr}
-                    </div>
-                    <div>
-                      <h1 className="text-2xl font-black uppercase leading-none tracking-wide text-white sm:text-4xl sm:leading-none 2xl:text-6xl">
-                        {team.city} {team.name}
-                      </h1>
-                      <p className="mt-2 text-sm font-black uppercase tracking-wide text-amber-400 sm:mt-3 sm:text-xl">
-                        {team.league} {team.division}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mt-5 grid grid-cols-3 gap-3 sm:mt-9 sm:gap-6">
-                    <Stat icon={<span>♟</span>} value={allGiveaways.length} label="Bobbleheads" />
-                    <Stat icon={<span>✓</span>} value={<OwnedCount />} label="Owned" />
-                    <Stat icon={<span>▣</span>} value={photoCount} label="Photos" />
+                      <span>{isAdding ? "-" : "+"}</span>
+                      Submit a bobblehead
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex items-center justify-start gap-2 self-start text-sm font-bold uppercase tracking-wide text-zinc-100 sm:self-auto"
+                    >
+                      Sort: Release date (newest)
+                      <span className="text-lg">⌄</span>
+                    </button>
                   </div>
                 </div>
 
-                <div className="flex flex-row items-center justify-between gap-4 xl:flex-col xl:items-end">
-                  <div className="space-y-1 text-right xl:space-y-3 xl:text-right">
-                    <p className="hidden text-sm font-black uppercase tracking-wide text-zinc-200 xl:block">
-                      ⓘ Team info
-                    </p>
-                    <div className="text-xs leading-5 text-zinc-300 sm:text-sm sm:leading-7 sm:text-zinc-200 xl:pt-4">
-                      <p className="uppercase">Est. {established}</p>
-                      <p>
-                        {team.city}, {team.league} {team.division}
-                      </p>
+                {isAdding ? (
+                  justSubmitted ? (
+                    <div className="mb-5 rounded-lg border border-amber-400/35 bg-amber-400/10 p-4 text-sm font-semibold text-amber-200">
+                      Submitted — the admin will review it before it appears for everyone.
                     </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section className="m-2 rounded-lg border border-white/10 bg-[#0b1a29] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] sm:m-3 sm:p-6">
-              <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <h2 className="text-2xl font-black uppercase tracking-wide text-zinc-100">SGA Bobbleheads</h2>
-                <div className="flex flex-wrap gap-3">
-                  <button
-                    type="button"
-                    className="inline-flex items-center justify-center gap-2 rounded border border-amber-400 px-4 py-2 text-sm font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
-                    onClick={() => {
-                      setJustSubmitted(false);
-                      setIsAdding((current) => !current);
-                    }}
-                  >
-                    <span>{isAdding ? "-" : "+"}</span>
-                    Submit a bobblehead
-                  </button>
-                  <button
-                    type="button"
-                    className="inline-flex items-center justify-start gap-2 self-start text-sm font-bold uppercase tracking-wide text-zinc-100 sm:self-auto"
-                  >
-                    Sort: Release date (newest)
-                    <span className="text-lg">⌄</span>
-                  </button>
-                </div>
-              </div>
-
-              {isAdding ? (
-                justSubmitted ? (
-                  <div className="mb-5 rounded-lg border border-amber-400/35 bg-amber-400/10 p-4 text-sm font-semibold text-amber-200">
-                    Submitted — the admin will review it before it appears for everyone.
-                  </div>
-                ) : (
-                  <SubmitBobbleheadForm
-                    teamSlug={team.slug}
-                    communityBobbleheads={communityBobbleheads}
-                    isDeleted={isDeleted}
-                    onDone={() => setJustSubmitted(true)}
-                  />
-                )
-              ) : null}
-
-              {allGiveaways.length > 0 ? (
-                <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 xl:grid-cols-6">
-                  {allGiveaways.map((giveaway, index) => (
-                    <GiveawayCard
-                      key={giveaway.id}
-                      giveaway={giveaway}
-                      team={team}
-                      index={index}
+                  ) : (
+                    <SubmitBobbleheadForm
+                      teamSlug={team.slug}
+                      communityBobbleheads={communityBobbleheads}
+                      isDeleted={isDeleted}
+                      onDone={() => setJustSubmitted(true)}
                     />
-                  ))}
-                </div>
-              ) : (
-                <div className="rounded-lg border border-dashed border-white/15 bg-black/15 p-8 text-center">
-                  <p className="text-sm font-black uppercase tracking-wide text-zinc-100">
-                    No bobbleheads added yet
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-zinc-400">
-                    Submit the first bobblehead for this team.
-                  </p>
-                  <button
-                    type="button"
-                    className="mt-5 rounded bg-amber-500 px-5 py-3 text-sm font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300"
-                    onClick={() => setIsAdding(true)}
-                  >
-                    Submit a bobblehead
-                  </button>
-                </div>
-              )}
-            </section>
-          </div>
-        </main>
+                  )
+                ) : null}
+
+                {allGiveaways.length > 0 ? (
+                  <BobbleheadCollection allGiveaways={allGiveaways} team={team} />
+                ) : (
+                  <div className="rounded-lg border border-dashed border-white/15 bg-black/15 p-8 text-center">
+                    <p className="text-sm font-black uppercase tracking-wide text-zinc-100">
+                      No bobbleheads added yet
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-zinc-400">
+                      Submit the first bobblehead for this team.
+                    </p>
+                    <button
+                      type="button"
+                      className="mt-5 rounded bg-amber-500 px-5 py-3 text-sm font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300"
+                      onClick={() => setIsAdding(true)}
+                    >
+                      Submit a bobblehead
+                    </button>
+                  </div>
+                )}
+              </section>
+            </div>
+          </main>
+        </WantedProvider>
       </FavoritesProvider>
     </OwnershipProvider>
   );
