@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
@@ -73,6 +74,10 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
               <span aria-hidden>←</span>
               Back to team
             </Link>
+
+            <div className="mt-3">
+              <AdminModeBadge />
+            </div>
 
             <div className="mt-5 rounded border border-white/15 bg-black/25 p-3 text-center">
               <div className="flex h-44 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">

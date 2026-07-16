@@ -100,8 +100,8 @@ export default function AdminReportsPage() {
     <main className="min-h-full bg-[#15110d] px-4 py-8 text-zinc-100 sm:px-8">
       <div className="mx-auto flex max-w-4xl items-center justify-between">
         <div>
-          <Link href="/" className="text-sm font-black uppercase tracking-wide text-white hover:text-amber-300">
-            ← Back to shelf
+          <Link href="/admin" className="text-sm font-black uppercase tracking-wide text-white hover:text-amber-300">
+            ← Back to admin
           </Link>
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">Listing reports</h1>
         </div>

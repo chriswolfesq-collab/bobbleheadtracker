@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { AuthWidget } from "@/components/AuthWidget";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { useAuth } from "@/lib/auth";
@@ -202,7 +203,8 @@ export function TeamPageClient({
                   Back to shelf
                 </Link>
               </div>
-              <div className="mt-3">
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <AdminModeBadge />
                 <AuthWidget />
               </div>
 

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
@@ -21,13 +22,16 @@ function Shell({ team, children }: { team: Team; children: React.ReactNode }) {
   return (
     <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
       <div className="mx-auto max-w-3xl rounded-xl border border-black bg-[#08131f] p-6 shadow-2xl">
-        <Link
-          href={`/teams/${team.slug}`}
-          className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
-        >
-          <span aria-hidden>←</span>
-          Back to team
-        </Link>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <Link
+            href={`/teams/${team.slug}`}
+            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
+          >
+            <span aria-hidden>←</span>
+            Back to team
+          </Link>
+          <AdminModeBadge />
+        </div>
         {children}
       </div>
     </main>
