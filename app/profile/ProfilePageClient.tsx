@@ -123,6 +123,7 @@ export function ProfilePageClient() {
           <ProfileSections
             countByTeamSlug={countByTeamSlug}
             totalByTeamSlug={totalByTeamSlug}
+            displayName={getDisplayName(user)}
             favorites={favorites}
             isFavoritesLoading={isFavoritesLoading}
             wanted={wanted}

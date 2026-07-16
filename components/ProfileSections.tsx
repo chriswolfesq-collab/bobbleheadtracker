@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import DisplayCase from "@/components/DisplayCase";
+import { ShareCollectionButton } from "@/components/ShareCollectionButton";
 import { publicAsset } from "@/lib/paths";
 import { type MyFavorite, type MySubmission, type MyWanted } from "@/lib/profile";
 import { TEAMS } from "@/lib/teams";
@@ -27,6 +29,7 @@ function submissionLabel(submission: MySubmission): string {
 export function ProfileSections({
   countByTeamSlug,
   totalByTeamSlug,
+  displayName,
   favorites,
   isFavoritesLoading,
   wanted,
@@ -36,6 +39,9 @@ export function ProfileSections({
 }: {
   countByTeamSlug: Record<string, number>;
   totalByTeamSlug: Record<string, number>;
+  /** Whose collection this is. Omitted in the admin read-only view, which hides
+   *  the share button rather than let an admin share another user's shelf. */
+  displayName?: string;
   favorites: MyFavorite[];
   isFavoritesLoading: boolean;
   wanted: MyWanted[];
@@ -43,10 +49,11 @@ export function ProfileSections({
   submissions: MySubmission[];
   isSubmissionsLoading: boolean;
 }) {
-  const teamCounts = TEAMS.map((team) => ({
-    team,
-    count: countByTeamSlug[team.slug] ?? 0,
-  })).sort((a, b) => b.count - a.count || a.team.name.localeCompare(b.team.name));
+  const totalOwned = TEAMS.reduce((sum, team) => sum + (countByTeamSlug[team.slug] ?? 0), 0);
+  const siteTotal = TEAMS.reduce((sum, team) => sum + (totalByTeamSlug[team.slug] ?? 0), 0);
+  const teamsStarted = TEAMS.filter((team) => (countByTeamSlug[team.slug] ?? 0) > 0).length;
+  const pctComplete = siteTotal > 0 ? Math.round((totalOwned / siteTotal) * 100) : 0;
+  const slotsEmpty = Math.max(siteTotal - totalOwned, 0);
 
   return (
     <>
@@ -71,36 +78,39 @@ export function ProfileSections({
       </nav>
 
       <section id="collection" className="mb-10 scroll-mt-6">
-        <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
-          Collection by team
-        </h2>
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-          {teamCounts.map(({ team, count }, index) => (
-            <Link
-              key={team.slug}
-              href={`/teams/${team.slug}`}
-              className={`flex items-center justify-between gap-3 px-4 py-3 text-sm transition hover:bg-white/5 ${
-                index !== teamCounts.length - 1 ? "border-b border-white/10" : ""
-              }`}
-            >
-              <span className="flex items-center gap-3">
-                <Image
-                  src={publicAsset(`/bobbleheads/${team.slug}.png`)}
-                  alt=""
-                  width={677}
-                  height={1607}
-                  sizes="100px"
-                  className="h-14 w-auto flex-shrink-0 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
-                />
-                <span className="font-bold text-zinc-100">{team.name}</span>
-                <span className="text-xs text-zinc-500">{team.city}</span>
-              </span>
-              <span className="font-black tabular-nums text-amber-300">
-                {count}/{totalByTeamSlug[team.slug] ?? 0}
-              </span>
-            </Link>
-          ))}
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
+            Collection by team
+          </h2>
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-black tabular-nums text-amber-300">
+              {totalOwned}/{siteTotal}
+            </span>
+            {displayName ? (
+              <ShareCollectionButton
+                displayName={displayName}
+                countByTeamSlug={countByTeamSlug}
+                totalByTeamSlug={totalByTeamSlug}
+                stats={{ totalOwned, siteTotal, pctComplete, teamsStarted, teamCount: TEAMS.length }}
+              />
+            ) : null}
+          </div>
         </div>
+
+        <div className="mb-6">
+          <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
+            <div
+              className="h-full rounded-full bg-amber-400 transition-all"
+              style={{ width: `${pctComplete}%` }}
+            />
+          </div>
+          <p className="mt-2 text-center text-xs font-bold text-zinc-500">
+            {pctComplete}% complete · {teamsStarted}/{TEAMS.length} teams started ·{" "}
+            {slotsEmpty} slots empty
+          </p>
+        </div>
+
+        <DisplayCase countByTeamSlug={countByTeamSlug} totalByTeamSlug={totalByTeamSlug} />
       </section>
 
       <section id="favorites" className="mb-10 scroll-mt-6">
