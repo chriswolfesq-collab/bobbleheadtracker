@@ -21,7 +21,7 @@ export default function RecentlyAdded() {
         Recently added by the community
       </h2>
 
-      <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
+      <div className="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-5">
         {communityBobbleheads.map((bobblehead) => {
           const team = getTeamBySlug(bobblehead.teamSlug);
           const imageSrc = bobblehead.imageUrl ?? publicAsset(`/bobbleheads/${bobblehead.teamSlug}.png`);
@@ -30,7 +30,7 @@ export default function RecentlyAdded() {
             <Link
               key={bobblehead.id}
               href={`/teams/${bobblehead.teamSlug}/community?id=${encodeURIComponent(bobblehead.id)}`}
-              className="group flex w-28 shrink-0 flex-col overflow-hidden rounded-lg border border-white/10 bg-[#102032] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition hover:border-amber-400/50 sm:w-32"
+              className="group flex flex-col overflow-hidden rounded-lg border border-white/10 bg-[#102032] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition hover:border-amber-400/50"
             >
               <div className="flex h-20 items-end justify-center bg-[radial-gradient(circle_at_50%_22%,rgba(255,255,255,0.14),rgba(255,255,255,0)_42%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.22))] px-2 pt-2 sm:h-24">
                 <Image
