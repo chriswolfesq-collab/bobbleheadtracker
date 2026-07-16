@@ -140,7 +140,26 @@ export function ProfilePageClient() {
             </p>
           </header>
 
-          <section className="mb-10">
+          <nav className="mb-8 flex flex-wrap justify-center gap-2">
+            {[
+              { id: "collection", label: "Collection" },
+              { id: "favorites", label: "Favorites" },
+              { id: "submissions", label: "Submissions" },
+            ].map(({ id, label }) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() =>
+                  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
+                }
+                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-300 transition hover:border-amber-400 hover:text-amber-300"
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
+
+          <section id="collection" className="mb-10 scroll-mt-6">
             <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
               Collection by team
             </h2>
@@ -173,7 +192,7 @@ export function ProfilePageClient() {
             </div>
           </section>
 
-          <section className="mb-10">
+          <section id="favorites" className="mb-10 scroll-mt-6">
             <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
               My favorites
             </h2>
@@ -202,8 +221,8 @@ export function ProfilePageClient() {
                         alt=""
                         width={677}
                         height={1607}
-                        sizes="100px"
-                        className="h-14 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]"
+                        sizes="120px"
+                        className="h-20 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
                       />
                       <span className="min-w-0">
                         <span className="block truncate font-bold text-zinc-100">{favorite.title}</span>
@@ -219,7 +238,7 @@ export function ProfilePageClient() {
             )}
           </section>
 
-          <section>
+          <section id="submissions" className="scroll-mt-6">
             <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
               My submissions
             </h2>
@@ -244,8 +263,8 @@ export function ProfilePageClient() {
                           alt=""
                           width={677}
                           height={1607}
-                          sizes="100px"
-                          className="h-14 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)]"
+                          sizes="120px"
+                          className="h-20 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
                         />
                         <span className="min-w-0">
                           <span className="block truncate font-bold text-zinc-100">
