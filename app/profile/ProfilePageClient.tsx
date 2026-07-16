@@ -38,18 +38,10 @@ export function ProfilePageClient() {
   const [nameDraft, setNameDraft] = useState("");
   const [isSavingName, setIsSavingName] = useState(false);
   const [nameError, setNameError] = useState<string | null>(null);
-  const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
     setNameDraft(getDisplayName(user));
   }, [user]);
-
-  useEffect(() => {
-    const handleScroll = () => setShowBackToTop(window.scrollY > 400);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const teamCounts = TEAMS.map((team) => ({
     team,
@@ -307,18 +299,6 @@ export function ProfilePageClient() {
           </section>
         </div>
       )}
-
-      <button
-        type="button"
-        aria-label="Back to top"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className={`fixed bottom-6 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/15 bg-[#101827]/60 px-5 py-2.5 text-xs font-medium tracking-wide text-zinc-300 shadow-xl backdrop-blur transition hover:bg-[#101827]/85 hover:text-amber-300 ${
-          showBackToTop ? "opacity-90" : "pointer-events-none opacity-0"
-        }`}
-      >
-        <span aria-hidden>↑</span>
-        Back to top
-      </button>
     </div>
   );
 }

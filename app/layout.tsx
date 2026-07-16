@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackToTopButton } from "@/components/BackToTopButton";
 import { RequireDisplayNameGate } from "@/components/RequireDisplayNameGate";
 import { AdminAuthProvider } from "@/lib/adminAuth";
 import { AuthProvider } from "@/lib/auth";
@@ -23,6 +24,7 @@ export default function RootLayout({
             <RequireDisplayNameGate>{children}</RequireDisplayNameGate>
           </AdminAuthProvider>
         </AuthProvider>
+        <BackToTopButton />
       </body>
     </html>
   );
