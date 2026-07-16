@@ -48,6 +48,49 @@ export function useCommunityBobbleheads(teamSlug: string) {
   return { communityBobbleheads, isLoading };
 }
 
+export type CommunityBobbleheadWithTeam = CommunityBobblehead & { teamSlug: string };
+
+export function useAllCommunityBobbleheads() {
+  const [communityBobbleheads, setCommunityBobbleheads] = useState<CommunityBobbleheadWithTeam[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    supabase
+      .from("community_bobbleheads")
+      .select("id, team_slug, title, year, date, image_url")
+      .then(({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load community bobbleheads:", error.message);
+          setCommunityBobbleheads([]);
+        } else {
+          setCommunityBobbleheads(
+            (data ?? []).map((row) => ({
+              id: row.id,
+              teamSlug: row.team_slug,
+              title: row.title,
+              year: row.year,
+              date: row.date,
+              imageUrl: row.image_url,
+              community: true as const,
+            })),
+          );
+        }
+
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return { communityBobbleheads, isLoading };
+}
+
 export function useCommunityBobblehead(teamSlug: string, bobbleheadId: string) {
   const [communityBobblehead, setCommunityBobblehead] = useState<CommunityBobblehead | null>(null);
   const [isLoading, setIsLoading] = useState(true);

@@ -1,6 +1,7 @@
 import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { AuthWidget } from "@/components/AuthWidget";
 import DisplayCase from "@/components/DisplayCase";
+import { SiteSearch } from "@/components/SiteSearch";
 
 export default function Home() {
   return (
@@ -20,6 +21,9 @@ export default function Home() {
         <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-amber-500/80 sm:text-xs">
           Click your team. Track your collection.
         </p>
+        <div className="mt-5">
+          <SiteSearch />
+        </div>
       </header>
 
       <DisplayCase />
