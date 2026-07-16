@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AuthWidget } from "@/components/AuthWidget";
 import { RecentlyAddedCard } from "@/components/RecentlyAddedCard";
 import { useRecentCommunityBobbleheads } from "@/lib/communityBobbleheads";
@@ -22,6 +22,12 @@ export function RecentlyAddedPageClient() {
   const [query, setQuery] = useState("");
   const [teamFilter, setTeamFilter] = useState("");
   const [yearFilter, setYearFilter] = useState("");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isSearchOpen) searchInputRef.current?.focus();
+  }, [isSearchOpen]);
 
   const teamOptions = useMemo(() => {
     const seen = new Map<string, string>();
@@ -92,15 +98,44 @@ export function RecentlyAddedPageClient() {
           <div className="mb-6">
             <div className="grid gap-3 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)]">
               <label className="min-w-0">
-                <span className="text-xs font-black uppercase tracking-wide text-amber-300">Search</span>
-                <input
-                  type="search"
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  placeholder="Search by player, team…"
-                  aria-label="Search recently added bobbleheads"
-                  className={FIELD_CLASSES}
-                />
+                {isSearchOpen ? (
+                  <>
+                    <span className="text-xs font-black uppercase tracking-wide text-amber-300">
+                      Search
+                    </span>
+                    <div className="relative mt-1">
+                      <input
+                        ref={searchInputRef}
+                        type="search"
+                        value={query}
+                        onChange={(event) => setQuery(event.target.value)}
+                        placeholder="Search by player, team…"
+                        aria-label="Search recently added bobbleheads"
+                        className="w-full rounded border border-white/15 bg-[#07111d] px-3 py-2 pr-9 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setQuery("");
+                          setIsSearchOpen(false);
+                        }}
+                        aria-label="Close search"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 transition hover:text-amber-300"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setIsSearchOpen(true)}
+                    className="mt-1 flex w-full items-center justify-center gap-2 rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white transition hover:border-amber-400 hover:text-amber-300"
+                  >
+                    <span aria-hidden>⌕</span>
+                    Search Recently Added
+                  </button>
+                )}
               </label>
               <label className="min-w-0">
                 <span className="text-xs font-black uppercase tracking-wide text-amber-300">Team</span>

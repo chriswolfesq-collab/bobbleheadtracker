@@ -202,7 +202,7 @@ export function TeamPageClient({
         <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
           <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border border-black bg-[#08131f] shadow-2xl">
             <div className="border-b border-white/10 bg-[#08131f] py-3">
-              <SiteSearch teamSlug={team.slug} />
+              <SiteSearch teamSlug={team.slug} buttonLabel={`Search ${team.name}`} />
             </div>
 
             <section

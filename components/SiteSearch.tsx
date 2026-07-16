@@ -10,12 +10,17 @@ import { publicAsset } from "@/lib/paths";
 import { CURATED_SEARCH_INDEX, searchGiveaways, type SearchResult } from "@/lib/search";
 import { getTeamBySlug } from "@/lib/teams";
 
-export function SiteSearch({ teamSlug }: { teamSlug?: string } = {}) {
+export function SiteSearch({
+  teamSlug,
+  buttonLabel = "Search",
+}: { teamSlug?: string; buttonLabel?: string } = {}) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { communityBobbleheads } = useAllCommunityBobbleheads();
   const { isDeleted, getOverride } = useBobbleheadOverrides();
 
@@ -58,9 +63,16 @@ export function SiteSearch({ teamSlug }: { teamSlug?: string } = {}) {
   const results = useMemo(() => searchGiveaways(index, query), [index, query]);
   const showResults = isFocused && query.trim().length > 0;
 
+  const closeSearch = () => {
+    setIsFocused(false);
+    setIsOpen(false);
+    setQuery("");
+    setActiveIndex(-1);
+  };
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Escape") {
-      setIsFocused(false);
+      closeSearch();
       return;
     }
 
@@ -84,11 +96,34 @@ export function SiteSearch({ teamSlug }: { teamSlug?: string } = {}) {
     function handleClickOutside(event: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setIsFocused(false);
+        if (query.trim().length === 0) setIsOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [query]);
+
+  useEffect(() => {
+    if (isOpen) inputRef.current?.focus();
+  }, [isOpen]);
+
+  if (!isOpen) {
+    return (
+      <div className="mx-auto w-full max-w-md px-4 text-center sm:px-0">
+        <button
+          type="button"
+          onClick={() => {
+            setIsOpen(true);
+            setIsFocused(true);
+          }}
+          className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#101827]/70 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur transition hover:border-amber-400 hover:text-amber-300"
+        >
+          <span aria-hidden>⌕</span>
+          {buttonLabel}
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className="relative mx-auto w-full max-w-md px-4 sm:px-0">
@@ -100,6 +135,7 @@ export function SiteSearch({ teamSlug }: { teamSlug?: string } = {}) {
           ⌕
         </span>
         <input
+          ref={inputRef}
           type="search"
           value={query}
           onChange={(event) => {
@@ -114,8 +150,16 @@ export function SiteSearch({ teamSlug }: { teamSlug?: string } = {}) {
           aria-expanded={showResults}
           aria-controls="site-search-results"
           aria-activedescendant={activeIndex >= 0 ? `site-search-result-${activeIndex}` : undefined}
-          className="w-full rounded-full border border-white/15 bg-[#101827]/70 py-2.5 pl-10 pr-4 text-sm text-white outline-none backdrop-blur transition placeholder:text-zinc-500 focus:border-amber-400"
+          className="w-full rounded-full border border-white/15 bg-[#101827]/70 py-2.5 pl-10 pr-9 text-sm text-white outline-none backdrop-blur transition placeholder:text-zinc-500 focus:border-amber-400"
         />
+        <button
+          type="button"
+          onClick={closeSearch}
+          aria-label="Close search"
+          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-400 transition hover:text-amber-300"
+        >
+          ✕
+        </button>
       </div>
 
       {showResults ? (
