@@ -148,13 +148,17 @@ create table if not exists public.listing_reports (
   bobblehead_id text not null,
   source text not null check (source in ('curated', 'community')),
   title text not null,
-  reason text not null check (reason in ('not_real', 'wrong_date', 'wrong_name', 'other')),
+  reason text not null check (reason in ('not_real', 'wrong_date', 'wrong_name', 'duplicate', 'other')),
   details text,
   submitted_by uuid not null references auth.users (id) on delete cascade,
   status text not null default 'pending' check (status in ('pending', 'resolved', 'dismissed')),
   created_at timestamptz not null default now(),
   reviewed_at timestamptz
 );
+
+alter table public.listing_reports drop constraint if exists listing_reports_reason_check;
+alter table public.listing_reports add constraint listing_reports_reason_check
+  check (reason in ('not_real', 'wrong_date', 'wrong_name', 'duplicate', 'other'));
 
 -- ---------------------------------------------------------------------------
 -- User deletion safety

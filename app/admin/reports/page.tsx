@@ -11,7 +11,7 @@ type Report = {
   bobblehead_id: string;
   source: "curated" | "community";
   title: string;
-  reason: "not_real" | "wrong_date" | "wrong_name" | "other";
+  reason: "not_real" | "wrong_date" | "wrong_name" | "duplicate" | "other";
   details: string | null;
   submitted_by: string;
   created_at: string;
@@ -21,6 +21,7 @@ const REASON_LABELS: Record<Report["reason"], string> = {
   not_real: "Not a real listing",
   wrong_date: "Incorrect date",
   wrong_name: "Incorrect name",
+  duplicate: "Duplicate listing",
   other: "Other",
 };
 

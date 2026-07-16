@@ -3,7 +3,7 @@
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
 
-export type ReportReason = "not_real" | "wrong_date" | "wrong_name" | "other";
+export type ReportReason = "not_real" | "wrong_date" | "wrong_name" | "duplicate" | "other";
 
 export async function submitListingReport({
   user,

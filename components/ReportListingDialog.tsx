@@ -8,6 +8,7 @@ const REASON_OPTIONS: { value: ReportReason; label: string }[] = [
   { value: "not_real", label: "Not a real listing" },
   { value: "wrong_date", label: "Incorrect date" },
   { value: "wrong_name", label: "Incorrect name" },
+  { value: "duplicate", label: "Duplicate listing" },
   { value: "other", label: "Other" },
 ];
 
