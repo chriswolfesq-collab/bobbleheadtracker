@@ -13,7 +13,8 @@ import { getTeamBySlug } from "@/lib/teams";
 export function SiteSearch({
   teamSlug,
   buttonLabel = "Search",
-}: { teamSlug?: string; buttonLabel?: string } = {}) {
+  variant = "centered",
+}: { teamSlug?: string; buttonLabel?: string; variant?: "centered" | "inline" } = {}) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
@@ -109,7 +110,13 @@ export function SiteSearch({
 
   if (!isOpen) {
     return (
-      <div className="mx-auto w-full max-w-md px-4 text-center sm:px-0">
+      <div
+        className={
+          variant === "inline"
+            ? "min-w-0 max-w-xs flex-1"
+            : "mx-auto w-full max-w-md px-4 text-center sm:px-0"
+        }
+      >
         <button
           type="button"
           onClick={() => {
@@ -126,7 +133,14 @@ export function SiteSearch({
   }
 
   return (
-    <div ref={containerRef} className="relative mx-auto w-full max-w-md px-4 sm:px-0">
+    <div
+      ref={containerRef}
+      className={
+        variant === "inline"
+          ? "relative min-w-0 max-w-xs flex-1"
+          : "relative mx-auto w-full max-w-md px-4 sm:px-0"
+      }
+    >
       <div className="relative">
         <span
           aria-hidden
