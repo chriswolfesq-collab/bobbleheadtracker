@@ -31,7 +31,7 @@ export default function TermsPage() {
               1. Acceptance of terms
             </h2>
             <p>
-              By creating an account or using MLB Bobblehead Collection ("the service"), you agree
+              By creating an account or using MLB Bobblehead Collection (&quot;the service&quot;), you agree
               to these Terms of Service. If you do not agree, please do not create an account or
               use the service.
             </p>
@@ -76,7 +76,7 @@ export default function TermsPage() {
             </h2>
             <p>
               This is a fan-run collection tracker and is not affiliated with Major League
-              Baseball or any team. The service is provided "as is," without warranties of any
+              Baseball or any team. The service is provided &quot;as is,&quot; without warranties of any
               kind.
             </p>
           </section>
