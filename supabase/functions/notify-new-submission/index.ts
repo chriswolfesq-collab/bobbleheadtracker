@@ -1,5 +1,6 @@
 // Supabase Edge Function: emails the admin whenever a new row lands in
-// `submissions` or `listing_reports`. Wired up via two Database Webhooks
+// `submissions` or `listing_reports`, and emails the submitter back once
+// their submission is approved or rejected. Wired up via Database Webhooks
 // (see supabase/webhook_trigger.sql), not called directly by the app.
 //
 // Deploy:
@@ -21,7 +22,35 @@ const REASON_LABELS: Record<string, string> = {
   other: "Other",
 };
 
-function buildEmail(table: string, record: Record<string, unknown>): { subject: string; text: string } {
+function describeSubmission(record: Record<string, unknown>): string {
+  return record.kind === "new_bobblehead"
+    ? `"${record.title ?? "Untitled"}" (${record.team_slug})`
+    : `your photo for ${record.target_bobblehead_id} (${record.team_slug})`;
+}
+
+function buildEmail(payload: Record<string, unknown>): { subject: string; text: string; to: string } {
+  const table = (payload.table as string) ?? "submissions";
+  const record = (payload.record as Record<string, unknown>) ?? {};
+
+  if (payload.type === "UPDATE" && table === "submissions") {
+    const summary = describeSubmission(record);
+    const to = payload.submitter_email as string;
+
+    if (record.status === "approved") {
+      return {
+        subject: "Your bobblehead submission was approved",
+        text: `Good news — ${summary} was approved and is now live on Bobble Shelf.`,
+        to,
+      };
+    }
+
+    return {
+      subject: "Your bobblehead submission was not approved",
+      text: `${summary} was reviewed and was not approved.`,
+      to,
+    };
+  }
+
   if (table === "listing_reports") {
     const reason = REASON_LABELS[record.reason as string] ?? (record.reason as string) ?? "Unknown reason";
     const summary = `${reason}: ${record.title ?? "Untitled"} (${record.team_slug})`;
@@ -30,6 +59,7 @@ function buildEmail(table: string, record: Record<string, unknown>): { subject: 
     return {
       subject: "New listing report pending review",
       text: `${summary}${details}\n\nReview it at: https://chriswolfesq-collab.github.io/bobbleheadtracker/admin/reports`,
+      to: ADMIN_EMAIL,
     };
   }
 
@@ -41,6 +71,7 @@ function buildEmail(table: string, record: Record<string, unknown>): { subject: 
   return {
     subject: "New bobblehead submission pending review",
     text: `${summary}\n\nReview it at: https://chriswolfesq-collab.github.io/bobbleheadtracker/admin/review`,
+    to: ADMIN_EMAIL,
   };
 }
 
@@ -56,7 +87,11 @@ Deno.serve(async (req) => {
   }
 
   const payload = await req.json();
-  const { subject, text } = buildEmail(payload.table ?? "submissions", payload.record ?? {});
+  const { subject, text, to } = buildEmail(payload);
+
+  if (!to) {
+    return new Response("No recipient email available", { status: 400 });
+  }
 
   const emailResponse = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -66,7 +101,7 @@ Deno.serve(async (req) => {
     },
     body: JSON.stringify({
       from: "Bobble Shelf <alerts@bobbleshelf.com>",
-      to: [ADMIN_EMAIL],
+      to: [to],
       subject,
       text,
     }),

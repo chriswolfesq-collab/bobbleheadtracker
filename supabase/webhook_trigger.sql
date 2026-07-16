@@ -62,3 +62,46 @@ create trigger on_listing_report_created
   after insert on public.listing_reports
   for each row
   execute function public.notify_new_report();
+
+-- Mirror image of on_submission_created: emails the submitter (not the
+-- admin) once their pending submission is approved or rejected. Looks up
+-- the address from auth.users since submissions only stores submitted_by.
+-- Same edge function, reused again (branches on payload.type = 'UPDATE').
+
+create or replace function public.notify_submission_reviewed()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_email text;
+begin
+  select email into v_email from auth.users where id = new.submitted_by;
+
+  if v_email is not null then
+    perform net.http_post(
+      url := 'https://mawwzvnlihhsagatmolq.supabase.co/functions/v1/notify-new-submission',
+      headers := jsonb_build_object(
+        'Content-Type', 'application/json',
+        'x-webhook-secret', '<WEBHOOK_SECRET>'
+      ),
+      body := jsonb_build_object(
+        'type', 'UPDATE',
+        'table', 'submissions',
+        'record', row_to_json(new),
+        'submitter_email', v_email
+      )
+    );
+  end if;
+
+  return new;
+end;
+$$;
+
+drop trigger if exists on_submission_reviewed on public.submissions;
+create trigger on_submission_reviewed
+  after update on public.submissions
+  for each row
+  when (old.status = 'pending' and new.status in ('approved', 'rejected'))
+  execute function public.notify_submission_reviewed();
