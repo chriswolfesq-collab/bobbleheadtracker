@@ -266,13 +266,6 @@ export function TeamPageClient({
               </div>
 
               <div className="flex flex-row items-center justify-between gap-4 xl:flex-col xl:items-end">
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-3 py-2 text-xs font-bold uppercase tracking-wide text-zinc-100 transition hover:border-amber-400 hover:text-amber-300 sm:px-5 sm:py-3 sm:text-sm"
-                >
-                  <span>✎</span>
-                  Edit team
-                </button>
                 <div className="space-y-1 text-right xl:space-y-3 xl:text-right">
                   <p className="hidden text-sm font-black uppercase tracking-wide text-zinc-200 xl:block">
                     ⓘ Team info
