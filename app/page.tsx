@@ -1,6 +1,7 @@
 import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { AuthWidget } from "@/components/AuthWidget";
 import DisplayCase from "@/components/DisplayCase";
+import RecentlyAdded from "@/components/RecentlyAdded";
 import { SiteSearch } from "@/components/SiteSearch";
 
 export default function Home() {
@@ -27,6 +28,10 @@ export default function Home() {
       </header>
 
       <DisplayCase />
+
+      <div className="mt-6">
+        <RecentlyAdded />
+      </div>
 
       <div className="h-16" />
     </div>
