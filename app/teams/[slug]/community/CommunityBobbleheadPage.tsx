@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
@@ -11,7 +11,7 @@ import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { useAdminAuth } from "@/lib/adminAuth";
-import { saveCommunityBobblehead } from "@/lib/adminEdit";
+import { deleteBobblehead, saveCommunityBobblehead } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { useBobbleheadGallery } from "@/lib/bobbleheadGallery";
 import { useCommunityBobblehead } from "@/lib/communityBobbleheads";
@@ -41,6 +41,7 @@ function Shell({ team, children }: { team: Team; children: React.ReactNode }) {
 }
 
 export function CommunityBobbleheadPage({ team }: { team: Team }) {
+  const router = useRouter();
   const bobbleheadId = useSearchParams().get("id") ?? "";
   const { isAdmin, user: adminUser } = useAdminAuth();
   const { communityBobblehead, isLoading, notFound } = useCommunityBobblehead(team.slug, bobbleheadId);
@@ -104,6 +105,11 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
 
     setLocalOverride(values);
     if (imageUrl) setLocalImageUrl(imageUrl);
+  };
+
+  const handleDelete = async () => {
+    await deleteBobblehead({ teamSlug: team.slug, bobbleheadId: giveaway.id, source: "community" });
+    router.replace(`/teams/${team.slug}`);
   };
 
   return (
@@ -245,6 +251,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
           onClose={() => setIsEditOpen(false)}
           initial={{ title, year, date }}
           onSave={handleEditSave}
+          onDelete={handleDelete}
         />
       ) : null}
     </main>

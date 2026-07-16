@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
@@ -10,7 +11,7 @@ import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { useAdminAuth } from "@/lib/adminAuth";
-import { saveCuratedBobblehead } from "@/lib/adminEdit";
+import { deleteBobblehead, saveCuratedBobblehead } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { useBobbleheadGallery } from "@/lib/bobbleheadGallery";
@@ -21,16 +22,42 @@ import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
 
 export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; team: Team }) {
+  const router = useRouter();
   const { isAdmin, user: adminUser } = useAdminAuth();
   const { photoUrlById } = useApprovedPhotos(team.slug);
   const { photos: galleryPhotos } = useBobbleheadGallery(team.slug, giveaway.id);
-  const { override } = useBobbleheadOverride(team.slug, giveaway.id);
+  const { override, isLoading: isOverrideLoading } = useBobbleheadOverride(team.slug, giveaway.id);
   const { ownedById, isLoggedIn, setOwned } = useUserCollection(team.slug);
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, setFavorited } = useUserFavorites(team.slug);
 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [localOverride, setLocalOverride] = useState<EditBobbleheadValues | null>(null);
   const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
+
+  // The page itself is statically generated from the hardcoded giveaway list,
+  // so a listing the admin deleted still has a route — the tombstone is what
+  // tells us it's gone.
+  if (!isOverrideLoading && override?.deleted) {
+    return (
+      <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
+        <div className="mx-auto max-w-3xl rounded-xl border border-black bg-[#08131f] p-6 shadow-2xl">
+          <Link
+            href={`/teams/${team.slug}`}
+            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
+          >
+            <span aria-hidden>←</span>
+            Back to team
+          </Link>
+          <div className="mt-8 rounded-lg border border-dashed border-white/15 bg-black/15 p-8 text-center">
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-100">Bobblehead removed</p>
+            <p className="mt-2 text-sm leading-6 text-zinc-400">
+              The site admin removed this listing from the catalog.
+            </p>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   const title = localOverride?.title ?? override?.title ?? giveaway.title;
   const year = localOverride?.year ?? override?.year ?? giveaway.year;
@@ -59,6 +86,11 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
 
     setLocalOverride(values);
     if (imageUrl) setLocalImageUrl(imageUrl);
+  };
+
+  const handleDelete = async () => {
+    await deleteBobblehead({ teamSlug: team.slug, bobbleheadId: giveaway.id, source: "curated" });
+    router.replace(`/teams/${team.slug}`);
   };
 
   return (
@@ -219,6 +251,7 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
           onClose={() => setIsEditOpen(false)}
           initial={{ title, year, date }}
           onSave={handleEditSave}
+          onDelete={handleDelete}
         />
       ) : null}
     </main>

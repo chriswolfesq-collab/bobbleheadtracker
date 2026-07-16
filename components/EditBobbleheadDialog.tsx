@@ -11,20 +11,26 @@ export function EditBobbleheadDialog({
   onClose,
   initial,
   onSave,
+  onDelete,
 }: {
   onClose: () => void;
   initial: EditBobbleheadValues;
   onSave: (values: EditBobbleheadValues, file: File | null) => Promise<void>;
+  onDelete: () => Promise<void>;
 }) {
   const [title, setTitle] = useState(initial.title);
   const [year, setYear] = useState(initial.year);
   const [date, setDate] = useState(initial.date);
   const [file, setFile] = useState<File | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const isBusy = isSaving || isDeleting;
+
   const close = () => {
-    if (isSaving) return;
+    if (isBusy) return;
     onClose();
   };
 
@@ -100,7 +106,7 @@ export function EditBobbleheadDialog({
           <div className="mt-1 flex gap-2">
             <button
               type="submit"
-              disabled={isSaving}
+              disabled={isBusy}
               className="flex-1 rounded-lg bg-amber-500 px-3 py-2.5 text-sm font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300 disabled:opacity-60"
             >
               {isSaving ? "Saving…" : "Save"}
@@ -108,13 +114,62 @@ export function EditBobbleheadDialog({
             <button
               type="button"
               onClick={close}
-              disabled={isSaving}
+              disabled={isBusy}
               className="rounded-lg border border-white/15 px-4 py-2.5 text-sm font-bold text-zinc-300 transition hover:border-amber-400/60 disabled:opacity-60"
             >
               Cancel
             </button>
           </div>
         </form>
+
+        <div className="mt-5 border-t border-white/10 pt-4">
+          {isConfirmingDelete ? (
+            <div className="rounded-lg border border-red-500/40 bg-red-500/10 p-3">
+              <p className="text-xs font-bold text-red-200">
+                Delete this listing for everyone? Its photos, and every user&apos;s ownership and favorite marks for
+                it, go too. This can&apos;t be undone.
+              </p>
+              <div className="mt-3 flex gap-2">
+                <button
+                  type="button"
+                  disabled={isBusy}
+                  onClick={async () => {
+                    setError(null);
+                    setIsDeleting(true);
+
+                    try {
+                      await onDelete();
+                    } catch (deleteError) {
+                      setError(deleteError instanceof Error ? deleteError.message : "Could not delete this listing.");
+                      setIsDeleting(false);
+                      setIsConfirmingDelete(false);
+                    }
+                  }}
+                  className="flex-1 rounded-lg bg-red-500 px-3 py-2 text-xs font-black uppercase tracking-wide text-white transition hover:bg-red-400 disabled:opacity-60"
+                >
+                  {isDeleting ? "Deleting…" : "Yes, delete it"}
+                </button>
+                <button
+                  type="button"
+                  disabled={isBusy}
+                  onClick={() => setIsConfirmingDelete(false)}
+                  className="rounded-lg border border-white/15 px-4 py-2 text-xs font-bold text-zinc-300 transition hover:border-amber-400/60 disabled:opacity-60"
+                >
+                  Keep it
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              type="button"
+              disabled={isBusy}
+              onClick={() => setIsConfirmingDelete(true)}
+              className="text-xs font-black uppercase tracking-wide text-red-400 transition hover:text-red-300 disabled:opacity-60"
+            >
+              Delete listing
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

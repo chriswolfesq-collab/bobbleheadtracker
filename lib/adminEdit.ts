@@ -74,6 +74,29 @@ export async function saveCuratedBobblehead({
   return { imageUrl };
 }
 
+// Deletes the listing and everything attached to it (photos, gallery,
+// ownership, favorites, reports). Irreversible from the UI: a deleted curated
+// listing can only come back by clearing its `deleted` flag in the SQL editor.
+export async function deleteBobblehead({
+  teamSlug,
+  bobbleheadId,
+  source,
+}: {
+  teamSlug: string;
+  bobbleheadId: string;
+  source: "curated" | "community";
+}) {
+  const { error } = await supabase.rpc("admin_delete_bobblehead", {
+    p_team_slug: teamSlug,
+    p_bobblehead_id: bobbleheadId,
+    p_source: source,
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+}
+
 export async function saveCommunityBobblehead({
   user,
   teamSlug,

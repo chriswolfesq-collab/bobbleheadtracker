@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useDeletedBobbleheads } from "@/lib/bobbleheadOverrides";
 import { useAllCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { publicAsset } from "@/lib/paths";
 import { CURATED_SEARCH_INDEX, searchGiveaways, type SearchResult } from "@/lib/search";
@@ -13,6 +14,7 @@ export function SiteSearch({ teamSlug }: { teamSlug?: string } = {}) {
   const [isFocused, setIsFocused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { communityBobbleheads } = useAllCommunityBobbleheads();
+  const { isDeleted } = useDeletedBobbleheads();
 
   const index = useMemo<SearchResult[]>(() => {
     const community: SearchResult[] = communityBobbleheads.map((giveaway) => {
@@ -31,9 +33,10 @@ export function SiteSearch({ teamSlug }: { teamSlug?: string } = {}) {
       };
     });
 
-    const combined = [...CURATED_SEARCH_INDEX, ...community];
+    const curated = CURATED_SEARCH_INDEX.filter((result) => !isDeleted(result.teamSlug, result.id));
+    const combined = [...curated, ...community];
     return teamSlug ? combined.filter((result) => result.teamSlug === teamSlug) : combined;
-  }, [communityBobbleheads, teamSlug]);
+  }, [communityBobbleheads, teamSlug, isDeleted]);
 
   const results = useMemo(() => searchGiveaways(index, query), [index, query]);
   const showResults = isFocused && query.trim().length > 0;

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { GIVEAWAYS_BY_TEAM } from "@/lib/bobbleheads";
+import { fetchDeletedBobbleheads } from "@/lib/bobbleheadOverrides";
 import { findDuplicateBobblehead, type DuplicateCandidate } from "@/lib/duplicateCheck";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 
@@ -108,6 +109,7 @@ export default function AdminReviewPage() {
         const { data: communityRows } = teamSlugs.length
           ? await supabase.from("community_bobbleheads").select("team_slug, title, date").in("team_slug", teamSlugs)
           : { data: [] as { team_slug: string; title: string; date: string }[] };
+        const { isDeleted } = await fetchDeletedBobbleheads();
         const communityByTeam = new Map<string, DuplicateCandidate[]>();
         for (const row of communityRows ?? []) {
           const list = communityByTeam.get(row.team_slug) ?? [];
@@ -127,6 +129,7 @@ export default function AdminReviewPage() {
                     submission.team_slug,
                     submission.title,
                     communityByTeam.get(submission.team_slug) ?? [],
+                    isDeleted,
                   )
                 : null;
 

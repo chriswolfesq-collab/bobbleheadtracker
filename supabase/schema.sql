@@ -99,16 +99,24 @@ create table if not exists public.bobblehead_gallery_photos (
 -- the hardcoded lib/bobbleheads.ts rather than a table. Community bobbleheads
 -- don't need this — their title/year/date are already real columns on
 -- community_bobbleheads. A null column here means "not overridden".
+--
+-- `deleted` is the tombstone for an admin-deleted curated listing: the row in
+-- lib/bobbleheads.ts can't be removed from the database, so the site filters
+-- out anything flagged here instead (see lib/bobbleheadOverrides.ts).
 create table if not exists public.bobblehead_overrides (
   team_slug text not null,
   bobblehead_id text not null,
   title text,
   year text,
   date text,
+  deleted boolean not null default false,
   updated_by uuid references auth.users (id),
   updated_at timestamptz not null default now(),
   primary key (team_slug, bobblehead_id)
 );
+
+alter table public.bobblehead_overrides
+  add column if not exists deleted boolean not null default false;
 
 create table if not exists public.submissions (
   id uuid primary key default gen_random_uuid(),
@@ -449,6 +457,77 @@ revoke all on function public.approve_submission(uuid, text, boolean) from publi
 revoke all on function public.reject_submission(uuid) from public, anon;
 grant execute on function public.approve_submission(uuid, text, boolean) to authenticated;
 grant execute on function public.reject_submission(uuid) to authenticated;
+
+-- ---------------------------------------------------------------------------
+-- Admin: delete a listing
+-- ---------------------------------------------------------------------------
+-- Removes a bobblehead and everything hanging off it (photos, gallery,
+-- ownership, favorites) in one transaction. A community listing is a real row
+-- and is deleted outright; a curated one lives in the hardcoded
+-- lib/bobbleheads.ts, so it gets a `deleted` tombstone in bobblehead_overrides
+-- that the site filters on instead. Pending submissions pointing at the
+-- listing are rejected rather than deleted, so they stay visible in the
+-- submitter's own history.
+
+create or replace function public.admin_delete_bobblehead(
+  p_team_slug text,
+  p_bobblehead_id text,
+  p_source text
+)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if not public.is_admin() then
+    raise exception 'not authorized';
+  end if;
+
+  if p_source not in ('curated', 'community') then
+    raise exception 'unknown source %', p_source;
+  end if;
+
+  if p_source = 'community' then
+    delete from public.community_bobbleheads
+      where id = p_bobblehead_id and team_slug = p_team_slug;
+
+    if not found then
+      raise exception 'bobblehead not found';
+    end if;
+
+    delete from public.bobblehead_overrides
+      where team_slug = p_team_slug and bobblehead_id = p_bobblehead_id;
+  else
+    insert into public.bobblehead_overrides (team_slug, bobblehead_id, deleted, updated_by, updated_at)
+    values (p_team_slug, p_bobblehead_id, true, auth.uid(), now())
+    on conflict (team_slug, bobblehead_id) do update
+      set deleted = true,
+          updated_by = auth.uid(),
+          updated_at = now();
+  end if;
+
+  delete from public.approved_photos
+    where bobblehead_id = p_bobblehead_id and team_slug = p_team_slug;
+  delete from public.bobblehead_gallery_photos
+    where bobblehead_id = p_bobblehead_id and team_slug = p_team_slug;
+  delete from public.user_collections
+    where bobblehead_id = p_bobblehead_id and team_slug = p_team_slug;
+  delete from public.user_favorites
+    where bobblehead_id = p_bobblehead_id and team_slug = p_team_slug;
+  delete from public.listing_reports
+    where bobblehead_id = p_bobblehead_id and team_slug = p_team_slug;
+
+  update public.submissions
+    set status = 'rejected', reviewed_at = now()
+    where target_bobblehead_id = p_bobblehead_id
+      and team_slug = p_team_slug
+      and status = 'pending';
+end;
+$$;
+
+revoke all on function public.admin_delete_bobblehead(text, text, text) from public, anon;
+grant execute on function public.admin_delete_bobblehead(text, text, text) to authenticated;
 
 -- ---------------------------------------------------------------------------
 -- Admin: user management
