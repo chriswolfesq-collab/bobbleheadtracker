@@ -61,6 +61,13 @@ export default function AdminPage() {
             <p className="mt-2 text-sm text-zinc-400">Approve or deny pending photo and bobblehead submissions.</p>
           </Link>
           <Link
+            href="/admin/reports"
+            className="rounded-lg border border-white/10 bg-[#0b1a29] p-5 transition hover:border-amber-400/60"
+          >
+            <p className="text-sm font-black uppercase tracking-wide text-white">Listing reports</p>
+            <p className="mt-2 text-sm text-zinc-400">Resolve or dismiss reports that a listing has wrong info.</p>
+          </Link>
+          <Link
             href="/"
             className="rounded-lg border border-white/10 bg-[#0b1a29] p-5 transition hover:border-amber-400/60"
           >

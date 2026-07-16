@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { PhotoGallery } from "@/components/PhotoGallery";
+import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { saveCommunityBobblehead } from "@/lib/adminEdit";
@@ -214,6 +215,14 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
               </button>
             ) : null}
           </div>
+
+          <ReportListingButton
+            teamSlug={team.slug}
+            bobbleheadId={giveaway.id}
+            source="community"
+            title={title}
+            className="mx-auto mt-4 block text-center text-xs font-bold uppercase tracking-wide text-zinc-500 transition hover:text-amber-300"
+          />
         </section>
       </div>
 

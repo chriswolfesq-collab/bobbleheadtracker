@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { PhotoGallery } from "@/components/PhotoGallery";
+import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { saveCuratedBobblehead } from "@/lib/adminEdit";
@@ -186,6 +187,14 @@ export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; 
                 </button>
               ) : null}
             </div>
+
+            <ReportListingButton
+              teamSlug={team.slug}
+              bobbleheadId={giveaway.id}
+              source="curated"
+              title={title}
+              className="mx-auto block text-center text-xs font-bold uppercase tracking-wide text-zinc-500 transition hover:text-amber-300"
+            />
           </div>
         </section>
       </div>

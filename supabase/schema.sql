@@ -116,6 +116,20 @@ create table if not exists public.submissions (
   reviewed_at timestamptz
 );
 
+create table if not exists public.listing_reports (
+  id uuid primary key default gen_random_uuid(),
+  team_slug text not null,
+  bobblehead_id text not null,
+  source text not null check (source in ('curated', 'community')),
+  title text not null,
+  reason text not null check (reason in ('not_real', 'wrong_date', 'wrong_name', 'other')),
+  details text,
+  submitted_by uuid not null references auth.users (id) on delete cascade,
+  status text not null default 'pending' check (status in ('pending', 'resolved', 'dismissed')),
+  created_at timestamptz not null default now(),
+  reviewed_at timestamptz
+);
+
 -- ---------------------------------------------------------------------------
 -- Row Level Security
 -- ---------------------------------------------------------------------------
@@ -126,6 +140,7 @@ alter table public.community_bobbleheads enable row level security;
 alter table public.bobblehead_gallery_photos enable row level security;
 alter table public.bobblehead_overrides enable row level security;
 alter table public.submissions enable row level security;
+alter table public.listing_reports enable row level security;
 
 -- user_collections: fully private per-user data.
 drop policy if exists "user_collections: owner select" on public.user_collections;
@@ -224,6 +239,27 @@ create policy "submissions: submitter or admin select"
   on public.submissions for select
   to authenticated
   using (auth.uid() = submitted_by or public.is_admin());
+
+-- listing_reports: anyone logged in can report a listing and see their own
+-- reports; only the admin can see and resolve/dismiss the full queue.
+drop policy if exists "listing_reports: submitter insert" on public.listing_reports;
+create policy "listing_reports: submitter insert"
+  on public.listing_reports for insert
+  to authenticated
+  with check (auth.uid() = submitted_by);
+
+drop policy if exists "listing_reports: submitter or admin select" on public.listing_reports;
+create policy "listing_reports: submitter or admin select"
+  on public.listing_reports for select
+  to authenticated
+  using (auth.uid() = submitted_by or public.is_admin());
+
+drop policy if exists "listing_reports: admin update" on public.listing_reports;
+create policy "listing_reports: admin update"
+  on public.listing_reports for update
+  to authenticated
+  using (public.is_admin())
+  with check (public.is_admin());
 
 -- ---------------------------------------------------------------------------
 -- Approval / rejection RPCs
