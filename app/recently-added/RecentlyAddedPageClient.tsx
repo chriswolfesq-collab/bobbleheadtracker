@@ -127,14 +127,19 @@ export function RecentlyAddedPageClient() {
                     </div>
                   </>
                 ) : (
-                  <button
-                    type="button"
-                    onClick={() => setIsSearchOpen(true)}
-                    className="mt-1 flex w-full items-center justify-center gap-2 rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white transition hover:border-amber-400 hover:text-amber-300"
-                  >
-                    <span aria-hidden>⌕</span>
-                    Search Recently Added
-                  </button>
+                  <>
+                    <span className="text-xs font-black uppercase tracking-wide text-amber-300">
+                      Search
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setIsSearchOpen(true)}
+                      className="mt-1 flex w-full items-center justify-center gap-2 rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white transition hover:border-amber-400 hover:text-amber-300"
+                    >
+                      <span aria-hidden>⌕</span>
+                      Search Recently Added
+                    </button>
+                  </>
                 )}
               </label>
               <label className="min-w-0">
