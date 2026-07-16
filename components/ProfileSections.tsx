@@ -78,7 +78,9 @@ export function ProfileSections({
       </nav>
 
       <section id="collection" className="mb-10 scroll-mt-6">
-        <div className="mb-4 flex items-center justify-between gap-3">
+        <DisplayCase countByTeamSlug={countByTeamSlug} totalByTeamSlug={totalByTeamSlug} />
+
+        <div className="mb-4 mt-6 flex items-center justify-between gap-3">
           <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
             Collection by team
           </h2>
@@ -97,7 +99,7 @@ export function ProfileSections({
           </div>
         </div>
 
-        <div className="mb-6">
+        <div>
           <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
             <div
               className="h-full rounded-full bg-amber-400 transition-all"
@@ -109,8 +111,6 @@ export function ProfileSections({
             {slotsEmpty} slots empty
           </p>
         </div>
-
-        <DisplayCase countByTeamSlug={countByTeamSlug} totalByTeamSlug={totalByTeamSlug} />
       </section>
 
       <section id="favorites" className="mb-10 scroll-mt-6">
