@@ -140,6 +140,35 @@ create table if not exists public.listing_reports (
 );
 
 -- ---------------------------------------------------------------------------
+-- User deletion safety
+-- ---------------------------------------------------------------------------
+-- These four columns were originally created with the default `references
+-- auth.users (id)` behavior (ON DELETE NO ACTION), which would make
+-- admin_delete_user() below fail with a foreign key violation for any user
+-- who ever approved a submission or edited a listing. Switching them to
+-- ON DELETE SET NULL lets the user be removed while leaving the
+-- approved/edited content itself intact.
+alter table public.approved_photos drop constraint if exists approved_photos_approved_by_fkey;
+alter table public.approved_photos
+  add constraint approved_photos_approved_by_fkey
+  foreign key (approved_by) references auth.users (id) on delete set null;
+
+alter table public.community_bobbleheads drop constraint if exists community_bobbleheads_approved_by_fkey;
+alter table public.community_bobbleheads
+  add constraint community_bobbleheads_approved_by_fkey
+  foreign key (approved_by) references auth.users (id) on delete set null;
+
+alter table public.bobblehead_gallery_photos drop constraint if exists bobblehead_gallery_photos_approved_by_fkey;
+alter table public.bobblehead_gallery_photos
+  add constraint bobblehead_gallery_photos_approved_by_fkey
+  foreign key (approved_by) references auth.users (id) on delete set null;
+
+alter table public.bobblehead_overrides drop constraint if exists bobblehead_overrides_updated_by_fkey;
+alter table public.bobblehead_overrides
+  add constraint bobblehead_overrides_updated_by_fkey
+  foreign key (updated_by) references auth.users (id) on delete set null;
+
+-- ---------------------------------------------------------------------------
 -- Row Level Security
 -- ---------------------------------------------------------------------------
 
@@ -404,6 +433,113 @@ revoke all on function public.approve_submission(uuid, text, boolean) from publi
 revoke all on function public.reject_submission(uuid) from public, anon;
 grant execute on function public.approve_submission(uuid, text, boolean) to authenticated;
 grant execute on function public.reject_submission(uuid) to authenticated;
+
+-- ---------------------------------------------------------------------------
+-- Admin: user management
+-- ---------------------------------------------------------------------------
+-- The site has no server (it's a static export deployed to GitHub Pages, see
+-- .github/workflows/deploy.yml), so there's nowhere to hold a Supabase
+-- service-role key to drive the Auth Admin API. These SECURITY DEFINER
+-- functions are the same workaround already used above for
+-- approve_submission/reject_submission: they run with the privileges of the
+-- function owner (which can read/write the auth schema), but re-check
+-- is_admin() themselves first, so a non-admin caller gets 'not authorized'
+-- regardless of what the client claims.
+
+create or replace function public.admin_list_users()
+returns table (
+  id uuid,
+  email text,
+  display_name text,
+  created_at timestamptz,
+  last_sign_in_at timestamptz,
+  owned_count int,
+  favorite_count int,
+  submission_count int,
+  report_count int
+)
+language plpgsql
+stable
+security definer
+set search_path = public
+as $$
+begin
+  if not public.is_admin() then
+    raise exception 'not authorized';
+  end if;
+
+  return query
+  select
+    u.id,
+    u.email::text,
+    coalesce(u.raw_user_meta_data ->> 'display_name', u.raw_user_meta_data ->> 'full_name', u.raw_user_meta_data ->> 'name'),
+    u.created_at,
+    u.last_sign_in_at,
+    (select count(*) from public.user_collections uc where uc.user_id = u.id and uc.owned)::int,
+    (select count(*) from public.user_favorites uf where uf.user_id = u.id and uf.favorited)::int,
+    (select count(*) from public.submissions s where s.submitted_by = u.id)::int,
+    (select count(*) from public.listing_reports lr where lr.submitted_by = u.id)::int
+  from auth.users u
+  order by u.created_at desc;
+end;
+$$;
+
+create or replace function public.admin_update_display_name(p_user_id uuid, p_display_name text)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if not public.is_admin() then
+    raise exception 'not authorized';
+  end if;
+
+  if trim(coalesce(p_display_name, '')) = '' then
+    raise exception 'display name is required';
+  end if;
+
+  update auth.users
+    set raw_user_meta_data = coalesce(raw_user_meta_data, '{}'::jsonb) || jsonb_build_object('display_name', trim(p_display_name))
+    where id = p_user_id;
+
+  if not found then
+    raise exception 'user not found';
+  end if;
+end;
+$$;
+
+-- Blocks deleting the account currently signed in to admin mode (rather than
+-- just any admin account) so an admin can never lock themselves out mid-session.
+create or replace function public.admin_delete_user(p_user_id uuid)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if not public.is_admin() then
+    raise exception 'not authorized';
+  end if;
+
+  if p_user_id = auth.uid() then
+    raise exception 'cannot remove the account you are currently signed in as';
+  end if;
+
+  delete from auth.users where id = p_user_id;
+
+  if not found then
+    raise exception 'user not found';
+  end if;
+end;
+$$;
+
+revoke all on function public.admin_list_users() from public, anon;
+revoke all on function public.admin_update_display_name(uuid, text) from public, anon;
+revoke all on function public.admin_delete_user(uuid) from public, anon;
+grant execute on function public.admin_list_users() to authenticated;
+grant execute on function public.admin_update_display_name(uuid, text) to authenticated;
+grant execute on function public.admin_delete_user(uuid) to authenticated;
 
 -- ---------------------------------------------------------------------------
 -- Storage buckets
