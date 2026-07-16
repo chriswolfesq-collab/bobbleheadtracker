@@ -8,6 +8,7 @@ import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { useAuth } from "@/lib/auth";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { useCommunityBobbleheads } from "@/lib/communityBobbleheads";
+import { findDuplicateBobblehead, type DuplicateCandidate } from "@/lib/duplicateCheck";
 import { publicAsset } from "@/lib/paths";
 import { submitNewBobblehead } from "@/lib/submissions";
 import type { Team } from "@/lib/teams";
@@ -35,9 +36,11 @@ function Stat({
 
 function SubmitBobbleheadForm({
   teamSlug,
+  communityBobbleheads,
   onDone,
 }: {
   teamSlug: string;
+  communityBobbleheads: DuplicateCandidate[];
   onDone: () => void;
 }) {
   const { user } = useAuth();
@@ -46,6 +49,7 @@ function SubmitBobbleheadForm({
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [duplicateMatch, setDuplicateMatch] = useState<DuplicateCandidate | null>(null);
 
   if (!user) {
     return (
@@ -63,6 +67,14 @@ function SubmitBobbleheadForm({
         if (!file) {
           setError("A photo is required.");
           return;
+        }
+
+        if (!duplicateMatch) {
+          const match = findDuplicateBobblehead(teamSlug, title, communityBobbleheads);
+          if (match) {
+            setDuplicateMatch(match);
+            return;
+          }
         }
 
         setIsSubmitting(true);
@@ -83,7 +95,10 @@ function SubmitBobbleheadForm({
         <input
           required
           value={title}
-          onChange={(event) => setTitle(event.target.value)}
+          onChange={(event) => {
+            setTitle(event.target.value);
+            setDuplicateMatch(null);
+          }}
           placeholder="Fernando Valenzuela"
           className="mt-1 w-full rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
         />
@@ -92,7 +107,10 @@ function SubmitBobbleheadForm({
         <span className="text-xs font-black uppercase tracking-wide text-amber-300">Date</span>
         <input
           value={date}
-          onChange={(event) => setDate(event.target.value)}
+          onChange={(event) => {
+            setDate(event.target.value);
+            setDuplicateMatch(null);
+          }}
           placeholder="July 14, 2026"
           className="mt-1 w-full rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
         />
@@ -113,9 +131,15 @@ function SubmitBobbleheadForm({
           disabled={isSubmitting}
           className="min-h-10 rounded bg-amber-500 px-4 text-sm font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300 disabled:opacity-60"
         >
-          {isSubmitting ? "Submitting…" : "Submit"}
+          {isSubmitting ? "Submitting…" : duplicateMatch ? "Submit anyway" : "Submit"}
         </button>
       </div>
+      {duplicateMatch ? (
+        <p className="text-xs font-semibold text-amber-300 sm:col-span-4">
+          This looks like it might already be on the shelf: “{duplicateMatch.title}” ({duplicateMatch.date}).
+          Click submit again to add it anyway.
+        </p>
+      ) : null}
       {error ? <p className="text-xs font-semibold text-red-400 sm:col-span-4">{error}</p> : null}
       <p className="text-xs leading-5 text-zinc-300 sm:col-span-4">
         Submitted bobbleheads are reviewed by the site admin before they appear for everyone.
@@ -295,6 +319,7 @@ export function TeamPageClient({
               ) : (
                 <SubmitBobbleheadForm
                   teamSlug={team.slug}
+                  communityBobbleheads={communityBobbleheads}
                   onDone={() => setJustSubmitted(true)}
                 />
               )

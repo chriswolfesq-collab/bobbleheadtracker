@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { GIVEAWAYS_BY_TEAM } from "@/lib/bobbleheads";
+import { findDuplicateBobblehead, type DuplicateCandidate } from "@/lib/duplicateCheck";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 
 type Submission = {
@@ -18,7 +19,7 @@ type Submission = {
   created_at: string;
 };
 
-type ReviewRow = Submission & { signedUrl: string | null };
+type ReviewRow = Submission & { signedUrl: string | null; duplicateOf: DuplicateCandidate | null };
 
 async function moveToApproved(storagePath: string, submissionId: string) {
   const { data: file, error: downloadError } = await supabase.storage
@@ -100,13 +101,36 @@ export default function AdminReviewPage() {
         }
 
         const submissions = (data ?? []) as Submission[];
+
+        const teamSlugs = Array.from(
+          new Set(submissions.filter((s) => s.kind === "new_bobblehead").map((s) => s.team_slug)),
+        );
+        const { data: communityRows } = teamSlugs.length
+          ? await supabase.from("community_bobbleheads").select("team_slug, title, date").in("team_slug", teamSlugs)
+          : { data: [] as { team_slug: string; title: string; date: string }[] };
+        const communityByTeam = new Map<string, DuplicateCandidate[]>();
+        for (const row of communityRows ?? []) {
+          const list = communityByTeam.get(row.team_slug) ?? [];
+          list.push({ title: row.title, date: row.date });
+          communityByTeam.set(row.team_slug, list);
+        }
+
         const withUrls = await Promise.all(
           submissions.map(async (submission) => {
             const { data: signed } = await supabase.storage
               .from("bobblehead-pending")
               .createSignedUrl(submission.storage_path, 60 * 10);
 
-            return { ...submission, signedUrl: signed?.signedUrl ?? null };
+            const duplicateOf =
+              submission.kind === "new_bobblehead" && submission.title
+                ? findDuplicateBobblehead(
+                    submission.team_slug,
+                    submission.title,
+                    communityByTeam.get(submission.team_slug) ?? [],
+                  )
+                : null;
+
+            return { ...submission, signedUrl: signed?.signedUrl ?? null, duplicateOf };
           }),
         );
 
@@ -243,9 +267,16 @@ export default function AdminReviewPage() {
                   Team: <span className="font-semibold">{row.team_slug}</span>
                 </p>
                 {row.kind === "new_bobblehead" ? (
-                  <p className="text-zinc-200">
-                    {row.title} · {row.date}
-                  </p>
+                  <>
+                    <p className="text-zinc-200">
+                      {row.title} · {row.date}
+                    </p>
+                    {row.duplicateOf ? (
+                      <p className="mt-1 text-xs font-semibold text-amber-300">
+                        ⚠ Possible duplicate of “{row.duplicateOf.title}” ({row.duplicateOf.date})
+                      </p>
+                    ) : null}
+                  </>
                 ) : (
                   <p className="text-zinc-200">
                     Target: <span className="font-semibold">{row.target_bobblehead_id}</span>
