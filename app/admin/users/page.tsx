@@ -201,14 +201,22 @@ export default function AdminUsersPage() {
 
               <div className="flex flex-col justify-center gap-2">
                 {editingId !== row.id ? (
-                  <button
-                    type="button"
-                    disabled={busyId === row.id}
-                    onClick={() => startEditing(row)}
-                    className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-60"
-                  >
-                    Edit
-                  </button>
+                  <>
+                    <Link
+                      href={`/admin/users/view?id=${encodeURIComponent(row.id)}`}
+                      className="rounded border border-white/20 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+                    >
+                      View profile
+                    </Link>
+                    <button
+                      type="button"
+                      disabled={busyId === row.id}
+                      onClick={() => startEditing(row)}
+                      className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-60"
+                    >
+                      Edit
+                    </button>
+                  </>
                 ) : null}
                 {confirmingId === row.id ? (
                   <>

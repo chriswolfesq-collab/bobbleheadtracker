@@ -201,6 +201,15 @@ create policy "user_collections: owner update"
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
 
+-- Additive read policy so an admin can view any user's collection from the
+-- admin "view profile" page. Postgres OR-combines permissive policies, so this
+-- widens select for admins without loosening the owner-only policy above.
+drop policy if exists "user_collections: admin select" on public.user_collections;
+create policy "user_collections: admin select"
+  on public.user_collections for select
+  to authenticated
+  using (public.is_admin());
+
 -- user_favorites: fully private per-user data, same shape as user_collections.
 drop policy if exists "user_favorites: owner select" on public.user_favorites;
 create policy "user_favorites: owner select"
@@ -220,6 +229,13 @@ create policy "user_favorites: owner update"
   to authenticated
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
+
+-- Additive admin read policy, same rationale as user_collections above.
+drop policy if exists "user_favorites: admin select" on public.user_favorites;
+create policy "user_favorites: admin select"
+  on public.user_favorites for select
+  to authenticated
+  using (public.is_admin());
 
 -- approved_photos / community_bobbleheads / bobblehead_gallery_photos: public
 -- read. Writes normally happen only via the SECURITY DEFINER
@@ -484,6 +500,38 @@ begin
 end;
 $$;
 
+-- Single-user version of admin_list_users, for the admin "view profile" page
+-- reached directly by URL (where the list isn't loaded).
+create or replace function public.admin_get_user(p_user_id uuid)
+returns table (
+  id uuid,
+  email text,
+  display_name text,
+  created_at timestamptz,
+  last_sign_in_at timestamptz
+)
+language plpgsql
+stable
+security definer
+set search_path = public
+as $$
+begin
+  if not public.is_admin() then
+    raise exception 'not authorized';
+  end if;
+
+  return query
+  select
+    u.id,
+    u.email::text,
+    coalesce(u.raw_user_meta_data ->> 'display_name', u.raw_user_meta_data ->> 'full_name', u.raw_user_meta_data ->> 'name'),
+    u.created_at,
+    u.last_sign_in_at
+  from auth.users u
+  where u.id = p_user_id;
+end;
+$$;
+
 create or replace function public.admin_update_display_name(p_user_id uuid, p_display_name text)
 returns void
 language plpgsql
@@ -535,9 +583,11 @@ end;
 $$;
 
 revoke all on function public.admin_list_users() from public, anon;
+revoke all on function public.admin_get_user(uuid) from public, anon;
 revoke all on function public.admin_update_display_name(uuid, text) from public, anon;
 revoke all on function public.admin_delete_user(uuid) from public, anon;
 grant execute on function public.admin_list_users() to authenticated;
+grant execute on function public.admin_get_user(uuid) to authenticated;
 grant execute on function public.admin_update_display_name(uuid, text) to authenticated;
 grant execute on function public.admin_delete_user(uuid) to authenticated;
 

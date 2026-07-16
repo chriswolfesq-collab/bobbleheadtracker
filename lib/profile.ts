@@ -1,5 +1,6 @@
 "use client";
 
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth";
 import { getGiveawayById, getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
@@ -7,6 +8,13 @@ import { supabase } from "@/lib/supabase";
 import { TEAMS } from "@/lib/teams";
 
 export type TeamCount = { teamSlug: string; count: number };
+
+// The collection/favorites/submissions hooks default to the signed-in site
+// user (via useAuth + the regular supabase client), but admin mode passes an
+// explicit target user id and the admin client so the "view profile" page can
+// render any user's profile read-only. Admin reads are allowed by the
+// "…: admin select" RLS policies added in supabase/schema.sql.
+export type ProfileSource = { userId?: string; client?: SupabaseClient };
 
 // The site total per team is the curated giveaway list (static) plus any
 // community-submitted bobbleheads that have been approved for that team.
@@ -52,20 +60,22 @@ export function useSiteBobbleheadCounts() {
   return { totalByTeamSlug, siteTotal, isLoading };
 }
 
-export function useCollectionSummary() {
+export function useCollectionSummary(source?: ProfileSource) {
   const { user } = useAuth();
+  const client = source?.client ?? supabase;
+  const userId = source?.userId ?? user?.id ?? null;
   const [countByTeamSlug, setCountByTeamSlug] = useState<Record<string, number>>({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) return;
+    if (!userId) return;
 
     let cancelled = false;
 
-    supabase
+    client
       .from("user_collections")
       .select("team_slug, owned")
-      .eq("user_id", user.id)
+      .eq("user_id", userId)
       .then(({ data, error }) => {
         if (cancelled) return;
 
@@ -87,12 +97,12 @@ export function useCollectionSummary() {
     return () => {
       cancelled = true;
     };
-  }, [user]);
+  }, [userId, client]);
 
-  const resolvedCounts = user ? countByTeamSlug : {};
+  const resolvedCounts = userId ? countByTeamSlug : {};
   const totalOwned = Object.values(resolvedCounts).reduce((sum, count) => sum + count, 0);
 
-  return { countByTeamSlug: resolvedCounts, totalOwned, isLoading: user ? isLoading : false };
+  return { countByTeamSlug: resolvedCounts, totalOwned, isLoading: userId ? isLoading : false };
 }
 
 export type MySubmission = {
@@ -112,19 +122,20 @@ export type MySubmission = {
 // moveToApproved in app/admin/review/page.tsx) — so the URL has to be derived
 // differently depending on status.
 async function resolveSubmissionImageUrl(
+  client: SupabaseClient,
   status: MySubmission["status"],
   submissionId: string,
   storagePath: string,
 ): Promise<string | null> {
   if (status === "approved") {
     const filename = storagePath.split("/").pop() ?? "photo";
-    const { data } = supabase.storage
+    const { data } = client.storage
       .from("bobblehead-approved")
       .getPublicUrl(`${submissionId}-${filename}`);
     return data.publicUrl ?? null;
   }
 
-  const { data } = await supabase.storage
+  const { data } = await client.storage
     .from("bobblehead-pending")
     .createSignedUrl(storagePath, 60 * 10);
   return data?.signedUrl ?? null;
@@ -135,6 +146,7 @@ async function resolveSubmissionImageUrl(
 // becomes a community_bobbleheads row whose generated id ends in the submission's
 // first 8 chars (see approve_submission() in supabase/schema.sql), so we look it up that way.
 async function resolveSubmissionHref(
+  client: SupabaseClient,
   status: MySubmission["status"],
   kind: MySubmission["kind"],
   submissionId: string,
@@ -151,7 +163,7 @@ async function resolveSubmissionHref(
       : `/teams/${teamSlug}/community?id=${encodeURIComponent(targetBobbleheadId)}`;
   }
 
-  const { data } = await supabase
+  const { data } = await client
     .from("community_bobbleheads")
     .select("id")
     .eq("team_slug", teamSlug)
@@ -161,20 +173,22 @@ async function resolveSubmissionHref(
   return data ? `/teams/${teamSlug}/community?id=${encodeURIComponent(data.id)}` : null;
 }
 
-export function useMySubmissions() {
+export function useMySubmissions(source?: ProfileSource) {
   const { user } = useAuth();
+  const client = source?.client ?? supabase;
+  const userId = source?.userId ?? user?.id ?? null;
   const [submissions, setSubmissions] = useState<MySubmission[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) return;
+    if (!userId) return;
 
     let cancelled = false;
 
-    supabase
+    client
       .from("submissions")
       .select("id, kind, team_slug, title, status, created_at, storage_path, target_bobblehead_id")
-      .eq("submitted_by", user.id)
+      .eq("submitted_by", userId)
       .order("created_at", { ascending: false })
       .then(async ({ data, error }) => {
         if (cancelled) return;
@@ -194,8 +208,9 @@ export function useMySubmissions() {
             title: row.title,
             status: row.status,
             createdAt: row.created_at,
-            imageUrl: await resolveSubmissionImageUrl(row.status, row.id, row.storage_path),
+            imageUrl: await resolveSubmissionImageUrl(client, row.status, row.id, row.storage_path),
             href: await resolveSubmissionHref(
+              client,
               row.status,
               row.kind,
               row.id,
@@ -214,9 +229,9 @@ export function useMySubmissions() {
     return () => {
       cancelled = true;
     };
-  }, [user]);
+  }, [userId, client]);
 
-  return { submissions: user ? submissions : [], isLoading: user ? isLoading : false };
+  return { submissions: userId ? submissions : [], isLoading: userId ? isLoading : false };
 }
 
 export type MyFavorite = {
@@ -231,20 +246,22 @@ export type MyFavorite = {
 // cross-team list for the profile page means resolving each row's title and
 // image against either the curated giveaway list or the community_bobbleheads
 // table, the same split used elsewhere for a bobblehead's identity.
-export function useMyFavorites() {
+export function useMyFavorites(source?: ProfileSource) {
   const { user } = useAuth();
+  const client = source?.client ?? supabase;
+  const userId = source?.userId ?? user?.id ?? null;
   const [favorites, setFavorites] = useState<MyFavorite[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) return;
+    if (!userId) return;
 
     let cancelled = false;
 
-    supabase
+    client
       .from("user_favorites")
       .select("bobblehead_id, team_slug")
-      .eq("user_id", user.id)
+      .eq("user_id", userId)
       .eq("favorited", true)
       .then(async ({ data, error }) => {
         if (cancelled) return;
@@ -267,11 +284,11 @@ export function useMyFavorites() {
         const teamSlugs = Array.from(new Set(rows.map((row) => row.team_slug)));
 
         const [{ data: communityRows }, { data: photoRows }] = await Promise.all([
-          supabase
+          client
             .from("community_bobbleheads")
             .select("id, team_slug, title, image_url")
             .in("team_slug", teamSlugs),
-          supabase.from("approved_photos").select("bobblehead_id, team_slug, image_url").in("team_slug", teamSlugs),
+          client.from("approved_photos").select("bobblehead_id, team_slug, image_url").in("team_slug", teamSlugs),
         ]);
 
         if (cancelled) return;
@@ -306,7 +323,7 @@ export function useMyFavorites() {
     return () => {
       cancelled = true;
     };
-  }, [user]);
+  }, [userId, client]);
 
-  return { favorites: user ? favorites : [], isLoading: user ? isLoading : false };
+  return { favorites: userId ? favorites : [], isLoading: userId ? isLoading : false };
 }

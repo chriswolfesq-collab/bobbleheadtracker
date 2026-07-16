@@ -1,32 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AuthWidget } from "@/components/AuthWidget";
+import { ProfileSections } from "@/components/ProfileSections";
 import { getDisplayName, useAuth } from "@/lib/auth";
-import { publicAsset } from "@/lib/paths";
 import {
   useCollectionSummary,
   useMyFavorites,
   useMySubmissions,
   useSiteBobbleheadCounts,
-  type MySubmission,
 } from "@/lib/profile";
-import { TEAMS } from "@/lib/teams";
-
-const STATUS_STYLES: Record<MySubmission["status"], string> = {
-  pending: "border-amber-400/40 bg-amber-400/10 text-amber-300",
-  approved: "border-emerald-400/40 bg-emerald-400/10 text-emerald-300",
-  rejected: "border-red-400/40 bg-red-400/10 text-red-300",
-};
-
-function submissionLabel(submission: MySubmission): string {
-  if (submission.kind === "new_bobblehead") {
-    return submission.title ?? "New bobblehead";
-  }
-  return "Photo for existing bobblehead";
-}
 
 export function ProfilePageClient() {
   const { user, isLoading: isAuthLoading, updateDisplayName } = useAuth();
@@ -42,11 +26,6 @@ export function ProfilePageClient() {
   useEffect(() => {
     setNameDraft(getDisplayName(user));
   }, [user]);
-
-  const teamCounts = TEAMS.map((team) => ({
-    team,
-    count: countByTeamSlug[team.slug] ?? 0,
-  })).sort((a, b) => b.count - a.count || a.team.name.localeCompare(b.team.name));
 
   return (
     <div
@@ -140,163 +119,14 @@ export function ProfilePageClient() {
             </p>
           </header>
 
-          <nav className="mb-8 flex flex-wrap justify-center gap-2">
-            {[
-              { id: "collection", label: "Collection" },
-              { id: "favorites", label: "Favorites" },
-              { id: "submissions", label: "Submissions" },
-            ].map(({ id, label }) => (
-              <button
-                key={id}
-                type="button"
-                onClick={() =>
-                  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
-                }
-                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-300 transition hover:border-amber-400 hover:text-amber-300"
-              >
-                {label}
-              </button>
-            ))}
-          </nav>
-
-          <section id="collection" className="mb-10 scroll-mt-6">
-            <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
-              Collection by team
-            </h2>
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-              {teamCounts.map(({ team, count }, index) => (
-                <Link
-                  key={team.slug}
-                  href={`/teams/${team.slug}`}
-                  className={`flex items-center justify-between gap-3 px-4 py-3 text-sm transition hover:bg-white/5 ${
-                    index !== teamCounts.length - 1 ? "border-b border-white/10" : ""
-                  }`}
-                >
-                  <span className="flex items-center gap-3">
-                    <Image
-                      src={publicAsset(`/bobbleheads/${team.slug}.png`)}
-                      alt=""
-                      width={677}
-                      height={1607}
-                      sizes="100px"
-                      className="h-14 w-auto flex-shrink-0 drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
-                    />
-                    <span className="font-bold text-zinc-100">{team.name}</span>
-                    <span className="text-xs text-zinc-500">{team.city}</span>
-                  </span>
-                  <span className="font-black tabular-nums text-amber-300">
-                    {count}/{totalByTeamSlug[team.slug] ?? 0}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </section>
-
-          <section id="favorites" className="mb-10 scroll-mt-6">
-            <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
-              My favorites
-            </h2>
-            {isFavoritesLoading ? (
-              <p className="text-sm text-zinc-400">Loading…</p>
-            ) : favorites.length === 0 ? (
-              <p className="text-sm text-zinc-400">
-                Tap the heart on a bobblehead to add it to your favorites.
-              </p>
-            ) : (
-              <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-                {favorites.map((favorite, index) => {
-                  const team = TEAMS.find((t) => t.slug === favorite.teamSlug);
-                  const imageSrc = favorite.imageUrl ?? publicAsset(`/bobbleheads/${favorite.teamSlug}.png`);
-
-                  return (
-                    <Link
-                      key={`${favorite.teamSlug}:${favorite.bobbleheadId}`}
-                      href={favorite.href}
-                      className={`flex items-center gap-3 px-4 py-3 text-sm transition hover:bg-white/5 ${
-                        index !== favorites.length - 1 ? "border-b border-white/10" : ""
-                      }`}
-                    >
-                      <Image
-                        src={imageSrc}
-                        alt=""
-                        width={677}
-                        height={1607}
-                        sizes="120px"
-                        className="h-20 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
-                      />
-                      <span className="min-w-0">
-                        <span className="block truncate font-bold text-zinc-100">{favorite.title}</span>
-                        <span className="text-xs text-zinc-500">{team?.name ?? favorite.teamSlug}</span>
-                      </span>
-                      <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-red-400">
-                        ♥
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-          </section>
-
-          <section id="submissions" className="scroll-mt-6">
-            <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
-              My submissions
-            </h2>
-            {isSubmissionsLoading ? (
-              <p className="text-sm text-zinc-400">Loading…</p>
-            ) : submissions.length === 0 ? (
-              <p className="text-sm text-zinc-400">You haven&apos;t submitted anything yet.</p>
-            ) : (
-              <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-                {submissions.map((submission, index) => {
-                  const team = TEAMS.find((t) => t.slug === submission.teamSlug);
-                  const imageSrc =
-                    submission.imageUrl ?? publicAsset(`/bobbleheads/${submission.teamSlug}.png`);
-                  const rowClassName = `flex items-center justify-between gap-3 px-4 py-3 text-sm ${
-                    index !== submissions.length - 1 ? "border-b border-white/10" : ""
-                  } ${submission.href ? "transition hover:bg-white/5" : ""}`;
-                  const content = (
-                    <>
-                      <span className="flex min-w-0 items-center gap-3">
-                        <Image
-                          src={imageSrc}
-                          alt=""
-                          width={677}
-                          height={1607}
-                          sizes="120px"
-                          className="h-20 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
-                        />
-                        <span className="min-w-0">
-                          <span className="block truncate font-bold text-zinc-100">
-                            {submissionLabel(submission)}
-                          </span>
-                          <span className="text-xs text-zinc-500">
-                            {team?.name ?? submission.teamSlug} ·{" "}
-                            {new Date(submission.createdAt).toLocaleDateString()}
-                          </span>
-                        </span>
-                      </span>
-                      <span
-                        className={`flex-shrink-0 rounded-full border px-2.5 py-1 text-[10px] font-black uppercase tracking-wide ${STATUS_STYLES[submission.status]}`}
-                      >
-                        {submission.status}
-                      </span>
-                    </>
-                  );
-
-                  return submission.href ? (
-                    <Link key={submission.id} href={submission.href} className={rowClassName}>
-                      {content}
-                    </Link>
-                  ) : (
-                    <div key={submission.id} className={rowClassName}>
-                      {content}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </section>
+          <ProfileSections
+            countByTeamSlug={countByTeamSlug}
+            totalByTeamSlug={totalByTeamSlug}
+            favorites={favorites}
+            isFavoritesLoading={isFavoritesLoading}
+            submissions={submissions}
+            isSubmissionsLoading={isSubmissionsLoading}
+          />
         </div>
       )}
     </div>
