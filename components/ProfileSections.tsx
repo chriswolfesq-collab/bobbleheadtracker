@@ -6,6 +6,7 @@ import DisplayCase from "@/components/DisplayCase";
 import { ShareCollectionButton } from "@/components/ShareCollectionButton";
 import { publicAsset } from "@/lib/paths";
 import { type MyFavorite, type MySubmission, type MyWanted } from "@/lib/profile";
+import { computeShelfStats } from "@/lib/shelfStats";
 import { TEAMS } from "@/lib/teams";
 
 const STATUS_STYLES: Record<MySubmission["status"], string> = {
@@ -49,11 +50,12 @@ export function ProfileSections({
   submissions: MySubmission[];
   isSubmissionsLoading: boolean;
 }) {
-  const totalOwned = TEAMS.reduce((sum, team) => sum + (countByTeamSlug[team.slug] ?? 0), 0);
-  const siteTotal = TEAMS.reduce((sum, team) => sum + (totalByTeamSlug[team.slug] ?? 0), 0);
-  const teamsStarted = TEAMS.filter((team) => (countByTeamSlug[team.slug] ?? 0) > 0).length;
-  const pctComplete = siteTotal > 0 ? Math.round((totalOwned / siteTotal) * 100) : 0;
-  const slotsEmpty = Math.max(siteTotal - totalOwned, 0);
+  // Shared with the public /shelf/<slug> page so a collector's own profile and
+  // the link they hand out always agree on the numbers.
+  const { totalOwned, siteTotal, pctComplete, teamsStarted, slotsEmpty } = computeShelfStats(
+    countByTeamSlug,
+    totalByTeamSlug,
+  );
 
   return (
     <>
