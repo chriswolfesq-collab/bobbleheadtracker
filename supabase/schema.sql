@@ -822,25 +822,46 @@ as $$
   );
 $$;
 
--- Display name to URL segment. Anything that isn't a-z0-9 becomes a dash, so
--- a name that survives none of that (all emoji, all non-Latin script) falls
--- back to 'collector' and leans on the uniqueness suffix to tell them apart.
--- Capped at 40 chars to keep shared links readable.
+-- Display name to URL segment.
+--
+-- Accented Latin characters are folded to ASCII first, so "José Ramírez"
+-- becomes "jose-ramirez" rather than "jos-ram-rez". This matters more than it
+-- looks: accented names are common among baseball fans, the slug is the thing
+-- people post publicly, and enable_public_shelf() freezes it forever on first
+-- use — so a mangled slug can never be corrected for that user. translate()
+-- rather than the unaccent extension keeps this dependency-free and IMMUTABLE;
+-- it covers Latin-1, which is the range these names actually live in.
+--
+-- Anything still not a-z0-9 becomes a dash. A name that survives none of that
+-- (all emoji, all non-Latin script) falls back to 'collector' and leans on the
+-- uniqueness suffix to tell those users apart.
 create or replace function public.slugify(p_text text)
 returns text
 language sql
 immutable
 as $$
-  select coalesce(
-    nullif(
-      trim(both '-' from left(
-        trim(both '-' from regexp_replace(lower(coalesce(p_text, '')), '[^a-z0-9]+', '-', 'g')),
-        40
-      )),
-      ''
-    ),
-    'collector'
-  );
+  with folded as (
+    select translate(
+      lower(coalesce(p_text, '')),
+      'áàâãäåéèêëíìîïóòôõöøúùûüñçýÿšž',
+      'aaaaaaeeeeiiiioooooouuuuncyysz'
+    ) as text
+  ),
+  dashed as (
+    select trim(both '-' from regexp_replace(folded.text, '[^a-z0-9]+', '-', 'g')) as text
+    from folded
+  ),
+  -- Capped at 40 chars to keep shared links readable, cut back to the last
+  -- whole word so it doesn't end on a severed fragment. A single word longer
+  -- than the cap has no dash to cut at and is simply truncated.
+  capped as (
+    select case
+      when length(dashed.text) <= 40 then dashed.text
+      else regexp_replace(left(dashed.text, 40), '-[^-]*$', '')
+    end as text
+    from dashed
+  )
+  select coalesce(nullif(trim(both '-' from capped.text), ''), 'collector') from capped;
 $$;
 
 -- Mirrors auth.users.raw_user_meta_data into profiles.display_name. anon can't
