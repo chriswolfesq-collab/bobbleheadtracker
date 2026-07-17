@@ -58,7 +58,7 @@ function buildEmail(payload: Record<string, unknown>): { subject: string; text: 
 
     return {
       subject: "New listing report pending review",
-      text: `${summary}${details}\n\nReview it at: https://chriswolfesq-collab.github.io/bobbleheadtracker/admin/reports`,
+      text: `${summary}${details}\n\nReview it at: https://bobbleshelf.com/admin/reports`,
       to: ADMIN_EMAIL,
     };
   }
@@ -70,7 +70,7 @@ function buildEmail(payload: Record<string, unknown>): { subject: string; text: 
 
   return {
     subject: "New bobblehead submission pending review",
-    text: `${summary}\n\nReview it at: https://chriswolfesq-collab.github.io/bobbleheadtracker/admin/review`,
+    text: `${summary}\n\nReview it at: https://bobbleshelf.com/admin/review`,
     to: ADMIN_EMAIL,
   };
 }
