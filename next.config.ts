@@ -8,6 +8,16 @@ const supabaseHostname = process.env.NEXT_PUBLIC_SUPABASE_URL
   : undefined;
 
 const nextConfig: NextConfig = {
+  // The OG image reads its fonts with readFile(join(process.cwd(), "assets/…")),
+  // a path built at runtime that the static trace can't see — so the fonts were
+  // left out of the deployed bundle and the route 500'd on Vercel while working
+  // locally, where the files are simply on disk.
+  //
+  // The key is a route glob matched with picomatch, so the brackets in [slug]
+  // are escaped: unescaped they'd read as a character class and never match.
+  outputFileTracingIncludes: {
+    "/shelf/\\[slug\\]/opengraph-image": ["./assets/**"],
+  },
   images: {
     // Every remote host a listing image can come from. These are enforced by the
     // optimizer, so an unlisted host is a broken image rather than a slow one.
