@@ -3,20 +3,14 @@ import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(import.meta.url));
-const isGithubPages = process.env.GITHUB_PAGES === "true";
 const supabaseHostname = process.env.NEXT_PUBLIC_SUPABASE_URL
   ? new URL(process.env.NEXT_PUBLIC_SUPABASE_URL).hostname
   : undefined;
 
 const nextConfig: NextConfig = {
-  output: isGithubPages ? "export" : undefined,
-  // No basePath: the site is served from the root of the bobbleshelf.com
-  // custom domain (see public/CNAME), not from a /bobbleheadtracker subpath.
-  env: {
-    NEXT_PUBLIC_BASE_PATH: "",
-  },
   images: {
-    unoptimized: isGithubPages,
+    // Every remote host a listing image can come from. These are enforced by the
+    // optimizer, so an unlisted host is a broken image rather than a slow one.
     remotePatterns: [
       { protocol: "https", hostname: "img.mlbstatic.com" },
       { protocol: "https", hostname: "bullpenbobbles.com" },

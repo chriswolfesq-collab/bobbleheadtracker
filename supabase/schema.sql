@@ -604,14 +604,16 @@ grant execute on function public.admin_delete_bobblehead(text, text, text) to au
 -- ---------------------------------------------------------------------------
 -- Admin: user management
 -- ---------------------------------------------------------------------------
--- The site has no server (it's a static export deployed to GitHub Pages, see
--- .github/workflows/deploy.yml), so there's nowhere to hold a Supabase
--- service-role key to drive the Auth Admin API. These SECURITY DEFINER
--- functions are the same workaround already used above for
--- approve_submission/reject_submission: they run with the privileges of the
--- function owner (which can read/write the auth schema), but re-check
--- is_admin() themselves first, so a non-admin caller gets 'not authorized'
--- regardless of what the client claims.
+-- Driving the Auth Admin API would need a Supabase service-role key. The site
+-- is server-rendered, so one could technically be held now, but we deliberately
+-- don't: a service-role key bypasses RLS entirely, so every route holding it
+-- becomes a place where a missing check leaks the whole table. Instead these
+-- SECURITY DEFINER functions do the same job as approve_submission /
+-- reject_submission above: they run with the privileges of the function owner
+-- (which can read/write the auth schema), but re-check is_admin() themselves
+-- first, so a non-admin caller gets 'not authorized' regardless of what the
+-- client claims. Authorization stays in one place — this file — rather than
+-- being spread across application code.
 
 drop function if exists public.admin_list_users();
 
