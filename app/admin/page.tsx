@@ -21,6 +21,7 @@ export default function AdminPage() {
   const [pendingSubmissions, setPendingSubmissions] = useState(0);
   const [pendingReports, setPendingReports] = useState(0);
   const [openDeadImages, setOpenDeadImages] = useState(0);
+  const [pendingScraped, setPendingScraped] = useState(0);
 
   useEffect(() => {
     if (!isAdmin) return;
@@ -49,6 +50,14 @@ export default function AdminPage() {
       .eq("status", "open")
       .then(({ count }) => {
         if (!cancelled) setOpenDeadImages(count ?? 0);
+      });
+
+    supabase
+      .from("scraped_giveaways")
+      .select("id", { count: "exact", head: true })
+      .eq("status", "pending")
+      .then(({ count }) => {
+        if (!cancelled) setPendingScraped(count ?? 0);
       });
 
     return () => {
@@ -131,6 +140,14 @@ export default function AdminPage() {
             <NotificationBadge count={openDeadImages} />
             <p className="text-sm font-black uppercase tracking-wide text-white">Dead images</p>
             <p className="mt-2 text-sm text-zinc-400">Fix listing photos the nightly sweep couldn&apos;t load.</p>
+          </Link>
+          <Link
+            href="/admin/scraped-giveaways"
+            className="relative rounded-lg border border-white/10 bg-[#0b1a29] p-5 transition hover:border-amber-400/60"
+          >
+            <NotificationBadge count={pendingScraped} />
+            <p className="text-sm font-black uppercase tracking-wide text-white">New giveaways</p>
+            <p className="mt-2 text-sm text-zinc-400">Review bobblehead promos the scraper found on team schedule pages.</p>
           </Link>
           <Link
             href="/"

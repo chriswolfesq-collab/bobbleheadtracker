@@ -50,6 +50,28 @@ photos in the DB — and queues the broken ones at `/admin/dead-images`.
    curl -H "Authorization: Bearer <CRON_SECRET>" https://bobbleshelf.com/api/dead-image-sweep
    ```
 
+## New-giveaway scraper (optional)
+
+A weekly Vercel Cron job (`vercel.json` → `/api/giveaway-scrape`) crawls each
+team's promo-schedule page (`lib/promoSources.ts`), extracts bobblehead
+giveaways it hasn't seen before, and drafts the genuinely new ones into a review
+queue at `/admin/scraped-giveaways` — so new giveaways no longer have to be
+hand-added to `data/giveaways/*.json`. Approving a draft publishes it as a live
+community listing on that team's page; dismissing hides it.
+
+1. In the Supabase SQL Editor, run `scraped_giveaways.sql` (this repo, same
+   folder).
+2. No new env vars — it reuses the `CRON_SECRET` and `SUPABASE_SERVICE_ROLE_KEY`
+   from the dead-image sweep above. If you skipped that section, add both now.
+3. Deploy so Vercel registers the cron. To run it by hand:
+   ```
+   curl -H "Authorization: Bearer <CRON_SECRET>" https://bobbleshelf.com/api/giveaway-scrape
+   ```
+   The response reports how many candidates were found, how many were new
+   drafts, and how many sources errored — handy for spotting a promo page that
+   has moved or now renders its schedule client-side. Edit `lib/promoSources.ts`
+   to point a team at a better source.
+
 ## Admin "email users" (optional)
 
 Powers the Email / Email selected / Email all buttons on `/admin/users`.
