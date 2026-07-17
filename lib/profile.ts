@@ -111,6 +111,16 @@ export type MyShelf = {
   isPublic: boolean;
 };
 
+// Returned by useMyShelf. Named so the profile page can call the hook once and
+// hand the result to both the privacy toggle and the share buttons, rather than
+// each calling the hook and refetching the same row.
+export type ShelfSharing = {
+  shelf: MyShelf;
+  isLoading: boolean;
+  isSaving: boolean;
+  setPublic: (isPublic: boolean) => Promise<{ error: string | null }>;
+};
+
 // The signed-in user's public-shelf settings. Reads profiles directly (allowed
 // by the "profiles: owner select" policy) but writes through the
 // enable/disable RPCs, because profiles has no update policy — the client must
@@ -119,7 +129,7 @@ export type MyShelf = {
 // No ProfileSource here, unlike the hooks above: this is a settings surface for
 // your own account, and there's deliberately no admin path to publish someone
 // else's shelf on their behalf.
-export function useMyShelf() {
+export function useMyShelf(): ShelfSharing {
   const { user } = useAuth();
   const userId = user?.id ?? null;
   const [shelf, setShelf] = useState<MyShelf>({ slug: null, isPublic: false });

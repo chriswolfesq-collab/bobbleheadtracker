@@ -2,15 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/Toast";
-import { useMyShelf } from "@/lib/profile";
+import type { ShelfSharing } from "@/lib/profile";
 
 // The opt-in for a public /shelf/<slug> page. Lives on the profile page rather
 // than inside ProfileSections because ProfileSections is also rendered by the
 // admin "view profile" page, and useMyShelf always reads the signed-in account
 // — an admin looking at someone else's profile would otherwise be shown a
 // toggle for their own shelf.
-export function ShelfSharingToggle() {
-  const { shelf, isLoading, isSaving, setPublic } = useMyShelf();
+export function ShelfSharingToggle({ sharing }: { sharing: ShelfSharing }) {
+  const { shelf, isLoading, isSaving, setPublic } = sharing;
   const { showError } = useToast();
   const [didCopy, setDidCopy] = useState(false);
 
