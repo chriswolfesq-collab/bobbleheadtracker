@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { AuthWidget } from "@/components/AuthWidget";
 import { ProfileSections } from "@/components/ProfileSections";
+import { ShelfSharingToggle } from "@/components/ShelfSharingToggle";
 import { getDisplayName, useAuth } from "@/lib/auth";
 import {
   useCollectionSummary,
   useMyFavorites,
+  useMyShelf,
   useMySubmissions,
   useMyWanted,
   useSiteBobbleheadCounts,
@@ -20,6 +22,9 @@ export function ProfilePageClient() {
   const { submissions, isLoading: isSubmissionsLoading } = useMySubmissions();
   const { favorites, isLoading: isFavoritesLoading } = useMyFavorites();
   const { wanted, isLoading: isWantedLoading } = useMyWanted();
+  // Called once here and passed down: the privacy toggle and both share buttons
+  // all need it, and each calling the hook would refetch the same row.
+  const sharing = useMyShelf();
   const [isEditingName, setIsEditingName] = useState(false);
   const [nameDraft, setNameDraft] = useState("");
   const [isSavingName, setIsSavingName] = useState(false);
@@ -120,10 +125,14 @@ export function ProfilePageClient() {
             </p>
           </header>
 
+          <ShelfSharingToggle sharing={sharing} />
+
           <ProfileSections
             countByTeamSlug={countByTeamSlug}
             totalByTeamSlug={totalByTeamSlug}
             displayName={getDisplayName(user)}
+            sharing={sharing}
+            isCollectionLoading={isCollectionLoading || isSiteTotalLoading}
             favorites={favorites}
             isFavoritesLoading={isFavoritesLoading}
             wanted={wanted}

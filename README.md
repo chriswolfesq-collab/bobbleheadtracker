@@ -4,8 +4,8 @@
 
 ## How it works
 
-- **Next.js (App Router)**, statically exported and served from GitHub Pages. There is no server of our own.
-- **Supabase** provides everything dynamic: auth, per-user collections/favorites, community submissions, photos (Storage), and admin tooling. The browser talks to Supabase directly with the public anon key; all authorization is enforced by Row Level Security policies and `SECURITY DEFINER` functions in [supabase/schema.sql](supabase/schema.sql).
+- **Next.js (App Router)**, server-rendered on Vercel. Most pages are static — the 30 team routes prerender at build time from curated JSON — but the site is a real Node server, which is what lets public shelf pages exist at arbitrary URLs and generate their own share images.
+- **Supabase** provides everything dynamic: auth, per-user collections/favorites, community submissions, photos (Storage), and admin tooling. The browser talks to Supabase directly with the public anon key; all authorization is enforced by Row Level Security policies and `SECURITY DEFINER` functions in [supabase/schema.sql](supabase/schema.sql). There is no service-role key anywhere: server-rendered pages use the same anon key and are bound by the same RLS.
 - **Curated data** — the giveaway history for all 30 teams — lives in one JSON file per team under [data/giveaways/](data/giveaways) and is baked into the site at build time by [lib/bobbleheads.ts](lib/bobbleheads.ts). Admin edits and deletions of curated listings are recorded in the `bobblehead_overrides` table and applied client-side.
 - **Community data** — user-submitted bobbleheads and photos — goes through a pending-review queue (`submissions` table plus a private Storage bucket) and appears publicly once the admin approves it at `/admin/review`.
 
@@ -46,4 +46,6 @@ Fix a title/date or add a newly announced giveaway by editing the team's file in
 
 ## Deployment
 
-Pushing to `main` runs [.github/workflows/deploy.yml](.github/workflows/deploy.yml): checks (lint, typecheck, tests), then a static export built with `GITHUB_PAGES=true` and the Supabase secrets, published to GitHub Pages under the custom domain in [public/CNAME](public/CNAME).
+Vercel builds and deploys on every push: `main` goes to production at [bobbleshelf.com](https://bobbleshelf.com), and every pull request gets its own preview URL. The Supabase URL and anon key are set as environment variables in the Vercel project, not in this repo.
+
+[.github/workflows/ci.yml](.github/workflows/ci.yml) runs the same checks (lint, typecheck, tests, build) independently on push and PR, so a broken commit fails loudly in GitHub rather than only in the Vercel dashboard.

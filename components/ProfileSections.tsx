@@ -5,7 +5,13 @@ import Link from "next/link";
 import DisplayCase from "@/components/DisplayCase";
 import { ShareCollectionButton } from "@/components/ShareCollectionButton";
 import { publicAsset } from "@/lib/paths";
-import { type MyFavorite, type MySubmission, type MyWanted } from "@/lib/profile";
+import {
+  type MyFavorite,
+  type MySubmission,
+  type MyWanted,
+  type ShelfSharing,
+} from "@/lib/profile";
+import { computeShelfStats } from "@/lib/shelfStats";
 import { TEAMS } from "@/lib/teams";
 
 const STATUS_STYLES: Record<MySubmission["status"], string> = {
@@ -30,6 +36,8 @@ export function ProfileSections({
   countByTeamSlug,
   totalByTeamSlug,
   displayName,
+  sharing,
+  isCollectionLoading = false,
   favorites,
   isFavoritesLoading,
   wanted,
@@ -42,6 +50,11 @@ export function ProfileSections({
   /** Whose collection this is. Omitted in the admin read-only view, which hides
    *  the share button rather than let an admin share another user's shelf. */
   displayName?: string;
+  /** Omitted alongside displayName in the admin view, for the same reason. */
+  sharing?: ShelfSharing;
+  /** Counts still loading. Without it the share button is live over an empty
+   *  collection and captures a 0/0 shelf. */
+  isCollectionLoading?: boolean;
   favorites: MyFavorite[];
   isFavoritesLoading: boolean;
   wanted: MyWanted[];
@@ -49,11 +62,10 @@ export function ProfileSections({
   submissions: MySubmission[];
   isSubmissionsLoading: boolean;
 }) {
-  const totalOwned = TEAMS.reduce((sum, team) => sum + (countByTeamSlug[team.slug] ?? 0), 0);
-  const siteTotal = TEAMS.reduce((sum, team) => sum + (totalByTeamSlug[team.slug] ?? 0), 0);
-  const teamsStarted = TEAMS.filter((team) => (countByTeamSlug[team.slug] ?? 0) > 0).length;
-  const pctComplete = siteTotal > 0 ? Math.round((totalOwned / siteTotal) * 100) : 0;
-  const slotsEmpty = Math.max(siteTotal - totalOwned, 0);
+  // Shared with the public /shelf/<slug> page so a collector's own profile and
+  // the link they hand out always agree on the numbers.
+  const stats = computeShelfStats(countByTeamSlug, totalByTeamSlug);
+  const { totalOwned, siteTotal, pctComplete, teamsStarted, slotsEmpty } = stats;
 
   return (
     <>
@@ -83,14 +95,16 @@ export function ProfileSections({
             there would recurse and end up baked into the shared image. */}
         <div className="relative mx-auto w-full max-w-2xl">
           <DisplayCase countByTeamSlug={countByTeamSlug} totalByTeamSlug={totalByTeamSlug} />
-          {displayName ? (
+          {displayName && sharing ? (
             <div className="absolute right-4 top-0 z-30 text-right sm:right-6">
               <ShareCollectionButton
                 variant="overlay"
                 displayName={displayName}
                 countByTeamSlug={countByTeamSlug}
                 totalByTeamSlug={totalByTeamSlug}
-                stats={{ totalOwned, siteTotal, pctComplete, teamsStarted, teamCount: TEAMS.length }}
+                stats={stats}
+                sharing={sharing}
+                isLoading={isCollectionLoading}
               />
             </div>
           ) : null}
@@ -104,12 +118,14 @@ export function ProfileSections({
             <span className="text-xs font-black tabular-nums text-amber-300">
               {totalOwned}/{siteTotal}
             </span>
-            {displayName ? (
+            {displayName && sharing ? (
               <ShareCollectionButton
                 displayName={displayName}
                 countByTeamSlug={countByTeamSlug}
                 totalByTeamSlug={totalByTeamSlug}
-                stats={{ totalOwned, siteTotal, pctComplete, teamsStarted, teamCount: TEAMS.length }}
+                stats={stats}
+                sharing={sharing}
+                isLoading={isCollectionLoading}
               />
             ) : null}
           </div>
