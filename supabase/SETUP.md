@@ -30,3 +30,22 @@ Skip this if the in-app queue at `/admin/review` is enough on its own.
    - Table: `submissions`, Event: `Insert`, Type: `HTTP Request`
    - URL: the function URL printed by `supabase functions deploy`
    - Header: `x-webhook-secret: <the same random string from step 2>`
+
+## Admin "email users" (optional)
+
+Powers the Email / Email selected / Email all buttons on `/admin/users`.
+Reuses the same Resend key as above.
+
+1. Deploy the function (JWT verification stays ON — it re-checks the caller
+   is an admin before sending anything):
+   ```
+   supabase functions deploy admin-send-email
+   ```
+2. If you skipped the section above, set the Resend key once:
+   ```
+   supabase secrets set RESEND_API_KEY=<your-resend-key>
+   ```
+
+No webhook is needed — the admin UI calls this function directly. `SUPABASE_URL`,
+`SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` are injected into every
+function automatically.
