@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { AuthWidget } from "@/components/AuthWidget";
 import { ProfileSections } from "@/components/ProfileSections";
-import { ShelfSharingToggle } from "@/components/ShelfSharingToggle";
 import { getDisplayName, MAX_DISPLAY_NAME_LENGTH, useAuth } from "@/lib/auth";
 import {
   useCollectionSummary,
@@ -22,8 +21,9 @@ export function ProfilePageClient() {
   const { submissions, isLoading: isSubmissionsLoading } = useMySubmissions();
   const { favorites, isLoading: isFavoritesLoading } = useMyFavorites();
   const { wanted, isLoading: isWantedLoading } = useMyWanted();
-  // Called once here and passed down: the privacy toggle and both share buttons
-  // all need it, and each calling the hook would refetch the same row.
+  // Called once here and passed down: both share buttons need it, and each
+  // calling the hook would refetch the same row. (The public-shelf privacy
+  // toggle now lives on the settings page.)
   const sharing = useMyShelf();
   const [isEditingName, setIsEditingName] = useState(false);
   const [nameDraft, setNameDraft] = useState("");
@@ -125,8 +125,6 @@ export function ProfilePageClient() {
                 : `${totalOwned}/${siteTotal} bobbleheads owned`}
             </p>
           </header>
-
-          <ShelfSharingToggle sharing={sharing} />
 
           <ProfileSections
             countByTeamSlug={countByTeamSlug}
