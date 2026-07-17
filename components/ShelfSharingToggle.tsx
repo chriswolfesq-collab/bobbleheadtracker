@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/Toast";
+import { copyText } from "@/lib/clipboard";
 import type { ShelfSharing } from "@/lib/profile";
 
 // The opt-in for a public /shelf/<slug> page. Lives on the profile page rather
@@ -42,12 +43,11 @@ export function ShelfSharingToggle({ sharing }: { sharing: ShelfSharing }) {
   async function handleCopy() {
     if (!shelfUrl) return;
 
-    try {
-      await navigator.clipboard.writeText(shelfUrl);
+    if (await copyText(shelfUrl)) {
       setDidCopy(true);
-    } catch {
-      showError("Couldn't copy the link.");
+      return;
     }
+    showError("Couldn't copy. Select the link and copy it manually.");
   }
 
   if (isLoading) return null;
@@ -87,7 +87,7 @@ export function ShelfSharingToggle({ sharing }: { sharing: ShelfSharing }) {
 
       {shelf.isPublic && shelfUrl ? (
         <div className="mt-4 flex items-center gap-2">
-          <code className="min-w-0 flex-1 truncate rounded-lg border border-white/10 bg-[#07111d] px-3 py-2 text-xs text-amber-200">
+          <code className="min-w-0 flex-1 select-all truncate rounded-lg border border-white/10 bg-[#07111d] px-3 py-2 text-xs text-amber-200">
             {shelfUrl}
           </code>
           <button

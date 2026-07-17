@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import DisplayCase from "@/components/DisplayCase";
 import { useToast } from "@/components/Toast";
+import { copyText } from "@/lib/clipboard";
 import type { ShelfSharing } from "@/lib/profile";
 import type { ShelfStats } from "@/lib/shelfStats";
 
@@ -176,12 +177,11 @@ export function ShareCollectionButton({
   async function handleCopy() {
     if (!shelfUrl) return;
 
-    try {
-      await navigator.clipboard.writeText(`${shareText} ${shelfUrl}`);
+    if (await copyText(`${shareText} ${shelfUrl}`)) {
       setDidCopy(true);
-    } catch {
-      showError("Couldn't copy the link.");
+      return;
     }
+    showError("Couldn't copy. Select the link below and copy it manually.");
   }
 
   async function handleMakePublic() {
@@ -279,7 +279,9 @@ export function ShareCollectionButton({
                   </button>
                 </div>
 
-                <p className="mt-3 truncate text-[11px] text-zinc-600">{shelfUrl}</p>
+                {/* select-all so one click grabs the whole URL — this is the
+                    manual escape hatch when copyText fails. */}
+                <p className="mt-3 select-all truncate text-[11px] text-zinc-500">{shelfUrl}</p>
               </>
             ) : (
               <>
