@@ -20,6 +20,7 @@ export default function AdminPage() {
   const { user, isAdmin, isLoading, signOut } = useAdminAuth();
   const [pendingSubmissions, setPendingSubmissions] = useState(0);
   const [pendingReports, setPendingReports] = useState(0);
+  const [openDeadImages, setOpenDeadImages] = useState(0);
 
   useEffect(() => {
     if (!isAdmin) return;
@@ -40,6 +41,14 @@ export default function AdminPage() {
       .eq("status", "pending")
       .then(({ count }) => {
         if (!cancelled) setPendingReports(count ?? 0);
+      });
+
+    supabase
+      .from("dead_images")
+      .select("id", { count: "exact", head: true })
+      .eq("status", "open")
+      .then(({ count }) => {
+        if (!cancelled) setOpenDeadImages(count ?? 0);
       });
 
     return () => {
@@ -114,6 +123,14 @@ export default function AdminPage() {
             <NotificationBadge count={pendingReports} />
             <p className="text-sm font-black uppercase tracking-wide text-white">Listing reports</p>
             <p className="mt-2 text-sm text-zinc-400">Resolve or dismiss reports that a listing has wrong info.</p>
+          </Link>
+          <Link
+            href="/admin/dead-images"
+            className="relative rounded-lg border border-white/10 bg-[#0b1a29] p-5 transition hover:border-amber-400/60"
+          >
+            <NotificationBadge count={openDeadImages} />
+            <p className="text-sm font-black uppercase tracking-wide text-white">Dead images</p>
+            <p className="mt-2 text-sm text-zinc-400">Fix listing photos the nightly sweep couldn&apos;t load.</p>
           </Link>
           <Link
             href="/"

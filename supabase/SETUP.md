@@ -31,6 +31,25 @@ Skip this if the in-app queue at `/admin/review` is enough on its own.
    - URL: the function URL printed by `supabase functions deploy`
    - Header: `x-webhook-secret: <the same random string from step 2>`
 
+## Dead-image sweep (optional)
+
+A nightly Vercel Cron job (`vercel.json` → `/api/dead-image-sweep`) crawls every
+listing image URL — the curated seed URLs plus the admin/community/gallery
+photos in the DB — and queues the broken ones at `/admin/dead-images`.
+
+1. In the Supabase SQL Editor, run `dead_images.sql` (this repo, same folder).
+2. In the Vercel project (Settings > Environment Variables), add:
+   - `CRON_SECRET` — any random string. Vercel Cron sends it automatically as
+     `Authorization: Bearer <value>`; the route rejects anything else, so it
+     doubles as the manual-trigger key.
+   - `SUPABASE_SERVICE_ROLE_KEY` — from Supabase Settings > API. The sweep
+     writes the queue past RLS with this key, so it must be a **server-side**
+     (unexposed) env var — never prefix it with `NEXT_PUBLIC_`.
+3. Deploy so Vercel registers the cron. To run it by hand:
+   ```
+   curl -H "Authorization: Bearer <CRON_SECRET>" https://bobbleshelf.com/api/dead-image-sweep
+   ```
+
 ## Admin "email users" (optional)
 
 Powers the Email / Email selected / Email all buttons on `/admin/users`.
