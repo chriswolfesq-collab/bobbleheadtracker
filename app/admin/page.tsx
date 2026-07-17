@@ -131,6 +131,13 @@ export default function AdminPage() {
             <p className="text-sm font-black uppercase tracking-wide text-white">Manage users</p>
             <p className="mt-2 text-sm text-zinc-400">Review every account, edit display names, or remove a user.</p>
           </Link>
+          <Link
+            href="/admin/users"
+            className="rounded-lg border border-white/10 bg-[#0b1a29] p-5 transition hover:border-amber-400/60"
+          >
+            <p className="text-sm font-black uppercase tracking-wide text-white">Email users</p>
+            <p className="mt-2 text-sm text-zinc-400">Message one user, a selected group, or everyone at once.</p>
+          </Link>
         </div>
       </div>
     </main>
