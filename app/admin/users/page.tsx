@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AdminEmailComposer, type EmailTarget } from "@/components/AdminEmailComposer";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { MAX_DISPLAY_NAME_LENGTH, validateDisplayName } from "@/lib/auth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
@@ -32,6 +33,9 @@ export default function AdminUsersPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [nameDraft, setNameDraft] = useState("");
   const [confirmingId, setConfirmingId] = useState<string | null>(null);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [emailTarget, setEmailTarget] = useState<EmailTarget | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isAdmin) return;
@@ -107,6 +111,50 @@ export default function AdminUsersPage() {
     }
   };
 
+  const toggleSelected = (id: string) => {
+    setSelectedIds((current) => {
+      const next = new Set(current);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
+
+  const allSelected = rows.length > 0 && selectedIds.size === rows.length;
+
+  const toggleSelectAll = () => {
+    setSelectedIds(allSelected ? new Set() : new Set(rows.map((r) => r.id)));
+  };
+
+  const toRecipient = (row: AdminUser) => ({
+    id: row.id,
+    email: row.email,
+    name: row.display_name,
+  });
+
+  const emailSelected = () => {
+    const recipients = rows.filter((r) => selectedIds.has(r.id)).map(toRecipient);
+    if (recipients.length === 0) return;
+    setNotice(null);
+    setEmailTarget({ kind: "selected", recipients });
+  };
+
+  const emailAll = () => {
+    if (rows.length === 0) return;
+    setNotice(null);
+    setEmailTarget({ kind: "all", count: rows.length });
+  };
+
+  const emailOne = (row: AdminUser) => {
+    setNotice(null);
+    setEmailTarget({ kind: "selected", recipients: [toRecipient(row)] });
+  };
+
+  const selectedCount = selectedIds.size;
+
   if (isLoading) {
     return null;
   }
@@ -148,6 +196,41 @@ export default function AdminUsersPage() {
       </div>
 
       {error ? <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold text-red-400">{error}</p> : null}
+      {notice ? <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold text-emerald-400">{notice}</p> : null}
+
+      {rows.length > 0 ? (
+        <div className="mx-auto mt-6 flex max-w-4xl flex-wrap items-center gap-3 rounded-lg border border-white/10 bg-[#0b1a29] px-4 py-3">
+          <label className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-zinc-300">
+            <input
+              type="checkbox"
+              checked={allSelected}
+              onChange={toggleSelectAll}
+              className="h-4 w-4 accent-amber-400"
+            />
+            Select all
+          </label>
+          <span className="text-xs text-zinc-500">
+            {selectedCount} selected
+          </span>
+          <div className="ml-auto flex flex-wrap gap-2">
+            <button
+              type="button"
+              disabled={selectedCount === 0}
+              onClick={emailSelected}
+              className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-40"
+            >
+              Email selected
+            </button>
+            <button
+              type="button"
+              onClick={emailAll}
+              className="rounded border border-amber-400 px-4 py-2 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
+            >
+              Email all
+            </button>
+          </div>
+        </div>
+      ) : null}
 
       <div className="mx-auto mt-6 max-w-4xl space-y-4">
         {isLoadingRows ? (
@@ -158,8 +241,17 @@ export default function AdminUsersPage() {
           rows.map((row) => (
             <div
               key={row.id}
-              className="grid gap-4 rounded-lg border border-white/10 bg-[#0b1a29] p-4 sm:grid-cols-[1fr_auto]"
+              className="grid gap-4 rounded-lg border border-white/10 bg-[#0b1a29] p-4 sm:grid-cols-[auto_1fr_auto]"
             >
+              <label className="flex items-start pt-1">
+                <input
+                  type="checkbox"
+                  checked={selectedIds.has(row.id)}
+                  onChange={() => toggleSelected(row.id)}
+                  aria-label={`Select ${row.display_name ?? row.email ?? "user"}`}
+                  className="h-4 w-4 accent-amber-400"
+                />
+              </label>
               <div className="text-sm">
                 {editingId === row.id ? (
                   <form
@@ -225,6 +317,15 @@ export default function AdminUsersPage() {
                     >
                       Edit
                     </button>
+                    <button
+                      type="button"
+                      disabled={!row.email}
+                      onClick={() => emailOne(row)}
+                      title={row.email ? undefined : "This account has no email address"}
+                      className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-40"
+                    >
+                      Email
+                    </button>
                   </>
                 ) : null}
                 {confirmingId === row.id ? (
@@ -261,6 +362,18 @@ export default function AdminUsersPage() {
           ))
         )}
       </div>
+
+      {emailTarget ? (
+        <AdminEmailComposer
+          target={emailTarget}
+          onClose={() => setEmailTarget(null)}
+          onSent={(count) => {
+            setEmailTarget(null);
+            setSelectedIds(new Set());
+            setNotice(`Email sent to ${count} ${count === 1 ? "recipient" : "recipients"}.`);
+          }}
+        />
+      ) : null}
     </main>
   );
 }
