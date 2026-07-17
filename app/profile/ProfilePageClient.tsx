@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { AuthWidget } from "@/components/AuthWidget";
 import { ProfileSections } from "@/components/ProfileSections";
+import { ShelfSharingToggle } from "@/components/ShelfSharingToggle";
 import { getDisplayName, useAuth } from "@/lib/auth";
 import {
   useCollectionSummary,
@@ -119,6 +120,8 @@ export function ProfilePageClient() {
                 : `${totalOwned}/${siteTotal} bobbleheads owned`}
             </p>
           </header>
+
+          <ShelfSharingToggle />
 
           <ProfileSections
             countByTeamSlug={countByTeamSlug}

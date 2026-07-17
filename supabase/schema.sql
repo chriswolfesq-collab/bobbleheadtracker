@@ -76,6 +76,29 @@ create table if not exists public.user_wants (
   primary key (user_id, bobblehead_id)
 );
 
+-- The public face of an account, and the only user data a stranger can reach.
+-- It exists because auth.users is unreachable by anon: a public shelf page has
+-- to turn a URL slug into a name and a user id, and there was no path for that.
+--
+-- Nothing here is public until the user opts in. is_public defaults to false,
+-- and slug stays null until they first enable sharing (see
+-- enable_public_shelf), so an account that never opts in has no URL to find.
+-- display_name is a mirror of auth.users.raw_user_meta_data ->> 'display_name',
+-- kept current by the sync_profile_from_auth trigger, because anon can't read
+-- auth.users to resolve it themselves.
+--
+-- The slug is deliberately NOT derived from display_name on read: it's minted
+-- once and then frozen. Renaming yourself must not break links other people
+-- have already posted, which is the whole point of the feature.
+create table if not exists public.profiles (
+  id uuid primary key references auth.users (id) on delete cascade,
+  slug text unique,
+  display_name text not null default 'Member',
+  is_public boolean not null default false,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
 create table if not exists public.approved_photos (
   bobblehead_id text primary key,
   team_slug text not null,
@@ -193,6 +216,7 @@ alter table public.bobblehead_overrides
 -- Row Level Security
 -- ---------------------------------------------------------------------------
 
+alter table public.profiles enable row level security;
 alter table public.user_collections enable row level security;
 alter table public.user_favorites enable row level security;
 alter table public.user_wants enable row level security;
@@ -203,7 +227,35 @@ alter table public.bobblehead_overrides enable row level security;
 alter table public.submissions enable row level security;
 alter table public.listing_reports enable row level security;
 
--- user_collections: fully private per-user data.
+-- profiles: readable by its owner only. Note what is NOT here — there is no
+-- anon select policy, so a stranger cannot read this table at all, not even to
+-- list slugs. Public shelves are served exclusively by get_public_shelf(), a
+-- SECURITY DEFINER function that takes a slug the caller already knows and
+-- returns nothing but a name and per-team counts. That means the public surface
+-- is one function's return shape rather than a table, and enumerating who has a
+-- shelf isn't possible.
+--
+-- There is no owner update policy either: writes go through
+-- enable_public_shelf() / disable_public_shelf(). If the client could update
+-- this table directly it could set its own slug, letting anyone squat an
+-- arbitrary URL or impersonate another collector's shelf address.
+drop policy if exists "profiles: owner select" on public.profiles;
+create policy "profiles: owner select"
+  on public.profiles for select
+  to authenticated
+  using (auth.uid() = id);
+
+-- Additive admin read policy, same rationale as user_collections below.
+drop policy if exists "profiles: admin select" on public.profiles;
+create policy "profiles: admin select"
+  on public.profiles for select
+  to authenticated
+  using (public.is_admin());
+
+-- user_collections: fully private per-user data. A public shelf does not change
+-- this: get_public_shelf() reads the table as its owner (SECURITY DEFINER) and
+-- returns only aggregate counts per team, never bobblehead_id rows. Which
+-- specific bobbleheads someone owns stays private whether or not they share.
 drop policy if exists "user_collections: owner select" on public.user_collections;
 create policy "user_collections: owner select"
   on public.user_collections for select
@@ -747,6 +799,200 @@ grant execute on function public.admin_list_users() to authenticated;
 grant execute on function public.admin_get_user(uuid) to authenticated;
 grant execute on function public.admin_update_display_name(uuid, text) to authenticated;
 grant execute on function public.admin_delete_user(uuid) to authenticated;
+
+-- ---------------------------------------------------------------------------
+-- Public shelves
+-- ---------------------------------------------------------------------------
+-- Backs /shelf/<slug>: a page a collector can post publicly, showing their
+-- per-team counts. Sharing is opt-in and off by default (see public.profiles).
+
+-- The SQL mirror of getDisplayName() in lib/auth.tsx. Kept in sync by hand —
+-- if the fallback chain changes there, change it here, or a shared shelf will
+-- show a different name than the site does.
+create or replace function public.display_name_of(p_meta jsonb)
+returns text
+language sql
+immutable
+as $$
+  select coalesce(
+    nullif(trim(p_meta ->> 'display_name'), ''),
+    nullif(trim(p_meta ->> 'full_name'), ''),
+    nullif(trim(p_meta ->> 'name'), ''),
+    'Member'
+  );
+$$;
+
+-- Display name to URL segment. Anything that isn't a-z0-9 becomes a dash, so
+-- a name that survives none of that (all emoji, all non-Latin script) falls
+-- back to 'collector' and leans on the uniqueness suffix to tell them apart.
+-- Capped at 40 chars to keep shared links readable.
+create or replace function public.slugify(p_text text)
+returns text
+language sql
+immutable
+as $$
+  select coalesce(
+    nullif(
+      trim(both '-' from left(
+        trim(both '-' from regexp_replace(lower(coalesce(p_text, '')), '[^a-z0-9]+', '-', 'g')),
+        40
+      )),
+      ''
+    ),
+    'collector'
+  );
+$$;
+
+-- Mirrors auth.users.raw_user_meta_data into profiles.display_name. anon can't
+-- read auth.users, so without this copy a public shelf has no name to show.
+-- Fires for both paths that touch the name: the user editing it themselves via
+-- supabase.auth.updateUser, and admin_update_display_name() above — both write
+-- raw_user_meta_data, so one trigger covers both.
+--
+-- Note this only syncs the name, never the slug: the slug is minted once in
+-- enable_public_shelf() and then frozen, so renaming yourself doesn't break
+-- links other people have already posted.
+create or replace function public.sync_profile_from_auth()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  insert into public.profiles (id, display_name)
+  values (new.id, public.display_name_of(new.raw_user_meta_data))
+  on conflict (id) do update
+    set display_name = excluded.display_name,
+        updated_at = now();
+  return new;
+end;
+$$;
+
+drop trigger if exists sync_profile_from_auth on auth.users;
+create trigger sync_profile_from_auth
+  after insert or update of raw_user_meta_data on auth.users
+  for each row execute function public.sync_profile_from_auth();
+
+-- Backfill accounts that predate the trigger. Safe to re-run.
+insert into public.profiles (id, display_name)
+select u.id, public.display_name_of(u.raw_user_meta_data)
+from auth.users u
+on conflict (id) do nothing;
+
+-- Turns sharing on and returns the shelf's slug, minting one on first call.
+-- SECURITY DEFINER because profiles has no update policy: letting the client
+-- write the table directly would let it choose its own slug and squat or
+-- impersonate someone else's shelf URL.
+create or replace function public.enable_public_shelf()
+returns text
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_user_id uuid := auth.uid();
+  v_slug text;
+  v_base text;
+  v_candidate text;
+  v_suffix int := 2;
+begin
+  if v_user_id is null then
+    raise exception 'not authenticated';
+  end if;
+
+  -- Defensive: the trigger should have made this row at signup.
+  insert into public.profiles (id, display_name)
+  select v_user_id, public.display_name_of(u.raw_user_meta_data)
+  from auth.users u
+  where u.id = v_user_id
+  on conflict (id) do nothing;
+
+  select slug into v_slug from public.profiles where id = v_user_id;
+
+  -- Only mint a slug the first time. Re-enabling after a disable reuses the
+  -- existing one, so a link that worked before still works.
+  if v_slug is null then
+    select public.slugify(display_name) into v_base
+    from public.profiles where id = v_user_id;
+
+    v_candidate := v_base;
+    while exists (select 1 from public.profiles where slug = v_candidate) loop
+      v_candidate := v_base || '-' || v_suffix;
+      v_suffix := v_suffix + 1;
+    end loop;
+    v_slug := v_candidate;
+  end if;
+
+  -- Two people with the same name enabling at the same instant can both pass
+  -- the loop above and collide here; the unique index turns that into an error
+  -- rather than a duplicate, and the retry picks the next suffix.
+  update public.profiles
+    set slug = v_slug,
+        is_public = true,
+        updated_at = now()
+    where id = v_user_id;
+
+  return v_slug;
+end;
+$$;
+
+-- Deliberately keeps the slug: re-enabling later restores the same URL rather
+-- than orphaning links that are already out in the world.
+create or replace function public.disable_public_shelf()
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if auth.uid() is null then
+    raise exception 'not authenticated';
+  end if;
+
+  update public.profiles
+    set is_public = false,
+        updated_at = now()
+    where id = auth.uid();
+end;
+$$;
+
+-- The entire public read surface for shelves, and the only way anon reaches
+-- user data anywhere in this schema. Takes a slug the caller already has (from
+-- a shared link) and returns a name plus per-team counts — never bobblehead_id
+-- rows, so what someone owns stays private even when their shelf is public.
+-- Returns no rows for an unknown slug or an opted-out shelf, which the page
+-- renders as a 404; there's no way to tell the two apart from outside, and no
+-- way to enumerate who has a shelf.
+create or replace function public.get_public_shelf(p_slug text)
+returns table (display_name text, counts jsonb)
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select
+    p.display_name,
+    coalesce(
+      (
+        select jsonb_object_agg(t.team_slug, t.cnt)
+        from (
+          select c.team_slug, count(*)::int as cnt
+          from public.user_collections c
+          where c.user_id = p.id and c.owned
+          group by c.team_slug
+        ) t
+      ),
+      '{}'::jsonb
+    )
+  from public.profiles p
+  where p.slug = p_slug and p.is_public;
+$$;
+
+revoke all on function public.enable_public_shelf() from public, anon;
+revoke all on function public.disable_public_shelf() from public, anon;
+grant execute on function public.enable_public_shelf() to authenticated;
+grant execute on function public.disable_public_shelf() to authenticated;
+grant execute on function public.get_public_shelf(text) to anon, authenticated;
 
 -- ---------------------------------------------------------------------------
 -- Storage buckets
