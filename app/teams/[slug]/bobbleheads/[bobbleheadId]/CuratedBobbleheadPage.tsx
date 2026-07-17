@@ -17,20 +17,35 @@ import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, saveCuratedBobbl
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
-import { useBobbleheadOverride } from "@/lib/bobbleheadOverrides";
+import { useBobbleheadOverride, type BobbleheadOverride } from "@/lib/bobbleheadOverrides";
 import { publicAsset } from "@/lib/paths";
 import type { Team } from "@/lib/teams";
 import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
 import { useUserWanted } from "@/lib/userWanted";
 
-export function CuratedBobbleheadPage({ giveaway, team }: { giveaway: Giveaway; team: Team }) {
+export function CuratedBobbleheadPage({
+  giveaway,
+  team,
+  initialOverride,
+  initialImageUrl,
+}: {
+  giveaway: Giveaway;
+  team: Team;
+  initialOverride: BobbleheadOverride | null;
+  initialImageUrl: string | null;
+}) {
   const router = useRouter();
   const { isAdmin, user: adminUser } = useAdminAuth();
   const { showError } = useToast();
-  const { photoUrlById } = useApprovedPhotos(team.slug);
+  const { photoUrlById } = useApprovedPhotos(
+    team.slug,
+    initialImageUrl ? { [giveaway.id]: initialImageUrl } : {},
+  );
   const { photos: galleryPhotos, removePhotoLocally } = useBobbleheadGallery(team.slug, giveaway.id);
-  const { override, isLoading: isOverrideLoading } = useBobbleheadOverride(team.slug, giveaway.id);
+  const { override, isLoading: isOverrideLoading } = useBobbleheadOverride(team.slug, giveaway.id, {
+    override: initialOverride,
+  });
   const { ownedById, isLoggedIn, setOwned } = useUserCollection(team.slug);
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, setFavorited } = useUserFavorites(team.slug);
   const { wantedById, isLoggedIn: isLoggedInForWanted, setWanted } = useUserWanted(team.slug);

@@ -1,6 +1,7 @@
 "use client";
 
 import type { User } from "@supabase/supabase-js";
+import { submissionError } from "@/lib/rateLimit";
 import { supabase } from "@/lib/supabase";
 
 async function uploadPendingPhoto(user: User, file: File): Promise<string> {
@@ -39,7 +40,7 @@ export async function submitPhotoForExisting({
   });
 
   if (error) {
-    throw new Error(error.message);
+    throw submissionError(error);
   }
 }
 
@@ -68,6 +69,6 @@ export async function submitNewBobblehead({
   });
 
   if (error) {
-    throw new Error(error.message);
+    throw submissionError(error);
   }
 }

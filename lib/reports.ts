@@ -1,6 +1,7 @@
 "use client";
 
 import type { User } from "@supabase/supabase-js";
+import { submissionError } from "@/lib/rateLimit";
 import { supabase } from "@/lib/supabase";
 
 export type ReportReason = "not_real" | "wrong_date" | "wrong_name" | "duplicate" | "other";
@@ -33,6 +34,6 @@ export async function submitListingReport({
   });
 
   if (error) {
-    throw new Error(error.message);
+    throw submissionError(error);
   }
 }
