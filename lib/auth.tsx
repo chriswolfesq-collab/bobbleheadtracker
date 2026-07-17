@@ -24,6 +24,23 @@ type AuthContextValue = {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
+// Long enough for a real name ("Bartholomew Fitzwilliam" is 23), short enough
+// to stay on one line everywhere it's shown. The public shelf card clamps at 26
+// characters of its own accord — that clamp stays as a backstop, since it also
+// has to cope with names that predate this limit.
+export const MAX_DISPLAY_NAME_LENGTH = 32;
+
+/** The single definition of a valid display name. Returns null when it's fine. */
+export function validateDisplayName(displayName: string): string | null {
+  const trimmed = displayName.trim();
+
+  if (!trimmed) return "Please enter a name.";
+  if (trimmed.length > MAX_DISPLAY_NAME_LENGTH) {
+    return `Names are limited to ${MAX_DISPLAY_NAME_LENGTH} characters.`;
+  }
+  return null;
+}
+
 // display_name is set at sign-up (or defaults from OAuth profile info) and
 // stored in Supabase Auth's user_metadata rather than a separate table, since
 // it's the only per-user profile field the app needs.
@@ -90,10 +107,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return { error: error?.message ?? null };
       },
       signUp: async (email, password, displayName) => {
+        // Enforced here rather than only at the input, so every caller is bound
+        // by it — Supabase Auth applies no constraints of its own to
+        // user_metadata.
+        const invalid = validateDisplayName(displayName);
+        if (invalid) return { error: invalid };
+
         const { error } = await supabase.auth.signUp({
           email,
           password,
-          options: { data: { display_name: displayName } },
+          options: { data: { display_name: displayName.trim() } },
         });
         return { error: error?.message ?? null };
       },
@@ -115,7 +138,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         await supabase.auth.signOut();
       },
       updateDisplayName: async (displayName) => {
-        const { error } = await supabase.auth.updateUser({ data: { display_name: displayName } });
+        const invalid = validateDisplayName(displayName);
+        if (invalid) return { error: invalid };
+
+        const { error } = await supabase.auth.updateUser({
+          data: { display_name: displayName.trim() },
+        });
         return { error: error?.message ?? null };
       },
     };

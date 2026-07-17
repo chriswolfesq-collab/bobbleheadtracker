@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { hasDisplayName, useAuth } from "@/lib/auth";
+import { hasDisplayName, MAX_DISPLAY_NAME_LENGTH, useAuth } from "@/lib/auth";
 
 // Blocks the whole app behind a "choose a username" prompt whenever a signed-in
 // user has no display_name yet. Email/password sign-up already collects one
@@ -46,6 +46,7 @@ export function RequireDisplayNameGate({ children }: { children: React.ReactNode
                 autoFocus
                 required
                 type="text"
+                maxLength={MAX_DISPLAY_NAME_LENGTH}
                 value={displayName}
                 onChange={(event) => setDisplayName(event.target.value)}
                 placeholder="Enter a username"

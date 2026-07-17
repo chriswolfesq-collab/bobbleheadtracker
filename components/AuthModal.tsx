@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useAuth } from "@/lib/auth";
+import { MAX_DISPLAY_NAME_LENGTH, useAuth, validateDisplayName } from "@/lib/auth";
 
 export function AuthModal() {
   const {
@@ -122,9 +122,12 @@ export function AuthModal() {
               onSubmit={async (event) => {
                 event.preventDefault();
 
-                if (mode === "sign-up" && !displayName.trim()) {
-                  setError("Please enter a name.");
-                  return;
+                if (mode === "sign-up") {
+                  const invalid = validateDisplayName(displayName);
+                  if (invalid) {
+                    setError(invalid);
+                    return;
+                  }
                 }
 
                 if (mode === "sign-up" && !acceptedTerms) {
@@ -161,6 +164,7 @@ export function AuthModal() {
                   <input
                     required
                     type="text"
+                    maxLength={MAX_DISPLAY_NAME_LENGTH}
                     value={displayName}
                     onChange={(event) => setDisplayName(event.target.value)}
                     placeholder="Enter your name"
