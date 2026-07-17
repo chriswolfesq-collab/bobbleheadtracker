@@ -204,9 +204,7 @@ export function ShareCollectionButton({
         }`}
       >
         <span aria-hidden>↗</span>
-        {/* The count rides on the button itself: it's the thing worth showing off,
-            and it makes the button an invitation rather than a utility. */}
-        {isLoading ? "Share" : `Share my ${stats.totalOwned}`}
+        Share
       </button>
 
       {isOpen ? (
