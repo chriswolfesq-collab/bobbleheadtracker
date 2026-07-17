@@ -5,9 +5,13 @@ import { supabase } from "@/lib/supabase";
 
 type ApprovedPhotoMap = Record<string, string>;
 
-export function useApprovedPhotos(teamSlug: string) {
-  const [photoUrlById, setPhotoUrlById] = useState<ApprovedPhotoMap>({});
-  const [isLoading, setIsLoading] = useState(true);
+// `seed` carries photo URLs already resolved on the server (see
+// lib/curatedListing.ts) so the first client paint matches the server HTML.
+// The effect still refetches the full team map to fill in the rest and pick up
+// changes made this session.
+export function useApprovedPhotos(teamSlug: string, seed?: ApprovedPhotoMap) {
+  const [photoUrlById, setPhotoUrlById] = useState<ApprovedPhotoMap>(seed ?? {});
+  const [isLoading, setIsLoading] = useState(!seed);
 
   useEffect(() => {
     let cancelled = false;

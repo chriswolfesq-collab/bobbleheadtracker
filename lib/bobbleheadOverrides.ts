@@ -10,9 +10,17 @@ export type BobbleheadOverride = {
   deleted: boolean;
 };
 
-export function useBobbleheadOverride(teamSlug: string, bobbleheadId: string) {
-  const [override, setOverride] = useState<BobbleheadOverride | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+// `seed` carries the override already resolved on the server (see
+// lib/curatedListing.ts). When present, the hook renders it immediately so the
+// first client paint matches the server HTML — no loading flicker, no
+// hydration mismatch — then still refetches to pick up edits made this session.
+export function useBobbleheadOverride(
+  teamSlug: string,
+  bobbleheadId: string,
+  seed?: { override: BobbleheadOverride | null },
+) {
+  const [override, setOverride] = useState<BobbleheadOverride | null>(seed?.override ?? null);
+  const [isLoading, setIsLoading] = useState(!seed);
 
   useEffect(() => {
     let cancelled = false;

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { GIVEAWAYS_BY_TEAM, getGiveawayById } from "@/lib/bobbleheads";
+import { getCuratedListingData } from "@/lib/curatedListing";
 import { getTeamBySlug } from "@/lib/teams";
 import { CuratedBobbleheadPage } from "./CuratedBobbleheadPage";
 
@@ -23,5 +24,14 @@ export default async function BobbleheadPage({
 
   if (!team || !giveaway) notFound();
 
-  return <CuratedBobbleheadPage giveaway={giveaway} team={team} />;
+  const { override, imageUrl } = await getCuratedListingData(slug, bobbleheadId);
+
+  return (
+    <CuratedBobbleheadPage
+      giveaway={giveaway}
+      team={team}
+      initialOverride={override}
+      initialImageUrl={imageUrl}
+    />
+  );
 }
