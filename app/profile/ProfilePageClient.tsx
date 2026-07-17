@@ -5,7 +5,7 @@ import { useState } from "react";
 import { AuthWidget } from "@/components/AuthWidget";
 import { ProfileSections } from "@/components/ProfileSections";
 import { ShelfSharingToggle } from "@/components/ShelfSharingToggle";
-import { getDisplayName, useAuth } from "@/lib/auth";
+import { getDisplayName, MAX_DISPLAY_NAME_LENGTH, useAuth } from "@/lib/auth";
 import {
   useCollectionSummary,
   useMyFavorites,
@@ -81,6 +81,7 @@ export function ProfilePageClient() {
                   autoFocus
                   required
                   type="text"
+                  maxLength={MAX_DISPLAY_NAME_LENGTH}
                   value={nameDraft}
                   onChange={(event) => setNameDraft(event.target.value)}
                   className="w-48 rounded-lg border border-white/15 bg-[#07111d] px-3 py-2 text-center text-lg font-black text-white outline-none focus:border-amber-400"

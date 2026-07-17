@@ -756,6 +756,13 @@ begin
     raise exception 'display name is required';
   end if;
 
+  -- Mirrors MAX_DISPLAY_NAME_LENGTH in lib/auth.tsx. Supabase Auth constrains
+  -- nothing in user_metadata itself, so this is enforced at each write path
+  -- rather than by the column; keep the two numbers in step.
+  if length(trim(p_display_name)) > 32 then
+    raise exception 'display name is limited to 32 characters';
+  end if;
+
   update auth.users
     set raw_user_meta_data = coalesce(raw_user_meta_data, '{}'::jsonb) || jsonb_build_object('display_name', trim(p_display_name))
     where id = p_user_id;

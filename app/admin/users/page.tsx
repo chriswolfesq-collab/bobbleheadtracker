@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAdminAuth } from "@/lib/adminAuth";
+import { MAX_DISPLAY_NAME_LENGTH, validateDisplayName } from "@/lib/auth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 
 type AdminUser = {
@@ -60,6 +61,12 @@ export default function AdminUsersPage() {
   };
 
   const saveDisplayName = async (row: AdminUser) => {
+    const invalid = validateDisplayName(nameDraft);
+    if (invalid) {
+      setError(invalid);
+      return;
+    }
+
     setBusyId(row.id);
     setError(null);
 
@@ -166,6 +173,7 @@ export default function AdminUsersPage() {
                       autoFocus
                       required
                       type="text"
+                      maxLength={MAX_DISPLAY_NAME_LENGTH}
                       value={nameDraft}
                       onChange={(event) => setNameDraft(event.target.value)}
                       className="w-48 rounded border border-white/15 bg-[#07111d] px-2 py-1 text-sm font-black text-white outline-none focus:border-amber-400"
