@@ -2,11 +2,14 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { BulkPrimaryButton, BulkSecondaryButton, BulkSelectBar } from "@/components/BulkSelectBar";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { GIVEAWAYS_BY_TEAM } from "@/lib/bobbleheads";
 import { fetchBobbleheadOverrides } from "@/lib/bobbleheadOverrides";
 import { findDuplicateBobblehead, type DuplicateCandidate } from "@/lib/duplicateCheck";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+import { useBulkRunner } from "@/lib/useBulkRunner";
+import { useBulkSelection } from "@/lib/useBulkSelection";
 
 type Submission = {
   id: string;
@@ -55,12 +58,53 @@ function curatedHasSeedPhoto(teamSlug: string, bobbleheadId: string): boolean {
   return Boolean(curated?.imageUrl);
 }
 
+// Core approve/reject work, throwing on failure so it can be reused by both the
+// single-row handlers and the bulk runner. Neither touches component state.
+async function approveSubmission(submission: ReviewRow) {
+  const { publicUrl, approvedPath } = await moveToApproved(submission.storage_path, submission.id);
+  const curatedHasPhoto =
+    submission.kind === "photo_for_existing" && submission.target_bobblehead_id
+      ? curatedHasSeedPhoto(submission.team_slug, submission.target_bobblehead_id)
+      : false;
+
+  const { error: rpcError } = await supabase.rpc("approve_submission", {
+    p_submission_id: submission.id,
+    p_image_url: publicUrl,
+    p_curated_has_photo: curatedHasPhoto,
+  });
+
+  if (rpcError) {
+    // The copy made by moveToApproved is orphaned if the approval didn't go
+    // through — best-effort cleanup, keeping the original error.
+    await supabase.storage
+      .from("bobblehead-approved")
+      .remove([approvedPath])
+      .catch(() => undefined);
+    throw new Error(rpcError.message);
+  }
+
+  await supabase.storage.from("bobblehead-pending").remove([submission.storage_path]);
+}
+
+async function rejectSubmission(submission: ReviewRow) {
+  const { error: rpcError } = await supabase.rpc("reject_submission", {
+    p_submission_id: submission.id,
+  });
+
+  if (rpcError) throw new Error(rpcError.message);
+  // The pending file is kept on purpose: the submitter's profile history renders
+  // rejected submissions from it (see lib/profile.ts), and RLS limits who can
+  // see it to the submitter and the admin.
+}
+
 export default function AdminReviewPage() {
   const { user, isAdmin, isLoading, signOut } = useAdminAuth();
   const [rows, setRows] = useState<ReviewRow[]>([]);
   const [isLoadingRows, setIsLoadingRows] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const selection = useBulkSelection(rows.map((row) => row.id));
+  const bulk = useBulkRunner<ReviewRow>();
 
   useEffect(() => {
     if (!isAdmin) return;
@@ -130,61 +174,39 @@ export default function AdminReviewPage() {
     };
   }, [isAdmin]);
 
-  const approve = async (submission: ReviewRow) => {
+  const runOne = async (submission: ReviewRow, action: (row: ReviewRow) => Promise<void>, fallback: string) => {
     setBusyId(submission.id);
     setError(null);
-
     try {
-      const { publicUrl, approvedPath } = await moveToApproved(submission.storage_path, submission.id);
-      const curatedHasPhoto =
-        submission.kind === "photo_for_existing" && submission.target_bobblehead_id
-          ? curatedHasSeedPhoto(submission.team_slug, submission.target_bobblehead_id)
-          : false;
-
-      const { error: rpcError } = await supabase.rpc("approve_submission", {
-        p_submission_id: submission.id,
-        p_image_url: publicUrl,
-        p_curated_has_photo: curatedHasPhoto,
-      });
-
-      if (rpcError) {
-        // The copy made by moveToApproved is orphaned if the approval didn't
-        // go through — best-effort cleanup, keeping the original error.
-        await supabase.storage
-          .from("bobblehead-approved")
-          .remove([approvedPath])
-          .catch(() => undefined);
-        throw new Error(rpcError.message);
-      }
-
-      await supabase.storage.from("bobblehead-pending").remove([submission.storage_path]);
+      await action(submission);
       setRows((current) => current.filter((row) => row.id !== submission.id));
-    } catch (approveError) {
-      setError(approveError instanceof Error ? approveError.message : "Could not approve submission.");
+    } catch (actionError) {
+      setError(actionError instanceof Error ? actionError.message : fallback);
     } finally {
       setBusyId(null);
     }
   };
 
-  const reject = async (submission: ReviewRow) => {
-    setBusyId(submission.id);
+  const approve = (submission: ReviewRow) =>
+    runOne(submission, approveSubmission, "Could not approve submission.");
+  const reject = (submission: ReviewRow) =>
+    runOne(submission, rejectSubmission, "Could not reject submission.");
+
+  const runBulkAction = async (
+    action: (row: ReviewRow) => Promise<void>,
+    verb: string,
+  ) => {
+    const targets = rows.filter((row) => selection.isSelected(row.id));
+    if (targets.length === 0) return;
     setError(null);
 
-    try {
-      const { error: rpcError } = await supabase.rpc("reject_submission", {
-        p_submission_id: submission.id,
-      });
+    const { succeeded, failed } = await bulk.run(targets, action);
+    const okIds = new Set(succeeded.map((row) => row.id));
+    setRows((current) => current.filter((row) => !okIds.has(row.id)));
+    selection.clear();
 
-      if (rpcError) throw new Error(rpcError.message);
-
-      // The pending file is kept on purpose: the submitter's profile history
-      // renders rejected submissions from it (see lib/profile.ts), and RLS
-      // limits who can see it to the submitter and the admin.
-      setRows((current) => current.filter((row) => row.id !== submission.id));
-    } catch (rejectError) {
-      setError(rejectError instanceof Error ? rejectError.message : "Could not reject submission.");
-    } finally {
-      setBusyId(null);
+    if (failed.length) {
+      setError(`Couldn't ${verb} ${failed.length} of ${targets.length}: ${failed[0].error}`);
     }
   };
 
@@ -230,6 +252,32 @@ export default function AdminReviewPage() {
 
       {error ? <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold text-red-400">{error}</p> : null}
 
+      {!isLoadingRows && rows.length > 0 ? (
+        <div className="mt-6">
+          <BulkSelectBar
+            total={rows.length}
+            count={selection.count}
+            allSelected={selection.allSelected}
+            onToggleAll={selection.toggleAll}
+            busy={bulk.busy}
+            progress={bulk.progress}
+          >
+            <BulkPrimaryButton
+              onClick={() => runBulkAction(approveSubmission, "approve")}
+              disabled={!selection.someSelected || bulk.busy}
+            >
+              Approve
+            </BulkPrimaryButton>
+            <BulkSecondaryButton
+              onClick={() => runBulkAction(rejectSubmission, "reject")}
+              disabled={!selection.someSelected || bulk.busy}
+            >
+              Reject
+            </BulkSecondaryButton>
+          </BulkSelectBar>
+        </div>
+      ) : null}
+
       <div className="mx-auto mt-6 max-w-4xl space-y-4">
         {isLoadingRows ? (
           <p className="text-sm text-zinc-400">Loading…</p>
@@ -239,8 +287,21 @@ export default function AdminReviewPage() {
           rows.map((row) => (
             <div
               key={row.id}
-              className="grid gap-4 rounded-lg border border-white/10 bg-[#0b1a29] p-4 sm:grid-cols-[160px_1fr_auto]"
+              className={`grid gap-4 rounded-lg border bg-[#0b1a29] p-4 sm:grid-cols-[auto_160px_1fr_auto] ${
+                selection.isSelected(row.id) ? "border-amber-500/70 ring-1 ring-amber-500/40" : "border-white/10"
+              }`}
             >
+              <label className="flex items-start justify-center pt-1 sm:items-center sm:pt-0">
+                <input
+                  type="checkbox"
+                  checked={selection.isSelected(row.id)}
+                  onChange={() => selection.toggle(row.id)}
+                  disabled={bulk.busy}
+                  className="h-4 w-4 accent-amber-500"
+                  aria-label="Select submission"
+                />
+              </label>
+
               {row.signedUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -291,7 +352,7 @@ export default function AdminReviewPage() {
                 </Link>
                 <button
                   type="button"
-                  disabled={busyId === row.id}
+                  disabled={busyId === row.id || bulk.busy}
                   onClick={() => approve(row)}
                   className="rounded bg-amber-500 px-4 py-2 text-xs font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300 disabled:opacity-60"
                 >
@@ -299,7 +360,7 @@ export default function AdminReviewPage() {
                 </button>
                 <button
                   type="button"
-                  disabled={busyId === row.id}
+                  disabled={busyId === row.id || bulk.busy}
                   onClick={() => reject(row)}
                   className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-red-400 hover:text-red-300 disabled:opacity-60"
                 >

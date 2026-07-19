@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { BulkPrimaryButton, BulkSecondaryButton, BulkSelectBar } from "@/components/BulkSelectBar";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+import { useBulkRunner } from "@/lib/useBulkRunner";
+import { useBulkSelection } from "@/lib/useBulkSelection";
 
 type Report = {
   id: string;
@@ -31,6 +34,8 @@ export default function AdminReportsPage() {
   const [isLoadingRows, setIsLoadingRows] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const selection = useBulkSelection(rows.map((row) => row.id));
+  const bulk = useBulkRunner<Report>();
 
   useEffect(() => {
     if (!isAdmin) return;
@@ -58,23 +63,41 @@ export default function AdminReportsPage() {
     };
   }, [isAdmin]);
 
+  const setReportStatus = async (report: Report, status: "resolved" | "dismissed") => {
+    const { error: updateError } = await supabase
+      .from("listing_reports")
+      .update({ status, reviewed_at: new Date().toISOString() })
+      .eq("id", report.id);
+
+    if (updateError) throw new Error(updateError.message);
+  };
+
   const updateStatus = async (report: Report, status: "resolved" | "dismissed") => {
     setBusyId(report.id);
     setError(null);
 
     try {
-      const { error: updateError } = await supabase
-        .from("listing_reports")
-        .update({ status, reviewed_at: new Date().toISOString() })
-        .eq("id", report.id);
-
-      if (updateError) throw new Error(updateError.message);
-
+      await setReportStatus(report, status);
       setRows((current) => current.filter((row) => row.id !== report.id));
     } catch (updateError) {
       setError(updateError instanceof Error ? updateError.message : "Could not update report.");
     } finally {
       setBusyId(null);
+    }
+  };
+
+  const runBulkAction = async (status: "resolved" | "dismissed", verb: string) => {
+    const targets = rows.filter((row) => selection.isSelected(row.id));
+    if (targets.length === 0) return;
+    setError(null);
+
+    const { succeeded, failed } = await bulk.run(targets, (report) => setReportStatus(report, status));
+    const okIds = new Set(succeeded.map((row) => row.id));
+    setRows((current) => current.filter((row) => !okIds.has(row.id)));
+    selection.clear();
+
+    if (failed.length) {
+      setError(`Couldn't ${verb} ${failed.length} of ${targets.length}: ${failed[0].error}`);
     }
   };
 
@@ -120,6 +143,32 @@ export default function AdminReportsPage() {
 
       {error ? <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold text-red-400">{error}</p> : null}
 
+      {!isLoadingRows && rows.length > 0 ? (
+        <div className="mt-6">
+          <BulkSelectBar
+            total={rows.length}
+            count={selection.count}
+            allSelected={selection.allSelected}
+            onToggleAll={selection.toggleAll}
+            busy={bulk.busy}
+            progress={bulk.progress}
+          >
+            <BulkPrimaryButton
+              onClick={() => runBulkAction("resolved", "resolve")}
+              disabled={!selection.someSelected || bulk.busy}
+            >
+              Mark resolved
+            </BulkPrimaryButton>
+            <BulkSecondaryButton
+              onClick={() => runBulkAction("dismissed", "dismiss")}
+              disabled={!selection.someSelected || bulk.busy}
+            >
+              Dismiss
+            </BulkSecondaryButton>
+          </BulkSelectBar>
+        </div>
+      ) : null}
+
       <div className="mx-auto mt-6 max-w-4xl space-y-4">
         {isLoadingRows ? (
           <p className="text-sm text-zinc-400">Loading…</p>
@@ -135,8 +184,21 @@ export default function AdminReportsPage() {
             return (
               <div
                 key={row.id}
-                className="grid gap-4 rounded-lg border border-white/10 bg-[#0b1a29] p-4 sm:grid-cols-[1fr_auto]"
+                className={`grid gap-4 rounded-lg border bg-[#0b1a29] p-4 sm:grid-cols-[auto_1fr_auto] ${
+                  selection.isSelected(row.id) ? "border-amber-500/70 ring-1 ring-amber-500/40" : "border-white/10"
+                }`}
               >
+                <label className="flex items-start justify-center pt-1 sm:items-center sm:pt-0">
+                  <input
+                    type="checkbox"
+                    checked={selection.isSelected(row.id)}
+                    onChange={() => selection.toggle(row.id)}
+                    disabled={bulk.busy}
+                    className="h-4 w-4 accent-amber-500"
+                    aria-label="Select report"
+                  />
+                </label>
+
                 <div className="text-sm">
                   <p className="font-black uppercase tracking-wide text-amber-300">{REASON_LABELS[row.reason]}</p>
                   <p className="mt-1 text-zinc-200">
@@ -161,7 +223,7 @@ export default function AdminReportsPage() {
                   </Link>
                   <button
                     type="button"
-                    disabled={busyId === row.id}
+                    disabled={busyId === row.id || bulk.busy}
                     onClick={() => updateStatus(row, "resolved")}
                     className="rounded bg-amber-500 px-4 py-2 text-xs font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300 disabled:opacity-60"
                   >
@@ -169,7 +231,7 @@ export default function AdminReportsPage() {
                   </button>
                   <button
                     type="button"
-                    disabled={busyId === row.id}
+                    disabled={busyId === row.id || bulk.busy}
                     onClick={() => updateStatus(row, "dismissed")}
                     className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-red-400 hover:text-red-300 disabled:opacity-60"
                   >
