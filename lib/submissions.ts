@@ -55,9 +55,9 @@ export async function submitNewBobblehead({
   teamSlug: string;
   title: string;
   date: string;
-  file: File;
+  file: File | null;
 }) {
-  const storagePath = await uploadPendingPhoto(user, file);
+  const storagePath = file ? await uploadPendingPhoto(user, file) : null;
 
   const { error } = await supabase.from("submissions").insert({
     kind: "new_bobblehead",

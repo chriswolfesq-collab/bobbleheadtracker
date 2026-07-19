@@ -158,12 +158,18 @@ create table if not exists public.submissions (
   title text,
   year text,
   date text,
-  storage_path text not null,
+  -- Null when a new_bobblehead submission was made without a photo; a photo is
+  -- optional for the submitter and can be added later by the admin.
+  storage_path text,
   submitted_by uuid not null references auth.users (id) on delete cascade,
   status text not null default 'pending' check (status in ('pending', 'approved', 'rejected')),
   created_at timestamptz not null default now(),
   reviewed_at timestamptz
 );
+
+-- storage_path started out NOT NULL; photos are now optional on new_bobblehead
+-- submissions, so relax it on databases created before that change.
+alter table public.submissions alter column storage_path drop not null;
 
 create table if not exists public.listing_reports (
   id uuid primary key default gen_random_uuid(),

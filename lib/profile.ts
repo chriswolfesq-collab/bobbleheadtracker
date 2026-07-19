@@ -214,8 +214,9 @@ export type MySubmission = {
 function approvedSubmissionImageUrl(
   client: SupabaseClient,
   submissionId: string,
-  storagePath: string,
+  storagePath: string | null,
 ): string | null {
+  if (!storagePath) return null;
   const filename = storagePath.split("/").pop() ?? "photo";
   const { data } = client.storage
     .from("bobblehead-approved")
@@ -227,13 +228,14 @@ function approvedSubmissionImageUrl(
 // submission. Paths that fail to sign are simply absent from the map.
 async function signPendingImageUrls(
   client: SupabaseClient,
-  storagePaths: string[],
+  storagePaths: (string | null)[],
 ): Promise<Map<string, string>> {
-  if (storagePaths.length === 0) return new Map();
+  const paths = storagePaths.filter((path): path is string => Boolean(path));
+  if (paths.length === 0) return new Map();
 
   const { data } = await client.storage
     .from("bobblehead-pending")
-    .createSignedUrls(storagePaths, 60 * 10);
+    .createSignedUrls(paths, 60 * 10);
 
   return new Map(
     (data ?? []).flatMap((item) =>
@@ -320,7 +322,7 @@ export function useMySubmissions(source?: ProfileSource) {
             imageUrl:
               row.status === "approved"
                 ? approvedSubmissionImageUrl(client, row.id, row.storage_path)
-                : (signedUrlByPath.get(row.storage_path) ?? null),
+                : ((row.storage_path && signedUrlByPath.get(row.storage_path)) ?? null),
             href: await resolveSubmissionHref(
               client,
               row.status,

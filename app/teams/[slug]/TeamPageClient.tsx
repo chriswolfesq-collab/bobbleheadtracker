@@ -70,10 +70,6 @@ function SubmitBobbleheadForm({
       className="mb-5 grid gap-3 rounded-lg border border-amber-400/35 bg-amber-400/10 p-4 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1fr)_auto]"
       onSubmit={async (event) => {
         event.preventDefault();
-        if (!file) {
-          setError("A photo is required.");
-          return;
-        }
 
         if (!duplicateMatch) {
           const match = findDuplicateBobblehead(teamSlug, title, communityBobbleheads, isDeleted);
@@ -122,9 +118,8 @@ function SubmitBobbleheadForm({
         />
       </label>
       <label className="min-w-0">
-        <span className="text-xs font-black uppercase tracking-wide text-amber-300">Photo</span>
+        <span className="text-xs font-black uppercase tracking-wide text-amber-300">Photo (optional)</span>
         <input
-          required
           type="file"
           accept="image/*"
           onChange={(event) => setFile(event.target.files?.[0] ?? null)}
@@ -189,7 +184,7 @@ export function TeamPageClient({
       source: "community",
     }));
 
-    return [...community, ...curated];
+    return [...curated, ...community];
   }, [giveaways, communityBobbleheads, photoUrlById, isDeleted, getOverride, team.slug]);
 
   const photoCount = useMemo(

@@ -20,7 +20,7 @@ type Submission = {
   team_slug: string;
   title: string | null;
   date: string | null;
-  storage_path: string;
+  storage_path: string | null;
   submitted_by: string;
   created_at: string;
 };
@@ -87,7 +87,11 @@ function curatedHasSeedPhoto(teamSlug: string, bobbleheadId: string): boolean {
 // Core approve/reject work, throwing on failure so it can be reused by both the
 // single-row handlers and the bulk runner. Neither touches component state.
 async function approveSubmission(submission: ReviewRow) {
-  const { publicUrl, approvedPath } = await moveToApproved(submission.storage_path, submission.id);
+  // A new_bobblehead submission can arrive without a photo; there's then nothing
+  // to move into the approved bucket and the listing is created photoless.
+  const moved = submission.storage_path
+    ? await moveToApproved(submission.storage_path, submission.id)
+    : null;
   const curatedHasPhoto =
     submission.kind === "photo_for_existing" && submission.target_bobblehead_id
       ? curatedHasSeedPhoto(submission.team_slug, submission.target_bobblehead_id)
@@ -95,21 +99,25 @@ async function approveSubmission(submission: ReviewRow) {
 
   const { error: rpcError } = await supabase.rpc("approve_submission", {
     p_submission_id: submission.id,
-    p_image_url: publicUrl,
+    p_image_url: moved?.publicUrl ?? null,
     p_curated_has_photo: curatedHasPhoto,
   });
 
   if (rpcError) {
     // The copy made by moveToApproved is orphaned if the approval didn't go
     // through — best-effort cleanup, keeping the original error.
-    await supabase.storage
-      .from("bobblehead-approved")
-      .remove([approvedPath])
-      .catch(() => undefined);
+    if (moved) {
+      await supabase.storage
+        .from("bobblehead-approved")
+        .remove([moved.approvedPath])
+        .catch(() => undefined);
+    }
     throw new Error(rpcError.message);
   }
 
-  await supabase.storage.from("bobblehead-pending").remove([submission.storage_path]);
+  if (submission.storage_path) {
+    await supabase.storage.from("bobblehead-pending").remove([submission.storage_path]);
+  }
 }
 
 async function rejectSubmission(submission: ReviewRow) {
@@ -173,9 +181,13 @@ export default function AdminReviewPage() {
 
         const withUrls = await Promise.all(
           submissions.map(async (submission) => {
-            const { data: signed } = await supabase.storage
-              .from("bobblehead-pending")
-              .createSignedUrl(submission.storage_path, 60 * 10);
+            const signed = submission.storage_path
+              ? (
+                  await supabase.storage
+                    .from("bobblehead-pending")
+                    .createSignedUrl(submission.storage_path, 60 * 10)
+                ).data
+              : null;
 
             const duplicateOf =
               submission.kind === "new_bobblehead" && submission.title
