@@ -18,6 +18,33 @@ import type { Team } from "@/lib/teams";
 import { BobbleheadCollection } from "./BobbleheadCollection";
 import { FavoritesProvider, OwnedCount, OwnershipProvider, WantedProvider, type ResolvedGiveaway } from "./GiveawayCard";
 
+const MONTH_NAMES = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+// The calendar picker gives us an ISO date ("2026-07-14"); store it in the same
+// human-readable format as the rest of the catalog ("July 14, 2026"). Parse the
+// parts directly to avoid timezone-shifted Date() off-by-one errors.
+function formatSubmissionDate(iso: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  if (!match) {
+    return "N/A";
+  }
+  const [, year, month, day] = match;
+  return `${MONTH_NAMES[Number(month) - 1]} ${Number(day)}, ${year}`;
+}
+
 function Stat({
   icon,
   value,
@@ -83,7 +110,7 @@ function SubmitBobbleheadForm({
         setError(null);
 
         try {
-          await submitNewBobblehead({ user, teamSlug, title, date, file });
+          await submitNewBobblehead({ user, teamSlug, title, date: formatSubmissionDate(date), file });
           onDone();
         } catch (submitError) {
           setError(submitError instanceof Error ? submitError.message : "Could not submit bobblehead.");
@@ -108,13 +135,13 @@ function SubmitBobbleheadForm({
       <label className="min-w-0">
         <span className="text-xs font-black uppercase tracking-wide text-amber-300">Date</span>
         <input
+          type="date"
           value={date}
           onChange={(event) => {
             setDate(event.target.value);
             setDuplicateMatch(null);
           }}
-          placeholder="July 14, 2026"
-          className="mt-1 w-full rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
+          className="mt-1 w-full rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white outline-none transition [color-scheme:dark] focus:border-amber-400"
         />
       </label>
       <label className="min-w-0">
