@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AdminEmailComposer, type EmailTarget } from "@/components/AdminEmailComposer";
 import { AdminFilterBar } from "@/components/AdminFilterBar";
 import { BulkPrimaryButton, BulkSecondaryButton, BulkSelectBar } from "@/components/BulkSelectBar";
 import { useAdminAuth } from "@/lib/adminAuth";
@@ -58,6 +59,9 @@ export default function AdminReportsPage() {
   const [rows, setRows] = useState<Report[]>([]);
   const [isLoadingRows, setIsLoadingRows] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [messagingId, setMessagingId] = useState<string | null>(null);
+  const [emailTarget, setEmailTarget] = useState<EmailTarget | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const filter = useAdminFilters(rows, searchReport, REPORT_FILTERS);
   const filtered = filter.filtered;
@@ -110,6 +114,26 @@ export default function AdminReportsPage() {
       setError(updateError instanceof Error ? updateError.message : "Could not update report.");
     } finally {
       setBusyId(null);
+    }
+  };
+
+  // The report row only carries the reporter's user id, so resolve their
+  // email/name (same RPC the profile view uses) before opening the composer.
+  const messageSubmitter = async (userId: string) => {
+    setMessagingId(userId);
+    setError(null);
+    try {
+      const { data, error: lookupError } = await supabase.rpc("admin_get_user", { p_user_id: userId });
+      if (lookupError) throw new Error(lookupError.message);
+      const profile = (data ?? [])[0] as { email: string | null; display_name: string | null } | undefined;
+      setEmailTarget({
+        kind: "selected",
+        recipients: [{ id: userId, email: profile?.email ?? null, name: profile?.display_name ?? null }],
+      });
+    } catch (lookupError) {
+      setError(lookupError instanceof Error ? lookupError.message : "Could not look up the reporter.");
+    } finally {
+      setMessagingId(null);
     }
   };
 
@@ -169,6 +193,7 @@ export default function AdminReportsPage() {
       </div>
 
       {error ? <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold text-red-400">{error}</p> : null}
+      {notice ? <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold text-amber-300">{notice}</p> : null}
 
       {!isLoadingRows && rows.length > 0 ? (
         <div className="mt-6">
@@ -264,6 +289,14 @@ export default function AdminReportsPage() {
                   </Link>
                   <button
                     type="button"
+                    disabled={messagingId === row.submitted_by || bulk.busy}
+                    onClick={() => messageSubmitter(row.submitted_by)}
+                    className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-60"
+                  >
+                    {messagingId === row.submitted_by ? "Opening…" : "Message"}
+                  </button>
+                  <button
+                    type="button"
                     disabled={busyId === row.id || bulk.busy}
                     onClick={() => updateStatus(row, "resolved")}
                     className="rounded bg-amber-500 px-4 py-2 text-xs font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300 disabled:opacity-60"
@@ -284,6 +317,18 @@ export default function AdminReportsPage() {
           })
         )}
       </div>
+
+      {emailTarget ? (
+        <AdminEmailComposer
+          target={emailTarget}
+          onClose={() => setEmailTarget(null)}
+          onSent={(count) => {
+            setEmailTarget(null);
+            setError(null);
+            setNotice(`Message sent to ${count} ${count === 1 ? "recipient" : "recipients"}.`);
+          }}
+        />
+      ) : null}
     </main>
   );
 }
