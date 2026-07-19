@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { useBobbleheadOverrides } from "@/lib/bobbleheadOverrides";
 import { useAllCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { publicAsset } from "@/lib/paths";
@@ -120,8 +121,15 @@ export function SiteSearch({
         <button
           type="button"
           onClick={() => {
-            setIsOpen(true);
-            setIsFocused(true);
+            // Focus must happen inside the tap gesture: iOS Safari ignores a
+            // programmatic focus() that runs later in an effect, so the input
+            // opens but the keyboard never appears. flushSync mounts the input
+            // synchronously so we can focus it before the click event ends.
+            flushSync(() => {
+              setIsOpen(true);
+              setIsFocused(true);
+            });
+            inputRef.current?.focus();
           }}
           className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#101827]/70 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur transition hover:border-amber-400 hover:text-amber-300"
         >
