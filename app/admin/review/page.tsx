@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AdminFilterBar } from "@/components/AdminFilterBar";
 import { BulkPrimaryButton, BulkSecondaryButton, BulkSelectBar } from "@/components/BulkSelectBar";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { GIVEAWAYS_BY_TEAM } from "@/lib/bobbleheads";
 import { fetchBobbleheadOverrides } from "@/lib/bobbleheadOverrides";
 import { findDuplicateBobblehead, type DuplicateCandidate } from "@/lib/duplicateCheck";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+import { type AdminFilter, useAdminFilters } from "@/lib/useAdminFilters";
 import { useBulkRunner } from "@/lib/useBulkRunner";
 import { useBulkSelection } from "@/lib/useBulkSelection";
 
@@ -24,6 +26,30 @@ type Submission = {
 };
 
 type ReviewRow = Submission & { signedUrl: string | null; duplicateOf: DuplicateCandidate | null };
+
+const searchReview = (row: ReviewRow) =>
+  `${row.team_slug} ${row.title ?? ""} ${row.target_bobblehead_id ?? ""}`;
+
+const REVIEW_FILTERS: AdminFilter<ReviewRow>[] = [
+  {
+    id: "kind",
+    allLabel: "All types",
+    get: (row) => row.kind,
+    options: [
+      { value: "new_bobblehead", label: "New bobblehead" },
+      { value: "photo_for_existing", label: "Photo for existing" },
+    ],
+  },
+  {
+    id: "duplicate",
+    allLabel: "Any duplicate status",
+    get: (row) => (row.duplicateOf ? "dup" : "unique"),
+    options: [
+      { value: "dup", label: "Possible duplicates" },
+      { value: "unique", label: "No duplicate flagged" },
+    ],
+  },
+];
 
 async function moveToApproved(storagePath: string, submissionId: string) {
   const { data: file, error: downloadError } = await supabase.storage
@@ -103,7 +129,9 @@ export default function AdminReviewPage() {
   const [isLoadingRows, setIsLoadingRows] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const selection = useBulkSelection(rows.map((row) => row.id));
+  const filter = useAdminFilters(rows, searchReview, REVIEW_FILTERS);
+  const filtered = filter.filtered;
+  const selection = useBulkSelection(filtered.map((row) => row.id));
   const bulk = useBulkRunner<ReviewRow>();
 
   useEffect(() => {
@@ -196,7 +224,7 @@ export default function AdminReviewPage() {
     action: (row: ReviewRow) => Promise<void>,
     verb: string,
   ) => {
-    const targets = rows.filter((row) => selection.isSelected(row.id));
+    const targets = filtered.filter((row) => selection.isSelected(row.id));
     if (targets.length === 0) return;
     setError(null);
 
@@ -254,8 +282,20 @@ export default function AdminReviewPage() {
 
       {!isLoadingRows && rows.length > 0 ? (
         <div className="mt-6">
-          <BulkSelectBar
+          <AdminFilterBar
+            filters={REVIEW_FILTERS}
+            state={filter}
+            placeholder="Search by team, title, or bobblehead…"
             total={rows.length}
+            noun="submissions"
+          />
+        </div>
+      ) : null}
+
+      {!isLoadingRows && filtered.length > 0 ? (
+        <div className="mt-6">
+          <BulkSelectBar
+            total={filtered.length}
             count={selection.count}
             allSelected={selection.allSelected}
             onToggleAll={selection.toggleAll}
@@ -283,8 +323,10 @@ export default function AdminReviewPage() {
           <p className="text-sm text-zinc-400">Loading…</p>
         ) : rows.length === 0 ? (
           <p className="text-sm text-zinc-400">Nothing pending review.</p>
+        ) : filtered.length === 0 ? (
+          <p className="text-sm text-zinc-400">No submissions match your search.</p>
         ) : (
-          rows.map((row) => (
+          filtered.map((row) => (
             <div
               key={row.id}
               className={`grid gap-4 rounded-lg border bg-[#0b1a29] p-4 sm:grid-cols-[auto_160px_1fr_auto] ${

@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AdminEmailComposer, type EmailTarget } from "@/components/AdminEmailComposer";
+import { AdminFilterBar } from "@/components/AdminFilterBar";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { MAX_DISPLAY_NAME_LENGTH, validateDisplayName } from "@/lib/auth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+import { type AdminFilter, useAdminFilters } from "@/lib/useAdminFilters";
 
 type AdminUser = {
   id: string;
@@ -24,6 +26,29 @@ function formatDate(value: string | null) {
   return value ? new Date(value).toLocaleDateString() : "Never";
 }
 
+const searchUser = (row: AdminUser) => `${row.email ?? ""} ${row.display_name ?? ""}`;
+
+const USER_FILTERS: AdminFilter<AdminUser>[] = [
+  {
+    id: "signed_in",
+    allLabel: "Any sign-in status",
+    get: (row) => (row.last_sign_in_at ? "yes" : "no"),
+    options: [
+      { value: "yes", label: "Has signed in" },
+      { value: "no", label: "Never signed in" },
+    ],
+  },
+  {
+    id: "activity",
+    allLabel: "Any contributions",
+    get: (row) => (row.submission_count > 0 || row.report_count > 0 ? "yes" : "no"),
+    options: [
+      { value: "yes", label: "Has submitted or reported" },
+      { value: "no", label: "No submissions or reports" },
+    ],
+  },
+];
+
 export default function AdminUsersPage() {
   const { user, isAdmin, isLoading, signOut } = useAdminAuth();
   const [rows, setRows] = useState<AdminUser[]>([]);
@@ -36,6 +61,8 @@ export default function AdminUsersPage() {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [emailTarget, setEmailTarget] = useState<EmailTarget | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const filter = useAdminFilters(rows, searchUser, USER_FILTERS);
+  const filtered = filter.filtered;
 
   useEffect(() => {
     if (!isAdmin) return;
@@ -123,10 +150,21 @@ export default function AdminUsersPage() {
     });
   };
 
-  const allSelected = rows.length > 0 && selectedIds.size === rows.length;
+  // "Select all" acts on the rows currently visible under the search/filters,
+  // so narrowing the list then selecting all doesn't quietly pull in hidden
+  // users. Selections already made for now-hidden users are preserved.
+  const allSelected = filtered.length > 0 && filtered.every((r) => selectedIds.has(r.id));
 
   const toggleSelectAll = () => {
-    setSelectedIds(allSelected ? new Set() : new Set(rows.map((r) => r.id)));
+    setSelectedIds((current) => {
+      const next = new Set(current);
+      if (allSelected) {
+        filtered.forEach((r) => next.delete(r.id));
+      } else {
+        filtered.forEach((r) => next.add(r.id));
+      }
+      return next;
+    });
   };
 
   const toRecipient = (row: AdminUser) => ({
@@ -199,6 +237,18 @@ export default function AdminUsersPage() {
       {notice ? <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold text-emerald-400">{notice}</p> : null}
 
       {rows.length > 0 ? (
+        <div className="mt-6">
+          <AdminFilterBar
+            filters={USER_FILTERS}
+            state={filter}
+            placeholder="Search by name or email…"
+            total={rows.length}
+            noun="users"
+          />
+        </div>
+      ) : null}
+
+      {rows.length > 0 ? (
         <div className="mx-auto mt-6 flex max-w-4xl flex-wrap items-center gap-3 rounded-lg border border-white/10 bg-[#0b1a29] px-4 py-3">
           <label className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-zinc-300">
             <input
@@ -237,8 +287,10 @@ export default function AdminUsersPage() {
           <p className="text-sm text-zinc-400">Loading…</p>
         ) : rows.length === 0 ? (
           <p className="text-sm text-zinc-400">No users yet.</p>
+        ) : filtered.length === 0 ? (
+          <p className="text-sm text-zinc-400">No users match your search.</p>
         ) : (
-          rows.map((row) => (
+          filtered.map((row) => (
             <div
               key={row.id}
               className="grid gap-4 rounded-lg border border-white/10 bg-[#0b1a29] p-4 sm:grid-cols-[auto_1fr_auto]"

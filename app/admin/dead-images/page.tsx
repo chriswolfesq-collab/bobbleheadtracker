@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AdminFilterBar } from "@/components/AdminFilterBar";
 import { BulkPrimaryButton, BulkSelectBar } from "@/components/BulkSelectBar";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+import { type AdminFilter, useAdminFilters } from "@/lib/useAdminFilters";
 import { useBulkRunner } from "@/lib/useBulkRunner";
 import { useBulkSelection } from "@/lib/useBulkSelection";
 
@@ -36,13 +38,39 @@ function reason(row: DeadImageRow): string {
   return row.error ?? "Broken";
 }
 
+const searchDeadImage = (row: DeadImageRow) =>
+  `${row.team_slug} ${row.title ?? ""} ${row.bobblehead_id} ${row.image_url}`;
+
+const DEAD_IMAGE_FILTERS: AdminFilter<DeadImageRow>[] = [
+  {
+    id: "source",
+    allLabel: "All photo types",
+    get: (row) => row.source,
+    options: (Object.keys(SOURCE_LABELS) as DeadImageRow["source"][]).map((source) => ({
+      value: source,
+      label: SOURCE_LABELS[source],
+    })),
+  },
+  {
+    id: "listing_kind",
+    allLabel: "All listings",
+    get: (row) => row.listing_kind,
+    options: [
+      { value: "curated", label: "Curated" },
+      { value: "community", label: "Community" },
+    ],
+  },
+];
+
 export default function AdminDeadImagesPage() {
   const { user, isAdmin, isLoading, signOut } = useAdminAuth();
   const [rows, setRows] = useState<DeadImageRow[]>([]);
   const [isLoadingRows, setIsLoadingRows] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const selection = useBulkSelection(rows.map((row) => row.id));
+  const filter = useAdminFilters(rows, searchDeadImage, DEAD_IMAGE_FILTERS);
+  const filtered = filter.filtered;
+  const selection = useBulkSelection(filtered.map((row) => row.id));
   const bulk = useBulkRunner<DeadImageRow>();
 
   useEffect(() => {
@@ -97,7 +125,7 @@ export default function AdminDeadImagesPage() {
   };
 
   const runBulkAction = async () => {
-    const targets = rows.filter((row) => selection.isSelected(row.id));
+    const targets = filtered.filter((row) => selection.isSelected(row.id));
     if (targets.length === 0) return;
     setError(null);
 
@@ -158,8 +186,20 @@ export default function AdminDeadImagesPage() {
 
       {!isLoadingRows && rows.length > 0 ? (
         <div className="mt-6">
-          <BulkSelectBar
+          <AdminFilterBar
+            filters={DEAD_IMAGE_FILTERS}
+            state={filter}
+            placeholder="Search by team, listing, or image URL…"
             total={rows.length}
+            noun="images"
+          />
+        </div>
+      ) : null}
+
+      {!isLoadingRows && filtered.length > 0 ? (
+        <div className="mt-6">
+          <BulkSelectBar
+            total={filtered.length}
             count={selection.count}
             allSelected={selection.allSelected}
             onToggleAll={selection.toggleAll}
@@ -178,8 +218,10 @@ export default function AdminDeadImagesPage() {
           <p className="text-sm text-zinc-400">Loading…</p>
         ) : rows.length === 0 ? (
           <p className="text-sm text-zinc-400">No dead images. Every listing photo loaded on the last sweep.</p>
+        ) : filtered.length === 0 ? (
+          <p className="text-sm text-zinc-400">No images match your search.</p>
         ) : (
-          rows.map((row) => {
+          filtered.map((row) => {
             const href =
               row.listing_kind === "community"
                 ? `/teams/${row.team_slug}/community?id=${encodeURIComponent(row.bobblehead_id)}`

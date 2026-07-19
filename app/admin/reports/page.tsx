@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AdminFilterBar } from "@/components/AdminFilterBar";
 import { BulkPrimaryButton, BulkSecondaryButton, BulkSelectBar } from "@/components/BulkSelectBar";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+import { type AdminFilter, useAdminFilters } from "@/lib/useAdminFilters";
 import { useBulkRunner } from "@/lib/useBulkRunner";
 import { useBulkSelection } from "@/lib/useBulkSelection";
 
@@ -28,13 +30,38 @@ const REASON_LABELS: Record<Report["reason"], string> = {
   other: "Other",
 };
 
+const searchReport = (row: Report) => `${row.team_slug} ${row.title} ${row.details ?? ""}`;
+
+const REPORT_FILTERS: AdminFilter<Report>[] = [
+  {
+    id: "reason",
+    allLabel: "All reasons",
+    get: (row) => row.reason,
+    options: (Object.keys(REASON_LABELS) as Report["reason"][]).map((reason) => ({
+      value: reason,
+      label: REASON_LABELS[reason],
+    })),
+  },
+  {
+    id: "source",
+    allLabel: "All sources",
+    get: (row) => row.source,
+    options: [
+      { value: "curated", label: "Curated" },
+      { value: "community", label: "Community" },
+    ],
+  },
+];
+
 export default function AdminReportsPage() {
   const { user, isAdmin, isLoading, signOut } = useAdminAuth();
   const [rows, setRows] = useState<Report[]>([]);
   const [isLoadingRows, setIsLoadingRows] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const selection = useBulkSelection(rows.map((row) => row.id));
+  const filter = useAdminFilters(rows, searchReport, REPORT_FILTERS);
+  const filtered = filter.filtered;
+  const selection = useBulkSelection(filtered.map((row) => row.id));
   const bulk = useBulkRunner<Report>();
 
   useEffect(() => {
@@ -87,7 +114,7 @@ export default function AdminReportsPage() {
   };
 
   const runBulkAction = async (status: "resolved" | "dismissed", verb: string) => {
-    const targets = rows.filter((row) => selection.isSelected(row.id));
+    const targets = filtered.filter((row) => selection.isSelected(row.id));
     if (targets.length === 0) return;
     setError(null);
 
@@ -145,8 +172,20 @@ export default function AdminReportsPage() {
 
       {!isLoadingRows && rows.length > 0 ? (
         <div className="mt-6">
-          <BulkSelectBar
+          <AdminFilterBar
+            filters={REPORT_FILTERS}
+            state={filter}
+            placeholder="Search by team, listing, or details…"
             total={rows.length}
+            noun="reports"
+          />
+        </div>
+      ) : null}
+
+      {!isLoadingRows && filtered.length > 0 ? (
+        <div className="mt-6">
+          <BulkSelectBar
+            total={filtered.length}
             count={selection.count}
             allSelected={selection.allSelected}
             onToggleAll={selection.toggleAll}
@@ -174,8 +213,10 @@ export default function AdminReportsPage() {
           <p className="text-sm text-zinc-400">Loading…</p>
         ) : rows.length === 0 ? (
           <p className="text-sm text-zinc-400">No open reports.</p>
+        ) : filtered.length === 0 ? (
+          <p className="text-sm text-zinc-400">No reports match your search.</p>
         ) : (
-          rows.map((row) => {
+          filtered.map((row) => {
             const href =
               row.source === "community"
                 ? `/teams/${row.team_slug}/community?id=${encodeURIComponent(row.bobblehead_id)}`

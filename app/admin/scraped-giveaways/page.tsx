@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { AdminFilterBar } from "@/components/AdminFilterBar";
 import { BulkPrimaryButton, BulkSecondaryButton, BulkSelectBar } from "@/components/BulkSelectBar";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+import { type AdminFilter, useAdminFilters } from "@/lib/useAdminFilters";
 import { useBulkRunner } from "@/lib/useBulkRunner";
 import { useBulkSelection } from "@/lib/useBulkSelection";
 
@@ -19,13 +21,42 @@ type ScrapedGiveawayRow = {
   first_seen_at: string;
 };
 
+const searchScraped = (row: ScrapedGiveawayRow) =>
+  `${row.team_slug} ${row.title} ${row.year} ${row.detected_text ?? ""} ${row.source_url}`;
+
 export default function AdminScrapedGiveawaysPage() {
   const { user, isAdmin, isLoading, signOut } = useAdminAuth();
   const [rows, setRows] = useState<ScrapedGiveawayRow[]>([]);
   const [isLoadingRows, setIsLoadingRows] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const selection = useBulkSelection(rows.map((row) => row.id));
+
+  // Team and year options come from whatever the scraper has queued up, newest
+  // years first, so the dropdowns only ever offer values that match a row.
+  const filters = useMemo<AdminFilter<ScrapedGiveawayRow>[]>(() => {
+    const teams = Array.from(new Set(rows.map((row) => row.team_slug))).sort();
+    const years = Array.from(new Set(rows.map((row) => row.year).filter(Boolean))).sort((a, b) =>
+      b.localeCompare(a),
+    );
+    return [
+      {
+        id: "team",
+        allLabel: "All teams",
+        get: (row) => row.team_slug,
+        options: teams.map((team) => ({ value: team, label: team })),
+      },
+      {
+        id: "year",
+        allLabel: "All years",
+        get: (row) => row.year,
+        options: years.map((year) => ({ value: year, label: year })),
+      },
+    ];
+  }, [rows]);
+
+  const filter = useAdminFilters(rows, searchScraped, filters);
+  const filtered = filter.filtered;
+  const selection = useBulkSelection(filtered.map((row) => row.id));
   const bulk = useBulkRunner<ScrapedGiveawayRow>();
 
   useEffect(() => {
@@ -92,7 +123,7 @@ export default function AdminScrapedGiveawaysPage() {
     action: (r: ScrapedGiveawayRow) => Promise<void>,
     verb: string,
   ) => {
-    const targets = rows.filter((row) => selection.isSelected(row.id));
+    const targets = filtered.filter((row) => selection.isSelected(row.id));
     if (targets.length === 0) return;
     setError(null);
 
@@ -154,8 +185,20 @@ export default function AdminScrapedGiveawaysPage() {
 
       {!isLoadingRows && rows.length > 0 ? (
         <div className="mt-6">
-          <BulkSelectBar
+          <AdminFilterBar
+            filters={filters}
+            state={filter}
+            placeholder="Search by team, title, or source…"
             total={rows.length}
+            noun="giveaways"
+          />
+        </div>
+      ) : null}
+
+      {!isLoadingRows && filtered.length > 0 ? (
+        <div className="mt-6">
+          <BulkSelectBar
+            total={filtered.length}
             count={selection.count}
             allSelected={selection.allSelected}
             onToggleAll={selection.toggleAll}
@@ -185,8 +228,10 @@ export default function AdminScrapedGiveawaysPage() {
           <p className="text-sm text-zinc-400">
             No new giveaways to review. The scraper drafts them here as it finds them.
           </p>
+        ) : filtered.length === 0 ? (
+          <p className="text-sm text-zinc-400">No giveaways match your search.</p>
         ) : (
-          rows.map((row) => (
+          filtered.map((row) => (
             <div
               key={row.id}
               className={`grid gap-4 rounded-lg border bg-[#0b1a29] p-4 sm:grid-cols-[auto_1fr_auto] ${
