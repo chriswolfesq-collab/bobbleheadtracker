@@ -195,6 +195,81 @@ export function useMyShelf(): ShelfSharing {
   };
 }
 
+export type EmailAlerts = {
+  enabled: boolean;
+  isLoading: boolean;
+  isSaving: boolean;
+  setEnabled: (enabled: boolean) => Promise<{ error: string | null }>;
+};
+
+// The signed-in user's wishlist-alert preference: whether to be emailed when a
+// bobblehead on their wishlist gets a new owner (see supabase/wishlist_alerts.sql).
+// Reads profiles directly (allowed by "profiles: owner select") but writes
+// through set_wishlist_alerts, because profiles has no client update policy —
+// same split as useMyShelf above.
+export function useEmailAlerts(): EmailAlerts {
+  const { user } = useAuth();
+  const userId = user?.id ?? null;
+  // Optimistic default matches the column default (on) so the toggle doesn't
+  // flicker off before the row loads.
+  const [enabled, setEnabledState] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    let cancelled = false;
+
+    supabase
+      .from("profiles")
+      .select("email_wishlist_alerts")
+      .eq("id", userId)
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load your alert settings:", error.message);
+        } else {
+          setEnabledState(data?.email_wishlist_alerts ?? true);
+        }
+
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
+
+  async function setEnabled(next: boolean): Promise<{ error: string | null }> {
+    if (!userId) return { error: "Not signed in." };
+
+    // Optimistic; reverted below if the save fails.
+    const previous = enabled;
+    setEnabledState(next);
+    setIsSaving(true);
+    const { error } = await supabase.rpc("set_wishlist_alerts", { p_enabled: next });
+    setIsSaving(false);
+
+    if (error) {
+      console.error("Failed to update your alert settings:", error.message);
+      setEnabledState(previous);
+      return { error: "Couldn't update your alerts. Try again." };
+    }
+
+    return { error: null };
+  }
+
+  return {
+    enabled: userId ? enabled : true,
+    isLoading: userId ? isLoading : false,
+    isSaving,
+    setEnabled,
+  };
+}
+
 export type MySubmission = {
   id: string;
   kind: "photo_for_existing" | "new_bobblehead";

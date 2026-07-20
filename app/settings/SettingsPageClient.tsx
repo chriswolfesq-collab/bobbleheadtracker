@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { AuthWidget } from "@/components/AuthWidget";
+import { EmailAlertsToggle } from "@/components/EmailAlertsToggle";
 import { ShelfSharingToggle } from "@/components/ShelfSharingToggle";
 import { useAuth } from "@/lib/auth";
-import { useMyShelf } from "@/lib/profile";
+import { useEmailAlerts, useMyShelf } from "@/lib/profile";
 
 export function SettingsPageClient() {
   const { user, isLoading: isAuthLoading } = useAuth();
   const sharing = useMyShelf();
+  const alerts = useEmailAlerts();
 
   return (
     <div
@@ -44,6 +46,7 @@ export function SettingsPageClient() {
           </header>
 
           <ShelfSharingToggle sharing={sharing} />
+          <EmailAlertsToggle alerts={alerts} />
         </div>
       )}
     </div>
