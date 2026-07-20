@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { AuthWidget } from "@/components/AuthWidget";
-import { SiteSearch } from "@/components/SiteSearch";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { useAuth } from "@/lib/auth";
 import type { Giveaway } from "@/lib/bobbleheads";
@@ -225,10 +224,6 @@ export function TeamPageClient({
         <WantedProvider teamSlug={team.slug}>
           <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
             <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border border-black bg-[#08131f] shadow-2xl">
-              <div className="border-b border-white/10 bg-[#08131f] py-3">
-                <SiteSearch teamSlug={team.slug} buttonLabel={`Search ${team.name}`} />
-              </div>
-
               <section
                 className="grid gap-4 border-b border-white/10 p-4 sm:gap-6 sm:p-5 lg:grid-cols-[220px_1fr]"
                 style={{

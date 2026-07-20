@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { SiteSearch } from "@/components/SiteSearch";
 import { ToggleChip } from "@/components/ToggleChip";
 import type { Team } from "@/lib/teams";
 import { GiveawayCard, type ResolvedGiveaway, useFavorites, useOwnership, useWanted } from "./GiveawayCard";
@@ -63,6 +64,9 @@ export function BobbleheadCollection({
   return (
     <div>
       <div className="mb-5">
+        <div className="mb-3 flex justify-start">
+          <SiteSearch teamSlug={team.slug} buttonLabel={`Search ${team.name}`} variant="inline" />
+        </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto_auto_auto]">
           <label className="min-w-0">
             <span className="text-xs font-black uppercase tracking-wide text-amber-300">Year</span>
@@ -127,7 +131,6 @@ export function BobbleheadCollection({
               key={giveaway.id}
               giveaway={giveaway}
               team={team}
-              index={allGiveaways.indexOf(giveaway)}
             />
           ))}
         </div>

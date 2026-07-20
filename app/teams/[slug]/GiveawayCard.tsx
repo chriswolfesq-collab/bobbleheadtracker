@@ -134,11 +134,9 @@ export function WantedProvider({
 export function GiveawayCard({
   giveaway,
   team,
-  index,
 }: {
   giveaway: ResolvedGiveaway;
   team: Team;
-  index: number;
 }) {
   const { ownedById, isLoggedIn, toggleOwned } = useOwnership();
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, toggleFavorited } = useFavorites();
@@ -213,12 +211,6 @@ export function GiveawayCard({
           </button>
         </div>
       </div>
-
-      {index === 0 ? (
-        <div className="absolute right-3 top-11 rounded bg-amber-400 px-2 py-1 text-[10px] font-black uppercase tracking-wide text-[#07111d]">
-          New
-        </div>
-      ) : null}
     </article>
   );
 }
