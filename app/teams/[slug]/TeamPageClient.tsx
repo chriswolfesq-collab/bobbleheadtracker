@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { AuthWidget } from "@/components/AuthWidget";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
@@ -14,7 +14,7 @@ import { findDuplicateBobblehead, type DuplicateCandidate } from "@/lib/duplicat
 import { publicAsset } from "@/lib/paths";
 import { submitNewBobblehead } from "@/lib/submissions";
 import type { Team } from "@/lib/teams";
-import { BobbleheadCollection } from "./BobbleheadCollection";
+import { BobbleheadCollection, DEFAULT_SORT_ORDER, SORT_OPTIONS, type SortOrder } from "./BobbleheadCollection";
 import { FavoritesProvider, OwnedCount, OwnershipProvider, WantedProvider, type ResolvedGiveaway } from "./GiveawayCard";
 
 const MONTH_NAMES = [
@@ -60,6 +60,82 @@ function Stat({
         <div className="text-xl font-black leading-none text-amber-400 sm:text-3xl">{value}</div>
         <div className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-zinc-200 sm:text-xs">{label}</div>
       </div>
+    </div>
+  );
+}
+
+function SortMenu({
+  value,
+  onChange,
+}: {
+  value: SortOrder;
+  onChange: (value: SortOrder) => void;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+    function handlePointerDown(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
+
+  const currentLabel = SORT_OPTIONS.find((option) => option.value === value)?.label ?? "";
+
+  return (
+    <div ref={containerRef} className="relative">
+      <button
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen((current) => !current)}
+        className="inline-flex items-center justify-start gap-2 self-start text-sm font-bold uppercase tracking-wide text-zinc-100 sm:self-auto"
+      >
+        Sort: {currentLabel}
+        <span className="text-lg">⌄</span>
+      </button>
+      {isOpen ? (
+        <ul
+          role="listbox"
+          className="absolute right-0 z-20 mt-2 w-56 overflow-hidden rounded-lg border border-white/15 bg-[#0b1a29] py-1 shadow-xl"
+        >
+          {SORT_OPTIONS.map((option) => (
+            <li key={option.value}>
+              <button
+                type="button"
+                role="option"
+                aria-selected={option.value === value}
+                onClick={() => {
+                  onChange(option.value);
+                  setIsOpen(false);
+                }}
+                className={`flex w-full items-center justify-between gap-3 px-4 py-2 text-left text-sm font-semibold uppercase tracking-wide transition hover:bg-white/10 ${
+                  option.value === value ? "text-amber-300" : "text-zinc-200"
+                }`}
+              >
+                {option.label}
+                {option.value === value ? <span aria-hidden>✓</span> : null}
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </div>
   );
 }
@@ -186,6 +262,7 @@ export function TeamPageClient({
 }) {
   const [isAdding, setIsAdding] = useState(false);
   const [justSubmitted, setJustSubmitted] = useState(false);
+  const [sortOrder, setSortOrder] = useState<SortOrder>(DEFAULT_SORT_ORDER);
   const { communityBobbleheads } = useCommunityBobbleheads(team.slug);
   const { photoUrlById } = useApprovedPhotos(team.slug);
   const { isDeleted, getOverride } = useBobbleheadOverrides();
@@ -333,13 +410,7 @@ export function TeamPageClient({
                       <span>{isAdding ? "-" : "+"}</span>
                       Submit a bobblehead
                     </button>
-                    <button
-                      type="button"
-                      className="inline-flex items-center justify-start gap-2 self-start text-sm font-bold uppercase tracking-wide text-zinc-100 sm:self-auto"
-                    >
-                      Sort: Release date (newest)
-                      <span className="text-lg">⌄</span>
-                    </button>
+                    <SortMenu value={sortOrder} onChange={setSortOrder} />
                   </div>
                 </div>
 
@@ -359,7 +430,7 @@ export function TeamPageClient({
                 ) : null}
 
                 {allGiveaways.length > 0 ? (
-                  <BobbleheadCollection allGiveaways={allGiveaways} team={team} />
+                  <BobbleheadCollection allGiveaways={allGiveaways} team={team} sortOrder={sortOrder} />
                 ) : (
                   <div className="rounded-lg border border-dashed border-white/15 bg-black/15 p-8 text-center">
                     <p className="text-sm font-black uppercase tracking-wide text-zinc-100">

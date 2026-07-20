@@ -12,12 +12,34 @@ const FIELD_CLASSES =
 
 type OwnedFilter = "all" | "owned" | "unowned";
 
+export type SortOrder = "date-desc" | "date-asc" | "title-asc";
+
+export const SORT_OPTIONS: { value: SortOrder; label: string }[] = [
+  { value: "date-desc", label: "Release date (newest)" },
+  { value: "date-asc", label: "Release date (oldest)" },
+  { value: "title-asc", label: "Name (A–Z)" },
+];
+
+export const DEFAULT_SORT_ORDER: SortOrder = "date-desc";
+
+// The catalog stores release dates as human-readable strings ("April 11, 2026").
+// Parse to a timestamp for sorting, falling back to the year, then to 0 so
+// undated entries sink to the bottom rather than breaking the comparator.
+function releaseTime(giveaway: ResolvedGiveaway): number {
+  const parsed = Date.parse(giveaway.date);
+  if (!Number.isNaN(parsed)) return parsed;
+  const year = Number(giveaway.year);
+  return Number.isNaN(year) ? 0 : Date.parse(`January 1, ${year}`);
+}
+
 export function BobbleheadCollection({
   allGiveaways,
   team,
+  sortOrder,
 }: {
   allGiveaways: ResolvedGiveaway[];
   team: Team;
+  sortOrder: SortOrder;
 }) {
   const { ownedById } = useOwnership();
   const { favoritedById } = useFavorites();
@@ -49,6 +71,19 @@ export function BobbleheadCollection({
       return true;
     });
   }, [allGiveaways, yearFilter, ownedFilter, hasPhotoOnly, favoritesOnly, wantedOnly, ownedById, favoritedById, wantedById]);
+
+  const sorted = useMemo(() => {
+    const list = [...filtered];
+    if (sortOrder === "title-asc") {
+      list.sort((a, b) => a.title.localeCompare(b.title));
+    } else {
+      list.sort((a, b) => {
+        const newestFirst = releaseTime(b) - releaseTime(a);
+        return sortOrder === "date-asc" ? -newestFirst : newestFirst;
+      });
+    }
+    return list;
+  }, [filtered, sortOrder]);
 
   const hasActiveFilters =
     yearFilter !== "" || ownedFilter !== "all" || hasPhotoOnly || favoritesOnly || wantedOnly;
@@ -124,9 +159,9 @@ export function BobbleheadCollection({
         </div>
       </div>
 
-      {filtered.length > 0 ? (
+      {sorted.length > 0 ? (
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 xl:grid-cols-6">
-          {filtered.map((giveaway) => (
+          {sorted.map((giveaway) => (
             <GiveawayCard
               key={giveaway.id}
               giveaway={giveaway}

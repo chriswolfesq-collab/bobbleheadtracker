@@ -229,7 +229,9 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
                 </button>
               ) : null}
               <p className="text-sm leading-6 text-zinc-300 xl:text-right">
-                Approved by the site admin. Log in to add it to your collection.
+                {isLoggedIn
+                  ? "Approved by the site admin. Add it to your collection below."
+                  : "Approved by the site admin. Log in to add it to your collection."}
               </p>
             </div>
           </div>

@@ -153,17 +153,25 @@ export function GiveawayCard({
 
   return (
     <article className="relative overflow-hidden rounded-lg border border-white/10 bg-[#102032] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
-      <div
-        aria-label={`${fullTitle} is ${isOwned ? "owned" : "not owned"}`}
-        className="absolute left-3 top-3 z-10 grid h-6 w-6 place-items-center rounded border border-zinc-300/80 bg-[#0a1522]/80 text-xs text-zinc-200"
-        role="img"
+      <button
+        type="button"
+        aria-pressed={isOwned}
+        disabled={!isLoggedIn}
+        aria-label={
+          isLoggedIn
+            ? `Mark ${fullTitle} as ${isOwned ? "not owned" : "owned"}`
+            : `${fullTitle} is ${isOwned ? "owned" : "not owned"} — log in to track`
+        }
+        title={isLoggedIn ? (isOwned ? "Remove as owned" : "Mark as owned") : "Log in to track"}
+        onClick={() => toggleOwned(giveaway.id)}
+        className="absolute left-3 top-3 z-10 grid h-6 w-6 place-items-center rounded border border-zinc-300/80 bg-[#0a1522]/80 text-xs text-zinc-200 transition hover:border-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 disabled:cursor-not-allowed enabled:cursor-pointer"
       >
         {isOwned ? (
           <span className="grid h-full w-full place-items-center rounded bg-green-500 font-black text-[#06110a]">
             ✓
           </span>
         ) : null}
-      </div>
+      </button>
 
       <div className="absolute right-3 top-3 z-10 flex items-center gap-1.5">
         <WantedButton
