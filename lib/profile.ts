@@ -270,6 +270,82 @@ export function useEmailAlerts(): EmailAlerts {
   };
 }
 
+export type GallerySharing = {
+  enabled: boolean;
+  isLoading: boolean;
+  isSaving: boolean;
+  setEnabled: (enabled: boolean) => Promise<{ error: string | null }>;
+};
+
+// The signed-in user's opt-in to show their actual owned bobbleheads and
+// favorites on their public shelf, rather than just the counts (see
+// supabase/gallery.sql). Reads profiles directly (allowed by "profiles: owner
+// select") but writes through set_gallery_public, because profiles has no
+// client update policy — same split as useMyShelf / useEmailAlerts above. This
+// only has any public effect while the shelf itself is public; the gallery RPC
+// gates on both flags.
+export function useGallerySharing(): GallerySharing {
+  const { user } = useAuth();
+  const userId = user?.id ?? null;
+  // Optimistic default matches the column default (off).
+  const [enabled, setEnabledState] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    let cancelled = false;
+
+    supabase
+      .from("profiles")
+      .select("gallery_public")
+      .eq("id", userId)
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load your gallery settings:", error.message);
+        } else {
+          setEnabledState(data?.gallery_public ?? false);
+        }
+
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
+
+  async function setEnabled(next: boolean): Promise<{ error: string | null }> {
+    if (!userId) return { error: "Not signed in." };
+
+    // Optimistic; reverted below if the save fails.
+    const previous = enabled;
+    setEnabledState(next);
+    setIsSaving(true);
+    const { error } = await supabase.rpc("set_gallery_public", { p_enabled: next });
+    setIsSaving(false);
+
+    if (error) {
+      console.error("Failed to update your gallery settings:", error.message);
+      setEnabledState(previous);
+      return { error: "Couldn't update your gallery. Try again." };
+    }
+
+    return { error: null };
+  }
+
+  return {
+    enabled: userId ? enabled : false,
+    isLoading: userId ? isLoading : false,
+    isSaving,
+    setEnabled,
+  };
+}
+
 export type MySubmission = {
   id: string;
   kind: "photo_for_existing" | "new_bobblehead";

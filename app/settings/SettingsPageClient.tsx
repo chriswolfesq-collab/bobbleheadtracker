@@ -3,13 +3,15 @@
 import Link from "next/link";
 import { AuthWidget } from "@/components/AuthWidget";
 import { EmailAlertsToggle } from "@/components/EmailAlertsToggle";
+import { GalleryToggle } from "@/components/GalleryToggle";
 import { ShelfSharingToggle } from "@/components/ShelfSharingToggle";
 import { useAuth } from "@/lib/auth";
-import { useEmailAlerts, useMyShelf } from "@/lib/profile";
+import { useEmailAlerts, useGallerySharing, useMyShelf } from "@/lib/profile";
 
 export function SettingsPageClient() {
   const { user, isLoading: isAuthLoading } = useAuth();
   const sharing = useMyShelf();
+  const gallery = useGallerySharing();
   const alerts = useEmailAlerts();
 
   return (
@@ -46,6 +48,9 @@ export function SettingsPageClient() {
           </header>
 
           <ShelfSharingToggle sharing={sharing} />
+          {/* The gallery only has an effect on a public shelf, so it appears as a
+              sub-option: shown right under sharing, and only once sharing is on. */}
+          {sharing.shelf.isPublic ? <GalleryToggle gallery={gallery} /> : null}
           <EmailAlertsToggle alerts={alerts} />
         </div>
       )}

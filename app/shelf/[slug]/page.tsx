@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import DisplayCase from "@/components/DisplayCase";
-import { getPublicShelf } from "@/lib/publicShelf";
+import PublicGallery from "@/components/PublicGallery";
+import { getPublicGallery, getPublicShelf } from "@/lib/publicShelf";
 
 // Counts change whenever the owner ticks a bobblehead, and a shelf is most
 // likely to be loaded right after its owner shares it — a stale count is
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: ShelfPageProps): Promise<Meta
 
 export default async function ShelfPage({ params }: ShelfPageProps) {
   const { slug } = await params;
-  const shelf = await getPublicShelf(slug);
+  const [shelf, galleryItems] = await Promise.all([getPublicShelf(slug), getPublicGallery(slug)]);
 
   // Unknown slug and opted-out shelf both land here, which is what keeps them
   // indistinguishable from outside.
@@ -85,6 +86,12 @@ export default async function ShelfPage({ params }: ShelfPageProps) {
         <div className="mt-8">
           <DisplayCase countByTeamSlug={countByTeamSlug} totalByTeamSlug={totalByTeamSlug} />
         </div>
+
+        {/* Opt-in only: getPublicGallery returns nothing unless the owner turned
+            the gallery on, so most shelves stay counts-only and render nothing here. */}
+        {galleryItems.length > 0 ? (
+          <PublicGallery displayName={displayName} items={galleryItems} />
+        ) : null}
 
         {/* The whole reason the page is public. Whoever is reading this arrived
             from someone else's post, so the ask is to go build their own. */}
