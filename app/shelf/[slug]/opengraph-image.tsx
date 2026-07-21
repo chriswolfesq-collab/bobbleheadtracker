@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { getPublicShelf } from "@/lib/publicShelf";
 
-export const alt = "An MLB bobblehead collection on Bobbleshelf";
+export const alt = "An MLB bobblehead collection on Bobble Shelf";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

@@ -26,7 +26,7 @@ export function AdminLoginForm() {
           href="/"
           className="mt-4 block text-center text-xs font-bold text-amber-300 hover:text-amber-200"
         >
-          ← Back to Bobbleshelf
+          ← Back to Bobble Shelf
         </Link>
       </div>
     );
@@ -110,7 +110,7 @@ export function AdminLoginForm() {
         </button>
       </form>
       <Link href="/" className="mt-4 block text-center text-xs font-bold text-amber-300 hover:text-amber-200">
-        ← Back to Bobbleshelf
+        ← Back to Bobble Shelf
       </Link>
     </div>
   );

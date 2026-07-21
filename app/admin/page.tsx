@@ -104,7 +104,7 @@ export default function AdminPage() {
               href="/"
               className="mt-2 inline-block text-xs font-bold text-amber-300 hover:text-amber-200"
             >
-              ← Back to Bobbleshelf
+              ← Back to Bobble Shelf
             </Link>
           </div>
           <button
