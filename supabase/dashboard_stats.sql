@@ -73,6 +73,31 @@ begin
       ) t
     ), '[]'::jsonb),
 
+    -- Community listings per team, with how many of them carry at least one
+    -- photo (the listing's own image_url, an approved main photo, or a gallery
+    -- photo matched by id). Every team with listings is returned; the page maps
+    -- slug -> name via lib/teams.ts.
+    'listings_by_team', coalesce((
+      select jsonb_agg(t)
+      from (
+        select
+          cb.team_slug as slug,
+          count(*)::int as total,
+          count(*) filter (
+            where cb.image_url is not null
+              or exists (
+                select 1 from public.approved_photos ap where ap.bobblehead_id = cb.id
+              )
+              or exists (
+                select 1 from public.bobblehead_gallery_photos gp where gp.bobblehead_id = cb.id
+              )
+          )::int as with_photos
+        from public.community_bobbleheads cb
+        group by cb.team_slug
+        order by count(*) desc, cb.team_slug
+      ) t
+    ), '[]'::jsonb),
+
     -- Top 5 listings by number of still-pending reports, so the most-complained
     -- -about listings float to the top of the queue's attention.
     'most_reported', coalesce((

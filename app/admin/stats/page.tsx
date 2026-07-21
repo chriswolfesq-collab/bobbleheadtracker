@@ -7,6 +7,7 @@ import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { getTeamBySlug } from "@/lib/teams";
 
 type TopTeam = { slug: string; count: number };
+type TeamListings = { slug: string; total: number; with_photos: number };
 type ReportedListing = {
   team_slug: string;
   bobblehead_id: string;
@@ -34,6 +35,7 @@ type DashboardStats = {
   submissions_rejected_7d: number;
   reports_7d: number;
   top_teams: TopTeam[];
+  listings_by_team: TeamListings[];
   most_reported: ReportedListing[];
 };
 
@@ -244,6 +246,43 @@ export default function AdminStatsPage() {
                   )}
                 </div>
               </div>
+            </div>
+
+            <SectionHeading>Listings by team</SectionHeading>
+            <div className="mt-4 rounded-lg border border-white/10 bg-[#0b1a29] p-2">
+              {stats.listings_by_team.length === 0 ? (
+                <p className="p-3 text-sm text-zinc-400">No community listings yet.</p>
+              ) : (
+                <ul>
+                  <li className="flex items-center gap-3 px-3 py-2 text-xs font-black uppercase tracking-wide text-zinc-400">
+                    <span className="min-w-0 flex-1">Team</span>
+                    <span className="w-20 shrink-0 text-right">Listings</span>
+                    <span className="w-24 shrink-0 text-right">With photos</span>
+                  </li>
+                  {stats.listings_by_team.map((team) => (
+                    <li
+                      key={team.slug}
+                      className="flex items-center gap-3 border-t border-white/5 px-3 py-2 text-sm"
+                    >
+                      <Link
+                        href={`/teams/${team.slug}`}
+                        className="min-w-0 flex-1 truncate font-black uppercase tracking-wide text-amber-300 hover:text-amber-200"
+                      >
+                        {teamName(team.slug)}
+                      </Link>
+                      <span className="w-20 shrink-0 text-right tabular-nums text-zinc-200">
+                        {fmt(team.total)}
+                      </span>
+                      <span className="w-24 shrink-0 text-right tabular-nums text-zinc-400">
+                        {fmt(team.with_photos)}
+                        <span className="ml-1 text-xs text-zinc-500">
+                          ({team.total > 0 ? Math.round((team.with_photos / team.total) * 100) : 0}%)
+                        </span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </>
         )}
