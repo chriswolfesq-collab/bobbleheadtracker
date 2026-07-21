@@ -218,6 +218,69 @@ export default function AdminStatsPage() {
           !error ? <p className="mt-8 text-sm text-zinc-400">No stats available.</p> : null
         ) : (
           <>
+            <SectionHeading>Listings by team</SectionHeading>
+            <div className="mt-4 rounded-lg border border-white/10 bg-[#0b1a29] p-2">
+              {listingsByTeam === null ? (
+                <p className="p-3 text-sm text-zinc-400">Loading…</p>
+              ) : listingsByTeam.length === 0 ? (
+                <p className="p-3 text-sm text-zinc-400">No listings yet.</p>
+              ) : (
+                <ul>
+                  <li className="flex items-center gap-3 px-3 py-2 text-xs font-black uppercase tracking-wide text-zinc-400">
+                    <span className="min-w-0 flex-1">Team</span>
+                    <span className="w-20 shrink-0 text-right">Listings</span>
+                    <span className="w-28 shrink-0 text-right">With photos</span>
+                  </li>
+                  {listingsByTeam.map((team) => (
+                    <li
+                      key={team.slug}
+                      className="flex items-center gap-3 border-t border-white/5 px-3 py-2 text-sm"
+                    >
+                      <Link
+                        href={`/teams/${team.slug}`}
+                        className="min-w-0 flex-1 truncate font-black uppercase tracking-wide text-amber-300 hover:text-amber-200"
+                      >
+                        {teamName(team.slug)}
+                      </Link>
+                      <span className="w-20 shrink-0 text-right tabular-nums text-zinc-200">
+                        {fmt(team.total)}
+                      </span>
+                      <span className="w-28 shrink-0 text-right tabular-nums text-zinc-400">
+                        {fmt(team.withPhotos)}
+                        <span className="ml-1 text-xs text-zinc-500">
+                          ({team.total > 0 ? Math.round((team.withPhotos / team.total) * 100) : 0}%)
+                        </span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <SectionHeading>Top teams by owned</SectionHeading>
+            <div className="mt-4 rounded-lg border border-white/10 bg-[#0b1a29] p-2">
+              {stats.top_teams.length === 0 ? (
+                <p className="p-3 text-sm text-zinc-400">No owned bobbleheads yet.</p>
+              ) : (
+                <ul>
+                  {stats.top_teams.map((team) => (
+                    <li
+                      key={team.slug}
+                      className="flex items-center justify-between px-3 py-2 text-sm"
+                    >
+                      <Link
+                        href={`/teams/${team.slug}`}
+                        className="font-black uppercase tracking-wide text-amber-300 hover:text-amber-200"
+                      >
+                        {teamName(team.slug)}
+                      </Link>
+                      <span className="tabular-nums text-zinc-200">{fmt(team.count)}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
             <SectionHeading>Accounts</SectionHeading>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <StatCard label="Total users" value={fmt(stats.users_total)} />
@@ -264,94 +327,25 @@ export default function AdminStatsPage() {
               <StatCard label="Reports filed" value={fmt(stats.reports_7d)} />
             </div>
 
-            <div className="mt-4 grid gap-6 lg:grid-cols-2">
-              <div>
-                <SectionHeading>Top teams by owned</SectionHeading>
-                <div className="mt-4 rounded-lg border border-white/10 bg-[#0b1a29] p-2">
-                  {stats.top_teams.length === 0 ? (
-                    <p className="p-3 text-sm text-zinc-400">No owned bobbleheads yet.</p>
-                  ) : (
-                    <ul>
-                      {stats.top_teams.map((team) => (
-                        <li
-                          key={team.slug}
-                          className="flex items-center justify-between px-3 py-2 text-sm"
-                        >
-                          <Link
-                            href={`/teams/${team.slug}`}
-                            className="font-black uppercase tracking-wide text-amber-300 hover:text-amber-200"
-                          >
-                            {teamName(team.slug)}
-                          </Link>
-                          <span className="tabular-nums text-zinc-200">{fmt(team.count)}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
-
-              <div>
-                <SectionHeading>Most-reported listings</SectionHeading>
-                <div className="mt-4 rounded-lg border border-white/10 bg-[#0b1a29] p-2">
-                  {stats.most_reported.length === 0 ? (
-                    <p className="p-3 text-sm text-zinc-400">No pending reports.</p>
-                  ) : (
-                    <ul>
-                      {stats.most_reported.map((listing) => (
-                        <li
-                          key={`${listing.team_slug}-${listing.bobblehead_id}`}
-                          className="flex items-center justify-between gap-3 px-3 py-2 text-sm"
-                        >
-                          <span className="min-w-0">
-                            <span className="block truncate font-semibold text-white">
-                              {listing.title ?? listing.bobblehead_id}
-                            </span>
-                            <span className="text-xs text-zinc-500">{teamName(listing.team_slug)}</span>
-                          </span>
-                          <span className="shrink-0 rounded-full bg-red-500/90 px-2 py-0.5 text-xs font-black tabular-nums text-white">
-                            {fmt(listing.count)}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <SectionHeading>Listings by team</SectionHeading>
+            <SectionHeading>Most-reported listings</SectionHeading>
             <div className="mt-4 rounded-lg border border-white/10 bg-[#0b1a29] p-2">
-              {listingsByTeam === null ? (
-                <p className="p-3 text-sm text-zinc-400">Loading…</p>
-              ) : listingsByTeam.length === 0 ? (
-                <p className="p-3 text-sm text-zinc-400">No listings yet.</p>
+              {stats.most_reported.length === 0 ? (
+                <p className="p-3 text-sm text-zinc-400">No pending reports.</p>
               ) : (
                 <ul>
-                  <li className="flex items-center gap-3 px-3 py-2 text-xs font-black uppercase tracking-wide text-zinc-400">
-                    <span className="min-w-0 flex-1">Team</span>
-                    <span className="w-20 shrink-0 text-right">Listings</span>
-                    <span className="w-28 shrink-0 text-right">With photos</span>
-                  </li>
-                  {listingsByTeam.map((team) => (
+                  {stats.most_reported.map((listing) => (
                     <li
-                      key={team.slug}
-                      className="flex items-center gap-3 border-t border-white/5 px-3 py-2 text-sm"
+                      key={`${listing.team_slug}-${listing.bobblehead_id}`}
+                      className="flex items-center justify-between gap-3 px-3 py-2 text-sm"
                     >
-                      <Link
-                        href={`/teams/${team.slug}`}
-                        className="min-w-0 flex-1 truncate font-black uppercase tracking-wide text-amber-300 hover:text-amber-200"
-                      >
-                        {teamName(team.slug)}
-                      </Link>
-                      <span className="w-20 shrink-0 text-right tabular-nums text-zinc-200">
-                        {fmt(team.total)}
-                      </span>
-                      <span className="w-28 shrink-0 text-right tabular-nums text-zinc-400">
-                        {fmt(team.withPhotos)}
-                        <span className="ml-1 text-xs text-zinc-500">
-                          ({team.total > 0 ? Math.round((team.withPhotos / team.total) * 100) : 0}%)
+                      <span className="min-w-0">
+                        <span className="block truncate font-semibold text-white">
+                          {listing.title ?? listing.bobblehead_id}
                         </span>
+                        <span className="text-xs text-zinc-500">{teamName(listing.team_slug)}</span>
+                      </span>
+                      <span className="shrink-0 rounded-full bg-red-500/90 px-2 py-0.5 text-xs font-black tabular-nums text-white">
+                        {fmt(listing.count)}
                       </span>
                     </li>
                   ))}
