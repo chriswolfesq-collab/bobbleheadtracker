@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useSyncExternalStore } from "react";
 import { useAuth } from "@/lib/auth";
+import { publicAsset } from "@/lib/paths";
 
 // One-time intro shown the first time anyone lands on the site. Unlike the
 // profile intro this isn't tied to an account — a visitor may be anonymous —
@@ -27,7 +29,7 @@ const FEATURES: { icon: string; title: string; body: string }[] = [
     body: "Create a free account to mark your collection, star favorites, and build a wanted list.",
   },
   {
-    icon: "🔗",
+    icon: "🎉",
     title: "Show it off",
     body: "Make your shelf public and share a link to your whole collection.",
   },
@@ -78,8 +80,21 @@ export function HomeWelcomeModal() {
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-5 flex flex-col items-center gap-3 text-center">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-400 text-lg font-black text-[#07111d]">
-            🏆
+          {/* A trio of full bobblehead figures from different teams stands in
+              for a logo at the top of the intro — a nod to "every team." Same
+              677×1607 shelf art, shown whole. */}
+          <div className="flex items-end justify-center gap-7">
+            {["dodgers", "orioles", "angels"].map((team) => (
+              <Image
+                key={team}
+                src={publicAsset(`/bobbleheads/${team}.png`)}
+                alt=""
+                width={677}
+                height={1607}
+                sizes="90px"
+                className="h-24 w-auto drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]"
+              />
+            ))}
           </div>
           <div>
             <h2 id="home-welcome-title" className="text-lg font-black text-white">
