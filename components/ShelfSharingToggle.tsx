@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/Toast";
 import { copyText } from "@/lib/clipboard";
@@ -84,6 +85,20 @@ export function ShelfSharingToggle({ sharing }: { sharing: ShelfSharing }) {
           />
         </button>
       </div>
+
+      {/* Available whether or not the shelf is public: while private it opens a
+          preview of what the public *would* see, which is exactly when a
+          collector wants to check before flipping the switch. Opens in a new tab
+          so their place in settings is kept. */}
+      <Link
+        href="/settings/preview"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 flex items-center justify-center gap-2 rounded-lg border border-black/10 px-3 py-2.5 text-[11px] font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:border-white/15 dark:text-zinc-300 dark:hover:text-accent-hover"
+      >
+        <span aria-hidden>👁</span>
+        {shelf.isPublic ? "Preview what the public sees" : "Preview what the public would see"}
+      </Link>
 
       {shelf.isPublic && shelfUrl ? (
         <div className="mt-4 flex items-center gap-2">

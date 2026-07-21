@@ -109,6 +109,10 @@ export type MyShelf = {
   /** null until the user has enabled sharing at least once. */
   slug: string | null;
   isPublic: boolean;
+  /** The name shown at the top of the public shelf — profiles.display_name,
+   *  the same source get_public_shelf uses, so a preview matches the live page
+   *  even if an admin has edited the name away from the auth metadata. */
+  displayName: string;
 };
 
 // Returned by useMyShelf. Named so the profile page can call the hook once and
@@ -132,7 +136,7 @@ export type ShelfSharing = {
 export function useMyShelf(): ShelfSharing {
   const { user } = useAuth();
   const userId = user?.id ?? null;
-  const [shelf, setShelf] = useState<MyShelf>({ slug: null, isPublic: false });
+  const [shelf, setShelf] = useState<MyShelf>({ slug: null, isPublic: false, displayName: "" });
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -143,7 +147,7 @@ export function useMyShelf(): ShelfSharing {
 
     supabase
       .from("profiles")
-      .select("slug, is_public")
+      .select("slug, is_public, display_name")
       .eq("id", userId)
       .maybeSingle()
       .then(({ data, error }) => {
@@ -152,7 +156,11 @@ export function useMyShelf(): ShelfSharing {
         if (error) {
           console.error("Failed to load your shelf settings:", error.message);
         } else {
-          setShelf({ slug: data?.slug ?? null, isPublic: data?.is_public ?? false });
+          setShelf({
+            slug: data?.slug ?? null,
+            isPublic: data?.is_public ?? false,
+            displayName: data?.display_name ?? "",
+          });
         }
 
         setIsLoading(false);
@@ -183,12 +191,13 @@ export function useMyShelf(): ShelfSharing {
     setShelf((current) => ({
       slug: isPublic ? ((data as string | null) ?? current.slug) : current.slug,
       isPublic,
+      displayName: current.displayName,
     }));
     return { error: null };
   }
 
   return {
-    shelf: userId ? shelf : { slug: null, isPublic: false },
+    shelf: userId ? shelf : { slug: null, isPublic: false, displayName: "" },
     isLoading: userId ? isLoading : false,
     isSaving,
     setPublic,
@@ -682,4 +691,100 @@ export function useMyWanted(source?: ProfileSource) {
   }, [userId, client]);
 
   return { wanted: userId ? wanted : [], isLoading: userId ? isLoading : false };
+}
+
+export type MyOwned = {
+  bobbleheadId: string;
+  teamSlug: string;
+  title: string;
+  imageUrl: string | null;
+  href: string;
+};
+
+// The individual bobbleheads the user owns, resolved the same cross-team way as
+// useMyFavorites. useCollectionSummary above only returns per-team *counts*; the
+// public gallery needs the actual items. This reads user_collections where owned
+// — the exact rows get_public_gallery marks 'owned' — so the settings preview
+// can show the same owned grid the live shelf would, without a public RPC (which
+// stays gated on is_public and so returns nothing while the shelf is private).
+export function useMyOwned(source?: ProfileSource) {
+  const { user } = useAuth();
+  const client = source?.client ?? supabase;
+  const userId = source?.userId ?? user?.id ?? null;
+  const [owned, setOwned] = useState<MyOwned[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    let cancelled = false;
+
+    client
+      .from("user_collections")
+      .select("bobblehead_id, team_slug")
+      .eq("user_id", userId)
+      .eq("owned", true)
+      .then(async ({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load your collection:", error.message);
+          setOwned([]);
+          setIsLoading(false);
+          return;
+        }
+
+        const rows = data ?? [];
+
+        if (rows.length === 0) {
+          setOwned([]);
+          setIsLoading(false);
+          return;
+        }
+
+        const teamSlugs = Array.from(new Set(rows.map((row) => row.team_slug)));
+
+        const [{ data: communityRows }, { data: photoRows }] = await Promise.all([
+          client
+            .from("community_bobbleheads")
+            .select("id, team_slug, title, image_url")
+            .in("team_slug", teamSlugs),
+          client.from("approved_photos").select("bobblehead_id, team_slug, image_url").in("team_slug", teamSlugs),
+        ]);
+
+        if (cancelled) return;
+
+        const communityByKey = new Map(
+          (communityRows ?? []).map((row) => [`${row.team_slug}:${row.id}`, row]),
+        );
+        const photoByKey = new Map(
+          (photoRows ?? []).map((row) => [`${row.team_slug}:${row.bobblehead_id}`, row.image_url]),
+        );
+
+        const resolved: MyOwned[] = rows.map((row) => {
+          const key = `${row.team_slug}:${row.bobblehead_id}`;
+          const curated = getGiveawayById(row.bobblehead_id, row.team_slug);
+          const community = communityByKey.get(key);
+
+          return {
+            bobbleheadId: row.bobblehead_id,
+            teamSlug: row.team_slug,
+            title: curated?.title ?? community?.title ?? "Bobblehead",
+            imageUrl: photoByKey.get(key) ?? curated?.imageUrl ?? community?.image_url ?? null,
+            href: curated
+              ? `/teams/${row.team_slug}/bobbleheads/${row.bobblehead_id}`
+              : `/teams/${row.team_slug}/community?id=${encodeURIComponent(row.bobblehead_id)}`,
+          };
+        });
+
+        setOwned(resolved);
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId, client]);
+
+  return { owned: userId ? owned : [], isLoading: userId ? isLoading : false };
 }
