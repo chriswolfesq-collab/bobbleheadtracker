@@ -98,7 +98,7 @@ export function HomeWelcomeModal() {
           </div>
           <div>
             <h2 id="home-welcome-title" className="text-lg font-black text-white">
-              Welcome to Bobbleshelf
+              Welcome to Bobble Shelf
             </h2>
             <p className="mt-1 text-xs text-zinc-400">
               The home for every MLB stadium giveaway bobblehead.
