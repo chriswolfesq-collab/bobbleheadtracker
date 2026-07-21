@@ -44,9 +44,13 @@ export function ProfileSections({
   isWantedLoading,
   submissions,
   isSubmissionsLoading,
+  isOtherUser = false,
 }: {
   countByTeamSlug: Record<string, number>;
   totalByTeamSlug: Record<string, number>;
+  /** True when an admin is viewing someone else's profile, so empty states read
+   *  "this user's" instead of the second-person "your". */
+  isOtherUser?: boolean;
   /** Whose collection this is. Omitted in the admin read-only view, which hides
    *  the share button rather than let an admin share another user's shelf. */
   displayName?: string;
@@ -196,7 +200,11 @@ export function ProfileSections({
         {isWantedLoading ? (
           <p className="text-sm text-zinc-400">Loading…</p>
         ) : wanted.length === 0 ? (
-          <p className="text-sm text-zinc-400">Nothing on your wanted list yet.</p>
+          <p className="text-sm text-zinc-400">
+            {isOtherUser
+              ? "Nothing on this user's wanted list yet."
+              : "Nothing on your wanted list yet."}
+          </p>
         ) : (
           <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
             {wanted.map((item, index) => {

@@ -158,6 +158,7 @@ export function AdminUserProfile() {
             isWantedLoading={isWantedLoading}
             submissions={submissions}
             isSubmissionsLoading={isSubmissionsLoading}
+            isOtherUser
           />
         </div>
       )}
