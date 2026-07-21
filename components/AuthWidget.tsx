@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ThemeToggleButton } from "@/components/ThemeToggleButton";
 import { getDisplayName, useAuth } from "@/lib/auth";
 
 export function AuthWidget({
@@ -22,6 +23,22 @@ export function AuthWidget({
     return (
       <div className={`flex items-center gap-3 text-sm ${className ?? ""}`}>
         <span className="font-semibold text-zinc-800 dark:text-zinc-200">{getDisplayName(user)}</span>
+        <ThemeToggleButton />
+        {hideProfileLink ? null : (
+          <Link
+            href="/profile"
+            className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
+          >
+            Profile
+          </Link>
+        )}
+        <button
+          type="button"
+          onClick={() => signOut()}
+          className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
+        >
+          Log out
+        </button>
         {hideSettingsLink ? null : (
           <Link
             href="/settings"
@@ -44,32 +61,20 @@ export function AuthWidget({
             </svg>
           </Link>
         )}
-        {hideProfileLink ? null : (
-          <Link
-            href="/profile"
-            className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
-          >
-            Profile
-          </Link>
-        )}
-        <button
-          type="button"
-          onClick={() => signOut()}
-          className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
-        >
-          Log out
-        </button>
       </div>
     );
   }
 
   return (
-    <button
-      type="button"
-      onClick={() => openAuthModal("sign-in")}
-      className={`rounded border border-accent px-3 py-1.5 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg ${className ?? ""}`}
-    >
-      Log in
-    </button>
+    <div className={`flex items-center gap-3 ${className ?? ""}`}>
+      <ThemeToggleButton />
+      <button
+        type="button"
+        onClick={() => openAuthModal("sign-in")}
+        className="rounded border border-accent px-3 py-1.5 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg"
+      >
+        Log in
+      </button>
+    </div>
   );
 }
