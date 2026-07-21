@@ -296,11 +296,24 @@ export default function AdminStatsPage() {
 
             <SectionHeading>Collections</SectionHeading>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <StatCard label="Owned items" value={fmt(stats.owned_total)} />
-              <StatCard label="Wanted items" value={fmt(stats.wanted_total)} />
-              <StatCard label="Favorited items" value={fmt(stats.favorite_total)} />
-              <StatCard label="Community listings" value={fmt(stats.community_total)} />
-              <StatCard label="Gallery photos" value={fmt(stats.gallery_total)} />
+              <Link href="/admin/owned" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Owned items" value={fmt(stats.owned_total)} />
+              </Link>
+              <Link href="/admin/wanted" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Wanted items" value={fmt(stats.wanted_total)} />
+              </Link>
+              <Link href="/admin/favorited" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Favorited items" value={fmt(stats.favorite_total)} />
+              </Link>
+              <Link
+                href="/admin/community-listings"
+                className="block rounded-lg transition hover:opacity-90"
+              >
+                <StatCard label="Community listings" value={fmt(stats.community_total)} />
+              </Link>
+              <Link href="/admin/gallery-photos" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Gallery photos" value={fmt(stats.gallery_total)} />
+              </Link>
             </div>
 
             <SectionHeading>Open queues</SectionHeading>
