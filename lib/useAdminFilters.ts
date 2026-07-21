@@ -72,9 +72,10 @@ export function useAdminFilters<T>(
   rows: T[],
   searchable: (row: T) => string,
   filters: AdminFilter<T>[],
+  initial?: { query?: string; selected?: Record<string, string> },
 ): AdminFiltersState<T> {
-  const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState<Record<string, string>>({});
+  const [query, setQuery] = useState(initial?.query ?? "");
+  const [selected, setSelected] = useState<Record<string, string>>(initial?.selected ?? {});
 
   const setFilter = useCallback((id: string, value: string) => {
     setSelected((prev) => ({ ...prev, [id]: value }));

@@ -283,15 +283,37 @@ export default function AdminStatsPage() {
 
             <SectionHeading>Accounts</SectionHeading>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <StatCard label="Total users" value={fmt(stats.users_total)} />
-              <StatCard
-                label="Signed in"
-                value={fmt(stats.users_signed_in)}
-                hint={`${fmt(stats.users_total - stats.users_signed_in)} never signed in`}
-              />
-              <StatCard label="New (7 days)" value={fmt(stats.users_new_7d)} />
-              <StatCard label="New (30 days)" value={fmt(stats.users_new_30d)} />
-              <StatCard label="Public shelves" value={fmt(stats.public_shelves)} />
+              <Link href="/admin/users" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Total users" value={fmt(stats.users_total)} />
+              </Link>
+              <Link
+                href="/admin/users?signed_in=yes"
+                className="block rounded-lg transition hover:opacity-90"
+              >
+                <StatCard
+                  label="Signed in"
+                  value={fmt(stats.users_signed_in)}
+                  hint={`${fmt(stats.users_total - stats.users_signed_in)} never signed in`}
+                />
+              </Link>
+              <Link
+                href="/admin/users?joined=7"
+                className="block rounded-lg transition hover:opacity-90"
+              >
+                <StatCard label="New (7 days)" value={fmt(stats.users_new_7d)} />
+              </Link>
+              <Link
+                href="/admin/users?joined=30"
+                className="block rounded-lg transition hover:opacity-90"
+              >
+                <StatCard label="New (30 days)" value={fmt(stats.users_new_30d)} />
+              </Link>
+              <Link
+                href="/admin/public-shelves"
+                className="block rounded-lg transition hover:opacity-90"
+              >
+                <StatCard label="Public shelves" value={fmt(stats.public_shelves)} />
+              </Link>
             </div>
 
             <SectionHeading>Collections</SectionHeading>
@@ -334,10 +356,21 @@ export default function AdminStatsPage() {
 
             <SectionHeading>Last 7 days</SectionHeading>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <StatCard label="Submissions made" value={fmt(stats.submissions_7d)} />
-              <StatCard label="Submissions approved" value={fmt(stats.submissions_approved_7d)} />
-              <StatCard label="Submissions rejected" value={fmt(stats.submissions_rejected_7d)} />
-              <StatCard label="Reports filed" value={fmt(stats.reports_7d)} />
+              {/* These are historical 7-day counts; the review/reports queues
+                  show only what's still pending, so the destination lists won't
+                  match these totals. */}
+              <Link href="/admin/review" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Submissions made" value={fmt(stats.submissions_7d)} />
+              </Link>
+              <Link href="/admin/review" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Submissions approved" value={fmt(stats.submissions_approved_7d)} />
+              </Link>
+              <Link href="/admin/review" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Submissions rejected" value={fmt(stats.submissions_rejected_7d)} />
+              </Link>
+              <Link href="/admin/reports" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Reports filed" value={fmt(stats.reports_7d)} />
+              </Link>
             </div>
 
             <SectionHeading>Most-reported listings</SectionHeading>

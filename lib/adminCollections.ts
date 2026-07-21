@@ -198,6 +198,64 @@ export function useAdminCommunityListings(): AdminItemsResult {
   return { items, isLoading, error };
 }
 
+export type AdminPublicShelf = {
+  id: string;
+  slug: string;
+  displayName: string;
+};
+
+// Every collector who has opted their shelf public. Reads profiles (allowed by
+// the "profiles: admin select" RLS policy) filtered to is_public; each links to
+// its /shelf/<slug> page.
+export function useAdminPublicShelves() {
+  const { isAdmin } = useAdminAuth();
+  const [shelves, setShelves] = useState<AdminPublicShelf[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isAdmin) return;
+
+    let cancelled = false;
+
+    supabase
+      .from("profiles")
+      .select("id, slug, display_name")
+      .eq("is_public", true)
+      .order("display_name", { ascending: true })
+      .then(({ data, error: fetchError }) => {
+        if (cancelled) return;
+
+        if (fetchError) {
+          setError(fetchError.message);
+          setShelves([]);
+          setIsLoading(false);
+          return;
+        }
+
+        // A public shelf always has a slug (minted when sharing is enabled), but
+        // guard anyway so a half-migrated row can't produce a /shelf/null link.
+        const resolved: AdminPublicShelf[] = (data ?? [])
+          .filter((row) => row.slug)
+          .map((row) => ({
+            id: row.id,
+            slug: row.slug,
+            displayName: row.display_name?.trim() || "Member",
+          }));
+
+        setError(null);
+        setShelves(resolved);
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isAdmin]);
+
+  return { shelves, isLoading, error };
+}
+
 // Every fan-uploaded gallery photo across all listings, newest first. Each photo
 // is labelled with the bobblehead it belongs to and links to that listing.
 export function useAdminGalleryPhotos(): AdminItemsResult {

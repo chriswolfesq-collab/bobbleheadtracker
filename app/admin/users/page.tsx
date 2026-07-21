@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { AdminEmailComposer, type EmailTarget } from "@/components/AdminEmailComposer";
 import { AdminFilterBar } from "@/components/AdminFilterBar";
 import { useAdminAuth } from "@/lib/adminAuth";
@@ -24,6 +25,11 @@ type AdminUser = {
 
 function formatDate(value: string | null) {
   return value ? new Date(value).toLocaleDateString() : "Never";
+}
+
+function joinedWithinDays(createdAt: string, days: number) {
+  const cutoff = Date.now() - days * 24 * 60 * 60 * 1000;
+  return new Date(createdAt).getTime() >= cutoff;
 }
 
 const searchUser = (row: AdminUser) => `${row.email ?? ""} ${row.display_name ?? ""}`;
@@ -49,7 +55,17 @@ const USER_FILTERS: AdminFilter<AdminUser>[] = [
   },
 ];
 
+// useSearchParams (for the ?signed_in / ?joined deep links) needs a Suspense
+// boundary during prerender, same as the view-profile route.
 export default function AdminUsersPage() {
+  return (
+    <Suspense fallback={<main className="min-h-full bg-[#15110d]" />}>
+      <AdminUsersPageInner />
+    </Suspense>
+  );
+}
+
+function AdminUsersPageInner() {
   const { user, isAdmin, isLoading, signOut } = useAdminAuth();
   const [rows, setRows] = useState<AdminUser[]>([]);
   const [isLoadingRows, setIsLoadingRows] = useState(true);
@@ -61,8 +77,30 @@ export default function AdminUsersPage() {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [emailTarget, setEmailTarget] = useState<EmailTarget | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
-  const filter = useAdminFilters(rows, searchUser, USER_FILTERS);
-  const filtered = filter.filtered;
+
+  // The stats-page Accounts cards deep-link here with a filter pre-applied:
+  // ?signed_in=yes seeds the sign-in dropdown, ?joined=7|30 narrows to accounts
+  // created in the last N days.
+  const searchParams = useSearchParams();
+  const signedInParam = searchParams.get("signed_in");
+  const joinedParam = searchParams.get("joined");
+  const joinedDays = joinedParam === "30" ? 30 : joinedParam === "7" ? 7 : null;
+  const initialFilters = useMemo(() => {
+    const selected: Record<string, string> = {};
+    if (signedInParam === "yes" || signedInParam === "no") selected.signed_in = signedInParam;
+    return { selected };
+  }, [signedInParam]);
+
+  const filter = useAdminFilters(rows, searchUser, USER_FILTERS, initialFilters);
+  // "Joined in the last N days" is a range, which the equality-based dropdowns
+  // can't express, so it layers on top of the dropdown/search filtering.
+  const filtered = useMemo(
+    () =>
+      joinedDays
+        ? filter.filtered.filter((row) => joinedWithinDays(row.created_at, joinedDays))
+        : filter.filtered,
+    [filter.filtered, joinedDays],
+  );
 
   useEffect(() => {
     if (!isAdmin) return;
@@ -245,6 +283,20 @@ export default function AdminUsersPage() {
             total={rows.length}
             noun="users"
           />
+        </div>
+      ) : null}
+
+      {joinedDays ? (
+        <div className="mx-auto mt-4 flex max-w-4xl items-center gap-2">
+          <span className="rounded-full border border-amber-400/50 bg-amber-400/10 px-3 py-1 text-xs font-black uppercase tracking-wide text-amber-300">
+            Joined in last {joinedDays} days
+          </span>
+          <Link
+            href="/admin/users"
+            className="text-xs font-semibold text-zinc-400 underline transition hover:text-amber-300"
+          >
+            Clear
+          </Link>
         </div>
       ) : null}
 
