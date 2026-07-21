@@ -194,6 +194,10 @@ function SubmitBobbleheadForm({
         }
       }}
     >
+      <p className="text-xs font-semibold leading-5 text-accent sm:col-span-4">
+        MLB stadium giveaway (SGA) bobbleheads only — no figurines, ring or trophy replicas, stadium
+        replicas, gnomes, or other non-bobblehead promos.
+      </p>
       <label className="min-w-0">
         <span className="text-xs font-black uppercase tracking-wide text-accent">Name</span>
         <input
