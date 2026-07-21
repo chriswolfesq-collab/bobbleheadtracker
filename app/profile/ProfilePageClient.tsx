@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { AuthWidget } from "@/components/AuthWidget";
 import { ProfileSections } from "@/components/ProfileSections";
+import { ProfileWelcomeModal } from "@/components/ProfileWelcomeModal";
 import { getDisplayName, MAX_DISPLAY_NAME_LENGTH, useAuth } from "@/lib/auth";
 import {
   useCollectionSummary,
@@ -57,6 +58,7 @@ export function ProfilePageClient() {
         </div>
       ) : (
         <div className="mx-auto w-full max-w-2xl px-4 pb-24 pt-2 sm:px-6">
+          <ProfileWelcomeModal userId={user.id} />
           <header className="mb-8 text-center">
             <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-amber-500/80 sm:text-xs">
               My Profile

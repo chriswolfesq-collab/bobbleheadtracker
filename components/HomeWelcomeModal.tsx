@@ -1,0 +1,146 @@
+"use client";
+
+import { useState, useSyncExternalStore } from "react";
+import { useAuth } from "@/lib/auth";
+
+// One-time intro shown the first time anyone lands on the site. Unlike the
+// profile intro this isn't tied to an account — a visitor may be anonymous —
+// so "seen" is a single device-level flag rather than one keyed per user.
+// Same rationale for keeping it in localStorage: missing it is harmless, so a
+// device-local flag beats any server round-trip on the busiest page.
+const SEEN_KEY = "bht:home-welcome-seen";
+
+const FEATURES: { icon: string; title: string; body: string }[] = [
+  {
+    icon: "⚾",
+    title: "Every team, every bobblehead",
+    body: "Browse SGA stadium giveaway bobbleheads across all 30 MLB teams — click a team on the shelf to dig in.",
+  },
+  {
+    icon: "🔍",
+    title: "Search",
+    body: "Jump straight to any player or bobblehead with the search bar up top.",
+  },
+  {
+    icon: "🏆",
+    title: "Track what you own",
+    body: "Create a free account to mark your collection, star favorites, and build a wanted list.",
+  },
+  {
+    icon: "🔗",
+    title: "Show it off",
+    body: "Make your shelf public and share a link to your whole collection.",
+  },
+];
+
+// Reads the device-level flag through useSyncExternalStore so there's no
+// setState-in-effect and no hydration mismatch — see ProfileWelcomeModal for
+// the full rationale. The flag never changes while the page is mounted.
+const noopSubscribe = () => () => {};
+
+export function HomeWelcomeModal() {
+  const { user, openAuthModal } = useAuth();
+  const seen = useSyncExternalStore(
+    noopSubscribe,
+    () => {
+      try {
+        return window.localStorage.getItem(SEEN_KEY) ? "1" : "";
+      } catch {
+        // localStorage unavailable (private mode / disabled) — skip the intro.
+        return "1";
+      }
+    },
+    () => "1",
+  );
+  const [dismissed, setDismissed] = useState(false);
+
+  function dismiss() {
+    setDismissed(true);
+    try {
+      window.localStorage.setItem(SEEN_KEY, "1");
+    } catch {
+      // Nothing to persist to — the modal is already closed for this session.
+    }
+  }
+
+  if (seen || dismissed) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-8"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="home-welcome-title"
+      onClick={dismiss}
+    >
+      <div
+        className="max-h-full w-full max-w-md overflow-y-auto rounded-2xl border border-white/10 bg-[#0b1a2b] p-6 shadow-2xl shadow-black/50"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="mb-5 flex flex-col items-center gap-3 text-center">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-400 text-lg font-black text-[#07111d]">
+            🏆
+          </div>
+          <div>
+            <h2 id="home-welcome-title" className="text-lg font-black text-white">
+              Welcome to Bobbleshelf
+            </h2>
+            <p className="mt-1 text-xs text-zinc-400">
+              The home for every MLB stadium giveaway bobblehead.
+            </p>
+          </div>
+        </div>
+
+        <ul className="grid gap-3">
+          {FEATURES.map((feature) => (
+            <li key={feature.title} className="flex items-start gap-3">
+              <span
+                aria-hidden
+                className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-sm text-amber-300"
+              >
+                {feature.icon}
+              </span>
+              <span className="min-w-0">
+                <span className="block text-sm font-bold text-zinc-100">{feature.title}</span>
+                <span className="text-xs leading-5 text-zinc-400">{feature.body}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Signed-in visitors (rare on a true first visit, but possible) don't
+            need the sign-up nudge, so the primary action collapses to a single
+            "Start exploring" button for them. */}
+        {user ? (
+          <button
+            type="button"
+            onClick={dismiss}
+            className="mt-5 w-full rounded-lg bg-amber-500 px-3 py-2.5 text-xs font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300"
+          >
+            Start exploring
+          </button>
+        ) : (
+          <div className="mt-5 grid grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={dismiss}
+              className="rounded-lg border border-amber-400 px-3 py-2.5 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400/10"
+            >
+              Explore first
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                dismiss();
+                openAuthModal("sign-up");
+              }}
+              className="rounded-lg bg-amber-500 px-3 py-2.5 text-xs font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300"
+            >
+              Create account
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
