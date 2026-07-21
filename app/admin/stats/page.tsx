@@ -1,0 +1,253 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useAdminAuth } from "@/lib/adminAuth";
+import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+import { getTeamBySlug } from "@/lib/teams";
+
+type TopTeam = { slug: string; count: number };
+type ReportedListing = {
+  team_slug: string;
+  bobblehead_id: string;
+  title: string | null;
+  count: number;
+};
+
+type DashboardStats = {
+  users_total: number;
+  users_signed_in: number;
+  users_new_7d: number;
+  users_new_30d: number;
+  public_shelves: number;
+  owned_total: number;
+  wanted_total: number;
+  favorite_total: number;
+  community_total: number;
+  gallery_total: number;
+  pending_submissions: number;
+  pending_reports: number;
+  open_dead_images: number;
+  pending_scraped: number;
+  submissions_7d: number;
+  submissions_approved_7d: number;
+  submissions_rejected_7d: number;
+  reports_7d: number;
+  top_teams: TopTeam[];
+  most_reported: ReportedListing[];
+};
+
+const nf = new Intl.NumberFormat();
+const fmt = (value: number) => nf.format(value);
+
+function StatCard({
+  label,
+  value,
+  hint,
+}: {
+  label: string;
+  value: string;
+  hint?: string;
+}) {
+  return (
+    <div className="rounded-lg border border-white/10 bg-[#0b1a29] p-5">
+      <p className="text-xs font-black uppercase tracking-wide text-zinc-400">{label}</p>
+      <p className="mt-2 text-3xl font-black tabular-nums text-white">{value}</p>
+      {hint ? <p className="mt-1 text-xs text-zinc-500">{hint}</p> : null}
+    </div>
+  );
+}
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="mt-10 text-sm font-black uppercase tracking-wide text-zinc-300">{children}</h2>
+  );
+}
+
+export default function AdminStatsPage() {
+  const { user, isAdmin, isLoading, signOut } = useAdminAuth();
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [isLoadingStats, setIsLoadingStats] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isAdmin) return;
+
+    let cancelled = false;
+
+    supabase.rpc("admin_dashboard_stats").then(({ data, error: rpcError }) => {
+      if (cancelled) return;
+
+      if (rpcError) {
+        setError(rpcError.message);
+      } else {
+        setStats(data as DashboardStats);
+      }
+      setIsLoadingStats(false);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isAdmin]);
+
+  if (isLoading) {
+    return null;
+  }
+
+  if (!user || !isAdmin) {
+    return (
+      <main className="min-h-full bg-[#15110d] px-4 py-10 text-center text-zinc-100">
+        <p className="text-sm font-black uppercase tracking-wide text-zinc-100">Not authorized</p>
+        <p className="mt-2 text-sm text-zinc-400">Log in with an admin-mode account to continue.</p>
+        <Link
+          href="/admin"
+          className="mt-6 inline-block rounded border border-amber-400 px-4 py-2 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
+        >
+          Go to admin login
+        </Link>
+      </main>
+    );
+  }
+
+  const teamName = (slug: string) => getTeamBySlug(slug)?.name ?? slug;
+
+  return (
+    <main className="min-h-full bg-[#15110d] px-4 py-8 text-zinc-100 sm:px-8">
+      <div className="mx-auto flex max-w-5xl items-center justify-between">
+        <div>
+          <Link href="/admin" className="text-sm font-black uppercase tracking-wide text-white hover:text-amber-300">
+            ← Back to admin
+          </Link>
+          <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">Site stats</h1>
+        </div>
+        <div className="flex items-center gap-3 text-sm">
+          <span className="font-semibold text-zinc-200">{user.email}</span>
+          <button
+            type="button"
+            onClick={() => signOut()}
+            className="rounded border border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+          >
+            Log out
+          </button>
+        </div>
+      </div>
+
+      {error ? (
+        <p className="mx-auto mt-6 max-w-5xl text-sm font-semibold text-red-400">{error}</p>
+      ) : null}
+
+      <div className="mx-auto max-w-5xl">
+        {isLoadingStats ? (
+          <p className="mt-8 text-sm text-zinc-400">Loading…</p>
+        ) : !stats ? (
+          !error ? <p className="mt-8 text-sm text-zinc-400">No stats available.</p> : null
+        ) : (
+          <>
+            <SectionHeading>Accounts</SectionHeading>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <StatCard label="Total users" value={fmt(stats.users_total)} />
+              <StatCard
+                label="Signed in"
+                value={fmt(stats.users_signed_in)}
+                hint={`${fmt(stats.users_total - stats.users_signed_in)} never signed in`}
+              />
+              <StatCard label="New (7 days)" value={fmt(stats.users_new_7d)} />
+              <StatCard label="New (30 days)" value={fmt(stats.users_new_30d)} />
+              <StatCard label="Public shelves" value={fmt(stats.public_shelves)} />
+            </div>
+
+            <SectionHeading>Collections</SectionHeading>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <StatCard label="Owned items" value={fmt(stats.owned_total)} />
+              <StatCard label="Wanted items" value={fmt(stats.wanted_total)} />
+              <StatCard label="Favorited items" value={fmt(stats.favorite_total)} />
+              <StatCard label="Community listings" value={fmt(stats.community_total)} />
+              <StatCard label="Gallery photos" value={fmt(stats.gallery_total)} />
+            </div>
+
+            <SectionHeading>Open queues</SectionHeading>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <Link href="/admin/review" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Pending submissions" value={fmt(stats.pending_submissions)} />
+              </Link>
+              <Link href="/admin/reports" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Pending reports" value={fmt(stats.pending_reports)} />
+              </Link>
+              <Link href="/admin/dead-images" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Open dead images" value={fmt(stats.open_dead_images)} />
+              </Link>
+              <Link href="/admin/scraped-giveaways" className="block rounded-lg transition hover:opacity-90">
+                <StatCard label="Scraped giveaways" value={fmt(stats.pending_scraped)} />
+              </Link>
+            </div>
+
+            <SectionHeading>Last 7 days</SectionHeading>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <StatCard label="Submissions made" value={fmt(stats.submissions_7d)} />
+              <StatCard label="Submissions approved" value={fmt(stats.submissions_approved_7d)} />
+              <StatCard label="Submissions rejected" value={fmt(stats.submissions_rejected_7d)} />
+              <StatCard label="Reports filed" value={fmt(stats.reports_7d)} />
+            </div>
+
+            <div className="mt-4 grid gap-6 lg:grid-cols-2">
+              <div>
+                <SectionHeading>Top teams by owned</SectionHeading>
+                <div className="mt-4 rounded-lg border border-white/10 bg-[#0b1a29] p-2">
+                  {stats.top_teams.length === 0 ? (
+                    <p className="p-3 text-sm text-zinc-400">No owned bobbleheads yet.</p>
+                  ) : (
+                    <ul>
+                      {stats.top_teams.map((team) => (
+                        <li
+                          key={team.slug}
+                          className="flex items-center justify-between px-3 py-2 text-sm"
+                        >
+                          <Link
+                            href={`/teams/${team.slug}`}
+                            className="font-black uppercase tracking-wide text-amber-300 hover:text-amber-200"
+                          >
+                            {teamName(team.slug)}
+                          </Link>
+                          <span className="tabular-nums text-zinc-200">{fmt(team.count)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <SectionHeading>Most-reported listings</SectionHeading>
+                <div className="mt-4 rounded-lg border border-white/10 bg-[#0b1a29] p-2">
+                  {stats.most_reported.length === 0 ? (
+                    <p className="p-3 text-sm text-zinc-400">No pending reports.</p>
+                  ) : (
+                    <ul>
+                      {stats.most_reported.map((listing) => (
+                        <li
+                          key={`${listing.team_slug}-${listing.bobblehead_id}`}
+                          className="flex items-center justify-between gap-3 px-3 py-2 text-sm"
+                        >
+                          <span className="min-w-0">
+                            <span className="block truncate font-semibold text-white">
+                              {listing.title ?? listing.bobblehead_id}
+                            </span>
+                            <span className="text-xs text-zinc-500">{teamName(listing.team_slug)}</span>
+                          </span>
+                          <span className="shrink-0 rounded-full bg-red-500/90 px-2 py-0.5 text-xs font-black tabular-nums text-white">
+                            {fmt(listing.count)}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </main>
+  );
+}

@@ -13,6 +13,9 @@
    `ADMIN_EMAIL`.
 6. Run `seed_chris_collection.sql` once, to restore the existing collection
    under that account.
+7. Run `dashboard_stats.sql` to add the `/admin/stats` metrics dashboard. Run
+   it after `dead_images.sql` and `scraped_giveaways.sql` (below), since it
+   reads those tables — or re-run it once they exist.
 
 ## Email notifications (optional)
 
