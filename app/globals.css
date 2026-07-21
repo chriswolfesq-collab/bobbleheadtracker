@@ -1,24 +1,59 @@
 @import "tailwindcss";
 
+/* Manual light/dark theming.
+   The `dark:` variant is driven by a `.dark` class on <html> (set by the theme
+   provider / no-flash script) instead of the OS `prefers-color-scheme`. That is
+   what lets the in-app toggle force a theme; "System" mode simply mirrors the OS
+   preference onto that class. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
+  --background: #f4f7fc;
   --foreground: #171717;
   --app-font-sans: Arial, Helvetica, sans-serif;
   --app-font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  /* Shared radial page backdrop used across most full-page routes. Defined as a
+     token so a single `background: var(--page-gradient)` flips with the theme. */
+  --page-gradient: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    #dbe7ff 0%,
+    #eaf0fb 45%,
+    #f4f7fc 100%
+  );
+
+  /* Brand accent. Gold reads poorly on a light background, so light mode uses a
+     deep blue that ties to the navy dark theme; dark mode keeps the original
+     amber gold. Used app-wide via the `accent` / `accent-hover` / `accent-fg`
+     utility colors (see @theme inline below), so the whole accent flips here.
+     `-fg` is the text/icon color that sits ON a solid accent button. */
+  --accent: #2563eb;        /* blue-600 */
+  --accent-hover: #1d4ed8;  /* blue-700 */
+  --accent-fg: #ffffff;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --page-gradient: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    #1b2a4a 0%,
+    #0e1626 45%,
+    #090e1a 100%
+  );
+  --accent: #fbbf24;        /* amber-400 */
+  --accent-hover: #fcd34d;  /* amber-300 */
+  --accent-fg: #07111d;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
   --font-sans: var(--app-font-sans);
   --font-mono: var(--app-font-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {

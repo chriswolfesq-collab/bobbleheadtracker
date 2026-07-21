@@ -49,12 +49,12 @@ export function AdminItemsBrowser({
 
   if (!user || !isAdmin) {
     return (
-      <main className="min-h-full bg-[#15110d] px-4 py-10 text-center text-zinc-100">
-        <p className="text-sm font-black uppercase tracking-wide text-zinc-100">Not authorized</p>
-        <p className="mt-2 text-sm text-zinc-400">Log in with an admin-mode account to continue.</p>
+      <main className="min-h-full bg-slate-50 px-4 py-10 text-center text-zinc-900 dark:bg-[#15110d] dark:text-zinc-100">
+        <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">Not authorized</p>
+        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Log in with an admin-mode account to continue.</p>
         <Link
           href="/admin"
-          className="mt-6 inline-block rounded border border-amber-400 px-4 py-2 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
+          className="mt-6 inline-block rounded border border-accent px-4 py-2 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg"
         >
           Go to admin login
         </Link>
@@ -63,24 +63,24 @@ export function AdminItemsBrowser({
   }
 
   return (
-    <main className="min-h-full bg-[#15110d] px-4 py-8 text-zinc-100 sm:px-8">
+    <main className="min-h-full bg-slate-50 px-4 py-8 text-zinc-900 dark:bg-[#15110d] dark:text-zinc-100 sm:px-8">
       <div className="mx-auto flex max-w-5xl items-center justify-between">
         <div>
           <Link
             href="/admin/stats"
-            className="text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
+            className="text-sm font-black uppercase tracking-wide text-zinc-900 hover:text-accent-hover dark:text-white dark:hover:text-accent-hover"
           >
             ← Back to stats
           </Link>
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">{title}</h1>
-          <p className="mt-1 text-sm text-zinc-400">{description}</p>
+          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{description}</p>
         </div>
         <div className="flex items-center gap-3 text-sm">
-          <span className="font-semibold text-zinc-200">{user.email}</span>
+          <span className="font-semibold text-zinc-800 dark:text-zinc-200">{user.email}</span>
           <button
             type="button"
             onClick={() => signOut()}
-            className="rounded border border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+            className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
           >
             Log out
           </button>
@@ -101,20 +101,20 @@ export function AdminItemsBrowser({
               placeholder={`Search by team, bobblehead${
                 items.some((item) => item.owner) ? ", or collector" : ""
               }…`}
-              className="w-full max-w-sm rounded-lg border border-white/15 bg-[#0b1a29] px-3 py-2 text-sm text-white outline-none focus:border-amber-400"
+              className="w-full max-w-sm rounded-lg border border-black/10 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-accent dark:border-white/15 dark:bg-[#0b1a29] dark:text-white"
             />
-            <span className="shrink-0 text-xs font-semibold uppercase tracking-wide text-zinc-400">
+            <span className="shrink-0 text-xs font-semibold uppercase tracking-wide text-zinc-600 dark:text-zinc-400">
               {filtered.length} of {items.length} {noun}
             </span>
           </div>
         ) : null}
 
         {isLoading ? (
-          <p className="mt-8 text-sm text-zinc-400">Loading…</p>
+          <p className="mt-8 text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
         ) : items.length === 0 ? (
-          <p className="mt-8 text-sm text-zinc-400">No {noun} yet.</p>
+          <p className="mt-8 text-sm text-zinc-600 dark:text-zinc-400">No {noun} yet.</p>
         ) : filtered.length === 0 ? (
-          <p className="mt-8 text-sm text-zinc-400">No {noun} match your search.</p>
+          <p className="mt-8 text-sm text-zinc-600 dark:text-zinc-400">No {noun} match your search.</p>
         ) : (
           <ul
             className={
@@ -126,9 +126,9 @@ export function AdminItemsBrowser({
             {filtered.map((item) => (
               <li
                 key={item.key}
-                className="overflow-hidden rounded-lg border border-white/10 bg-[#0b1a29]"
+                className="overflow-hidden rounded-lg border border-black/10 bg-white dark:border-white/10 dark:bg-[#0b1a29]"
               >
-                <Link href={item.href} className="flex gap-3 p-3 transition hover:bg-white/5">
+                <Link href={item.href} className="flex gap-3 p-3 transition hover:bg-black/[0.04] dark:hover:bg-white/5">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.imageUrl ?? undefined}
@@ -138,12 +138,12 @@ export function AdminItemsBrowser({
                     }`}
                   />
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-black text-white">{item.title}</p>
-                    <p className="mt-0.5 truncate text-xs font-semibold uppercase tracking-wide text-amber-300">
+                    <p className="truncate font-black text-zinc-900 dark:text-white">{item.title}</p>
+                    <p className="mt-0.5 truncate text-xs font-semibold uppercase tracking-wide text-accent">
                       {teamName(item.teamSlug)}
                     </p>
                     {item.owner ? (
-                      <p className="mt-1 truncate text-xs text-zinc-400">{item.owner.name}</p>
+                      <p className="mt-1 truncate text-xs text-zinc-600 dark:text-zinc-400">{item.owner.name}</p>
                     ) : null}
                   </div>
                 </Link>

@@ -21,7 +21,7 @@ function GalleryGrid({ items }: { items: PublicGalleryItem[] }) {
           <Link
             key={`${item.teamSlug}:${item.bobbleheadId}`}
             href={item.href}
-            className="flex flex-col items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-4 text-center transition hover:border-amber-400/50 hover:bg-white/10"
+            className="flex flex-col items-center gap-2 rounded-2xl border border-black/10 bg-black/[0.04] px-3 py-4 text-center transition hover:border-accent/50 hover:bg-black/[0.06] dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
           >
             <Image
               src={imageSrc}
@@ -32,7 +32,7 @@ function GalleryGrid({ items }: { items: PublicGalleryItem[] }) {
               className="h-28 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-32"
             />
             <span className="block w-full min-w-0">
-              <span className="block truncate text-sm font-bold text-zinc-100">{item.title}</span>
+              <span className="block truncate text-sm font-bold text-zinc-900 dark:text-zinc-100">{item.title}</span>
               <span className="block truncate text-xs text-zinc-500">
                 {team?.name ?? item.teamSlug}
               </span>
@@ -63,10 +63,10 @@ export default function PublicGallery({
       {owned.length > 0 ? (
         <section>
           <div className="mb-3 flex items-baseline justify-between gap-3">
-            <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
+            <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-600 dark:text-zinc-400">
               {displayName}&rsquo;s bobbleheads
             </h2>
-            <span className="text-xs font-black tabular-nums text-amber-300">{owned.length}</span>
+            <span className="text-xs font-black tabular-nums text-accent">{owned.length}</span>
           </div>
           <GalleryGrid items={owned} />
         </section>
@@ -75,7 +75,7 @@ export default function PublicGallery({
       {favorites.length > 0 ? (
         <section>
           <div className="mb-3 flex items-baseline justify-between gap-3">
-            <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
+            <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-600 dark:text-zinc-400">
               Favorites
             </h2>
             <span className="text-xs font-black tabular-nums text-red-400">

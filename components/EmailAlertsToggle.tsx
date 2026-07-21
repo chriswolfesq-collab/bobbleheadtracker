@@ -18,13 +18,13 @@ export function EmailAlertsToggle({ alerts }: { alerts: EmailAlerts }) {
   if (isLoading) return null;
 
   return (
-    <div className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-4">
+    <div className="mb-8 rounded-2xl border border-black/10 bg-black/[0.04] p-4 dark:border-white/10 dark:bg-white/5">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
+          <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-600 dark:text-zinc-400">
             Wanted alerts
           </h2>
-          <p className="mt-1.5 text-sm text-zinc-400">
+          <p className="mt-1.5 text-sm text-zinc-600 dark:text-zinc-400">
             {enabled
               ? "We'll email you when a bobblehead on your wanted list is marked owned by another collector."
               : "Turn this on to get an email when a bobblehead on your wanted list gets a new owner."}
@@ -39,7 +39,7 @@ export function EmailAlertsToggle({ alerts }: { alerts: EmailAlerts }) {
           disabled={isSaving}
           onClick={handleToggle}
           className={`relative h-6 w-11 flex-shrink-0 rounded-full transition disabled:opacity-60 ${
-            enabled ? "bg-amber-400" : "bg-white/15"
+            enabled ? "bg-accent" : "bg-black/[0.08] dark:bg-white/15"
           }`}
         >
           <span

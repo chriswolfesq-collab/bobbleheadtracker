@@ -59,7 +59,7 @@ const USER_FILTERS: AdminFilter<AdminUser>[] = [
 // boundary during prerender, same as the view-profile route.
 export default function AdminUsersPage() {
   return (
-    <Suspense fallback={<main className="min-h-full bg-[#15110d]" />}>
+    <Suspense fallback={<main className="min-h-full bg-slate-50 dark:bg-[#15110d]" />}>
       <AdminUsersPageInner />
     </Suspense>
   );
@@ -237,12 +237,12 @@ function AdminUsersPageInner() {
 
   if (!user || !isAdmin) {
     return (
-      <main className="min-h-full bg-[#15110d] px-4 py-10 text-center text-zinc-100">
-        <p className="text-sm font-black uppercase tracking-wide text-zinc-100">Not authorized</p>
-        <p className="mt-2 text-sm text-zinc-400">Log in with an admin-mode account to continue.</p>
+      <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-center text-zinc-900 dark:text-zinc-100">
+        <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">Not authorized</p>
+        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Log in with an admin-mode account to continue.</p>
         <Link
           href="/admin"
-          className="mt-6 inline-block rounded border border-amber-400 px-4 py-2 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
+          className="mt-6 inline-block rounded border border-accent px-4 py-2 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg"
         >
           Go to admin login
         </Link>
@@ -251,20 +251,20 @@ function AdminUsersPageInner() {
   }
 
   return (
-    <main className="min-h-full bg-[#15110d] px-4 py-8 text-zinc-100 sm:px-8">
+    <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-8 text-zinc-900 dark:text-zinc-100 sm:px-8">
       <div className="mx-auto flex max-w-4xl items-center justify-between">
         <div>
-          <Link href="/admin" className="text-sm font-black uppercase tracking-wide text-white hover:text-amber-300">
+          <Link href="/admin" className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white hover:text-accent-hover dark:hover:text-accent-hover">
             ← Back to admin
           </Link>
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">Manage users</h1>
         </div>
         <div className="flex items-center gap-3 text-sm">
-          <span className="font-semibold text-zinc-200">{user.email}</span>
+          <span className="font-semibold text-zinc-800 dark:text-zinc-200">{user.email}</span>
           <button
             type="button"
             onClick={() => signOut()}
-            className="rounded border border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+            className="rounded border border-black/15 dark:border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
           >
             Log out
           </button>
@@ -288,12 +288,12 @@ function AdminUsersPageInner() {
 
       {joinedDays ? (
         <div className="mx-auto mt-4 flex max-w-4xl items-center gap-2">
-          <span className="rounded-full border border-amber-400/50 bg-amber-400/10 px-3 py-1 text-xs font-black uppercase tracking-wide text-amber-300">
+          <span className="rounded-full border border-accent/50 bg-accent/10 px-3 py-1 text-xs font-black uppercase tracking-wide text-accent">
             Joined in last {joinedDays} days
           </span>
           <Link
             href="/admin/users"
-            className="text-xs font-semibold text-zinc-400 underline transition hover:text-amber-300"
+            className="text-xs font-semibold text-zinc-600 dark:text-zinc-400 underline transition hover:text-accent-hover dark:hover:text-accent-hover"
           >
             Clear
           </Link>
@@ -301,13 +301,13 @@ function AdminUsersPageInner() {
       ) : null}
 
       {rows.length > 0 ? (
-        <div className="mx-auto mt-6 flex max-w-4xl flex-wrap items-center gap-3 rounded-lg border border-white/10 bg-[#0b1a29] px-4 py-3">
-          <label className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-zinc-300">
+        <div className="mx-auto mt-6 flex max-w-4xl flex-wrap items-center gap-3 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] px-4 py-3">
+          <label className="flex items-center gap-2 text-xs font-black uppercase tracking-wide text-zinc-700 dark:text-zinc-300">
             <input
               type="checkbox"
               checked={allSelected}
               onChange={toggleSelectAll}
-              className="h-4 w-4 accent-amber-400"
+              className="h-4 w-4 accent-accent"
             />
             Select all
           </label>
@@ -319,14 +319,14 @@ function AdminUsersPageInner() {
               type="button"
               disabled={selectedCount === 0}
               onClick={emailSelected}
-              className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-40"
+              className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover disabled:opacity-40"
             >
               Email selected
             </button>
             <button
               type="button"
               onClick={emailAll}
-              className="rounded border border-amber-400 px-4 py-2 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
+              className="rounded border border-accent px-4 py-2 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg"
             >
               Email all
             </button>
@@ -336,16 +336,16 @@ function AdminUsersPageInner() {
 
       <div className="mx-auto mt-6 max-w-4xl space-y-4">
         {isLoadingRows ? (
-          <p className="text-sm text-zinc-400">Loading…</p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
         ) : rows.length === 0 ? (
-          <p className="text-sm text-zinc-400">No users yet.</p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">No users yet.</p>
         ) : filtered.length === 0 ? (
-          <p className="text-sm text-zinc-400">No users match your search.</p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">No users match your search.</p>
         ) : (
           filtered.map((row) => (
             <div
               key={row.id}
-              className="grid gap-4 rounded-lg border border-white/10 bg-[#0b1a29] p-4 sm:grid-cols-[auto_1fr_auto]"
+              className="grid gap-4 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-4 sm:grid-cols-[auto_1fr_auto]"
             >
               <label className="flex items-start pt-1">
                 <input
@@ -353,7 +353,7 @@ function AdminUsersPageInner() {
                   checked={selectedIds.has(row.id)}
                   onChange={() => toggleSelected(row.id)}
                   aria-label={`Select ${row.display_name ?? row.email ?? "user"}`}
-                  className="h-4 w-4 accent-amber-400"
+                  className="h-4 w-4 accent-accent"
                 />
               </label>
               <div className="text-sm">
@@ -372,29 +372,29 @@ function AdminUsersPageInner() {
                       maxLength={MAX_DISPLAY_NAME_LENGTH}
                       value={nameDraft}
                       onChange={(event) => setNameDraft(event.target.value)}
-                      className="w-48 rounded border border-white/15 bg-[#07111d] px-2 py-1 text-sm font-black text-white outline-none focus:border-amber-400"
+                      className="w-48 rounded border border-black/10 dark:border-white/15 bg-white dark:bg-[#07111d] px-2 py-1 text-sm font-black text-zinc-900 outline-none dark:text-white focus:border-accent"
                     />
                     <button
                       type="submit"
                       disabled={busyId === row.id}
-                      className="rounded border border-amber-400 px-2 py-1 text-xs font-black uppercase tracking-wide text-amber-300 disabled:opacity-60"
+                      className="rounded border border-accent px-2 py-1 text-xs font-black uppercase tracking-wide text-accent disabled:opacity-60"
                     >
                       {busyId === row.id ? "Saving…" : "Save"}
                     </button>
                     <button
                       type="button"
                       onClick={() => setEditingId(null)}
-                      className="rounded border border-white/20 px-2 py-1 text-xs font-black uppercase tracking-wide text-zinc-300"
+                      className="rounded border border-black/15 dark:border-white/20 px-2 py-1 text-xs font-black uppercase tracking-wide text-zinc-700 dark:text-zinc-300"
                     >
                       Cancel
                     </button>
                   </form>
                 ) : (
-                  <p className="font-black uppercase tracking-wide text-amber-300">
+                  <p className="font-black uppercase tracking-wide text-accent">
                     {row.display_name ?? "(no display name)"}
                   </p>
                 )}
-                <p className="mt-1 text-zinc-200">{row.email}</p>
+                <p className="mt-1 text-zinc-800 dark:text-zinc-200">{row.email}</p>
                 <p className="mt-2 text-xs text-zinc-500">
                   Joined {formatDate(row.created_at)} · Last sign-in {formatDate(row.last_sign_in_at)}
                 </p>
@@ -409,7 +409,7 @@ function AdminUsersPageInner() {
                   <>
                     <Link
                       href={`/admin/users/view?id=${encodeURIComponent(row.id)}`}
-                      className="rounded border border-white/20 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+                      className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
                     >
                       View profile
                     </Link>
@@ -417,7 +417,7 @@ function AdminUsersPageInner() {
                       type="button"
                       disabled={busyId === row.id}
                       onClick={() => startEditing(row)}
-                      className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-60"
+                      className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover disabled:opacity-60"
                     >
                       Edit
                     </button>
@@ -426,7 +426,7 @@ function AdminUsersPageInner() {
                       disabled={!row.email}
                       onClick={() => emailOne(row)}
                       title={row.email ? undefined : "This account has no email address"}
-                      className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-40"
+                      className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover disabled:opacity-40"
                     >
                       Email
                     </button>
@@ -446,7 +446,7 @@ function AdminUsersPageInner() {
                       type="button"
                       disabled={busyId === row.id}
                       onClick={() => setConfirmingId(null)}
-                      className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 disabled:opacity-60"
+                      className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 disabled:opacity-60"
                     >
                       Cancel
                     </button>
@@ -456,7 +456,7 @@ function AdminUsersPageInner() {
                     type="button"
                     disabled={busyId === row.id}
                     onClick={() => setConfirmingId(row.id)}
-                    className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-red-400 hover:text-red-300 disabled:opacity-60"
+                    className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-red-400 hover:text-red-300 disabled:opacity-60"
                   >
                     Remove
                   </button>

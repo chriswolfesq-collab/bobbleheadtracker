@@ -18,12 +18,12 @@ export default function RecentlyAdded() {
   return (
     <section className="mx-auto w-full max-w-2xl px-4 pb-2 sm:px-6">
       <div className="flex items-center justify-between gap-3">
-        <h2 className="text-[11px] font-semibold uppercase tracking-[0.35em] text-amber-500/80 sm:text-xs">
+        <h2 className="text-[11px] font-semibold uppercase tracking-[0.35em] text-accent/80 sm:text-xs">
           Recently added by the community
         </h2>
         <Link
           href="/recently-added"
-          className="shrink-0 text-[11px] font-semibold uppercase tracking-wide text-zinc-400 transition hover:text-amber-300"
+          className="shrink-0 text-[11px] font-semibold uppercase tracking-wide text-zinc-600 transition hover:text-accent-hover dark:text-zinc-400 dark:hover:text-accent-hover"
         >
           View more
         </Link>

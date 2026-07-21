@@ -11,7 +11,7 @@ export function AdminModeBadge({ className }: { className?: string }) {
   return (
     <Link
       href="/admin"
-      className={`inline-flex items-center gap-1.5 rounded border border-amber-400/60 bg-amber-400/10 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d] ${className ?? ""}`}
+      className={`inline-flex items-center gap-1.5 rounded border border-accent/60 bg-accent/10 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg ${className ?? ""}`}
     >
       <span aria-hidden>⚙</span>
       Admin mode

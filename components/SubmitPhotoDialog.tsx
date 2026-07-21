@@ -27,7 +27,7 @@ export function SubmitPhotoButton({
   if (status === "submitted") {
     return (
       <div className={className}>
-        <span className="text-center text-xs font-black uppercase tracking-wide text-amber-300">
+        <span className="text-center text-xs font-black uppercase tracking-wide text-accent">
           Submitted — pending review
         </span>
       </div>
@@ -42,7 +42,7 @@ export function SubmitPhotoButton({
         onClick={() => setMessage("Log in to submit a photo for review.")}
       >
         {message ? (
-          <span className="text-center text-xs font-semibold text-amber-300">{message}</span>
+          <span className="text-center text-xs font-semibold text-accent">{message}</span>
         ) : (
           (children ?? label)
         )}
@@ -75,7 +75,7 @@ export function SubmitPhotoButton({
         }}
       />
       {status === "uploading" ? (
-        <span className="text-xs font-black uppercase tracking-wide text-zinc-400">Uploading…</span>
+        <span className="text-xs font-black uppercase tracking-wide text-zinc-600 dark:text-zinc-400">Uploading…</span>
       ) : message ? (
         <span className="text-center text-xs font-semibold text-red-400">{message}</span>
       ) : (

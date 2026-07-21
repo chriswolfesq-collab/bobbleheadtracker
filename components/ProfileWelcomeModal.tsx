@@ -76,18 +76,18 @@ export function ProfileWelcomeModal({ userId }: { userId: string }) {
       onClick={dismiss}
     >
       <div
-        className="max-h-full w-full max-w-md overflow-y-auto rounded-2xl border border-white/10 bg-[#0b1a2b] p-6 shadow-2xl shadow-black/50"
+        className="max-h-full w-full max-w-md overflow-y-auto rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50 dark:border-white/10 dark:bg-[#0b1a2b]"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-5 flex flex-col items-center gap-3 text-center">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-400 text-lg font-black text-[#07111d]">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-lg font-black text-accent-fg">
             🏆
           </div>
           <div>
-            <h2 id="profile-welcome-title" className="text-lg font-black text-white">
+            <h2 id="profile-welcome-title" className="text-lg font-black text-zinc-900 dark:text-white">
               Welcome to your profile
             </h2>
-            <p className="mt-1 text-xs text-zinc-400">
+            <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
               Here&apos;s everything you can do from here.
             </p>
           </div>
@@ -98,13 +98,13 @@ export function ProfileWelcomeModal({ userId }: { userId: string }) {
             <li key={feature.title} className="flex items-start gap-3">
               <span
                 aria-hidden
-                className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-sm text-amber-300"
+                className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg border border-black/10 bg-black/[0.04] text-sm text-accent dark:border-white/10 dark:bg-white/5"
               >
                 {feature.icon}
               </span>
               <span className="min-w-0">
-                <span className="block text-sm font-bold text-zinc-100">{feature.title}</span>
-                <span className="text-xs leading-5 text-zinc-400">{feature.body}</span>
+                <span className="block text-sm font-bold text-zinc-900 dark:text-zinc-100">{feature.title}</span>
+                <span className="text-xs leading-5 text-zinc-600 dark:text-zinc-400">{feature.body}</span>
               </span>
             </li>
           ))}
@@ -113,11 +113,11 @@ export function ProfileWelcomeModal({ userId }: { userId: string }) {
         {/* The privacy choice gets its own highlighted callout — it's the one
             feature that lives on a different page and the one members most need
             to know exists. */}
-        <div className="mt-4 rounded-xl border border-amber-400/30 bg-amber-400/10 p-4">
-          <h3 className="flex items-center gap-2 text-sm font-black text-amber-200">
+        <div className="mt-4 rounded-xl border border-accent/30 bg-accent/10 p-4">
+          <h3 className="flex items-center gap-2 text-sm font-black text-accent">
             <span aria-hidden>🔒</span> Public or private?
           </h3>
-          <p className="mt-1.5 text-xs leading-5 text-amber-100/80">
+          <p className="mt-1.5 text-xs leading-5 text-accent/80">
             Your profile is private by default. On the{" "}
             <span className="font-bold">Settings</span> page you can make it public to get a
             shareable link — or keep it just for you.
@@ -128,14 +128,14 @@ export function ProfileWelcomeModal({ userId }: { userId: string }) {
           <Link
             href="/settings"
             onClick={dismiss}
-            className="rounded-lg border border-amber-400 px-3 py-2.5 text-center text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400/10"
+            className="rounded-lg border border-accent px-3 py-2.5 text-center text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent/10"
           >
             Open settings
           </Link>
           <button
             type="button"
             onClick={dismiss}
-            className="rounded-lg bg-amber-500 px-3 py-2.5 text-xs font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300"
+            className="rounded-lg bg-accent px-3 py-2.5 text-xs font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover"
           >
             Got it
           </button>

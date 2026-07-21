@@ -73,20 +73,20 @@ export function AdminEmailComposer({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg rounded-lg border border-white/10 bg-[#0b1a29] p-6 text-zinc-100 shadow-2xl"
+        className="w-full max-w-lg rounded-lg border border-black/10 bg-white p-6 text-zinc-900 shadow-2xl dark:border-white/10 dark:bg-[#0b1a29] dark:text-zinc-100"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
           <div>
             <h2 className="text-lg font-black uppercase tracking-wide">Send email</h2>
-            <p className="mt-1 text-sm text-zinc-400">
-              To <span className="font-semibold text-amber-300">{recipientLabel(target)}</span>
+            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              To <span className="font-semibold text-accent">{recipientLabel(target)}</span>
             </p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="rounded border border-white/20 px-2 py-1 text-xs font-black uppercase tracking-wide text-zinc-300 transition hover:border-amber-400 hover:text-amber-300"
+            className="rounded border border-black/15 px-2 py-1 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-300 dark:hover:text-accent-hover"
           >
             Close
           </button>
@@ -100,25 +100,25 @@ export function AdminEmailComposer({
           }}
         >
           <label className="block text-sm">
-            <span className="font-black uppercase tracking-wide text-zinc-300">Subject</span>
+            <span className="font-black uppercase tracking-wide text-zinc-700 dark:text-zinc-300">Subject</span>
             <input
               autoFocus
               type="text"
               required
               value={subject}
               onChange={(event) => setSubject(event.target.value)}
-              className="mt-1 w-full rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm text-white outline-none focus:border-amber-400"
+              className="mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
             />
           </label>
 
           <label className="block text-sm">
-            <span className="font-black uppercase tracking-wide text-zinc-300">Message</span>
+            <span className="font-black uppercase tracking-wide text-zinc-700 dark:text-zinc-300">Message</span>
             <textarea
               required
               rows={8}
               value={message}
               onChange={(event) => setMessage(event.target.value)}
-              className="mt-1 w-full resize-y rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm text-white outline-none focus:border-amber-400"
+              className="mt-1 w-full resize-y rounded border border-black/10 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
             />
           </label>
 
@@ -129,14 +129,14 @@ export function AdminEmailComposer({
               type="button"
               onClick={onClose}
               disabled={isSending}
-              className="rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-60"
+              className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover disabled:opacity-60 dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSending}
-              className="rounded border border-amber-400 px-4 py-2 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d] disabled:opacity-60"
+              className="rounded border border-accent px-4 py-2 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg disabled:opacity-60"
             >
               {isSending ? "Sending…" : "Send email"}
             </button>

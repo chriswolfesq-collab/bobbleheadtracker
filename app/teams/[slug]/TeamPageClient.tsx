@@ -57,7 +57,7 @@ function Stat({
     <div className="flex flex-col items-center gap-1 text-center sm:flex-row sm:items-center sm:gap-3 sm:text-left">
       <div className="hidden h-12 w-12 shrink-0 place-items-center text-3xl text-zinc-200 sm:grid">{icon}</div>
       <div>
-        <div className="text-xl font-black leading-none text-amber-400 sm:text-3xl">{value}</div>
+        <div className="text-xl font-black leading-none text-accent sm:text-3xl">{value}</div>
         <div className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-zinc-200 sm:text-xs">{label}</div>
       </div>
     </div>
@@ -105,7 +105,7 @@ function SortMenu({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         onClick={() => setIsOpen((current) => !current)}
-        className="inline-flex items-center justify-start gap-2 self-start text-sm font-bold uppercase tracking-wide text-zinc-100 sm:self-auto"
+        className="inline-flex items-center justify-start gap-2 self-start text-sm font-bold uppercase tracking-wide text-zinc-900 dark:text-zinc-100 sm:self-auto"
       >
         Sort: {currentLabel}
         <span className="text-lg">⌄</span>
@@ -113,7 +113,7 @@ function SortMenu({
       {isOpen ? (
         <ul
           role="listbox"
-          className="absolute right-0 z-20 mt-2 w-56 overflow-hidden rounded-lg border border-white/15 bg-[#0b1a29] py-1 shadow-xl"
+          className="absolute right-0 z-20 mt-2 w-56 overflow-hidden rounded-lg border border-black/10 bg-white py-1 shadow-xl dark:border-white/15 dark:bg-[#0b1a29]"
         >
           {SORT_OPTIONS.map((option) => (
             <li key={option.value}>
@@ -125,8 +125,8 @@ function SortMenu({
                   onChange(option.value);
                   setIsOpen(false);
                 }}
-                className={`flex w-full items-center justify-between gap-3 px-4 py-2 text-left text-sm font-semibold uppercase tracking-wide transition hover:bg-white/10 ${
-                  option.value === value ? "text-amber-300" : "text-zinc-200"
+                className={`flex w-full items-center justify-between gap-3 px-4 py-2 text-left text-sm font-semibold uppercase tracking-wide transition hover:bg-black/[0.06] dark:hover:bg-white/10 ${
+                  option.value === value ? "text-accent" : "text-zinc-800 dark:text-zinc-200"
                 }`}
               >
                 {option.label}
@@ -161,7 +161,7 @@ function SubmitBobbleheadForm({
 
   if (!user) {
     return (
-      <div className="mb-5 rounded-lg border border-amber-400/35 bg-amber-400/10 p-4 text-sm text-zinc-100">
+      <div className="mb-5 rounded-lg border border-accent/35 bg-accent/10 p-4 text-sm text-zinc-900 dark:text-zinc-100">
         Log in to submit a bobblehead for review.
       </div>
     );
@@ -169,7 +169,7 @@ function SubmitBobbleheadForm({
 
   return (
     <form
-      className="mb-5 grid gap-3 rounded-lg border border-amber-400/35 bg-amber-400/10 p-4 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1fr)_auto]"
+      className="mb-5 grid gap-3 rounded-lg border border-accent/35 bg-accent/10 p-4 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1fr)_auto]"
       onSubmit={async (event) => {
         event.preventDefault();
 
@@ -195,7 +195,7 @@ function SubmitBobbleheadForm({
       }}
     >
       <label className="min-w-0">
-        <span className="text-xs font-black uppercase tracking-wide text-amber-300">Name</span>
+        <span className="text-xs font-black uppercase tracking-wide text-accent">Name</span>
         <input
           required
           value={title}
@@ -204,11 +204,11 @@ function SubmitBobbleheadForm({
             setDuplicateMatch(null);
           }}
           placeholder="Fernando Valenzuela"
-          className="mt-1 w-full rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
+          className="mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
         />
       </label>
       <label className="min-w-0">
-        <span className="text-xs font-black uppercase tracking-wide text-amber-300">Date</span>
+        <span className="text-xs font-black uppercase tracking-wide text-accent">Date</span>
         <input
           type="date"
           value={date}
@@ -216,35 +216,35 @@ function SubmitBobbleheadForm({
             setDate(event.target.value);
             setDuplicateMatch(null);
           }}
-          className="mt-1 w-full rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white outline-none transition [color-scheme:dark] focus:border-amber-400"
+          className="mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition [color-scheme:light] focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white dark:[color-scheme:dark]"
         />
       </label>
       <label className="min-w-0">
-        <span className="text-xs font-black uppercase tracking-wide text-amber-300">Photo (optional)</span>
+        <span className="text-xs font-black uppercase tracking-wide text-accent">Photo (optional)</span>
         <input
           type="file"
           accept="image/*"
           onChange={(event) => setFile(event.target.files?.[0] ?? null)}
-          className="mt-1 w-full text-xs text-zinc-200 file:mr-2 file:rounded file:border-0 file:bg-amber-500 file:px-2 file:py-1.5 file:text-xs file:font-black file:uppercase file:text-[#07111d]"
+          className="mt-1 w-full text-xs text-zinc-800 dark:text-zinc-200 file:mr-2 file:rounded file:border-0 file:bg-accent file:px-2 file:py-1.5 file:text-xs file:font-black file:uppercase file:text-accent-fg"
         />
       </label>
       <div className="flex items-end gap-3">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="min-h-10 rounded bg-amber-500 px-4 text-sm font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300 disabled:opacity-60"
+          className="min-h-10 rounded bg-accent px-4 text-sm font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover disabled:opacity-60"
         >
           {isSubmitting ? "Submitting…" : duplicateMatch ? "Submit anyway" : "Submit"}
         </button>
       </div>
       {duplicateMatch ? (
-        <p className="text-xs font-semibold text-amber-300 sm:col-span-4">
+        <p className="text-xs font-semibold text-accent sm:col-span-4">
           This looks like it might already be on the shelf: “{duplicateMatch.title}” ({duplicateMatch.date}).
           Click submit again to add it anyway.
         </p>
       ) : null}
       {error ? <p className="text-xs font-semibold text-red-400 sm:col-span-4">{error}</p> : null}
-      <p className="text-xs leading-5 text-zinc-300 sm:col-span-4">
+      <p className="text-xs leading-5 text-zinc-700 dark:text-zinc-300 sm:col-span-4">
         Submitted bobbleheads are reviewed by the site admin before they appear for everyone.
       </p>
     </form>
@@ -299,10 +299,14 @@ export function TeamPageClient({
     <OwnershipProvider teamSlug={team.slug}>
       <FavoritesProvider teamSlug={team.slug}>
         <WantedProvider teamSlug={team.slug}>
-          <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
-            <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border border-black bg-[#08131f] shadow-2xl">
+          <main className="min-h-full bg-slate-50 px-3 py-3 text-zinc-900 dark:bg-[#15110d] dark:text-zinc-100 sm:px-5 sm:py-5">
+            <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border border-black bg-white shadow-2xl dark:bg-[#08131f]">
+              {/* This hero keeps its team-colored dark gradient in both themes.
+                  The `dark` class scopes everything inside it to dark-surface
+                  styling so shared chrome (AuthWidget, etc.) stays legible on it
+                  even when the rest of the page is in light mode. */}
               <section
-                className="grid gap-4 border-b border-white/10 p-4 sm:gap-6 sm:p-5 lg:grid-cols-[220px_1fr]"
+                className="dark grid gap-4 border-b border-white/10 p-4 sm:gap-6 sm:p-5 lg:grid-cols-[220px_1fr]"
                 style={{
                   background: `radial-gradient(circle at 74% 14%, ${team.primary}44, transparent 34%), linear-gradient(135deg, #08131f 0%, #0b1d2e 52%, #07111d 100%)`,
                 }}
@@ -311,7 +315,7 @@ export function TeamPageClient({
                   <div className="flex items-center justify-between gap-3">
                     <Link
                       href="/"
-                      className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
+                      className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-accent-hover"
                     >
                       <span aria-hidden>←</span>
                       Back to shelf
@@ -333,7 +337,7 @@ export function TeamPageClient({
                         className="h-44 w-auto drop-shadow-[0_12px_16px_rgba(0,0,0,0.65)]"
                       />
                     </div>
-                    <div className="mt-2 rounded bg-black/45 px-2 py-1 text-sm font-black uppercase tracking-wide">
+                    <div className="mt-2 rounded bg-black/45 px-2 py-1 text-sm font-black uppercase tracking-wide text-zinc-100">
                       {team.name}
                     </div>
                   </div>
@@ -366,7 +370,7 @@ export function TeamPageClient({
                         <h1 className="text-2xl font-black uppercase leading-none tracking-wide text-white sm:text-4xl sm:leading-none 2xl:text-6xl">
                           {team.city} {team.name}
                         </h1>
-                        <p className="mt-2 text-sm font-black uppercase tracking-wide text-amber-400 sm:mt-3 sm:text-xl">
+                        <p className="mt-2 text-sm font-black uppercase tracking-wide text-accent sm:mt-3 sm:text-xl">
                           {team.league} {team.division}
                         </p>
                       </div>
@@ -395,13 +399,13 @@ export function TeamPageClient({
                 </div>
               </section>
 
-              <section className="m-2 rounded-lg border border-white/10 bg-[#0b1a29] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] sm:m-3 sm:p-6">
+              <section className="m-2 rounded-lg border border-black/10 bg-white p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] dark:border-white/10 dark:bg-[#0b1a29] sm:m-3 sm:p-6">
                 <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <h2 className="text-2xl font-black uppercase tracking-wide text-zinc-100">SGA Bobbleheads</h2>
+                  <h2 className="text-2xl font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">SGA Bobbleheads</h2>
                   <div className="flex flex-wrap gap-3">
                     <button
                       type="button"
-                      className="inline-flex items-center justify-center gap-2 rounded border border-amber-400 px-4 py-2 text-sm font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
+                      className="inline-flex items-center justify-center gap-2 rounded border border-accent px-4 py-2 text-sm font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg"
                       onClick={() => {
                         setJustSubmitted(false);
                         setIsAdding((current) => !current);
@@ -416,7 +420,7 @@ export function TeamPageClient({
 
                 {isAdding ? (
                   justSubmitted ? (
-                    <div className="mb-5 rounded-lg border border-amber-400/35 bg-amber-400/10 p-4 text-sm font-semibold text-amber-200">
+                    <div className="mb-5 rounded-lg border border-accent/35 bg-accent/10 p-4 text-sm font-semibold text-accent">
                       Submitted — the admin will review it before it appears for everyone.
                     </div>
                   ) : (
@@ -432,16 +436,16 @@ export function TeamPageClient({
                 {allGiveaways.length > 0 ? (
                   <BobbleheadCollection allGiveaways={allGiveaways} team={team} sortOrder={sortOrder} />
                 ) : (
-                  <div className="rounded-lg border border-dashed border-white/15 bg-black/15 p-8 text-center">
-                    <p className="text-sm font-black uppercase tracking-wide text-zinc-100">
+                  <div className="rounded-lg border border-dashed border-black/10 bg-black/15 p-8 text-center dark:border-white/15">
+                    <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">
                       No bobbleheads added yet
                     </p>
-                    <p className="mt-2 text-sm leading-6 text-zinc-400">
+                    <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
                       Submit the first bobblehead for this team.
                     </p>
                     <button
                       type="button"
-                      className="mt-5 rounded bg-amber-500 px-5 py-3 text-sm font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300"
+                      className="mt-5 rounded bg-accent px-5 py-3 text-sm font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover"
                       onClick={() => setIsAdding(true)}
                     >
                       Submit a bobblehead

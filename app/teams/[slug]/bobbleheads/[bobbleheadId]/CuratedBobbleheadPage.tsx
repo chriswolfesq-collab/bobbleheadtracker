@@ -60,18 +60,18 @@ export function CuratedBobbleheadPage({
   // tells us it's gone.
   if (!isOverrideLoading && override?.deleted) {
     return (
-      <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
-        <div className="mx-auto max-w-3xl rounded-xl border border-black bg-[#08131f] p-6 shadow-2xl">
+      <main className="min-h-full bg-slate-50 px-3 py-3 text-zinc-900 dark:bg-[#15110d] dark:text-zinc-100 sm:px-5 sm:py-5">
+        <div className="mx-auto max-w-3xl rounded-xl border border-black bg-white p-6 shadow-2xl dark:bg-[#08131f]">
           <Link
             href={`/teams/${team.slug}`}
-            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
+            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-zinc-900 hover:text-accent-hover dark:text-white dark:hover:text-accent-hover"
           >
             <span aria-hidden>←</span>
             Back to team
           </Link>
-          <div className="mt-8 rounded-lg border border-dashed border-white/15 bg-black/15 p-8 text-center">
-            <p className="text-sm font-black uppercase tracking-wide text-zinc-100">Bobblehead removed</p>
-            <p className="mt-2 text-sm leading-6 text-zinc-400">
+          <div className="mt-8 rounded-lg border border-dashed border-black/10 bg-black/15 p-8 text-center dark:border-white/15">
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">Bobblehead removed</p>
+            <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
               The site admin removed this listing from the catalog.
             </p>
           </div>
@@ -144,10 +144,12 @@ export function CuratedBobbleheadPage({
   };
 
   return (
-    <main className="min-h-full bg-[#15110d] px-3 py-3 text-zinc-100 sm:px-5 sm:py-5">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border border-black bg-[#08131f] shadow-2xl">
+    <main className="min-h-full bg-slate-50 px-3 py-3 text-zinc-900 dark:bg-[#15110d] dark:text-zinc-100 sm:px-5 sm:py-5">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border border-black bg-white shadow-2xl dark:bg-[#08131f]">
+        {/* Always-dark team hero; `dark` scopes its contents to dark-surface
+            styling so they stay legible when the page is in light mode. */}
         <section
-          className="grid gap-6 border-b border-white/10 p-5 lg:grid-cols-[190px_1fr]"
+          className="dark grid gap-6 border-b border-white/10 p-5 lg:grid-cols-[190px_1fr]"
           style={{
             background: `radial-gradient(circle at 72% 10%, ${team.primary}44, transparent 34%), linear-gradient(135deg, #08131f 0%, #0b1d2e 52%, #07111d 100%)`,
           }}
@@ -155,7 +157,7 @@ export function CuratedBobbleheadPage({
           <aside className="lg:border-r lg:border-white/10 lg:pr-5">
             <Link
               href={`/teams/${team.slug}`}
-              className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
+              className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-accent-hover"
             >
               <span aria-hidden>←</span>
               Back to team
@@ -177,7 +179,7 @@ export function CuratedBobbleheadPage({
                   className="relative h-40 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.65)]"
                 />
               </div>
-              <div className="mt-2 rounded bg-black/45 px-2 py-1 text-sm font-black uppercase tracking-wide">
+              <div className="mt-2 rounded bg-black/45 px-2 py-1 text-sm font-black uppercase tracking-wide text-zinc-100">
                 {team.name}
               </div>
             </div>
@@ -185,7 +187,7 @@ export function CuratedBobbleheadPage({
 
           <div className="grid gap-6 xl:grid-cols-[1fr_210px]">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.22em] text-amber-400">
+              <p className="text-sm font-black uppercase tracking-[0.22em] text-accent">
                 {team.city} {team.name}
               </p>
               <h1 className="mt-3 flex flex-wrap items-center gap-3 text-4xl font-black uppercase leading-none tracking-wide text-white sm:text-5xl 2xl:text-6xl">
@@ -218,7 +220,7 @@ export function CuratedBobbleheadPage({
                 <button
                   type="button"
                   onClick={() => setIsEditOpen(true)}
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-5 py-3 text-sm font-bold uppercase tracking-wide text-zinc-100 transition hover:border-amber-400 hover:text-amber-300"
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-5 py-3 text-sm font-bold uppercase tracking-wide text-zinc-100 transition hover:border-accent hover:text-accent-hover"
                 >
                   <span>✎</span>
                   Edit bobblehead
@@ -231,11 +233,11 @@ export function CuratedBobbleheadPage({
           </div>
         </section>
 
-        <section className="m-2 rounded-lg border border-white/10 bg-[#0b1a29] p-4 sm:m-3 sm:p-6">
-          <div className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b border-white/15 pb-3">
+        <section className="m-2 rounded-lg border border-black/10 bg-white p-4 dark:border-white/10 dark:bg-[#0b1a29] sm:m-3 sm:p-6">
+          <div className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b border-black/10 pb-3 dark:border-white/15">
             <div>
-              <p className="text-sm font-black uppercase tracking-wide text-white">Photos</p>
-              <p className="mt-1 text-sm text-zinc-400">
+              <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Photos</p>
+              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
                 Have a better photo? Submit it for the admin to review.
               </p>
             </div>
@@ -247,11 +249,11 @@ export function CuratedBobbleheadPage({
           ) : null}
           <div className="space-y-5">
             {!isOwned ? (
-              <div className="rounded-lg border border-amber-400/50 bg-amber-400/10 p-4">
-                <p className="text-sm font-black uppercase tracking-wide text-amber-300">
+              <div className="rounded-lg border border-accent/50 bg-accent/10 p-4">
+                <p className="text-sm font-black uppercase tracking-wide text-accent">
                   Mark this one as owned
                 </p>
-                <p className="mt-2 text-sm leading-6 text-zinc-300">
+                <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
                   {isLoggedIn
                     ? "Track this bobblehead in your own collection."
                     : "Log in to track this bobblehead in your own collection."}
@@ -263,11 +265,11 @@ export function CuratedBobbleheadPage({
               bobbleheadId={giveaway.id}
               teamSlug={team.slug}
               label="Add photos"
-              className="flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-zinc-400/70 px-5 py-5 text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+              className="flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-zinc-400/70 px-5 py-5 text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:text-zinc-200 dark:hover:text-accent-hover"
             >
               <span className="text-3xl">▣</span>
               <span className="mt-1 text-lg font-black uppercase tracking-wide">Submit a photo</span>
-              <span className="mt-1 text-sm text-zinc-300">Reviewed by the admin before it goes live</span>
+              <span className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">Reviewed by the admin before it goes live</span>
             </SubmitPhotoButton>
 
             <button
@@ -277,7 +279,7 @@ export function CuratedBobbleheadPage({
               className={`w-full rounded-lg px-5 py-4 text-base font-black uppercase tracking-wide shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] transition disabled:cursor-not-allowed disabled:opacity-50 ${
                 isOwned
                   ? "bg-green-500 text-[#06110a] hover:bg-green-400"
-                  : "border border-amber-400 text-amber-300 hover:bg-amber-400 hover:text-[#07111d]"
+                  : "border border-accent text-accent hover:bg-accent-hover hover:text-accent-fg"
               }`}
               onClick={() => setOwned(giveaway.id, !isOwned)}
             >
@@ -289,7 +291,7 @@ export function CuratedBobbleheadPage({
               bobbleheadId={giveaway.id}
               source="curated"
               title={title}
-              className="mx-auto block text-center text-xs font-bold uppercase tracking-wide text-zinc-500 transition hover:text-amber-300"
+              className="mx-auto block text-center text-xs font-bold uppercase tracking-wide text-zinc-500 transition hover:text-accent-hover dark:hover:text-accent-hover"
             />
           </div>
         </section>

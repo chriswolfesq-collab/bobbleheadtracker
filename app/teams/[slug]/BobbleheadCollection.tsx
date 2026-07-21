@@ -8,7 +8,7 @@ import { GiveawayCard, type ResolvedGiveaway, useFavorites, useOwnership, useWan
 
 const UNKNOWN_YEAR = "Unknown";
 const FIELD_CLASSES =
-  "mt-1 w-full rounded border border-white/15 bg-[#07111d] px-3 py-2 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400";
+  "mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white";
 
 type OwnedFilter = "all" | "owned" | "unowned";
 
@@ -115,7 +115,7 @@ export function BobbleheadCollection({
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto_auto_auto]">
           <label className="min-w-0">
-            <span className="text-xs font-black uppercase tracking-wide text-amber-300">Year</span>
+            <span className="text-xs font-black uppercase tracking-wide text-accent">Year</span>
             <select
               value={yearFilter}
               onChange={(event) => setYearFilter(event.target.value)}
@@ -131,7 +131,7 @@ export function BobbleheadCollection({
             </select>
           </label>
           <label className="min-w-0">
-            <span className="text-xs font-black uppercase tracking-wide text-amber-300">Ownership</span>
+            <span className="text-xs font-black uppercase tracking-wide text-accent">Ownership</span>
             <select
               value={ownedFilter}
               onChange={(event) => setOwnedFilter(event.target.value as OwnedFilter)}
@@ -155,14 +155,14 @@ export function BobbleheadCollection({
         </div>
 
         <div className="mt-3 flex items-center justify-between gap-3">
-          <p className="text-xs text-zinc-400">
+          <p className="text-xs text-zinc-600 dark:text-zinc-400">
             Showing {filtered.length} of {allGiveaways.length}
           </p>
           {hasActiveFilters ? (
             <button
               type="button"
               onClick={clearFilters}
-              className="text-xs font-semibold uppercase tracking-wide text-zinc-400 transition hover:text-amber-300"
+              className="text-xs font-semibold uppercase tracking-wide text-zinc-600 transition hover:text-accent-hover dark:text-zinc-400 dark:hover:text-accent-hover"
             >
               Clear filters
             </button>
@@ -182,9 +182,9 @@ export function BobbleheadCollection({
           ))}
         </div>
       ) : (
-        <div className="rounded-lg border border-dashed border-white/15 bg-black/15 p-8 text-center">
-          <p className="text-sm font-black uppercase tracking-wide text-zinc-100">No matches</p>
-          <p className="mt-2 text-sm leading-6 text-zinc-400">Try a different filter.</p>
+        <div className="rounded-lg border border-dashed border-black/10 bg-black/15 p-8 text-center dark:border-white/15">
+          <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">No matches</p>
+          <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">Try a different filter.</p>
         </div>
       )}
     </div>

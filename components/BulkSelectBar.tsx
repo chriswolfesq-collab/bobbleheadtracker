@@ -38,26 +38,26 @@ export function BulkSelectBar({
   }, [count, allSelected]);
 
   return (
-    <div className="sticky top-0 z-10 -mx-4 mb-4 bg-[#15110d]/95 px-4 py-3 backdrop-blur sm:-mx-8 sm:px-8">
-      <div className="mx-auto flex max-w-4xl flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border border-white/10 bg-[#0b1a29] px-4 py-3">
-        <label className="flex cursor-pointer items-center gap-2 text-xs font-black uppercase tracking-wide text-zinc-200">
+    <div className="sticky top-0 z-10 -mx-4 mb-4 bg-slate-50/95 px-4 py-3 backdrop-blur dark:bg-[#15110d]/95 sm:-mx-8 sm:px-8">
+      <div className="mx-auto flex max-w-4xl flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border border-black/10 bg-white px-4 py-3 dark:border-white/10 dark:bg-[#0b1a29]">
+        <label className="flex cursor-pointer items-center gap-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200">
           <input
             ref={checkboxRef}
             type="checkbox"
             checked={allSelected}
             onChange={onToggleAll}
             disabled={busy || total === 0}
-            className="h-4 w-4 accent-amber-500"
+            className="h-4 w-4 accent-accent"
             aria-label="Select all"
           />
           Select all
         </label>
-        <span className="text-xs font-semibold text-zinc-400">
+        <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">
           {count} of {total} selected
         </span>
         <div className="ml-auto flex items-center gap-2">
           {busy && progress ? (
-            <span className="text-xs font-semibold text-zinc-400" role="status">
+            <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-400" role="status">
               {progress.done}/{progress.total}…
             </span>
           ) : null}
@@ -86,7 +86,7 @@ export function BulkPrimaryButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`${BASE_BUTTON} bg-amber-500 text-[#07111d] hover:bg-amber-300`}
+      className={`${BASE_BUTTON} bg-accent text-accent-fg hover:bg-accent-hover`}
     >
       {children}
     </button>
@@ -108,7 +108,7 @@ export function BulkSecondaryButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`${BASE_BUTTON} border border-white/20 text-zinc-200 hover:border-red-400 hover:text-red-300`}
+      className={`${BASE_BUTTON} border border-black/15 text-zinc-800 hover:border-red-400 hover:text-red-300 dark:border-white/20 dark:text-zinc-200`}
     >
       {children}
     </button>

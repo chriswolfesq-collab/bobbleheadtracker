@@ -55,9 +55,9 @@ function StatCard({
   hint?: string;
 }) {
   return (
-    <div className="rounded-lg border border-white/10 bg-[#0b1a29] p-5">
-      <p className="text-xs font-black uppercase tracking-wide text-zinc-400">{label}</p>
-      <p className="mt-2 text-3xl font-black tabular-nums text-white">{value}</p>
+    <div className="rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-5">
+      <p className="text-xs font-black uppercase tracking-wide text-zinc-600 dark:text-zinc-400">{label}</p>
+      <p className="mt-2 text-3xl font-black tabular-nums text-zinc-900 dark:text-white">{value}</p>
       {hint ? <p className="mt-1 text-xs text-zinc-500">{hint}</p> : null}
     </div>
   );
@@ -65,7 +65,7 @@ function StatCard({
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="mt-10 text-sm font-black uppercase tracking-wide text-zinc-300">{children}</h2>
+    <h2 className="mt-10 text-sm font-black uppercase tracking-wide text-zinc-700 dark:text-zinc-300">{children}</h2>
   );
 }
 
@@ -173,12 +173,12 @@ export default function AdminStatsPage() {
 
   if (!user || !isAdmin) {
     return (
-      <main className="min-h-full bg-[#15110d] px-4 py-10 text-center text-zinc-100">
-        <p className="text-sm font-black uppercase tracking-wide text-zinc-100">Not authorized</p>
-        <p className="mt-2 text-sm text-zinc-400">Log in with an admin-mode account to continue.</p>
+      <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-center text-zinc-900 dark:text-zinc-100">
+        <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">Not authorized</p>
+        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Log in with an admin-mode account to continue.</p>
         <Link
           href="/admin"
-          className="mt-6 inline-block rounded border border-amber-400 px-4 py-2 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
+          className="mt-6 inline-block rounded border border-accent px-4 py-2 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg"
         >
           Go to admin login
         </Link>
@@ -187,20 +187,20 @@ export default function AdminStatsPage() {
   }
 
   return (
-    <main className="min-h-full bg-[#15110d] px-4 py-8 text-zinc-100 sm:px-8">
+    <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-8 text-zinc-900 dark:text-zinc-100 sm:px-8">
       <div className="mx-auto flex max-w-5xl items-center justify-between">
         <div>
-          <Link href="/admin" className="text-sm font-black uppercase tracking-wide text-white hover:text-amber-300">
+          <Link href="/admin" className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white hover:text-accent-hover dark:hover:text-accent-hover">
             ← Back to admin
           </Link>
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">Site stats</h1>
         </div>
         <div className="flex items-center gap-3 text-sm">
-          <span className="font-semibold text-zinc-200">{user.email}</span>
+          <span className="font-semibold text-zinc-800 dark:text-zinc-200">{user.email}</span>
           <button
             type="button"
             onClick={() => signOut()}
-            className="rounded border border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+            className="rounded border border-black/15 dark:border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
           >
             Log out
           </button>
@@ -213,20 +213,20 @@ export default function AdminStatsPage() {
 
       <div className="mx-auto max-w-5xl">
         {isLoadingStats ? (
-          <p className="mt-8 text-sm text-zinc-400">Loading…</p>
+          <p className="mt-8 text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
         ) : !stats ? (
-          !error ? <p className="mt-8 text-sm text-zinc-400">No stats available.</p> : null
+          !error ? <p className="mt-8 text-sm text-zinc-600 dark:text-zinc-400">No stats available.</p> : null
         ) : (
           <>
             <SectionHeading>Listings by team</SectionHeading>
-            <div className="mt-4 rounded-lg border border-white/10 bg-[#0b1a29] p-2">
+            <div className="mt-4 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-2">
               {listingsByTeam === null ? (
-                <p className="p-3 text-sm text-zinc-400">Loading…</p>
+                <p className="p-3 text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
               ) : listingsByTeam.length === 0 ? (
-                <p className="p-3 text-sm text-zinc-400">No listings yet.</p>
+                <p className="p-3 text-sm text-zinc-600 dark:text-zinc-400">No listings yet.</p>
               ) : (
                 <ul>
-                  <li className="flex items-center gap-3 px-3 py-2 text-xs font-black uppercase tracking-wide text-zinc-400">
+                  <li className="flex items-center gap-3 px-3 py-2 text-xs font-black uppercase tracking-wide text-zinc-600 dark:text-zinc-400">
                     <span className="min-w-0 flex-1">Team</span>
                     <span className="w-20 shrink-0 text-right">Listings</span>
                     <span className="w-28 shrink-0 text-right">With photos</span>
@@ -234,18 +234,18 @@ export default function AdminStatsPage() {
                   {listingsByTeam.map((team) => (
                     <li
                       key={team.slug}
-                      className="flex items-center gap-3 border-t border-white/5 px-3 py-2 text-sm"
+                      className="flex items-center gap-3 border-t border-black/[0.06] dark:border-white/5 px-3 py-2 text-sm"
                     >
                       <Link
                         href={`/teams/${team.slug}`}
-                        className="min-w-0 flex-1 truncate font-black uppercase tracking-wide text-amber-300 hover:text-amber-200"
+                        className="min-w-0 flex-1 truncate font-black uppercase tracking-wide text-accent hover:text-accent-hover dark:hover:text-accent-hover"
                       >
                         {teamName(team.slug)}
                       </Link>
-                      <span className="w-20 shrink-0 text-right tabular-nums text-zinc-200">
+                      <span className="w-20 shrink-0 text-right tabular-nums text-zinc-800 dark:text-zinc-200">
                         {fmt(team.total)}
                       </span>
-                      <span className="w-28 shrink-0 text-right tabular-nums text-zinc-400">
+                      <span className="w-28 shrink-0 text-right tabular-nums text-zinc-600 dark:text-zinc-400">
                         {fmt(team.withPhotos)}
                         <span className="ml-1 text-xs text-zinc-500">
                           ({team.total > 0 ? Math.round((team.withPhotos / team.total) * 100) : 0}%)
@@ -258,9 +258,9 @@ export default function AdminStatsPage() {
             </div>
 
             <SectionHeading>Top teams by owned</SectionHeading>
-            <div className="mt-4 rounded-lg border border-white/10 bg-[#0b1a29] p-2">
+            <div className="mt-4 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-2">
               {stats.top_teams.length === 0 ? (
-                <p className="p-3 text-sm text-zinc-400">No owned bobbleheads yet.</p>
+                <p className="p-3 text-sm text-zinc-600 dark:text-zinc-400">No owned bobbleheads yet.</p>
               ) : (
                 <ul>
                   {stats.top_teams.map((team) => (
@@ -270,11 +270,11 @@ export default function AdminStatsPage() {
                     >
                       <Link
                         href={`/teams/${team.slug}`}
-                        className="font-black uppercase tracking-wide text-amber-300 hover:text-amber-200"
+                        className="font-black uppercase tracking-wide text-accent hover:text-accent-hover dark:hover:text-accent-hover"
                       >
                         {teamName(team.slug)}
                       </Link>
-                      <span className="tabular-nums text-zinc-200">{fmt(team.count)}</span>
+                      <span className="tabular-nums text-zinc-800 dark:text-zinc-200">{fmt(team.count)}</span>
                     </li>
                   ))}
                 </ul>
@@ -374,9 +374,9 @@ export default function AdminStatsPage() {
             </div>
 
             <SectionHeading>Most-reported listings</SectionHeading>
-            <div className="mt-4 rounded-lg border border-white/10 bg-[#0b1a29] p-2">
+            <div className="mt-4 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-2">
               {stats.most_reported.length === 0 ? (
-                <p className="p-3 text-sm text-zinc-400">No pending reports.</p>
+                <p className="p-3 text-sm text-zinc-600 dark:text-zinc-400">No pending reports.</p>
               ) : (
                 <ul>
                   {stats.most_reported.map((listing) => (
@@ -385,7 +385,7 @@ export default function AdminStatsPage() {
                       className="flex items-center justify-between gap-3 px-3 py-2 text-sm"
                     >
                       <span className="min-w-0">
-                        <span className="block truncate font-semibold text-white">
+                        <span className="block truncate font-semibold text-zinc-900 dark:text-white">
                           {listing.title ?? listing.bobblehead_id}
                         </span>
                         <span className="text-xs text-zinc-500">{teamName(listing.team_slug)}</span>

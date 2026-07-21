@@ -9,25 +9,22 @@ export default function TermsPage() {
   return (
     <div
       className="flex min-h-full flex-1 flex-col"
-      style={{
-        background:
-          "radial-gradient(ellipse 80% 50% at 50% -10%, #1b2a4a 0%, #0e1626 45%, #090e1a 100%)",
-      }}
+      style={{ background: "var(--page-gradient)" }}
     >
       <div className="mx-auto w-full max-w-2xl px-4 py-10 sm:px-6 sm:py-14">
         <Link
           href="/"
-          className="text-xs font-bold uppercase tracking-wide text-amber-300 hover:text-amber-200"
+          className="text-xs font-bold uppercase tracking-wide text-accent hover:text-accent-hover"
         >
           ← Back home
         </Link>
 
-        <h1 className="mt-4 text-2xl font-black text-white sm:text-3xl">Terms of Service</h1>
+        <h1 className="mt-4 text-2xl font-black text-zinc-900 sm:text-3xl dark:text-white">Terms of Service</h1>
         <p className="mt-2 text-xs text-zinc-500">Last updated July 16, 2026</p>
 
-        <div className="mt-8 grid gap-6 text-sm leading-6 text-zinc-300">
+        <div className="mt-8 grid gap-6 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
           <section>
-            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
+            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-accent">
               1. Acceptance of terms
             </h2>
             <p>
@@ -38,7 +35,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
+            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-accent">
               2. Your account
             </h2>
             <p>
@@ -49,7 +46,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
+            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-accent">
               3. Content you submit
             </h2>
             <p>
@@ -60,7 +57,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
+            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-accent">
               4. Acceptable use
             </h2>
             <p>
@@ -71,7 +68,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
+            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-accent">
               5. Disclaimer
             </h2>
             <p>
@@ -82,7 +79,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
+            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-accent">
               6. Changes
             </h2>
             <p>
@@ -92,7 +89,7 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-amber-300">
+            <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-accent">
               7. Contact
             </h2>
             <p>Questions about these terms? Reach out through the site&apos;s contact options.</p>

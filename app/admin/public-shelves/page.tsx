@@ -14,12 +14,12 @@ export default function AdminPublicShelvesPage() {
 
   if (!user || !isAdmin) {
     return (
-      <main className="min-h-full bg-[#15110d] px-4 py-10 text-center text-zinc-100">
-        <p className="text-sm font-black uppercase tracking-wide text-zinc-100">Not authorized</p>
-        <p className="mt-2 text-sm text-zinc-400">Log in with an admin-mode account to continue.</p>
+      <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-center text-zinc-900 dark:text-zinc-100">
+        <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">Not authorized</p>
+        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Log in with an admin-mode account to continue.</p>
         <Link
           href="/admin"
-          className="mt-6 inline-block rounded border border-amber-400 px-4 py-2 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d]"
+          className="mt-6 inline-block rounded border border-accent px-4 py-2 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg"
         >
           Go to admin login
         </Link>
@@ -28,26 +28,26 @@ export default function AdminPublicShelvesPage() {
   }
 
   return (
-    <main className="min-h-full bg-[#15110d] px-4 py-8 text-zinc-100 sm:px-8">
+    <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-8 text-zinc-900 dark:text-zinc-100 sm:px-8">
       <div className="mx-auto flex max-w-3xl items-center justify-between">
         <div>
           <Link
             href="/admin/stats"
-            className="text-sm font-black uppercase tracking-wide text-white hover:text-amber-300"
+            className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white hover:text-accent-hover dark:hover:text-accent-hover"
           >
             ← Back to stats
           </Link>
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">Public shelves</h1>
-          <p className="mt-1 text-sm text-zinc-400">
+          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
             Collectors who have made their shelf public. Each opens their shared /shelf page.
           </p>
         </div>
         <div className="flex items-center gap-3 text-sm">
-          <span className="font-semibold text-zinc-200">{user.email}</span>
+          <span className="font-semibold text-zinc-800 dark:text-zinc-200">{user.email}</span>
           <button
             type="button"
             onClick={() => signOut()}
-            className="rounded border border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+            className="rounded border border-black/15 dark:border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
           >
             Log out
           </button>
@@ -60,25 +60,25 @@ export default function AdminPublicShelvesPage() {
 
       <div className="mx-auto max-w-3xl">
         {isLoading ? (
-          <p className="mt-8 text-sm text-zinc-400">Loading…</p>
+          <p className="mt-8 text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
         ) : shelves.length === 0 ? (
-          <p className="mt-8 text-sm text-zinc-400">No public shelves yet.</p>
+          <p className="mt-8 text-sm text-zinc-600 dark:text-zinc-400">No public shelves yet.</p>
         ) : (
           <ul className="mt-6 space-y-3">
             {shelves.map((shelf) => (
               <li
                 key={shelf.id}
-                className="rounded-lg border border-white/10 bg-[#0b1a29]"
+                className="rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29]"
               >
                 <Link
                   href={`/shelf/${shelf.slug}`}
-                  className="flex items-center justify-between gap-3 p-4 transition hover:bg-white/5"
+                  className="flex items-center justify-between gap-3 p-4 transition hover:bg-black/[0.04] dark:hover:bg-white/5"
                 >
                   <span className="min-w-0">
-                    <span className="block truncate font-black text-white">{shelf.displayName}</span>
-                    <span className="block truncate text-xs text-zinc-400">/shelf/{shelf.slug}</span>
+                    <span className="block truncate font-black text-zinc-900 dark:text-white">{shelf.displayName}</span>
+                    <span className="block truncate text-xs text-zinc-600 dark:text-zinc-400">/shelf/{shelf.slug}</span>
                   </span>
-                  <span aria-hidden className="shrink-0 text-amber-300">
+                  <span aria-hidden className="shrink-0 text-accent">
                     →
                   </span>
                 </Link>

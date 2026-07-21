@@ -53,13 +53,13 @@ export function ShelfSharingToggle({ sharing }: { sharing: ShelfSharing }) {
   if (isLoading) return null;
 
   return (
-    <div className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-4">
+    <div className="mb-8 rounded-2xl border border-black/10 bg-black/[0.04] p-4 dark:border-white/10 dark:bg-white/5">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
+          <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-600 dark:text-zinc-400">
             Public shelf
           </h2>
-          <p className="mt-1.5 text-sm text-zinc-400">
+          <p className="mt-1.5 text-sm text-zinc-600 dark:text-zinc-400">
             {shelf.isPublic
               ? "Anyone with your link can see your shelf and your team counts."
               : "Turn this on to get a link you can post. Your shelf is private until you do."}
@@ -74,7 +74,7 @@ export function ShelfSharingToggle({ sharing }: { sharing: ShelfSharing }) {
           disabled={isSaving}
           onClick={handleToggle}
           className={`relative h-6 w-11 flex-shrink-0 rounded-full transition disabled:opacity-60 ${
-            shelf.isPublic ? "bg-amber-400" : "bg-white/15"
+            shelf.isPublic ? "bg-accent" : "bg-black/[0.08] dark:bg-white/15"
           }`}
         >
           <span
@@ -87,13 +87,13 @@ export function ShelfSharingToggle({ sharing }: { sharing: ShelfSharing }) {
 
       {shelf.isPublic && shelfUrl ? (
         <div className="mt-4 flex items-center gap-2">
-          <code className="min-w-0 flex-1 select-all truncate rounded-lg border border-white/10 bg-[#07111d] px-3 py-2 text-xs text-amber-200">
+          <code className="min-w-0 flex-1 select-all truncate rounded-lg border border-black/10 bg-white px-3 py-2 text-xs text-accent dark:border-white/10 dark:bg-[#07111d] dark:text-accent">
             {shelfUrl}
           </code>
           <button
             type="button"
             onClick={handleCopy}
-            className="w-20 flex-shrink-0 rounded-lg border border-white/15 px-3 py-2 text-[11px] font-black uppercase tracking-wide text-zinc-300 transition hover:border-amber-400 hover:text-amber-300"
+            className="w-20 flex-shrink-0 rounded-lg border border-black/10 px-3 py-2 text-[11px] font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:border-white/15 dark:text-zinc-300 dark:hover:text-accent-hover"
           >
             {didCopy ? "Copied" : "Copy"}
           </button>

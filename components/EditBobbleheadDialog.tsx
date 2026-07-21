@@ -66,10 +66,10 @@ export function EditBobbleheadDialog({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-8" onClick={close}>
       <div
-        className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#0b1a2b] p-6 shadow-2xl shadow-black/50"
+        className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50 dark:border-white/10 dark:bg-[#0b1a2b]"
         onClick={(event) => event.stopPropagation()}
       >
-        <h2 className="text-lg font-black text-white">Edit bobblehead</h2>
+        <h2 className="text-lg font-black text-zinc-900 dark:text-white">Edit bobblehead</h2>
 
         <form
           className="mt-5 grid gap-3"
@@ -96,18 +96,18 @@ export function EditBobbleheadDialog({
           }}
         >
           <div className="grid gap-1.5">
-            <label className="text-xs font-bold text-zinc-300">Title</label>
+            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Title</label>
             <input
               required
               type="text"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
-              className="w-full rounded-lg border border-white/15 bg-[#07111d] px-3 py-2.5 text-sm font-semibold text-white outline-none transition focus:border-amber-400"
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="grid gap-1.5">
-              <label className="text-xs font-bold text-zinc-300">Year</label>
+              <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Year</label>
               <input
                 required
                 type="text"
@@ -115,27 +115,27 @@ export function EditBobbleheadDialog({
                 maxLength={4}
                 value={year}
                 onChange={(event) => setYear(event.target.value)}
-                className="w-full rounded-lg border border-white/15 bg-[#07111d] px-3 py-2.5 text-sm font-semibold text-white outline-none transition focus:border-amber-400"
+                className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
               />
             </div>
             <div className="grid gap-1.5">
-              <label className="text-xs font-bold text-zinc-300">Date</label>
+              <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Date</label>
               <input
                 required
                 type="text"
                 value={date}
                 onChange={(event) => setDate(event.target.value)}
-                className="w-full rounded-lg border border-white/15 bg-[#07111d] px-3 py-2.5 text-sm font-semibold text-white outline-none transition focus:border-amber-400"
+                className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
               />
             </div>
           </div>
           <div className="grid gap-1.5">
-            <label className="text-xs font-bold text-zinc-300">Replace photo</label>
+            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Replace photo</label>
             <input
               type="file"
               accept="image/*"
               onChange={(event) => setFile(event.currentTarget.files?.[0] ?? null)}
-              className="w-full text-xs text-zinc-300 file:mr-3 file:rounded file:border-0 file:bg-amber-500 file:px-3 file:py-1.5 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-[#07111d]"
+              className="w-full text-xs text-zinc-700 dark:text-zinc-300 file:mr-3 file:rounded file:border-0 file:bg-accent file:px-3 file:py-1.5 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-accent-fg"
             />
             {onRemovePhoto ? (
               <button
@@ -169,7 +169,7 @@ export function EditBobbleheadDialog({
             <button
               type="submit"
               disabled={isBusy}
-              className="flex-1 rounded-lg bg-amber-500 px-3 py-2.5 text-sm font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300 disabled:opacity-60"
+              className="flex-1 rounded-lg bg-accent px-3 py-2.5 text-sm font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover disabled:opacity-60"
             >
               {isSaving ? "Saving…" : "Save"}
             </button>
@@ -177,14 +177,14 @@ export function EditBobbleheadDialog({
               type="button"
               onClick={close}
               disabled={isBusy}
-              className="rounded-lg border border-white/15 px-4 py-2.5 text-sm font-bold text-zinc-300 transition hover:border-amber-400/60 disabled:opacity-60"
+              className="rounded-lg border border-black/10 px-4 py-2.5 text-sm font-bold text-zinc-700 transition hover:border-accent/60 disabled:opacity-60 dark:border-white/15 dark:text-zinc-300"
             >
               Cancel
             </button>
           </div>
         </form>
 
-        <div className="mt-5 border-t border-white/10 pt-4">
+        <div className="mt-5 border-t border-black/10 pt-4 dark:border-white/10">
           {isConfirmingDelete ? (
             <div className="rounded-lg border border-red-500/40 bg-red-500/10 p-3">
               <p className="text-xs font-bold text-red-200">
@@ -215,7 +215,7 @@ export function EditBobbleheadDialog({
                   type="button"
                   disabled={isBusy}
                   onClick={() => setIsConfirmingDelete(false)}
-                  className="rounded-lg border border-white/15 px-4 py-2 text-xs font-bold text-zinc-300 transition hover:border-amber-400/60 disabled:opacity-60"
+                  className="rounded-lg border border-black/10 px-4 py-2 text-xs font-bold text-zinc-700 transition hover:border-accent/60 disabled:opacity-60 dark:border-white/15 dark:text-zinc-300"
                 >
                   Keep it
                 </button>

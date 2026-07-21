@@ -9,7 +9,7 @@ import { AdminUserProfile } from "./AdminUserProfile";
 // prerender, same as the community listing page.
 export default function AdminUserProfilePage() {
   return (
-    <Suspense fallback={<main className="min-h-full bg-[#15110d]" />}>
+    <Suspense fallback={<main className="min-h-full bg-slate-50 dark:bg-[#15110d]" />}>
       <AdminUserProfile />
     </Suspense>
   );

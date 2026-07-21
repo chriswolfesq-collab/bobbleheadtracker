@@ -35,7 +35,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             <div
               key={toast.id}
               role="alert"
-              className="pointer-events-auto rounded-lg border border-red-400/40 bg-[#2a1013]/95 px-4 py-3 text-sm font-semibold text-red-200 shadow-2xl backdrop-blur"
+              className="pointer-events-auto rounded-lg border border-red-400/40 bg-red-50 px-4 py-3 text-sm font-semibold text-red-800 shadow-2xl backdrop-blur dark:bg-[#2a1013]/95 dark:text-red-200"
             >
               {toast.message}
             </div>

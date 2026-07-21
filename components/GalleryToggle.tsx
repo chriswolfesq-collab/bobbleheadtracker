@@ -23,13 +23,13 @@ export function GalleryToggle({ gallery }: { gallery: GallerySharing }) {
   if (isLoading) return null;
 
   return (
-    <div className="mb-8 rounded-2xl border border-white/10 bg-white/5 p-4">
+    <div className="mb-8 rounded-2xl border border-black/10 bg-black/[0.04] p-4 dark:border-white/10 dark:bg-white/5">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
+          <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-600 dark:text-zinc-400">
             Show my items
           </h2>
-          <p className="mt-1.5 text-sm text-zinc-400">
+          <p className="mt-1.5 text-sm text-zinc-600 dark:text-zinc-400">
             {enabled
               ? "Your public shelf shows the bobbleheads you own and your favorites, not just the counts."
               : "Turn this on to show the actual bobbleheads you own and your favorites on your public shelf, not just the counts."}
@@ -44,7 +44,7 @@ export function GalleryToggle({ gallery }: { gallery: GallerySharing }) {
           disabled={isSaving}
           onClick={handleToggle}
           className={`relative h-6 w-11 flex-shrink-0 rounded-full transition disabled:opacity-60 ${
-            enabled ? "bg-amber-400" : "bg-white/15"
+            enabled ? "bg-accent" : "bg-black/[0.08] dark:bg-white/15"
           }`}
         >
           <span

@@ -30,7 +30,7 @@ export function BobbleheadImage({
       {loaded ? null : (
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-0 animate-pulse rounded bg-white/[0.06]"
+          className="pointer-events-none absolute inset-0 animate-pulse rounded bg-black/[0.06] dark:bg-white/[0.06]"
         />
       )}
       <Image

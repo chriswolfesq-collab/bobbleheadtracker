@@ -34,11 +34,11 @@ function ReportListingDialog({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-8" onClick={close}>
       <div
-        className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#0b1a2b] p-6 shadow-2xl shadow-black/50"
+        className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50 dark:border-white/10 dark:bg-[#0b1a2b]"
         onClick={(event) => event.stopPropagation()}
       >
-        <h2 className="text-lg font-black text-white">Report this listing</h2>
-        <p className="mt-1 text-xs leading-5 text-zinc-400">
+        <h2 className="text-lg font-black text-zinc-900 dark:text-white">Report this listing</h2>
+        <p className="mt-1 text-xs leading-5 text-zinc-600 dark:text-zinc-400">
           Tell the admin what&apos;s wrong. Reports are reviewed before anything changes.
         </p>
 
@@ -65,11 +65,11 @@ function ReportListingDialog({
           }}
         >
           <div className="grid gap-1.5">
-            <label className="text-xs font-bold text-zinc-300">What&apos;s wrong?</label>
+            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">What&apos;s wrong?</label>
             <select
               value={reason}
               onChange={(event) => setReason(event.target.value as ReportReason)}
-              className="w-full rounded-lg border border-white/15 bg-[#07111d] px-3 py-2.5 text-sm font-semibold text-white outline-none transition focus:border-amber-400"
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
             >
               {REASON_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -79,7 +79,7 @@ function ReportListingDialog({
             </select>
           </div>
           <div className="grid gap-1.5">
-            <label className="text-xs font-bold text-zinc-300">
+            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
               Details {reason === "other" ? "" : "(optional)"}
             </label>
             <textarea
@@ -87,7 +87,7 @@ function ReportListingDialog({
               onChange={(event) => setDetails(event.target.value)}
               rows={3}
               placeholder="Anything that helps the admin fix it"
-              className="w-full rounded-lg border border-white/15 bg-[#07111d] px-3 py-2.5 text-sm text-white outline-none transition focus:border-amber-400"
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
             />
           </div>
 
@@ -97,7 +97,7 @@ function ReportListingDialog({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 rounded-lg bg-amber-500 px-3 py-2.5 text-sm font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300 disabled:opacity-60"
+              className="flex-1 rounded-lg bg-accent px-3 py-2.5 text-sm font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover disabled:opacity-60"
             >
               {isSubmitting ? "Sending…" : "Send report"}
             </button>
@@ -105,7 +105,7 @@ function ReportListingDialog({
               type="button"
               onClick={close}
               disabled={isSubmitting}
-              className="rounded-lg border border-white/15 px-4 py-2.5 text-sm font-bold text-zinc-300 transition hover:border-amber-400/60 disabled:opacity-60"
+              className="rounded-lg border border-black/10 px-4 py-2.5 text-sm font-bold text-zinc-700 transition hover:border-accent/60 disabled:opacity-60 dark:border-white/15 dark:text-zinc-300"
             >
               Cancel
             </button>
@@ -137,7 +137,7 @@ export function ReportListingButton({
   if (isSubmitted) {
     return (
       <span className={className}>
-        <span className="text-xs font-black uppercase tracking-wide text-amber-300">Report sent — thanks</span>
+        <span className="text-xs font-black uppercase tracking-wide text-accent">Report sent — thanks</span>
       </span>
     );
   }

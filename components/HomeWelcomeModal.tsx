@@ -76,7 +76,7 @@ export function HomeWelcomeModal() {
       onClick={dismiss}
     >
       <div
-        className="max-h-full w-full max-w-md overflow-y-auto rounded-2xl border border-white/10 bg-[#0b1a2b] p-6 shadow-2xl shadow-black/50"
+        className="max-h-full w-full max-w-md overflow-y-auto rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50 dark:border-white/10 dark:bg-[#0b1a2b]"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-5 flex flex-col items-center gap-3 text-center">
@@ -97,10 +97,10 @@ export function HomeWelcomeModal() {
             ))}
           </div>
           <div>
-            <h2 id="home-welcome-title" className="text-lg font-black text-white">
+            <h2 id="home-welcome-title" className="text-lg font-black text-zinc-900 dark:text-white">
               Welcome to Bobble Shelf
             </h2>
-            <p className="mt-1 text-xs text-zinc-400">
+            <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
               The home for every MLB stadium giveaway bobblehead.
             </p>
           </div>
@@ -111,13 +111,13 @@ export function HomeWelcomeModal() {
             <li key={feature.title} className="flex items-start gap-3">
               <span
                 aria-hidden
-                className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-sm text-amber-300"
+                className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg border border-black/10 bg-black/[0.04] text-sm text-accent dark:border-white/10 dark:bg-white/5"
               >
                 {feature.icon}
               </span>
               <span className="min-w-0">
-                <span className="block text-sm font-bold text-zinc-100">{feature.title}</span>
-                <span className="text-xs leading-5 text-zinc-400">{feature.body}</span>
+                <span className="block text-sm font-bold text-zinc-900 dark:text-zinc-100">{feature.title}</span>
+                <span className="text-xs leading-5 text-zinc-600 dark:text-zinc-400">{feature.body}</span>
               </span>
             </li>
           ))}
@@ -130,7 +130,7 @@ export function HomeWelcomeModal() {
           <button
             type="button"
             onClick={dismiss}
-            className="mt-5 w-full rounded-lg bg-amber-500 px-3 py-2.5 text-xs font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300"
+            className="mt-5 w-full rounded-lg bg-accent px-3 py-2.5 text-xs font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover"
           >
             Start exploring
           </button>
@@ -142,14 +142,14 @@ export function HomeWelcomeModal() {
                 dismiss();
                 openAuthModal("sign-up");
               }}
-              className="rounded-lg bg-amber-500 px-3 py-2.5 text-xs font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300"
+              className="rounded-lg bg-accent px-3 py-2.5 text-xs font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover"
             >
               Create a free account
             </button>
             <button
               type="button"
               onClick={dismiss}
-              className="text-center text-xs font-bold uppercase tracking-wide text-zinc-500 transition hover:text-zinc-300"
+              className="text-center text-xs font-bold uppercase tracking-wide text-zinc-500 transition hover:text-zinc-700 dark:hover:text-zinc-300"
             >
               Continue without an account
             </button>

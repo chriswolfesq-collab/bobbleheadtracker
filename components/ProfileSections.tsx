@@ -15,7 +15,7 @@ import { computeShelfStats } from "@/lib/shelfStats";
 import { TEAMS } from "@/lib/teams";
 
 const STATUS_STYLES: Record<MySubmission["status"], string> = {
-  pending: "border-amber-400/40 bg-amber-400/10 text-amber-300",
+  pending: "border-accent/40 bg-accent/10 text-accent",
   approved: "border-emerald-400/40 bg-emerald-400/10 text-emerald-300",
   rejected: "border-red-400/40 bg-red-400/10 text-red-300",
 };
@@ -86,7 +86,7 @@ export function ProfileSections({
             onClick={() =>
               document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
             }
-            className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-300 transition hover:border-amber-400 hover:text-amber-300"
+            className="rounded-full border border-black/10 bg-black/[0.04] px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:border-white/15 dark:bg-white/5 dark:text-zinc-300 dark:hover:text-accent-hover"
           >
             {label}
           </button>
@@ -115,11 +115,11 @@ export function ProfileSections({
         </div>
 
         <div className="mb-4 mt-6 flex items-center justify-between gap-3">
-          <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
+          <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-600 dark:text-zinc-400">
             Collection progress
           </h2>
           <div className="flex items-center gap-3">
-            <span className="text-xs font-black tabular-nums text-amber-300">
+            <span className="text-xs font-black tabular-nums text-accent">
               {totalOwned}/{siteTotal}
             </span>
             {displayName && sharing ? (
@@ -136,9 +136,9 @@ export function ProfileSections({
         </div>
 
         <div>
-          <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
+          <div className="h-1.5 overflow-hidden rounded-full bg-black/[0.06] dark:bg-white/10">
             <div
-              className="h-full rounded-full bg-amber-400 transition-all"
+              className="h-full rounded-full bg-accent transition-all"
               style={{ width: `${pctComplete}%` }}
             />
           </div>
@@ -150,15 +150,15 @@ export function ProfileSections({
       </section>
 
       <section id="favorites" className="mb-10 scroll-mt-6">
-        <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
+        <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-600 dark:text-zinc-400">
           Favorites
         </h2>
         {isFavoritesLoading ? (
-          <p className="text-sm text-zinc-400">Loading…</p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
         ) : favorites.length === 0 ? (
-          <p className="text-sm text-zinc-400">No favorites yet.</p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">No favorites yet.</p>
         ) : (
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+          <div className="overflow-hidden rounded-2xl border border-black/10 bg-black/[0.04] dark:border-white/10 dark:bg-white/5">
             {favorites.map((favorite, index) => {
               const team = TEAMS.find((t) => t.slug === favorite.teamSlug);
               const imageSrc = favorite.imageUrl ?? publicAsset(`/bobbleheads/${favorite.teamSlug}.png`);
@@ -167,8 +167,8 @@ export function ProfileSections({
                 <Link
                   key={`${favorite.teamSlug}:${favorite.bobbleheadId}`}
                   href={favorite.href}
-                  className={`flex items-center gap-3 px-4 py-3 text-sm transition hover:bg-white/5 ${
-                    index !== favorites.length - 1 ? "border-b border-white/10" : ""
+                  className={`flex items-center gap-3 px-4 py-3 text-sm transition hover:bg-black/[0.04] dark:hover:bg-white/5 ${
+                    index !== favorites.length - 1 ? "border-b border-black/10 dark:border-white/10" : ""
                   }`}
                 >
                   <Image
@@ -180,7 +180,7 @@ export function ProfileSections({
                     className="h-20 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
                   />
                   <span className="min-w-0">
-                    <span className="block truncate font-bold text-zinc-100">{favorite.title}</span>
+                    <span className="block truncate font-bold text-zinc-900 dark:text-zinc-100">{favorite.title}</span>
                     <span className="text-xs text-zinc-500">{team?.name ?? favorite.teamSlug}</span>
                   </span>
                   <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-red-400">
@@ -194,19 +194,19 @@ export function ProfileSections({
       </section>
 
       <section id="wanted" className="mb-10 scroll-mt-6">
-        <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
+        <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-600 dark:text-zinc-400">
           Wanted
         </h2>
         {isWantedLoading ? (
-          <p className="text-sm text-zinc-400">Loading…</p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
         ) : wanted.length === 0 ? (
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">
             {isOtherUser
               ? "Nothing on this user's wanted list yet."
               : "Nothing on your wanted list yet."}
           </p>
         ) : (
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+          <div className="overflow-hidden rounded-2xl border border-black/10 bg-black/[0.04] dark:border-white/10 dark:bg-white/5">
             {wanted.map((item, index) => {
               const team = TEAMS.find((t) => t.slug === item.teamSlug);
               const imageSrc = item.imageUrl ?? publicAsset(`/bobbleheads/${item.teamSlug}.png`);
@@ -215,8 +215,8 @@ export function ProfileSections({
                 <Link
                   key={`${item.teamSlug}:${item.bobbleheadId}`}
                   href={item.href}
-                  className={`flex items-center gap-3 px-4 py-3 text-sm transition hover:bg-white/5 ${
-                    index !== wanted.length - 1 ? "border-b border-white/10" : ""
+                  className={`flex items-center gap-3 px-4 py-3 text-sm transition hover:bg-black/[0.04] dark:hover:bg-white/5 ${
+                    index !== wanted.length - 1 ? "border-b border-black/10 dark:border-white/10" : ""
                   }`}
                 >
                   <Image
@@ -228,10 +228,10 @@ export function ProfileSections({
                     className="h-20 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
                   />
                   <span className="min-w-0">
-                    <span className="block truncate font-bold text-zinc-100">{item.title}</span>
+                    <span className="block truncate font-bold text-zinc-900 dark:text-zinc-100">{item.title}</span>
                     <span className="text-xs text-zinc-500">{team?.name ?? item.teamSlug}</span>
                   </span>
-                  <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-amber-400">
+                  <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-accent">
                     ★
                   </span>
                 </Link>
@@ -242,22 +242,22 @@ export function ProfileSections({
       </section>
 
       <section id="submissions" className="scroll-mt-6">
-        <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
+        <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-600 dark:text-zinc-400">
           Submissions
         </h2>
         {isSubmissionsLoading ? (
-          <p className="text-sm text-zinc-400">Loading…</p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
         ) : submissions.length === 0 ? (
-          <p className="text-sm text-zinc-400">Nothing submitted yet.</p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">Nothing submitted yet.</p>
         ) : (
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+          <div className="overflow-hidden rounded-2xl border border-black/10 bg-black/[0.04] dark:border-white/10 dark:bg-white/5">
             {submissions.map((submission, index) => {
               const team = TEAMS.find((t) => t.slug === submission.teamSlug);
               const imageSrc =
                 submission.imageUrl ?? publicAsset(`/bobbleheads/${submission.teamSlug}.png`);
               const rowClassName = `flex items-center justify-between gap-3 px-4 py-3 text-sm ${
-                index !== submissions.length - 1 ? "border-b border-white/10" : ""
-              } ${submission.href ? "transition hover:bg-white/5" : ""}`;
+                index !== submissions.length - 1 ? "border-b border-black/10 dark:border-white/10" : ""
+              } ${submission.href ? "transition hover:bg-black/[0.04] dark:hover:bg-white/5" : ""}`;
               const content = (
                 <>
                   <span className="flex min-w-0 items-center gap-3">
@@ -270,7 +270,7 @@ export function ProfileSections({
                       className="h-20 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
                     />
                     <span className="min-w-0">
-                      <span className="block truncate font-bold text-zinc-100">
+                      <span className="block truncate font-bold text-zinc-900 dark:text-zinc-100">
                         {submissionLabel(submission)}
                       </span>
                       <span className="text-xs text-zinc-500">

@@ -47,32 +47,29 @@ export default async function ShelfPage({ params }: ShelfPageProps) {
   return (
     <div
       className="flex min-h-full flex-1 flex-col"
-      style={{
-        background:
-          "radial-gradient(ellipse 80% 50% at 50% -10%, #1b2a4a 0%, #0e1626 45%, #090e1a 100%)",
-      }}
+      style={{ background: "var(--page-gradient)" }}
     >
       <div className="mx-auto w-full max-w-2xl px-4 pb-16 pt-6 sm:px-6">
         <header className="text-center">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-amber-500/80 sm:text-xs">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-accent/80 sm:text-xs">
             MLB Bobblehead Shelf
           </p>
-          <h1 className="mt-2 text-2xl font-black text-white">{displayName}</h1>
+          <h1 className="mt-2 text-2xl font-black text-zinc-900 dark:text-white">{displayName}</h1>
 
           {/* The count is the point of the page: it's what gets posted, what a
               rival collector measures themselves against, and the reason they
               click through. Everything else is supporting detail. */}
-          <p className="mt-6 text-7xl font-black leading-none tabular-nums text-amber-400 sm:text-8xl">
+          <p className="mt-6 text-7xl font-black leading-none tabular-nums text-accent sm:text-8xl">
             {stats.totalOwned}
           </p>
-          <p className="mt-2 text-sm font-black uppercase tracking-[0.3em] text-zinc-300">
+          <p className="mt-2 text-sm font-black uppercase tracking-[0.3em] text-zinc-700 dark:text-zinc-300">
             Bobbleheads
           </p>
 
           <div className="mx-auto mt-6 max-w-sm">
-            <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
+            <div className="h-1.5 overflow-hidden rounded-full bg-black/[0.06] dark:bg-white/10">
               <div
-                className="h-full rounded-full bg-amber-400"
+                className="h-full rounded-full bg-accent"
                 style={{ width: `${stats.pctComplete}%` }}
               />
             </div>
@@ -95,15 +92,15 @@ export default async function ShelfPage({ params }: ShelfPageProps) {
 
         {/* The whole reason the page is public. Whoever is reading this arrived
             from someone else's post, so the ask is to go build their own. */}
-        <div className="mt-10 rounded-2xl border border-amber-400/30 bg-amber-400/5 p-6 text-center">
-          <p className="text-lg font-black text-white">Think your shelf beats this?</p>
-          <p className="mx-auto mt-1.5 max-w-sm text-sm text-zinc-400">
+        <div className="mt-10 rounded-2xl border border-accent/30 bg-accent/5 p-6 text-center">
+          <p className="text-lg font-black text-zinc-900 dark:text-white">Think your shelf beats this?</p>
+          <p className="mx-auto mt-1.5 max-w-sm text-sm text-zinc-600 dark:text-zinc-400">
             Track every stadium giveaway bobblehead across all 30 teams, then put your own count up
             here.
           </p>
           <Link
             href="/"
-            className="mt-5 inline-block rounded-full bg-amber-400 px-6 py-3 text-xs font-black uppercase tracking-wide text-[#0e1626] transition hover:bg-amber-300"
+            className="mt-5 inline-block rounded-full bg-accent px-6 py-3 text-xs font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover"
           >
             Build your shelf
           </Link>

@@ -21,13 +21,13 @@ export function AuthWidget({
   if (user) {
     return (
       <div className={`flex items-center gap-3 text-sm ${className ?? ""}`}>
-        <span className="font-semibold text-zinc-200">{getDisplayName(user)}</span>
+        <span className="font-semibold text-zinc-800 dark:text-zinc-200">{getDisplayName(user)}</span>
         {hideSettingsLink ? null : (
           <Link
             href="/settings"
             aria-label="Settings"
             title="Settings"
-            className="flex items-center rounded border border-white/20 px-2 py-1.5 text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+            className="flex items-center rounded border border-black/15 px-2 py-1.5 text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
           >
             <svg
               aria-hidden
@@ -47,7 +47,7 @@ export function AuthWidget({
         {hideProfileLink ? null : (
           <Link
             href="/profile"
-            className="rounded border border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+            className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
           >
             Profile
           </Link>
@@ -55,7 +55,7 @@ export function AuthWidget({
         <button
           type="button"
           onClick={() => signOut()}
-          className="rounded border border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+          className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
         >
           Log out
         </button>
@@ -67,7 +67,7 @@ export function AuthWidget({
     <button
       type="button"
       onClick={() => openAuthModal("sign-in")}
-      className={`rounded border border-amber-400 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d] ${className ?? ""}`}
+      className={`rounded border border-accent px-3 py-1.5 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg ${className ?? ""}`}
     >
       Log in
     </button>

@@ -56,18 +56,18 @@ export function AuthModal() {
       onClick={resetAndClose}
     >
       <div
-        className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#0b1a2b] p-6 shadow-2xl shadow-black/50"
+        className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50 dark:border-white/10 dark:bg-[#0b1a2b]"
         onClick={(event) => event.stopPropagation()}
       >
         {confirmationSent ? (
           <div className="grid gap-4 text-center">
-            <p className="text-sm leading-6 text-zinc-200">
+            <p className="text-sm leading-6 text-zinc-800 dark:text-zinc-200">
               Check your email to confirm your account, then log in.
             </p>
             <button
               type="button"
               onClick={resetAndClose}
-              className="mx-auto rounded border border-white/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-300"
+              className="mx-auto rounded border border-black/10 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-700 dark:border-white/15 dark:text-zinc-300"
             >
               Close
             </button>
@@ -75,14 +75,14 @@ export function AuthModal() {
         ) : (
           <>
             <div className="mb-5 flex flex-col items-center gap-3 text-center">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-400 text-lg font-black text-[#07111d]">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-lg font-black text-accent-fg">
                 🏆
               </div>
               <div>
-                <h2 className="text-lg font-black text-white">
+                <h2 className="text-lg font-black text-zinc-900 dark:text-white">
                   {mode === "sign-in" ? "Sign in" : "Create your account"}
                 </h2>
-                <p className="mt-1 text-xs text-zinc-400">
+                <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
                   {mode === "sign-in"
                     ? "Welcome back! Please sign in to continue."
                     : "Welcome! Please fill in the details to get started."}
@@ -95,7 +95,7 @@ export function AuthModal() {
                 type="button"
                 onClick={() => handleOAuth("google")}
                 disabled={oauthLoading !== null}
-                className="flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-bold text-zinc-100 transition hover:border-amber-400/60 hover:bg-white/10 disabled:opacity-60"
+                className="flex items-center justify-center gap-2 rounded-lg border border-black/10 bg-black/[0.04] px-3 py-2.5 text-sm font-bold text-zinc-900 transition hover:border-accent/60 hover:bg-black/[0.06] disabled:opacity-60 dark:border-white/15 dark:bg-white/5 dark:text-zinc-100 dark:hover:bg-white/10"
               >
                 <GoogleIcon />
                 {oauthLoading === "google" ? "Connecting…" : "Continue with Google"}
@@ -104,7 +104,7 @@ export function AuthModal() {
                 type="button"
                 onClick={() => handleOAuth("github")}
                 disabled={oauthLoading !== null}
-                className="flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 px-3 py-2.5 text-sm font-bold text-zinc-100 transition hover:border-amber-400/60 hover:bg-white/10 disabled:opacity-60"
+                className="flex items-center justify-center gap-2 rounded-lg border border-black/10 bg-black/[0.04] px-3 py-2.5 text-sm font-bold text-zinc-900 transition hover:border-accent/60 hover:bg-black/[0.06] disabled:opacity-60 dark:border-white/15 dark:bg-white/5 dark:text-zinc-100 dark:hover:bg-white/10"
               >
                 <GithubIcon />
                 {oauthLoading === "github" ? "Connecting…" : "Continue with GitHub"}
@@ -112,9 +112,9 @@ export function AuthModal() {
             </div>
 
             <div className="my-4 flex items-center gap-3">
-              <div className="h-px flex-1 bg-white/10" />
+              <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
               <span className="text-xs uppercase tracking-wide text-zinc-500">or</span>
-              <div className="h-px flex-1 bg-white/10" />
+              <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
             </div>
 
             <form
@@ -160,7 +160,7 @@ export function AuthModal() {
             >
               {mode === "sign-up" ? (
                 <div className="grid gap-1.5">
-                  <label className="text-xs font-bold text-zinc-300">Your name</label>
+                  <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Your name</label>
                   <input
                     required
                     type="text"
@@ -168,23 +168,23 @@ export function AuthModal() {
                     value={displayName}
                     onChange={(event) => setDisplayName(event.target.value)}
                     placeholder="Enter your name"
-                    className="w-full rounded-lg border border-white/15 bg-[#07111d] px-3 py-2.5 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
+                    className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
                   />
                 </div>
               ) : null}
               <div className="grid gap-1.5">
-                <label className="text-xs font-bold text-zinc-300">Email address</label>
+                <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Email address</label>
                 <input
                   required
                   type="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder="Enter your email address"
-                  className="w-full rounded-lg border border-white/15 bg-[#07111d] px-3 py-2.5 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
+                  className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
                 />
               </div>
               <div className="grid gap-1.5">
-                <label className="text-xs font-bold text-zinc-300">Password</label>
+                <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Password</label>
                 <input
                   required
                   type="password"
@@ -192,17 +192,17 @@ export function AuthModal() {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   placeholder="Enter your password"
-                  className="w-full rounded-lg border border-white/15 bg-[#07111d] px-3 py-2.5 text-sm font-semibold text-white outline-none transition placeholder:text-zinc-500 focus:border-amber-400"
+                  className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
                 />
               </div>
               {mode === "sign-up" ? (
-                <label className="flex items-start gap-2 text-xs text-zinc-300">
+                <label className="flex items-start gap-2 text-xs text-zinc-700 dark:text-zinc-300">
                   <input
                     required
                     type="checkbox"
                     checked={acceptedTerms}
                     onChange={(event) => setAcceptedTerms(event.target.checked)}
-                    className="mt-0.5 h-3.5 w-3.5 shrink-0 rounded border-white/30 bg-[#07111d] accent-amber-400"
+                    className="mt-0.5 h-3.5 w-3.5 shrink-0 rounded border-black/20 bg-white accent-accent dark:border-white/30 dark:bg-[#07111d]"
                   />
                   <span>
                     I accept the{" "}
@@ -210,7 +210,7 @@ export function AuthModal() {
                       href="/terms"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-bold text-amber-300 hover:text-amber-200"
+                      className="font-bold text-accent hover:text-accent-hover"
                     >
                       Terms of Service
                     </Link>
@@ -221,13 +221,13 @@ export function AuthModal() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-1 rounded-lg bg-amber-500 px-3 py-2.5 text-sm font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300 disabled:opacity-60"
+                className="mt-1 rounded-lg bg-accent px-3 py-2.5 text-sm font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover disabled:opacity-60"
               >
                 {isSubmitting ? "Please wait…" : "Continue"}
               </button>
             </form>
 
-            <div className="mt-5 border-t border-white/10 pt-4 text-center text-xs text-zinc-400">
+            <div className="mt-5 border-t border-black/10 pt-4 text-center text-xs text-zinc-600 dark:border-white/10 dark:text-zinc-400">
               {mode === "sign-in" ? "Don't have an account?" : "Already have an account?"}{" "}
               <button
                 type="button"
@@ -235,7 +235,7 @@ export function AuthModal() {
                   setError(null);
                   openAuthModal(mode === "sign-in" ? "sign-up" : "sign-in");
                 }}
-                className="font-bold text-amber-300 hover:text-amber-200"
+                className="font-bold text-accent hover:text-accent-hover"
               >
                 {mode === "sign-in" ? "Sign up" : "Sign in"}
               </button>
@@ -244,7 +244,7 @@ export function AuthModal() {
             <button
               type="button"
               onClick={resetAndClose}
-              className="mt-3 w-full text-center text-xs font-bold uppercase tracking-wide text-zinc-500 hover:text-zinc-300"
+              className="mt-3 w-full text-center text-xs font-bold uppercase tracking-wide text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
             >
               Cancel
             </button>

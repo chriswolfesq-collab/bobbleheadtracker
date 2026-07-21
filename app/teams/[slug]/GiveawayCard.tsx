@@ -154,7 +154,7 @@ export function GiveawayCard({
   const imageSrc = giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
 
   return (
-    <article className="relative overflow-hidden rounded-lg border border-white/10 bg-[#102032] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+    <article className="relative overflow-hidden rounded-lg border border-black/10 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] dark:border-white/10 dark:bg-[#102032]">
       <button
         type="button"
         aria-pressed={isOwned}
@@ -166,7 +166,7 @@ export function GiveawayCard({
         }
         title={isLoggedIn ? (isOwned ? "Remove as owned" : "Mark as owned") : "Log in to track"}
         onClick={() => toggleOwned(giveaway.id)}
-        className="absolute left-3 top-3 z-10 grid h-6 w-6 place-items-center rounded border border-zinc-300/80 bg-[#0a1522]/80 text-xs text-zinc-200 transition hover:border-amber-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 disabled:cursor-not-allowed enabled:cursor-pointer"
+        className="absolute left-3 top-3 z-10 grid h-6 w-6 place-items-center rounded border border-zinc-300/80 bg-white/80 text-xs text-zinc-800 transition hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed enabled:cursor-pointer dark:bg-[#0a1522]/80 dark:text-zinc-200"
       >
         {isOwned ? (
           <span className="grid h-full w-full place-items-center rounded bg-green-500 font-black text-[#06110a]">
@@ -190,7 +190,7 @@ export function GiveawayCard({
         />
       </div>
 
-      <Link href={href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">
+      <Link href={href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
         <div className="relative flex h-32 items-end justify-center bg-[radial-gradient(circle_at_50%_22%,rgba(255,255,255,0.14),rgba(255,255,255,0)_42%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.22))] px-3 pt-4 sm:h-52 sm:px-4 sm:pt-6">
           <BobbleheadImage
             src={imageSrc}
@@ -204,11 +204,11 @@ export function GiveawayCard({
         </div>
       </Link>
 
-      <div className="border-t border-white/[0.04] bg-[#0d1a29]/70 px-2.5 pb-2.5 pt-2.5 text-center sm:min-h-40 sm:px-4 sm:pb-3 sm:pt-3">
-        <h2 className="text-xs font-bold leading-tight text-white sm:text-base">
+      <div className="border-t border-black/[0.06] bg-slate-50 px-2.5 pb-2.5 pt-2.5 text-center dark:border-white/[0.04] dark:bg-[#0d1a29]/70 sm:min-h-40 sm:px-4 sm:pb-3 sm:pt-3">
+        <h2 className="text-xs font-bold leading-tight text-zinc-900 dark:text-white sm:text-base">
           {fullTitle}
         </h2>
-        <p className="mt-1.5 text-[11px] text-zinc-300 sm:mt-3 sm:text-sm">{giveaway.date}</p>
+        <p className="mt-1.5 text-[11px] text-zinc-700 dark:text-zinc-300 sm:mt-3 sm:text-sm">{giveaway.date}</p>
 
         <div className="mt-2 sm:mt-3">
           <button
@@ -218,7 +218,7 @@ export function GiveawayCard({
             className={`w-full rounded px-2 py-2 text-[10px] font-bold uppercase tracking-wide transition disabled:cursor-not-allowed disabled:opacity-50 sm:text-xs ${
               isOwned
                 ? "bg-green-500 text-[#06110a] hover:bg-green-400"
-                : "border border-amber-400 text-amber-300 hover:bg-amber-400 hover:text-[#07111d]"
+                : "border border-accent text-accent hover:bg-accent-hover hover:text-accent-fg"
             }`}
             onClick={() => toggleOwned(giveaway.id)}
           >

@@ -10,7 +10,7 @@ function NotificationBadge({ count }: { count: number }) {
   if (count <= 0) return null;
 
   return (
-    <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[11px] font-black text-white ring-2 ring-[#15110d]">
+    <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[11px] font-black text-white ring-2 ring-slate-50 dark:ring-[#15110d]">
       {count > 99 ? "99+" : count}
     </span>
   );
@@ -71,7 +71,7 @@ export default function AdminPage() {
 
   if (!user) {
     return (
-      <main className="min-h-full bg-[#15110d] px-4 py-10 text-zinc-100">
+      <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-zinc-900 dark:text-zinc-100">
         <AdminLoginForm />
       </main>
     );
@@ -79,13 +79,13 @@ export default function AdminPage() {
 
   if (!isAdmin) {
     return (
-      <main className="min-h-full bg-[#15110d] px-4 py-10 text-center text-zinc-100">
-        <p className="text-sm font-black uppercase tracking-wide text-zinc-100">Not authorized</p>
-        <p className="mt-2 text-sm text-zinc-400">{user.email} isn&apos;t an approved admin account.</p>
+      <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-center text-zinc-900 dark:text-zinc-100">
+        <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">Not authorized</p>
+        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{user.email} isn&apos;t an approved admin account.</p>
         <button
           type="button"
           onClick={() => signOut()}
-          className="mt-6 rounded border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+          className="mt-6 rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
         >
           Log out
         </button>
@@ -94,15 +94,15 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="min-h-full bg-[#15110d] px-4 py-10 text-zinc-100">
+    <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-zinc-900 dark:text-zinc-100">
       <div className="mx-auto max-w-2xl">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-black uppercase tracking-wide">Admin mode</h1>
-            <p className="mt-1 text-sm text-zinc-400">Signed in as {user.email}</p>
+            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Signed in as {user.email}</p>
             <Link
               href="/"
-              className="mt-2 inline-block text-xs font-bold text-amber-300 hover:text-amber-200"
+              className="mt-2 inline-block text-xs font-bold text-accent hover:text-accent-hover dark:hover:text-accent-hover"
             >
               ← Back to Bobble Shelf
             </Link>
@@ -110,7 +110,7 @@ export default function AdminPage() {
           <button
             type="button"
             onClick={() => signOut()}
-            className="rounded border border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
+            className="rounded border border-black/15 dark:border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
           >
             Log out
           </button>
@@ -119,61 +119,61 @@ export default function AdminPage() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           <Link
             href="/admin/review"
-            className="relative rounded-lg border border-white/10 bg-[#0b1a29] p-5 transition hover:border-amber-400/60"
+            className="relative rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-5 transition hover:border-accent/60"
           >
             <NotificationBadge count={pendingSubmissions} />
-            <p className="text-sm font-black uppercase tracking-wide text-white">Review submissions</p>
-            <p className="mt-2 text-sm text-zinc-400">Approve or deny pending photo and bobblehead submissions.</p>
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Review submissions</p>
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Approve or deny pending photo and bobblehead submissions.</p>
           </Link>
           <Link
             href="/admin/reports"
-            className="relative rounded-lg border border-white/10 bg-[#0b1a29] p-5 transition hover:border-amber-400/60"
+            className="relative rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-5 transition hover:border-accent/60"
           >
             <NotificationBadge count={pendingReports} />
-            <p className="text-sm font-black uppercase tracking-wide text-white">Listing reports</p>
-            <p className="mt-2 text-sm text-zinc-400">Resolve or dismiss reports that a listing has wrong info.</p>
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Listing reports</p>
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Resolve or dismiss reports that a listing has wrong info.</p>
           </Link>
           <Link
             href="/admin/dead-images"
-            className="relative rounded-lg border border-white/10 bg-[#0b1a29] p-5 transition hover:border-amber-400/60"
+            className="relative rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-5 transition hover:border-accent/60"
           >
             <NotificationBadge count={openDeadImages} />
-            <p className="text-sm font-black uppercase tracking-wide text-white">Dead images</p>
-            <p className="mt-2 text-sm text-zinc-400">Fix listing photos the nightly sweep couldn&apos;t load.</p>
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Dead images</p>
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Fix listing photos the nightly sweep couldn&apos;t load.</p>
           </Link>
           <Link
             href="/admin/scraped-giveaways"
-            className="relative rounded-lg border border-white/10 bg-[#0b1a29] p-5 transition hover:border-amber-400/60"
+            className="relative rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-5 transition hover:border-accent/60"
           >
             <NotificationBadge count={pendingScraped} />
-            <p className="text-sm font-black uppercase tracking-wide text-white">New giveaways</p>
-            <p className="mt-2 text-sm text-zinc-400">Review bobblehead promos the scraper found on team schedule pages.</p>
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">New giveaways</p>
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Review bobblehead promos the scraper found on team schedule pages.</p>
           </Link>
           <Link
             href="/"
-            className="rounded-lg border border-white/10 bg-[#0b1a29] p-5 transition hover:border-amber-400/60"
+            className="rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-5 transition hover:border-accent/60"
           >
-            <p className="text-sm font-black uppercase tracking-wide text-white">Edit bobbleheads</p>
-            <p className="mt-2 text-sm text-zinc-400">
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Edit bobbleheads</p>
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
               Browse to any team or bobblehead page — an Edit button now appears there.
             </p>
           </Link>
           <Link
             href="/admin/users"
-            className="rounded-lg border border-white/10 bg-[#0b1a29] p-5 transition hover:border-amber-400/60"
+            className="rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-5 transition hover:border-accent/60"
           >
-            <p className="text-sm font-black uppercase tracking-wide text-white">Manage users</p>
-            <p className="mt-2 text-sm text-zinc-400">
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Manage users</p>
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
               Review every account, edit display names, remove a user, or email one, a group, or
               everyone.
             </p>
           </Link>
           <Link
             href="/admin/stats"
-            className="rounded-lg border border-white/10 bg-[#0b1a29] p-5 transition hover:border-amber-400/60"
+            className="rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-5 transition hover:border-accent/60"
           >
-            <p className="text-sm font-black uppercase tracking-wide text-white">Site stats</p>
-            <p className="mt-2 text-sm text-zinc-400">User growth, collection totals, queue throughput, and top teams.</p>
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Site stats</p>
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">User growth, collection totals, queue throughput, and top teams.</p>
           </Link>
         </div>
       </div>

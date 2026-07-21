@@ -32,8 +32,8 @@ export function WantedButton({
       }}
       className={`grid place-items-center rounded-full border transition ${
         isWanted
-          ? "border-amber-400 bg-amber-400/20 text-amber-400"
-          : "border-zinc-300/80 bg-[#0a1522]/80 text-zinc-300 hover:border-amber-400 hover:text-amber-400"
+          ? "border-accent bg-accent/20 text-accent"
+          : "border-zinc-400/80 bg-white/80 text-zinc-700 hover:border-accent hover:text-accent-hover dark:border-zinc-300/80 dark:bg-[#0a1522]/80 dark:text-zinc-300"
       } ${className}`}
     >
       <span aria-hidden>{isWanted ? "★" : "☆"}</span>

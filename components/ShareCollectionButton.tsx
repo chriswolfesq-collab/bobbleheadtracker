@@ -197,10 +197,10 @@ export function ShareCollectionButton({
         type="button"
         onClick={() => setIsOpen(true)}
         disabled={isLoading}
-        className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-black uppercase tracking-wide transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-60 ${
+        className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-black uppercase tracking-wide transition disabled:opacity-60 ${
           variant === "overlay"
-            ? "border-amber-400/40 bg-[#101827]/90 text-amber-100 shadow-lg backdrop-blur-sm"
-            : "border-white/15 bg-white/5 text-zinc-300"
+            ? "border-amber-400/40 bg-[#101827]/90 text-amber-100 shadow-lg backdrop-blur-sm hover:border-amber-400 hover:text-amber-300"
+            : "border-black/10 bg-black/[0.04] text-zinc-700 hover:border-accent hover:text-accent-hover dark:border-white/15 dark:bg-white/5 dark:text-zinc-300 dark:hover:text-accent-hover"
         }`}
       >
         <span aria-hidden>↗</span>
@@ -217,12 +217,12 @@ export function ShareCollectionButton({
             aria-modal="true"
             aria-label="Share your shelf"
             onClick={(event) => event.stopPropagation()}
-            className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#101827] p-5 text-left shadow-2xl"
+            className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-5 text-left shadow-2xl dark:border-white/10 dark:bg-[#101827]"
           >
-            <p className="text-[11px] font-black uppercase tracking-[0.25em] text-zinc-400">
+            <p className="text-[11px] font-black uppercase tracking-[0.25em] text-zinc-600 dark:text-zinc-400">
               Share your shelf
             </p>
-            <p className="mt-2 text-2xl font-black text-white">
+            <p className="mt-2 text-2xl font-black text-zinc-900 dark:text-white">
               {stats.totalOwned} bobbleheads
             </p>
             <p className="mt-1 text-xs font-bold text-zinc-500">
@@ -237,7 +237,7 @@ export function ShareCollectionButton({
                     <button
                       type="button"
                       onClick={handleNativeShare}
-                      className="flex-1 rounded-lg bg-amber-400 px-3 py-2.5 text-[11px] font-black uppercase tracking-wide text-[#0e1626] transition hover:bg-amber-300"
+                      className="flex-1 rounded-lg bg-accent px-3 py-2.5 text-[11px] font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover"
                     >
                       Share…
                     </button>
@@ -249,7 +249,7 @@ export function ShareCollectionButton({
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => setIsOpen(false)}
-                      className="flex-1 rounded-lg border border-white/15 px-3 py-2.5 text-center text-[11px] font-black uppercase tracking-wide text-zinc-300 transition hover:border-amber-400 hover:text-amber-300"
+                      className="flex-1 rounded-lg border border-black/10 px-3 py-2.5 dark:border-white/15 text-center text-[11px] font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:text-zinc-300 dark:hover:text-accent-hover"
                     >
                       {target.name}
                     </a>
@@ -260,7 +260,7 @@ export function ShareCollectionButton({
                   <button
                     type="button"
                     onClick={handleCopy}
-                    className="flex-1 rounded-lg border border-white/15 px-3 py-2.5 text-[11px] font-black uppercase tracking-wide text-zinc-300 transition hover:border-amber-400 hover:text-amber-300"
+                    className="flex-1 rounded-lg border border-black/10 px-3 py-2.5 dark:border-white/15 text-[11px] font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:text-zinc-300 dark:hover:text-accent-hover"
                   >
                     {didCopy ? "Copied" : "Copy link"}
                   </button>
@@ -271,7 +271,7 @@ export function ShareCollectionButton({
                     type="button"
                     onClick={handleSaveImage}
                     disabled={isBusy}
-                    className="flex-1 rounded-lg border border-white/15 px-3 py-2.5 text-[11px] font-black uppercase tracking-wide text-zinc-300 transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-60"
+                    className="flex-1 rounded-lg border border-black/10 px-3 py-2.5 dark:border-white/15 text-[11px] font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:text-zinc-300 dark:hover:text-accent-hover disabled:opacity-60"
                   >
                     {isBusy ? "Building…" : "Save image"}
                   </button>
@@ -283,7 +283,7 @@ export function ShareCollectionButton({
               </>
             ) : (
               <>
-                <p className="mt-4 text-sm text-zinc-400">
+                <p className="mt-4 text-sm text-zinc-600 dark:text-zinc-400">
                   Your shelf is private. Turn it on to get a link that shows your collection and
                   your count.
                 </p>
@@ -291,7 +291,7 @@ export function ShareCollectionButton({
                   type="button"
                   onClick={handleMakePublic}
                   disabled={isSaving}
-                  className="mt-4 w-full rounded-lg bg-amber-400 px-3 py-2.5 text-[11px] font-black uppercase tracking-wide text-[#0e1626] transition hover:bg-amber-300 disabled:opacity-60"
+                  className="mt-4 w-full rounded-lg bg-accent px-3 py-2.5 text-[11px] font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover disabled:opacity-60"
                 >
                   {isSaving ? "Turning on…" : "Make my shelf public"}
                 </button>
@@ -299,7 +299,7 @@ export function ShareCollectionButton({
                   type="button"
                   onClick={handleSaveImage}
                   disabled={isBusy}
-                  className="mt-2 w-full rounded-lg border border-white/15 px-3 py-2.5 text-[11px] font-black uppercase tracking-wide text-zinc-300 transition hover:border-amber-400 hover:text-amber-300 disabled:opacity-60"
+                  className="mt-2 w-full rounded-lg border border-black/10 px-3 py-2.5 dark:border-white/15 text-[11px] font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:text-zinc-300 dark:hover:text-accent-hover disabled:opacity-60"
                 >
                   {isBusy ? "Building…" : "Just save the image"}
                 </button>

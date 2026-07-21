@@ -16,8 +16,8 @@ export function ToggleChip({
       onClick={onClick}
       className={`rounded border px-3 py-2 text-sm font-semibold transition ${
         active
-          ? "border-amber-400 bg-amber-400/15 text-amber-300"
-          : "border-white/15 bg-[#07111d] text-zinc-300 hover:border-amber-400/60 hover:text-amber-300"
+          ? "border-accent bg-accent/15 text-accent"
+          : "border-black/10 bg-white text-zinc-700 hover:border-accent/60 hover:text-accent-hover dark:border-white/15 dark:bg-[#07111d] dark:text-zinc-300 dark:hover:text-accent-hover"
       }`}
     >
       {label}

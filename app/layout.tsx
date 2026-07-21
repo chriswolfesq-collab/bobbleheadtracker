@@ -5,7 +5,14 @@ import { RequireDisplayNameGate } from "@/components/RequireDisplayNameGate";
 import { ToastProvider } from "@/components/Toast";
 import { AdminAuthProvider } from "@/lib/adminAuth";
 import { AuthProvider } from "@/lib/auth";
+import { ThemeProvider } from "@/lib/theme";
 import "./globals.css";
+
+// Runs synchronously in <head> before first paint so the correct theme class is
+// on <html> before any pixels render — otherwise a saved/forced dark theme would
+// flash the light default (or vice-versa) on every load. Kept as a raw string in
+// sync with lib/theme.tsx (THEME_STORAGE_KEY / THEME_DARK_CLASS).
+const noFlashThemeScript = `(function(){try{var p=localStorage.getItem("bobbleshelf-theme");var d=p==="dark"||((p==="system"||!p)&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d);}catch(e){}})();`;
 
 // Resolves the relative og:image from /shelf/<slug> into an absolute URL, which
 // crawlers require. It has to follow the deployment: pinned to bobbleshelf.com,
@@ -31,17 +38,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: noFlashThemeScript }} />
+      </head>
       <body className="min-h-full flex flex-col">
-        <AuthProvider>
-          <AdminAuthProvider>
-            <ToastProvider>
-              <RequireDisplayNameGate>{children}</RequireDisplayNameGate>
-            </ToastProvider>
-          </AdminAuthProvider>
-          <AuthModal />
-        </AuthProvider>
-        <BackToTopButton />
+        <ThemeProvider>
+          <AuthProvider>
+            <AdminAuthProvider>
+              <ToastProvider>
+                <RequireDisplayNameGate>{children}</RequireDisplayNameGate>
+              </ToastProvider>
+            </AdminAuthProvider>
+            <AuthModal />
+          </AuthProvider>
+          <BackToTopButton />
+        </ThemeProvider>
       </body>
     </html>
   );
