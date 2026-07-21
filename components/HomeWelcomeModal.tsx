@@ -26,7 +26,7 @@ const FEATURES: { icon: string; title: string; body: string }[] = [
   {
     icon: "🏆",
     title: "Track what you own",
-    body: "Create a free account to mark your collection, star favorites, and build a wanted list.",
+    body: "Create a free account to mark your collection, heart favorites, and build a wanted list.",
   },
   {
     icon: "🎉",

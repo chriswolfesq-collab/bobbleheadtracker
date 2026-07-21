@@ -18,12 +18,12 @@ const FEATURES: { icon: string; title: string; body: string }[] = [
     body: "Mark the bobbleheads you own across every team and watch your progress fill in.",
   },
   {
-    icon: "★",
+    icon: "♥",
     title: "Favorites",
-    body: "Star the ones you love to keep them a tap away.",
+    body: "Heart the ones you love to keep them a tap away.",
   },
   {
-    icon: "♥",
+    icon: "★",
     title: "Wanted list",
     body: "Build a wishlist of the bobbleheads you're still hunting for.",
   },

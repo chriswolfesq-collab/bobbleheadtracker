@@ -183,8 +183,8 @@ export function ProfileSections({
                     <span className="block truncate font-bold text-zinc-100">{favorite.title}</span>
                     <span className="text-xs text-zinc-500">{team?.name ?? favorite.teamSlug}</span>
                   </span>
-                  <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-amber-400">
-                    ★
+                  <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-red-400">
+                    ♥
                   </span>
                 </Link>
               );
@@ -231,8 +231,8 @@ export function ProfileSections({
                     <span className="block truncate font-bold text-zinc-100">{item.title}</span>
                     <span className="text-xs text-zinc-500">{team?.name ?? item.teamSlug}</span>
                   </span>
-                  <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-red-400">
-                    ♥
+                  <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-amber-400">
+                    ★
                   </span>
                 </Link>
               );
