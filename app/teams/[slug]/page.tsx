@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
 import { TEAMS, getTeamBySlug } from "@/lib/teams";
@@ -38,6 +39,32 @@ const establishedBySlug: Record<string, string> = {
 
 export function generateStaticParams() {
   return TEAMS.map((team) => ({ slug: team.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const team = getTeamBySlug(slug);
+
+  if (!team) return { title: "Team not found" };
+
+  const count = getGiveawaysByTeamSlug(slug).length;
+  const name = `${team.city} ${team.name}`;
+  const title = `${name} bobbleheads — ${count} stadium giveaways`;
+  const description = `Every ${name} SGA bobblehead giveaway, tracked. ${count} in the database. Track the ones you own.`;
+
+  return {
+    title,
+    description,
+    // The image itself comes from opengraph-image.tsx alongside this file:
+    // file-based metadata outranks anything declared here, so the og:image tag
+    // is deliberately absent.
+    openGraph: { title, description, type: "website", url: `/teams/${slug}` },
+    twitter: { card: "summary_large_image", title, description },
+  };
 }
 
 export default async function TeamPage({
