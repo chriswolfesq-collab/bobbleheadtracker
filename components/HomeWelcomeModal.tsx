@@ -120,14 +120,7 @@ export function HomeWelcomeModal() {
             Start exploring
           </button>
         ) : (
-          <div className="mt-5 grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={dismiss}
-              className="rounded-lg border border-amber-400 px-3 py-2.5 text-xs font-black uppercase tracking-wide text-amber-300 transition hover:bg-amber-400/10"
-            >
-              Explore first
-            </button>
+          <div className="mt-5 grid gap-3">
             <button
               type="button"
               onClick={() => {
@@ -136,7 +129,14 @@ export function HomeWelcomeModal() {
               }}
               className="rounded-lg bg-amber-500 px-3 py-2.5 text-xs font-black uppercase tracking-wide text-[#07111d] transition hover:bg-amber-300"
             >
-              Create account
+              Create a free account
+            </button>
+            <button
+              type="button"
+              onClick={dismiss}
+              className="text-center text-xs font-bold uppercase tracking-wide text-zinc-500 transition hover:text-zinc-300"
+            >
+              Continue without an account
             </button>
           </div>
         )}
