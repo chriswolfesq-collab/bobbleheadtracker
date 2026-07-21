@@ -28,7 +28,26 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   // a card that reveals the account exists.
   if (!shelf) return new Response("Not found", { status: 404 });
 
-  const { displayName, stats } = shelf;
+  const { displayName, stats, countByTeamSlug } = shelf;
+
+  // A row of the collector's actual bobbleheads, so the card previews the shelf
+  // itself rather than just a number. Their strongest teams lead (sorted by
+  // count), capped so the figures stay large enough to read as a thumbnail in a
+  // feed. Uses the pre-baked 200x480 og/ thumbnails — the full figures are
+  // ~1.5MB each, far too heavy to base64-inline into a per-request render.
+  const MAX_FIGURES = 9;
+  const ownedSlugs = Object.entries(countByTeamSlug)
+    .filter(([, count]) => count > 0)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, MAX_FIGURES)
+    .map(([slug]) => slug);
+
+  const figures = await Promise.all(
+    ownedSlugs.map(async (slug) => {
+      const data = await readFile(join(process.cwd(), `public/bobbleheads/og/${slug}.png`));
+      return `data:image/png;base64,${data.toString("base64")}`;
+    }),
+  );
 
   // Display names are unbounded free text — there's no length limit in the
   // sign-up form, in updateDisplayName, or in the schema. The page can wrap a
@@ -57,81 +76,94 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: "space-between",
           alignItems: "center",
           // Linear rather than the site's radial gradient: radial support in
           // Satori is patchy, and at this size the difference isn't visible.
           backgroundImage: "linear-gradient(160deg, #1b2a4a 0%, #0e1626 45%, #090e1a 100%)",
           fontFamily: "Geist",
-          padding: "60px",
+          padding: "48px 60px 40px",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            fontSize: 22,
-            fontWeight: 900,
-            letterSpacing: "0.35em",
-            color: "#f59e0b",
-          }}
-        >
-          MLB BOBBLEHEAD SHELF
+        {/* Header: who, and the number the card exists to show. */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 22,
+              fontWeight: 900,
+              letterSpacing: "0.35em",
+              color: "#f59e0b",
+            }}
+          >
+            MLB BOBBLEHEAD SHELF
+          </div>
+
+          <div style={{ display: "flex", marginTop: 10, fontSize: 46, fontWeight: 900, color: "white" }}>
+            {name}
+          </div>
+
+          {/* The reason the card exists. Still the loudest thing on the card,
+              trimmed just enough to make room for the shelf beneath it. */}
+          <div style={{ display: "flex", alignItems: "baseline", gap: 18, marginTop: 6 }}>
+            <div style={{ display: "flex", fontSize: 132, fontWeight: 900, lineHeight: 1, color: "#fbbf24" }}>
+              {stats.totalOwned}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                fontSize: 40,
+                fontWeight: 900,
+                letterSpacing: "0.18em",
+                color: "#e4e4e7",
+              }}
+            >
+              BOBBLEHEADS
+            </div>
+          </div>
+
+          {/* No progress bar here, unlike the page. Against a 3627-bobblehead
+              denominator even a huge collection is a low percentage, and a
+              mostly empty track reads "barely started" — the opposite of what a
+              shared card should say. The numbers survive as a quiet text line. */}
+          <div style={{ display: "flex", marginTop: 12, fontSize: 24, fontWeight: 400, color: "#a1a1aa" }}>
+            {stats.totalOwned} of {stats.siteTotal} · {stats.teamsStarted} of {stats.teamCount} teams
+            started
+          </div>
         </div>
 
-        <div style={{ display: "flex", marginTop: 14, fontSize: 52, fontWeight: 900, color: "white" }}>
-          {name}
-        </div>
-
-        {/* The reason the card exists. Sized to stay legible when a timeline
-            scales this down to a thumbnail. */}
-        <div
-          style={{
-            display: "flex",
-            marginTop: 18,
-            fontSize: 200,
-            fontWeight: 900,
-            lineHeight: 1,
-            color: "#fbbf24",
-          }}
-        >
-          {stats.totalOwned}
-        </div>
-        <div
-          style={{
-            display: "flex",
-            marginTop: 8,
-            fontSize: 34,
-            fontWeight: 900,
-            letterSpacing: "0.3em",
-            color: "#e4e4e7",
-          }}
-        >
-          BOBBLEHEADS
-        </div>
-
-        {/* No progress bar here, unlike the page. Against a 3627-bobblehead
-            denominator even a huge collection is a low percentage, and a mostly
-            empty track is the loudest thing on the card — it reads "barely
-            started", which is the opposite of what a shared card should say.
-            The same numbers survive as a quiet text line; the count does the
-            talking. */}
-        <div
-          style={{
-            display: "flex",
-            marginTop: 32,
-            fontSize: 26,
-            fontWeight: 400,
-            color: "#a1a1aa",
-          }}
-        >
-          {stats.totalOwned} of {stats.siteTotal} · {stats.teamsStarted} of {stats.teamCount} teams
-          started
-        </div>
+        {/* The shelf: the collector's own figures standing on a ledge. */}
+        {figures.length > 0 ? (
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div style={{ display: "flex", alignItems: "flex-end", gap: 16, height: 180 }}>
+              {figures.map((src, index) => (
+                <img
+                  key={index}
+                  src={src}
+                  alt=""
+                  width={75}
+                  height={180}
+                  style={{ objectFit: "contain", objectPosition: "bottom" }}
+                />
+              ))}
+            </div>
+            {/* The ledge the figures rest on. */}
+            <div
+              style={{
+                display: "flex",
+                width: figures.length * 91 + 40,
+                maxWidth: 1000,
+                height: 12,
+                borderRadius: 6,
+                backgroundImage: "linear-gradient(180deg, #b45309 0%, #7c3d09 100%)",
+              }}
+            />
+          </div>
+        ) : null}
 
         <div
           style={{
             display: "flex",
-            marginTop: 40,
             fontSize: 22,
             fontWeight: 900,
             letterSpacing: "0.2em",
