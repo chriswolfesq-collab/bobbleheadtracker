@@ -1,13 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
-import { getTeamBySlug } from "@/lib/teams";
+import { GIVEAWAYS_BY_TEAM } from "@/lib/bobbleheads";
+import { useAllCommunityBobbleheads } from "@/lib/communityBobbleheads";
+import { useBobbleheadOverrides } from "@/lib/bobbleheadOverrides";
+import { TEAMS, getTeamBySlug } from "@/lib/teams";
 
 type TopTeam = { slug: string; count: number };
-type TeamListings = { slug: string; total: number; with_photos: number };
+type TeamListings = { slug: string; total: number; withPhotos: number };
 type ReportedListing = {
   team_slug: string;
   bobblehead_id: string;
@@ -35,12 +38,12 @@ type DashboardStats = {
   submissions_rejected_7d: number;
   reports_7d: number;
   top_teams: TopTeam[];
-  listings_by_team: TeamListings[];
   most_reported: ReportedListing[];
 };
 
 const nf = new Intl.NumberFormat();
 const fmt = (value: number) => nf.format(value);
+const teamName = (slug: string) => getTeamBySlug(slug)?.name ?? slug;
 
 function StatCard({
   label,
@@ -72,6 +75,17 @@ export default function AdminStatsPage() {
   const [isLoadingStats, setIsLoadingStats] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // The per-team listing/photo breakdown mirrors the team page's own header
+  // math: a team's listings are its curated catalog (baked into the app, minus
+  // admin-deleted ones) plus community rows, and a listing "has a photo" if it
+  // has an approved main photo or its own inline image. The curated catalog and
+  // its inline images live only in TS (lib/bobbleheads.ts), so this can't be
+  // computed in SQL — it's assembled client-side from the same sources the
+  // team page uses. approved_photos is keyed by (team_slug, bobblehead_id).
+  const { communityBobbleheads } = useAllCommunityBobbleheads();
+  const overrides = useBobbleheadOverrides();
+  const [approvedPhotoKeys, setApprovedPhotoKeys] = useState<Set<string> | null>(null);
+
   useEffect(() => {
     if (!isAdmin) return;
 
@@ -93,6 +107,66 @@ export default function AdminStatsPage() {
     };
   }, [isAdmin]);
 
+  useEffect(() => {
+    if (!isAdmin) return;
+
+    let cancelled = false;
+
+    supabase
+      .from("approved_photos")
+      .select("team_slug, bobblehead_id")
+      .then(({ data, error: photoError }) => {
+        if (cancelled) return;
+        if (photoError) {
+          setError(photoError.message);
+          setApprovedPhotoKeys(new Set());
+        } else {
+          setApprovedPhotoKeys(
+            new Set((data ?? []).map((row) => `${row.team_slug}/${row.bobblehead_id}`)),
+          );
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isAdmin]);
+
+  const listingsByTeam = useMemo<TeamListings[] | null>(() => {
+    if (!approvedPhotoKeys) return null;
+
+    const communityByTeam = new Map<string, typeof communityBobbleheads>();
+    for (const cb of communityBobbleheads) {
+      const list = communityByTeam.get(cb.teamSlug);
+      if (list) list.push(cb);
+      else communityByTeam.set(cb.teamSlug, [cb]);
+    }
+
+    const hasPhoto = (slug: string, id: string, inlineUrl?: string | null) =>
+      approvedPhotoKeys.has(`${slug}/${id}`) || Boolean(inlineUrl);
+
+    return TEAMS.map((team) => {
+      const curated = (GIVEAWAYS_BY_TEAM[team.slug] ?? []).filter(
+        (giveaway) => !overrides.isDeleted(team.slug, giveaway.id),
+      );
+      const community = communityByTeam.get(team.slug) ?? [];
+
+      let withPhotos = 0;
+      for (const giveaway of curated) {
+        if (hasPhoto(team.slug, giveaway.id, giveaway.imageUrl)) withPhotos += 1;
+      }
+      for (const cb of community) {
+        if (hasPhoto(team.slug, cb.id, cb.imageUrl)) withPhotos += 1;
+      }
+
+      return { slug: team.slug, total: curated.length + community.length, withPhotos };
+    })
+      .filter((row) => row.total > 0)
+      .sort(
+        (a, b) => b.total - a.total || teamName(a.slug).localeCompare(teamName(b.slug)),
+      );
+  }, [approvedPhotoKeys, communityBobbleheads, overrides]);
+
   if (isLoading) {
     return null;
   }
@@ -111,8 +185,6 @@ export default function AdminStatsPage() {
       </main>
     );
   }
-
-  const teamName = (slug: string) => getTeamBySlug(slug)?.name ?? slug;
 
   return (
     <main className="min-h-full bg-[#15110d] px-4 py-8 text-zinc-100 sm:px-8">
@@ -250,16 +322,18 @@ export default function AdminStatsPage() {
 
             <SectionHeading>Listings by team</SectionHeading>
             <div className="mt-4 rounded-lg border border-white/10 bg-[#0b1a29] p-2">
-              {stats.listings_by_team.length === 0 ? (
-                <p className="p-3 text-sm text-zinc-400">No community listings yet.</p>
+              {listingsByTeam === null ? (
+                <p className="p-3 text-sm text-zinc-400">Loading…</p>
+              ) : listingsByTeam.length === 0 ? (
+                <p className="p-3 text-sm text-zinc-400">No listings yet.</p>
               ) : (
                 <ul>
                   <li className="flex items-center gap-3 px-3 py-2 text-xs font-black uppercase tracking-wide text-zinc-400">
                     <span className="min-w-0 flex-1">Team</span>
                     <span className="w-20 shrink-0 text-right">Listings</span>
-                    <span className="w-24 shrink-0 text-right">With photos</span>
+                    <span className="w-28 shrink-0 text-right">With photos</span>
                   </li>
-                  {stats.listings_by_team.map((team) => (
+                  {listingsByTeam.map((team) => (
                     <li
                       key={team.slug}
                       className="flex items-center gap-3 border-t border-white/5 px-3 py-2 text-sm"
@@ -273,10 +347,10 @@ export default function AdminStatsPage() {
                       <span className="w-20 shrink-0 text-right tabular-nums text-zinc-200">
                         {fmt(team.total)}
                       </span>
-                      <span className="w-24 shrink-0 text-right tabular-nums text-zinc-400">
-                        {fmt(team.with_photos)}
+                      <span className="w-28 shrink-0 text-right tabular-nums text-zinc-400">
+                        {fmt(team.withPhotos)}
                         <span className="ml-1 text-xs text-zinc-500">
-                          ({team.total > 0 ? Math.round((team.with_photos / team.total) * 100) : 0}%)
+                          ({team.total > 0 ? Math.round((team.withPhotos / team.total) * 100) : 0}%)
                         </span>
                       </span>
                     </li>
