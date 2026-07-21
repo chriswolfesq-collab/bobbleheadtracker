@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
+import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { PhotoGallery } from "@/components/PhotoGallery";
@@ -167,15 +167,15 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
             </Link>
 
             <div className="mt-5 rounded border border-white/15 bg-black/25 p-3 text-center">
-              <div className="flex h-44 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
-                <Image
+              <div className="relative flex h-44 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
+                <BobbleheadImage
                   src={imageSrc}
                   alt={`${team.city} ${team.name} ${title} bobblehead`}
                   width={268}
                   height={630}
-                  priority
+                  eager
                   unoptimized={imageSrc.startsWith("http")}
-                  className="h-40 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.65)]"
+                  className="relative h-40 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.65)]"
                 />
               </div>
               <div className="mt-2 rounded bg-black/45 px-2 py-1 text-sm font-black uppercase tracking-wide">
@@ -253,14 +253,19 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
             </div>
           ) : null}
 
-          <div className="grid gap-3 sm:grid-cols-[1fr_1fr_56px]">
+          <div className="grid gap-3 sm:grid-cols-[1fr_1fr]">
             <button
               type="button"
+              aria-pressed={isOwned}
               disabled={!isLoggedIn}
-              className="rounded-lg bg-amber-500 px-5 py-4 text-base font-black uppercase tracking-wide text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-50"
+              className={`rounded-lg px-5 py-4 text-base font-black uppercase tracking-wide shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] transition disabled:cursor-not-allowed disabled:opacity-50 ${
+                isOwned
+                  ? "bg-green-500 text-[#06110a] hover:bg-green-400"
+                  : "border border-amber-400 text-amber-300 hover:bg-amber-400 hover:text-[#07111d]"
+              }`}
               onClick={() => setOwned(giveaway.id, !isOwned)}
             >
-              {isOwned ? "Owned" : isLoggedIn ? "Mark as owned" : "Log in to track"}
+              {isOwned ? "✓ Owned" : isLoggedIn ? "Mark as owned" : "Log in to track"}
             </button>
             <SubmitPhotoButton
               bobbleheadId={giveaway.id}
@@ -268,16 +273,6 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
               label="Submit a photo"
               className="flex min-h-14 w-full cursor-pointer items-center justify-center rounded-lg border border-dashed border-zinc-400/70 px-3 text-xs font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
             />
-            {isAdmin ? (
-              <button
-                type="button"
-                onClick={() => setIsEditOpen(true)}
-                title="Edit bobblehead"
-                className="hidden min-h-14 items-center justify-center rounded-lg border border-white/20 text-zinc-200 transition hover:border-amber-400 hover:text-amber-300 sm:flex"
-              >
-                <span>✎</span>
-              </button>
-            ) : null}
           </div>
 
           <ReportListingButton

@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { createContext, useContext } from "react";
+import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { WantedButton } from "@/components/WantedButton";
 import type { Giveaway } from "@/lib/bobbleheads";
@@ -134,9 +134,11 @@ export function WantedProvider({
 export function GiveawayCard({
   giveaway,
   team,
+  eager = false,
 }: {
   giveaway: ResolvedGiveaway;
   team: Team;
+  eager?: boolean;
 }) {
   const { ownedById, isLoggedIn, toggleOwned } = useOwnership();
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, toggleFavorited } = useFavorites();
@@ -189,14 +191,15 @@ export function GiveawayCard({
       </div>
 
       <Link href={href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400">
-        <div className="flex h-32 items-end justify-center bg-[radial-gradient(circle_at_50%_22%,rgba(255,255,255,0.14),rgba(255,255,255,0)_42%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.22))] px-3 pt-4 sm:h-52 sm:px-4 sm:pt-6">
-          <Image
+        <div className="relative flex h-32 items-end justify-center bg-[radial-gradient(circle_at_50%_22%,rgba(255,255,255,0.14),rgba(255,255,255,0)_42%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.22))] px-3 pt-4 sm:h-52 sm:px-4 sm:pt-6">
+          <BobbleheadImage
             src={imageSrc}
             alt={`${fullTitle} bobblehead`}
             width={268}
             height={630}
+            eager={eager}
             unoptimized={imageSrc.startsWith("http")}
-            className="h-24 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.6)] sm:h-44"
+            className="relative h-24 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.6)] sm:h-44"
           />
         </div>
       </Link>
@@ -212,10 +215,14 @@ export function GiveawayCard({
             type="button"
             aria-pressed={isOwned}
             disabled={!isLoggedIn}
-            className="w-full rounded border border-amber-400 px-2 py-2 text-[10px] font-bold uppercase tracking-wide text-amber-300 transition hover:bg-amber-400 hover:text-[#07111d] disabled:cursor-not-allowed disabled:opacity-50 sm:text-xs"
+            className={`w-full rounded px-2 py-2 text-[10px] font-bold uppercase tracking-wide transition disabled:cursor-not-allowed disabled:opacity-50 sm:text-xs ${
+              isOwned
+                ? "bg-green-500 text-[#06110a] hover:bg-green-400"
+                : "border border-amber-400 text-amber-300 hover:bg-amber-400 hover:text-[#07111d]"
+            }`}
             onClick={() => toggleOwned(giveaway.id)}
           >
-            {isLoggedIn ? (isOwned ? "Remove as Owned" : "Mark as Owned") : "Log in to track"}
+            {isLoggedIn ? (isOwned ? "✓ Owned" : "Mark as Owned") : "Log in to track"}
           </button>
         </div>
       </div>

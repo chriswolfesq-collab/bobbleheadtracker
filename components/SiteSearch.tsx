@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
+import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { useBobbleheadOverrides } from "@/lib/bobbleheadOverrides";
 import { useAllCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { publicAsset } from "@/lib/paths";
@@ -172,7 +172,7 @@ export function SiteSearch({
           aria-expanded={showResults}
           aria-controls="site-search-results"
           aria-activedescendant={activeIndex >= 0 ? `site-search-result-${activeIndex}` : undefined}
-          className="w-full rounded-full border border-white/15 bg-[#101827]/70 py-2.5 pl-10 pr-9 text-sm text-white outline-none backdrop-blur transition placeholder:text-zinc-500 focus:border-amber-400"
+          className="w-full rounded-full border border-white/15 bg-[#101827]/70 py-2.5 pl-10 pr-9 text-sm text-white outline-none backdrop-blur transition placeholder:text-zinc-500 focus:border-amber-400 [&::-webkit-search-cancel-button]:appearance-none"
         />
         <button
           type="button"
@@ -208,14 +208,16 @@ export function SiteSearch({
                       resultIndex === activeIndex ? "bg-white/5" : ""
                     }`}
                   >
-                    <Image
-                      src={result.imageUrl || publicAsset(`/bobbleheads/${result.teamSlug}.png`)}
-                      alt=""
-                      width={30}
-                      height={70}
-                      unoptimized={!!result.imageUrl?.startsWith("http")}
-                      className="h-9 w-auto shrink-0 object-contain"
-                    />
+                    <span className="relative flex h-9 w-6 shrink-0 items-center justify-center">
+                      <BobbleheadImage
+                        src={result.imageUrl || publicAsset(`/bobbleheads/${result.teamSlug}.png`)}
+                        alt=""
+                        width={30}
+                        height={70}
+                        unoptimized={!!result.imageUrl?.startsWith("http")}
+                        className="relative h-9 w-auto object-contain"
+                      />
+                    </span>
                     <div className="min-w-0">
                       <p className="truncate text-sm font-semibold text-white">{result.title}</p>
                       <p className="truncate text-xs text-zinc-400">

@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
+import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { PhotoGallery } from "@/components/PhotoGallery";
@@ -166,15 +166,15 @@ export function CuratedBobbleheadPage({
             </div>
 
             <div className="mt-5 rounded border border-white/15 bg-black/25 p-3 text-center">
-              <div className="flex h-44 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
-                <Image
+              <div className="relative flex h-44 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
+                <BobbleheadImage
                   src={imageSrc}
                   alt={`${team.city} ${team.name} ${title} bobblehead`}
                   width={268}
                   height={630}
-                  priority
+                  eager
                   unoptimized={imageSrc.startsWith("http")}
-                  className="h-40 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.65)]"
+                  className="relative h-40 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.65)]"
                 />
               </div>
               <div className="mt-2 rounded bg-black/45 px-2 py-1 text-sm font-black uppercase tracking-wide">
@@ -270,26 +270,19 @@ export function CuratedBobbleheadPage({
               <span className="mt-1 text-sm text-zinc-300">Reviewed by the admin before it goes live</span>
             </SubmitPhotoButton>
 
-            <div className="grid gap-3 sm:grid-cols-[1fr_1fr]">
-              <button
-                type="button"
-                disabled={!isLoggedIn}
-                className="rounded-lg bg-amber-500 px-5 py-4 text-base font-black uppercase tracking-wide text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] transition hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-50"
-                onClick={() => setOwned(giveaway.id, !isOwned)}
-              >
-                {isOwned ? "Owned" : isLoggedIn ? "Mark as owned" : "Log in to track"}
-              </button>
-              {isAdmin ? (
-                <button
-                  type="button"
-                  onClick={() => setIsEditOpen(true)}
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 px-5 py-4 text-base font-black uppercase tracking-wide text-zinc-200 transition hover:border-amber-400 hover:text-amber-300"
-                >
-                  <span>✎</span>
-                  Edit bobblehead
-                </button>
-              ) : null}
-            </div>
+            <button
+              type="button"
+              aria-pressed={isOwned}
+              disabled={!isLoggedIn}
+              className={`w-full rounded-lg px-5 py-4 text-base font-black uppercase tracking-wide shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] transition disabled:cursor-not-allowed disabled:opacity-50 ${
+                isOwned
+                  ? "bg-green-500 text-[#06110a] hover:bg-green-400"
+                  : "border border-amber-400 text-amber-300 hover:bg-amber-400 hover:text-[#07111d]"
+              }`}
+              onClick={() => setOwned(giveaway.id, !isOwned)}
+            >
+              {isOwned ? "✓ Owned" : isLoggedIn ? "Mark as owned" : "Log in to track"}
+            </button>
 
             <ReportListingButton
               teamSlug={team.slug}

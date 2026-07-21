@@ -4,6 +4,30 @@ import { useState } from "react";
 
 export type EditBobbleheadValues = { title: string; year: string; date: string };
 
+// The National League's first season; no MLB bobblehead predates it. Upper bound
+// leaves a little room for next-season promos that get catalogued early.
+const MIN_YEAR = 1876;
+const MAX_YEAR = new Date().getFullYear() + 2;
+
+// Returns an error message if the year/date pair is invalid, or null if it's OK.
+// Year must be a plausible 4-digit season, and when the free-text date carries a
+// year of its own the two have to agree (no more "Year 2016 / Date April 2020").
+function validateYearAndDate(year: string, date: string): string | null {
+  const trimmedYear = year.trim();
+  if (!/^\d{4}$/.test(trimmedYear)) {
+    return "Year must be a 4-digit year, e.g. 2020.";
+  }
+  const yearNumber = Number(trimmedYear);
+  if (yearNumber < MIN_YEAR || yearNumber > MAX_YEAR) {
+    return `Year must be between ${MIN_YEAR} and ${MAX_YEAR}.`;
+  }
+  const dateYear = date.match(/\b(\d{4})\b/)?.[1];
+  if (dateYear && dateYear !== trimmedYear) {
+    return `Year (${trimmedYear}) doesn't match the date's year (${dateYear}).`;
+  }
+  return null;
+}
+
 // The caller only mounts this (`{isOpen && <EditBobbleheadDialog ... />}`) while
 // open, so a fresh instance — and fresh form state from `initial` — is
 // guaranteed every time it's opened.
@@ -52,6 +76,13 @@ export function EditBobbleheadDialog({
           onSubmit={async (event) => {
             event.preventDefault();
             setError(null);
+
+            const validationError = validateYearAndDate(year, date);
+            if (validationError) {
+              setError(validationError);
+              return;
+            }
+
             setIsSaving(true);
 
             try {
@@ -80,6 +111,8 @@ export function EditBobbleheadDialog({
               <input
                 required
                 type="text"
+                inputMode="numeric"
+                maxLength={4}
                 value={year}
                 onChange={(event) => setYear(event.target.value)}
                 className="w-full rounded-lg border border-white/15 bg-[#07111d] px-3 py-2.5 text-sm font-semibold text-white outline-none transition focus:border-amber-400"

@@ -3,9 +3,9 @@
 import { useToast } from "@/components/Toast";
 import type { EmailAlerts } from "@/lib/profile";
 
-// The opt-out for wishlist "new owner" emails (see supabase/wishlist_alerts.sql).
-// Same shape as ShelfSharingToggle: the switch flipping is the success feedback,
-// and the toast is error-only.
+// The opt-out for wanted-list "new owner" emails (see supabase/wishlist_alerts.sql;
+// the DB column/RPC keep the "wishlist" name). Same shape as ShelfSharingToggle:
+// the switch flipping is the success feedback, and the toast is error-only.
 export function EmailAlertsToggle({ alerts }: { alerts: EmailAlerts }) {
   const { enabled, isLoading, isSaving, setEnabled } = alerts;
   const { showError } = useToast();
@@ -22,12 +22,12 @@ export function EmailAlertsToggle({ alerts }: { alerts: EmailAlerts }) {
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-400">
-            Wishlist alerts
+            Wanted alerts
           </h2>
           <p className="mt-1.5 text-sm text-zinc-400">
             {enabled
-              ? "We'll email you when a bobblehead on your wishlist is marked owned by another collector."
-              : "Turn this on to get an email when a bobblehead on your wishlist gets a new owner."}
+              ? "We'll email you when a bobblehead on your wanted list is marked owned by another collector."
+              : "Turn this on to get an email when a bobblehead on your wanted list gets a new owner."}
           </p>
         </div>
 
@@ -35,7 +35,7 @@ export function EmailAlertsToggle({ alerts }: { alerts: EmailAlerts }) {
           type="button"
           role="switch"
           aria-checked={enabled}
-          aria-label="Email me wishlist alerts"
+          aria-label="Email me wanted alerts"
           disabled={isSaving}
           onClick={handleToggle}
           className={`relative h-6 w-11 flex-shrink-0 rounded-full transition disabled:opacity-60 ${

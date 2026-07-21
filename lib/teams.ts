@@ -27,11 +27,11 @@ export const TEAMS: Team[] = [
   { slug: "guardians", name: "Guardians", city: "Cleveland", abbr: "CLE", league: "AL", division: "Central", primary: "#00385D", secondary: "#E31937", x: 62.75, y: 41.96, labelSide: "left" },
   { slug: "tigers", name: "Tigers", city: "Detroit", abbr: "DET", league: "AL", division: "Central", primary: "#0C2340", secondary: "#FA4616", x: 57.72, y: 39.84, labelSide: "right" },
   { slug: "royals", name: "Royals", city: "Kansas City", abbr: "KC", league: "AL", division: "Central", primary: "#004687", secondary: "#BD9B60", x: 27.49, y: 51.89, labelSide: "right" },
-  { slug: "twins", name: "Twins", city: "Minneapolis", abbr: "MIN", league: "AL", division: "Central", primary: "#002B5C", secondary: "#D31145", x: 32.53, y: 33.63, labelSide: "right" },
+  { slug: "twins", name: "Twins", city: "Minnesota", abbr: "MIN", league: "AL", division: "Central", primary: "#002B5C", secondary: "#D31145", x: 32.53, y: 33.63, labelSide: "right" },
 
   // AL West
   { slug: "astros", name: "Astros", city: "Houston", abbr: "HOU", league: "AL", division: "West", primary: "#002D62", secondary: "#EB6E1F", x: 53.18, y: 80.46, labelSide: "right" },
-  { slug: "angels", name: "Angels", city: "Anaheim", abbr: "LAA", league: "AL", division: "West", primary: "#BA0021", secondary: "#003263", x: 15.36, y: 64.77, labelSide: "right" },
+  { slug: "angels", name: "Angels", city: "Los Angeles", abbr: "LAA", league: "AL", division: "West", primary: "#BA0021", secondary: "#003263", x: 15.36, y: 64.77, labelSide: "right" },
   { slug: "athletics", name: "Athletics", city: "Sacramento", abbr: "ATH", league: "AL", division: "West", primary: "#003831", secondary: "#EFB21E", x: 6.94, y: 43.3, labelSide: "right" },
   { slug: "mariners", name: "Mariners", city: "Seattle", abbr: "SEA", league: "AL", division: "West", primary: "#0C2C56", secondary: "#005C5C", x: 10.01, y: 18.26, labelSide: "right" },
   { slug: "rangers", name: "Rangers", city: "Texas", abbr: "TEX", league: "AL", division: "West", primary: "#003278", secondary: "#C0111F", x: 48.15, y: 71.3, labelSide: "right" },

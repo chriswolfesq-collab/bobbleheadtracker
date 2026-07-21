@@ -32,6 +32,17 @@ function releaseTime(giveaway: ResolvedGiveaway): number {
   return Number.isNaN(year) ? 0 : Date.parse(`January 1, ${year}`);
 }
 
+// Sort by the first letter/number, ignoring leading punctuation — otherwise a
+// title like `"House" (Random) Bobblehead` sorts ahead of "Aaron Judge" because
+// the quotation mark orders before letters.
+function titleSortKey(title: string): string {
+  return title.replace(/^[^\p{L}\p{N}]+/u, "");
+}
+
+// Eagerly load roughly the first two grid rows (6-up at the widest breakpoint)
+// so the above-the-fold cards don't flash their loading skeleton.
+const EAGER_CARD_COUNT = 12;
+
 export function BobbleheadCollection({
   allGiveaways,
   team,
@@ -75,7 +86,7 @@ export function BobbleheadCollection({
   const sorted = useMemo(() => {
     const list = [...filtered];
     if (sortOrder === "title-asc") {
-      list.sort((a, b) => a.title.localeCompare(b.title));
+      list.sort((a, b) => titleSortKey(a.title).localeCompare(titleSortKey(b.title)));
     } else {
       list.sort((a, b) => {
         const newestFirst = releaseTime(b) - releaseTime(a);
@@ -161,11 +172,12 @@ export function BobbleheadCollection({
 
       {sorted.length > 0 ? (
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 xl:grid-cols-6">
-          {sorted.map((giveaway) => (
+          {sorted.map((giveaway, index) => (
             <GiveawayCard
               key={giveaway.id}
               giveaway={giveaway}
               team={team}
+              eager={index < EAGER_CARD_COUNT}
             />
           ))}
         </div>
