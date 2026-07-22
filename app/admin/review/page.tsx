@@ -137,6 +137,7 @@ export default function AdminReviewPage() {
   const [rows, setRows] = useState<ReviewRow[]>([]);
   const [isLoadingRows, setIsLoadingRows] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [detailId, setDetailId] = useState<string | null>(null);
   const [messagingId, setMessagingId] = useState<string | null>(null);
   const [emailTarget, setEmailTarget] = useState<EmailTarget | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -377,11 +378,15 @@ export default function AdminReviewPage() {
             return (
             <div
               key={row.id}
-              className={`grid gap-4 rounded-lg border bg-white dark:bg-[#0b1a29] p-4 sm:grid-cols-[auto_160px_1fr_auto] ${
+              onClick={() => setDetailId(row.id)}
+              className={`grid cursor-pointer gap-4 rounded-lg border bg-white p-4 transition hover:border-accent/50 dark:bg-[#0b1a29] sm:grid-cols-[auto_160px_1fr_auto] ${
                 selection.isSelected(row.id) ? "border-accent/70 ring-1 ring-accent/40" : "border-black/10 dark:border-white/10"
               }`}
             >
-              <label className="flex items-start justify-center pt-1 sm:items-center sm:pt-0">
+              <label
+                onClick={(event) => event.stopPropagation()}
+                className="flex items-start justify-center pt-1 sm:items-center sm:pt-0"
+              >
                 <input
                   type="checkbox"
                   checked={selection.isSelected(row.id)}
@@ -392,23 +397,37 @@ export default function AdminReviewPage() {
                 />
               </label>
 
-              {row.signedUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={row.signedUrl}
-                  alt="Submitted photo"
-                  className="h-40 w-40 rounded object-cover"
-                />
-              ) : (
-                <div className="grid h-40 w-40 place-items-center rounded bg-black/30 text-xs text-zinc-500">
-                  No preview
-                </div>
-              )}
+              <button
+                type="button"
+                onClick={() => setDetailId(row.id)}
+                aria-label="View submission details"
+                className="group relative h-40 w-40 overflow-hidden rounded"
+              >
+                {row.signedUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={row.signedUrl}
+                    alt="Submitted photo"
+                    className="h-40 w-40 rounded object-cover transition group-hover:opacity-80"
+                  />
+                ) : (
+                  <div className="grid h-40 w-40 place-items-center rounded bg-black/30 text-xs text-zinc-500 transition group-hover:bg-black/40">
+                    No preview
+                  </div>
+                )}
+                <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-black/60 py-1 text-center text-[10px] font-black uppercase tracking-wide text-white opacity-0 transition group-hover:opacity-100">
+                  View details
+                </span>
+              </button>
 
               <div className="text-sm">
-                <p className="font-black uppercase tracking-wide text-accent">
+                <button
+                  type="button"
+                  onClick={() => setDetailId(row.id)}
+                  className="font-black uppercase tracking-wide text-accent transition hover:text-accent-hover"
+                >
                   {row.kind === "new_bobblehead" ? "New bobblehead" : "Photo for existing bobblehead"}
-                </p>
+                </button>
                 <p className="mt-1 text-zinc-800 dark:text-zinc-200">
                   Team: <span className="font-semibold">{row.team_slug}</span>
                 </p>
@@ -427,7 +446,7 @@ export default function AdminReviewPage() {
                   <p className="text-zinc-800 dark:text-zinc-200">
                     Target:{" "}
                     {listingHref ? (
-                      <Link href={listingHref} className="font-semibold underline hover:text-accent-hover dark:hover:text-accent-hover">
+                      <Link href={listingHref} onClick={(event) => event.stopPropagation()} className="font-semibold underline hover:text-accent-hover dark:hover:text-accent-hover">
                         {row.target_bobblehead_id}
                       </Link>
                     ) : (
@@ -440,7 +459,7 @@ export default function AdminReviewPage() {
                 </p>
               </div>
 
-              <div className="flex flex-col justify-center gap-2">
+              <div onClick={(event) => event.stopPropagation()} className="flex flex-col justify-center gap-2">
                 <Link
                   href={`/admin/users/view?id=${encodeURIComponent(row.submitted_by)}&from=review`}
                   className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
@@ -477,6 +496,136 @@ export default function AdminReviewPage() {
           })
         )}
       </div>
+
+      {(() => {
+        const detail = detailId ? rows.find((row) => row.id === detailId) : null;
+        if (!detail) return null;
+
+        const detailListingHref =
+          detail.kind === "photo_for_existing" && detail.target_bobblehead_id
+            ? GIVEAWAYS_BY_TEAM[detail.team_slug]?.some((g) => g.id === detail.target_bobblehead_id)
+              ? `/teams/${detail.team_slug}/bobbleheads/${detail.target_bobblehead_id}`
+              : `/teams/${detail.team_slug}/community?id=${encodeURIComponent(detail.target_bobblehead_id)}`
+            : null;
+
+        return (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-8"
+            onClick={() => setDetailId(null)}
+          >
+            <div
+              className="flex max-h-full w-full max-w-3xl flex-col overflow-hidden rounded-lg border border-black/10 bg-white text-zinc-900 shadow-2xl dark:border-white/10 dark:bg-[#0b1a29] dark:text-zinc-100"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="flex items-start justify-between gap-4 border-b border-black/10 p-5 dark:border-white/10">
+                <div>
+                  <p className="text-lg font-black uppercase tracking-wide text-accent">
+                    {detail.kind === "new_bobblehead" ? "New bobblehead" : "Photo for existing bobblehead"}
+                  </p>
+                  <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                    Team: <span className="font-semibold text-zinc-800 dark:text-zinc-200">{detail.team_slug}</span>
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setDetailId(null)}
+                  className="rounded border border-black/15 px-2 py-1 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-300 dark:hover:text-accent-hover"
+                >
+                  Close
+                </button>
+              </div>
+
+              <div className="min-h-0 flex-1 overflow-y-auto p-5">
+                {detail.signedUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={detail.signedUrl}
+                    alt="Submitted photo"
+                    className="mx-auto max-h-[60vh] w-auto rounded object-contain"
+                  />
+                ) : (
+                  <div className="grid h-48 w-full place-items-center rounded bg-black/30 text-sm text-zinc-500">
+                    No photo submitted
+                  </div>
+                )}
+
+                <dl className="mt-5 space-y-2 text-sm">
+                  {detail.kind === "new_bobblehead" ? (
+                    <div className="flex gap-2">
+                      <dt className="w-32 shrink-0 font-black uppercase tracking-wide text-zinc-500">Bobblehead</dt>
+                      <dd className="text-zinc-800 dark:text-zinc-200">
+                        {detail.title ?? "—"}
+                        {detail.date ? <> · {detail.date}</> : null}
+                      </dd>
+                    </div>
+                  ) : (
+                    <div className="flex gap-2">
+                      <dt className="w-32 shrink-0 font-black uppercase tracking-wide text-zinc-500">Target</dt>
+                      <dd className="text-zinc-800 dark:text-zinc-200">
+                        {detailListingHref ? (
+                          <Link href={detailListingHref} className="font-semibold underline hover:text-accent-hover">
+                            {detail.target_bobblehead_id}
+                          </Link>
+                        ) : (
+                          detail.target_bobblehead_id ?? "—"
+                        )}
+                      </dd>
+                    </div>
+                  )}
+                  {detail.duplicateOf ? (
+                    <div className="flex gap-2">
+                      <dt className="w-32 shrink-0 font-black uppercase tracking-wide text-zinc-500">Duplicate?</dt>
+                      <dd className="font-semibold text-accent">
+                        ⚠ Possible duplicate of “{detail.duplicateOf.title}” ({detail.duplicateOf.date})
+                      </dd>
+                    </div>
+                  ) : null}
+                  <div className="flex gap-2">
+                    <dt className="w-32 shrink-0 font-black uppercase tracking-wide text-zinc-500">Submitted</dt>
+                    <dd className="text-zinc-800 dark:text-zinc-200">{new Date(detail.created_at).toLocaleString()}</dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-end gap-2 border-t border-black/10 p-5 dark:border-white/10">
+                <Link
+                  href={`/admin/users/view?id=${encodeURIComponent(detail.submitted_by)}&from=review`}
+                  className="rounded border border-black/15 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
+                >
+                  View profile
+                </Link>
+                <button
+                  type="button"
+                  disabled={messagingId === detail.submitted_by || bulk.busy}
+                  onClick={() => {
+                    setDetailId(null);
+                    messageSubmitter(detail.submitted_by);
+                  }}
+                  className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover disabled:opacity-60 dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
+                >
+                  Message
+                </button>
+                <button
+                  type="button"
+                  disabled={busyId === detail.id || bulk.busy}
+                  onClick={() => reject(detail)}
+                  className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-red-400 hover:text-red-300 disabled:opacity-60 dark:border-white/20 dark:text-zinc-200"
+                >
+                  Reject
+                </button>
+                <button
+                  type="button"
+                  disabled={busyId === detail.id || bulk.busy}
+                  onClick={() => approve(detail)}
+                  className="rounded bg-accent px-4 py-2 text-xs font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover disabled:opacity-60"
+                >
+                  Approve
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {emailTarget ? (
         <AdminEmailComposer
