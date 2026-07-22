@@ -37,20 +37,22 @@
     "id": "rickey-henderson-retro-2024",
     "title": "Rickey Henderson (Retro)",
     "year": "2024",
-    "date": "September 20, 2024"
+    "date": "September 20, 2024",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/iige2trj2xtqolgoyeyr.png"
   },
   {
     "id": "vida-blue-2024",
     "title": "Vida Blue",
     "year": "2024",
-    "date": "August 8, 2024",
+    "date": "August 18, 2024",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/zjhtg8gsqibehbhpkk9j.png"
   },
   {
     "id": "jose-canseco-2024",
     "title": "Jose Canseco",
     "year": "2024",
-    "date": "July 20, 2024"
+    "date": "July 20, 2024",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/nszwrqqpykiwodusyxea.png"
   },
   {
     "id": "rollie-fingers-2024",
@@ -63,25 +65,29 @@
     "id": "satchel-paige-rocking-chair-2024",
     "title": "Satchel Paige (Rocking Chair)",
     "year": "2024",
-    "date": "June 21, 2024"
+    "date": "June 21, 2024",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/xxzl5dgg2oxglk0rwx81.png"
   },
   {
     "id": "retro-bobblehead-2023",
     "title": "\"Retro\" Bobblehead",
     "year": "2023",
-    "date": "July 23, 2023"
+    "date": "July 23, 2023",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/uultwhk5fkphtonwof34.jpg"
   },
   {
     "id": "captain-marvel-2023",
     "title": "Captain Marvel",
     "year": "2023",
-    "date": "July 15, 2023"
+    "date": "July 15, 2023",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/sbqq6kfe4def1uvsjds3.jpg"
   },
   {
     "id": "groot-2023",
     "title": "Groot",
     "year": "2023",
-    "date": "May 13, 2023"
+    "date": "May 13, 2023",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/gbcha14eaxosrxqodnnu.jpg"
   },
   {
     "id": "mark-kotsay-mandalorian-star-wars-2023",
@@ -122,6 +128,12 @@
     "year": "2019",
     "date": "April 20, 2019",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/bhikd0nfog0nitgijkun.jpg"
+  },
+  {
+    "id": "matt-chapman-gold-glove-gold-2019",
+    "title": "Matt Chapman Gold Glove (Gold)",
+    "year": "2019",
+    "date": "April 20, 2019"
   },
   {
     "id": "sean-manaea-no-hitter-2018",
@@ -323,7 +335,7 @@
     "id": "dallas-braden-2010",
     "title": "Dallas Braden",
     "year": "2010",
-    "date": "September 2, 2010"
+    "date": "September 26, 2010"
   },
   {
     "id": "andrew-bailey-2010",
