@@ -14,6 +14,8 @@ export function AuthModal() {
     signUp,
     signInWithGoogle,
     signInWithGithub,
+    oauthError,
+    clearOauthError,
   } = useAuth();
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,6 +31,9 @@ export function AuthModal() {
   }
 
   const mode = authModalMode;
+  // A failed OAuth redirect surfaces its reason through context; a form attempt
+  // sets the local error. Either one should show in the same spot.
+  const displayError = error ?? oauthError;
 
   const resetAndClose = () => {
     closeAuthModal();
@@ -42,6 +47,7 @@ export function AuthModal() {
 
   const handleOAuth = async (provider: "google" | "github") => {
     setError(null);
+    clearOauthError();
     setOauthLoading(provider);
     const result = provider === "google" ? await signInWithGoogle() : await signInWithGithub();
     setOauthLoading(null);
@@ -136,6 +142,7 @@ export function AuthModal() {
                 }
 
                 setError(null);
+                clearOauthError();
                 setIsSubmitting(true);
 
                 const result =
@@ -217,7 +224,7 @@ export function AuthModal() {
                   </span>
                 </label>
               ) : null}
-              {error ? <p className="text-xs font-semibold text-red-400">{error}</p> : null}
+              {displayError ? <p className="text-xs font-semibold text-red-400">{displayError}</p> : null}
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -233,6 +240,7 @@ export function AuthModal() {
                 type="button"
                 onClick={() => {
                   setError(null);
+                  clearOauthError();
                   openAuthModal(mode === "sign-in" ? "sign-up" : "sign-in");
                 }}
                 className="font-bold text-accent hover:text-accent-hover"

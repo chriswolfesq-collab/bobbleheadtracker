@@ -12,8 +12,12 @@ type AuthContextValue = {
   isLoading: boolean;
   isAuthModalOpen: boolean;
   authModalMode: AuthModalMode;
+  // An OAuth sign-in that failed and bounced us back with an error in the URL.
+  // Surfaced so the modal can show it — see the mount effect below.
+  oauthError: string | null;
   openAuthModal: (mode?: AuthModalMode) => void;
   closeAuthModal: () => void;
+  clearOauthError: () => void;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string, displayName: string) => Promise<{ error: string | null }>;
   signInWithGoogle: () => Promise<{ error: string | null }>;
@@ -67,6 +71,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalMode, setAuthModalMode] = useState<AuthModalMode>("sign-in");
+  const [oauthError, setOauthError] = useState<string | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -82,6 +87,48 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.subscription.unsubscribe();
   }, []);
 
+  // Supabase's implicit OAuth flow reports failures (e.g. an email that already
+  // belongs to another account) by redirecting back here with error params in
+  // the URL. auth-js parses them, throws internally, and never surfaces them
+  // through getSession/onAuthStateChange — so without this the user just lands
+  // back on the page silently signed out. Pull the message out ourselves, show
+  // it in the modal, then scrub the params so a refresh doesn't resurface it.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const errorKeys = ["error", "error_code", "error_description"];
+    const extract = (raw: string): string | null => {
+      const params = new URLSearchParams(raw.replace(/^[#?]/, ""));
+      if (!errorKeys.some((key) => params.has(key))) return null;
+      return (
+        params.get("error_description") ||
+        params.get("error") ||
+        "Sign-in failed. Please try again."
+      );
+    };
+
+    const message = extract(window.location.hash) ?? extract(window.location.search);
+    if (!message) return;
+
+    // Reading window.location is only possible after mount (no window during
+    // SSR), so this state must be set here rather than in an initializer, which
+    // would desync server/client hydration. Runs once, and only when a failed
+    // OAuth redirect is actually present — no cascading-render concern.
+    /* eslint-disable react-hooks/set-state-in-effect */
+    setOauthError(message);
+    setAuthModalMode("sign-in");
+    setIsAuthModalOpen(true);
+    /* eslint-enable react-hooks/set-state-in-effect */
+
+    // Remove only the auth error params, leaving any unrelated hash/query intact.
+    const url = new URL(window.location.href);
+    errorKeys.forEach((key) => url.searchParams.delete(key));
+    const hashParams = new URLSearchParams(url.hash.replace(/^#/, ""));
+    errorKeys.forEach((key) => hashParams.delete(key));
+    url.hash = hashParams.toString();
+    window.history.replaceState(window.history.state, "", url.toString());
+  }, []);
+
   const openAuthModal = useCallback((mode: AuthModalMode = "sign-in") => {
     setAuthModalMode(mode);
     setIsAuthModalOpen(true);
@@ -89,6 +136,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const closeAuthModal = useCallback(() => {
     setIsAuthModalOpen(false);
+    setOauthError(null);
+  }, []);
+
+  const clearOauthError = useCallback(() => {
+    setOauthError(null);
   }, []);
 
   const value = useMemo<AuthContextValue>(() => {
@@ -100,8 +152,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       isLoading,
       isAuthModalOpen,
       authModalMode,
+      oauthError,
       openAuthModal,
       closeAuthModal,
+      clearOauthError,
       signIn: async (email, password) => {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         return { error: error?.message ?? null };
@@ -147,7 +201,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return { error: error?.message ?? null };
       },
     };
-  }, [session, isLoading, isAuthModalOpen, authModalMode, openAuthModal, closeAuthModal]);
+  }, [session, isLoading, isAuthModalOpen, authModalMode, oauthError, openAuthModal, closeAuthModal, clearOauthError]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
