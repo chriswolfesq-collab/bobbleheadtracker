@@ -13,7 +13,7 @@ import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { useToast } from "@/components/Toast";
 import { WantedButton } from "@/components/WantedButton";
 import { useAdminAuth } from "@/lib/adminAuth";
-import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, saveCuratedBobblehead } from "@/lib/adminEdit";
+import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, saveCuratedBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
@@ -86,8 +86,13 @@ export function CuratedBobbleheadPage({
   // The removable "main photo" is an approved_photos row (or one the admin
   // just uploaded); the curated seed imageUrl is build-time data and stays.
   const removableMainPhotoUrl = mainPhotoRemoved ? null : (localImageUrl ?? photoUrlById[giveaway.id] ?? null);
+  // With no profile photo of its own, a listing borrows its first gallery
+  // photo as the profile image rather than showing the team placeholder.
+  const galleryFallbackUrl = galleryPhotos[0]?.imageUrl ?? null;
   const imageSrc =
-    removableMainPhotoUrl ?? giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+    removableMainPhotoUrl ?? giveaway.imageUrl ?? galleryFallbackUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+  // Don't show the photo twice when it's standing in as the profile image.
+  const galleryPhotosToShow = galleryPhotos.filter((photo) => photo.imageUrl !== imageSrc);
   const isOwned = ownedById[giveaway.id] ?? false;
   const isFavorited = favoritedById[giveaway.id] ?? false;
   const isWanted = wantedById[giveaway.id] ?? false;
@@ -140,6 +145,19 @@ export function CuratedBobbleheadPage({
       removePhotoLocally(photo.id);
     } catch (deleteError) {
       showError(deleteError instanceof Error ? deleteError.message : "Could not remove the photo.");
+    }
+  };
+
+  const handleSetGalleryPhotoAsMain = async (photo: GalleryPhoto) => {
+    if (!adminUser) return;
+
+    try {
+      await setGalleryPhotoAsMain({ user: adminUser, teamSlug: team.slug, bobbleheadId: giveaway.id, photo });
+      setLocalImageUrl(photo.imageUrl);
+      setMainPhotoRemoved(false);
+      removePhotoLocally(photo.id);
+    } catch (promoteError) {
+      showError(promoteError instanceof Error ? promoteError.message : "Could not set the profile photo.");
     }
   };
 
@@ -242,9 +260,13 @@ export function CuratedBobbleheadPage({
               </p>
             </div>
           </div>
-          {galleryPhotos.length > 0 ? (
+          {galleryPhotosToShow.length > 0 ? (
             <div className="mb-5">
-              <PhotoGallery photos={galleryPhotos} onDelete={isAdmin ? handleDeleteGalleryPhoto : undefined} />
+              <PhotoGallery
+                photos={galleryPhotosToShow}
+                onDelete={isAdmin ? handleDeleteGalleryPhoto : undefined}
+                onSetAsMain={isAdmin ? handleSetGalleryPhotoAsMain : undefined}
+              />
             </div>
           ) : null}
           <div className="space-y-5">

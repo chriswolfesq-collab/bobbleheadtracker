@@ -6,10 +6,13 @@ import type { GalleryPhoto } from "@/lib/bobbleheadGallery";
 export function PhotoGallery({
   photos,
   onDelete,
+  onSetAsMain,
 }: {
   photos: GalleryPhoto[];
   // Provided only in admin mode; renders a remove button on each photo.
   onDelete?: (photo: GalleryPhoto) => void;
+  // Provided only in admin mode; renders a "set as profile photo" button.
+  onSetAsMain?: (photo: GalleryPhoto) => void;
 }) {
   if (photos.length === 0) return null;
 
@@ -32,6 +35,17 @@ export function PhotoGallery({
               className="h-full w-full object-cover"
             />
           </a>
+          {onSetAsMain ? (
+            <button
+              type="button"
+              aria-label="Set as profile photo"
+              title="Set as profile photo"
+              onClick={() => onSetAsMain(photo)}
+              className="absolute -left-1.5 -top-1.5 grid h-5 w-5 place-items-center rounded-full border border-accent/70 bg-white text-[10px] font-black text-accent transition hover:bg-accent hover:text-accent-fg dark:bg-[#0b1a29]"
+            >
+              ★
+            </button>
+          ) : null}
           {onDelete ? (
             <button
               type="button"

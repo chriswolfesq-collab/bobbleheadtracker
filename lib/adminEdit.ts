@@ -90,6 +90,43 @@ async function removeApprovedFile(imageUrl: string) {
   }
 }
 
+// Promotes an existing gallery photo to the listing's main/profile image:
+// upserts approved_photos with its URL, then drops the gallery row. The file
+// itself stays in the bobblehead-approved bucket — it's now referenced by the
+// main photo instead of the gallery — so we delete only the DB row.
+export async function setGalleryPhotoAsMain({
+  user,
+  teamSlug,
+  bobbleheadId,
+  photo,
+}: {
+  user: User;
+  teamSlug: string;
+  bobbleheadId: string;
+  photo: { id: string; imageUrl: string };
+}) {
+  const { error } = await supabase.from("approved_photos").upsert({
+    bobblehead_id: bobbleheadId,
+    team_slug: teamSlug,
+    image_url: photo.imageUrl,
+    approved_by: user.id,
+    updated_at: new Date().toISOString(),
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  const { error: galleryError } = await supabase
+    .from("bobblehead_gallery_photos")
+    .delete()
+    .eq("id", photo.id);
+
+  if (galleryError) {
+    throw new Error(galleryError.message);
+  }
+}
+
 export async function deleteGalleryPhoto(photo: { id: string; imageUrl: string }) {
   const { error } = await supabase.from("bobblehead_gallery_photos").delete().eq("id", photo.id);
 
