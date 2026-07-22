@@ -17,7 +17,7 @@ export function ThemeToggleButton({ className }: { className?: string }) {
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
       title={`Switch to ${isDark ? "light" : "dark"} mode`}
       onClick={() => setPreference(isDark ? "light" : "dark")}
-      className={`flex items-center gap-1.5 rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover ${className ?? ""}`}
+      className={`flex items-center gap-1.5 rounded border border-black/15 px-2 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover sm:px-3 ${className ?? ""}`}
     >
       {isDark ? (
         // Sun — currently dark, click to go light.
@@ -49,7 +49,7 @@ export function ThemeToggleButton({ className }: { className?: string }) {
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg>
       )}
-      {targetLabel}
+      <span className="hidden sm:inline">{targetLabel}</span>
     </button>
   );
 }
