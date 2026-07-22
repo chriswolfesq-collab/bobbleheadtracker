@@ -154,6 +154,7 @@ function SubmitBobbleheadForm({
   const { user } = useAuth();
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
+  const [dateUnknown, setDateUnknown] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -185,7 +186,13 @@ function SubmitBobbleheadForm({
         setError(null);
 
         try {
-          await submitNewBobblehead({ user, teamSlug, title, date: formatSubmissionDate(date), file });
+          await submitNewBobblehead({
+            user,
+            teamSlug,
+            title,
+            date: dateUnknown ? "N/A" : formatSubmissionDate(date),
+            file,
+          });
           onDone();
         } catch (submitError) {
           setError(submitError instanceof Error ? submitError.message : "Could not submit bobblehead.");
@@ -216,12 +223,27 @@ function SubmitBobbleheadForm({
         <input
           type="date"
           value={date}
+          disabled={dateUnknown}
           onChange={(event) => {
             setDate(event.target.value);
             setDuplicateMatch(null);
           }}
-          className="mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition [color-scheme:light] focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white dark:[color-scheme:dark]"
+          className="mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition [color-scheme:light] focus:border-accent disabled:opacity-50 dark:border-white/15 dark:bg-[#07111d] dark:text-white dark:[color-scheme:dark]"
         />
+        <span className="mt-1.5 flex items-center gap-1.5">
+          <input
+            type="checkbox"
+            checked={dateUnknown}
+            onChange={(event) => {
+              setDateUnknown(event.target.checked);
+              setDuplicateMatch(null);
+            }}
+            className="h-3.5 w-3.5 accent-accent"
+          />
+          <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+            Date Unknown
+          </span>
+        </span>
       </label>
       <label className="min-w-0">
         <span className="text-xs font-black uppercase tracking-wide text-accent">Photo (optional)</span>
