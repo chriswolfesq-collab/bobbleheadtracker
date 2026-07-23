@@ -6,6 +6,7 @@ import { useState } from "react";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { AuthWidget } from "@/components/AuthWidget";
 import { BobbleheadImage } from "@/components/BobbleheadImage";
+import { BobbleheadTitle } from "@/components/BobbleheadTitle";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { PhotoGallery } from "@/components/PhotoGallery";
@@ -225,7 +226,9 @@ export function CuratedBobbleheadPage({
                 {team.city} {team.name}
               </p>
               <h1 className="mt-3 flex flex-wrap items-center gap-3 text-4xl font-black uppercase leading-none tracking-wide text-white sm:text-5xl 2xl:text-6xl">
-                {title}
+                <span>
+                  <BobbleheadTitle title={title} />
+                </span>
                 <WantedButton
                   isWanted={isWanted}
                   isLoggedIn={isLoggedInForWanted}
