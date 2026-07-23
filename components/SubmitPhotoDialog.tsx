@@ -22,13 +22,14 @@ export function SubmitPhotoButton({
 }) {
   const { user } = useAuth();
   const [status, setStatus] = useState<Status>("idle");
+  const [autoApproved, setAutoApproved] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
   if (status === "submitted") {
     return (
       <div className={className}>
         <span className="text-center text-xs font-black uppercase tracking-wide text-accent">
-          Submitted — pending review
+          {autoApproved ? "Added — live now" : "Submitted — pending review"}
         </span>
       </div>
     );
@@ -66,7 +67,8 @@ export function SubmitPhotoButton({
           setMessage(null);
 
           try {
-            await submitPhotoForExisting({ user, teamSlug, bobbleheadId, file });
+            const result = await submitPhotoForExisting({ user, teamSlug, bobbleheadId, file });
+            setAutoApproved(result.autoApproved);
             setStatus("submitted");
           } catch (error) {
             setStatus("idle");

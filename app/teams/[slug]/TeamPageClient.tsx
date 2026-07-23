@@ -149,7 +149,7 @@ function SubmitBobbleheadForm({
   teamSlug: string;
   communityBobbleheads: DuplicateCandidate[];
   isDeleted: BobbleheadOverridesLookup["isDeleted"];
-  onDone: () => void;
+  onDone: (autoApproved: boolean) => void;
 }) {
   const { user } = useAuth();
   const [title, setTitle] = useState("");
@@ -188,7 +188,7 @@ function SubmitBobbleheadForm({
         setError(null);
 
         try {
-          await submitNewBobblehead({
+          const result = await submitNewBobblehead({
             user,
             teamSlug,
             title,
@@ -197,7 +197,7 @@ function SubmitBobbleheadForm({
             date: dateUnknown ? "N/A" : formatSubmissionDate(date),
             file,
           });
-          onDone();
+          onDone(result.autoApproved);
         } catch (submitError) {
           setError(submitError instanceof Error ? submitError.message : "Could not submit bobblehead.");
         } finally {
@@ -310,6 +310,7 @@ export function TeamPageClient({
 }) {
   const [isAdding, setIsAdding] = useState(false);
   const [justSubmitted, setJustSubmitted] = useState(false);
+  const [justApproved, setJustApproved] = useState(false);
   const [sortOrder, setSortOrder] = useState<SortOrder>(DEFAULT_SORT_ORDER);
   const { communityBobbleheads } = useCommunityBobbleheads(team.slug);
   const { photoUrlById } = useApprovedPhotos(team.slug);
@@ -459,6 +460,7 @@ export function TeamPageClient({
                       className="inline-flex items-center justify-center gap-2 rounded border border-accent px-4 py-2 text-sm font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg"
                       onClick={() => {
                         setJustSubmitted(false);
+                        setJustApproved(false);
                         setIsAdding((current) => !current);
                       }}
                     >
@@ -472,14 +474,19 @@ export function TeamPageClient({
                 {isAdding ? (
                   justSubmitted ? (
                     <div className="mb-5 rounded-lg border border-accent/35 bg-accent/10 p-4 text-sm font-semibold text-accent">
-                      Submitted — the admin will review it before it appears for everyone.
+                      {justApproved
+                        ? "Added — it's live for everyone now."
+                        : "Submitted — the admin will review it before it appears for everyone."}
                     </div>
                   ) : (
                     <SubmitBobbleheadForm
                       teamSlug={team.slug}
                       communityBobbleheads={communityBobbleheads}
                       isDeleted={isDeleted}
-                      onDone={() => setJustSubmitted(true)}
+                      onDone={(autoApproved) => {
+                        setJustApproved(autoApproved);
+                        setJustSubmitted(true);
+                      }}
                     />
                   )
                 ) : null}
