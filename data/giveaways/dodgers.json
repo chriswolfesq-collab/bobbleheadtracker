@@ -1,7 +1,8 @@
 [
   {
     "id": "yoshinobu-yamamoto-starter-series-2026",
-    "title": "Yoshinobu Yamamoto (Starter Series)",
+    "title": "Yoshinobu Yamamoto",
+    "nickname": "Starter Series",
     "year": "2026",
     "date": "September 5, 2026",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/ouygzzt7igjl5skhooqm.jpg",
@@ -9,7 +10,8 @@
   },
   {
     "id": "shohei-ohtani-starter-series-2026",
-    "title": "Shohei Ohtani (Starter Series)",
+    "title": "Shohei Ohtani",
+    "nickname": "Starter Series",
     "year": "2026",
     "date": "August 22, 2026",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/xhnhqbwbhm3yjeblnq8t.jpg",
@@ -41,7 +43,8 @@
   },
   {
     "id": "max-muncy-game-7-home-run-2026",
-    "title": "Max Muncy (Game 7 Home Run)",
+    "title": "Max Muncy",
+    "nickname": "Game 7 Home Run",
     "year": "2026",
     "date": "August 10, 2026",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/fd3y1zflikmem1g9jrma.jpg",
@@ -81,7 +84,8 @@
   },
   {
     "id": "freddie-freeman-18th-inning-walk-off-2026",
-    "title": "Freddie Freeman (18th Inning Walk-Off)",
+    "title": "Freddie Freeman",
+    "nickname": "18th Inning Walk-Off",
     "year": "2026",
     "date": "July 6, 2026",
     "imageUrl": null,
@@ -97,7 +101,8 @@
   },
   {
     "id": "mookie-betts-game-7-double-play-2026",
-    "title": "Mookie Betts (Game 7 Double Play)",
+    "title": "Mookie Betts",
+    "nickname": "Game 7 Double Play",
     "year": "2026",
     "date": "June 19, 2026",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/aepeltptsrbdclh6a0sk.jpg",
@@ -105,7 +110,8 @@
   },
   {
     "id": "tyler-glasnow-starter-series-2026",
-    "title": "Tyler Glasnow (Starter Series)",
+    "title": "Tyler Glasnow",
+    "nickname": "Starter Series",
     "year": "2026",
     "date": "June 6, 2026",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/zowsinczwbuouz8ggwfw.jpg",
@@ -129,7 +135,8 @@
   },
   {
     "id": "yoshinobu-yamamoto-game-7-last-out-2026",
-    "title": "Yoshinobu Yamamoto (Game 7 Last Out)",
+    "title": "Yoshinobu Yamamoto",
+    "nickname": "Game 7 Last Out",
     "year": "2026",
     "date": "May 27, 2026",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/op7m9mbxzhvmtfcq27ms.jpg",
@@ -153,7 +160,8 @@
   },
   {
     "id": "blake-snell-starter-series-2026",
-    "title": "Blake Snell (Starter Series)",
+    "title": "Blake Snell",
+    "nickname": "Starter Series",
     "year": "2026",
     "date": "May 9, 2026",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/enebe7clbkpbalv5oeoh.jpg",
@@ -161,7 +169,8 @@
   },
   {
     "id": "miguel-rojas-game-7-home-run-2026",
-    "title": "Miguel Rojas (Game 7 Home Run)",
+    "title": "Miguel Rojas",
+    "nickname": "Game 7 Home Run",
     "year": "2026",
     "date": "May 8, 2026",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/j15oktngjyqfoqdep2fr.jpg",
@@ -192,7 +201,8 @@
   },
   {
     "id": "will-smith-game-7-home-run-2026",
-    "title": "Will Smith (Game 7 Home Run)",
+    "title": "Will Smith",
+    "nickname": "Game 7 Home Run",
     "year": "2026",
     "date": "March 28, 2026",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/kdlq1injpfwzxo20pgjr.jpg",
@@ -200,7 +210,8 @@
   },
   {
     "id": "clayton-kershaw-3000-strikeouts-2025",
-    "title": "Clayton Kershaw (3000 Strikeouts)",
+    "title": "Clayton Kershaw",
+    "nickname": "3000 Strikeouts",
     "year": "2025",
     "date": "September 20, 2025",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/j7spbkez34qf8nxgd0nk.jpg",
@@ -224,7 +235,8 @@
   },
   {
     "id": "shohei-ohtani-pitching-2025",
-    "title": "Shohei Ohtani (Pitching)",
+    "title": "Shohei Ohtani",
+    "nickname": "Pitching",
     "year": "2025",
     "date": "September 10, 2025",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/mfzyii3zitji92tan0oy.jpg",
@@ -239,7 +251,8 @@
   },
   {
     "id": "shohei-ohtani-50-50-hitting-2025",
-    "title": "Shohei Ohtani 50/50 (Hitting)",
+    "title": "Shohei Ohtani 50/50",
+    "nickname": "Hitting",
     "year": "2025",
     "date": "August 27, 2025",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/c4dkwpdzublwwrurx2ii.jpg",
@@ -342,7 +355,8 @@
   },
   {
     "id": "shohei-ohtani-50-50-sliding-2025",
-    "title": "Shohei Ohtani 50/50 (Sliding)",
+    "title": "Shohei Ohtani 50/50",
+    "nickname": "Sliding",
     "year": "2025",
     "date": "May 15, 2025",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/unk8pyaejbiso9gflnte.jpg",
@@ -366,7 +380,8 @@
   },
   {
     "id": "freddie-freeman-world-series-grand-slam-walkoff-2025",
-    "title": "Freddie Freeman (World Series Grand Slam Walkoff)",
+    "title": "Freddie Freeman",
+    "nickname": "World Series Grand Slam Walkoff",
     "year": "2025",
     "date": "April 11, 2025",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/fqw7qjgkga7iryzh2pvj.jpg",
@@ -445,7 +460,8 @@
   },
   {
     "id": "kike-hernandez-celebration-2024",
-    "title": "Kike Hernandez (Celebration)",
+    "title": "Kike Hernandez",
+    "nickname": "Celebration",
     "year": "2024",
     "date": "July 24, 2024",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/h1g6nbkgaxwr5xcadqs5.jpg",
@@ -453,7 +469,8 @@
   },
   {
     "id": "jason-hayward-city-connect-2024",
-    "title": "Jason Hayward (City Connect)",
+    "title": "Jason Hayward",
+    "nickname": "City Connect",
     "year": "2024",
     "date": "July 6, 2024",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/mwe4qvfirnvdbvqv9s67.jpg"
@@ -659,7 +676,8 @@
   },
   {
     "id": "mookie-betts-diving-2023",
-    "title": "Mookie Betts (Diving)",
+    "title": "Mookie Betts",
+    "nickname": "Diving",
     "year": "2023",
     "date": "May 15, 2023",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/zfklgpcahttjyzhckv9u.jpg",
@@ -698,7 +716,8 @@
   },
   {
     "id": "justin-turner-pitching-2022",
-    "title": "Justin Turner (Pitching)",
+    "title": "Justin Turner",
+    "nickname": "Pitching",
     "year": "2022",
     "date": "October 4, 2022",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/fwri6anbocxo1hxroyig.jpg",
@@ -706,7 +725,8 @@
   },
   {
     "id": "mookie-betts-300-bowl-2022",
-    "title": "Mookie Betts (300 Bowl)",
+    "title": "Mookie Betts",
+    "nickname": "300 Bowl",
     "year": "2022",
     "date": "October 3, 2022",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/xl3hvrugoooscilflxkr.jpg",
@@ -1245,7 +1265,8 @@
   },
   {
     "id": "kirk-gibson-gold-limited-edition-1-of-350-2018",
-    "title": "Kirk Gibson Gold Limited Edition (1 of 350)",
+    "title": "Kirk Gibson Gold Limited Edition",
+    "nickname": "1 of 350",
     "year": "2018",
     "date": "March 30, 2018",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/qug88icdb1ydqwebmu3x.jpg",
@@ -1285,7 +1306,8 @@
   },
   {
     "id": "clayton-kershaw-batting-2017",
-    "title": "Clayton Kershaw (Batting)",
+    "title": "Clayton Kershaw",
+    "nickname": "Batting",
     "year": "2017",
     "date": "July 26, 2017",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/nmc8zxr3679ea1m2ejvw.jpg",
@@ -1452,7 +1474,8 @@
   },
   {
     "id": "yasiel-puig-diving-2015",
-    "title": "Yasiel Puig (Diving)",
+    "title": "Yasiel Puig",
+    "nickname": "Diving",
     "year": "2015",
     "date": "July 29, 2015",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/wtkvz39k8vxwserlogqf.jpg",

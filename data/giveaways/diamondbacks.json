@@ -1,14 +1,16 @@
 [
   {
     "id": "gabriel-moreno-mandalorian-2026",
-    "title": "Gabriel Moreno (Mandalorian)",
+    "title": "Gabriel Moreno",
+    "nickname": "Mandalorian",
     "year": "2026",
     "date": "May 9, 2026",
     "quantity": "25,000"
   },
   {
     "id": "geraldo-perdomo-audio-2026",
-    "title": "Geraldo Perdomo (Audio)",
+    "title": "Geraldo Perdomo",
+    "nickname": "Audio",
     "year": "2026",
     "date": "July 18, 2026",
     "quantity": "20,000"
@@ -44,7 +46,8 @@
   },
   {
     "id": "corbin-carroll-2025",
-    "title": "Corbin Carroll (Rebel Pilot)",
+    "title": "Corbin Carroll",
+    "nickname": "Rebel Pilot",
     "year": "2025",
     "date": "August 9, 2025",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/tjgdwc8bhsdd9yhu395w.jpg",
@@ -52,7 +55,8 @@
   },
   {
     "id": "corbin-carroll-2024",
-    "title": "Corbin Carroll (Rookie of the Year)",
+    "title": "Corbin Carroll",
+    "nickname": "Rookie of the Year",
     "year": "2024",
     "date": "March 30, 2024",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/ogsyyu4liws5irsdwsya.jpg",
@@ -60,7 +64,8 @@
   },
   {
     "id": "gabriel-moreno-2024",
-    "title": "Gabriel Moreno (Gold Glove)",
+    "title": "Gabriel Moreno",
+    "nickname": "Gold Glove",
     "year": "2024",
     "date": "May 4, 2024",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/wodoyatgtxvsz9yu6ng3.jpg",
@@ -68,7 +73,8 @@
   },
   {
     "id": "ketel-marte-2024",
-    "title": "Ketel Marte (Bat Flip)",
+    "title": "Ketel Marte",
+    "nickname": "Bat Flip",
     "year": "2024",
     "date": "June 29, 2024",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/wkssfq784c964cvdj8cp.jpg",
@@ -76,7 +82,8 @@
   },
   {
     "id": "lourdes-gurriel-jr-2024",
-    "title": "Lourdes Gurriel Jr. (Stormtrooper)",
+    "title": "Lourdes Gurriel Jr.",
+    "nickname": "Stormtrooper",
     "year": "2024",
     "date": "July 13, 2024",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/xwqxgk1bwf6ctwf10joc.jpg",
@@ -84,7 +91,8 @@
   },
   {
     "id": "zac-gallen-scoreless-streak-2023",
-    "title": "Zac Gallen (Scoreless Streak)",
+    "title": "Zac Gallen",
+    "nickname": "Scoreless Streak",
     "year": "2023",
     "date": "April 22, 2023",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/nhqtxlnwqipibkivzvw5.jpg",
@@ -100,7 +108,8 @@
   },
   {
     "id": "ketel-marte-switch-hitter-2021",
-    "title": "Ketel Marte (Switch-Hitter)",
+    "title": "Ketel Marte",
+    "nickname": "Switch-Hitter",
     "year": "2021",
     "date": "May 14, 2021",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/y9stfgfpmow7etkvzggd.jpg",
@@ -108,7 +117,8 @@
   },
   {
     "id": "christian-walker-sky-walker-2021",
-    "title": "Christian Walker (Sky-Walker)",
+    "title": "Christian Walker",
+    "nickname": "Sky-Walker",
     "year": "2021",
     "date": "June 11, 2021",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/eh3fckt1xr6lxmxrfvs2.jpg",
@@ -124,14 +134,16 @@
   },
   {
     "id": "zack-godley-game-of-thrones-2019",
-    "title": "Zack Godley (Game of Thrones)",
+    "title": "Zack Godley",
+    "nickname": "Game of Thrones",
     "year": "2019",
     "date": "May 17, 2019",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/vslgm0qmlh2fhbaeltgj.jpg"
   },
   {
     "id": "david-peralta-freighttrain-2019",
-    "title": "David Peralta (#FreightTrain)",
+    "title": "David Peralta",
+    "nickname": "#FreightTrain",
     "year": "2019",
     "date": "June 22, 2019",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/olej0un9ycpeglw2tn4r.jpg",
@@ -139,7 +151,8 @@
   },
   {
     "id": "nick-ahmed-on-the-moon-2019",
-    "title": "Nick Ahmed (On the Moon)",
+    "title": "Nick Ahmed",
+    "nickname": "On the Moon",
     "year": "2019",
     "date": "July 20, 2019",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/nv3mjjcc6zgqpbcwjdsn.jpg",
@@ -147,7 +160,8 @@
   },
   {
     "id": "archie-bradley-audio-2018",
-    "title": "Archie Bradley (Audio)",
+    "title": "Archie Bradley",
+    "nickname": "Audio",
     "year": "2018",
     "date": "April 21, 2018",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/btydanclwxgy932nxqym.jpg",
@@ -155,7 +169,8 @@
   },
   {
     "id": "paul-solo-star-wars-2018",
-    "title": "\"Paul Solo\" (Star Wars)",
+    "title": "\"Paul Solo\"",
+    "nickname": "Star Wars",
     "year": "2018",
     "date": "June 2, 2018",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/mi6sx6gqqonsagslcno9.jpg"
@@ -177,7 +192,8 @@
   },
   {
     "id": "ketel-marte-luchador-2018",
-    "title": "Ketel Marte (Luchador)",
+    "title": "Ketel Marte",
+    "nickname": "Luchador",
     "year": "2018",
     "date": "September 8, 2018",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/adjycmr46qggwmgoenhz.jpg",
@@ -193,7 +209,8 @@
   },
   {
     "id": "paul-goldschmidt-star-wars-2017",
-    "title": "Paul Goldschmidt (Star Wars)",
+    "title": "Paul Goldschmidt",
+    "nickname": "Star Wars",
     "year": "2017",
     "date": "June 24, 2017",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/ogeypsbrljbqyskxgylw.jpg",
@@ -201,14 +218,16 @@
   },
   {
     "id": "game-of-thrones-2017",
-    "title": "Taijuan Walker (Game of Thrones)",
+    "title": "Taijuan Walker",
+    "nickname": "Game of Thrones",
     "year": "2017",
     "date": "July 7, 2017",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/ym1j5niztpvb7jqsgbtu.jpg"
   },
   {
     "id": "robbie-ray-strikeout-counter-2017",
-    "title": "Robbie Ray (Strikeout Counter)",
+    "title": "Robbie Ray",
+    "nickname": "Strikeout Counter",
     "year": "2017",
     "date": "July 22, 2017",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/ulntaxllsbbta2rju7gq.jpg",
@@ -278,14 +297,16 @@
   },
   {
     "id": "aj-pollock-star-wars-2015",
-    "title": "A.J. Pollock (Star Wars)",
+    "title": "A.J. Pollock",
+    "nickname": "Star Wars",
     "year": "2015",
     "date": "July 18, 2015",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/eovq1oj9v05mo2eqys60.jpg"
   },
   {
     "id": "randy-johnson-hall-of-fame-2015",
-    "title": "Randy Johnson (Hall of Fame)",
+    "title": "Randy Johnson",
+    "nickname": "Hall of Fame",
     "year": "2015",
     "date": "July 25, 2015",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/bzcp9l8wex341ekcgln0.jpg",
@@ -314,7 +335,8 @@
   },
   {
     "id": "josh-collmenter-star-wars-day-2014",
-    "title": "Josh Collmenter (Star Wars Day)",
+    "title": "Josh Collmenter",
+    "nickname": "Star Wars Day",
     "year": "2014",
     "date": "July 20, 2014",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/cytsp59hql3c7cxvz4er.jpg"
@@ -343,13 +365,15 @@
   },
   {
     "id": "wade-miley-garden-gnome-2013",
-    "title": "Wade Miley (Garden Gnome)",
+    "title": "Wade Miley",
+    "nickname": "Garden Gnome",
     "year": "2013",
     "date": "April 27, 2013"
   },
   {
     "id": "aaron-hill-bicycle-2013",
-    "title": "Aaron Hill (#BiCycle)",
+    "title": "Aaron Hill",
+    "nickname": "#BiCycle",
     "year": "2013",
     "date": "June 8, 2013",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/gj9x9sni7b7sn22oqkvh.jpg"
@@ -403,7 +427,8 @@
   },
   {
     "id": "mark-grace-racing-gracie-2011",
-    "title": "Mark Grace (Racing Gracie)",
+    "title": "Mark Grace",
+    "nickname": "Racing Gracie",
     "year": "2011",
     "date": "April 24, 2011",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/ow7qkehcv1dyr65lgdpi.jpg",
@@ -456,7 +481,8 @@
   },
   {
     "id": "luis-gonzalez-gonzo-2010",
-    "title": "Luis Gonzalez (Gonzo)",
+    "title": "Luis Gonzalez",
+    "nickname": "Gonzo",
     "year": "2010",
     "date": "August 7, 2010",
     "quantity": "15,000"
@@ -534,7 +560,8 @@
   },
   {
     "id": "d-baxter-2008",
-    "title": "D. Baxter (Mascot)",
+    "title": "D. Baxter",
+    "nickname": "Mascot",
     "year": "2008",
     "date": "June 1, 2008",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/i1jieoqju52nnyugi62v.jpg"
@@ -557,7 +584,8 @@
   },
   {
     "id": "brandon-webb-cy-young-2007",
-    "title": "Brandon Webb (Cy Young)",
+    "title": "Brandon Webb",
+    "nickname": "Cy Young",
     "year": "2007",
     "date": "April 14, 2007",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/qjwfd1v5utrlmsvjgx76.jpg",
@@ -565,7 +593,8 @@
   },
   {
     "id": "orlando-hudson-gold-glove-2007",
-    "title": "Orlando Hudson (Gold Glove)",
+    "title": "Orlando Hudson",
+    "nickname": "Gold Glove",
     "year": "2007",
     "date": "April 28, 2007",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/hm5rxsosioc6mv0xwpkp.jpg",
@@ -657,7 +686,8 @@
   },
   {
     "id": "maxter-mascot-2003",
-    "title": "Maxter (Mascot)",
+    "title": "Maxter",
+    "nickname": "Mascot",
     "year": "2003",
     "date": "June 7, 2003",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/d0k02dmrt4xhoirkc8fa.jpg"
@@ -687,7 +717,8 @@
   },
   {
     "id": "luis-gonzalez-hr-derby-2002",
-    "title": "Luis Gonzalez (HR Derby)",
+    "title": "Luis Gonzalez",
+    "nickname": "HR Derby",
     "year": "2002",
     "date": "July 6, 2002",
     "quantity": "15,000"
@@ -701,7 +732,8 @@
   },
   {
     "id": "randy-johnson-cy-young-2002",
-    "title": "Randy Johnson (Cy Young)",
+    "title": "Randy Johnson",
+    "nickname": "Cy Young",
     "year": "2002",
     "date": "August 24, 2002",
     "quantity": "15,000"

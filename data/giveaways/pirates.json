@@ -69,14 +69,16 @@
   },
   {
     "id": "bill-mazeroski-gold-glove-2022",
-    "title": "Bill Mazeroski (Gold Glove)",
+    "title": "Bill Mazeroski",
+    "nickname": "Gold Glove",
     "year": "2022",
     "date": "July 5, 2022",
     "quantity": "20,000"
   },
   {
     "id": "doug-drabek-cy-young-2022",
-    "title": "Doug Drabek (Cy Young)",
+    "title": "Doug Drabek",
+    "nickname": "Cy Young",
     "year": "2022",
     "date": "September 24, 2022",
     "quantity": "20,000"
@@ -89,7 +91,8 @@
   },
   {
     "id": "jameson-taillon-star-wars-2019",
-    "title": "Jameson Taillon (Star Wars)",
+    "title": "Jameson Taillon",
+    "nickname": "Star Wars",
     "year": "2019",
     "date": "April 5, 2019",
     "quantity": "20,000"
@@ -117,7 +120,8 @@
   },
   {
     "id": "steve-blass-dual-player-broadcaster-2019",
-    "title": "Steve Blass (Dual Player/Broadcaster)",
+    "title": "Steve Blass",
+    "nickname": "Dual Player/Broadcaster",
     "year": "2019",
     "date": "September 28, 2019",
     "quantity": "20,000"
@@ -130,7 +134,8 @@
   },
   {
     "id": "sean-rodriguez-walk-off-2018",
-    "title": "Sean Rodriguez (Walk-Off)",
+    "title": "Sean Rodriguez",
+    "nickname": "Walk-Off",
     "year": "2018",
     "date": "June 23, 2018",
     "quantity": "20,000"
@@ -144,7 +149,8 @@
   },
   {
     "id": "hulk-kids-2018",
-    "title": "Hulk (Kids)",
+    "title": "Hulk",
+    "nickname": "Kids",
     "year": "2018",
     "date": "July 29, 2018"
   },
@@ -164,7 +170,8 @@
   },
   {
     "id": "francisco-cervelli-thats-amore-singing-2017",
-    "title": "Francisco Cervelli (\"That's Amore\" Singing)",
+    "title": "Francisco Cervelli",
+    "nickname": "\"That's Amore\" Singing",
     "year": "2017",
     "date": "April 8, 2017",
     "quantity": "20,000"
@@ -185,7 +192,8 @@
   },
   {
     "id": "gregory-polanco-el-coffee-2017",
-    "title": "Gregory Polanco (\"El Coffee\")",
+    "title": "Gregory Polanco",
+    "nickname": "\"El Coffee\"",
     "year": "2017",
     "date": "August 19, 2017"
   },
@@ -225,14 +233,16 @@
   },
   {
     "id": "pedro-alvarez-silver-slugger-2014",
-    "title": "Pedro Alvarez (Silver Slugger)",
+    "title": "Pedro Alvarez",
+    "nickname": "Silver Slugger",
     "year": "2014",
     "date": "May 24, 2014",
     "quantity": "25,000"
   },
   {
     "id": "andrew-mccutchen-nl-mvp-2014",
-    "title": "Andrew McCutchen (N.L. MVP)",
+    "title": "Andrew McCutchen",
+    "nickname": "N.L. MVP",
     "year": "2014",
     "date": "June 28, 2014",
     "quantity": "25,000"
@@ -246,14 +256,16 @@
   },
   {
     "id": "andrew-mccutchen-awards-2013",
-    "title": "Andrew McCutchen (Awards)",
+    "title": "Andrew McCutchen",
+    "nickname": "Awards",
     "year": "2013",
     "date": "April 23, 2013",
     "quantity": "25,000"
   },
   {
     "id": "aj-burnett-camo-jersey-2013",
-    "title": "A.J. Burnett (Camo Jersey)",
+    "title": "A.J. Burnett",
+    "nickname": "Camo Jersey",
     "year": "2013",
     "date": "May 18, 2013",
     "quantity": "25,000"
@@ -266,7 +278,8 @@
   },
   {
     "id": "andrew-mccutchen-figurine-2011",
-    "title": "Andrew McCutchen (Figurine)",
+    "title": "Andrew McCutchen",
+    "nickname": "Figurine",
     "year": "2011",
     "date": "April 23, 2011"
   },
@@ -278,14 +291,16 @@
   },
   {
     "id": "pirate-parrot-mascot-2011",
-    "title": "Pirate Parrot (Mascot)",
+    "title": "Pirate Parrot",
+    "nickname": "Mascot",
     "year": "2011",
     "date": "June 12, 2011",
     "quantity": "5,000"
   },
   {
     "id": "garrett-jones-figurine-2010",
-    "title": "Garrett Jones (Figurine)",
+    "title": "Garrett Jones",
+    "nickname": "Figurine",
     "year": "2010",
     "date": "May 22, 2010"
   },
@@ -309,7 +324,8 @@
   },
   {
     "id": "honus-wagner-figurine-2009",
-    "title": "Honus Wagner (Figurine)",
+    "title": "Honus Wagner",
+    "nickname": "Figurine",
     "year": "2009",
     "date": "June 13, 2009"
   },
@@ -381,13 +397,15 @@
   },
   {
     "id": "jason-bay-2006-all-star-2007",
-    "title": "Jason Bay (2006 All-Star)",
+    "title": "Jason Bay",
+    "nickname": "2006 All-Star",
     "year": "2007",
     "date": "April 13, 2007"
   },
   {
     "id": "freddy-sanchez-2006-batting-champion-2007",
-    "title": "Freddy Sanchez (2006 Batting Champion)",
+    "title": "Freddy Sanchez",
+    "nickname": "2006 Batting Champion",
     "year": "2007",
     "date": "April 28, 2007"
   },
@@ -441,7 +459,8 @@
   },
   {
     "id": "jason-bay-all-star-2006",
-    "title": "Jason Bay (All-Star)",
+    "title": "Jason Bay",
+    "nickname": "All-Star",
     "year": "2006",
     "date": "April 15, 2006"
   },
@@ -453,13 +472,15 @@
   },
   {
     "id": "jack-wilson-jose-castillo-double-2006",
-    "title": "Jack Wilson & Jose Castillo (Double)",
+    "title": "Jack Wilson & Jose Castillo",
+    "nickname": "Double",
     "year": "2006",
     "date": "May 13, 2006"
   },
   {
     "id": "fire-ice-gonzalez-perez-2006",
-    "title": "\"Fire & Ice\" (Gonzalez & Perez)",
+    "title": "\"Fire & Ice\"",
+    "nickname": "Gonzalez & Perez",
     "year": "2006",
     "date": "May 27, 2006"
   },
@@ -471,7 +492,8 @@
   },
   {
     "id": "young-guns-duke-doumit-duffy-2006",
-    "title": "\"Young Guns\" (Duke, Doumit, Duffy)",
+    "title": "\"Young Guns\"",
+    "nickname": "Duke, Doumit, Duffy",
     "year": "2006",
     "date": "July 1, 2006"
   },
@@ -483,7 +505,8 @@
   },
   {
     "id": "jolly-roger-mascot-2006",
-    "title": "Jolly Roger (Mascot)",
+    "title": "Jolly Roger",
+    "nickname": "Mascot",
     "year": "2006",
     "date": "July 30, 2006"
   },
@@ -495,7 +518,8 @@
   },
   {
     "id": "potato-pete-mascot-2006",
-    "title": "\"Potato Pete\" (Mascot)",
+    "title": "\"Potato Pete\"",
+    "nickname": "Mascot",
     "year": "2006",
     "date": "August 13, 2006"
   },
@@ -513,7 +537,8 @@
   },
   {
     "id": "jason-bay-nl-rookie-of-the-year-2005",
-    "title": "Jason Bay (NL Rookie of the Year)",
+    "title": "Jason Bay",
+    "nickname": "NL Rookie of the Year",
     "year": "2005",
     "date": "April 15, 2005"
   },
@@ -555,7 +580,8 @@
   },
   {
     "id": "cheese-chester-mascot-2005",
-    "title": "\"Cheese Chester\" (Mascot)",
+    "title": "\"Cheese Chester\"",
+    "nickname": "Mascot",
     "year": "2005",
     "date": "August 7, 2005"
   },
@@ -591,7 +617,8 @@
   },
   {
     "id": "jalapeno-hannah-mini-2004",
-    "title": "\"Jalapeno Hannah\" (Mini)",
+    "title": "\"Jalapeno Hannah\"",
+    "nickname": "Mini",
     "year": "2004",
     "date": "May 8, 2004"
   },
@@ -609,7 +636,8 @@
   },
   {
     "id": "sauerkraut-saul-mini-2004",
-    "title": "\"Sauerkraut Saul\" (Mini)",
+    "title": "\"Sauerkraut Saul\"",
+    "nickname": "Mini",
     "year": "2004",
     "date": "July 18, 2004"
   },
@@ -651,7 +679,8 @@
   },
   {
     "id": "bob-prince-talking-2003",
-    "title": "Bob Prince (Talking)",
+    "title": "Bob Prince",
+    "nickname": "Talking",
     "year": "2003",
     "date": "May 21, 2003"
   },
@@ -705,7 +734,8 @@
   },
   {
     "id": "pirate-parrot-mascot-2002",
-    "title": "Pirate Parrot (Mascot)",
+    "title": "Pirate Parrot",
+    "nickname": "Mascot",
     "year": "2002",
     "date": "September 22, 2002"
   },

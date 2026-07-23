@@ -1,7 +1,8 @@
 [
   {
     "id": "jac-caglianone-blazin-bat-2026",
-    "title": "Jac Caglianone (\"Blazin' Bat\")",
+    "title": "Jac Caglianone",
+    "nickname": "\"Blazin' Bat\"",
     "year": "2026",
     "date": "May 4, 2026",
     "quantity": "15,000"
@@ -14,20 +15,23 @@
   },
   {
     "id": "lucas-erceg-lights-out-lucas-2026",
-    "title": "Lucas Erceg (\"Lights Out Lucas\")",
+    "title": "Lucas Erceg",
+    "nickname": "\"Lights Out Lucas\"",
     "year": "2026",
     "date": "May 18, 2026",
     "quantity": "15,000"
   },
   {
     "id": "the-pasquatch-2026",
-    "title": "\"The Pasquatch\" (Vinnie Pasquantino)",
+    "title": "\"The Pasquatch\"",
+    "nickname": "Vinnie Pasquantino",
     "year": "2026",
     "date": "May 26, 2026"
   },
   {
     "id": "red-white-bobby-2026",
-    "title": "\"Red, White & Bobby\" (Bobby Witt Jr.)",
+    "title": "\"Red, White & Bobby\"",
+    "nickname": "Bobby Witt Jr.",
     "year": "2026",
     "date": "July 4, 2026"
   },
@@ -51,21 +55,24 @@
   },
   {
     "id": "maikel-garcia-big-time-bat-flip-2026",
-    "title": "Maikel Garcia (\"Big Time Bat Flip\")",
+    "title": "Maikel Garcia",
+    "nickname": "\"Big Time Bat Flip\"",
     "year": "2026",
     "date": "July 21, 2026",
     "quantity": "15,000"
   },
   {
     "id": "salvador-perez-city-connect-2026",
-    "title": "Salvador Perez (City Connect)",
+    "title": "Salvador Perez",
+    "nickname": "City Connect",
     "year": "2026",
     "date": "September 25, 2026",
     "quantity": "20,000"
   },
   {
     "id": "sluggerrr-italian-heritage-2025",
-    "title": "Sluggerrr (Italian Heritage)",
+    "title": "Sluggerrr",
+    "nickname": "Italian Heritage",
     "year": "2025",
     "date": "September 21, 2025"
   },
@@ -78,13 +85,15 @@
   },
   {
     "id": "sluggerrr-viva-los-royals-2025",
-    "title": "Sluggerrr (Viva Los Royals)",
+    "title": "Sluggerrr",
+    "nickname": "Viva Los Royals",
     "year": "2025",
     "date": "September 6, 2025"
   },
   {
     "id": "sluggerrr-jewish-heritage-2025",
-    "title": "Sluggerrr (Jewish Heritage)",
+    "title": "Sluggerrr",
+    "nickname": "Jewish Heritage",
     "year": "2025",
     "date": "September 3, 2025"
   },
@@ -132,7 +141,8 @@
   },
   {
     "id": "george-brett-bret-saberhagen-1985-championship-2025",
-    "title": "George Brett & Bret Saberhagen (1985 Championship, Theme Ticket)",
+    "title": "George Brett & Bret Saberhagen",
+    "nickname": "1985 Championship, Theme Ticket",
     "year": "2025",
     "date": "2025"
   },
@@ -144,7 +154,8 @@
   },
   {
     "id": "sluggerrr-asian-american-pacific-islander-heritage-2025",
-    "title": "Sluggerrr (Asian American & Pacific Islander Heritage)",
+    "title": "Sluggerrr",
+    "nickname": "Asian American & Pacific Islander Heritage",
     "year": "2025",
     "date": "May 7, 2025"
   },
@@ -157,7 +168,8 @@
   },
   {
     "id": "sluggerrr-irish-heritage-2025",
-    "title": "Sluggerrr (Irish Heritage)",
+    "title": "Sluggerrr",
+    "nickname": "Irish Heritage",
     "year": "2025",
     "date": "April 23, 2025"
   },
@@ -205,7 +217,8 @@
   },
   {
     "id": "pasquatch-2024",
-    "title": "\"Pasquatch\" (Vinnie Pasquantino)",
+    "title": "\"Pasquatch\"",
+    "nickname": "Vinnie Pasquantino",
     "year": "2024",
     "date": "June 1, 2024"
   },
@@ -223,7 +236,8 @@
   },
   {
     "id": "trevor-vance-head-groundskeeper-2023",
-    "title": "Trevor Vance (Head Groundskeeper)",
+    "title": "Trevor Vance",
+    "nickname": "Head Groundskeeper",
     "year": "2023",
     "date": "August 1, 2023"
   },
@@ -236,14 +250,16 @@
   },
   {
     "id": "nicky-lopez-vinnie-pasquantino-double-2023",
-    "title": "Nicky Lopez & Vinnie Pasquantino (Double)",
+    "title": "Nicky Lopez & Vinnie Pasquantino",
+    "nickname": "Double",
     "year": "2023",
     "date": "June 18, 2023",
     "quantity": "15,000"
   },
   {
     "id": "mj-melendez-build-your-own-2023",
-    "title": "MJ Melendez (\"Build-Your-Own\")",
+    "title": "MJ Melendez",
+    "nickname": "\"Build-Your-Own\"",
     "year": "2023",
     "date": "April 1, 2023",
     "quantity": "15,000"
@@ -290,39 +306,45 @@
   },
   {
     "id": "mondi-lorian-2021",
-    "title": "\"Mondi-Lorian\" (Adalberto Mondesi)",
+    "title": "\"Mondi-Lorian\"",
+    "nickname": "Adalberto Mondesi",
     "year": "2021",
     "date": "August 10, 2021"
   },
   {
     "id": "whit-merrifield-hit-counter-2021",
-    "title": "Whit Merrifield (\"Hit Counter\")",
+    "title": "Whit Merrifield",
+    "nickname": "\"Hit Counter\"",
     "year": "2021",
     "date": "June 5, 2021",
     "quantity": "15,000"
   },
   {
     "id": "jorge-soler-soler-power-2021",
-    "title": "Jorge Soler (\"Soler Power\")",
+    "title": "Jorge Soler",
+    "nickname": "\"Soler Power\"",
     "year": "2021",
     "date": "June 4, 2021",
     "quantity": "15,000"
   },
   {
     "id": "whitey-herzog-hall-of-fame-series-2020",
-    "title": "Whitey Herzog (Hall of Fame Series)",
+    "title": "Whitey Herzog",
+    "nickname": "Hall of Fame Series",
     "year": "2020",
     "date": "July 25, 2020"
   },
   {
     "id": "whit-merrifield-hit-counter-2020",
-    "title": "Whit Merrifield (\"Hit Counter\")",
+    "title": "Whit Merrifield",
+    "nickname": "\"Hit Counter\"",
     "year": "2020",
     "date": "June 13, 2020"
   },
   {
     "id": "hunter-dozier-bull-dozier-2020",
-    "title": "Hunter Dozier (\"Bull-Dozier\")",
+    "title": "Hunter Dozier",
+    "nickname": "\"Bull-Dozier\"",
     "year": "2020",
     "date": "June 6, 2020"
   },
@@ -334,7 +356,8 @@
   },
   {
     "id": "danny-duffy-player-designed-2019",
-    "title": "Danny Duffy (Player Designed)",
+    "title": "Danny Duffy",
+    "nickname": "Player Designed",
     "year": "2019",
     "date": "July 13, 2019",
     "quantity": "15,000"
@@ -360,7 +383,8 @@
   },
   {
     "id": "jeff-montgomery-hall-of-fame-series-2018",
-    "title": "Jeff Montgomery (Hall of Fame Series)",
+    "title": "Jeff Montgomery",
+    "nickname": "Hall of Fame Series",
     "year": "2018",
     "date": "August 25, 2018",
     "quantity": "20,000"
@@ -374,13 +398,15 @@
   },
   {
     "id": "ned-yost-iron-throne-2018",
-    "title": "Ned Yost (Iron Throne)",
+    "title": "Ned Yost",
+    "nickname": "Iron Throne",
     "year": "2018",
     "date": "June 19, 2018"
   },
   {
     "id": "whit-merrifield-two-hit-whit-2018",
-    "title": "Whit Merrifield (Two-Hit Whit)",
+    "title": "Whit Merrifield",
+    "nickname": "Two-Hit Whit",
     "year": "2018",
     "date": "June 2, 2018",
     "imageUrl": "https://www.stadiumgiveawayexchange.com/wp-content/uploads/2018/06/Kansas-City-Royals-Whit-Merrifield-Bobblehead-6-2-2018.jpg",
@@ -388,7 +414,8 @@
   },
   {
     "id": "george-brett-pine-tar-2018",
-    "title": "George Brett (Pine Tar)",
+    "title": "George Brett",
+    "nickname": "Pine Tar",
     "year": "2018",
     "date": "May 19, 2018",
     "quantity": "20,000"
@@ -402,7 +429,8 @@
   },
   {
     "id": "sal-solo-2018",
-    "title": "\"Sal Solo\" (Salvador Perez, Star Wars)",
+    "title": "\"Sal Solo\"",
+    "nickname": "Salvador Perez, Star Wars",
     "year": "2018",
     "date": "May 4, 2018"
   },
@@ -415,7 +443,8 @@
   },
   {
     "id": "cam-butera-tie-fighter-pilot-2017",
-    "title": "Cam Butera (TIE Fighter Pilot)",
+    "title": "Cam Butera",
+    "nickname": "TIE Fighter Pilot",
     "year": "2017",
     "date": "September 20, 2017"
   },
@@ -468,7 +497,8 @@
   },
   {
     "id": "eric-hosmer-star-wars-x-wing-2016",
-    "title": "Eric Hosmer (Star Wars X-Wing)",
+    "title": "Eric Hosmer",
+    "nickname": "Star Wars X-Wing",
     "year": "2016",
     "date": "September 18, 2016"
   },
@@ -505,7 +535,8 @@
   },
   {
     "id": "mike-sweeney-hall-of-fame-2015",
-    "title": "Mike Sweeney (Hall of Fame)",
+    "title": "Mike Sweeney",
+    "nickname": "Hall of Fame",
     "year": "2015",
     "date": "September 6, 2015",
     "quantity": "10,000"
@@ -518,7 +549,8 @@
   },
   {
     "id": "alex-gordon-jedi-2015",
-    "title": "Alex Gordon (Jedi)",
+    "title": "Alex Gordon",
+    "nickname": "Jedi",
     "year": "2015",
     "date": "August 9, 2015"
   },
@@ -601,7 +633,8 @@
   },
   {
     "id": "billy-butler-silver-slugger-2013",
-    "title": "Billy Butler (Silver Slugger)",
+    "title": "Billy Butler",
+    "nickname": "Silver Slugger",
     "year": "2013",
     "date": "May 4, 2013",
     "quantity": "10,000"
@@ -746,7 +779,8 @@
   },
   {
     "id": "denny-matthews-talking-2004",
-    "title": "Denny Matthews (Talking)",
+    "title": "Denny Matthews",
+    "nickname": "Talking",
     "year": "2004",
     "date": "August 7, 2004"
   },
@@ -758,7 +792,8 @@
   },
   {
     "id": "sluggerrr-mascot-2002",
-    "title": "Sluggerrr (Mascot)",
+    "title": "Sluggerrr",
+    "nickname": "Mascot",
     "year": "2002",
     "date": "June 30, 2002"
   },

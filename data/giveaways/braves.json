@@ -1,7 +1,8 @@
 [
   {
     "id": "drake-baldwin-nl-rookie-of-the-year-2026",
-    "title": "Drake Baldwin (NL Rookie of the Year)",
+    "title": "Drake Baldwin",
+    "nickname": "NL Rookie of the Year",
     "year": "2026",
     "date": "March 31, 2026",
     "quantity": "15,000"
@@ -29,7 +30,8 @@
   },
   {
     "id": "andruw-jones-hall-of-fame-2026",
-    "title": "Andruw Jones (Hall of Fame)",
+    "title": "Andruw Jones",
+    "nickname": "Hall of Fame",
     "year": "2026",
     "date": "July 30, 2026",
     "quantity": "15,000"
@@ -57,7 +59,8 @@
   },
   {
     "id": "chipper-jones-2000-all-star-game-2025",
-    "title": "Chipper Jones (2000 All-Star Game)",
+    "title": "Chipper Jones",
+    "nickname": "2000 All-Star Game",
     "year": "2025",
     "date": "April 22, 2025",
     "quantity": "15,000"
@@ -126,14 +129,16 @@
   },
   {
     "id": "blooper-bobblebody-2023",
-    "title": "BLOOPER (Bobblebody)",
+    "title": "BLOOPER",
+    "nickname": "Bobblebody",
     "year": "2023",
     "date": "April 11, 2023",
     "quantity": "15,000"
   },
   {
     "id": "matt-olson-hometown-series-2023",
-    "title": "Matt Olson (\"Hometown\" Series)",
+    "title": "Matt Olson",
+    "nickname": "\"Hometown\" Series",
     "year": "2023",
     "date": "April 25, 2023",
     "quantity": "15,000"
@@ -172,13 +177,15 @@
   },
   {
     "id": "hammerin-hank-aaron-2023",
-    "title": "\"Hammerin' Hank\" (Aaron)",
+    "title": "\"Hammerin' Hank\"",
+    "nickname": "Aaron",
     "year": "2023",
     "date": "July 2, 2023"
   },
   {
     "id": "ron-gant-93-pressbox-fire-2023",
-    "title": "Ron Gant ('93 Pressbox Fire)",
+    "title": "Ron Gant",
+    "nickname": "'93 Pressbox Fire",
     "year": "2023",
     "date": "July 19, 2023",
     "quantity": "15,000"
@@ -191,14 +198,16 @@
   },
   {
     "id": "fred-mcgriff-hall-of-fame-2023",
-    "title": "Fred McGriff (Hall of Fame)",
+    "title": "Fred McGriff",
+    "nickname": "Hall of Fame",
     "year": "2023",
     "date": "August 1, 2023",
     "quantity": "15,000"
   },
   {
     "id": "michael-harris-ii-rookie-of-the-year-2023",
-    "title": "Michael Harris II (Rookie of the Year)",
+    "title": "Michael Harris II",
+    "nickname": "Rookie of the Year",
     "year": "2023",
     "date": "August 22, 2023",
     "quantity": "15,000"
@@ -218,14 +227,16 @@
   },
   {
     "id": "ronald-acuna-jr-bat-flip-2023",
-    "title": "Ronald Acuna Jr. (Bat Flip)",
+    "title": "Ronald Acuna Jr.",
+    "nickname": "Bat Flip",
     "year": "2023",
     "date": "September 19, 2023",
     "quantity": "15,000"
   },
   {
     "id": "aj-minter-cowboy-2023",
-    "title": "A.J. Minter (Cowboy)",
+    "title": "A.J. Minter",
+    "nickname": "Cowboy",
     "year": "2023",
     "date": "September 26, 2023",
     "quantity": "15,000"
@@ -239,21 +250,24 @@
   },
   {
     "id": "greg-maddux-cy-young-2022",
-    "title": "Greg Maddux (Cy Young)",
+    "title": "Greg Maddux",
+    "nickname": "Cy Young",
     "year": "2022",
     "date": "April 26, 2022",
     "quantity": "15,000"
   },
   {
     "id": "john-smoltz-cy-young-2022",
-    "title": "John Smoltz (Cy Young)",
+    "title": "John Smoltz",
+    "nickname": "Cy Young",
     "year": "2022",
     "date": "May 10, 2022",
     "quantity": "15,000"
   },
   {
     "id": "tom-glavine-cy-young-2022",
-    "title": "Tom Glavine (Cy Young)",
+    "title": "Tom Glavine",
+    "nickname": "Cy Young",
     "year": "2022",
     "date": "May 13, 2022",
     "quantity": "15,000"
@@ -267,21 +281,24 @@
   },
   {
     "id": "dale-murphy-power-alley-2022",
-    "title": "Dale Murphy (\"Power Alley\")",
+    "title": "Dale Murphy",
+    "nickname": "\"Power Alley\"",
     "year": "2022",
     "date": "June 20, 2022",
     "quantity": "15,000"
   },
   {
     "id": "brian-snitker-world-series-trophy-2022",
-    "title": "Brian Snitker (World Series Trophy)",
+    "title": "Brian Snitker",
+    "nickname": "World Series Trophy",
     "year": "2022",
     "date": "July 6, 2022",
     "quantity": "15,000"
   },
   {
     "id": "dansby-swanson-mini-2022",
-    "title": "Dansby Swanson (Mini)",
+    "title": "Dansby Swanson",
+    "nickname": "Mini",
     "year": "2022",
     "date": "July 10, 2022",
     "quantity": "3,000"
@@ -295,7 +312,8 @@
   },
   {
     "id": "eddie-rosario-nlcs-mvp-2022",
-    "title": "Eddie Rosario (NLCS MVP)",
+    "title": "Eddie Rosario",
+    "nickname": "NLCS MVP",
     "year": "2022",
     "date": "August 2, 2022",
     "quantity": "15,000"
@@ -322,21 +340,24 @@
   },
   {
     "id": "ronald-acuna-jr-bat-flip-2022",
-    "title": "Ronald Acuna Jr. (Bat Flip)",
+    "title": "Ronald Acuna Jr.",
+    "nickname": "Bat Flip",
     "year": "2022",
     "date": "September 2, 2022",
     "quantity": "15,000"
   },
   {
     "id": "ronald-acuna-jr-grand-slam-2022",
-    "title": "Ronald Acuna Jr. (Grand Slam)",
+    "title": "Ronald Acuna Jr.",
+    "nickname": "Grand Slam",
     "year": "2022",
     "date": "September 16, 2022",
     "quantity": "15,000"
   },
   {
     "id": "blooper-world-series-2022",
-    "title": "BLOOPER (World Series)",
+    "title": "BLOOPER",
+    "nickname": "World Series",
     "year": "2022",
     "date": "September 18, 2022",
     "quantity": "3,000"
@@ -349,7 +370,8 @@
   },
   {
     "id": "freddie-freeman-2020-nl-mvp-2021",
-    "title": "Freddie Freeman (2020 NL MVP)",
+    "title": "Freddie Freeman",
+    "nickname": "2020 NL MVP",
     "year": "2021",
     "date": "May 23, 2021",
     "quantity": "15,000"
@@ -377,7 +399,8 @@
   },
   {
     "id": "ronald-acuna-jr-mini-2021",
-    "title": "Ronald Acuna Jr. (Mini)",
+    "title": "Ronald Acuna Jr.",
+    "nickname": "Mini",
     "year": "2021",
     "date": "July 4, 2021",
     "quantity": "3,000"
@@ -405,7 +428,8 @@
   },
   {
     "id": "ozzie-albies-los-bravos-2021",
-    "title": "Ozzie Albies (\"Los Bravos\")",
+    "title": "Ozzie Albies",
+    "nickname": "\"Los Bravos\"",
     "year": "2021",
     "date": "September 10, 2021",
     "quantity": "15,000"
@@ -454,7 +478,8 @@
   },
   {
     "id": "swanberson-swanson-culberson-2019",
-    "title": "\"Swanberson\" (Swanson & Culberson)",
+    "title": "\"Swanberson\"",
+    "nickname": "Swanson & Culberson",
     "year": "2019",
     "date": "June 11, 2019"
   },
@@ -474,7 +499,8 @@
   },
   {
     "id": "hammerin-hank-aaron-2019",
-    "title": "\"Hammerin' Hank\" (Aaron)",
+    "title": "\"Hammerin' Hank\"",
+    "nickname": "Aaron",
     "year": "2019",
     "date": "August 4, 2019",
     "quantity": "5,000"
@@ -500,7 +526,8 @@
   },
   {
     "id": "ender-inciarte-gold-glove-2018",
-    "title": "Ender Inciarte (Gold Glove)",
+    "title": "Ender Inciarte",
+    "nickname": "Gold Glove",
     "year": "2018",
     "date": "April 20, 2018",
     "quantity": "20,000"
@@ -514,13 +541,15 @@
   },
   {
     "id": "ozzie-calrissian-star-wars-2018",
-    "title": "\"Ozzie Calrissian\" (Star Wars)",
+    "title": "\"Ozzie Calrissian\"",
+    "nickname": "Star Wars",
     "year": "2018",
     "date": "May 4, 2018"
   },
   {
     "id": "freddie-freeman-freddie-stretch-2018",
-    "title": "Freddie Freeman (\"Freddie Stretch\")",
+    "title": "Freddie Freeman",
+    "nickname": "\"Freddie Stretch\"",
     "year": "2018",
     "date": "June 15, 2018"
   },
@@ -532,27 +561,31 @@
   },
   {
     "id": "chipper-jones-crazy-train-2018",
-    "title": "Chipper Jones (\"Crazy Train\")",
+    "title": "Chipper Jones",
+    "nickname": "\"Crazy Train\"",
     "year": "2018",
     "date": "August 18, 2018",
     "quantity": "20,000"
   },
   {
     "id": "babe-ruth-boston-braves-2018",
-    "title": "Babe Ruth (Boston Braves)",
+    "title": "Babe Ruth",
+    "nickname": "Boston Braves",
     "year": "2018",
     "date": "September 4, 2018",
     "quantity": "20,000"
   },
   {
     "id": "mike-foltynewicz-player-designed-2018",
-    "title": "Mike Foltynewicz (Player Designed)",
+    "title": "Mike Foltynewicz",
+    "nickname": "Player Designed",
     "year": "2018",
     "date": "September 15, 2018"
   },
   {
     "id": "ra-dickey-stormtrooper-2017",
-    "title": "R.A. Dickey (Stormtrooper)",
+    "title": "R.A. Dickey",
+    "nickname": "Stormtrooper",
     "year": "2017",
     "date": "May 6, 2017"
   },
@@ -593,14 +626,16 @@
   },
   {
     "id": "skip-caray-pete-van-wieren-famous-calls-2016",
-    "title": "Skip Caray & Pete Van Wieren (\"Famous Calls\")",
+    "title": "Skip Caray & Pete Van Wieren",
+    "nickname": "\"Famous Calls\"",
     "year": "2016",
     "date": "April 23, 2016",
     "quantity": "20,000"
   },
   {
     "id": "chipper-jones-freddie-freeman-atv-2016",
-    "title": "Chipper Jones & Freddie Freeman (ATV)",
+    "title": "Chipper Jones & Freddie Freeman",
+    "nickname": "ATV",
     "year": "2016",
     "date": "May 28, 2016",
     "quantity": "20,000"
@@ -620,27 +655,31 @@
   },
   {
     "id": "aj-pierzynski-zombified-2016",
-    "title": "A.J. Pierzynski (Zombified)",
+    "title": "A.J. Pierzynski",
+    "nickname": "Zombified",
     "year": "2016",
     "date": "July 15, 2016"
   },
   {
     "id": "andruw-jones-spider-man-catch-2016",
-    "title": "Andruw Jones (Spider-Man Catch)",
+    "title": "Andruw Jones",
+    "nickname": "Spider-Man Catch",
     "year": "2016",
     "date": "August 16, 2016",
     "quantity": "20,000"
   },
   {
     "id": "chipper-jones-2000-all-star-game-2016",
-    "title": "Chipper Jones (2000 All-Star Game)",
+    "title": "Chipper Jones",
+    "nickname": "2000 All-Star Game",
     "year": "2016",
     "date": "September 10, 2016",
     "quantity": "20,000"
   },
   {
     "id": "bobby-cox-carried-off-2016",
-    "title": "Bobby Cox (\"Carried Off\")",
+    "title": "Bobby Cox",
+    "nickname": "\"Carried Off\"",
     "year": "2016",
     "date": "September 17, 2016",
     "quantity": "20,000"
@@ -661,20 +700,23 @@
   },
   {
     "id": "jason-grilli-x-wing-fighter-2015",
-    "title": "Jason Grilli (X-Wing Fighter)",
+    "title": "Jason Grilli",
+    "nickname": "X-Wing Fighter",
     "year": "2015",
     "date": "July 3, 2015"
   },
   {
     "id": "freddie-freeman-jonny-gomes-hugging-2015",
-    "title": "Freddie Freeman & Jonny Gomes (Hugging)",
+    "title": "Freddie Freeman & Jonny Gomes",
+    "nickname": "Hugging",
     "year": "2015",
     "date": "July 21, 2015",
     "quantity": "20,000"
   },
   {
     "id": "john-smoltz-hall-of-fame-2015",
-    "title": "John Smoltz (Hall of Fame)",
+    "title": "John Smoltz",
+    "nickname": "Hall of Fame",
     "year": "2015",
     "date": "August 14, 2015",
     "quantity": "20,000"
@@ -821,49 +863,57 @@
   },
   {
     "id": "hank-aaron-statue-2007",
-    "title": "Hank Aaron (Statue)",
+    "title": "Hank Aaron",
+    "nickname": "Statue",
     "year": "2007",
     "date": "April 12, 2007"
   },
   {
     "id": "brian-mccann-statue-2007",
-    "title": "Brian McCann (Statue)",
+    "title": "Brian McCann",
+    "nickname": "Statue",
     "year": "2007",
     "date": "July 19, 2007"
   },
   {
     "id": "john-smoltz-statue-2007",
-    "title": "John Smoltz (Statue)",
+    "title": "John Smoltz",
+    "nickname": "Statue",
     "year": "2007",
     "date": "September 20, 2007"
   },
   {
     "id": "andruw-jones-statue-2006",
-    "title": "Andruw Jones (Statue)",
+    "title": "Andruw Jones",
+    "nickname": "Statue",
     "year": "2006",
     "date": "May 30, 2006"
   },
   {
     "id": "chipper-jones-statue-2006",
-    "title": "Chipper Jones (Statue)",
+    "title": "Chipper Jones",
+    "nickname": "Statue",
     "year": "2006",
     "date": "June 7, 2006"
   },
   {
     "id": "john-smoltz-statue-2006",
-    "title": "John Smoltz (Statue)",
+    "title": "John Smoltz",
+    "nickname": "Statue",
     "year": "2006",
     "date": "July 6, 2006"
   },
   {
     "id": "jeff-francoeur-statue-2006",
-    "title": "Jeff Francoeur (Statue)",
+    "title": "Jeff Francoeur",
+    "nickname": "Statue",
     "year": "2006",
     "date": "August 22, 2006"
   },
   {
     "id": "tim-hudson-statue-2006",
-    "title": "Tim Hudson (Statue)",
+    "title": "Tim Hudson",
+    "nickname": "Statue",
     "year": "2006",
     "date": "September 12, 2006"
   },

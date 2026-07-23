@@ -50,7 +50,8 @@
   },
   {
     "id": "luis-arraez-la-regadera-2025",
-    "title": "Luis Arraez (\"La Regadera\")",
+    "title": "Luis Arraez",
+    "nickname": "\"La Regadera\"",
     "year": "2025",
     "date": "September 22, 2025",
     "quantity": "40,000"
@@ -97,28 +98,32 @@
   },
   {
     "id": "juan-soto-soto-shuffle-2023",
-    "title": "Juan Soto (\"Soto Shuffle\")",
+    "title": "Juan Soto",
+    "nickname": "\"Soto Shuffle\"",
     "year": "2023",
     "date": "April 13, 2023",
     "quantity": "40,000"
   },
   {
     "id": "manny-machado-city-connect-2023",
-    "title": "Manny Machado (City Connect)",
+    "title": "Manny Machado",
+    "nickname": "City Connect",
     "year": "2023",
     "date": "May 15, 2023",
     "quantity": "40,000"
   },
   {
     "id": "yu-darvish-3-000-strikeouts-2023",
-    "title": "Yu Darvish (3,000 Strikeouts)",
+    "title": "Yu Darvish",
+    "nickname": "3,000 Strikeouts",
     "year": "2023",
     "date": "July 24, 2023",
     "quantity": "40,000"
   },
   {
     "id": "don-orsillo-mark-grant-don-and-mud-2023",
-    "title": "Don Orsillo & Mark Grant (\"Don and Mud\")",
+    "title": "Don Orsillo & Mark Grant",
+    "nickname": "\"Don and Mud\"",
     "year": "2023",
     "date": "August 17, 2023"
   },
@@ -194,7 +199,8 @@
   },
   {
     "id": "swingin-friar-50th-anniversary-2019",
-    "title": "Swingin' Friar (50th Anniversary)",
+    "title": "Swingin' Friar",
+    "nickname": "50th Anniversary",
     "year": "2019",
     "date": "March 30, 2019"
   },
@@ -230,37 +236,43 @@
   },
   {
     "id": "tony-gwynn-98-commemorative-2018",
-    "title": "Tony Gwynn ('98 Commemorative)",
+    "title": "Tony Gwynn",
+    "nickname": "'98 Commemorative",
     "year": "2018",
     "date": "May 10, 2018"
   },
   {
     "id": "ken-caminiti-98-commemorative-2018",
-    "title": "Ken Caminiti ('98 Commemorative)",
+    "title": "Ken Caminiti",
+    "nickname": "'98 Commemorative",
     "year": "2018",
     "date": "May 11, 2018"
   },
   {
     "id": "trevor-hoffman-98-commemorative-2018",
-    "title": "Trevor Hoffman ('98 Commemorative)",
+    "title": "Trevor Hoffman",
+    "nickname": "'98 Commemorative",
     "year": "2018",
     "date": "May 12, 2018"
   },
   {
     "id": "greg-vaughn-98-commemorative-2018",
-    "title": "Greg Vaughn ('98 Commemorative)",
+    "title": "Greg Vaughn",
+    "nickname": "'98 Commemorative",
     "year": "2018",
     "date": "May 13, 2018"
   },
   {
     "id": "han-myers-wil-myers-2018",
-    "title": "\"Han Myers\" (Wil Myers)",
+    "title": "\"Han Myers\"",
+    "nickname": "Wil Myers",
     "year": "2018",
     "date": "June 1, 2018"
   },
   {
     "id": "trevor-hoffman-500th-save-2018",
-    "title": "Trevor Hoffman (500th Save)",
+    "title": "Trevor Hoffman",
+    "nickname": "500th Save",
     "year": "2018",
     "date": "June 30, 2018",
     "imageUrl": "https://images.pristineauction.com/142/1428742/1581727283-Trevor-Hoffman-Signed-Padres-Bobblehead-PSA-Hologram-PristineAuction.com.jpg"
@@ -286,13 +298,15 @@
   },
   {
     "id": "wil-myers-ghostbusters-2016",
-    "title": "Wil Myers (Ghostbusters)",
+    "title": "Wil Myers",
+    "nickname": "Ghostbusters",
     "year": "2016",
     "date": "July 15, 2016"
   },
   {
     "id": "jedi-andy-andy-green-2016",
-    "title": "\"Jedi Andy\" (Andy Green)",
+    "title": "\"Jedi Andy\"",
+    "nickname": "Andy Green",
     "year": "2016",
     "date": "September 8, 2016"
   },
@@ -353,13 +367,15 @@
   },
   {
     "id": "adrian-gonzalez-action-figurine-2009",
-    "title": "Adrian Gonzalez (Action Figurine)",
+    "title": "Adrian Gonzalez",
+    "nickname": "Action Figurine",
     "year": "2009",
     "date": "June 6, 2009"
   },
   {
     "id": "bruce-bochy-jake-peavy-shawn-green-mini-set-2006",
-    "title": "Bruce Bochy, Jake Peavy & Shawn Green (Mini Set)",
+    "title": "Bruce Bochy, Jake Peavy & Shawn Green",
+    "nickname": "Mini Set",
     "year": "2006",
     "date": "August 18, 2006"
   },
@@ -377,7 +393,8 @@
   },
   {
     "id": "sean-burroughs-action-figure-2004",
-    "title": "Sean Burroughs (Action Figure)",
+    "title": "Sean Burroughs",
+    "nickname": "Action Figure",
     "year": "2004",
     "date": "July 11, 2004"
   },

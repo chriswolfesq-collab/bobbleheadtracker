@@ -28,14 +28,16 @@
   },
   {
     "id": "brent-rooker-silver-slugger-2025",
-    "title": "Brent Rooker (Silver Slugger)",
+    "title": "Brent Rooker",
+    "nickname": "Silver Slugger",
     "year": "2025",
     "date": "June 8, 2025",
     "imageUrl": "https://preview.redd.it/o5z2upqeas5f1.png?width=1080&crop=smart&auto=webp&s=76f59a8a5cf7d96240c69e7f440abb457dab48d7"
   },
   {
     "id": "rickey-henderson-retro-2024",
-    "title": "Rickey Henderson (Retro)",
+    "title": "Rickey Henderson",
+    "nickname": "Retro",
     "year": "2024",
     "date": "September 20, 2024",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/iige2trj2xtqolgoyeyr.png"
@@ -63,7 +65,8 @@
   },
   {
     "id": "satchel-paige-rocking-chair-2024",
-    "title": "Satchel Paige (Rocking Chair)",
+    "title": "Satchel Paige",
+    "nickname": "Rocking Chair",
     "year": "2024",
     "date": "June 21, 2024",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/xxzl5dgg2oxglk0rwx81.png"
@@ -91,7 +94,8 @@
   },
   {
     "id": "mark-kotsay-mandalorian-star-wars-2023",
-    "title": "Mark Kotsay Mandalorian (Star Wars)",
+    "title": "Mark Kotsay Mandalorian",
+    "nickname": "Star Wars",
     "year": "2023",
     "date": "May 4, 2023",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/upload/t_4x5/t_w372/mlb/svfuznysewnpkozzeue6.jpg"
@@ -105,7 +109,8 @@
   },
   {
     "id": "mike-fiers-no-hitter-2019",
-    "title": "Mike Fiers (No-Hitter)",
+    "title": "Mike Fiers",
+    "nickname": "No-Hitter",
     "year": "2019",
     "date": "September 20, 2019",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/p2wbhqia1sxqzvywieol.jpg"
@@ -119,7 +124,8 @@
   },
   {
     "id": "matt-olson-gold-glove-2019",
-    "title": "Matt Olson (Gold Glove)",
+    "title": "Matt Olson",
+    "nickname": "Gold Glove",
     "year": "2019",
     "date": "June 22, 2019",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/fcebv1i4fuh1xhemonyg.jpg"
@@ -133,14 +139,16 @@
   },
   {
     "id": "matt-chapman-gold-glove-gold-2019",
-    "title": "Matt Chapman Gold Glove (Gold)",
+    "title": "Matt Chapman Gold Glove",
+    "nickname": "Gold",
     "year": "2019",
     "date": "April 20, 2019",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/avqo91kwkpf4ciraaphq.jpg"
   },
   {
     "id": "sean-manaea-no-hitter-2018",
-    "title": "Sean Manaea (No-Hitter)",
+    "title": "Sean Manaea",
+    "nickname": "No-Hitter",
     "year": "2018",
     "date": "September 21, 2018",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/idsawtefrwe9yxqoggm4.jpg",
@@ -191,7 +199,8 @@
   },
   {
     "id": "rickey-henderson-bobble-legs-2018",
-    "title": "Rickey Henderson (\"Bobble-Legs\")",
+    "title": "Rickey Henderson",
+    "nickname": "\"Bobble-Legs\"",
     "year": "2018",
     "date": "July 22, 2018",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/bxcelxbz4kxlo7i93rwj.jpg",
@@ -221,7 +230,8 @@
   },
   {
     "id": "g-eazy-with-sound-2017",
-    "title": "G-Eazy (with sound)",
+    "title": "G-Eazy",
+    "nickname": "with sound",
     "year": "2017",
     "date": "July 28, 2017",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/adrfsjqqlwwsqlnnshun.jpg",
@@ -292,7 +302,8 @@
   },
   {
     "id": "stephen-vogt-referee-2015",
-    "title": "Stephen Vogt (Referee)",
+    "title": "Stephen Vogt",
+    "nickname": "Referee",
     "year": "2015",
     "date": "May 28, 2015",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/z7isanzhgge2etmvamfa.jpg",
@@ -300,7 +311,8 @@
   },
   {
     "id": "tony-la-russa-hall-of-fame-2014",
-    "title": "Tony La Russa (Hall of Fame)",
+    "title": "Tony La Russa",
+    "nickname": "Hall of Fame",
     "year": "2014",
     "date": "August 9, 2014",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/kldhx5hzj1ffq7ljt9bo.jpg",
@@ -332,7 +344,8 @@
   },
   {
     "id": "coco-crisp-coco-lean-2013",
-    "title": "Coco Crisp (\"Coco Lean\")",
+    "title": "Coco Crisp",
+    "nickname": "\"Coco Lean\"",
     "year": "2013",
     "date": "June 29, 2013",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/dqh5o4k9spdpxwqruz4n.jpg",
@@ -340,7 +353,8 @@
   },
   {
     "id": "reggie-jackson-1973-2013",
-    "title": "Reggie Jackson (1973)",
+    "title": "Reggie Jackson",
+    "nickname": "1973",
     "year": "2013",
     "date": "April 27, 2013",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/orerkyuc8c2y9psz5sog.jpg",
@@ -371,7 +385,8 @@
   },
   {
     "id": "mc-hammer-spinning-2011",
-    "title": "M.C. Hammer (Spinning)",
+    "title": "M.C. Hammer",
+    "nickname": "Spinning",
     "year": "2011",
     "date": "July 17, 2011",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/nx73zpunxtqxclzn07iy.jpg"
@@ -413,7 +428,8 @@
   },
   {
     "id": "justin-duchscherer-all-star-2009",
-    "title": "Justin Duchscherer (All-Star)",
+    "title": "Justin Duchscherer",
+    "nickname": "All-Star",
     "year": "2009",
     "date": "May 9, 2009",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/lrjadtjgdmrodxhpg1nr.jpg"
@@ -469,7 +485,8 @@
   },
   {
     "id": "eric-chavez-6-gold-gloves-non-gold-2007",
-    "title": "Eric Chavez (6 Gold Gloves - Non Gold)",
+    "title": "Eric Chavez",
+    "nickname": "6 Gold Gloves - Non Gold",
     "year": "2007",
     "date": "April 28, 2007",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/zlnzkeyvtg5n6mdryphs.jpg"
@@ -490,21 +507,24 @@
   },
   {
     "id": "nick-swisher-left-handed-2006",
-    "title": "Nick Swisher (Left Handed)",
+    "title": "Nick Swisher",
+    "nickname": "Left Handed",
     "year": "2006",
     "date": "May 6, 2006",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/lym1epswyhsopyyhoxrq.jpg"
   },
   {
     "id": "nick-swisher-right-handed-2006",
-    "title": "Nick Swisher (Right Handed)",
+    "title": "Nick Swisher",
+    "nickname": "Right Handed",
     "year": "2006",
     "date": "May 6, 2006",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/lym1epswyhsopyyhoxrq.jpg"
   },
   {
     "id": "huston-street-2005-rookie-of-the-year-2006",
-    "title": "Huston Street (2005 Rookie of the Year)",
+    "title": "Huston Street",
+    "nickname": "2005 Rookie of the Year",
     "year": "2006",
     "date": "April 16, 2006",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/q0jw9bhx4gzej0e1rvpq.jpg"
@@ -558,7 +578,8 @@
   },
   {
     "id": "stomper-mascot-kids-club-2005",
-    "title": "Stomper (Mascot, Kids Club)",
+    "title": "Stomper",
+    "nickname": "Mascot, Kids Club",
     "year": "2005",
     "date": "2005"
   },
@@ -592,7 +613,8 @@
   },
   {
     "id": "dave-stewart-2004-season-ticket-holders-2004",
-    "title": "Dave Stewart (2004 Season Ticket Holders)",
+    "title": "Dave Stewart",
+    "nickname": "2004 Season Ticket Holders",
     "year": "2004",
     "date": "April 1, 2004",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/azrsvclt47iudps9uo7j.jpg"
@@ -613,21 +635,24 @@
   },
   {
     "id": "barry-zito-cy-young-2003",
-    "title": "Barry Zito (Cy Young)",
+    "title": "Barry Zito",
+    "nickname": "Cy Young",
     "year": "2003",
     "date": "May 25, 2003",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/iqm3nw2dxpt0hko6kgvd.jpg"
   },
   {
     "id": "miguel-tejada-2002-mvp-2003",
-    "title": "Miguel Tejada (2002 MVP)",
+    "title": "Miguel Tejada",
+    "nickname": "2002 MVP",
     "year": "2003",
     "date": "April 26, 2003",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/mtsaumi4p4ra0int95lr.jpg"
   },
   {
     "id": "bill-king-with-sound-season-ticket-holders-2003",
-    "title": "Bill King (with Sound, Season Ticket Holders)",
+    "title": "Bill King",
+    "nickname": "with Sound, Season Ticket Holders",
     "year": "2003",
     "date": "2003",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/yloritao6knqvfa7eebg.jpg"
@@ -669,7 +694,8 @@
   },
   {
     "id": "jason-giambi-2000-mvp-2001",
-    "title": "Jason Giambi (2000 MVP)",
+    "title": "Jason Giambi",
+    "nickname": "2000 MVP",
     "year": "2001",
     "date": "May 19, 2001",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/vbjchmyhlvgxtsm0sxxt.jpg",

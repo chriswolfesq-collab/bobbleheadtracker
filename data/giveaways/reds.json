@@ -19,7 +19,8 @@
   },
   {
     "id": "mr-red-race-car-2025",
-    "title": "Mr. Red (Race Car)",
+    "title": "Mr. Red",
+    "nickname": "Race Car",
     "year": "2025",
     "date": "May 17, 2025"
   },
@@ -49,31 +50,36 @@
   },
   {
     "id": "jake-fraley-city-connect-2024",
-    "title": "Jake Fraley (City Connect)",
+    "title": "Jake Fraley",
+    "nickname": "City Connect",
     "year": "2024",
     "date": "April 6, 2024"
   },
   {
     "id": "matt-mclain-city-connect-2024",
-    "title": "Matt McLain (City Connect)",
+    "title": "Matt McLain",
+    "nickname": "City Connect",
     "year": "2024",
     "date": "April 7, 2024"
   },
   {
     "id": "alexis-diaz-city-connect-2024",
-    "title": "Alexis Diaz (City Connect)",
+    "title": "Alexis Diaz",
+    "nickname": "City Connect",
     "year": "2024",
     "date": "May 5, 2024"
   },
   {
     "id": "elly-de-la-cruz-city-connect-2024",
-    "title": "Elly De La Cruz (City Connect)",
+    "title": "Elly De La Cruz",
+    "nickname": "City Connect",
     "year": "2024",
     "date": "June 12, 2024"
   },
   {
     "id": "graham-ashcraft-city-connect-2024",
-    "title": "Graham Ashcraft (City Connect)",
+    "title": "Graham Ashcraft",
+    "nickname": "City Connect",
     "year": "2024",
     "date": "July 7, 2024"
   },
@@ -85,7 +91,8 @@
   },
   {
     "id": "hunter-greene-city-connect-2024",
-    "title": "Hunter Greene (City Connect)",
+    "title": "Hunter Greene",
+    "nickname": "City Connect",
     "year": "2024",
     "date": "September 1, 2024"
   },
@@ -140,7 +147,8 @@
   },
   {
     "id": "joey-votto-jedi-joey-star-wars-2022",
-    "title": "Joey Votto (Jedi Joey, Star Wars)",
+    "title": "Joey Votto",
+    "nickname": "Jedi Joey, Star Wars",
     "year": "2022",
     "date": "May 7, 2022"
   },
@@ -191,13 +199,15 @@
   },
   {
     "id": "queen-city-sluggers-triple-2021",
-    "title": "\"Queen City Sluggers\" (Triple)",
+    "title": "\"Queen City Sluggers\"",
+    "nickname": "Triple",
     "year": "2021",
     "date": "June 24, 2021"
   },
   {
     "id": "barry-larkin-dual-2021",
-    "title": "Barry Larkin (Dual)",
+    "title": "Barry Larkin",
+    "nickname": "Dual",
     "year": "2021",
     "date": "September 4, 2021",
     "quantity": "20,000"
@@ -229,7 +239,8 @@
   },
   {
     "id": "ernie-lombardi-150-series-2019",
-    "title": "Ernie Lombardi (150 Series)",
+    "title": "Ernie Lombardi",
+    "nickname": "150 Series",
     "year": "2019",
     "date": "May 18, 2019",
     "quantity": "20,000"
@@ -242,7 +253,8 @@
   },
   {
     "id": "joe-morgan-150-series-2019",
-    "title": "Joe Morgan (150 Series)",
+    "title": "Joe Morgan",
+    "nickname": "150 Series",
     "year": "2019",
     "date": "June 1, 2019",
     "quantity": "20,000"
@@ -255,7 +267,8 @@
   },
   {
     "id": "barry-larkin-150-series-2019",
-    "title": "Barry Larkin (150 Series)",
+    "title": "Barry Larkin",
+    "nickname": "150 Series",
     "year": "2019",
     "date": "June 15, 2019",
     "quantity": "20,000"
@@ -268,7 +281,8 @@
   },
   {
     "id": "yasiel-puig-2019",
-    "title": "Yasiel Puig (Wild Horse)",
+    "title": "Yasiel Puig",
+    "nickname": "Wild Horse",
     "year": "2019",
     "date": "July 18, 2019",
     "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnbfVJ0XfNwCS9oEoWYGTybZR5ph6naQ-y0A&s",
@@ -282,7 +296,8 @@
   },
   {
     "id": "tony-perez-150-series-2019",
-    "title": "Tony Perez (150 Series)",
+    "title": "Tony Perez",
+    "nickname": "150 Series",
     "year": "2019",
     "date": "July 27, 2019",
     "quantity": "20,000"
@@ -295,28 +310,32 @@
   },
   {
     "id": "johnny-bench-150-series-2019",
-    "title": "Johnny Bench (150 Series)",
+    "title": "Johnny Bench",
+    "nickname": "150 Series",
     "year": "2019",
     "date": "August 17, 2019",
     "quantity": "20,000"
   },
   {
     "id": "ken-griffey-jr-150-series-2019",
-    "title": "Ken Griffey Jr. (150 Series)",
+    "title": "Ken Griffey Jr.",
+    "nickname": "150 Series",
     "year": "2019",
     "date": "September 7, 2019",
     "quantity": "20,000"
   },
   {
     "id": "mr-redlegs-f-35-2018",
-    "title": "Mr. Redlegs (F-35)",
+    "title": "Mr. Redlegs",
+    "nickname": "F-35",
     "year": "2018",
     "date": "February 24, 2018",
     "quantity": "2,000"
   },
   {
     "id": "tucker-barnhart-gold-glove-2018",
-    "title": "Tucker Barnhart (Gold Glove)",
+    "title": "Tucker Barnhart",
+    "nickname": "Gold Glove",
     "year": "2018",
     "date": "April 14, 2018",
     "quantity": "20,000"
@@ -410,7 +429,8 @@
   },
   {
     "id": "scott-schebler-fan-vote-2018",
-    "title": "Scott Schebler (Fan Vote)",
+    "title": "Scott Schebler",
+    "nickname": "Fan Vote",
     "year": "2018",
     "date": "August 18, 2018",
     "quantity": "20,000"
@@ -423,7 +443,8 @@
   },
   {
     "id": "raisel-iglesias-spring-training-2017",
-    "title": "Raisel Iglesias (Spring Training)",
+    "title": "Raisel Iglesias",
+    "nickname": "Spring Training",
     "year": "2017",
     "date": "March 10, 2017",
     "quantity": "2,000"
@@ -526,14 +547,16 @@
   },
   {
     "id": "joey-votto-spring-training-2016",
-    "title": "Joey Votto (Spring Training)",
+    "title": "Joey Votto",
+    "nickname": "Spring Training",
     "year": "2016",
     "date": "March 6, 2016",
     "quantity": "25,000"
   },
   {
     "id": "joey-votto-super-hero-2016",
-    "title": "Joey Votto (Super Hero)",
+    "title": "Joey Votto",
+    "nickname": "Super Hero",
     "year": "2016",
     "date": "April 23, 2016",
     "quantity": "25,000"
@@ -546,14 +569,16 @@
   },
   {
     "id": "mr-redlegs-x-wing-fighter-2016",
-    "title": "Mr. Redlegs (X-Wing Fighter)",
+    "title": "Mr. Redlegs",
+    "nickname": "X-Wing Fighter",
     "year": "2016",
     "date": "May 7, 2016",
     "quantity": "25,000"
   },
   {
     "id": "ken-griffey-jr-dual-2016",
-    "title": "Ken Griffey Jr. (Dual)",
+    "title": "Ken Griffey Jr.",
+    "nickname": "Dual",
     "year": "2016",
     "date": "May 21, 2016",
     "quantity": "25,000"
@@ -588,7 +613,8 @@
   },
   {
     "id": "nasty-boys-commemorative-triple-2015",
-    "title": "Nasty Boys (Commemorative Triple)",
+    "title": "Nasty Boys",
+    "nickname": "Commemorative Triple",
     "year": "2015",
     "date": "April 25, 2015"
   },
@@ -628,20 +654,23 @@
   },
   {
     "id": "pete-rose-stars-of-the-queen-city-2015",
-    "title": "Pete Rose (\"Stars of the Queen City\")",
+    "title": "Pete Rose",
+    "nickname": "\"Stars of the Queen City\"",
     "year": "2015",
     "date": "September 12, 2015",
     "quantity": "25,000"
   },
   {
     "id": "2015-all-star-player-figurine-2015",
-    "title": "2015 All-Star Player (Figurine)",
+    "title": "2015 All-Star Player",
+    "nickname": "Figurine",
     "year": "2015",
     "date": "September 26, 2015"
   },
   {
     "id": "homer-bailey-dual-no-hitter-2014",
-    "title": "Homer Bailey (Dual No-Hitter)",
+    "title": "Homer Bailey",
+    "nickname": "Dual No-Hitter",
     "year": "2014",
     "date": "May 10, 2014",
     "quantity": "25,000"
@@ -655,7 +684,8 @@
   },
   {
     "id": "ken-griffey-jr-500th-home-run-2014",
-    "title": "Ken Griffey Jr. (500th Home Run)",
+    "title": "Ken Griffey Jr.",
+    "nickname": "500th Home Run",
     "year": "2014",
     "date": "June 21, 2014",
     "quantity": "25,000"
@@ -710,7 +740,8 @@
   },
   {
     "id": "mr-red-bobblehead-frame-2013",
-    "title": "Mr. Red (Bobblehead Frame)",
+    "title": "Mr. Red",
+    "nickname": "Bobblehead Frame",
     "year": "2013",
     "date": "July 21, 2013"
   },
@@ -723,13 +754,15 @@
   },
   {
     "id": "cesar-geronimo-reds-hof-2012",
-    "title": "Cesar Geronimo (Reds HOF)",
+    "title": "Cesar Geronimo",
+    "nickname": "Reds HOF",
     "year": "2012",
     "date": "April 1, 2012"
   },
   {
     "id": "george-foster-reds-hof-2012",
-    "title": "George Foster (Reds HOF)",
+    "title": "George Foster",
+    "nickname": "Reds HOF",
     "year": "2012",
     "date": "May 1, 2012"
   },
@@ -742,7 +775,8 @@
   },
   {
     "id": "dan-driessen-reds-hof-2012",
-    "title": "Dan Driessen (Reds HOF)",
+    "title": "Dan Driessen",
+    "nickname": "Reds HOF",
     "year": "2012",
     "date": "June 1, 2012",
     "quantity": "5,000"
@@ -756,7 +790,8 @@
   },
   {
     "id": "ken-griffey-sr-reds-hof-2012",
-    "title": "Ken Griffey Sr. (Reds HOF)",
+    "title": "Ken Griffey Sr.",
+    "nickname": "Reds HOF",
     "year": "2012",
     "date": "July 1, 2012",
     "quantity": "5,000"
@@ -770,7 +805,8 @@
   },
   {
     "id": "dave-concepcion-reds-hof-2012",
-    "title": "Dave Concepcion (Reds HOF)",
+    "title": "Dave Concepcion",
+    "nickname": "Reds HOF",
     "year": "2012",
     "date": "August 1, 2012"
   },
@@ -783,34 +819,39 @@
   },
   {
     "id": "joe-morgan-reds-hof-2012",
-    "title": "Joe Morgan (Reds HOF)",
+    "title": "Joe Morgan",
+    "nickname": "Reds HOF",
     "year": "2012",
     "date": "September 1, 2012"
   },
   {
     "id": "joey-votto-mvp-2011",
-    "title": "Joey Votto (MVP)",
+    "title": "Joey Votto",
+    "nickname": "MVP",
     "year": "2011",
     "date": "April 30, 2011",
     "quantity": "30,000"
   },
   {
     "id": "johnny-bench-b-reds-hof-2011",
-    "title": "Johnny Bench \"B\" (Reds HOF)",
+    "title": "Johnny Bench \"B\"",
+    "nickname": "Reds HOF",
     "year": "2011",
     "date": "May 1, 2011",
     "quantity": "5,000"
   },
   {
     "id": "johnny-bench-e-reds-hof-2011",
-    "title": "Johnny Bench \"E\" (Reds HOF)",
+    "title": "Johnny Bench \"E\"",
+    "nickname": "Reds HOF",
     "year": "2011",
     "date": "June 1, 2011",
     "quantity": "5,000"
   },
   {
     "id": "johnny-bench-n-reds-hof-2011",
-    "title": "Johnny Bench \"N\" (Reds HOF)",
+    "title": "Johnny Bench \"N\"",
+    "nickname": "Reds HOF",
     "year": "2011",
     "date": "July 1, 2011",
     "quantity": "5,000"
@@ -831,14 +872,16 @@
   },
   {
     "id": "johnny-bench-c-reds-hof-2011",
-    "title": "Johnny Bench \"C\" (Reds HOF)",
+    "title": "Johnny Bench \"C\"",
+    "nickname": "Reds HOF",
     "year": "2011",
     "date": "August 1, 2011",
     "quantity": "5,000"
   },
   {
     "id": "johnny-bench-h-reds-hof-2011",
-    "title": "Johnny Bench \"H\" (Reds HOF)",
+    "title": "Johnny Bench \"H\"",
+    "nickname": "Reds HOF",
     "year": "2011",
     "date": "September 1, 2011",
     "quantity": "5,000"
@@ -859,14 +902,16 @@
   },
   {
     "id": "homer-bailey-fans-choice-2010",
-    "title": "Homer Bailey (Fan's Choice)",
+    "title": "Homer Bailey",
+    "nickname": "Fan's Choice",
     "year": "2010",
     "date": "July 31, 2010",
     "quantity": "30,000"
   },
   {
     "id": "marge-schott-reds-hof-2010",
-    "title": "Marge Schott (Reds HOF)",
+    "title": "Marge Schott",
+    "nickname": "Reds HOF",
     "year": "2010",
     "date": "August 1, 2010",
     "quantity": "5,000"
@@ -887,7 +932,8 @@
   },
   {
     "id": "edinson-volquez-fans-choice-2009",
-    "title": "Edinson Volquez (Fan's Choice)",
+    "title": "Edinson Volquez",
+    "nickname": "Fan's Choice",
     "year": "2009",
     "date": "July 18, 2009",
     "quantity": "30,000"
@@ -901,27 +947,31 @@
   },
   {
     "id": "adam-dunn-80s-theme-2008",
-    "title": "Adam Dunn ('80s Theme)",
+    "title": "Adam Dunn",
+    "nickname": "'80s Theme",
     "year": "2008",
     "date": "N/A",
     "quantity": "30,000"
   },
   {
     "id": "brandon-phillips-dual-30-30-2008",
-    "title": "Brandon Phillips (Dual, 30/30)",
+    "title": "Brandon Phillips",
+    "nickname": "Dual, 30/30",
     "year": "2008",
     "date": "N/A",
     "quantity": "30,000"
   },
   {
     "id": "joe-nuxhall-bronze-statue-2008",
-    "title": "Joe Nuxhall (Bronze Statue)",
+    "title": "Joe Nuxhall",
+    "nickname": "Bronze Statue",
     "year": "2008",
     "date": "June 10, 2008"
   },
   {
     "id": "tom-browning-perfect-game-2008",
-    "title": "Tom Browning (Perfect Game)",
+    "title": "Tom Browning",
+    "nickname": "Perfect Game",
     "year": "2008",
     "date": "September 16, 2008",
     "quantity": "30,000"
@@ -1024,7 +1074,8 @@
   },
   {
     "id": "marty-brennaman-joe-nuxhall-dual-2003",
-    "title": "Marty Brennaman & Joe Nuxhall (Dual)",
+    "title": "Marty Brennaman & Joe Nuxhall",
+    "nickname": "Dual",
     "year": "2003",
     "date": "May 24, 2003",
     "quantity": "20,000"
@@ -1038,7 +1089,8 @@
   },
   {
     "id": "gapper-mascot-2003",
-    "title": "Gapper (Mascot)",
+    "title": "Gapper",
+    "nickname": "Mascot",
     "year": "2003",
     "date": "August 1, 2003",
     "quantity": "10,000"

@@ -1,14 +1,16 @@
 [
   {
     "id": "mike-trout-400-hr-2026",
-    "title": "Mike Trout (400 HR)",
+    "title": "Mike Trout",
+    "nickname": "400 HR",
     "year": "2026",
     "date": "April 7, 2026",
     "quantity": "25,000"
   },
   {
     "id": "mickey-mouse-d23-2026",
-    "title": "Mickey Mouse (D23)",
+    "title": "Mickey Mouse",
+    "nickname": "D23",
     "year": "2026",
     "date": "August 12, 2026",
     "quantity": "25,000"
@@ -47,14 +49,16 @@
   },
   {
     "id": "mickey-mouse-d23-2024",
-    "title": "Mickey Mouse (D23)",
+    "title": "Mickey Mouse",
+    "nickname": "D23",
     "year": "2024",
     "date": "August 4, 2024",
     "quantity": "23,000"
   },
   {
     "id": "mike-trout-throwback-2024",
-    "title": "Mike Trout (Throwback)",
+    "title": "Mike Trout",
+    "nickname": "Throwback",
     "year": "2024",
     "date": "July 27, 2024"
   },
@@ -72,75 +76,86 @@
   },
   {
     "id": "mike-trout-silver-slugger-2023",
-    "title": "Mike Trout (Silver Slugger)",
+    "title": "Mike Trout",
+    "nickname": "Silver Slugger",
     "year": "2023",
     "date": "September 15, 2023",
     "quantity": "25,000"
   },
   {
     "id": "mike-trout-shohei-ohtani-city-connect-2023",
-    "title": "Mike Trout & Shohei Ohtani (City Connect)",
+    "title": "Mike Trout & Shohei Ohtani",
+    "nickname": "City Connect",
     "year": "2023",
     "date": "July 1, 2023",
     "quantity": "25,000"
   },
   {
     "id": "mike-trout-bb-8-star-wars-2023",
-    "title": "Mike Trout & BB-8 (Star Wars)",
+    "title": "Mike Trout & BB-8",
+    "nickname": "Star Wars",
     "year": "2023",
     "date": "April 21, 2023",
     "quantity": "25,000"
   },
   {
     "id": "shohei-ohtani-13-strikeout-2023",
-    "title": "Shohei Ohtani (13 Strikeout)",
+    "title": "Shohei Ohtani",
+    "nickname": "13 Strikeout",
     "year": "2023",
     "date": "April 8, 2023",
     "quantity": "25,000"
   },
   {
     "id": "mike-trout-city-connect-2022",
-    "title": "Mike Trout (City Connect)",
+    "title": "Mike Trout",
+    "nickname": "City Connect",
     "year": "2022",
     "date": "September 16, 2022",
     "quantity": "25,000"
   },
   {
     "id": "shohei-ohtani-ohtani-wan-kenobi-star-wars-2022",
-    "title": "Shohei Ohtani (\"Ohtani-Wan Kenobi\", Star Wars)",
+    "title": "Shohei Ohtani",
+    "nickname": "\"Ohtani-Wan Kenobi\", Star Wars",
     "year": "2022",
     "date": "May 27, 2022",
     "quantity": "25,000"
   },
   {
     "id": "shohei-ohtani-mvp-2022",
-    "title": "Shohei Ohtani (MVP)",
+    "title": "Shohei Ohtani",
+    "nickname": "MVP",
     "year": "2022",
     "date": "May 10, 2022",
     "quantity": "25,000"
   },
   {
     "id": "shohei-ohtani-historic-season-2022",
-    "title": "Shohei Ohtani (Historic Season)",
+    "title": "Shohei Ohtani",
+    "nickname": "Historic Season",
     "year": "2022",
     "date": "April 8, 2022",
     "quantity": "25,000"
   },
   {
     "id": "mike-trout-3x-mvp-2021",
-    "title": "Mike Trout (3x MVP)",
+    "title": "Mike Trout",
+    "nickname": "3x MVP",
     "year": "2021",
     "date": "June 4, 2021"
   },
   {
     "id": "mike-trout-300-hr-2021",
-    "title": "Mike Trout (300 HR)",
+    "title": "Mike Trout",
+    "nickname": "300 HR",
     "year": "2021",
     "date": "May 21, 2021"
   },
   {
     "id": "shohei-ohtani-cycle-2021",
-    "title": "Shohei Ohtani (Cycle)",
+    "title": "Shohei Ohtani",
+    "nickname": "Cycle",
     "year": "2021",
     "date": "April 16, 2021"
   },
@@ -153,33 +168,38 @@
   },
   {
     "id": "shohei-ohtani-rookie-of-the-year-2019",
-    "title": "Shohei Ohtani (Rookie of the Year)",
+    "title": "Shohei Ohtani",
+    "nickname": "Rookie of the Year",
     "year": "2019",
     "date": "July 16, 2019",
     "quantity": "30,000"
   },
   {
     "id": "mike-trout-silver-slugger-2019",
-    "title": "Mike Trout (Silver Slugger)",
+    "title": "Mike Trout",
+    "nickname": "Silver Slugger",
     "year": "2019",
     "date": "April 5, 2019",
     "quantity": "30,000"
   },
   {
     "id": "vladimir-guerrero-hall-of-fame-2018",
-    "title": "Vladimir Guerrero (Hall of Fame)",
+    "title": "Vladimir Guerrero",
+    "nickname": "Hall of Fame",
     "year": "2018",
     "date": "August 10, 2018"
   },
   {
     "id": "shohei-ohtani-double-2018",
-    "title": "Shohei Ohtani (Double)",
+    "title": "Shohei Ohtani",
+    "nickname": "Double",
     "year": "2018",
     "date": "July 12, 2018"
   },
   {
     "id": "albert-pujols-3000-hits-2018",
-    "title": "Albert Pujols (3,000 Hits)",
+    "title": "Albert Pujols",
+    "nickname": "3,000 Hits",
     "year": "2018",
     "date": "June 2, 2018"
   },
@@ -203,43 +223,50 @@
   },
   {
     "id": "mike-trout-mvp-3-of-3-2017",
-    "title": "Mike Trout (MVP, #3 of 3)",
+    "title": "Mike Trout",
+    "nickname": "MVP, #3 of 3",
     "year": "2017",
     "date": "August 22, 2017"
   },
   {
     "id": "mike-trout-mvp-2-of-3-2017",
-    "title": "Mike Trout (MVP, #2 of 3)",
+    "title": "Mike Trout",
+    "nickname": "MVP, #2 of 3",
     "year": "2017",
     "date": "August 4, 2017"
   },
   {
     "id": "mike-trout-mvp-double-2017",
-    "title": "Mike Trout (MVP Double)",
+    "title": "Mike Trout",
+    "nickname": "MVP Double",
     "year": "2017",
     "date": "July 18, 2017"
   },
   {
     "id": "albert-pujols-600-home-runs-2017",
-    "title": "Albert Pujols (600 Home Runs)",
+    "title": "Albert Pujols",
+    "nickname": "600 Home Runs",
     "year": "2017",
     "date": "July 1, 2017"
   },
   {
     "id": "mike-trout-mvp-1-of-3-2017",
-    "title": "Mike Trout (MVP, #1 of 3)",
+    "title": "Mike Trout",
+    "nickname": "MVP, #1 of 3",
     "year": "2017",
     "date": "May 16, 2017"
   },
   {
     "id": "mike-trout-albert-pujols-hr-2016",
-    "title": "Mike Trout & Albert Pujols (HR)",
+    "title": "Mike Trout & Albert Pujols",
+    "nickname": "HR",
     "year": "2016",
     "date": "April 7, 2016"
   },
   {
     "id": "mike-trout-season-ticket-holder-2016",
-    "title": "Mike Trout (Season Ticket Holder)",
+    "title": "Mike Trout",
+    "nickname": "Season Ticket Holder",
     "year": "2016",
     "date": "2016"
   },
@@ -263,13 +290,15 @@
   },
   {
     "id": "baby-rally-monkey-kids-2014",
-    "title": "Baby Rally Monkey (Kids)",
+    "title": "Baby Rally Monkey",
+    "nickname": "Kids",
     "year": "2014",
     "date": "August 13, 2014"
   },
   {
     "id": "albert-pujols-500-home-runs-2014",
-    "title": "Albert Pujols (500 Home Runs)",
+    "title": "Albert Pujols",
+    "nickname": "500 Home Runs",
     "year": "2014",
     "date": "May 21, 2014"
   },
@@ -396,13 +425,15 @@
   },
   {
     "id": "chone-figgins-sliding-2006",
-    "title": "Chone Figgins (Sliding)",
+    "title": "Chone Figgins",
+    "nickname": "Sliding",
     "year": "2006",
     "date": "July 17, 2006"
   },
   {
     "id": "vladimir-guerrero-silver-slugger-2006",
-    "title": "Vladimir Guerrero (Silver Slugger)",
+    "title": "Vladimir Guerrero",
+    "nickname": "Silver Slugger",
     "year": "2006",
     "date": "May 15, 2006"
   },
@@ -414,7 +445,8 @@
   },
   {
     "id": "darin-erstad-gold-glove-2005",
-    "title": "Darin Erstad (Gold Glove)",
+    "title": "Darin Erstad",
+    "nickname": "Gold Glove",
     "year": "2005",
     "date": "May 23, 2005"
   },

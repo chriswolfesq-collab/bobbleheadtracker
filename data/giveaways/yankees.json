@@ -1,14 +1,16 @@
 [
   {
     "id": "josh-hart-no-32-elston-howard-tribute-2026",
-    "title": "Josh Hart (No. 32, Elston Howard Tribute)",
+    "title": "Josh Hart",
+    "nickname": "No. 32, Elston Howard Tribute",
     "year": "2026",
     "date": "September 25, 2026",
     "quantity": "18,000"
   },
   {
     "id": "george-costanza-calzone-2026",
-    "title": "George Costanza (Calzone)",
+    "title": "George Costanza",
+    "nickname": "Calzone",
     "year": "2026",
     "date": "August 27, 2026",
     "quantity": "18,000"
@@ -29,14 +31,16 @@
   },
   {
     "id": "aaron-judge-mvp-2nd-consecutive-2026",
-    "title": "Aaron Judge (MVP, 2nd Consecutive)",
+    "title": "Aaron Judge",
+    "nickname": "MVP, 2nd Consecutive",
     "year": "2026",
     "date": "June 20, 2026",
     "quantity": "18,000"
   },
   {
     "id": "max-fried-mandalorian-with-grogu-2026",
-    "title": "Max Fried (Mandalorian, with Grogu)",
+    "title": "Max Fried",
+    "nickname": "Mandalorian, with Grogu",
     "year": "2026",
     "date": "May 2, 2026",
     "quantity": "18,000"
@@ -170,7 +174,8 @@
   },
   {
     "id": "roger-maris-61-2023",
-    "title": "Roger Maris (#61)",
+    "title": "Roger Maris",
+    "nickname": "#61",
     "year": "2023",
     "date": "August 20, 2023",
     "quantity": "18,000"
@@ -204,7 +209,8 @@
   },
   {
     "id": "derek-jeter-captain-america-2023",
-    "title": "Derek Jeter (Captain America)",
+    "title": "Derek Jeter",
+    "nickname": "Captain America",
     "year": "2023",
     "date": "June 23, 2023",
     "quantity": "18,000"
@@ -217,7 +223,8 @@
   },
   {
     "id": "anthony-rizzo-mandalorian-2023",
-    "title": "Anthony Rizzo (Mandalorian)",
+    "title": "Anthony Rizzo",
+    "nickname": "Mandalorian",
     "year": "2023",
     "date": "May 12, 2023",
     "quantity": "18,000"
@@ -244,7 +251,8 @@
   },
   {
     "id": "john-sterling-suzyn-waldman-talking-2022",
-    "title": "John Sterling & Suzyn Waldman (Talking)",
+    "title": "John Sterling & Suzyn Waldman",
+    "nickname": "Talking",
     "year": "2022",
     "date": "August 19, 2022",
     "quantity": "10,000"
@@ -272,7 +280,8 @@
   },
   {
     "id": "yoda-star-wars-2022",
-    "title": "Yoda (Star Wars)",
+    "title": "Yoda",
+    "nickname": "Star Wars",
     "year": "2022",
     "date": "May 25, 2022",
     "quantity": "18,000"
@@ -313,7 +322,8 @@
   },
   {
     "id": "gerrit-cole-top-gun-2021",
-    "title": "Gerrit Cole (Top Gun)",
+    "title": "Gerrit Cole",
+    "nickname": "Top Gun",
     "year": "2021",
     "date": "August 6, 2021",
     "quantity": "18,000"
@@ -334,7 +344,8 @@
   },
   {
     "id": "mariano-rivera-captain-america-2019",
-    "title": "Mariano Rivera (Captain America)",
+    "title": "Mariano Rivera",
+    "nickname": "Captain America",
     "year": "2019",
     "date": "July 12, 2019",
     "quantity": "18,000"
@@ -348,7 +359,8 @@
   },
   {
     "id": "cc-sabathia-jedi-2019",
-    "title": "CC Sabathia (Jedi)",
+    "title": "CC Sabathia",
+    "nickname": "Jedi",
     "year": "2019",
     "date": "May 4, 2019"
   },
@@ -361,7 +373,8 @@
   },
   {
     "id": "didi-gregorius-spring-training-2019",
-    "title": "Didi Gregorius (Spring Training)",
+    "title": "Didi Gregorius",
+    "nickname": "Spring Training",
     "year": "2019",
     "date": "2019"
   },
@@ -387,7 +400,8 @@
   },
   {
     "id": "aaron-judge-jedi-star-wars-2018",
-    "title": "Aaron Judge (Jedi, Star Wars)",
+    "title": "Aaron Judge",
+    "nickname": "Jedi, Star Wars",
     "year": "2018",
     "date": "May 4, 2018",
     "quantity": "40,000"
@@ -443,7 +457,8 @@
   },
   {
     "id": "peanuts-5-2016",
-    "title": "Peanuts (#5)",
+    "title": "Peanuts",
+    "nickname": "#5",
     "year": "2016",
     "date": "September 8, 2016"
   },
@@ -456,7 +471,8 @@
   },
   {
     "id": "mickey-mantle-triple-crown-2016",
-    "title": "Mickey Mantle (Triple Crown)",
+    "title": "Mickey Mantle",
+    "nickname": "Triple Crown",
     "year": "2016",
     "date": "June 24, 2016",
     "quantity": "18,000"
@@ -503,7 +519,8 @@
   },
   {
     "id": "lucy-peanuts-3rd-series-2014",
-    "title": "Lucy (Peanuts, 3rd Series)",
+    "title": "Lucy",
+    "nickname": "Peanuts, 3rd Series",
     "year": "2014",
     "date": "September 9, 2014",
     "quantity": "18,000"
@@ -587,25 +604,29 @@
   },
   {
     "id": "mark-teixeira-figurine-2012",
-    "title": "Mark Teixeira (Figurine)",
+    "title": "Mark Teixeira",
+    "nickname": "Figurine",
     "year": "2012",
     "date": "July 18, 2012"
   },
   {
     "id": "jorge-posada-figurine-2011",
-    "title": "Jorge Posada (Figurine)",
+    "title": "Jorge Posada",
+    "nickname": "Figurine",
     "year": "2011",
     "date": "June 10, 2011"
   },
   {
     "id": "mariano-rivera-figurine-2010",
-    "title": "Mariano Rivera (Figurine)",
+    "title": "Mariano Rivera",
+    "nickname": "Figurine",
     "year": "2010",
     "date": "June 11, 2010"
   },
   {
     "id": "cc-sabathia-mini-2010",
-    "title": "CC Sabathia (Mini)",
+    "title": "CC Sabathia",
+    "nickname": "Mini",
     "year": "2010",
     "date": "March 3, 2010"
   },

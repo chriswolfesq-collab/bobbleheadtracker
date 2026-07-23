@@ -509,7 +509,8 @@
   },
   {
     "id": "slider-lifeguard-mascot-2009",
-    "title": "Slider (Lifeguard) (Mascot)",
+    "title": "Slider (Lifeguard)",
+    "nickname": "Mascot",
     "year": "2009",
     "date": "July 19, 2009",
     "imageUrl": null
@@ -593,7 +594,8 @@
   },
   {
     "id": "slider-gapper-double-mascots-2007",
-    "title": "Slider/Gapper Double (Mascots)",
+    "title": "Slider/Gapper Double",
+    "nickname": "Mascots",
     "year": "2007",
     "date": "May 20, 2007",
     "imageUrl": null

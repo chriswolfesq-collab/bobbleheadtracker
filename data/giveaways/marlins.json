@@ -167,13 +167,15 @@
   },
   {
     "id": "charlie-hough-season-ticket-holders-2018",
-    "title": "Charlie Hough (Season Ticket Holders)",
+    "title": "Charlie Hough",
+    "nickname": "Season Ticket Holders",
     "year": "2018",
     "date": "N/A"
   },
   {
     "id": "justin-bour-home-run-derby-superhero-2018",
-    "title": "Justin Bour (Home Run Derby Superhero)",
+    "title": "Justin Bour",
+    "nickname": "Home Run Derby Superhero",
     "year": "2018",
     "date": "July 1, 2018"
   },
@@ -217,14 +219,16 @@
   },
   {
     "id": "giancarlo-stanton-2016-home-run-derby-2017",
-    "title": "Giancarlo Stanton (2016 Home Run Derby)",
+    "title": "Giancarlo Stanton",
+    "nickname": "2016 Home Run Derby",
     "year": "2017",
     "date": "June 3, 2017",
     "quantity": "7,500"
   },
   {
     "id": "jon-snow-tom-koehler-game-of-thrones-2017",
-    "title": "Jon Snow / Tom Koehler (Game of Thrones)",
+    "title": "Jon Snow / Tom Koehler",
+    "nickname": "Game of Thrones",
     "year": "2017",
     "date": "July 14, 2017"
   },
@@ -243,7 +247,8 @@
   },
   {
     "id": "billy-the-marlin-birthday-2017",
-    "title": "Billy the Marlin (Birthday)",
+    "title": "Billy the Marlin",
+    "nickname": "Birthday",
     "year": "2017",
     "date": "August 13, 2017",
     "quantity": "7,000"
@@ -263,7 +268,8 @@
   },
   {
     "id": "billy-the-marlin-aviation-2017",
-    "title": "Billy the Marlin (Aviation)",
+    "title": "Billy the Marlin",
+    "nickname": "Aviation",
     "year": "2017",
     "date": "September 16, 2017",
     "quantity": "7,000"
@@ -277,104 +283,119 @@
   },
   {
     "id": "adam-conley-stormtrooper-2017",
-    "title": "Adam Conley (Stormtrooper)",
+    "title": "Adam Conley",
+    "nickname": "Stormtrooper",
     "year": "2017",
     "date": "September 30, 2017"
   },
   {
     "id": "charles-johnson-1997-all-star-2016",
-    "title": "Charles Johnson (1997 All-Star)",
+    "title": "Charles Johnson",
+    "nickname": "1997 All-Star",
     "year": "2016",
     "date": "April 16, 2016",
     "quantity": "5,000"
   },
   {
     "id": "jeff-conine-1995-all-star-2016",
-    "title": "Jeff Conine (1995 All-Star)",
+    "title": "Jeff Conine",
+    "nickname": "1995 All-Star",
     "year": "2016",
     "date": "May 7, 2016",
     "quantity": "5,000"
   },
   {
     "id": "kevin-brown-1997-all-star-2016",
-    "title": "Kevin Brown (1997 All-Star)",
+    "title": "Kevin Brown",
+    "nickname": "1997 All-Star",
     "year": "2016",
     "date": "May 21, 2016",
     "quantity": "5,000"
   },
   {
     "id": "ichiro-suzuki-hit-counter-2016",
-    "title": "Ichiro Suzuki (Hit-Counter)",
+    "title": "Ichiro Suzuki",
+    "nickname": "Hit-Counter",
     "year": "2016",
     "date": "May 22, 2016",
     "quantity": "12,000"
   },
   {
     "id": "mike-lowell-2003-all-star-2016",
-    "title": "Mike Lowell (2003 All-Star)",
+    "title": "Mike Lowell",
+    "nickname": "2003 All-Star",
     "year": "2016",
     "date": "June 4, 2016",
     "quantity": "5,000"
   },
   {
     "id": "luis-castillo-2002-all-star-2016",
-    "title": "Luis Castillo (2002 All-Star)",
+    "title": "Luis Castillo",
+    "nickname": "2002 All-Star",
     "year": "2016",
     "date": "June 18, 2016",
     "quantity": "5,000"
   },
   {
     "id": "moises-alou-1997-all-star-2016",
-    "title": "Moises Alou (1997 All-Star)",
+    "title": "Moises Alou",
+    "nickname": "1997 All-Star",
     "year": "2016",
     "date": "June 25, 2016",
     "quantity": "5,000"
   },
   {
     "id": "edgar-renteria-1998-all-star-2016",
-    "title": "Edgar Renteria (1998 All-Star)",
+    "title": "Edgar Renteria",
+    "nickname": "1998 All-Star",
     "year": "2016",
     "date": "July 9, 2016",
     "quantity": "5,000"
   },
   {
     "id": "dontrelle-willis-2005-all-star-2016",
-    "title": "Dontrelle Willis (2005 All-Star)",
+    "title": "Dontrelle Willis",
+    "nickname": "2005 All-Star",
     "year": "2016",
     "date": "July 23, 2016",
     "quantity": "5,000"
   },
   {
     "id": "alex-gonzalez-1999-all-star-2016",
-    "title": "Alex Gonzalez (1999 All-Star)",
+    "title": "Alex Gonzalez",
+    "nickname": "1999 All-Star",
     "year": "2016",
     "date": "July 30, 2016",
     "quantity": "5,000"
   },
   {
     "id": "cliff-floyd-2001-all-star-2016",
-    "title": "Cliff Floyd (2001 All-Star)",
+    "title": "Cliff Floyd",
+    "nickname": "2001 All-Star",
     "year": "2016",
     "date": "August 13, 2016",
     "quantity": "5,000"
   },
   {
     "id": "jack-mckeon-2004-all-star-2016",
-    "title": "Jack McKeon (2004 All-Star)",
+    "title": "Jack McKeon",
+    "nickname": "2004 All-Star",
     "year": "2016",
     "date": "August 27, 2016",
     "quantity": "5,000"
   },
   {
     "id": "al-leiter-1996-all-star-2016",
-    "title": "Al Leiter (1996 All-Star)",
+    "title": "Al Leiter",
+    "nickname": "1996 All-Star",
     "year": "2016",
     "date": "September 10, 2016",
     "quantity": "5,000"
   },
   {
     "id": "jim-leyland-1998-all-star-2016",
-    "title": "Jim Leyland (1998 All-Star)",
+    "title": "Jim Leyland",
+    "nickname": "1998 All-Star",
     "year": "2016",
     "date": "September 24, 2016",
     "quantity": "5,000"
@@ -388,7 +409,8 @@
   },
   {
     "id": "billy-the-marlin-stormtrooper-2015",
-    "title": "Billy the Marlin (Stormtrooper)",
+    "title": "Billy the Marlin",
+    "nickname": "Stormtrooper",
     "year": "2015",
     "date": "September 4, 2015"
   },
@@ -401,7 +423,8 @@
   },
   {
     "id": "billy-mcfly-back-to-the-future-2015",
-    "title": "Billy McFly (Back to the Future)",
+    "title": "Billy McFly",
+    "nickname": "Back to the Future",
     "year": "2015",
     "date": "September 25, 2015"
   },
@@ -427,14 +450,16 @@
   },
   {
     "id": "juan-pierre-20th-anniversary-franchise-2013",
-    "title": "Juan Pierre (20th Anniversary Franchise)",
+    "title": "Juan Pierre",
+    "nickname": "20th Anniversary Franchise",
     "year": "2013",
     "date": "June 30, 2013",
     "quantity": "15,000"
   },
   {
     "id": "mike-lowell-10th-anniversary-world-series-2013",
-    "title": "Mike Lowell (10th Anniversary World Series)",
+    "title": "Mike Lowell",
+    "nickname": "10th Anniversary World Series",
     "year": "2013",
     "date": "August 4, 2013",
     "quantity": "15,000"
@@ -462,14 +487,16 @@
   },
   {
     "id": "cody-ross-billy-bingo-prize-2010",
-    "title": "Cody Ross (Billy Bingo Prize)",
+    "title": "Cody Ross",
+    "nickname": "Billy Bingo Prize",
     "year": "2010",
     "date": "May 28, 2010",
     "quantity": "10,000"
   },
   {
     "id": "chris-coghlan-billy-bingo-prize-2010",
-    "title": "Chris Coghlan (Billy Bingo Prize)",
+    "title": "Chris Coghlan",
+    "nickname": "Billy Bingo Prize",
     "year": "2010",
     "date": "June 25, 2010",
     "quantity": "2,500"
@@ -489,7 +516,8 @@
   },
   {
     "id": "dan-uggla-mini-2007",
-    "title": "Dan Uggla (Mini)",
+    "title": "Dan Uggla",
+    "nickname": "Mini",
     "year": "2007",
     "date": "June 23, 2007",
     "quantity": "5,000"
@@ -502,13 +530,15 @@
   },
   {
     "id": "aj-burnett-mini-2005",
-    "title": "A.J. Burnett (Mini)",
+    "title": "A.J. Burnett",
+    "nickname": "Mini",
     "year": "2005",
     "date": "April 9, 2005"
   },
   {
     "id": "miguel-cabrera-mini-2005",
-    "title": "Miguel Cabrera (Mini)",
+    "title": "Miguel Cabrera",
+    "nickname": "Mini",
     "year": "2005",
     "date": "August 20, 2005"
   },

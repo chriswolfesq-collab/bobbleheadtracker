@@ -87,7 +87,8 @@
   },
   {
     "id": "lou-seal-splash-hits-counter-2023",
-    "title": "Lou Seal (Splash Hits Counter)",
+    "title": "Lou Seal",
+    "nickname": "Splash Hits Counter",
     "year": "2023",
     "date": "May 20, 2023",
     "quantity": "20,000"
@@ -101,7 +102,8 @@
   },
   {
     "id": "joc-pederson-indiana-jones-2023",
-    "title": "Joc Pederson (Indiana Jones)",
+    "title": "Joc Pederson",
+    "nickname": "Indiana Jones",
     "year": "2023",
     "date": "June 21, 2023",
     "quantity": "20,000"
@@ -115,7 +117,8 @@
   },
   {
     "id": "lou-seal-greek-heritage-2023",
-    "title": "Lou Seal (Greek Heritage)",
+    "title": "Lou Seal",
+    "nickname": "Greek Heritage",
     "year": "2023",
     "date": "July 26, 2023",
     "quantity": "20,000"
@@ -135,7 +138,8 @@
   },
   {
     "id": "kristi-yamaguchi-signed-2022",
-    "title": "Kristi Yamaguchi (signed)",
+    "title": "Kristi Yamaguchi",
+    "nickname": "signed",
     "year": "2022",
     "date": "May 21, 2022"
   },
@@ -223,7 +227,8 @@
   },
   {
     "id": "willie-mays-20th-anniversary-2019",
-    "title": "Willie Mays (20th Anniversary)",
+    "title": "Willie Mays",
+    "nickname": "20th Anniversary",
     "year": "2019",
     "date": "April 27, 2019",
     "quantity": "35,000"
@@ -260,7 +265,8 @@
   },
   {
     "id": "lou-seal-themed-runner-2019",
-    "title": "Lou Seal (Themed Runner)",
+    "title": "Lou Seal",
+    "nickname": "Themed Runner",
     "year": "2019",
     "date": "June 24, 2019"
   },
@@ -328,7 +334,8 @@
   },
   {
     "id": "brandon-crawford-star-wars-2019",
-    "title": "Brandon Crawford (Star Wars)",
+    "title": "Brandon Crawford",
+    "nickname": "Star Wars",
     "year": "2019",
     "date": "September 15, 2019",
     "quantity": "20,000"
@@ -354,7 +361,8 @@
   },
   {
     "id": "willie-mays-60th-anniversary-2018",
-    "title": "Willie Mays (60th Anniversary)",
+    "title": "Willie Mays",
+    "nickname": "60th Anniversary",
     "year": "2018",
     "date": "April 7, 2018",
     "quantity": "35,000"
@@ -379,7 +387,8 @@
   },
   {
     "id": "willie-mccovey-60th-anniversary-2018",
-    "title": "Willie McCovey (60th Anniversary)",
+    "title": "Willie McCovey",
+    "nickname": "60th Anniversary",
     "year": "2018",
     "date": "June 3, 2018",
     "quantity": "35,000"
@@ -392,13 +401,15 @@
   },
   {
     "id": "buster-hugs-buster-posey-2018",
-    "title": "\"Buster Hugs\" (Buster Posey)",
+    "title": "\"Buster Hugs\"",
+    "nickname": "Buster Posey",
     "year": "2018",
     "date": "August 25, 2018"
   },
   {
     "id": "bruce-bochy-runner-2018",
-    "title": "Bruce Bochy (Runner)",
+    "title": "Bruce Bochy",
+    "nickname": "Runner",
     "year": "2018",
     "date": "September 10, 2018"
   },
@@ -416,13 +427,15 @@
   },
   {
     "id": "lou-seal-oktoberfest-2018",
-    "title": "Lou Seal (Oktoberfest)",
+    "title": "Lou Seal",
+    "nickname": "Oktoberfest",
     "year": "2018",
     "date": "September 26, 2018"
   },
   {
     "id": "johnny-cueto-shimmy-2017",
-    "title": "Johnny Cueto (Shimmy)",
+    "title": "Johnny Cueto",
+    "nickname": "Shimmy",
     "year": "2017",
     "date": "April 15, 2017",
     "quantity": "40,000"
@@ -447,13 +460,15 @@
   },
   {
     "id": "house-of-pence-hunter-pence-2017",
-    "title": "\"House Of Pence\" (Hunter Pence)",
+    "title": "\"House Of Pence\"",
+    "nickname": "Hunter Pence",
     "year": "2017",
     "date": "July 20, 2017"
   },
   {
     "id": "dancing-bear-vip-2017",
-    "title": "Dancing Bear (VIP)",
+    "title": "Dancing Bear",
+    "nickname": "VIP",
     "year": "2017",
     "date": "August 3, 2017"
   },
@@ -471,13 +486,15 @@
   },
   {
     "id": "madison-bumgarner-running-2017",
-    "title": "Madison Bumgarner (Running)",
+    "title": "Madison Bumgarner",
+    "nickname": "Running",
     "year": "2017",
     "date": "August 31, 2017"
   },
   {
     "id": "lou-seal-italian-2017",
-    "title": "Lou Seal (Italian)",
+    "title": "Lou Seal",
+    "nickname": "Italian",
     "year": "2017",
     "date": "August 31, 2017"
   },
@@ -489,7 +506,8 @@
   },
   {
     "id": "joe-montana-vip-2017",
-    "title": "Joe Montana (VIP)",
+    "title": "Joe Montana",
+    "nickname": "VIP",
     "year": "2017",
     "date": "September 12, 2017"
   },
@@ -534,7 +552,8 @@
   },
   {
     "id": "lou-seal-cinco-de-mayo-2016",
-    "title": "Lou Seal (Cinco de Mayo)",
+    "title": "Lou Seal",
+    "nickname": "Cinco de Mayo",
     "year": "2016",
     "date": "May 5, 2016"
   },
@@ -559,14 +578,16 @@
   },
   {
     "id": "hunter-pence-solar-bobblebody-2016",
-    "title": "Hunter Pence (Solar Bobblebody)",
+    "title": "Hunter Pence",
+    "nickname": "Solar Bobblebody",
     "year": "2016",
     "date": "August 14, 2016",
     "quantity": "20,000"
   },
   {
     "id": "bill-graham-father-time-2016",
-    "title": "Bill Graham (Father Time)",
+    "title": "Bill Graham",
+    "nickname": "Father Time",
     "year": "2016",
     "date": "August 26, 2016"
   },
@@ -603,7 +624,8 @@
   },
   {
     "id": "bruce-bochy-vulcan-2016",
-    "title": "Bruce Bochy (Vulcan)",
+    "title": "Bruce Bochy",
+    "nickname": "Vulcan",
     "year": "2016",
     "date": "September 16, 2016",
     "quantity": "30,000"
@@ -622,27 +644,31 @@
   },
   {
     "id": "madison-bumgarner-stormtrooper-2016",
-    "title": "Madison Bumgarner (Stormtrooper)",
+    "title": "Madison Bumgarner",
+    "nickname": "Stormtrooper",
     "year": "2016",
     "date": "October 1, 2016",
     "quantity": "40,000"
   },
   {
     "id": "madison-bumgarner-postseason-mvp-2015",
-    "title": "Madison Bumgarner (Postseason MVP)",
+    "title": "Madison Bumgarner",
+    "nickname": "Postseason MVP",
     "year": "2015",
     "date": "April 18, 2015",
     "quantity": "40,000"
   },
   {
     "id": "tim-lincecum-filipino-heritage-2015",
-    "title": "Tim Lincecum (Filipino Heritage)",
+    "title": "Tim Lincecum",
+    "nickname": "Filipino Heritage",
     "year": "2015",
     "date": "May 8, 2015"
   },
   {
     "id": "hunter-pence-fence-catch-2015",
-    "title": "Hunter Pence (\"Fence Catch\")",
+    "title": "Hunter Pence",
+    "nickname": "\"Fence Catch\"",
     "year": "2015",
     "date": "May 9, 2015",
     "quantity": "40,000"
@@ -655,7 +681,8 @@
   },
   {
     "id": "travis-ishikawa-japanese-heritage-2015",
-    "title": "Travis Ishikawa (Japanese Heritage)",
+    "title": "Travis Ishikawa",
+    "nickname": "Japanese Heritage",
     "year": "2015",
     "date": "May 19, 2015"
   },
@@ -667,19 +694,22 @@
   },
   {
     "id": "world-champions-postseason-heroes-crawford-belt-petit-2015",
-    "title": "World Champions Postseason Heroes (Crawford/Belt/Petit)",
+    "title": "World Champions Postseason Heroes",
+    "nickname": "Crawford/Belt/Petit",
     "year": "2015",
     "date": "May 30, 2015"
   },
   {
     "id": "murph-and-mac-dual-2015",
-    "title": "Murph and Mac (Dual)",
+    "title": "Murph and Mac",
+    "nickname": "Dual",
     "year": "2015",
     "date": "June 1, 2015"
   },
   {
     "id": "world-champions-postseason-heroes-affeldt-ishikawa-panik-2015",
-    "title": "World Champions Postseason Heroes (Affeldt/Ishikawa/Panik)",
+    "title": "World Champions Postseason Heroes",
+    "nickname": "Affeldt/Ishikawa/Panik",
     "year": "2015",
     "date": "June 13, 2015",
     "imageUrl": "https://u-mercari-images.mercdn.net/photos/m68839241196_1.jpg"
@@ -693,7 +723,8 @@
   },
   {
     "id": "bruce-lee-75th-birthday-2015",
-    "title": "Bruce Lee (75th Birthday)",
+    "title": "Bruce Lee",
+    "nickname": "75th Birthday",
     "year": "2015",
     "date": "July 7, 2015",
     "quantity": "3,000"
@@ -750,7 +781,8 @@
   },
   {
     "id": "woody-funko-pop-2014",
-    "title": "Woody (Funko POP!)",
+    "title": "Woody",
+    "nickname": "Funko POP!",
     "year": "2014",
     "date": "June 29, 2014"
   },
@@ -775,7 +807,8 @@
   },
   {
     "id": "buster-posey-nl-mvp-2013",
-    "title": "Buster Posey (NL MVP)",
+    "title": "Buster Posey",
+    "nickname": "NL MVP",
     "year": "2013",
     "date": "April 6, 2013",
     "quantity": "40,000"
@@ -809,14 +842,16 @@
   },
   {
     "id": "buster-posey-stormtrooper-2013",
-    "title": "Buster Posey (Stormtrooper)",
+    "title": "Buster Posey",
+    "nickname": "Stormtrooper",
     "year": "2013",
     "date": "September 8, 2013",
     "quantity": "40,000"
   },
   {
     "id": "buster-posey-stormtrooper-vip-2013",
-    "title": "Buster Posey (Stormtrooper VIP)",
+    "title": "Buster Posey",
+    "nickname": "Stormtrooper VIP",
     "year": "2013",
     "date": "September 8, 2013",
     "quantity": "40,000"
@@ -829,7 +864,8 @@
   },
   {
     "id": "sergio-romo-cinco-de-mayo-2012",
-    "title": "Sergio Romo (Cinco de Mayo)",
+    "title": "Sergio Romo",
+    "nickname": "Cinco de Mayo",
     "year": "2012",
     "date": "May 5, 2012",
     "quantity": "25,000"
@@ -855,7 +891,8 @@
   },
   {
     "id": "jeff-kent-2002-world-series-reunion-2012",
-    "title": "Jeff Kent (2002 World Series Reunion)",
+    "title": "Jeff Kent",
+    "nickname": "2002 World Series Reunion",
     "year": "2012",
     "date": "June 30, 2012",
     "quantity": "5,000"
@@ -888,7 +925,8 @@
   },
   {
     "id": "bruce-lee-year-of-the-dragon-2012",
-    "title": "Bruce Lee (\"Year of the Dragon\")",
+    "title": "Bruce Lee",
+    "nickname": "\"Year of the Dragon\"",
     "year": "2012",
     "date": "September 4, 2012"
   },
@@ -960,7 +998,8 @@
   },
   {
     "id": "lou-seal-luchador-2010",
-    "title": "Lou Seal (\"Luchador\")",
+    "title": "Lou Seal",
+    "nickname": "\"Luchador\"",
     "year": "2010",
     "date": "May 1, 2010"
   },
@@ -984,13 +1023,15 @@
   },
   {
     "id": "lucy-peanuts-2010",
-    "title": "Lucy (Peanuts)",
+    "title": "Lucy",
+    "nickname": "Peanuts",
     "year": "2010",
     "date": "June 13, 2010"
   },
   {
     "id": "pablo-sandoval-pandoval-2010",
-    "title": "Pablo Sandoval (\"Pandoval\")",
+    "title": "Pablo Sandoval",
+    "nickname": "\"Pandoval\"",
     "year": "2010",
     "date": "June 14, 2010"
   },
@@ -1020,7 +1061,8 @@
   },
   {
     "id": "jonathan-sanchez-no-hitter-2010",
-    "title": "Jonathan Sanchez (No-Hitter)",
+    "title": "Jonathan Sanchez",
+    "nickname": "No-Hitter",
     "year": "2010",
     "date": "September 18, 2010"
   },
@@ -1038,7 +1080,8 @@
   },
   {
     "id": "lou-seal-chinese-heritage-2009",
-    "title": "Lou Seal (Chinese Heritage)",
+    "title": "Lou Seal",
+    "nickname": "Chinese Heritage",
     "year": "2009",
     "date": "May 12, 2009"
   },
@@ -1056,13 +1099,15 @@
   },
   {
     "id": "lou-seal-stitch-pitch-2009",
-    "title": "Lou Seal (Stitch & Pitch)",
+    "title": "Lou Seal",
+    "nickname": "Stitch & Pitch",
     "year": "2009",
     "date": "July 27, 2009"
   },
   {
     "id": "lou-seal-policeman-jul-2009",
-    "title": "Lou Seal (Policeman)",
+    "title": "Lou Seal",
+    "nickname": "Policeman",
     "year": "2009",
     "date": "July 30, 2009"
   },
@@ -1086,7 +1131,8 @@
   },
   {
     "id": "lou-seal-policeman-sep-2009",
-    "title": "Lou Seal (Policeman)",
+    "title": "Lou Seal",
+    "nickname": "Policeman",
     "year": "2009",
     "date": "September 24, 2009"
   },
@@ -1175,7 +1221,8 @@
   },
   {
     "id": "lou-seal-oktoberfest-2007",
-    "title": "Lou Seal (Oktoberfest)",
+    "title": "Lou Seal",
+    "nickname": "Oktoberfest",
     "year": "2007",
     "date": "August 24, 2007"
   },

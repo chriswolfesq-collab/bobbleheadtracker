@@ -52,7 +52,8 @@
   },
   {
     "id": "carl-crawford-mystery-3-poses-2023",
-    "title": "Carl Crawford (Mystery, 3 poses)",
+    "title": "Carl Crawford",
+    "nickname": "Mystery, 3 poses",
     "year": "2023",
     "date": "August 26, 2023"
   },
@@ -70,7 +71,8 @@
   },
   {
     "id": "zim-bear-don-zimmer-2023",
-    "title": "\"Zim Bear\" (Don Zimmer)",
+    "title": "\"Zim Bear\"",
+    "nickname": "Don Zimmer",
     "year": "2023",
     "date": "April 2, 2023"
   },
@@ -82,7 +84,8 @@
   },
   {
     "id": "mike-zunino-florida-man-2022",
-    "title": "Mike Zunino (\"Florida Man\")",
+    "title": "Mike Zunino",
+    "nickname": "\"Florida Man\"",
     "year": "2022",
     "date": "June 21, 2022"
   },
@@ -106,13 +109,15 @@
   },
   {
     "id": "brandon-lowe-delayed-2021",
-    "title": "Brandon Lowe (Delayed)",
+    "title": "Brandon Lowe",
+    "nickname": "Delayed",
     "year": "2021",
     "date": "June 26, 2021"
   },
   {
     "id": "willy-adames-audio-2021",
-    "title": "Willy Adames (Audio)",
+    "title": "Willy Adames",
+    "nickname": "Audio",
     "year": "2021",
     "date": "June 9, 2021"
   },
@@ -130,19 +135,22 @@
   },
   {
     "id": "blake-snell-cy-zilla-2019",
-    "title": "Blake Snell (\"Cy Zilla\")",
+    "title": "Blake Snell",
+    "nickname": "\"Cy Zilla\"",
     "year": "2019",
     "date": "March 30, 2019"
   },
   {
     "id": "jake-bauers-willy-adames-double-season-ticket-holders-2019",
-    "title": "Jake Bauers & Willy Adames (Double, Season Ticket Holders)",
+    "title": "Jake Bauers & Willy Adames",
+    "nickname": "Double, Season Ticket Holders",
     "year": "2019",
     "date": "2019"
   },
   {
     "id": "blake-snell-season-ticket-holders-2019",
-    "title": "Blake Snell (Season Ticket Holders)",
+    "title": "Blake Snell",
+    "nickname": "Season Ticket Holders",
     "year": "2019",
     "date": "2019"
   },
@@ -178,7 +186,8 @@
   },
   {
     "id": "evan-longoria-fan-fest-game-162-2018",
-    "title": "Evan Longoria (Fan Fest, Game 162)",
+    "title": "Evan Longoria",
+    "nickname": "Fan Fest, Game 162",
     "year": "2018",
     "date": "2018"
   },
@@ -191,28 +200,32 @@
   },
   {
     "id": "iron-man-marvel-2017",
-    "title": "Iron Man (Marvel)",
+    "title": "Iron Man",
+    "nickname": "Marvel",
     "year": "2017",
     "date": "August 5, 2017",
     "quantity": "15,000"
   },
   {
     "id": "evan-longoria-game-of-thrones-2017",
-    "title": "Evan Longoria (Game of Thrones)",
+    "title": "Evan Longoria",
+    "nickname": "Game of Thrones",
     "year": "2017",
     "date": "July 8, 2017",
     "quantity": "15,000"
   },
   {
     "id": "kevin-kiermaier-star-wars-2017",
-    "title": "Kevin Kiermaier (Star Wars)",
+    "title": "Kevin Kiermaier",
+    "nickname": "Star Wars",
     "year": "2017",
     "date": "June 24, 2017",
     "quantity": "15,000"
   },
   {
     "id": "matt-duffy-double-play-2017",
-    "title": "Matt Duffy (Double Play)",
+    "title": "Matt Duffy",
+    "nickname": "Double Play",
     "year": "2017",
     "date": "June 10, 2017",
     "quantity": "15,000"
@@ -225,31 +238,36 @@
   },
   {
     "id": "raymond-dj-kitty-double-2016",
-    "title": "Raymond & DJ Kitty (Double)",
+    "title": "Raymond & DJ Kitty",
+    "nickname": "Double",
     "year": "2016",
     "date": "August 21, 2016"
   },
   {
     "id": "kevin-kiermaier-claus-2016",
-    "title": "Kevin Kiermaier (\"Claus\")",
+    "title": "Kevin Kiermaier",
+    "nickname": "\"Claus\"",
     "year": "2016",
     "date": "July 17, 2016"
   },
   {
     "id": "chris-archer-stormtrooper-2016",
-    "title": "Chris Archer (Stormtrooper)",
+    "title": "Chris Archer",
+    "nickname": "Stormtrooper",
     "year": "2016",
     "date": "June 11, 2016"
   },
   {
     "id": "chris-archer-k-counter-2016",
-    "title": "Chris Archer (K-Counter)",
+    "title": "Chris Archer",
+    "nickname": "K-Counter",
     "year": "2016",
     "date": "April 30, 2016"
   },
   {
     "id": "kevin-kiermaier-platinum-glove-2016",
-    "title": "Kevin Kiermaier (Platinum Glove)",
+    "title": "Kevin Kiermaier",
+    "nickname": "Platinum Glove",
     "year": "2016",
     "date": "April 16, 2016"
   },
@@ -261,13 +279,15 @@
   },
   {
     "id": "han-longo-evan-longoria-star-wars-2015",
-    "title": "\"Han Longo\" (Evan Longoria, Star Wars)",
+    "title": "\"Han Longo\"",
+    "nickname": "Evan Longoria, Star Wars",
     "year": "2015",
     "date": "September 12, 2015"
   },
   {
     "id": "evan-longoria-walkup-music-2015",
-    "title": "Evan Longoria (Walkup Music)",
+    "title": "Evan Longoria",
+    "nickname": "Walkup Music",
     "year": "2015",
     "date": "May 9, 2015"
   },
@@ -279,14 +299,16 @@
   },
   {
     "id": "evan-longoria-80s-hair-band-2014",
-    "title": "Evan Longoria ('80s Hair Band)",
+    "title": "Evan Longoria",
+    "nickname": "'80s Hair Band",
     "year": "2014",
     "date": "September 6, 2014",
     "quantity": "20,000"
   },
   {
     "id": "wil-myers-star-wars-2014",
-    "title": "Wil Myers (Star Wars)",
+    "title": "Wil Myers",
+    "nickname": "Star Wars",
     "year": "2014",
     "date": "August 30, 2014",
     "quantity": "20,000"
@@ -299,39 +321,45 @@
   },
   {
     "id": "alex-cobb-military-themed-2014",
-    "title": "Alex Cobb (Military Themed)",
+    "title": "Alex Cobb",
+    "nickname": "Military Themed",
     "year": "2014",
     "date": "May 23, 2014"
   },
   {
     "id": "wil-myers-rookie-of-the-year-2014",
-    "title": "Wil Myers (Rookie of the Year)",
+    "title": "Wil Myers",
+    "nickname": "Rookie of the Year",
     "year": "2014",
     "date": "April 4, 2014",
     "quantity": "20,000"
   },
   {
     "id": "raymond-bobble-belly-2013",
-    "title": "Raymond (\"Bobble Belly\")",
+    "title": "Raymond",
+    "nickname": "\"Bobble Belly\"",
     "year": "2013",
     "date": "September 22, 2013"
   },
   {
     "id": "ben-zobrist-jedi-zo-star-wars-2013",
-    "title": "Ben Zobrist (\"Jedi ZO\", Star Wars)",
+    "title": "Ben Zobrist",
+    "nickname": "\"Jedi ZO\", Star Wars",
     "year": "2013",
     "date": "September 21, 2013"
   },
   {
     "id": "evan-longoria-retro-2013",
-    "title": "Evan Longoria (Retro)",
+    "title": "Evan Longoria",
+    "nickname": "Retro",
     "year": "2013",
     "date": "July 6, 2013",
     "quantity": "20,000"
   },
   {
     "id": "astro-devil-rays-mascot-2013",
-    "title": "Astro (Devil Rays Mascot)",
+    "title": "Astro",
+    "nickname": "Devil Rays Mascot",
     "year": "2013",
     "date": "April 21, 2013"
   },
@@ -447,45 +475,52 @@
   },
   {
     "id": "troy-percival-figurine-2008",
-    "title": "Troy Percival (Figurine)",
+    "title": "Troy Percival",
+    "nickname": "Figurine",
     "year": "2008",
     "date": "September 20, 2008"
   },
   {
     "id": "james-shields-figurine-2008",
-    "title": "James Shields (Figurine)",
+    "title": "James Shields",
+    "nickname": "Figurine",
     "year": "2008",
     "date": "August 30, 2008"
   },
   {
     "id": "bj-upton-figurine-2008",
-    "title": "B.J. Upton (Figurine)",
+    "title": "B.J. Upton",
+    "nickname": "Figurine",
     "year": "2008",
     "date": "August 2, 2008"
   },
   {
     "id": "carlos-pena-figurine-2008",
-    "title": "Carlos Pena (Figurine)",
+    "title": "Carlos Pena",
+    "nickname": "Figurine",
     "year": "2008",
     "date": "May 10, 2008"
   },
   {
     "id": "mickey-mouse-mini-disney-2008",
-    "title": "Mickey Mouse (Mini, Disney)",
+    "title": "Mickey Mouse",
+    "nickname": "Mini, Disney",
     "year": "2008",
     "date": "April 24, 2008",
     "quantity": "2,500"
   },
   {
     "id": "goofy-mini-disney-2008",
-    "title": "Goofy (Mini, Disney)",
+    "title": "Goofy",
+    "nickname": "Mini, Disney",
     "year": "2008",
     "date": "April 23, 2008",
     "quantity": "2,500"
   },
   {
     "id": "donald-duck-mini-disney-2008",
-    "title": "Donald Duck (Mini, Disney)",
+    "title": "Donald Duck",
+    "nickname": "Mini, Disney",
     "year": "2008",
     "date": "April 22, 2008",
     "quantity": "2,500"
@@ -529,7 +564,8 @@
   },
   {
     "id": "dewayne-staats-joe-magrane-talking-double-2006",
-    "title": "DeWayne Staats & Joe Magrane (Talking, Double)",
+    "title": "DeWayne Staats & Joe Magrane",
+    "nickname": "Talking, Double",
     "year": "2006",
     "date": "September 2, 2006"
   },
@@ -559,7 +595,8 @@
   },
   {
     "id": "carl-crawford-sliding-2005",
-    "title": "Carl Crawford (Sliding)",
+    "title": "Carl Crawford",
+    "nickname": "Sliding",
     "year": "2005",
     "date": "October 1, 2005"
   },
@@ -577,68 +614,79 @@
   },
   {
     "id": "don-zimmer-mini-2004",
-    "title": "Don Zimmer (Mini)",
+    "title": "Don Zimmer",
+    "nickname": "Mini",
     "year": "2004",
     "date": "August 2, 2004"
   },
   {
     "id": "lou-piniella-mini-2004",
-    "title": "Lou Piniella (Mini)",
+    "title": "Lou Piniella",
+    "nickname": "Mini",
     "year": "2004",
     "date": "July 19, 2004"
   },
   {
     "id": "toby-hall-mini-2004",
-    "title": "Toby Hall (Mini)",
+    "title": "Toby Hall",
+    "nickname": "Mini",
     "year": "2004",
     "date": "June 30, 2004",
     "quantity": "7,500"
   },
   {
     "id": "jose-cruz-jr-mini-2004",
-    "title": "Jose Cruz Jr. (Mini)",
+    "title": "Jose Cruz Jr.",
+    "nickname": "Mini",
     "year": "2004",
     "date": "June 9, 2004"
   },
   {
     "id": "tino-martinez-mini-2004",
-    "title": "Tino Martinez (Mini)",
+    "title": "Tino Martinez",
+    "nickname": "Mini",
     "year": "2004",
     "date": "May 30, 2004"
   },
   {
     "id": "carl-crawford-mini-2004",
-    "title": "Carl Crawford (Mini)",
+    "title": "Carl Crawford",
+    "nickname": "Mini",
     "year": "2004",
     "date": "May 23, 2004"
   },
   {
     "id": "rocco-baldelli-mini-2004",
-    "title": "Rocco Baldelli (Mini)",
+    "title": "Rocco Baldelli",
+    "nickname": "Mini",
     "year": "2004",
     "date": "May 18, 2004"
   },
   {
     "id": "aubrey-huff-mini-2004",
-    "title": "Aubrey Huff (Mini)",
+    "title": "Aubrey Huff",
+    "nickname": "Mini",
     "year": "2004",
     "date": "April 10, 2004"
   },
   {
     "id": "carl-crawford-mini-2003",
-    "title": "Carl Crawford (Mini)",
+    "title": "Carl Crawford",
+    "nickname": "Mini",
     "year": "2003",
     "date": "September 27, 2003"
   },
   {
     "id": "aubrey-huff-mini-2003",
-    "title": "Aubrey Huff (Mini)",
+    "title": "Aubrey Huff",
+    "nickname": "Mini",
     "year": "2003",
     "date": "September 19, 2003"
   },
   {
     "id": "rocco-baldelli-mini-2003",
-    "title": "Rocco Baldelli (Mini)",
+    "title": "Rocco Baldelli",
+    "nickname": "Mini",
     "year": "2003",
     "date": "September 7, 2003"
   },
@@ -656,7 +704,8 @@
   },
   {
     "id": "raymond-mascot-2001",
-    "title": "Raymond (Mascot)",
+    "title": "Raymond",
+    "nickname": "Mascot",
     "year": "2001",
     "date": "August 12, 2001"
   },

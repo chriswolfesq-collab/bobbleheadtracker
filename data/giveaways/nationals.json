@@ -43,7 +43,8 @@
   },
   {
     "id": "hello-kitty-city-connect-2025",
-    "title": "Hello Kitty (City Connect)",
+    "title": "Hello Kitty",
+    "nickname": "City Connect",
     "year": "2025",
     "date": "September 27, 2025"
   },
@@ -96,13 +97,15 @@
   },
   {
     "id": "hello-kitty-red-2025",
-    "title": "Hello Kitty (Red)",
+    "title": "Hello Kitty",
+    "nickname": "Red",
     "year": "2025",
     "date": "April 8, 2025"
   },
   {
     "id": "mackenzie-gore-sth-only-2025",
-    "title": "MacKenzie Gore (STH Only)",
+    "title": "MacKenzie Gore",
+    "nickname": "STH Only",
     "year": "2025",
     "date": "April 1, 2025"
   },
@@ -156,7 +159,8 @@
   },
   {
     "id": "lane-thomas-sth-only-2024",
-    "title": "Lane Thomas (STH Only)",
+    "title": "Lane Thomas",
+    "nickname": "STH Only",
     "year": "2024",
     "date": "April 1, 2024",
     "quantity": "20,000"
@@ -170,13 +174,15 @@
   },
   {
     "id": "hbcu-drum-major-2023",
-    "title": "HBCU Drum Major (Special Ticket)",
+    "title": "HBCU Drum Major",
+    "nickname": "Special Ticket",
     "year": "2023",
     "date": "August 19, 2023"
   },
   {
     "id": "racing-presidents-george-tom-2023",
-    "title": "Racing Presidents (George & Tom)",
+    "title": "Racing Presidents",
+    "nickname": "George & Tom",
     "year": "2023",
     "date": "August 12, 2023",
     "quantity": "20,000"
@@ -190,14 +196,16 @@
   },
   {
     "id": "racing-presidents-teddy-abe-2023",
-    "title": "Racing Presidents (Teddy & Abe)",
+    "title": "Racing Presidents",
+    "nickname": "Teddy & Abe",
     "year": "2023",
     "date": "June 17, 2023",
     "quantity": "20,000"
   },
   {
     "id": "screech-night-out-2023",
-    "title": "Screech (\"Night OUT\")",
+    "title": "Screech",
+    "nickname": "\"Night OUT\"",
     "year": "2023",
     "date": "June 6, 2023",
     "quantity": "20,000"
@@ -211,7 +219,8 @@
   },
   {
     "id": "josiah-gray-sth-only-2023",
-    "title": "Josiah Gray (STH Only)",
+    "title": "Josiah Gray",
+    "nickname": "STH Only",
     "year": "2023",
     "date": "April 1, 2023",
     "quantity": "20,000"
@@ -225,21 +234,24 @@
   },
   {
     "id": "juan-solo-star-wars-2022",
-    "title": "Juan \"Solo\" (Star Wars)",
+    "title": "Juan \"Solo\"",
+    "nickname": "Star Wars",
     "year": "2022",
     "date": "July 16, 2022",
     "quantity": "20,000"
   },
   {
     "id": "josh-bell-the-unstoppable-marvel-2022",
-    "title": "Josh Bell (\"The Unstoppable\", Marvel)",
+    "title": "Josh Bell",
+    "nickname": "\"The Unstoppable\", Marvel",
     "year": "2022",
     "date": "June 11, 2022",
     "quantity": "20,000"
   },
   {
     "id": "juan-soto-soto-shuffle-2022",
-    "title": "Juan Soto (\"Soto Shuffle\")",
+    "title": "Juan Soto",
+    "nickname": "\"Soto Shuffle\"",
     "year": "2022",
     "date": "May 27, 2022",
     "quantity": "20,000"
@@ -253,13 +265,15 @@
   },
   {
     "id": "victor-robles-spring-training-2022",
-    "title": "Victor Robles (Spring Training)",
+    "title": "Victor Robles",
+    "nickname": "Spring Training",
     "year": "2022",
     "date": "April 3, 2022"
   },
   {
     "id": "ryan-zimmerman-spring-training-2022",
-    "title": "Ryan Zimmerman (Spring Training)",
+    "title": "Ryan Zimmerman",
+    "nickname": "Spring Training",
     "year": "2022",
     "date": "March 18, 2022"
   },
@@ -286,27 +300,31 @@
   },
   {
     "id": "davey-martinez-world-series-2021-6-28",
-    "title": "Davey Martinez (World Series)",
+    "title": "Davey Martinez",
+    "nickname": "World Series",
     "year": "2021",
     "date": "June 28, 2021",
     "quantity": "20,000"
   },
   {
     "id": "daniel-hudson-world-series-2021-5-5",
-    "title": "Daniel Hudson (World Series)",
+    "title": "Daniel Hudson",
+    "nickname": "World Series",
     "year": "2021",
     "date": "May 5, 2021",
     "quantity": "20,000"
   },
   {
     "id": "daniel-hudson-world-series-2021-5-1",
-    "title": "Daniel Hudson (World Series)",
+    "title": "Daniel Hudson",
+    "nickname": "World Series",
     "year": "2021",
     "date": "May 1, 2021"
   },
   {
     "id": "davey-martinez-world-series-2021-4-3",
-    "title": "Davey Martinez (World Series)",
+    "title": "Davey Martinez",
+    "nickname": "World Series",
     "year": "2021",
     "date": "April 3, 2021",
     "quantity": "25,000"
@@ -341,7 +359,8 @@
   },
   {
     "id": "obi-sean-kenobi-2019",
-    "title": "\"Obi 'Sean' Kenobi\" (Sean Doolittle)",
+    "title": "\"Obi 'Sean' Kenobi\"",
+    "nickname": "Sean Doolittle",
     "year": "2019",
     "date": "June 15, 2019",
     "quantity": "10,000"
@@ -375,7 +394,8 @@
   },
   {
     "id": "michael-a-taylor-game-of-thrones-2018",
-    "title": "Michael A. Taylor (Game of Thrones)",
+    "title": "Michael A. Taylor",
+    "nickname": "Game of Thrones",
     "year": "2018",
     "date": "August 18, 2018",
     "quantity": "25,000"
@@ -389,28 +409,32 @@
   },
   {
     "id": "teddy-roosevelt-garden-gnome-2018",
-    "title": "Teddy Roosevelt (Garden Gnome, MLB Futures Game)",
+    "title": "Teddy Roosevelt",
+    "nickname": "Garden Gnome, MLB Futures Game",
     "year": "2018",
     "date": "July 15, 2018",
     "quantity": "15,000"
   },
   {
     "id": "bryce-harper-patriotic-2018",
-    "title": "Bryce Harper (Patriotic)",
+    "title": "Bryce Harper",
+    "nickname": "Patriotic",
     "year": "2018",
     "date": "July 6, 2018",
     "quantity": "25,000"
   },
   {
     "id": "ryan-zimmerman-ryanaissance-2018",
-    "title": "Ryan Zimmerman (\"Ryanaissance\")",
+    "title": "Ryan Zimmerman",
+    "nickname": "\"Ryanaissance\"",
     "year": "2018",
     "date": "June 8, 2018",
     "quantity": "25,000"
   },
   {
     "id": "max-scherzer-cy-young-2018",
-    "title": "Max Scherzer (Cy Young)",
+    "title": "Max Scherzer",
+    "nickname": "Cy Young",
     "year": "2018",
     "date": "May 4, 2018",
     "quantity": "25,000"
@@ -451,7 +475,8 @@
   },
   {
     "id": "election-night-donkey-elephant-2016",
-    "title": "Election Night (Donkey & Elephant)",
+    "title": "Election Night",
+    "nickname": "Donkey & Elephant",
     "year": "2016",
     "date": "September 30, 2016",
     "quantity": "12,500"
@@ -465,14 +490,16 @@
   },
   {
     "id": "michael-a-taylor-fan-choice-2016",
-    "title": "Michael A. Taylor (Fan Choice)",
+    "title": "Michael A. Taylor",
+    "nickname": "Fan Choice",
     "year": "2016",
     "date": "September 9, 2016",
     "quantity": "25,000"
   },
   {
     "id": "max-scherzer-no-hitter-2-2016",
-    "title": "Max Scherzer (No-Hitter, #2)",
+    "title": "Max Scherzer",
+    "nickname": "No-Hitter, #2",
     "year": "2016",
     "date": "August 26, 2016",
     "quantity": "25,000"
@@ -486,7 +513,8 @@
   },
   {
     "id": "herbert-hoover-racing-president-2016",
-    "title": "Herbert Hoover (Racing President)",
+    "title": "Herbert Hoover",
+    "nickname": "Racing President",
     "year": "2016",
     "date": "July 3, 2016",
     "quantity": "25,000"
@@ -500,28 +528,32 @@
   },
   {
     "id": "max-scherzer-no-hitter-1-2016",
-    "title": "Max Scherzer (No-Hitter, #1)",
+    "title": "Max Scherzer",
+    "nickname": "No-Hitter, #1",
     "year": "2016",
     "date": "May 23, 2016",
     "quantity": "25,000"
   },
   {
     "id": "bryce-harper-mvp-2016",
-    "title": "Bryce Harper (MVP)",
+    "title": "Bryce Harper",
+    "nickname": "MVP",
     "year": "2016",
     "date": "May 11, 2016",
     "quantity": "25,000"
   },
   {
     "id": "jordan-zimmermann-no-hitter-2015",
-    "title": "Jordan Zimmermann (No-Hitter)",
+    "title": "Jordan Zimmermann",
+    "nickname": "No-Hitter",
     "year": "2015",
     "date": "September 25, 2015",
     "quantity": "25,000"
   },
   {
     "id": "calvin-coolidge-racing-president-2015",
-    "title": "Calvin Coolidge (Racing President)",
+    "title": "Calvin Coolidge",
+    "nickname": "Racing President",
     "year": "2015",
     "date": "September 21, 2015",
     "quantity": "25,000"
@@ -577,7 +609,8 @@
   },
   {
     "id": "bill-racing-president-2014",
-    "title": "\"Bill\" (Racing President)",
+    "title": "\"Bill\"",
+    "nickname": "Racing President",
     "year": "2014",
     "date": "August 17, 2014",
     "quantity": "25,000"
@@ -667,7 +700,8 @@
   },
   {
     "id": "screech-kids-club-2012",
-    "title": "Screech (Kids Club)",
+    "title": "Screech",
+    "nickname": "Kids Club",
     "year": "2012",
     "date": "2012"
   },
@@ -742,35 +776,40 @@
   },
   {
     "id": "teddy-roosevelt-racing-president-2007",
-    "title": "Teddy Roosevelt (Racing President)",
+    "title": "Teddy Roosevelt",
+    "nickname": "Racing President",
     "year": "2007",
     "date": "September 1, 2007",
     "quantity": "15,000"
   },
   {
     "id": "abe-lincoln-racing-president-2007",
-    "title": "Abe Lincoln (Racing President)",
+    "title": "Abe Lincoln",
+    "nickname": "Racing President",
     "year": "2007",
     "date": "August 18, 2007",
     "quantity": "15,000"
   },
   {
     "id": "thomas-jefferson-racing-president-2007",
-    "title": "Thomas Jefferson (Racing President)",
+    "title": "Thomas Jefferson",
+    "nickname": "Racing President",
     "year": "2007",
     "date": "August 4, 2007",
     "quantity": "15,000"
   },
   {
     "id": "george-washington-racing-president-2007",
-    "title": "George Washington (Racing President)",
+    "title": "George Washington",
+    "nickname": "Racing President",
     "year": "2007",
     "date": "July 4, 2007",
     "quantity": "15,000"
   },
   {
     "id": "screech-mascot-2006",
-    "title": "Screech (Mascot)",
+    "title": "Screech",
+    "nickname": "Mascot",
     "year": "2006",
     "date": "August 13, 2006"
   },

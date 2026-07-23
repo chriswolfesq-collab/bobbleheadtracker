@@ -1,28 +1,32 @@
 [
   {
     "id": "juan-soto-40-30-2026",
-    "title": "Juan Soto (40/30)",
+    "title": "Juan Soto",
+    "nickname": "40/30",
     "year": "2026",
     "date": "April 11, 2026",
     "quantity": "18,000"
   },
   {
     "id": "mr-met-unisphere-light-up-2026",
-    "title": "Mr. Met (Unisphere Light-Up)",
+    "title": "Mr. Met",
+    "nickname": "Unisphere Light-Up",
     "year": "2026",
     "date": "April 25, 2026",
     "quantity": "18,000"
   },
   {
     "id": "juan-soto-baseball-card-2026",
-    "title": "Juan Soto (Baseball Card)",
+    "title": "Juan Soto",
+    "nickname": "Baseball Card",
     "year": "2026",
     "date": "June 25, 2026",
     "quantity": "18,000"
   },
   {
     "id": "mrs-met-taxicab-2025",
-    "title": "Mrs. Met (Taxicab)",
+    "title": "Mrs. Met",
+    "nickname": "Taxicab",
     "year": "2025",
     "date": "September 13, 2025",
     "quantity": "15,000"
@@ -43,7 +47,8 @@
   },
   {
     "id": "mrs-met-gives-back-2025",
-    "title": "Mrs. Met (Gives Back)",
+    "title": "Mrs. Met",
+    "nickname": "Gives Back",
     "year": "2025",
     "date": "August 13, 2025",
     "quantity": "15,000"
@@ -78,7 +83,8 @@
   },
   {
     "id": "mr-met-empire-state-building-2025",
-    "title": "Mr. Met (Empire State Building)",
+    "title": "Mr. Met",
+    "nickname": "Empire State Building",
     "year": "2025",
     "date": "April 19, 2025",
     "quantity": "15,000"
@@ -127,35 +133,40 @@
   },
   {
     "id": "edwin-diaz-trumpet-2023",
-    "title": "Edwin Diaz (Trumpet)",
+    "title": "Edwin Diaz",
+    "nickname": "Trumpet",
     "year": "2023",
     "date": "August 15, 2023",
     "quantity": "15,000"
   },
   {
     "id": "mr-met-indiana-jones-2023",
-    "title": "Mr. Met (Indiana Jones)",
+    "title": "Mr. Met",
+    "nickname": "Indiana Jones",
     "year": "2023",
     "date": "June 27, 2023",
     "quantity": "15,000"
   },
   {
     "id": "starling-marte-black-panther-2023",
-    "title": "Starling Marte (Black Panther)",
+    "title": "Starling Marte",
+    "nickname": "Black Panther",
     "year": "2023",
     "date": "June 26, 2023",
     "quantity": "15,000"
   },
   {
     "id": "howie-rose-sound-2023",
-    "title": "Howie Rose (Sound)",
+    "title": "Howie Rose",
+    "nickname": "Sound",
     "year": "2023",
     "date": "May 31, 2023",
     "quantity": "15,000"
   },
   {
     "id": "francisco-lindor-grass-growing-2023",
-    "title": "Francisco Lindor (Grass Growing)",
+    "title": "Francisco Lindor",
+    "nickname": "Grass Growing",
     "year": "2023",
     "date": "May 20, 2023",
     "quantity": "15,000"
@@ -175,7 +186,8 @@
   },
   {
     "id": "max-scherzer-strikeout-counter-2022",
-    "title": "Max Scherzer (Strikeout Counter)",
+    "title": "Max Scherzer",
+    "nickname": "Strikeout Counter",
     "year": "2022",
     "date": "August 26, 2022"
   },
@@ -188,7 +200,8 @@
   },
   {
     "id": "jacob-degrom-strikeout-counter-2022",
-    "title": "Jacob deGrom (Strikeout Counter)",
+    "title": "Jacob deGrom",
+    "nickname": "Strikeout Counter",
     "year": "2022",
     "date": "August 6, 2022"
   },
@@ -208,21 +221,24 @@
   },
   {
     "id": "pete-alonso-polar-bear-2022",
-    "title": "Pete Alonso (\"Polar Bear\")",
+    "title": "Pete Alonso",
+    "nickname": "\"Polar Bear\"",
     "year": "2022",
     "date": "May 14, 2022",
     "quantity": "25,000"
   },
   {
     "id": "trevor-may-mandalorian-2022",
-    "title": "Trevor May (Mandalorian)",
+    "title": "Trevor May",
+    "nickname": "Mandalorian",
     "year": "2022",
     "date": "May 4, 2022",
     "quantity": "3,000"
   },
   {
     "id": "jerry-koosman-number-retirement-2021",
-    "title": "Jerry Koosman (Number Retirement)",
+    "title": "Jerry Koosman",
+    "nickname": "Number Retirement",
     "year": "2021",
     "date": "August 28, 2021",
     "quantity": "25,000"
@@ -235,7 +251,8 @@
   },
   {
     "id": "mrs-met-wonder-woman-2021",
-    "title": "Mrs. Met (Wonder Woman)",
+    "title": "Mrs. Met",
+    "nickname": "Wonder Woman",
     "year": "2021",
     "date": "May 7, 2021"
   },
@@ -267,7 +284,8 @@
   },
   {
     "id": "mr-met-7-line-army-100th-2019",
-    "title": "Mr. Met (7 Line Army 100th)",
+    "title": "Mr. Met",
+    "nickname": "7 Line Army 100th",
     "year": "2019",
     "date": "June 29, 2019",
     "quantity": "25,000"
@@ -280,21 +298,24 @@
   },
   {
     "id": "noah-syndergaard-game-of-thrones-2019",
-    "title": "Noah Syndergaard (Game of Thrones)",
+    "title": "Noah Syndergaard",
+    "nickname": "Game of Thrones",
     "year": "2019",
     "date": "April 27, 2019",
     "quantity": "25,000"
   },
   {
     "id": "jacob-degrom-cy-young-2019",
-    "title": "Jacob deGrom (Cy Young)",
+    "title": "Jacob deGrom",
+    "nickname": "Cy Young",
     "year": "2019",
     "date": "April 7, 2019",
     "quantity": "25,000"
   },
   {
     "id": "todd-frazier-wwe-day-2019",
-    "title": "Todd Frazier (WWE Day)",
+    "title": "Todd Frazier",
+    "nickname": "WWE Day",
     "year": "2019",
     "date": "April 6, 2019",
     "quantity": "25,000"
@@ -315,7 +336,8 @@
   },
   {
     "id": "noah-syndergaard-thor-2018",
-    "title": "Noah Syndergaard (Thor)",
+    "title": "Noah Syndergaard",
+    "nickname": "Thor",
     "year": "2018",
     "date": "August 4, 2018",
     "quantity": "25,000"
@@ -329,14 +351,16 @@
   },
   {
     "id": "mr-met-han-solo-star-wars-2018",
-    "title": "Mr. Met (Han Solo, Star Wars)",
+    "title": "Mr. Met",
+    "nickname": "Han Solo, Star Wars",
     "year": "2018",
     "date": "May 19, 2018",
     "quantity": "25,000"
   },
   {
     "id": "noah-syndergaard-season-ticket-holders-2018",
-    "title": "Noah Syndergaard (Season Ticket Holders)",
+    "title": "Noah Syndergaard",
+    "nickname": "Season Ticket Holders",
     "year": "2018",
     "date": "2018",
     "quantity": "25,000"
@@ -350,7 +374,8 @@
   },
   {
     "id": "noah-syndergaard-thor-2017",
-    "title": "Noah Syndergaard (Thor)",
+    "title": "Noah Syndergaard",
+    "nickname": "Thor",
     "year": "2017",
     "date": "July 22, 2017",
     "quantity": "15,000"
@@ -405,33 +430,38 @@
   },
   {
     "id": "david-wright-law-enforcement-2014",
-    "title": "David Wright (Law Enforcement)",
+    "title": "David Wright",
+    "nickname": "Law Enforcement",
     "year": "2014",
     "date": "August 15, 2014"
   },
   {
     "id": "travis-darnaud-jedi-knight-2014",
-    "title": "Travis d'Arnaud (Jedi Knight)",
+    "title": "Travis d'Arnaud",
+    "nickname": "Jedi Knight",
     "year": "2014",
     "date": "July 11, 2014",
     "quantity": "1,000"
   },
   {
     "id": "zack-wheeler-firefighter-2014",
-    "title": "Zack Wheeler (Firefighter)",
+    "title": "Zack Wheeler",
+    "nickname": "Firefighter",
     "year": "2014",
     "date": "June 14, 2014"
   },
   {
     "id": "nolan-ryan-1969-commemorative-2014",
-    "title": "Nolan Ryan (1969 Commemorative)",
+    "title": "Nolan Ryan",
+    "nickname": "1969 Commemorative",
     "year": "2014",
     "date": "May 10, 2014",
     "quantity": "20,000"
   },
   {
     "id": "tom-seaver-all-star-2013",
-    "title": "Tom Seaver (All-Star)",
+    "title": "Tom Seaver",
+    "nickname": "All-Star",
     "year": "2013",
     "date": "August 25, 2013",
     "quantity": "25,000"
@@ -444,21 +474,24 @@
   },
   {
     "id": "mr-met-master-met-star-wars-2013",
-    "title": "Mr. Met (\"Master Met\" Star Wars)",
+    "title": "Mr. Met",
+    "nickname": "\"Master Met\" Star Wars",
     "year": "2013",
     "date": "July 23, 2013",
     "quantity": "1,000"
   },
   {
     "id": "dwight-gooden-all-star-2013",
-    "title": "Dwight Gooden (All-Star)",
+    "title": "Dwight Gooden",
+    "nickname": "All-Star",
     "year": "2013",
     "date": "July 21, 2013",
     "quantity": "25,000"
   },
   {
     "id": "david-wright-all-star-2013",
-    "title": "David Wright (All-Star)",
+    "title": "David Wright",
+    "nickname": "All-Star",
     "year": "2013",
     "date": "June 30, 2013",
     "quantity": "25,000"
@@ -472,7 +505,8 @@
   },
   {
     "id": "mr-met-knitting-2013",
-    "title": "Mr. Met (Knitting)",
+    "title": "Mr. Met",
+    "nickname": "Knitting",
     "year": "2013",
     "date": "May 11, 2013",
     "quantity": "1,000"
@@ -527,7 +561,8 @@
   },
   {
     "id": "mr-met-mascot-2011",
-    "title": "Mr. Met (Mascot)",
+    "title": "Mr. Met",
+    "nickname": "Mascot",
     "year": "2011",
     "date": "April 8, 2011"
   },
@@ -546,7 +581,8 @@
   },
   {
     "id": "gary-cohen-ron-darling-keith-hernandez-triple-2010",
-    "title": "Gary Cohen, Ron Darling & Keith Hernandez (Triple)",
+    "title": "Gary Cohen, Ron Darling & Keith Hernandez",
+    "nickname": "Triple",
     "year": "2010",
     "date": "March 27, 2010",
     "quantity": "2,000"
@@ -632,7 +668,8 @@
   },
   {
     "id": "mr-met-mascot-2004",
-    "title": "Mr. Met (Mascot)",
+    "title": "Mr. Met",
+    "nickname": "Mascot",
     "year": "2004",
     "date": "May 22, 2004"
   },

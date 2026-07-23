@@ -1,7 +1,8 @@
 [
   {
     "id": "cal-ripken-jr-2131-30th-anniversary-2026",
-    "title": "Cal Ripken Jr. (\"2131\", 30th Anniversary)",
+    "title": "Cal Ripken Jr.",
+    "nickname": "\"2131\", 30th Anniversary",
     "year": "2026",
     "date": "September 6, 2026"
   },
@@ -20,7 +21,8 @@
   },
   {
     "id": "star-wars-weekend-bobblehead-jedi-themed-2026",
-    "title": "Star Wars Weekend Bobblehead (Jedi-Themed)",
+    "title": "Star Wars Weekend Bobblehead",
+    "nickname": "Jedi-Themed",
     "year": "2026",
     "date": "May 2, 2026"
   },
@@ -123,13 +125,15 @@
   },
   {
     "id": "eddie-murray-1983-world-series-2023",
-    "title": "Eddie Murray (1983 World Series)",
+    "title": "Eddie Murray",
+    "nickname": "1983 World Series",
     "year": "2023",
     "date": "August 5, 2023"
   },
   {
     "id": "adley-rutschman-captain-america-2023",
-    "title": "Adley Rutschman (Captain America)",
+    "title": "Adley Rutschman",
+    "nickname": "Captain America",
     "year": "2023",
     "date": "June 10, 2023"
   },
@@ -154,27 +158,31 @@
   },
   {
     "id": "cedric-mullins-30-30-club-2022",
-    "title": "Cedric Mullins (30/30 Club)",
+    "title": "Cedric Mullins",
+    "nickname": "30/30 Club",
     "year": "2022",
     "date": "August 5, 2022",
     "quantity": "20,000"
   },
   {
     "id": "oriole-bird-hall-of-fame-spring-training-2022",
-    "title": "Oriole Bird (Hall of Fame, Spring Training)",
+    "title": "Oriole Bird",
+    "nickname": "Hall of Fame, Spring Training",
     "year": "2022",
     "date": "March 19, 2022"
   },
   {
     "id": "john-means-business-2021",
-    "title": "John Means (\"Business\")",
+    "title": "John Means",
+    "nickname": "\"Business\"",
     "year": "2021",
     "date": "August 21, 2021",
     "quantity": "15,000"
   },
   {
     "id": "oriole-bird-hall-of-fame-2021",
-    "title": "Oriole Bird (Hall of Fame)",
+    "title": "Oriole Bird",
+    "nickname": "Hall of Fame",
     "year": "2021",
     "date": "August 7, 2021",
     "quantity": "20,000"
@@ -188,7 +196,8 @@
   },
   {
     "id": "oriole-bird-stranger-things-2019",
-    "title": "Oriole Bird (Stranger Things)",
+    "title": "Oriole Bird",
+    "nickname": "Stranger Things",
     "year": "2019",
     "date": "August 2, 2019"
   },
@@ -201,13 +210,15 @@
   },
   {
     "id": "trey-mancini-bb-8-star-wars-2019",
-    "title": "Trey Mancini & BB-8 (Star Wars)",
+    "title": "Trey Mancini & BB-8",
+    "nickname": "Star Wars",
     "year": "2019",
     "date": "May 4, 2019"
   },
   {
     "id": "kevin-gausman-game-of-thrones-2018",
-    "title": "Kevin Gausman (Game of Thrones)",
+    "title": "Kevin Gausman",
+    "nickname": "Game of Thrones",
     "year": "2018",
     "date": "August 14, 2018"
   },
@@ -227,13 +238,15 @@
   },
   {
     "id": "oday-wan-kenobi-darren-oday-star-wars-2018",
-    "title": "\"O'Day-Wan Kenobi\" (Darren O'Day, Star Wars)",
+    "title": "\"O'Day-Wan Kenobi\"",
+    "nickname": "Darren O'Day, Star Wars",
     "year": "2018",
     "date": "May 11, 2018"
   },
   {
     "id": "oriole-bird-toothbrush-holder-2017",
-    "title": "Oriole Bird (Toothbrush Holder)",
+    "title": "Oriole Bird",
+    "nickname": "Toothbrush Holder",
     "year": "2017",
     "date": "September 24, 2017"
   },
@@ -252,7 +265,8 @@
   },
   {
     "id": "orioles-vintage-bobble-boy-girl-2016",
-    "title": "Orioles Vintage (Bobble Boy/Girl)",
+    "title": "Orioles Vintage",
+    "nickname": "Bobble Boy/Girl",
     "year": "2016",
     "date": "September 17, 2016"
   },
@@ -264,7 +278,8 @@
   },
   {
     "id": "steve-pearce-fans-choice-2015",
-    "title": "Steve Pearce (Fans' Choice)",
+    "title": "Steve Pearce",
+    "nickname": "Fans' Choice",
     "year": "2015",
     "date": "October 3, 2015",
     "quantity": "25,000"
@@ -278,7 +293,8 @@
   },
   {
     "id": "chris-tillman-fans-choice-2014",
-    "title": "Chris Tillman (Fans' Choice)",
+    "title": "Chris Tillman",
+    "nickname": "Fans' Choice",
     "year": "2014",
     "date": "September 21, 2014",
     "quantity": "25,000"
@@ -299,7 +315,8 @@
   },
   {
     "id": "chris-davis-fans-choice-2013",
-    "title": "Chris Davis (Fans' Choice)",
+    "title": "Chris Davis",
+    "nickname": "Fans' Choice",
     "year": "2013",
     "date": "September 29, 2013",
     "quantity": "20,000"
@@ -313,37 +330,43 @@
   },
   {
     "id": "brooks-robinson-bronze-statue-2012",
-    "title": "Brooks Robinson (Bronze Statue)",
+    "title": "Brooks Robinson",
+    "nickname": "Bronze Statue",
     "year": "2012",
     "date": "September 29, 2012"
   },
   {
     "id": "cal-ripken-jr-bronze-statue-2012",
-    "title": "Cal Ripken Jr. (Bronze Statue)",
+    "title": "Cal Ripken Jr.",
+    "nickname": "Bronze Statue",
     "year": "2012",
     "date": "September 6, 2012"
   },
   {
     "id": "eddie-murray-bronze-statue-2012",
-    "title": "Eddie Murray (Bronze Statue)",
+    "title": "Eddie Murray",
+    "nickname": "Bronze Statue",
     "year": "2012",
     "date": "August 11, 2012"
   },
   {
     "id": "jim-palmer-bronze-statue-2012",
-    "title": "Jim Palmer (Bronze Statue)",
+    "title": "Jim Palmer",
+    "nickname": "Bronze Statue",
     "year": "2012",
     "date": "July 14, 2012"
   },
   {
     "id": "earl-weaver-bronze-statue-2012",
-    "title": "Earl Weaver (Bronze Statue)",
+    "title": "Earl Weaver",
+    "nickname": "Bronze Statue",
     "year": "2012",
     "date": "June 30, 2012"
   },
   {
     "id": "frank-robinson-bronze-statue-2012",
-    "title": "Frank Robinson (Bronze Statue)",
+    "title": "Frank Robinson",
+    "nickname": "Bronze Statue",
     "year": "2012",
     "date": "April 28, 2012"
   },
@@ -361,7 +384,8 @@
   },
   {
     "id": "nick-markakis-mini-2010",
-    "title": "Nick Markakis (Mini)",
+    "title": "Nick Markakis",
+    "nickname": "Mini",
     "year": "2010",
     "date": "August 5, 2010",
     "quantity": "15,000"
@@ -375,14 +399,16 @@
   },
   {
     "id": "adam-jones-mini-2010",
-    "title": "Adam Jones (Mini)",
+    "title": "Adam Jones",
+    "nickname": "Mini",
     "year": "2010",
     "date": "June 24, 2010",
     "quantity": "15,000"
   },
   {
     "id": "nolan-reimold-mini-2010",
-    "title": "Nolan Reimold (Mini)",
+    "title": "Nolan Reimold",
+    "nickname": "Mini",
     "year": "2010",
     "date": "May 26, 2010",
     "quantity": "15,000"
@@ -423,7 +449,8 @@
   },
   {
     "id": "cal-ripken-jr-season-ticket-2007",
-    "title": "Cal Ripken Jr. (Season Ticket)",
+    "title": "Cal Ripken Jr.",
+    "nickname": "Season Ticket",
     "year": "2007",
     "date": "January 1, 2007",
     "quantity": "25,000"
@@ -519,7 +546,8 @@
   },
   {
     "id": "funbird-mascot-2002",
-    "title": "\"Funbird\" (Mascot)",
+    "title": "\"Funbird\"",
+    "nickname": "Mascot",
     "year": "2002",
     "date": "July 15, 2002",
     "quantity": "10,000"

@@ -36,7 +36,8 @@
   },
   {
     "id": "kris-bryant-jedi-2023",
-    "title": "Kris Bryant (Jedi)",
+    "title": "Kris Bryant",
+    "nickname": "Jedi",
     "year": "2023",
     "date": "July 29, 2023",
     "quantity": "15,000"
@@ -50,7 +51,8 @@
   },
   {
     "id": "german-marquez-all-star-2022",
-    "title": "German Marquez (2021 All-Star Game)",
+    "title": "German Marquez",
+    "nickname": "2021 All-Star Game",
     "year": "2022",
     "date": "June 18, 2022",
     "quantity": "15,000"
@@ -71,20 +73,23 @@
   },
   {
     "id": "chuck-nazty-charlie-blackmon-2021",
-    "title": "\"Chuck Nazty\" (Charlie Blackmon)",
+    "title": "\"Chuck Nazty\"",
+    "nickname": "Charlie Blackmon",
     "year": "2021",
     "date": "May 15, 2021"
   },
   {
     "id": "trevor-story-time-2021",
-    "title": "Trevor Story (\"Story Time\")",
+    "title": "Trevor Story",
+    "nickname": "\"Story Time\"",
     "year": "2021",
     "date": "June 19, 2021",
     "quantity": "15,000"
   },
   {
     "id": "larry-walker-hof-2021",
-    "title": "Larry Walker (Hall of Fame)",
+    "title": "Larry Walker",
+    "nickname": "Hall of Fame",
     "year": "2021",
     "date": "September 25, 2021"
   },
@@ -111,14 +116,16 @@
   },
   {
     "id": "charlie-blackmon-nl-batting-champion-2018",
-    "title": "Charlie Blackmon (NL Batting Champion)",
+    "title": "Charlie Blackmon",
+    "nickname": "NL Batting Champion",
     "year": "2018",
     "date": "April 8, 2018",
     "quantity": "20,000"
   },
   {
     "id": "nolan-arenado-walk-off-cycle-2018",
-    "title": "Nolan Arenado (Walk-Off Cycle)",
+    "title": "Nolan Arenado",
+    "nickname": "Walk-Off Cycle",
     "year": "2018",
     "date": "July 14, 2018",
     "quantity": "20,000"
@@ -137,7 +144,8 @@
   },
   {
     "id": "adam-ottavino-star-wars-2017",
-    "title": "Adam Ottavino (Star Wars)",
+    "title": "Adam Ottavino",
+    "nickname": "Star Wars",
     "year": "2017",
     "date": "July 22, 2017"
   },
@@ -149,28 +157,32 @@
   },
   {
     "id": "nolan-arenado-diamond-leader-2016",
-    "title": "Nolan Arenado (Diamond Leader)",
+    "title": "Nolan Arenado",
+    "nickname": "Diamond Leader",
     "year": "2016",
     "date": "April 10, 2016",
     "quantity": "20,000"
   },
   {
     "id": "charlie-blackmon-star-wars-2016",
-    "title": "Charlie Blackmon (Star Wars)",
+    "title": "Charlie Blackmon",
+    "nickname": "Star Wars",
     "year": "2016",
     "date": "July 23, 2016",
     "quantity": "20,000"
   },
   {
     "id": "dj-lemahieu-ghostbusters-2016",
-    "title": "DJ LeMahieu (Ghostbusters)",
+    "title": "DJ LeMahieu",
+    "nickname": "Ghostbusters",
     "year": "2016",
     "date": "August 6, 2016",
     "quantity": "20,000"
   },
   {
     "id": "nolan-arenado-gold-glove-mine-2016",
-    "title": "Nolan Arenado (Gold Glove Mine)",
+    "title": "Nolan Arenado",
+    "nickname": "Gold Glove Mine",
     "year": "2016",
     "date": "August 21, 2016",
     "quantity": "15,000"
@@ -184,7 +196,8 @@
   },
   {
     "id": "justin-morneau-batting-champ-2015",
-    "title": "Justin Morneau (Batting Champ)",
+    "title": "Justin Morneau",
+    "nickname": "Batting Champ",
     "year": "2015",
     "date": "April 12, 2015"
   },
@@ -203,13 +216,15 @@
   },
   {
     "id": "nolan-arenado-gold-glove-2015",
-    "title": "Nolan Arenado (Gold Glove)",
+    "title": "Nolan Arenado",
+    "nickname": "Gold Glove",
     "year": "2015",
     "date": "July 26, 2015"
   },
   {
     "id": "cargo-fett-carlos-gonzalez-star-wars-2015",
-    "title": "\"Cargo Fett\" Carlos Gonzalez (Star Wars)",
+    "title": "\"Cargo Fett\" Carlos Gonzalez",
+    "nickname": "Star Wars",
     "year": "2015",
     "date": "August 22, 2015",
     "quantity": "10,000"
@@ -266,14 +281,16 @@
   },
   {
     "id": "todd-helton-farewell-2014",
-    "title": "Todd Helton (\"Farewell\")",
+    "title": "Todd Helton",
+    "nickname": "\"Farewell\"",
     "year": "2014",
     "date": "August 15, 2014",
     "quantity": "15,000"
   },
   {
     "id": "todd-helton-retire-17-gnome-2014",
-    "title": "Todd Helton (\"Retire 17\" Gnome)",
+    "title": "Todd Helton",
+    "nickname": "\"Retire 17\" Gnome",
     "year": "2014",
     "date": "August 17, 2014",
     "quantity": "15,000"
@@ -286,63 +303,72 @@
   },
   {
     "id": "eric-young-20th-anniversary-2013",
-    "title": "Eric Young (20th Anniversary)",
+    "title": "Eric Young",
+    "nickname": "20th Anniversary",
     "year": "2013",
     "date": "April 21, 2013",
     "quantity": "20,000"
   },
   {
     "id": "vinny-castilla-20th-anniversary-2013",
-    "title": "Vinny Castilla (20th Anniversary)",
+    "title": "Vinny Castilla",
+    "nickname": "20th Anniversary",
     "year": "2013",
     "date": "May 5, 2013",
     "quantity": "20,000"
   },
   {
     "id": "dante-bichette-20th-anniversary-2013",
-    "title": "Dante Bichette (20th Anniversary)",
+    "title": "Dante Bichette",
+    "nickname": "20th Anniversary",
     "year": "2013",
     "date": "May 19, 2013",
     "quantity": "20,000"
   },
   {
     "id": "andres-galarraga-20th-anniversary-2013",
-    "title": "Andres Galarraga (20th Anniversary)",
+    "title": "Andres Galarraga",
+    "nickname": "20th Anniversary",
     "year": "2013",
     "date": "June 2, 2013",
     "quantity": "20,000"
   },
   {
     "id": "walt-weiss-20th-anniversary-2013",
-    "title": "Walt Weiss (20th Anniversary)",
+    "title": "Walt Weiss",
+    "nickname": "20th Anniversary",
     "year": "2013",
     "date": "June 16, 2013",
     "quantity": "20,000"
   },
   {
     "id": "larry-walker-20th-anniversary-2013",
-    "title": "Larry Walker (20th Anniversary)",
+    "title": "Larry Walker",
+    "nickname": "20th Anniversary",
     "year": "2013",
     "date": "June 30, 2013",
     "quantity": "20,000"
   },
   {
     "id": "troy-tulowitzki-20th-anniversary-2013",
-    "title": "Troy Tulowitzki (20th Anniversary)",
+    "title": "Troy Tulowitzki",
+    "nickname": "20th Anniversary",
     "year": "2013",
     "date": "July 21, 2013",
     "quantity": "20,000"
   },
   {
     "id": "ellis-burks-20th-anniversary-2013",
-    "title": "Ellis Burks (20th Anniversary)",
+    "title": "Ellis Burks",
+    "nickname": "20th Anniversary",
     "year": "2013",
     "date": "July 28, 2013",
     "quantity": "20,000"
   },
   {
     "id": "todd-helton-20th-anniversary-2013",
-    "title": "Todd Helton (20th Anniversary)",
+    "title": "Todd Helton",
+    "nickname": "20th Anniversary",
     "year": "2013",
     "date": "September 25, 2013",
     "quantity": "20,000"
@@ -392,13 +418,15 @@
   },
   {
     "id": "radio-broadcasters-double-2004",
-    "title": "Radio Broadcasters (Double)",
+    "title": "Radio Broadcasters",
+    "nickname": "Double",
     "year": "2004",
     "date": "August 22, 2004"
   },
   {
     "id": "dinger-mascot-2003",
-    "title": "Dinger (Mascot)",
+    "title": "Dinger",
+    "nickname": "Mascot",
     "year": "2003",
     "date": "March 10, 2003"
   },
@@ -411,7 +439,8 @@
   },
   {
     "id": "dinger-mascot-2002",
-    "title": "Dinger (Mascot)",
+    "title": "Dinger",
+    "nickname": "Mascot",
     "year": "2002",
     "date": "July 21, 2002"
   },

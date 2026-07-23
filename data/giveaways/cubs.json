@@ -127,7 +127,8 @@
   },
   {
     "id": "justin-steele-american-flag-2024",
-    "title": "Justin Steele (American Flag)",
+    "title": "Justin Steele",
+    "nickname": "American Flag",
     "year": "2024",
     "date": "July 6, 2024",
     "quantity": "10,000"
@@ -153,14 +154,16 @@
   },
   {
     "id": "billy-williams-statue-2023",
-    "title": "Billy Williams (Statue)",
+    "title": "Billy Williams",
+    "nickname": "Statue",
     "year": "2023",
     "date": "May 27, 2023",
     "quantity": "10,000"
   },
   {
     "id": "boog-jd-talking-2023",
-    "title": "Boog & JD (Talking)",
+    "title": "Boog & JD",
+    "nickname": "Talking",
     "year": "2023",
     "date": "June 17, 2023"
   },
@@ -184,27 +187,31 @@
   },
   {
     "id": "ernie-banks-statue-2023",
-    "title": "Ernie Banks (Statue)",
+    "title": "Ernie Banks",
+    "nickname": "Statue",
     "year": "2023",
     "date": "July 19, 2023",
     "quantity": "10,000"
   },
   {
     "id": "nico-hoerner-jedi-2023",
-    "title": "Nico Hoerner (Jedi)",
+    "title": "Nico Hoerner",
+    "nickname": "Jedi",
     "year": "2023",
     "date": "August 2, 2023"
   },
   {
     "id": "ron-santo-statue-2023",
-    "title": "Ron Santo (Statue)",
+    "title": "Ron Santo",
+    "nickname": "Statue",
     "year": "2023",
     "date": "August 20, 2023",
     "quantity": "10,000"
   },
   {
     "id": "harry-caray-statue-2023",
-    "title": "Harry Caray (Statue)",
+    "title": "Harry Caray",
+    "nickname": "Statue",
     "year": "2023",
     "date": "September 9, 2023",
     "quantity": "10,000"
@@ -252,21 +259,24 @@
   },
   {
     "id": "cole-hamels-hang-loose-2019",
-    "title": "Cole Hamels (\"Hang Loose\")",
+    "title": "Cole Hamels",
+    "nickname": "\"Hang Loose\"",
     "year": "2019",
     "date": "May 10, 2019",
     "quantity": "10,000"
   },
   {
     "id": "anthony-rizzo-out-on-the-water-2019",
-    "title": "Anthony Rizzo (\"Out on the Water\")",
+    "title": "Anthony Rizzo",
+    "nickname": "\"Out on the Water\"",
     "year": "2019",
     "date": "June 21, 2019",
     "quantity": "10,000"
   },
   {
     "id": "kris-bryant-round-of-golf-2019",
-    "title": "Kris Bryant (\"Round of Golf\")",
+    "title": "Kris Bryant",
+    "nickname": "\"Round of Golf\"",
     "year": "2019",
     "date": "July 15, 2019",
     "quantity": "10,000"
@@ -280,7 +290,8 @@
   },
   {
     "id": "clark-the-cub-2019",
-    "title": "Clark (the Cub)",
+    "title": "Clark",
+    "nickname": "the Cub",
     "year": "2019",
     "date": "August 4, 2019",
     "quantity": "5,000"
@@ -328,7 +339,8 @@
   },
   {
     "id": "ben-zobrist-world-series-mvp-2017",
-    "title": "Ben Zobrist (World Series MVP)",
+    "title": "Ben Zobrist",
+    "nickname": "World Series MVP",
     "year": "2017",
     "date": "June 8, 2017",
     "quantity": "10,000"
@@ -347,7 +359,8 @@
   },
   {
     "id": "anthony-rizzo-tarp-catch-2016",
-    "title": "Anthony Rizzo (\"Tarp Catch\")",
+    "title": "Anthony Rizzo",
+    "nickname": "\"Tarp Catch\"",
     "year": "2016",
     "date": "July 5, 2016",
     "quantity": "10,000"
@@ -368,42 +381,48 @@
   },
   {
     "id": "kyle-schwarber-home-run-2016",
-    "title": "Kyle Schwarber (Home Run)",
+    "title": "Kyle Schwarber",
+    "nickname": "Home Run",
     "year": "2016",
     "date": "September 16, 2016",
     "quantity": "10,000"
   },
   {
     "id": "clark-w-flag-2015",
-    "title": "Clark (\"W\" Flag)",
+    "title": "Clark",
+    "nickname": "\"W\" Flag",
     "year": "2015",
     "date": "May 31, 2015",
     "quantity": "5,000"
   },
   {
     "id": "joe-maddon-cubs-debut-2015",
-    "title": "Joe Maddon (Cubs Debut)",
+    "title": "Joe Maddon",
+    "nickname": "Cubs Debut",
     "year": "2015",
     "date": "June 13, 2015",
     "quantity": "10,000"
   },
   {
     "id": "jorge-soler-cubs-debut-2015",
-    "title": "Jorge Soler (Cubs Debut)",
+    "title": "Jorge Soler",
+    "nickname": "Cubs Debut",
     "year": "2015",
     "date": "July 25, 2015",
     "quantity": "10,000"
   },
   {
     "id": "jon-lester-cubs-debut-2015",
-    "title": "Jon Lester (Cubs Debut)",
+    "title": "Jon Lester",
+    "nickname": "Cubs Debut",
     "year": "2015",
     "date": "August 22, 2015",
     "quantity": "10,000"
   },
   {
     "id": "kris-bryant-cubs-debut-2015",
-    "title": "Kris Bryant (Cubs Debut)",
+    "title": "Kris Bryant",
+    "nickname": "Cubs Debut",
     "year": "2015",
     "date": "August 26, 2015",
     "quantity": "10,000"
@@ -424,7 +443,8 @@
   },
   {
     "id": "babe-ruth-called-shot-2014",
-    "title": "Babe Ruth (\"Called Shot\")",
+    "title": "Babe Ruth",
+    "nickname": "\"Called Shot\"",
     "year": "2014",
     "date": "May 16, 2014",
     "quantity": "10,000"
@@ -464,14 +484,16 @@
   },
   {
     "id": "kerry-wood-20-strikeout-game-2014",
-    "title": "Kerry Wood (20-Strikeout Game)",
+    "title": "Kerry Wood",
+    "nickname": "20-Strikeout Game",
     "year": "2014",
     "date": "August 22, 2014",
     "quantity": "10,000"
   },
   {
     "id": "greg-maddux-3-000th-strikeout-2014",
-    "title": "Greg Maddux (3,000th Strikeout)",
+    "title": "Greg Maddux",
+    "nickname": "3,000th Strikeout",
     "year": "2014",
     "date": "September 5, 2014",
     "quantity": "10,000"
@@ -569,7 +591,8 @@
   },
   {
     "id": "carlos-zambrano-no-hitter-statue-2009",
-    "title": "Carlos Zambrano (No-Hitter Statue)",
+    "title": "Carlos Zambrano",
+    "nickname": "No-Hitter Statue",
     "year": "2009",
     "date": "April 21, 2009"
   },

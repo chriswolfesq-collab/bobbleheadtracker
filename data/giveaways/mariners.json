@@ -8,7 +8,8 @@
   },
   {
     "id": "cal-raleigh-60-home-run-2026",
-    "title": "Cal Raleigh (\"60 Home Run\")",
+    "title": "Cal Raleigh",
+    "nickname": "\"60 Home Run\"",
     "year": "2026",
     "date": "March 28, 2026",
     "quantity": "40,000"
@@ -50,7 +51,8 @@
   },
   {
     "id": "julio-rodriguez-dominican-republic-2023",
-    "title": "Julio Rodriguez (Dominican Republic)",
+    "title": "Julio Rodriguez",
+    "nickname": "Dominican Republic",
     "year": "2023",
     "date": "September 11, 2023",
     "quantity": "20,000"
@@ -89,20 +91,23 @@
   },
   {
     "id": "logan-gilbert-indiana-jones-2023",
-    "title": "Logan Gilbert (Indiana Jones)",
+    "title": "Logan Gilbert",
+    "nickname": "Indiana Jones",
     "year": "2023",
     "date": "June 26, 2023"
   },
   {
     "id": "cal-raleigh-superman-2023",
-    "title": "Cal Raleigh (Superman)",
+    "title": "Cal Raleigh",
+    "nickname": "Superman",
     "year": "2023",
     "date": "May 8, 2023",
     "quantity": "20,000"
   },
   {
     "id": "cal-raleigh-the-clinch-2023",
-    "title": "Cal Raleigh (\"The Clinch\")",
+    "title": "Cal Raleigh",
+    "nickname": "\"The Clinch\"",
     "year": "2023",
     "date": "April 14, 2023",
     "quantity": "20,000"
@@ -136,7 +141,8 @@
   },
   {
     "id": "ken-griffey-jr-42-2022",
-    "title": "Ken Griffey Jr. (\"42\")",
+    "title": "Ken Griffey Jr.",
+    "nickname": "\"42\"",
     "year": "2022",
     "date": "April 16, 2022",
     "quantity": "20,000"
@@ -150,7 +156,8 @@
   },
   {
     "id": "edgar-martinez-hall-of-fame-2019",
-    "title": "Edgar Martinez (Hall of Fame)",
+    "title": "Edgar Martinez",
+    "nickname": "Hall of Fame",
     "year": "2019",
     "date": "August 9, 2019",
     "quantity": "40,000"
@@ -164,7 +171,8 @@
   },
   {
     "id": "ken-griffey-jr-rookie-year-2019",
-    "title": "Ken Griffey Jr. (\"Rookie Year\")",
+    "title": "Ken Griffey Jr.",
+    "nickname": "\"Rookie Year\"",
     "year": "2019",
     "date": "May 18, 2019",
     "quantity": "20,000"
@@ -178,7 +186,8 @@
   },
   {
     "id": "mitch-haniger-five-tool-2019",
-    "title": "Mitch Haniger (\"Five-Tool\")",
+    "title": "Mitch Haniger",
+    "nickname": "\"Five-Tool\"",
     "year": "2019",
     "date": "April 27, 2019",
     "quantity": "20,000"
@@ -192,14 +201,16 @@
   },
   {
     "id": "james-paxton-big-maple-2018",
-    "title": "James Paxton (\"Big Maple\")",
+    "title": "James Paxton",
+    "nickname": "\"Big Maple\"",
     "year": "2018",
     "date": "July 1, 2018",
     "quantity": "20,000"
   },
   {
     "id": "felix-hernandez-infield-grass-2018",
-    "title": "Felix Hernandez (\"Infield Grass\")",
+    "title": "Felix Hernandez",
+    "nickname": "\"Infield Grass\"",
     "year": "2018",
     "date": "May 19, 2018",
     "quantity": "20,000"
@@ -212,7 +223,8 @@
   },
   {
     "id": "han-seago-star-wars-2018",
-    "title": "\"Han Seago\" (Star Wars)",
+    "title": "\"Han Seago\"",
+    "nickname": "Star Wars",
     "year": "2018",
     "date": "May 4, 2018"
   },
@@ -267,21 +279,24 @@
   },
   {
     "id": "ichiro-dual-2017",
-    "title": "Ichiro (Dual)",
+    "title": "Ichiro",
+    "nickname": "Dual",
     "year": "2017",
     "date": "April 19, 2017",
     "quantity": "20,000"
   },
   {
     "id": "taijuan-walker-sky-walker-2016",
-    "title": "Taijuan Walker (\"Sky Walker\")",
+    "title": "Taijuan Walker",
+    "nickname": "\"Sky Walker\"",
     "year": "2016",
     "date": "August 21, 2016",
     "quantity": "20,000"
   },
   {
     "id": "ken-griffey-jr-hall-of-fame-2016",
-    "title": "Ken Griffey Jr. (Hall of Fame)",
+    "title": "Ken Griffey Jr.",
+    "nickname": "Hall of Fame",
     "year": "2016",
     "date": "August 5, 2016",
     "quantity": "20,000"
@@ -309,7 +324,8 @@
   },
   {
     "id": "nelson-cruz-boomstick-2016",
-    "title": "Nelson Cruz (\"Boomstick\")",
+    "title": "Nelson Cruz",
+    "nickname": "\"Boomstick\"",
     "year": "2016",
     "date": "April 30, 2016",
     "quantity": "20,000"
@@ -365,7 +381,8 @@
   },
   {
     "id": "lou-piniella-hall-of-fame-2014",
-    "title": "Lou Piniella (Hall of Fame)",
+    "title": "Lou Piniella",
+    "nickname": "Hall of Fame",
     "year": "2014",
     "date": "August 9, 2014",
     "quantity": "20,000"
@@ -394,21 +411,24 @@
   },
   {
     "id": "ken-griffey-jr-hall-of-fame-2013",
-    "title": "Ken Griffey Jr. (Hall of Fame)",
+    "title": "Ken Griffey Jr.",
+    "nickname": "Hall of Fame",
     "year": "2013",
     "date": "August 9, 2013",
     "quantity": "20,000"
   },
   {
     "id": "felix-hernandez-perfect-game-2013",
-    "title": "Felix Hernandez (\"Perfect Game\")",
+    "title": "Felix Hernandez",
+    "nickname": "\"Perfect Game\"",
     "year": "2013",
     "date": "May 25, 2013",
     "quantity": "20,000"
   },
   {
     "id": "randy-johnson-dan-wilson-dual-2012",
-    "title": "Randy Johnson & Dan Wilson (Dual)",
+    "title": "Randy Johnson & Dan Wilson",
+    "nickname": "Dual",
     "year": "2012",
     "date": "July 28, 2012",
     "quantity": "20,000"
@@ -442,7 +462,8 @@
   },
   {
     "id": "mike-cameron-mark-mclemore-dual-2011",
-    "title": "Mike Cameron & Mark McLemore (Dual)",
+    "title": "Mike Cameron & Mark McLemore",
+    "nickname": "Dual",
     "year": "2011",
     "date": "July 15, 2011"
   },
@@ -466,13 +487,15 @@
   },
   {
     "id": "ken-griffey-jr-ichiro-suzuki-double-2010",
-    "title": "Ken Griffey Jr. & Ichiro Suzuki (Double)",
+    "title": "Ken Griffey Jr. & Ichiro Suzuki",
+    "nickname": "Double",
     "year": "2010",
     "date": "June 18, 2010"
   },
   {
     "id": "ken-griffey-jr-95-slide-2010",
-    "title": "Ken Griffey Jr. (\"The '95 Slide\")",
+    "title": "Ken Griffey Jr.",
+    "nickname": "\"The '95 Slide\"",
     "year": "2010",
     "date": "May 7, 2010"
   },
@@ -484,7 +507,8 @@
   },
   {
     "id": "ken-griffey-jr-the-kid-2010",
-    "title": "Ken Griffey Jr. (\"The Kid\")",
+    "title": "Ken Griffey Jr.",
+    "nickname": "\"The Kid\"",
     "year": "2010",
     "date": "April 16, 2010"
   },
@@ -620,7 +644,8 @@
   },
   {
     "id": "ichiro-suzuki-262-hits-2005",
-    "title": "Ichiro Suzuki (262 Hits)",
+    "title": "Ichiro Suzuki",
+    "nickname": "262 Hits",
     "year": "2005",
     "date": "April 22, 2005"
   },

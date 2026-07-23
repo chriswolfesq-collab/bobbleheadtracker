@@ -64,7 +64,8 @@
   },
   {
     "id": "bill-veeck-1960-2025",
-    "title": "Bill Veeck (1960)",
+    "title": "Bill Veeck",
+    "nickname": "1960",
     "year": "2025",
     "date": "August 9, 2025",
     "quantity": "15,000"
@@ -99,7 +100,8 @@
   },
   {
     "id": "dick-allen-1972-mvp-2025",
-    "title": "Dick Allen (1972 MVP)",
+    "title": "Dick Allen",
+    "nickname": "1972 MVP",
     "year": "2025",
     "date": "May 3, 2025",
     "quantity": "15,000"
@@ -132,7 +134,8 @@
   },
   {
     "id": "andrew-benintendi-elf-2023",
-    "title": "Andrew Benintendi (Elf)",
+    "title": "Andrew Benintendi",
+    "nickname": "Elf",
     "year": "2023",
     "date": "July 30, 2023"
   },
@@ -151,7 +154,8 @@
   },
   {
     "id": "eloy-jimenez-hi-mom-talking-2023",
-    "title": "Eloy Jimenez (\"Hi Mom!\" Talking)",
+    "title": "Eloy Jimenez",
+    "nickname": "\"Hi Mom!\" Talking",
     "year": "2023",
     "date": "May 13, 2023",
     "quantity": "20,000"
@@ -185,7 +189,8 @@
   },
   {
     "id": "paul-konerko-captain-america-2022",
-    "title": "Paul Konerko (Captain America)",
+    "title": "Paul Konerko",
+    "nickname": "Captain America",
     "year": "2022",
     "date": "July 4, 2022",
     "quantity": "12,000"
@@ -213,7 +218,8 @@
   },
   {
     "id": "jose-abreu-2020-mvp-2021",
-    "title": "Jose Abreu (2020 MVP)",
+    "title": "Jose Abreu",
+    "nickname": "2020 MVP",
     "year": "2021",
     "date": "September 28, 2021",
     "quantity": "10,000"
@@ -234,7 +240,8 @@
   },
   {
     "id": "tim-anderson-bat-flip-2021",
-    "title": "Tim Anderson (Bat Flip)",
+    "title": "Tim Anderson",
+    "nickname": "Bat Flip",
     "year": "2021",
     "date": "May 28, 2021",
     "quantity": "10,000"
@@ -269,7 +276,8 @@
   },
   {
     "id": "jose-abreu-silver-slugger-2019",
-    "title": "Jose Abreu (Silver Slugger)",
+    "title": "Jose Abreu",
+    "nickname": "Silver Slugger",
     "year": "2019",
     "date": "April 27, 2019",
     "quantity": "20,000"
@@ -282,7 +290,8 @@
   },
   {
     "id": "tommy-hawk-blackhawks-night-2018",
-    "title": "Tommy Hawk (Blackhawks Night)",
+    "title": "Tommy Hawk",
+    "nickname": "Blackhawks Night",
     "year": "2018",
     "date": "August 21, 2018"
   },
@@ -295,7 +304,8 @@
   },
   {
     "id": "jim-thome-hall-of-fame-2018",
-    "title": "Jim Thome (Hall of Fame)",
+    "title": "Jim Thome",
+    "nickname": "Hall of Fame",
     "year": "2018",
     "date": "August 11, 2018",
     "quantity": "20,000"
@@ -316,7 +326,8 @@
   },
   {
     "id": "hawk-solo-star-wars-2018",
-    "title": "Hawk \"Solo\" (Star Wars)",
+    "title": "Hawk \"Solo\"",
+    "nickname": "Star Wars",
     "year": "2018",
     "date": "May 19, 2018"
   },
@@ -336,19 +347,22 @@
   },
   {
     "id": "southpaw-game-of-thrones-2017",
-    "title": "Southpaw (Game of Thrones)",
+    "title": "Southpaw",
+    "nickname": "Game of Thrones",
     "year": "2017",
     "date": "July 19, 2017"
   },
   {
     "id": "jose-abreu-super-hero-2017",
-    "title": "Jose Abreu (Super Hero)",
+    "title": "Jose Abreu",
+    "nickname": "Super Hero",
     "year": "2017",
     "date": "June 29, 2017"
   },
   {
     "id": "southpaw-birthday-2017",
-    "title": "Southpaw (Birthday)",
+    "title": "Southpaw",
+    "nickname": "Birthday",
     "year": "2017",
     "date": "June 25, 2017"
   },
@@ -361,53 +375,61 @@
   },
   {
     "id": "jim-thome-soxfest-2017",
-    "title": "Jim Thome (SoxFest)",
+    "title": "Jim Thome",
+    "nickname": "SoxFest",
     "year": "2017",
     "date": "January 27, 2017"
   },
   {
     "id": "southpaw-star-wars-2016",
-    "title": "Southpaw (Star Wars)",
+    "title": "Southpaw",
+    "nickname": "Star Wars",
     "year": "2016",
     "date": "August 27, 2016"
   },
   {
     "id": "chris-sale-k-counter-2016",
-    "title": "Chris Sale (K-Counter)",
+    "title": "Chris Sale",
+    "nickname": "K-Counter",
     "year": "2016",
     "date": "May 7, 2016",
     "quantity": "20,000"
   },
   {
     "id": "chris-sale-soxfest-2016",
-    "title": "Chris Sale (SoxFest)",
+    "title": "Chris Sale",
+    "nickname": "SoxFest",
     "year": "2016",
     "date": "January 29, 2016",
     "quantity": "20,000"
   },
   {
     "id": "adam-wan-kenobi-2015",
-    "title": "\"Adam Wan Kenobi\" (Star Wars)",
+    "title": "\"Adam Wan Kenobi\"",
+    "nickname": "Star Wars",
     "year": "2015",
     "date": "September 13, 2015"
   },
   {
     "id": "jermaine-dye-world-series-moment-2015",
-    "title": "Jermaine Dye (World Series Moment)",
+    "title": "Jermaine Dye",
+    "nickname": "World Series Moment",
     "year": "2015",
     "date": "August 29, 2015",
     "quantity": "20,000"
   },
   {
     "id": "scott-podsednik-world-series-moment-2015",
-    "title": "Scott Podsednik (World Series Moment)",
+    "title": "Scott Podsednik",
+    "nickname": "World Series Moment",
     "year": "2015",
     "date": "August 1, 2015",
     "quantity": "20,000"
   },
   {
     "id": "bobby-jenks-world-series-moment-2015",
-    "title": "Bobby Jenks (World Series Moment)",
+    "title": "Bobby Jenks",
+    "nickname": "World Series Moment",
     "year": "2015",
     "date": "July 4, 2015",
     "quantity": "20,000"
@@ -442,7 +464,8 @@
   },
   {
     "id": "billy-pierce-replica-statue-2013",
-    "title": "Billy Pierce (Replica Statue)",
+    "title": "Billy Pierce",
+    "nickname": "Replica Statue",
     "year": "2013",
     "date": "June 29, 2013"
   },
@@ -469,7 +492,8 @@
   },
   {
     "id": "carlton-fisk-bronze-statue-2012",
-    "title": "Carlton Fisk (Bronze Statue)",
+    "title": "Carlton Fisk",
+    "nickname": "Bronze Statue",
     "year": "2012",
     "date": "June 2, 2012"
   },

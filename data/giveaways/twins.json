@@ -8,7 +8,8 @@
   },
   {
     "id": "grogu-star-wars-theme-ticket-2026",
-    "title": "Grogu (Star Wars, Theme Ticket)",
+    "title": "Grogu",
+    "nickname": "Star Wars, Theme Ticket",
     "year": "2026",
     "date": "May 16, 2026"
   },
@@ -96,7 +97,8 @@
   },
   {
     "id": "big-bird-twins-2022",
-    "title": "Big Bird (Twins)",
+    "title": "Big Bird",
+    "nickname": "Twins",
     "year": "2022",
     "date": "June 25, 2022"
   },
@@ -108,21 +110,24 @@
   },
   {
     "id": "justin-morneau-hall-of-fame-2021",
-    "title": "Justin Morneau (Hall of Fame)",
+    "title": "Justin Morneau",
+    "nickname": "Hall of Fame",
     "year": "2021",
     "date": "September 25, 2021",
     "quantity": "10,000"
   },
   {
     "id": "josh-donaldson-bringer-of-rain-2021",
-    "title": "Josh Donaldson (\"Bringer of Rain\")",
+    "title": "Josh Donaldson",
+    "nickname": "\"Bringer of Rain\"",
     "year": "2021",
     "date": "July 23, 2021",
     "quantity": "10,000"
   },
   {
     "id": "30-hr-bomba-club-2021",
-    "title": "\"30 HR Bomba Club\" (Sano, Rosario, Garver, Cruz, Kepler)",
+    "title": "\"30 HR Bomba Club\"",
+    "nickname": "Sano, Rosario, Garver, Cruz, Kepler",
     "year": "2021",
     "date": "July 10, 2021"
   },
@@ -148,7 +153,8 @@
   },
   {
     "id": "joe-nathan-hall-of-fame-2019",
-    "title": "Joe Nathan (Hall of Fame)",
+    "title": "Joe Nathan",
+    "nickname": "Hall of Fame",
     "year": "2019",
     "date": "August 3, 2019",
     "quantity": "10,000"
@@ -162,13 +168,15 @@
   },
   {
     "id": "tc-mascot-2019",
-    "title": "T.C. (Mascot)",
+    "title": "T.C.",
+    "nickname": "Mascot",
     "year": "2019",
     "date": "June 27, 2019"
   },
   {
     "id": "obi-wan-kepleroni-2019",
-    "title": "\"Obi-Wan Kepleroni\" (Max Kepler)",
+    "title": "\"Obi-Wan Kepleroni\"",
+    "nickname": "Max Kepler",
     "year": "2019",
     "date": "June 26, 2019"
   },
@@ -181,47 +189,54 @@
   },
   {
     "id": "jim-thome-babe-dual-2018",
-    "title": "Jim Thome & Babe (Dual)",
+    "title": "Jim Thome & Babe",
+    "nickname": "Dual",
     "year": "2018",
     "date": "August 25, 2018"
   },
   {
     "id": "johan-santana-hall-of-fame-2018",
-    "title": "Johan Santana (Hall of Fame)",
+    "title": "Johan Santana",
+    "nickname": "Hall of Fame",
     "year": "2018",
     "date": "August 4, 2018",
     "quantity": "10,000"
   },
   {
     "id": "eddie-rosario-nothing-falls-but-raindrops-2018",
-    "title": "Eddie Rosario (\"Nothing Falls But Raindrops\")",
+    "title": "Eddie Rosario",
+    "nickname": "\"Nothing Falls But Raindrops\"",
     "year": "2018",
     "date": "July 13, 2018",
     "quantity": "10,000"
   },
   {
     "id": "byron-buxton-nothing-falls-but-raindrops-2018",
-    "title": "Byron Buxton (\"Nothing Falls But Raindrops\")",
+    "title": "Byron Buxton",
+    "nickname": "\"Nothing Falls But Raindrops\"",
     "year": "2018",
     "date": "June 22, 2018",
     "quantity": "10,000"
   },
   {
     "id": "max-kepler-nothing-falls-but-raindrops-2018",
-    "title": "Max Kepler (\"Nothing Falls But Raindrops\")",
+    "title": "Max Kepler",
+    "nickname": "\"Nothing Falls But Raindrops\"",
     "year": "2018",
     "date": "June 1, 2018",
     "quantity": "10,000"
   },
   {
     "id": "joe-solo-mauer-star-wars-2018",
-    "title": "Joe \"Solo\" Mauer (Star Wars)",
+    "title": "Joe \"Solo\" Mauer",
+    "nickname": "Star Wars",
     "year": "2018",
     "date": "May 22, 2018"
   },
   {
     "id": "michael-cuddyer-hall-of-fame-2017",
-    "title": "Michael Cuddyer (Hall of Fame)",
+    "title": "Michael Cuddyer",
+    "nickname": "Hall of Fame",
     "year": "2017",
     "date": "August 19, 2017",
     "quantity": "10,000"
@@ -235,14 +250,16 @@
   },
   {
     "id": "tc-mascot-2017",
-    "title": "T.C. (Mascot)",
+    "title": "T.C.",
+    "nickname": "Mascot",
     "year": "2017",
     "date": "August 6, 2017",
     "quantity": "10,000"
   },
   {
     "id": "brian-dozier-stormtrooper-2017",
-    "title": "Brian Dozier (Stormtrooper)",
+    "title": "Brian Dozier",
+    "nickname": "Stormtrooper",
     "year": "2017",
     "date": "June 21, 2017"
   },
@@ -261,7 +278,8 @@
   },
   {
     "id": "torii-hunter-hall-of-fame-2016",
-    "title": "Torii Hunter (Hall of Fame)",
+    "title": "Torii Hunter",
+    "nickname": "Hall of Fame",
     "year": "2016",
     "date": "July 16, 2016",
     "quantity": "10,000"
@@ -282,7 +300,8 @@
   },
   {
     "id": "trevor-plouffe-skywalker-star-wars-2016",
-    "title": "Trevor Plouffe (\"Skywalker\", Star Wars)",
+    "title": "Trevor Plouffe",
+    "nickname": "\"Skywalker\", Star Wars",
     "year": "2016",
     "date": "May 19, 2016"
   },
@@ -315,21 +334,24 @@
   },
   {
     "id": "phil-hughes-star-wars-2015",
-    "title": "Phil Hughes (Star Wars)",
+    "title": "Phil Hughes",
+    "nickname": "Star Wars",
     "year": "2015",
     "date": "May 4, 2015",
     "quantity": "10,000"
   },
   {
     "id": "glen-perkins-2014-all-star-game-2014",
-    "title": "Glen Perkins (2014 All-Star Game)",
+    "title": "Glen Perkins",
+    "nickname": "2014 All-Star Game",
     "year": "2014",
     "date": "September 6, 2014",
     "quantity": "10,000"
   },
   {
     "id": "tom-brunansky-1985-all-star-game-2014",
-    "title": "Tom Brunansky (1985 All-Star Game)",
+    "title": "Tom Brunansky",
+    "nickname": "1985 All-Star Game",
     "year": "2014",
     "date": "July 5, 2014",
     "quantity": "10,000"
@@ -343,46 +365,53 @@
   },
   {
     "id": "harmon-killebrew-1965-all-star-game-2014",
-    "title": "Harmon Killebrew (1965 All-Star Game)",
+    "title": "Harmon Killebrew",
+    "nickname": "1965 All-Star Game",
     "year": "2014",
     "date": "June 20, 2014",
     "quantity": "10,000"
   },
   {
     "id": "snoopy-all-star-game-figurine-2014",
-    "title": "Snoopy (All-Star Game Figurine)",
+    "title": "Snoopy",
+    "nickname": "All-Star Game Figurine",
     "year": "2014",
     "date": "June 6, 2014"
   },
   {
     "id": "joe-mauer-justin-morneau-double-2013",
-    "title": "Joe Mauer & Justin Morneau (Double)",
+    "title": "Joe Mauer & Justin Morneau",
+    "nickname": "Double",
     "year": "2013",
     "date": "July 19, 2013",
     "quantity": "10,000"
   },
   {
     "id": "josh-willingham-willing-hammer-2013",
-    "title": "Josh Willingham (\"Willing-Hammer\")",
+    "title": "Josh Willingham",
+    "nickname": "\"Willing-Hammer\"",
     "year": "2013",
     "date": "May 10, 2013",
     "quantity": "10,000"
   },
   {
     "id": "ron-gant-kent-hrbek-dual-2011",
-    "title": "Ron Gant & Kent Hrbek (Dual)",
+    "title": "Ron Gant & Kent Hrbek",
+    "nickname": "Dual",
     "year": "2011",
     "date": "August 5, 2011"
   },
   {
     "id": "kent-hrbek-kirby-puckett-legends-set-of-2-2011",
-    "title": "Kent Hrbek & Kirby Puckett (\"Legends\" Set of 2)",
+    "title": "Kent Hrbek & Kirby Puckett",
+    "nickname": "\"Legends\" Set of 2",
     "year": "2011",
     "date": "March 10, 2011"
   },
   {
     "id": "minnie-paul-shaking-hands-double-2010",
-    "title": "Minnie & Paul (Shaking Hands, Double)",
+    "title": "Minnie & Paul",
+    "nickname": "Shaking Hands, Double",
     "year": "2010",
     "date": "July 4, 2010"
   },
@@ -400,13 +429,15 @@
   },
   {
     "id": "kent-hrbek-legends-of-the-dome-2009",
-    "title": "Kent Hrbek (\"Legends of the Dome\")",
+    "title": "Kent Hrbek",
+    "nickname": "\"Legends of the Dome\"",
     "year": "2009",
     "date": "June 19, 2009"
   },
   {
     "id": "kirby-puckett-legends-of-the-dome-2009",
-    "title": "Kirby Puckett (\"Legends of the Dome\")",
+    "title": "Kirby Puckett",
+    "nickname": "\"Legends of the Dome\"",
     "year": "2009",
     "date": "May 3, 2009"
   },
@@ -484,7 +515,8 @@
   },
   {
     "id": "justin-morneau-al-mvp-2007",
-    "title": "Justin Morneau (AL MVP)",
+    "title": "Justin Morneau",
+    "nickname": "AL MVP",
     "year": "2007",
     "date": "July 20, 2007",
     "quantity": "10,000"
@@ -497,20 +529,23 @@
   },
   {
     "id": "joe-mauer-al-batting-champ-2007",
-    "title": "Joe Mauer (AL Batting Champ)",
+    "title": "Joe Mauer",
+    "nickname": "AL Batting Champ",
     "year": "2007",
     "date": "June 9, 2007",
     "quantity": "10,000"
   },
   {
     "id": "earl-battey-season-ticket-2007",
-    "title": "Earl Battey (Season Ticket)",
+    "title": "Earl Battey",
+    "nickname": "Season Ticket",
     "year": "2007",
     "date": "March 15, 2007"
   },
   {
     "id": "zoilo-versalles-season-ticket-2007",
-    "title": "Zoilo Versalles (Season Ticket)",
+    "title": "Zoilo Versalles",
+    "nickname": "Season Ticket",
     "year": "2007",
     "date": "March 6, 2007"
   },
@@ -549,14 +584,16 @@
   },
   {
     "id": "torii-hunter-gold-glove-2006",
-    "title": "Torii Hunter (Gold Glove)",
+    "title": "Torii Hunter",
+    "nickname": "Gold Glove",
     "year": "2006",
     "date": "May 5, 2006",
     "quantity": "10,000"
   },
   {
     "id": "harmon-killebrew-sth-red-variant-2006",
-    "title": "Harmon Killebrew (STH Red Variant)",
+    "title": "Harmon Killebrew",
+    "nickname": "STH Red Variant",
     "year": "2006",
     "date": "April 1, 2006",
     "imageUrl": "https://i.ebayimg.com/00/s/MTU5OVgxMTk5/z/meMAAOSw8pxnhGQV/$_12.JPG?set_id=880000500F"
@@ -669,7 +706,8 @@
   },
   {
     "id": "brad-radke-torii-hunter-corey-koskie-ron-gardenhire-season-ticket-2004",
-    "title": "Brad Radke, Torii Hunter, Corey Koskie & Ron Gardenhire (Season Ticket)",
+    "title": "Brad Radke, Torii Hunter, Corey Koskie & Ron Gardenhire",
+    "nickname": "Season Ticket",
     "year": "2004",
     "date": "January 1, 2004"
   },
@@ -681,7 +719,8 @@
   },
   {
     "id": "corey-koskie-super-hero-2003",
-    "title": "Corey Koskie (Super Hero)",
+    "title": "Corey Koskie",
+    "nickname": "Super Hero",
     "year": "2003",
     "date": "August 22, 2003",
     "quantity": "10,000"

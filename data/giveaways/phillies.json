@@ -1,7 +1,8 @@
 [
   {
     "id": "phillie-phanatic-colonial-2026",
-    "title": "Phillie Phanatic (Colonial)",
+    "title": "Phillie Phanatic",
+    "nickname": "Colonial",
     "year": "2026",
     "date": "April 19, 2026"
   },
@@ -31,7 +32,8 @@
   },
   {
     "id": "ranger-suarez-mandalorian-2024",
-    "title": "Ranger Suarez (Mandalorian)",
+    "title": "Ranger Suarez",
+    "nickname": "Mandalorian",
     "year": "2024",
     "date": "August 26, 2024"
   },
@@ -67,7 +69,8 @@
   },
   {
     "id": "rob-thomson-papa-elf-2023",
-    "title": "Rob Thomson (\"Papa Elf\")",
+    "title": "Rob Thomson",
+    "nickname": "\"Papa Elf\"",
     "year": "2023",
     "date": "July 25, 2023"
   },
@@ -91,7 +94,8 @@
   },
   {
     "id": "miles-teller-rooster-2022",
-    "title": "Miles Teller (Rooster)",
+    "title": "Miles Teller",
+    "nickname": "Rooster",
     "year": "2022",
     "date": "June 1, 2022",
     "quantity": "1,500"
@@ -105,7 +109,8 @@
   },
   {
     "id": "schroeder-peanuts-2021",
-    "title": "Schroeder (Peanuts)",
+    "title": "Schroeder",
+    "nickname": "Peanuts",
     "year": "2021",
     "date": "May 4, 2021",
     "quantity": "3,000"
@@ -118,7 +123,8 @@
   },
   {
     "id": "aaron-nola-bobble-figurine-2019",
-    "title": "Aaron Nola (Bobble Figurine)",
+    "title": "Aaron Nola",
+    "nickname": "Bobble Figurine",
     "year": "2019",
     "date": "August 18, 2019"
   },
@@ -137,7 +143,8 @@
   },
   {
     "id": "jake-arrieta-jedi-bobble-figurine-2019",
-    "title": "Jake Arrieta (Jedi, Bobble Figurine)",
+    "title": "Jake Arrieta",
+    "nickname": "Jedi, Bobble Figurine",
     "year": "2019",
     "date": "July 17, 2019"
   },
@@ -149,13 +156,15 @@
   },
   {
     "id": "chase-utley-bobble-figurine-2019",
-    "title": "Chase Utley (Bobble Figurine)",
+    "title": "Chase Utley",
+    "nickname": "Bobble Figurine",
     "year": "2019",
     "date": "June 21, 2019"
   },
   {
     "id": "seranthony-dominguez-bobble-figurine-2019",
-    "title": "Seranthony Dominguez (Bobble Figurine)",
+    "title": "Seranthony Dominguez",
+    "nickname": "Bobble Figurine",
     "year": "2019",
     "date": "May 13, 2019"
   },
@@ -180,7 +189,8 @@
   },
   {
     "id": "phanatic-iron-throne-2018",
-    "title": "Phanatic (Iron Throne)",
+    "title": "Phanatic",
+    "nickname": "Iron Throne",
     "year": "2018",
     "date": "June 18, 2018",
     "quantity": "3,500"
@@ -194,7 +204,8 @@
   },
   {
     "id": "han-nola-aaron-nola-star-wars-2018",
-    "title": "\"Han Nola\" (Aaron Nola, Star Wars)",
+    "title": "\"Han Nola\"",
+    "nickname": "Aaron Nola, Star Wars",
     "year": "2018",
     "date": "May 23, 2018"
   },
@@ -218,40 +229,46 @@
   },
   {
     "id": "charlie-brown-50th-anniversary-2017",
-    "title": "Charlie Brown (50th Anniversary)",
+    "title": "Charlie Brown",
+    "nickname": "50th Anniversary",
     "year": "2017",
     "date": "July 5, 2017",
     "quantity": "2,000"
   },
   {
     "id": "phanatic-star-wars-2017",
-    "title": "Phanatic (Star Wars)",
+    "title": "Phanatic",
+    "nickname": "Star Wars",
     "year": "2017",
     "date": "June 21, 2017",
     "quantity": "7,000"
   },
   {
     "id": "phanatic-band-themed-2016",
-    "title": "Phanatic (Band Themed)",
+    "title": "Phanatic",
+    "nickname": "Band Themed",
     "year": "2016",
     "date": "2016",
     "quantity": "5,000"
   },
   {
     "id": "phoebe-phanatic-stitch-n-pitch-2016",
-    "title": "Phoebe Phanatic (Stitch 'n Pitch)",
+    "title": "Phoebe Phanatic",
+    "nickname": "Stitch 'n Pitch",
     "year": "2016",
     "date": "August 29, 2016"
   },
   {
     "id": "phillie-phanatic-variant-2016",
-    "title": "Phillie Phanatic (Variant)",
+    "title": "Phillie Phanatic",
+    "nickname": "Variant",
     "year": "2016",
     "date": "August 21, 2016"
   },
   {
     "id": "phanatic-master-phanatic-star-wars-2016",
-    "title": "Phanatic (\"Master Phanatic\", Star Wars)",
+    "title": "Phanatic",
+    "nickname": "\"Master Phanatic\", Star Wars",
     "year": "2016",
     "date": "July 21, 2016",
     "quantity": "5,000"
@@ -270,7 +287,8 @@
   },
   {
     "id": "vintage-phillies-gold-base-variant-2015",
-    "title": "Vintage Phillies (Gold Base Variant)",
+    "title": "Vintage Phillies",
+    "nickname": "Gold Base Variant",
     "year": "2015",
     "date": "June 19, 2015"
   },
@@ -300,7 +318,8 @@
   },
   {
     "id": "john-kruk-action-figure-2013",
-    "title": "John Kruk (Action Figure)",
+    "title": "John Kruk",
+    "nickname": "Action Figure",
     "year": "2013",
     "date": "August 23, 2013"
   },
@@ -372,19 +391,22 @@
   },
   {
     "id": "shane-victorino-flyin-hawaiian-figurine-2008",
-    "title": "Shane Victorino (\"Flyin' Hawaiian\" Figurine)",
+    "title": "Shane Victorino",
+    "nickname": "\"Flyin' Hawaiian\" Figurine",
     "year": "2008",
     "date": "July 13, 2008"
   },
   {
     "id": "jimmy-rollins-mvp-2008",
-    "title": "Jimmy Rollins (MVP)",
+    "title": "Jimmy Rollins",
+    "nickname": "MVP",
     "year": "2008",
     "date": "June 4, 2008"
   },
   {
     "id": "jamie-moyer-nl-east-champions-2008",
-    "title": "Jamie Moyer (NL East Champions)",
+    "title": "Jamie Moyer",
+    "nickname": "NL East Champions",
     "year": "2008",
     "date": "April 30, 2008"
   },
@@ -396,13 +418,15 @@
   },
   {
     "id": "shane-victorino-hula-figurine-2007",
-    "title": "Shane Victorino (Hula Figurine)",
+    "title": "Shane Victorino",
+    "nickname": "Hula Figurine",
     "year": "2007",
     "date": "June 3, 2007"
   },
   {
     "id": "ryan-howard-mvp-figurine-2007",
-    "title": "Ryan Howard (MVP Figurine)",
+    "title": "Ryan Howard",
+    "nickname": "MVP Figurine",
     "year": "2007",
     "date": "May 16, 2007"
   },
@@ -456,7 +480,8 @@
   },
   {
     "id": "phil-phillis-original-mascots-2003",
-    "title": "Phil & Phillis (Original Mascots)",
+    "title": "Phil & Phillis",
+    "nickname": "Original Mascots",
     "year": "2003",
     "date": "September 27, 2003"
   },
@@ -474,7 +499,8 @@
   },
   {
     "id": "harry-kalas-richie-ashburn-dual-2002",
-    "title": "Harry Kalas & Richie Ashburn (Dual)",
+    "title": "Harry Kalas & Richie Ashburn",
+    "nickname": "Dual",
     "year": "2002",
     "date": "August 18, 2002"
   },
@@ -486,7 +512,8 @@
   },
   {
     "id": "phillie-phanatic-mascot-2002",
-    "title": "Phillie Phanatic (Mascot)",
+    "title": "Phillie Phanatic",
+    "nickname": "Mascot",
     "year": "2002",
     "date": "May 5, 2002"
   },

@@ -22,7 +22,8 @@
   },
   {
     "id": "george-springer-jumpin-springer-dinger-2026",
-    "title": "George Springer (\"Jumpin'\", Springer Dinger)",
+    "title": "George Springer",
+    "nickname": "\"Jumpin'\", Springer Dinger",
     "year": "2026",
     "date": "April 10, 2026",
     "quantity": "15,000"
@@ -50,7 +51,8 @@
   },
   {
     "id": "vladimir-guerrero-jr-dancing-2025",
-    "title": "Vladimir Guerrero Jr. (Dancing)",
+    "title": "Vladimir Guerrero Jr.",
+    "nickname": "Dancing",
     "year": "2025",
     "date": "July 23, 2025",
     "quantity": "15,000"
@@ -134,7 +136,8 @@
   },
   {
     "id": "jose-bautista-bat-flip-2023",
-    "title": "Jose Bautista (Bat Flip)",
+    "title": "Jose Bautista",
+    "nickname": "Bat Flip",
     "year": "2023",
     "date": "August 12, 2023",
     "quantity": "15,000"
@@ -154,7 +157,8 @@
   },
   {
     "id": "jordan-romano-kenley-jansen-handshake-2023",
-    "title": "Jordan Romano & Kenley Jansen (Handshake)",
+    "title": "Jordan Romano & Kenley Jansen",
+    "nickname": "Handshake",
     "year": "2023",
     "date": "April 24, 2023"
   },
@@ -174,7 +178,8 @@
   },
   {
     "id": "vladimir-guerrero-jr-victory-vlad-2022",
-    "title": "Vladimir Guerrero Jr. (\"Victory Vlad\")",
+    "title": "Vladimir Guerrero Jr.",
+    "nickname": "\"Victory Vlad\"",
     "year": "2022",
     "date": "August 13, 2022",
     "quantity": "15,000"
@@ -188,27 +193,31 @@
   },
   {
     "id": "vladimir-guerrero-sr-jr-dual-2022",
-    "title": "Vladimir Guerrero Sr. & Jr. (Dual)",
+    "title": "Vladimir Guerrero Sr. & Jr.",
+    "nickname": "Dual",
     "year": "2022",
     "date": "July 2, 2022",
     "quantity": "15,000"
   },
   {
     "id": "teoscar-hernandez-silver-slugger-2022",
-    "title": "Teoscar Hernandez (Silver Slugger)",
+    "title": "Teoscar Hernandez",
+    "nickname": "Silver Slugger",
     "year": "2022",
     "date": "June 1, 2022",
     "quantity": "15,000"
   },
   {
     "id": "snoopy-woodstock-doghouse-2022",
-    "title": "Snoopy & Woodstock (Doghouse)",
+    "title": "Snoopy & Woodstock",
+    "nickname": "Doghouse",
     "year": "2022",
     "date": "April 30, 2022"
   },
   {
     "id": "bo-bichette-bo-flow-2022",
-    "title": "Bo Bichette (\"Bo Flow\")",
+    "title": "Bo Bichette",
+    "nickname": "\"Bo Flow\"",
     "year": "2022",
     "date": "April 29, 2022",
     "quantity": "15,000"
@@ -236,7 +245,8 @@
   },
   {
     "id": "roberto-alomar-paul-molitor-john-olerud-triple-2018",
-    "title": "Roberto Alomar, Paul Molitor & John Olerud (Triple)",
+    "title": "Roberto Alomar, Paul Molitor & John Olerud",
+    "nickname": "Triple",
     "year": "2018",
     "date": "August 11, 2018",
     "quantity": "20,000"
@@ -250,7 +260,8 @@
   },
   {
     "id": "marcus-stroman-shimmy-wobble-bobble-2018",
-    "title": "Marcus Stroman (\"Shimmy Wobble Bobble\")",
+    "title": "Marcus Stroman",
+    "nickname": "\"Shimmy Wobble Bobble\"",
     "year": "2018",
     "date": "June 6, 2018",
     "quantity": "20,000"
@@ -285,7 +296,8 @@
   },
   {
     "id": "dave-stieb-pat-hentgen-roy-halladay-trio-2016",
-    "title": "Dave Stieb, Pat Hentgen & Roy Halladay (Trio)",
+    "title": "Dave Stieb, Pat Hentgen & Roy Halladay",
+    "nickname": "Trio",
     "year": "2016",
     "date": "August 14, 2016",
     "quantity": "20,000"
@@ -306,7 +318,8 @@
   },
   {
     "id": "carlos-delgado-jose-bautista-vernon-wells-trio-2016",
-    "title": "Carlos Delgado, Jose Bautista & Vernon Wells (Trio)",
+    "title": "Carlos Delgado, Jose Bautista & Vernon Wells",
+    "nickname": "Trio",
     "year": "2016",
     "date": "May 29, 2016",
     "quantity": "20,000"
@@ -320,7 +333,8 @@
   },
   {
     "id": "george-bell-lloyd-moseby-jesse-barfield-trio-2015",
-    "title": "George Bell, Lloyd Moseby & Jesse Barfield (Trio)",
+    "title": "George Bell, Lloyd Moseby & Jesse Barfield",
+    "nickname": "Trio",
     "year": "2015",
     "date": "August 16, 2015",
     "quantity": "20,000"
@@ -464,19 +478,22 @@
   },
   {
     "id": "scott-rolen-mini-2008",
-    "title": "Scott Rolen (Mini)",
+    "title": "Scott Rolen",
+    "nickname": "Mini",
     "year": "2008",
     "date": "April 1, 2008"
   },
   {
     "id": "alex-rios-mini-2008",
-    "title": "Alex Rios (Mini)",
+    "title": "Alex Rios",
+    "nickname": "Mini",
     "year": "2008",
     "date": "April 1, 2008"
   },
   {
     "id": "adam-lind-mini-2008",
-    "title": "Adam Lind (Mini)",
+    "title": "Adam Lind",
+    "nickname": "Mini",
     "year": "2008",
     "date": "April 1, 2008"
   },
@@ -513,7 +530,8 @@
   },
   {
     "id": "ace-mascot-2007",
-    "title": "Ace (Mascot)",
+    "title": "Ace",
+    "nickname": "Mascot",
     "year": "2007",
     "date": "July 22, 2007",
     "quantity": "10,000"
@@ -526,31 +544,36 @@
   },
   {
     "id": "vernon-wells-spring-training-season-ticket-2007",
-    "title": "Vernon Wells (Spring Training Season Ticket)",
+    "title": "Vernon Wells",
+    "nickname": "Spring Training Season Ticket",
     "year": "2007",
     "date": "2007"
   },
   {
     "id": "greg-zaun-junior-jays-2007",
-    "title": "Greg Zaun (Junior Jays)",
+    "title": "Greg Zaun",
+    "nickname": "Junior Jays",
     "year": "2007",
     "date": "2007"
   },
   {
     "id": "aaron-hill-junior-jays-2007",
-    "title": "Aaron Hill (Junior Jays)",
+    "title": "Aaron Hill",
+    "nickname": "Junior Jays",
     "year": "2007",
     "date": "2007"
   },
   {
     "id": "aj-burnett-junior-jays-2007",
-    "title": "A.J. Burnett (Junior Jays)",
+    "title": "A.J. Burnett",
+    "nickname": "Junior Jays",
     "year": "2007",
     "date": "2007"
   },
   {
     "id": "reed-johnson-flex-plan-2007",
-    "title": "Reed Johnson (Flex Plan)",
+    "title": "Reed Johnson",
+    "nickname": "Flex Plan",
     "year": "2007",
     "date": "2007"
   },
@@ -570,7 +593,8 @@
   },
   {
     "id": "corey-koskie-bj-ryan-flex-pack-2006",
-    "title": "Corey Koskie & B.J. Ryan (Flex Pack)",
+    "title": "Corey Koskie & B.J. Ryan",
+    "nickname": "Flex Pack",
     "year": "2006",
     "date": "2006"
   },
@@ -582,19 +606,22 @@
   },
   {
     "id": "orlando-hudson-flex-plan-2005",
-    "title": "Orlando Hudson (Flex Plan)",
+    "title": "Orlando Hudson",
+    "nickname": "Flex Plan",
     "year": "2005",
     "date": "2005"
   },
   {
     "id": "roy-halladay-cy-young-2004",
-    "title": "Roy Halladay (Cy Young)",
+    "title": "Roy Halladay",
+    "nickname": "Cy Young",
     "year": "2004",
     "date": "May 16, 2004"
   },
   {
     "id": "roy-halladay-carlos-delgado-7-game-flex-pack-2004",
-    "title": "Roy Halladay & Carlos Delgado (7-Game Flex Pack)",
+    "title": "Roy Halladay & Carlos Delgado",
+    "nickname": "7-Game Flex Pack",
     "year": "2004",
     "date": "2004"
   },
@@ -612,7 +639,8 @@
   },
   {
     "id": "roy-halladay-fan-rewards-2003",
-    "title": "Roy Halladay (Fan Rewards)",
+    "title": "Roy Halladay",
+    "nickname": "Fan Rewards",
     "year": "2003",
     "date": "2003"
   },
