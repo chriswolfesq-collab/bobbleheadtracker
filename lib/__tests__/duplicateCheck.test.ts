@@ -18,7 +18,16 @@ describe("findDuplicateBobblehead", () => {
   });
 
   it("skips curated listings the admin deleted", () => {
-    const match = findDuplicateBobblehead("angels", CURATED.title, [], (_team, id) => id === CURATED.id);
+    // Several angels listings now share a title (the descriptor moved from the
+    // title's parenthetical into the nickname), so deleting just one leaves
+    // same-titled siblings. Delete every listing with this title to prove the
+    // isDeleted filter removes them all and nothing curated matches.
+    const deletedIds = new Set(
+      getGiveawaysByTeamSlug("angels")
+        .filter((giveaway) => giveaway.title === CURATED.title)
+        .map((giveaway) => giveaway.id),
+    );
+    const match = findDuplicateBobblehead("angels", CURATED.title, [], (_team, id) => deletedIds.has(id));
     expect(match?.title ?? null).not.toBe(CURATED.title);
   });
 
