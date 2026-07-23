@@ -57,7 +57,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
   const { communityBobblehead, isLoading, notFound } = useCommunityBobblehead(team.slug, bobbleheadId);
   const { photoUrlById } = useApprovedPhotos(team.slug);
   const { photos: galleryPhotos, removePhotoLocally, addPhotoLocally } = useBobbleheadGallery(team.slug, bobbleheadId);
-  const { ownedById, isLoggedIn, setOwned } = useUserCollection(team.slug);
+  const { ownedById, isLoggedIn, isLoading: isCollectionLoading, setOwned } = useUserCollection(team.slug);
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, setFavorited } = useUserFavorites(team.slug);
   const { wantedById, isLoggedIn: isLoggedInForWanted, setWanted } = useUserWanted(team.slug);
 
@@ -107,6 +107,9 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
   // Don't show the photo twice when it's standing in as the profile image.
   const galleryPhotosToShow = galleryPhotos.filter((photo) => photo.imageUrl !== imageSrc);
   const isOwned = ownedById[giveaway.id] ?? false;
+  // Until the collection loads client-side we can't tell owned from unowned;
+  // keep the button neutral rather than flashing an owned item as unowned.
+  const ownershipKnown = !isCollectionLoading;
   const isFavorited = favoritedById[giveaway.id] ?? false;
   const isWanted = wantedById[giveaway.id] ?? false;
   const details = [
@@ -313,15 +316,23 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
             <button
               type="button"
               aria-pressed={isOwned}
-              disabled={!isLoggedIn}
+              disabled={!isLoggedIn || !ownershipKnown}
               className={`rounded-lg px-5 py-4 text-base font-black uppercase tracking-wide shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] transition disabled:cursor-not-allowed disabled:opacity-50 ${
-                isOwned
-                  ? "bg-green-500 text-[#06110a] hover:bg-green-400"
-                  : "border border-accent text-accent hover:bg-accent-hover hover:text-accent-fg"
+                isLoggedIn && !ownershipKnown
+                  ? "border border-black/10 text-zinc-500 dark:border-white/15 dark:text-zinc-400"
+                  : isOwned
+                    ? "bg-green-500 text-[#06110a] hover:bg-green-400"
+                    : "border border-accent text-accent hover:bg-accent-hover hover:text-accent-fg"
               }`}
               onClick={() => setOwned(giveaway.id, !isOwned)}
             >
-              {isOwned ? "✓ Owned" : isLoggedIn ? "Mark as owned" : "Log in to track"}
+              {!isLoggedIn
+                ? "Log in to track"
+                : !ownershipKnown
+                  ? "Loading…"
+                  : isOwned
+                    ? "✓ Owned"
+                    : "Mark as owned"}
             </button>
             <SubmitPhotoButton
               bobbleheadId={giveaway.id}

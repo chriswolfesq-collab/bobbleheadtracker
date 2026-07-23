@@ -18,6 +18,10 @@ export type ResolvedGiveaway = Giveaway & { source: "curated" | "community" };
 type OwnershipContextValue = {
   ownedCount: number;
   ownedById: Record<string, boolean>;
+  // False until the collection has loaded client-side. Until then we can't tell
+  // an owned bobblehead from an unowned one, so the card keeps its owned UI
+  // neutral rather than flashing an owned item as unowned.
+  ownershipKnown: boolean;
   isLoggedIn: boolean;
   toggleOwned: (id: string) => void;
 };
@@ -41,12 +45,13 @@ export function OwnershipProvider({
   children: React.ReactNode;
   teamSlug: string;
 }) {
-  const { ownedById, isLoggedIn, setOwned } = useUserCollection(teamSlug);
+  const { ownedById, isLoggedIn, isLoading, setOwned } = useUserCollection(teamSlug);
   const ownedCount = Object.values(ownedById).filter(Boolean).length;
 
   const value: OwnershipContextValue = {
     ownedCount,
     ownedById,
+    ownershipKnown: !isLoading,
     isLoggedIn,
     toggleOwned: (id: string) => setOwned(id, !ownedById[id]),
   };
@@ -141,7 +146,7 @@ export function GiveawayCard({
   team: Team;
   eager?: boolean;
 }) {
-  const { ownedById, isLoggedIn, toggleOwned } = useOwnership();
+  const { ownedById, ownershipKnown, isLoggedIn, toggleOwned } = useOwnership();
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, toggleFavorited } = useFavorites();
   const { wantedById, isLoggedIn: isLoggedInForWanted, toggleWanted } = useWanted();
   const isOwned = ownedById[giveaway.id] ?? false;
@@ -159,7 +164,7 @@ export function GiveawayCard({
       <button
         type="button"
         aria-pressed={isOwned}
-        disabled={!isLoggedIn}
+        disabled={!isLoggedIn || !ownershipKnown}
         aria-label={
           isLoggedIn
             ? `Mark ${fullTitle} as ${isOwned ? "not owned" : "owned"}`
@@ -173,6 +178,8 @@ export function GiveawayCard({
           <span className="grid h-full w-full place-items-center rounded bg-green-500 font-black text-[#06110a]">
             ✓
           </span>
+        ) : isLoggedIn && !ownershipKnown ? (
+          <span aria-hidden className="h-full w-full animate-pulse rounded bg-black/10 dark:bg-white/10" />
         ) : null}
       </button>
 
@@ -215,15 +222,23 @@ export function GiveawayCard({
           <button
             type="button"
             aria-pressed={isOwned}
-            disabled={!isLoggedIn}
+            disabled={!isLoggedIn || !ownershipKnown}
             className={`w-full rounded px-2 py-2 text-[10px] font-bold uppercase tracking-wide transition disabled:cursor-not-allowed disabled:opacity-50 sm:text-xs ${
-              isOwned
-                ? "bg-green-500 text-[#06110a] hover:bg-green-400"
-                : "border border-accent text-accent hover:bg-accent-hover hover:text-accent-fg"
+              isLoggedIn && !ownershipKnown
+                ? "border border-black/10 text-zinc-500 dark:border-white/15 dark:text-zinc-400"
+                : isOwned
+                  ? "bg-green-500 text-[#06110a] hover:bg-green-400"
+                  : "border border-accent text-accent hover:bg-accent-hover hover:text-accent-fg"
             }`}
             onClick={() => toggleOwned(giveaway.id)}
           >
-            {isLoggedIn ? (isOwned ? "✓ Owned" : "Mark as Owned") : "Log in to track"}
+            {!isLoggedIn
+              ? "Log in to track"
+              : !ownershipKnown
+                ? "…"
+                : isOwned
+                  ? "✓ Owned"
+                  : "Mark as Owned"}
           </button>
         </div>
       </div>
