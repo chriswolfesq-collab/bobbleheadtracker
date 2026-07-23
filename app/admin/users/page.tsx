@@ -2,13 +2,18 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { AdminEmailComposer, type EmailTarget } from "@/components/AdminEmailComposer";
 import { AdminFilterBar } from "@/components/AdminFilterBar";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { MAX_DISPLAY_NAME_LENGTH, validateDisplayName } from "@/lib/auth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+import { TEAMS } from "@/lib/teams";
 import { type AdminFilter, useAdminFilters } from "@/lib/useAdminFilters";
+
+type TeamRep = { email: string; team_slug: string };
+
+const teamName = (slug: string) => TEAMS.find((t) => t.slug === slug)?.name ?? slug;
 
 type AdminUser = {
   id: string;
@@ -77,6 +82,33 @@ function AdminUsersPageInner() {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [emailTarget, setEmailTarget] = useState<EmailTarget | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const [reps, setReps] = useState<TeamRep[]>([]);
+  const [repEditingId, setRepEditingId] = useState<string | null>(null);
+  const [repTeamDraft, setRepTeamDraft] = useState<string>(TEAMS[0]?.slug ?? "");
+
+  // email (lowercased) -> the team slugs that account reps. Reps are keyed by
+  // email, same as admins, so this joins the rep list onto the user rows.
+  const repTeamsByEmail = useMemo(() => {
+    const map = new Map<string, string[]>();
+    for (const rep of reps) {
+      const key = rep.email.toLowerCase();
+      map.set(key, [...(map.get(key) ?? []), rep.team_slug]);
+    }
+    return map;
+  }, [reps]);
+
+  const repTeamsFor = useCallback(
+    (email: string | null) => (email ? repTeamsByEmail.get(email.toLowerCase()) ?? [] : []),
+    [repTeamsByEmail],
+  );
+
+  // No cancelled guard: a late set after unmount is harmless, and this doubles
+  // as the refresh after an assign/remove.
+  const loadReps = useCallback(() => {
+    supabase.rpc("admin_list_team_reps").then(({ data, error: repError }) => {
+      if (!repError) setReps((data ?? []) as TeamRep[]);
+    });
+  }, []);
 
   // The stats-page Accounts cards deep-link here with a filter pre-applied:
   // ?signed_in=yes seeds the sign-in dropdown, ?joined=7|30 narrows to accounts
@@ -118,10 +150,62 @@ function AdminUsersPageInner() {
       setIsLoadingRows(false);
     });
 
+    loadReps();
+
     return () => {
       cancelled = true;
     };
-  }, [isAdmin]);
+  }, [isAdmin, loadReps]);
+
+  const startRepEditing = (row: AdminUser) => {
+    setRepEditingId(row.id);
+    // Default the picker to the first team the user is NOT already a rep for.
+    const taken = new Set(repTeamsFor(row.email));
+    const firstFree = TEAMS.find((t) => !taken.has(t.slug))?.slug ?? TEAMS[0]?.slug ?? "";
+    setRepTeamDraft(firstFree);
+    setError(null);
+  };
+
+  const assignRep = async (row: AdminUser) => {
+    if (!row.email || !repTeamDraft) return;
+    setBusyId(row.id);
+    setError(null);
+
+    const { error: rpcError } = await supabase.rpc("admin_assign_team_rep", {
+      p_email: row.email,
+      p_team_slug: repTeamDraft,
+    });
+
+    setBusyId(null);
+    if (rpcError) {
+      setError(rpcError.message);
+      return;
+    }
+
+    setNotice(`${row.email} can now edit ${teamName(repTeamDraft)}.`);
+    setRepEditingId(null);
+    loadReps();
+  };
+
+  const removeRep = async (row: AdminUser, slug: string) => {
+    if (!row.email) return;
+    setBusyId(row.id);
+    setError(null);
+
+    const { error: rpcError } = await supabase.rpc("admin_remove_team_rep", {
+      p_email: row.email,
+      p_team_slug: slug,
+    });
+
+    setBusyId(null);
+    if (rpcError) {
+      setError(rpcError.message);
+      return;
+    }
+
+    setNotice(`Removed ${row.email} as ${teamName(slug)} rep.`);
+    loadReps();
+  };
 
   const startEditing = (row: AdminUser) => {
     setEditingId(row.id);
@@ -402,6 +486,13 @@ function AdminUsersPageInner() {
                   {row.owned_count} owned · {row.favorite_count} favorited · {row.wanted_count} wanted ·{" "}
                   {row.submission_count} submissions · {row.report_count} reports
                 </p>
+                {repTeamsFor(row.email).length > 0 ? (
+                  <p className="mt-2">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-accent/50 bg-accent/10 px-2.5 py-0.5 text-xs font-black uppercase tracking-wide text-accent">
+                      Team rep: {repTeamsFor(row.email).map(teamName).join(", ")}
+                    </span>
+                  </p>
+                ) : null}
               </div>
 
               <div className="flex flex-col justify-center gap-2">
@@ -429,6 +520,15 @@ function AdminUsersPageInner() {
                       className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover disabled:opacity-40"
                     >
                       Email
+                    </button>
+                    <button
+                      type="button"
+                      disabled={!row.email}
+                      onClick={() => (repEditingId === row.id ? setRepEditingId(null) : startRepEditing(row))}
+                      title={row.email ? undefined : "A rep is identified by email; this account has none"}
+                      className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover disabled:opacity-40"
+                    >
+                      Team rep
                     </button>
                   </>
                 ) : null}
@@ -462,6 +562,66 @@ function AdminUsersPageInner() {
                   </button>
                 )}
               </div>
+
+              {repEditingId === row.id ? (
+                <div className="rounded-lg border border-accent/30 bg-accent/5 p-3 sm:col-span-3">
+                  <p className="text-xs font-black uppercase tracking-wide text-zinc-600 dark:text-zinc-300">
+                    Team rep access
+                  </p>
+                  {repTeamsFor(row.email).length > 0 ? (
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {repTeamsFor(row.email).map((slug) => (
+                        <span
+                          key={slug}
+                          className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-white/60 px-3 py-1 text-xs font-bold text-zinc-800 dark:bg-white/5 dark:text-zinc-200"
+                        >
+                          {teamName(slug)}
+                          <button
+                            type="button"
+                            disabled={busyId === row.id}
+                            onClick={() => removeRep(row, slug)}
+                            className="text-red-500 transition hover:text-red-400 disabled:opacity-50"
+                            aria-label={`Remove ${teamName(slug)} rep access`}
+                          >
+                            ✕
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="mt-2 text-xs text-zinc-500">Not a rep for any team yet.</p>
+                  )}
+
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <select
+                      value={repTeamDraft}
+                      onChange={(event) => setRepTeamDraft(event.target.value)}
+                      className="rounded border border-black/15 dark:border-white/20 bg-white dark:bg-[#07111d] px-2 py-1.5 text-sm text-zinc-900 dark:text-zinc-100 focus:border-accent focus:outline-none"
+                    >
+                      {TEAMS.map((team) => (
+                        <option key={team.slug} value={team.slug}>
+                          {team.name}
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      type="button"
+                      disabled={busyId === row.id}
+                      onClick={() => assignRep(row)}
+                      className="rounded border border-accent bg-accent/10 px-4 py-2 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg disabled:opacity-50"
+                    >
+                      {busyId === row.id ? "Working…" : "Assign team"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setRepEditingId(null)}
+                      className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-700 dark:text-zinc-300"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              ) : null}
             </div>
           ))
         )}
