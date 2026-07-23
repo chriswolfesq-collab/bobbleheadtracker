@@ -50,7 +50,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
   const { showError } = useToast();
   const { communityBobblehead, isLoading, notFound } = useCommunityBobblehead(team.slug, bobbleheadId);
   const { photoUrlById } = useApprovedPhotos(team.slug);
-  const { photos: galleryPhotos, removePhotoLocally } = useBobbleheadGallery(team.slug, bobbleheadId);
+  const { photos: galleryPhotos, removePhotoLocally, addPhotoLocally } = useBobbleheadGallery(team.slug, bobbleheadId);
   const { ownedById, isLoggedIn, setOwned } = useUserCollection(team.slug);
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, setFavorited } = useUserFavorites(team.slug);
   const { wantedById, isLoggedIn: isLoggedInForWanted, setWanted } = useUserWanted(team.slug);
@@ -157,10 +157,21 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
     if (!adminUser) return;
 
     try {
-      await setGalleryPhotoAsMain({ user: adminUser, teamSlug: team.slug, bobbleheadId: giveaway.id, photo });
+      // The photo currently serving as the profile image moves down into the
+      // gallery. A community listing's main is always in removableMainPhotoUrl;
+      // the gallery-fallback and team placeholder don't count (the fallback is
+      // already a gallery row and the placeholder isn't a real photo).
+      const { demotedPhoto } = await setGalleryPhotoAsMain({
+        user: adminUser,
+        teamSlug: team.slug,
+        bobbleheadId: giveaway.id,
+        photo,
+        previousMainUrl: removableMainPhotoUrl,
+      });
       setLocalImageUrl(photo.imageUrl);
       setMainPhotoRemoved(false);
       removePhotoLocally(photo.id);
+      if (demotedPhoto) addPhotoLocally(demotedPhoto);
     } catch (promoteError) {
       showError(promoteError instanceof Error ? promoteError.message : "Could not set the profile photo.");
     }

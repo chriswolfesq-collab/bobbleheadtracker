@@ -1,6 +1,7 @@
 "use client";
 
 import type { User } from "@supabase/supabase-js";
+import type { GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 
 async function uploadPhotoDirect(file: File): Promise<string> {
@@ -94,17 +95,48 @@ async function removeApprovedFile(imageUrl: string) {
 // upserts approved_photos with its URL, then drops the gallery row. The file
 // itself stays in the bobblehead-approved bucket — it's now referenced by the
 // main photo instead of the gallery — so we delete only the DB row.
+//
+// The photo the promotion displaces (`previousMainUrl` — the outgoing main
+// photo or curated seed) is demoted back into the gallery so it isn't lost.
+// When there was nothing to demote (only the team placeholder was showing) the
+// caller passes null; the returned demoted photo is null in that case. We move
+// it down first, so a failure there leaves the current main untouched.
 export async function setGalleryPhotoAsMain({
   user,
   teamSlug,
   bobbleheadId,
   photo,
+  previousMainUrl,
 }: {
   user: User;
   teamSlug: string;
   bobbleheadId: string;
   photo: { id: string; imageUrl: string };
-}) {
+  previousMainUrl?: string | null;
+}): Promise<{ demotedPhoto: GalleryPhoto | null }> {
+  let demotedPhoto: GalleryPhoto | null = null;
+
+  // Skip when the outgoing main is the very photo we're promoting (it's leaving
+  // the gallery anyway) — that would just reinsert it.
+  if (previousMainUrl && previousMainUrl !== photo.imageUrl) {
+    const { data, error: demoteError } = await supabase
+      .from("bobblehead_gallery_photos")
+      .insert({
+        bobblehead_id: bobbleheadId,
+        team_slug: teamSlug,
+        image_url: previousMainUrl,
+        approved_by: user.id,
+      })
+      .select("id, image_url")
+      .single();
+
+    if (demoteError) {
+      throw new Error(demoteError.message);
+    }
+
+    demotedPhoto = { id: data.id, imageUrl: data.image_url };
+  }
+
   const { error } = await supabase.from("approved_photos").upsert({
     bobblehead_id: bobbleheadId,
     team_slug: teamSlug,
@@ -125,6 +157,8 @@ export async function setGalleryPhotoAsMain({
   if (galleryError) {
     throw new Error(galleryError.message);
   }
+
+  return { demotedPhoto };
 }
 
 export async function deleteGalleryPhoto(photo: { id: string; imageUrl: string }) {

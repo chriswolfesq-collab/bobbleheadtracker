@@ -41,5 +41,14 @@ export function useBobbleheadGallery(teamSlug: string, bobbleheadId: string) {
     setPhotos((current) => current.filter((photo) => photo.id !== photoId));
   }, []);
 
-  return { photos, isLoading, removePhotoLocally };
+  // For reflecting a photo demoted from main back into the gallery (when an
+  // admin promotes a different gallery photo) without a refetch. Appended last,
+  // matching the created_at ordering the query would return on reload.
+  const addPhotoLocally = useCallback((photo: GalleryPhoto) => {
+    setPhotos((current) =>
+      current.some((existing) => existing.id === photo.id) ? current : [...current, photo],
+    );
+  }, []);
+
+  return { photos, isLoading, removePhotoLocally, addPhotoLocally };
 }

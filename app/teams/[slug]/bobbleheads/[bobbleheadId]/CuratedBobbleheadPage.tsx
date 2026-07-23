@@ -42,7 +42,7 @@ export function CuratedBobbleheadPage({
     team.slug,
     initialImageUrl ? { [giveaway.id]: initialImageUrl } : {},
   );
-  const { photos: galleryPhotos, removePhotoLocally } = useBobbleheadGallery(team.slug, giveaway.id);
+  const { photos: galleryPhotos, removePhotoLocally, addPhotoLocally } = useBobbleheadGallery(team.slug, giveaway.id);
   const { override, isLoading: isOverrideLoading } = useBobbleheadOverride(team.slug, giveaway.id, {
     override: initialOverride,
   });
@@ -152,10 +152,22 @@ export function CuratedBobbleheadPage({
     if (!adminUser) return;
 
     try {
-      await setGalleryPhotoAsMain({ user: adminUser, teamSlug: team.slug, bobbleheadId: giveaway.id, photo });
+      // The photo currently serving as the profile image moves down into the
+      // gallery. The curated seed counts (it's what shows with no approved
+      // photo); the gallery-fallback and team placeholder don't — the fallback
+      // is already a gallery row and the placeholder isn't a real photo.
+      const previousMainUrl = removableMainPhotoUrl ?? giveaway.imageUrl ?? null;
+      const { demotedPhoto } = await setGalleryPhotoAsMain({
+        user: adminUser,
+        teamSlug: team.slug,
+        bobbleheadId: giveaway.id,
+        photo,
+        previousMainUrl,
+      });
       setLocalImageUrl(photo.imageUrl);
       setMainPhotoRemoved(false);
       removePhotoLocally(photo.id);
+      if (demotedPhoto) addPhotoLocally(demotedPhoto);
     } catch (promoteError) {
       showError(promoteError instanceof Error ? promoteError.message : "Could not set the profile photo.");
     }
