@@ -177,7 +177,7 @@ function SubmitBobbleheadForm({
         event.preventDefault();
 
         if (!duplicateMatch) {
-          const match = findDuplicateBobblehead(teamSlug, title, communityBobbleheads, isDeleted);
+          const match = findDuplicateBobblehead(teamSlug, title, nickname, communityBobbleheads, isDeleted);
           if (match) {
             setDuplicateMatch(match);
             return;

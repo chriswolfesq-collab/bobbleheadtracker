@@ -21,6 +21,7 @@ type Submission = {
   target_bobblehead_id: string | null;
   team_slug: string;
   title: string | null;
+  nickname: string | null;
   date: string | null;
   storage_path: string | null;
   submitted_by: string;
@@ -90,7 +91,7 @@ export default function AdminReviewPage() {
     supabase
       .from("submissions")
       .select(
-        "id, kind, target_bobblehead_id, team_slug, title, date, storage_path, submitted_by, created_at",
+        "id, kind, target_bobblehead_id, team_slug, title, nickname, date, storage_path, submitted_by, created_at",
       )
       .eq("status", "pending")
       .order("created_at", { ascending: true })
@@ -109,13 +110,16 @@ export default function AdminReviewPage() {
           new Set(submissions.filter((s) => s.kind === "new_bobblehead").map((s) => s.team_slug)),
         );
         const { data: communityRows } = teamSlugs.length
-          ? await supabase.from("community_bobbleheads").select("team_slug, title, date").in("team_slug", teamSlugs)
-          : { data: [] as { team_slug: string; title: string; date: string }[] };
+          ? await supabase
+              .from("community_bobbleheads")
+              .select("team_slug, title, nickname, date")
+              .in("team_slug", teamSlugs)
+          : { data: [] as { team_slug: string; title: string; nickname: string | null; date: string }[] };
         const { isDeleted } = await fetchBobbleheadOverrides();
         const communityByTeam = new Map<string, DuplicateCandidate[]>();
         for (const row of communityRows ?? []) {
           const list = communityByTeam.get(row.team_slug) ?? [];
-          list.push({ title: row.title, date: row.date });
+          list.push({ title: row.title, nickname: row.nickname, date: row.date });
           communityByTeam.set(row.team_slug, list);
         }
 
@@ -134,6 +138,7 @@ export default function AdminReviewPage() {
                 ? findDuplicateBobblehead(
                     submission.team_slug,
                     submission.title,
+                    submission.nickname,
                     communityByTeam.get(submission.team_slug) ?? [],
                     isDeleted,
                   )
