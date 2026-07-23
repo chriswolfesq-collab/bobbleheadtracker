@@ -404,6 +404,17 @@ create policy "bobblehead_gallery_photos: admin delete"
   to authenticated
   using (public.is_admin());
 
+-- Approving a submission inserts here via the approve_submission SECURITY
+-- DEFINER function (which bypasses RLS), but promoting a gallery photo to the
+-- main/profile image demotes the outgoing photo back into the gallery with a
+-- direct client insert (lib/adminEdit.ts setGalleryPhotoAsMain). That needs an
+-- insert policy; scope it to admins, mirroring the delete policy above.
+drop policy if exists "bobblehead_gallery_photos: admin insert" on public.bobblehead_gallery_photos;
+create policy "bobblehead_gallery_photos: admin insert"
+  on public.bobblehead_gallery_photos for insert
+  to authenticated
+  with check (public.is_admin());
+
 drop policy if exists "bobblehead_overrides: public read" on public.bobblehead_overrides;
 create policy "bobblehead_overrides: public read"
   on public.bobblehead_overrides for select
