@@ -92,6 +92,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
   const giveaway = communityBobblehead;
   const title = localOverride?.title ?? giveaway.title;
   const nickname = localOverride?.nickname ?? giveaway.nickname ?? null;
+  const quantity = localOverride?.quantity ?? giveaway.quantity ?? null;
   const year = localOverride?.year ?? giveaway.year;
   const date = localOverride?.date ?? giveaway.date;
   // A community listing's photo is always admin-removable: either an
@@ -111,6 +112,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
   const details = [
     ["Release Date", date],
     ["Team", `${team.city} ${team.name}`],
+    ...(quantity?.trim() ? [["Number Given Away", quantity]] : []),
   ];
 
   const handleEditSave = async (values: EditBobbleheadValues, file: File | null) => {
@@ -122,6 +124,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
       bobbleheadId: giveaway.id,
       title: values.title,
       nickname: values.nickname,
+      quantity: values.quantity,
       year: values.year,
       date: values.date,
       file: file ?? undefined,
@@ -341,7 +344,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
       {isEditOpen ? (
         <EditBobbleheadDialog
           onClose={() => setIsEditOpen(false)}
-          initial={{ title, nickname: nickname ?? "", year, date }}
+          initial={{ title, nickname: nickname ?? "", quantity: quantity ?? "", year, date }}
           onSave={handleEditSave}
           onDelete={handleDelete}
           onRemovePhoto={removableMainPhotoUrl ? handleRemoveMainPhoto : undefined}

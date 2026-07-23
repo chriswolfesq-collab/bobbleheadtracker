@@ -274,6 +274,7 @@ create table if not exists public.community_bobbleheads (
   team_slug text not null,
   title text not null,
   nickname text,
+  quantity text,
   year text not null default 'Unknown',
   date text not null default 'N/A',
   image_url text,
@@ -283,6 +284,9 @@ create table if not exists public.community_bobbleheads (
 
 alter table public.community_bobbleheads
   add column if not exists nickname text;
+
+alter table public.community_bobbleheads
+  add column if not exists quantity text;
 
 create table if not exists public.bobblehead_gallery_photos (
   id uuid primary key default gen_random_uuid(),
@@ -306,6 +310,7 @@ create table if not exists public.bobblehead_overrides (
   bobblehead_id text not null,
   title text,
   nickname text,
+  quantity text,
   year text,
   date text,
   deleted boolean not null default false,
@@ -320,6 +325,9 @@ alter table public.bobblehead_overrides
 alter table public.bobblehead_overrides
   add column if not exists nickname text;
 
+alter table public.bobblehead_overrides
+  add column if not exists quantity text;
+
 create table if not exists public.submissions (
   id uuid primary key default gen_random_uuid(),
   kind text not null check (kind in ('photo_for_existing', 'new_bobblehead')),
@@ -327,6 +335,7 @@ create table if not exists public.submissions (
   team_slug text not null,
   title text,
   nickname text,
+  quantity text,
   year text,
   date text,
   -- Null when a new_bobblehead submission was made without a photo; a photo is
@@ -344,6 +353,9 @@ alter table public.submissions alter column storage_path drop not null;
 
 alter table public.submissions
   add column if not exists nickname text;
+
+alter table public.submissions
+  add column if not exists quantity text;
 
 create table if not exists public.listing_reports (
   id uuid primary key default gen_random_uuid(),
@@ -733,12 +745,13 @@ begin
       regexp_replace(lower(coalesce(v_submission.title, 'bobblehead')), '[^a-z0-9]+', '-', 'g') ||
       '-' || substr(v_submission.id::text, 1, 8);
 
-    insert into public.community_bobbleheads (id, team_slug, title, nickname, year, date, image_url, approved_by, created_at)
+    insert into public.community_bobbleheads (id, team_slug, title, nickname, quantity, year, date, image_url, approved_by, created_at)
     values (
       v_new_id,
       v_submission.team_slug,
       coalesce(v_submission.title, 'Untitled'),
       v_submission.nickname,
+      v_submission.quantity,
       coalesce(v_submission.year, 'Unknown'),
       coalesce(v_submission.date, 'N/A'),
       p_image_url,

@@ -15,7 +15,7 @@ export function useCommunityBobbleheads(teamSlug: string) {
 
     supabase
       .from("community_bobbleheads")
-      .select("id, title, nickname, year, date, image_url")
+      .select("id, title, nickname, quantity, year, date, image_url")
       .eq("team_slug", teamSlug)
       .order("created_at", { ascending: false })
       .then(({ data, error }) => {
@@ -30,6 +30,7 @@ export function useCommunityBobbleheads(teamSlug: string) {
               id: row.id,
               title: row.title,
               nickname: row.nickname,
+              quantity: row.quantity,
               year: row.year,
               date: row.date,
               imageUrl: row.image_url,
@@ -60,7 +61,7 @@ export function useAllCommunityBobbleheads() {
 
     supabase
       .from("community_bobbleheads")
-      .select("id, team_slug, title, nickname, year, date, image_url")
+      .select("id, team_slug, title, nickname, quantity, year, date, image_url")
       .then(({ data, error }) => {
         if (cancelled) return;
 
@@ -74,6 +75,7 @@ export function useAllCommunityBobbleheads() {
               teamSlug: row.team_slug,
               title: row.title,
               nickname: row.nickname,
+              quantity: row.quantity,
               year: row.year,
               date: row.date,
               imageUrl: row.image_url,
@@ -102,7 +104,7 @@ export function useRecentCommunityBobbleheads(limit: number) {
 
     supabase
       .from("community_bobbleheads")
-      .select("id, team_slug, title, nickname, year, date, image_url")
+      .select("id, team_slug, title, nickname, quantity, year, date, image_url")
       .order("created_at", { ascending: false })
       .limit(limit)
       .then(({ data, error }) => {
@@ -118,6 +120,7 @@ export function useRecentCommunityBobbleheads(limit: number) {
               teamSlug: row.team_slug,
               title: row.title,
               nickname: row.nickname,
+              quantity: row.quantity,
               year: row.year,
               date: row.date,
               imageUrl: row.image_url,
@@ -147,7 +150,7 @@ export function useCommunityBobblehead(teamSlug: string, bobbleheadId: string) {
 
     supabase
       .from("community_bobbleheads")
-      .select("id, title, nickname, year, date, image_url")
+      .select("id, title, nickname, quantity, year, date, image_url")
       .eq("team_slug", teamSlug)
       .eq("id", bobbleheadId)
       .maybeSingle()
@@ -163,6 +166,7 @@ export function useCommunityBobblehead(teamSlug: string, bobbleheadId: string) {
             id: data.id,
             title: data.title,
             nickname: data.nickname,
+            quantity: data.quantity,
             year: data.year,
             date: data.date,
             imageUrl: data.image_url,

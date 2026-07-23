@@ -85,6 +85,7 @@ export function CuratedBobbleheadPage({
 
   const title = localOverride?.title ?? override?.title ?? giveaway.title;
   const nickname = localOverride?.nickname ?? override?.nickname ?? giveaway.nickname ?? null;
+  const quantity = localOverride?.quantity ?? override?.quantity ?? giveaway.quantity ?? null;
   const year = localOverride?.year ?? override?.year ?? giveaway.year;
   const date = localOverride?.date ?? override?.date ?? giveaway.date;
   // The removable "main photo" is an approved_photos row (or one the admin
@@ -103,6 +104,7 @@ export function CuratedBobbleheadPage({
   const details = [
     ["Release Date", date],
     ["Team", `${team.city} ${team.name}`],
+    ...(quantity?.trim() ? [["Number Given Away", quantity]] : []),
   ];
 
   const handleEditSave = async (values: EditBobbleheadValues, file: File | null) => {
@@ -114,6 +116,7 @@ export function CuratedBobbleheadPage({
       bobbleheadId: giveaway.id,
       title: values.title,
       nickname: values.nickname,
+      quantity: values.quantity,
       year: values.year,
       date: values.date,
       file: file ?? undefined,
@@ -345,7 +348,7 @@ export function CuratedBobbleheadPage({
       {isEditOpen ? (
         <EditBobbleheadDialog
           onClose={() => setIsEditOpen(false)}
-          initial={{ title, nickname: nickname ?? "", year, date }}
+          initial={{ title, nickname: nickname ?? "", quantity: quantity ?? "", year, date }}
           onSave={handleEditSave}
           onDelete={handleDelete}
           onRemovePhoto={removableMainPhotoUrl ? handleRemoveMainPhoto : undefined}

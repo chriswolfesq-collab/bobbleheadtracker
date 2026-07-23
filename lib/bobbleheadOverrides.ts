@@ -6,6 +6,7 @@ import { supabase } from "@/lib/supabase";
 export type BobbleheadOverride = {
   title: string | null;
   nickname: string | null;
+  quantity: string | null;
   year: string | null;
   date: string | null;
   deleted: boolean;
@@ -28,7 +29,7 @@ export function useBobbleheadOverride(
 
     supabase
       .from("bobblehead_overrides")
-      .select("title, nickname, year, date, deleted")
+      .select("title, nickname, quantity, year, date, deleted")
       .eq("team_slug", teamSlug)
       .eq("bobblehead_id", bobbleheadId)
       .maybeSingle()
@@ -75,7 +76,7 @@ const NONE: BobbleheadOverridesLookup = { isDeleted: () => false, getOverride: (
 export async function fetchBobbleheadOverrides(): Promise<BobbleheadOverridesLookup> {
   const { data, error } = await supabase
     .from("bobblehead_overrides")
-    .select("team_slug, bobblehead_id, title, nickname, year, date, deleted");
+    .select("team_slug, bobblehead_id, title, nickname, quantity, year, date, deleted");
 
   if (error) {
     console.error("Failed to load bobblehead overrides:", error.message);
@@ -85,7 +86,7 @@ export async function fetchBobbleheadOverrides(): Promise<BobbleheadOverridesLoo
   const byKey = new Map(
     (data ?? []).map((row) => [
       overrideKey(row.team_slug, row.bobblehead_id),
-      { title: row.title, nickname: row.nickname, year: row.year, date: row.date, deleted: row.deleted },
+      { title: row.title, nickname: row.nickname, quantity: row.quantity, year: row.year, date: row.date, deleted: row.deleted },
     ]),
   );
 

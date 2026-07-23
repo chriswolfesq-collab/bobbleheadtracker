@@ -49,6 +49,7 @@ export async function submitNewBobblehead({
   teamSlug,
   title,
   nickname,
+  quantity,
   date,
   file,
 }: {
@@ -56,6 +57,7 @@ export async function submitNewBobblehead({
   teamSlug: string;
   title: string;
   nickname: string;
+  quantity: string;
   date: string;
   file: File | null;
 }) {
@@ -66,6 +68,7 @@ export async function submitNewBobblehead({
     team_slug: teamSlug,
     title,
     nickname: nickname.trim() || null,
+    quantity: quantity.trim() || null,
     date: date || "N/A",
     storage_path: storagePath,
     submitted_by: user.id,

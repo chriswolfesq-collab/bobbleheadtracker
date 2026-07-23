@@ -39,6 +39,12 @@ export interface Giveaway {
    * components/BobbleheadTitle.tsx.
    */
   nickname?: string | null;
+  /**
+   * Optional count of how many were given away, shown in the detail info grid
+   * so people can gauge how rare a bobblehead is. Free text ("25,000",
+   * "~15,000", "Unknown"); omitted from the grid when absent.
+   */
+  quantity?: string | null;
   year: string;
   date: string;
   imageUrl?: string | null;
