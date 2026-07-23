@@ -253,6 +253,24 @@ export default function AdminStatsPage() {
                       </span>
                     </li>
                   ))}
+                  {(() => {
+                    const total = listingsByTeam.reduce((sum, team) => sum + team.total, 0);
+                    const withPhotos = listingsByTeam.reduce((sum, team) => sum + team.withPhotos, 0);
+                    return (
+                      <li className="flex items-center gap-3 border-t-2 border-black/10 dark:border-white/10 px-3 py-2 text-sm font-black uppercase tracking-wide">
+                        <span className="min-w-0 flex-1 text-zinc-800 dark:text-zinc-200">Total</span>
+                        <span className="w-20 shrink-0 text-right tabular-nums text-zinc-800 dark:text-zinc-200">
+                          {fmt(total)}
+                        </span>
+                        <span className="w-28 shrink-0 text-right tabular-nums text-zinc-600 dark:text-zinc-400">
+                          {fmt(withPhotos)}
+                          <span className="ml-1 text-xs text-zinc-500">
+                            ({total > 0 ? Math.round((withPhotos / total) * 100) : 0}%)
+                          </span>
+                        </span>
+                      </li>
+                    );
+                  })()}
                 </ul>
               )}
             </div>

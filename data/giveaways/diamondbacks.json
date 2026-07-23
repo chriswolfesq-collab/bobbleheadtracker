@@ -172,10 +172,18 @@
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/hdowk9uwupydcbpripbm.jpg"
   },
   {
-    "id": "game-of-thrones-2017",
-    "title": "Game of Thrones",
+    "id": "paul-goldschmidt-star-wars-2017",
+    "title": "Paul Goldschmidt (Star Wars)",
     "year": "2017",
-    "date": "July 7, 2017"
+    "date": "June 24, 2017",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/ogeypsbrljbqyskxgylw.jpg"
+  },
+  {
+    "id": "game-of-thrones-2017",
+    "title": "Taijuan Walker (Game of Thrones)",
+    "year": "2017",
+    "date": "July 7, 2017",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/ym1j5niztpvb7jqsgbtu.jpg"
   },
   {
     "id": "robbie-ray-strikeout-counter-2017",
@@ -280,6 +288,13 @@
     "year": "2014",
     "date": "July 20, 2014",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/cytsp59hql3c7cxvz4er.jpg"
+  },
+  {
+    "id": "dbacks-zombie-2014",
+    "title": "D-backs Zombie",
+    "year": "2014",
+    "date": "August 2, 2014",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/atp9vfse19h6gyczobg7.jpg"
   },
   {
     "id": "bob-brenly-2014",
@@ -444,6 +459,48 @@
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/ss8ip2cbu9fsagbin1cs.jpg"
   },
   {
+    "id": "dan-haren-2008",
+    "title": "Dan Haren",
+    "year": "2008",
+    "date": "September 13, 2008",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/yteigws5asrsbgxaw93z.jpg"
+  },
+  {
+    "id": "eric-byrnes-2008",
+    "title": "Eric Byrnes",
+    "year": "2008",
+    "date": "August 23, 2008",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/o3nrwbanrohad8p4vxkn.jpg"
+  },
+  {
+    "id": "bob-melvin-2008",
+    "title": "Bob Melvin",
+    "year": "2008",
+    "date": "July 19, 2008",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/tlsyhiswk8xejcavz5rc.jpg"
+  },
+  {
+    "id": "d-baxter-2008",
+    "title": "D. Baxter (Mascot)",
+    "year": "2008",
+    "date": "June 1, 2008",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/i1jieoqju52nnyugi62v.jpg"
+  },
+  {
+    "id": "chris-young-2008",
+    "title": "Chris Young",
+    "year": "2008",
+    "date": "May 17, 2008",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/ljinjilrqy4xt2y3vtaj.jpg"
+  },
+  {
+    "id": "micah-owings-2008",
+    "title": "Micah Owings",
+    "year": "2008",
+    "date": "April 19, 2008",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/cftqspbe0svmgdxov0pb.jpg"
+  },
+  {
     "id": "brandon-webb-cy-young-2007",
     "title": "Brandon Webb (Cy Young)",
     "year": "2007",
@@ -511,6 +568,20 @@
     "year": "2006",
     "date": "August 26, 2006",
     "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/h2niwggpglz9tn5iwsih.jpg"
+  },
+  {
+    "id": "troy-glaus-2005",
+    "title": "Troy Glaus",
+    "year": "2005",
+    "date": "2005 (Kids Club)",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/jdaa3bk0wte896zacs2k.jpg"
+  },
+  {
+    "id": "shawn-green-2005",
+    "title": "Shawn Green",
+    "year": "2005",
+    "date": "2005 (Kids Club)",
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/lovdkonmmkvka3rynrac.jpg"
   },
   {
     "id": "richie-sexson-2004",
