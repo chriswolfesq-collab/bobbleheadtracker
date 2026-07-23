@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AuthModal } from "@/components/AuthModal";
 import { BackToTopButton } from "@/components/BackToTopButton";
+import { RepWelcomeBanner } from "@/components/RepWelcomeBanner";
 import { RequireDisplayNameGate } from "@/components/RequireDisplayNameGate";
 import { ToastProvider } from "@/components/Toast";
 import { AdminAuthProvider } from "@/lib/adminAuth";
@@ -48,6 +49,7 @@ export default function RootLayout({
             <AdminAuthProvider>
               <ToastProvider>
                 <RequireDisplayNameGate>{children}</RequireDisplayNameGate>
+                <RepWelcomeBanner />
               </ToastProvider>
             </AdminAuthProvider>
             <AuthModal />
