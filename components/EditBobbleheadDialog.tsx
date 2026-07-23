@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { formatQuantity } from "@/lib/formatQuantity";
 
 export type EditBobbleheadValues = { title: string; nickname: string; quantity: string; year: string; date: string };
 
@@ -88,7 +89,7 @@ export function EditBobbleheadDialog({
             setIsSaving(true);
 
             try {
-              await onSave({ title, nickname, quantity, year, date }, file);
+              await onSave({ title, nickname, quantity: formatQuantity(quantity), year, date }, file);
               onClose();
             } catch (saveError) {
               setError(saveError instanceof Error ? saveError.message : "Could not save changes.");
@@ -130,6 +131,7 @@ export function EditBobbleheadDialog({
               type="text"
               value={quantity}
               onChange={(event) => setQuantity(event.target.value)}
+              onBlur={(event) => setQuantity(formatQuantity(event.target.value))}
               placeholder="e.g. 25,000"
               className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
             />
