@@ -38,7 +38,8 @@ export function CuratedBobbleheadPage({
   initialImageUrl: string | null;
 }) {
   const router = useRouter();
-  const { isAdmin, user: adminUser } = useAdminAuth();
+  const { canEditTeam, user: adminUser } = useAdminAuth();
+  const canEdit = canEditTeam(team.slug);
   const { showError } = useToast();
   const { photoUrlById } = useApprovedPhotos(
     team.slug,
@@ -255,7 +256,7 @@ export function CuratedBobbleheadPage({
             </div>
 
             <div className="flex flex-col items-start gap-4 xl:items-end">
-              {isAdmin ? (
+              {canEdit ? (
                 <button
                   type="button"
                   onClick={() => setIsEditOpen(true)}
@@ -286,8 +287,8 @@ export function CuratedBobbleheadPage({
             <div className="mb-5">
               <PhotoGallery
                 photos={galleryPhotosToShow}
-                onDelete={isAdmin ? handleDeleteGalleryPhoto : undefined}
-                onSetAsMain={isAdmin ? handleSetGalleryPhotoAsMain : undefined}
+                onDelete={canEdit ? handleDeleteGalleryPhoto : undefined}
+                onSetAsMain={canEdit ? handleSetGalleryPhotoAsMain : undefined}
               />
             </div>
           ) : null}

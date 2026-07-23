@@ -51,7 +51,8 @@ function Shell({ team, children }: { team: Team; children: React.ReactNode }) {
 export function CommunityBobbleheadPage({ team }: { team: Team }) {
   const router = useRouter();
   const bobbleheadId = useSearchParams().get("id") ?? "";
-  const { isAdmin, user: adminUser } = useAdminAuth();
+  const { canEditTeam, user: adminUser } = useAdminAuth();
+  const canEdit = canEditTeam(team.slug);
   const { showError } = useToast();
   const { communityBobblehead, isLoading, notFound } = useCommunityBobblehead(team.slug, bobbleheadId);
   const { photoUrlById } = useApprovedPhotos(team.slug);
@@ -265,7 +266,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
               <span className="rounded-lg border border-accent/60 px-5 py-3 text-sm font-bold uppercase tracking-wide text-accent">
                 Community submission
               </span>
-              {isAdmin ? (
+              {canEdit ? (
                 <button
                   type="button"
                   onClick={() => setIsEditOpen(true)}
@@ -299,8 +300,8 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
             <div className="mb-5">
               <PhotoGallery
                 photos={galleryPhotosToShow}
-                onDelete={isAdmin ? handleDeleteGalleryPhoto : undefined}
-                onSetAsMain={isAdmin ? handleSetGalleryPhotoAsMain : undefined}
+                onDelete={canEdit ? handleDeleteGalleryPhoto : undefined}
+                onSetAsMain={canEdit ? handleSetGalleryPhotoAsMain : undefined}
               />
             </div>
           ) : null}

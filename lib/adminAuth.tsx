@@ -8,6 +8,15 @@ type AdminAuthContextValue = {
   user: User | null;
   session: Session | null;
   isAdmin: boolean;
+  // A rep has team-scoped edit rights but is not a full admin. isAdmin and
+  // isRep are independent: a full admin has isAdmin true and isRep false.
+  isRep: boolean;
+  // Team slugs this account may edit as a rep (empty for a pure admin, who can
+  // edit any team — canEditTeam folds that in).
+  editableTeams: string[];
+  // The single question every edit affordance should ask: may this account edit
+  // this team? True for a full admin (any team) or that team's rep.
+  canEditTeam: (teamSlug: string) => boolean;
   isLoading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signUp: (email: string, password: string) => Promise<{ error: string | null }>;
@@ -16,16 +25,24 @@ type AdminAuthContextValue = {
 
 const AdminAuthContext = createContext<AdminAuthContextValue | null>(null);
 
-// Entirely separate from AuthProvider (lib/auth.tsx): tracks the admin-mode
-// session (signed in via /admin, backed by supabaseAdmin's own session
-// storage) rather than the regular site session. isAdmin here reflects
-// membership in public.admins for whoever is signed into *this* session.
+// Tracks the same single main-site session as AuthProvider (supabaseAdmin is
+// now an alias of the main client — see lib/supabaseAdmin.ts) and layers the
+// admin/rep capability checks on top of it: isAdmin reflects membership in
+// public.admins, and editableTeams comes from my_editable_teams(), both keyed
+// on the signed-in account's email. So whoever is logged into the site — by
+// password or Google/GitHub — gets their powers here with no separate login.
+// This provider stays distinct from AuthProvider only to keep that capability
+// logic (and the many useAdminAuth consumers) in one place.
 export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [isSessionLoading, setIsSessionLoading] = useState(true);
   // Keyed by user id so isAdmin/isAdminLoading can be derived during render
   // instead of needing their own state + reset-on-logout effect.
-  const [adminCheck, setAdminCheck] = useState<{ forUserId: string; isAdmin: boolean } | null>(null);
+  const [adminCheck, setAdminCheck] = useState<{
+    forUserId: string;
+    isAdmin: boolean;
+    editableTeams: string[];
+  } | null>(null);
 
   useEffect(() => {
     supabaseAdmin.auth.getSession().then(({ data }) => {
@@ -48,14 +65,31 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
 
     let cancelled = false;
 
-    supabaseAdmin.rpc("is_admin").then(({ data, error }) => {
+    // One round-trip for both grants: full-admin status and this account's rep
+    // teams. Resolved together so isAdmin and editableTeams never disagree
+    // about who is signed in.
+    Promise.all([
+      supabaseAdmin.rpc("is_admin"),
+      supabaseAdmin.rpc("my_editable_teams"),
+    ]).then(([adminResult, teamsResult]) => {
       if (cancelled) return;
 
-      if (error) {
-        console.error("Failed to check admin status:", error.message);
+      if (adminResult.error) {
+        console.error("Failed to check admin status:", adminResult.error.message);
+      }
+      if (teamsResult.error) {
+        console.error("Failed to load editable teams:", teamsResult.error.message);
       }
 
-      setAdminCheck({ forUserId: userId, isAdmin: !error && Boolean(data) });
+      const editableTeams: string[] = !teamsResult.error && Array.isArray(teamsResult.data)
+        ? (teamsResult.data as unknown[]).map(String)
+        : [];
+
+      setAdminCheck({
+        forUserId: userId,
+        isAdmin: !adminResult.error && Boolean(adminResult.data),
+        editableTeams,
+      });
     });
 
     return () => {
@@ -63,7 +97,15 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, [isSessionLoading, userId]);
 
-  const isAdmin = userId !== null && adminCheck?.forUserId === userId ? adminCheck.isAdmin : false;
+  const checkReady = userId !== null && adminCheck?.forUserId === userId;
+  const isAdmin = checkReady ? adminCheck!.isAdmin : false;
+  // Memoized so the `: []` fallback doesn't hand a fresh array to the value
+  // useMemo on every render (which would defeat it). When ready, this is the
+  // stable array held in adminCheck state.
+  const editableTeams = useMemo<string[]>(
+    () => (checkReady ? adminCheck!.editableTeams : []),
+    [checkReady, adminCheck],
+  );
   const isAdminLoading = userId !== null && adminCheck?.forUserId !== userId;
 
   const value = useMemo<AdminAuthContextValue>(() => {
@@ -73,6 +115,9 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
       user,
       session,
       isAdmin,
+      isRep: !isAdmin && editableTeams.length > 0,
+      editableTeams,
+      canEditTeam: (teamSlug: string) => isAdmin || editableTeams.includes(teamSlug),
       isLoading: isSessionLoading || isAdminLoading,
       signIn: async (email, password) => {
         const { error } = await supabaseAdmin.auth.signInWithPassword({ email, password });
@@ -86,7 +131,7 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
         await supabaseAdmin.auth.signOut();
       },
     };
-  }, [session, isAdmin, isSessionLoading, isAdminLoading]);
+  }, [session, isAdmin, editableTeams, isSessionLoading, isAdminLoading]);
 
   return <AdminAuthContext.Provider value={value}>{children}</AdminAuthContext.Provider>;
 }

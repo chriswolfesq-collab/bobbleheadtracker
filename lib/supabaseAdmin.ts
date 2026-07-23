@@ -1,20 +1,12 @@
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
-
-// A second client with its own session storage key, so admin-mode login (at
-// /admin) never shares or overwrites the regular site's session — even when
-// the same email/password is used for both. Two independent sessions can
-// coexist in the same browser this way: logging in as a regular fan on the
-// main site never grants admin powers, and logging into admin mode never
-// affects your regular collection/login state.
-export const supabaseAdmin = createClient(
-  supabaseUrl || "https://placeholder.supabase.co",
-  supabaseAnonKey || "placeholder-anon-key",
-  {
-    auth: {
-      storageKey: "bobbleshelf-admin-auth",
-    },
-  },
-);
+// Historically this was a SECOND Supabase client with its own session storage,
+// so that admin powers lived behind a separate /admin login and never attached
+// to the regular main-site session. That separation has been intentionally
+// removed: admin and team-rep powers now ride on the single main-site session
+// (whoever is signed in), gated by is_admin() / my_editable_teams() keyed on the
+// account's email. A rep or admin who is logged into the site — by password OR
+// Google/GitHub — has their powers everywhere, with no second login.
+//
+// This file remains only as a compatibility alias: many modules import
+// `supabaseAdmin` (often as `supabaseAdmin as supabase`). Re-exporting the one
+// real client keeps all of them pointing at that single shared session.
+export { supabase as supabaseAdmin } from "@/lib/supabase";

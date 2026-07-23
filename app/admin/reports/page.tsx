@@ -55,7 +55,9 @@ const REPORT_FILTERS: AdminFilter<Report>[] = [
 ];
 
 export default function AdminReportsPage() {
-  const { user, isAdmin, isLoading, signOut } = useAdminAuth();
+  const { user, isAdmin, isRep, isLoading, signOut } = useAdminAuth();
+  // Reps included; RLS scopes the queue to their team (see the review page).
+  const canReview = isAdmin || isRep;
   const [rows, setRows] = useState<Report[]>([]);
   const [isLoadingRows, setIsLoadingRows] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -69,7 +71,7 @@ export default function AdminReportsPage() {
   const bulk = useBulkRunner<Report>();
 
   useEffect(() => {
-    if (!isAdmin) return;
+    if (!canReview) return;
 
     let cancelled = false;
 
@@ -92,7 +94,7 @@ export default function AdminReportsPage() {
     return () => {
       cancelled = true;
     };
-  }, [isAdmin]);
+  }, [canReview]);
 
   const setReportStatus = async (report: Report, status: "resolved" | "dismissed") => {
     const { error: updateError } = await supabase
@@ -156,7 +158,7 @@ export default function AdminReportsPage() {
     return null;
   }
 
-  if (!user || !isAdmin) {
+  if (!user || !canReview) {
     return (
       <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-center text-zinc-900 dark:text-zinc-100">
         <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">Not authorized</p>
@@ -281,20 +283,25 @@ export default function AdminReportsPage() {
                 </div>
 
                 <div className="flex flex-col justify-center gap-2">
-                  <Link
-                    href={`/admin/users/view?id=${encodeURIComponent(row.submitted_by)}&from=reports`}
-                    className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
-                  >
-                    View profile
-                  </Link>
-                  <button
-                    type="button"
-                    disabled={messagingId === row.submitted_by || bulk.busy}
-                    onClick={() => messageSubmitter(row.submitted_by)}
-                    className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover disabled:opacity-60"
-                  >
-                    {messagingId === row.submitted_by ? "Opening…" : "Message"}
-                  </button>
+                  {/* Admin-only tools (the email edge function 403s a rep). */}
+                  {isAdmin ? (
+                    <>
+                      <Link
+                        href={`/admin/users/view?id=${encodeURIComponent(row.submitted_by)}&from=reports`}
+                        className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
+                      >
+                        View profile
+                      </Link>
+                      <button
+                        type="button"
+                        disabled={messagingId === row.submitted_by || bulk.busy}
+                        onClick={() => messageSubmitter(row.submitted_by)}
+                        className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover disabled:opacity-60"
+                      >
+                        {messagingId === row.submitted_by ? "Opening…" : "Message"}
+                      </button>
+                    </>
+                  ) : null}
                   <button
                     type="button"
                     disabled={busyId === row.id || bulk.busy}

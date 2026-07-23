@@ -133,7 +133,10 @@ async function rejectSubmission(submission: ReviewRow) {
 }
 
 export default function AdminReviewPage() {
-  const { user, isAdmin, isLoading, signOut } = useAdminAuth();
+  const { user, isAdmin, isRep, isLoading, signOut } = useAdminAuth();
+  // Reps are allowed in; RLS returns only their team's submissions, so the same
+  // queries below just come back scoped without any per-page team filtering.
+  const canReview = isAdmin || isRep;
   const [rows, setRows] = useState<ReviewRow[]>([]);
   const [isLoadingRows, setIsLoadingRows] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -148,7 +151,7 @@ export default function AdminReviewPage() {
   const bulk = useBulkRunner<ReviewRow>();
 
   useEffect(() => {
-    if (!isAdmin) return;
+    if (!canReview) return;
 
     let cancelled = false;
 
@@ -217,7 +220,7 @@ export default function AdminReviewPage() {
     return () => {
       cancelled = true;
     };
-  }, [isAdmin]);
+  }, [canReview]);
 
   const runOne = async (submission: ReviewRow, action: (row: ReviewRow) => Promise<void>, fallback: string) => {
     setBusyId(submission.id);
@@ -279,7 +282,7 @@ export default function AdminReviewPage() {
     return null;
   }
 
-  if (!user || !isAdmin) {
+  if (!user || !canReview) {
     return (
       <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-center text-zinc-900 dark:text-zinc-100">
         <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">Not authorized</p>
@@ -460,20 +463,26 @@ export default function AdminReviewPage() {
               </div>
 
               <div onClick={(event) => event.stopPropagation()} className="flex flex-col justify-center gap-2">
-                <Link
-                  href={`/admin/users/view?id=${encodeURIComponent(row.submitted_by)}&from=review`}
-                  className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
-                >
-                  View profile
-                </Link>
-                <button
-                  type="button"
-                  disabled={messagingId === row.submitted_by || bulk.busy}
-                  onClick={() => messageSubmitter(row.submitted_by)}
-                  className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover disabled:opacity-60"
-                >
-                  {messagingId === row.submitted_by ? "Opening…" : "Message"}
-                </button>
+                {/* Profile view and email are site-wide, admin-only tools (the
+                    email edge function 403s a rep), so hide them from reps. */}
+                {isAdmin ? (
+                  <>
+                    <Link
+                      href={`/admin/users/view?id=${encodeURIComponent(row.submitted_by)}&from=review`}
+                      className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
+                    >
+                      View profile
+                    </Link>
+                    <button
+                      type="button"
+                      disabled={messagingId === row.submitted_by || bulk.busy}
+                      onClick={() => messageSubmitter(row.submitted_by)}
+                      className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover disabled:opacity-60"
+                    >
+                      {messagingId === row.submitted_by ? "Opening…" : "Message"}
+                    </button>
+                  </>
+                ) : null}
                 <button
                   type="button"
                   disabled={busyId === row.id || bulk.busy}
@@ -588,23 +597,27 @@ export default function AdminReviewPage() {
               </div>
 
               <div className="flex flex-wrap items-center justify-end gap-2 border-t border-black/10 p-5 dark:border-white/10">
-                <Link
-                  href={`/admin/users/view?id=${encodeURIComponent(detail.submitted_by)}&from=review`}
-                  className="rounded border border-black/15 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
-                >
-                  View profile
-                </Link>
-                <button
-                  type="button"
-                  disabled={messagingId === detail.submitted_by || bulk.busy}
-                  onClick={() => {
-                    setDetailId(null);
-                    messageSubmitter(detail.submitted_by);
-                  }}
-                  className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover disabled:opacity-60 dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
-                >
-                  Message
-                </button>
+                {isAdmin ? (
+                  <>
+                    <Link
+                      href={`/admin/users/view?id=${encodeURIComponent(detail.submitted_by)}&from=review`}
+                      className="rounded border border-black/15 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
+                    >
+                      View profile
+                    </Link>
+                    <button
+                      type="button"
+                      disabled={messagingId === detail.submitted_by || bulk.busy}
+                      onClick={() => {
+                        setDetailId(null);
+                        messageSubmitter(detail.submitted_by);
+                      }}
+                      className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover disabled:opacity-60 dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
+                    >
+                      Message
+                    </button>
+                  </>
+                ) : null}
                 <button
                   type="button"
                   disabled={busyId === detail.id || bulk.busy}
