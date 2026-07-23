@@ -33,10 +33,6 @@ declare
   v_has_existing_photo boolean;
   v_new_id text;
 begin
-  if not public.is_admin() then
-    raise exception 'not authorized';
-  end if;
-
   select * into v_submission
     from public.submissions
     where id = p_submission_id and status = 'pending'
@@ -44,6 +40,12 @@ begin
 
   if not found then
     raise exception 'submission not found or already reviewed';
+  end if;
+
+  -- Authorize against the submission's own team, so a rep can approve only
+  -- their team's queue while an admin can approve any.
+  if not public.can_edit_team(v_submission.team_slug) then
+    raise exception 'not authorized';
   end if;
 
   if v_submission.kind = 'photo_for_existing' then
