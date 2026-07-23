@@ -34,6 +34,27 @@ Skip this if the in-app queue at `/admin/review` is enough on its own.
    - URL: the function URL printed by `supabase functions deploy`
    - Header: `x-webhook-secret: <the same random string from step 2>`
 
+## Branded confirmation email (optional)
+
+Out of the box, Supabase Auth sends a plain, unbranded "Confirm your email
+address" from `noreply@mail.app.supabase.io` — it never mentions Bobble Shelf
+and looks a bit like spam. `email-templates/confirm-signup.html` (this repo,
+same folder) replaces it with a branded version: the Bobble Shelf wordmark, the
+shelf hero image, welcome copy, and a blue "Confirm email address" button.
+
+1. In the Supabase dashboard: Authentication > Emails > Confirm signup.
+2. Paste the full contents of `email-templates/confirm-signup.html` into the
+   **Message body** field, and set the **Subject** to something like
+   `Confirm your email for Bobble Shelf`. Save.
+3. The template's only variable is `{{ .ConfirmationURL }}` — leave it as-is.
+   The hero image loads from `https://bobbleshelf.com/shelf-filled.png` (the
+   shelf with all 30 team bobbleheads, built by `scripts/build-shelf-filled.mjs`),
+   so it only renders once the site is deployed under that domain.
+4. To also fix the sender (so it comes from `Bobble Shelf
+   <alerts@bobbleshelf.com>` instead of the Supabase address), set up custom
+   SMTP under Authentication > Emails > SMTP settings — the same Resend account
+   the edge functions already use will work.
+
 ## Dead-image sweep (optional)
 
 A nightly Vercel Cron job (`vercel.json` → `/api/dead-image-sweep`) crawls every
