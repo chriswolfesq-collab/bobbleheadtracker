@@ -44,6 +44,7 @@ export async function saveCuratedBobblehead({
   teamSlug,
   bobbleheadId,
   title,
+  nickname,
   year,
   date,
   file,
@@ -52,6 +53,7 @@ export async function saveCuratedBobblehead({
   teamSlug: string;
   bobbleheadId: string;
   title: string;
+  nickname: string;
   year: string;
   date: string;
   file?: File;
@@ -62,6 +64,7 @@ export async function saveCuratedBobblehead({
     team_slug: teamSlug,
     bobblehead_id: bobbleheadId,
     title,
+    nickname: nickname.trim() || null,
     year,
     date,
     updated_by: user.id,
@@ -239,6 +242,7 @@ export async function saveCommunityBobblehead({
   teamSlug,
   bobbleheadId,
   title,
+  nickname,
   year,
   date,
   file,
@@ -247,6 +251,7 @@ export async function saveCommunityBobblehead({
   teamSlug: string;
   bobbleheadId: string;
   title: string;
+  nickname: string;
   year: string;
   date: string;
   file?: File;
@@ -255,7 +260,7 @@ export async function saveCommunityBobblehead({
 
   const { error } = await supabase
     .from("community_bobbleheads")
-    .update({ title, year, date })
+    .update({ title, nickname: nickname.trim() || null, year, date })
     .eq("id", bobbleheadId);
 
   if (error) {

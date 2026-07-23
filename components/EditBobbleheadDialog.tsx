@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export type EditBobbleheadValues = { title: string; year: string; date: string };
+export type EditBobbleheadValues = { title: string; nickname: string; year: string; date: string };
 
 // The National League's first season; no MLB bobblehead predates it. Upper bound
 // leaves a little room for next-season promos that get catalogued early.
@@ -47,6 +47,7 @@ export function EditBobbleheadDialog({
   onRemovePhoto?: () => Promise<void>;
 }) {
   const [title, setTitle] = useState(initial.title);
+  const [nickname, setNickname] = useState(initial.nickname);
   const [year, setYear] = useState(initial.year);
   const [date, setDate] = useState(initial.date);
   const [file, setFile] = useState<File | null>(null);
@@ -86,7 +87,7 @@ export function EditBobbleheadDialog({
             setIsSaving(true);
 
             try {
-              await onSave({ title, year, date }, file);
+              await onSave({ title, nickname, year, date }, file);
               onClose();
             } catch (saveError) {
               setError(saveError instanceof Error ? saveError.message : "Could not save changes.");
@@ -104,6 +105,21 @@ export function EditBobbleheadDialog({
               onChange={(event) => setTitle(event.target.value)}
               className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
             />
+          </div>
+          <div className="grid gap-1.5">
+            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+              Nickname <span className="font-medium text-zinc-500 dark:text-zinc-400">(optional)</span>
+            </label>
+            <input
+              type="text"
+              value={nickname}
+              onChange={(event) => setNickname(event.target.value)}
+              placeholder="e.g. “La Regadera”"
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+            />
+            <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">
+              Shown on a second line beneath the title.
+            </p>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="grid gap-1.5">

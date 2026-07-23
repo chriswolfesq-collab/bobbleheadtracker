@@ -153,6 +153,7 @@ function SubmitBobbleheadForm({
 }) {
   const { user } = useAuth();
   const [title, setTitle] = useState("");
+  const [nickname, setNickname] = useState("");
   const [date, setDate] = useState("");
   const [dateUnknown, setDateUnknown] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -170,7 +171,7 @@ function SubmitBobbleheadForm({
 
   return (
     <form
-      className="mb-5 grid gap-3 rounded-lg border border-accent/35 bg-accent/10 p-4 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1fr)_auto]"
+      className="mb-5 grid gap-3 rounded-lg border border-accent/35 bg-accent/10 p-4 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto]"
       onSubmit={async (event) => {
         event.preventDefault();
 
@@ -190,6 +191,7 @@ function SubmitBobbleheadForm({
             user,
             teamSlug,
             title,
+            nickname,
             date: dateUnknown ? "N/A" : formatSubmissionDate(date),
             file,
           });
@@ -201,7 +203,7 @@ function SubmitBobbleheadForm({
         }
       }}
     >
-      <p className="text-xs font-semibold leading-5 text-accent sm:col-span-4">
+      <p className="text-xs font-semibold leading-5 text-accent sm:col-span-5">
         MLB stadium giveaway (SGA) bobbleheads only — no figurines, ring or trophy replicas, stadium
         replicas, gnomes, or other non-bobblehead promos.
       </p>
@@ -215,6 +217,15 @@ function SubmitBobbleheadForm({
             setDuplicateMatch(null);
           }}
           placeholder="Fernando Valenzuela"
+          className="mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+        />
+      </label>
+      <label className="min-w-0">
+        <span className="text-xs font-black uppercase tracking-wide text-accent">Nickname</span>
+        <input
+          value={nickname}
+          onChange={(event) => setNickname(event.target.value)}
+          placeholder="“El Toro” (optional)"
           className="mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
         />
       </label>
@@ -264,13 +275,13 @@ function SubmitBobbleheadForm({
         </button>
       </div>
       {duplicateMatch ? (
-        <p className="text-xs font-semibold text-accent sm:col-span-4">
+        <p className="text-xs font-semibold text-accent sm:col-span-5">
           This looks like it might already be on the shelf: “{duplicateMatch.title}” ({duplicateMatch.date}).
           Click submit again to add it anyway.
         </p>
       ) : null}
-      {error ? <p className="text-xs font-semibold text-red-400 sm:col-span-4">{error}</p> : null}
-      <p className="text-xs leading-5 text-zinc-700 dark:text-zinc-300 sm:col-span-4">
+      {error ? <p className="text-xs font-semibold text-red-400 sm:col-span-5">{error}</p> : null}
+      <p className="text-xs leading-5 text-zinc-700 dark:text-zinc-300 sm:col-span-5">
         Submitted bobbleheads are reviewed by the site admin before they appear for everyone.
       </p>
     </form>
@@ -301,6 +312,7 @@ export function TeamPageClient({
         return {
           ...giveaway,
           title: override?.title ?? giveaway.title,
+          nickname: override?.nickname ?? giveaway.nickname ?? null,
           year: override?.year ?? giveaway.year,
           date: override?.date ?? giveaway.date,
           imageUrl: photoUrlById[giveaway.id] ?? giveaway.imageUrl,

@@ -111,12 +111,16 @@ create table if not exists public.community_bobbleheads (
   id text primary key,
   team_slug text not null,
   title text not null,
+  nickname text,
   year text not null default 'Unknown',
   date text not null default 'N/A',
   image_url text,
   approved_by uuid references auth.users (id),
   created_at timestamptz not null default now()
 );
+
+alter table public.community_bobbleheads
+  add column if not exists nickname text;
 
 create table if not exists public.bobblehead_gallery_photos (
   id uuid primary key default gen_random_uuid(),
@@ -139,6 +143,7 @@ create table if not exists public.bobblehead_overrides (
   team_slug text not null,
   bobblehead_id text not null,
   title text,
+  nickname text,
   year text,
   date text,
   deleted boolean not null default false,
@@ -150,12 +155,16 @@ create table if not exists public.bobblehead_overrides (
 alter table public.bobblehead_overrides
   add column if not exists deleted boolean not null default false;
 
+alter table public.bobblehead_overrides
+  add column if not exists nickname text;
+
 create table if not exists public.submissions (
   id uuid primary key default gen_random_uuid(),
   kind text not null check (kind in ('photo_for_existing', 'new_bobblehead')),
   target_bobblehead_id text,
   team_slug text not null,
   title text,
+  nickname text,
   year text,
   date text,
   -- Null when a new_bobblehead submission was made without a photo; a photo is
@@ -170,6 +179,9 @@ create table if not exists public.submissions (
 -- storage_path started out NOT NULL; photos are now optional on new_bobblehead
 -- submissions, so relax it on databases created before that change.
 alter table public.submissions alter column storage_path drop not null;
+
+alter table public.submissions
+  add column if not exists nickname text;
 
 create table if not exists public.listing_reports (
   id uuid primary key default gen_random_uuid(),
@@ -550,11 +562,12 @@ begin
       regexp_replace(lower(coalesce(v_submission.title, 'bobblehead')), '[^a-z0-9]+', '-', 'g') ||
       '-' || substr(v_submission.id::text, 1, 8);
 
-    insert into public.community_bobbleheads (id, team_slug, title, year, date, image_url, approved_by, created_at)
+    insert into public.community_bobbleheads (id, team_slug, title, nickname, year, date, image_url, approved_by, created_at)
     values (
       v_new_id,
       v_submission.team_slug,
       coalesce(v_submission.title, 'Untitled'),
+      v_submission.nickname,
       coalesce(v_submission.year, 'Unknown'),
       coalesce(v_submission.date, 'N/A'),
       p_image_url,

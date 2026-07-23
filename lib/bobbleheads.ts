@@ -32,6 +32,13 @@ import yankees from "@/data/giveaways/yankees.json";
 export interface Giveaway {
   id: string;
   title: string;
+  /**
+   * Optional nickname rendered on a second line beneath the title (e.g. a
+   * player's moniker, "La Regadera"). When absent, the title's own trailing
+   * parenthetical is auto-split onto the second line instead — see
+   * components/BobbleheadTitle.tsx.
+   */
+  nickname?: string | null;
   year: string;
   date: string;
   imageUrl?: string | null;

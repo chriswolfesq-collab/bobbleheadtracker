@@ -35,12 +35,18 @@ export function splitTitle(title: string): { primary: string; secondary: string 
 }
 
 /**
- * Renders a bobblehead title with any trailing parenthetical dropped onto a second
- * line beneath the primary name. The secondary line scales relative to the parent
- * font size, so it works for both small cards and large detail headings.
+ * Renders a bobblehead title with its nickname dropped onto a second line beneath
+ * the primary name. An explicit `nickname` wins: the title is shown as-is on line
+ * one and the nickname on line two. With no explicit nickname, the title's own
+ * trailing parenthetical is auto-split onto the second line instead. The secondary
+ * line scales relative to the parent font size, so it works for both small cards
+ * and large detail headings.
  */
-export function BobbleheadTitle({ title }: { title: string }) {
-  const { primary, secondary } = splitTitle(title);
+export function BobbleheadTitle({ title, nickname }: { title: string; nickname?: string | null }) {
+  const explicitNickname = nickname?.trim();
+  const { primary, secondary } = explicitNickname
+    ? { primary: title.trim(), secondary: explicitNickname }
+    : splitTitle(title);
 
   if (!secondary) return <>{primary}</>;
 

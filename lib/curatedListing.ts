@@ -28,7 +28,7 @@ const getOverridesMap = unstable_cache(
     const client = createServerSupabase();
     const { data, error } = await client
       .from("bobblehead_overrides")
-      .select("team_slug, bobblehead_id, title, year, date, deleted");
+      .select("team_slug, bobblehead_id, title, nickname, year, date, deleted");
 
     if (error) {
       console.error("Failed to load bobblehead overrides (server):", error.message);
@@ -39,6 +39,7 @@ const getOverridesMap = unstable_cache(
     for (const row of data ?? []) {
       map[listingKey(row.team_slug, row.bobblehead_id)] = {
         title: row.title,
+        nickname: row.nickname,
         year: row.year,
         date: row.date,
         deleted: row.deleted,

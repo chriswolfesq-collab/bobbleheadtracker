@@ -207,7 +207,7 @@ export function GiveawayCard({
 
       <div className="border-t border-black/[0.06] bg-slate-50 px-2.5 pb-2.5 pt-2.5 text-center dark:border-white/[0.04] dark:bg-[#0d1a29]/70 sm:min-h-40 sm:px-4 sm:pb-3 sm:pt-3">
         <h2 className="text-xs font-bold leading-tight text-zinc-900 dark:text-white sm:text-base">
-          <BobbleheadTitle title={fullTitle} />
+          <BobbleheadTitle title={fullTitle} nickname={giveaway.nickname} />
         </h2>
         <p className="mt-1.5 text-[11px] text-zinc-700 dark:text-zinc-300 sm:mt-3 sm:text-sm">{giveaway.date}</p>
 
