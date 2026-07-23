@@ -3,38 +3,44 @@
     "id": "masyn-winn-2026",
     "title": "Masyn Winn",
     "year": "2026",
-    "date": "May 2, 2026"
+    "date": "May 2, 2026",
+    "quantity": "15,000"
   },
   {
     "id": "alec-burleson-truck-2025",
     "title": "Alec Burleson (Truck)",
     "year": "2025",
-    "date": "March 29, 2025"
+    "date": "March 29, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "brendan-donovan-2025",
     "title": "Brendan Donovan",
     "year": "2025",
-    "date": "May 4, 2025"
+    "date": "May 4, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "masyn-winn-2025",
     "title": "Masyn Winn",
     "year": "2025",
-    "date": "May 24, 2025"
+    "date": "May 24, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "ozzie-smith-2025",
     "title": "Ozzie Smith (Backflip)",
     "year": "2025",
     "date": "July 24, 2025",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCKMf6-EPC5xt3PX_fnCbNF5WIzZaCPTwuvg&s"
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCKMf6-EPC5xt3PX_fnCbNF5WIzZaCPTwuvg&s",
+    "quantity": "20,000"
   },
   {
     "id": "chris-carpenter-cy-young-20th-anniversary-2025",
     "title": "Chris Carpenter (Cy Young 20th Anniversary)",
     "year": "2025",
-    "date": "August 15, 2025"
+    "date": "August 15, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "1985-nl-champions-vince-coleman-willie-mcgee-ozzie-smith-2025",
@@ -59,19 +65,22 @@
     "title": "Scott Rolen",
     "year": "2024",
     "date": "August 17, 2024",
-    "imageUrl": "https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/3d4AAOSwOh5mgh6u/$_57.JPG?set_id=880000500F"
+    "imageUrl": "https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/3d4AAOSwOh5mgh6u/$_57.JPG?set_id=880000500F",
+    "quantity": "25,000"
   },
   {
     "id": "lars-nootbaar-2024",
     "title": "Lars Nootbaar",
     "year": "2024",
-    "date": "September 20, 2024"
+    "date": "September 20, 2024",
+    "quantity": "25,000"
   },
   {
     "id": "yadier-molina-albert-pujols-mystery-pitching-2023",
     "title": "Yadier Molina & Albert Pujols (Mystery Pitching)",
     "year": "2023",
-    "date": "April 1, 2023"
+    "date": "April 1, 2023",
+    "quantity": "12,500"
   },
   {
     "id": "schroeder-2023",
@@ -83,7 +92,8 @@
     "id": "nolan-arenado-cycle-2023",
     "title": "Nolan Arenado (Cycle)",
     "year": "2023",
-    "date": "April 14, 2023"
+    "date": "April 14, 2023",
+    "quantity": "25,000"
   },
   {
     "id": "daniel-descalso-2023",
@@ -95,7 +105,8 @@
     "id": "ryan-helsley-2023",
     "title": "Ryan Helsley",
     "year": "2023",
-    "date": "May 6, 2023"
+    "date": "May 6, 2023",
+    "quantity": "25,000"
   },
   {
     "id": "elmo-2023",
@@ -107,7 +118,8 @@
     "id": "ryan-helsley-2023-2",
     "title": "Ryan Helsley",
     "year": "2023",
-    "date": "May 30, 2023"
+    "date": "May 30, 2023",
+    "quantity": "25,000"
   },
   {
     "id": "adam-wainwright-london-series-2023",
@@ -137,7 +149,8 @@
     "id": "albert-pujols-703-2023",
     "title": "Albert Pujols (703)",
     "year": "2023",
-    "date": "July 15, 2023"
+    "date": "July 15, 2023",
+    "quantity": "12,500"
   },
   {
     "id": "lars-nootbaar-2023",
@@ -221,7 +234,8 @@
     "id": "mike-shannon-2022",
     "title": "Mike Shannon",
     "year": "2022",
-    "date": "April 10, 2022"
+    "date": "April 10, 2022",
+    "quantity": "25,000"
   },
   {
     "id": "linus-2022",
@@ -233,7 +247,8 @@
     "id": "nolan-arenado-2022",
     "title": "Nolan Arenado",
     "year": "2022",
-    "date": "April 30, 2022"
+    "date": "April 30, 2022",
+    "quantity": "25,000"
   },
   {
     "id": "fredbird-big-bird-2022",
@@ -251,7 +266,8 @@
     "id": "nolan-arenado-2022-2",
     "title": "Nolan Arenado",
     "year": "2022",
-    "date": "July 11, 2022"
+    "date": "July 11, 2022",
+    "quantity": "25,000"
   },
   {
     "id": "willie-mcgee-2022",
@@ -275,7 +291,8 @@
     "id": "joe-torre-2022",
     "title": "Joe Torre",
     "year": "2022",
-    "date": "August 6, 2022"
+    "date": "August 6, 2022",
+    "quantity": "25,000"
   },
   {
     "id": "1982-final-out-2022",
@@ -305,19 +322,22 @@
     "id": "albert-pujols-2022",
     "title": "Albert Pujols",
     "year": "2022",
-    "date": "September 18, 2022"
+    "date": "September 18, 2022",
+    "quantity": "25,000"
   },
   {
     "id": "adam-wainwright-2022",
     "title": "Adam Wainwright",
     "year": "2022",
-    "date": "September 30, 2022"
+    "date": "September 30, 2022",
+    "quantity": "25,000"
   },
   {
     "id": "yadier-molina-2022",
     "title": "Yadier Molina",
     "year": "2022",
-    "date": "October 1, 2022"
+    "date": "October 1, 2022",
+    "quantity": "25,000"
   },
   {
     "id": "car-parade-2021",
@@ -335,19 +355,22 @@
     "id": "willie-mcgee-gnome-2021",
     "title": "Willie McGee (Gnome)",
     "year": "2021",
-    "date": "July 16, 2021"
+    "date": "July 16, 2021",
+    "quantity": "30,000"
   },
   {
     "id": "ted-simmons-2021",
     "title": "Ted Simmons",
     "year": "2021",
-    "date": "July 31, 2021"
+    "date": "July 31, 2021",
+    "quantity": "30,000"
   },
   {
     "id": "whitey-herzog-fishing-2021",
     "title": "Whitey Herzog (Fishing)",
     "year": "2021",
-    "date": "August 7, 2021"
+    "date": "August 7, 2021",
+    "quantity": "30,000"
   },
   {
     "id": "john-daly-2021",
@@ -359,7 +382,8 @@
     "id": "paul-goldschmidt-2021",
     "title": "Paul Goldschmidt",
     "year": "2021",
-    "date": "October 2, 2021"
+    "date": "October 2, 2021",
+    "quantity": "30,000"
   },
   {
     "id": "mystery-hall-of-fame-opening-day-car-parade-2019",
@@ -377,7 +401,8 @@
     "id": "yadier-molina-roberto-clemente-double-2019",
     "title": "Yadier Molina & Roberto Clemente (Double)",
     "year": "2019",
-    "date": "May 10, 2019"
+    "date": "May 10, 2019",
+    "quantity": "30,000"
   },
   {
     "id": "rex-hudler-2019",
@@ -455,7 +480,8 @@
     "id": "stan-musial-red-schoendienst-double-2019",
     "title": "Stan Musial & Red Schoendienst (Double)",
     "year": "2019",
-    "date": "September 14, 2019"
+    "date": "September 14, 2019",
+    "quantity": "30,000"
   },
   {
     "id": "fiesta-2019",
@@ -473,7 +499,8 @@
     "id": "dexter-fowler-2018",
     "title": "Dexter Fowler",
     "year": "2018",
-    "date": "April 21, 2018"
+    "date": "April 21, 2018",
+    "quantity": "30,000"
   },
   {
     "id": "andy-van-slyke-mini-2018",
@@ -503,7 +530,8 @@
     "id": "chris-carpenter-2018",
     "title": "Chris Carpenter",
     "year": "2018",
-    "date": "June 3, 2018"
+    "date": "June 3, 2018",
+    "quantity": "30,000"
   },
   {
     "id": "scott-rolen-2018",
@@ -527,7 +555,8 @@
     "id": "adam-wainwright-2018",
     "title": "Adam Wainwright",
     "year": "2018",
-    "date": "July 14, 2018"
+    "date": "July 14, 2018",
+    "quantity": "30,000"
   },
   {
     "id": "santa-fredbird-2018",
@@ -569,7 +598,8 @@
     "id": "mark-mcgwire-2018",
     "title": "Mark McGwire",
     "year": "2018",
-    "date": "September 16, 2018"
+    "date": "September 16, 2018",
+    "quantity": "30,000"
   },
   {
     "id": "fredbird-louie-dual-2018",
@@ -587,7 +617,8 @@
     "id": "yadier-molina-2017",
     "title": "Yadier Molina",
     "year": "2017",
-    "date": "April 8, 2017"
+    "date": "April 8, 2017",
+    "quantity": "30,000"
   },
   {
     "id": "red-schoendienst-mini-2017",
@@ -605,7 +636,8 @@
     "id": "carlos-martinez-matt-carpenter-double-2017",
     "title": "Carlos Martinez & Matt Carpenter (Double)",
     "year": "2017",
-    "date": "April 29, 2017"
+    "date": "April 29, 2017",
+    "quantity": "30,000"
   },
   {
     "id": "tom-pagnozzi-mini-2017",
@@ -629,7 +661,8 @@
     "id": "bob-gibson-2017",
     "title": "Bob Gibson",
     "year": "2017",
-    "date": "June 24, 2017"
+    "date": "June 24, 2017",
+    "quantity": "30,000"
   },
   {
     "id": "fredbird-kids-2017",
@@ -641,7 +674,8 @@
     "id": "tim-mccarver-2017",
     "title": "Tim McCarver",
     "year": "2017",
-    "date": "July 8, 2017"
+    "date": "July 8, 2017",
+    "quantity": "30,000"
   },
   {
     "id": "ozzie-smith-mini-2017",
@@ -677,25 +711,29 @@
     "id": "scott-rolen-2017",
     "title": "Scott Rolen",
     "year": "2017",
-    "date": "September 30, 2017"
+    "date": "September 30, 2017",
+    "quantity": "30,000"
   },
   {
     "id": "adam-wainwright-2016",
     "title": "Adam Wainwright",
     "year": "2016",
-    "date": "April 16, 2016"
+    "date": "April 16, 2016",
+    "quantity": "30,000"
   },
   {
     "id": "adam-wainwright-mini-2016",
     "title": "Adam Wainwright (Mini)",
     "year": "2016",
-    "date": "April 19, 2016"
+    "date": "April 19, 2016",
+    "quantity": "30,000"
   },
   {
     "id": "trevor-rosenthal-2016",
     "title": "Trevor Rosenthal",
     "year": "2016",
-    "date": "April 30, 2016"
+    "date": "April 30, 2016",
+    "quantity": "30,000"
   },
   {
     "id": "jeff-suppan-mini-2016",
@@ -713,13 +751,15 @@
     "id": "david-eckstein-mini-2016",
     "title": "David Eckstein (Mini)",
     "year": "2016",
-    "date": "May 24, 2016"
+    "date": "May 24, 2016",
+    "quantity": "30,000"
   },
   {
     "id": "adam-wainwright-yadier-molina-dual-2016",
     "title": "Adam Wainwright & Yadier Molina (Dual)",
     "year": "2016",
-    "date": "June 4, 2016"
+    "date": "June 4, 2016",
+    "quantity": "30,000"
   },
   {
     "id": "jason-isringhausen-mini-2016",
@@ -749,7 +789,8 @@
     "id": "matt-holliday-2016",
     "title": "Matt Holliday",
     "year": "2016",
-    "date": "July 22, 2016"
+    "date": "July 22, 2016",
+    "quantity": "30,000"
   },
   {
     "id": "aaron-miles-mini-2016",
@@ -761,7 +802,8 @@
     "id": "eddie-gaedel-2016",
     "title": "Eddie Gaedel",
     "year": "2016",
-    "date": "September 9, 2016"
+    "date": "September 9, 2016",
+    "quantity": "30,000"
   },
   {
     "id": "lou-brock-tribute-2016",
@@ -785,13 +827,15 @@
     "id": "david-eckstein-2016",
     "title": "David Eckstein",
     "year": "2016",
-    "date": "October 1, 2016"
+    "date": "October 1, 2016",
+    "quantity": "30,000"
   },
   {
     "id": "yadier-molina-gold-platinum-gloves-2015",
     "title": "Yadier Molina (Gold & Platinum Gloves)",
     "year": "2015",
-    "date": "April 18, 2015"
+    "date": "April 18, 2015",
+    "quantity": "25,000"
   },
   {
     "id": "jack-clark-mini-2015",
@@ -809,7 +853,8 @@
     "id": "ozzie-smith-2015",
     "title": "Ozzie Smith",
     "year": "2015",
-    "date": "May 30, 2015"
+    "date": "May 30, 2015",
+    "quantity": "25,000"
   },
   {
     "id": "danny-cox-mini-2015",
@@ -827,25 +872,29 @@
     "id": "whitey-herzog-mini-2015",
     "title": "Whitey Herzog (Mini)",
     "year": "2015",
-    "date": "June 26, 2015"
+    "date": "June 26, 2015",
+    "quantity": "25,000"
   },
   {
     "id": "al-hrabosky-2015",
     "title": "Al Hrabosky",
     "year": "2015",
-    "date": "July 24, 2015"
+    "date": "July 24, 2015",
+    "quantity": "25,000"
   },
   {
     "id": "matt-carpenter-2015",
     "title": "Matt Carpenter",
     "year": "2015",
-    "date": "July 28, 2015"
+    "date": "July 28, 2015",
+    "quantity": "25,000"
   },
   {
     "id": "lou-brock-2015",
     "title": "Lou Brock",
     "year": "2015",
-    "date": "July 31, 2015"
+    "date": "July 31, 2015",
+    "quantity": "25,000"
   },
   {
     "id": "ken-dayley-mini-2015",
@@ -869,7 +918,8 @@
     "id": "harry-caray-voice-chip-2015",
     "title": "Harry Caray (Voice Chip)",
     "year": "2015",
-    "date": "September 7, 2015"
+    "date": "September 7, 2015",
+    "quantity": "25,000"
   },
   {
     "id": "john-tudor-mini-2015",
@@ -887,67 +937,78 @@
     "id": "lance-berkman-mini-2015",
     "title": "Lance Berkman (Mini)",
     "year": "2015",
-    "date": "September 26, 2015"
+    "date": "September 26, 2015",
+    "quantity": "25,000"
   },
   {
     "id": "michael-wacha-2014",
     "title": "Michael Wacha",
     "year": "2014",
-    "date": "April 11, 2014"
+    "date": "April 11, 2014",
+    "quantity": "25,000"
   },
   {
     "id": "jack-buck-voice-chip-2014",
     "title": "Jack Buck (Voice Chip)",
     "year": "2014",
-    "date": "June 15, 2014"
+    "date": "June 15, 2014",
+    "quantity": "25,000"
   },
   {
     "id": "jim-edmonds-2014",
     "title": "Jim Edmonds",
     "year": "2014",
-    "date": "July 6, 2014"
+    "date": "July 6, 2014",
+    "quantity": "25,000"
   },
   {
     "id": "chris-carpenter-retirement-2014",
     "title": "Chris Carpenter (Retirement)",
     "year": "2014",
-    "date": "August 15, 2014"
+    "date": "August 15, 2014",
+    "quantity": "25,000"
   },
   {
     "id": "jose-oquendo-2014",
     "title": "Jose Oquendo",
     "year": "2014",
-    "date": "September 20, 2014"
+    "date": "September 20, 2014",
+    "quantity": "25,000"
   },
   {
     "id": "carlos-beltran-2013",
     "title": "Carlos Beltran",
     "year": "2013",
-    "date": "April 28, 2013"
+    "date": "April 28, 2013",
+    "quantity": "25,000"
   },
   {
     "id": "mike-shannon-voice-chip-2013",
     "title": "Mike Shannon (Voice Chip)",
     "year": "2013",
-    "date": "July 5, 2013"
+    "date": "July 5, 2013",
+    "quantity": "25,000"
   },
   {
     "id": "ozzie-smith-gold-glove-2013",
     "title": "Ozzie Smith (Gold Glove)",
     "year": "2013",
-    "date": "July 19, 2013"
+    "date": "July 19, 2013",
+    "quantity": "25,000"
   },
   {
     "id": "mike-matheny-2013",
     "title": "Mike Matheny",
     "year": "2013",
-    "date": "September 13, 2013"
+    "date": "September 13, 2013",
+    "quantity": "25,000"
   },
   {
     "id": "david-freese-2012",
     "title": "David Freese",
     "year": "2012",
-    "date": "May 13, 2012"
+    "date": "May 13, 2012",
+    "quantity": "25,000"
   },
   {
     "id": "bruce-sutter-2012",
@@ -965,13 +1026,15 @@
     "id": "willie-mcgee-2011",
     "title": "Willie McGee",
     "year": "2011",
-    "date": "August 26, 2011"
+    "date": "August 26, 2011",
+    "quantity": "25,000"
   },
   {
     "id": "matt-holliday-2011",
     "title": "Matt Holliday",
     "year": "2011",
-    "date": "August 28, 2011"
+    "date": "August 28, 2011",
+    "quantity": "25,000"
   },
   {
     "id": "vince-coleman-2010",
@@ -1025,13 +1088,15 @@
     "id": "albert-pujols-2008",
     "title": "Albert Pujols",
     "year": "2008",
-    "date": "September 7, 2008"
+    "date": "September 7, 2008",
+    "quantity": "25,000"
   },
   {
     "id": "red-schoendienst-2008",
     "title": "Red Schoendienst",
     "year": "2008",
-    "date": "September 26, 2008"
+    "date": "September 26, 2008",
+    "quantity": "25,000"
   },
   {
     "id": "yadier-molina-2007",
@@ -1043,7 +1108,8 @@
     "id": "tony-la-russa-2007",
     "title": "Tony La Russa",
     "year": "2007",
-    "date": "September 23, 2007"
+    "date": "September 23, 2007",
+    "quantity": "25,000"
   },
   {
     "id": "chris-carpenter-2006",

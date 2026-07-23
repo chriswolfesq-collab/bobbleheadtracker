@@ -3,61 +3,71 @@
     "id": "garrett-crochet-2026",
     "title": "Garrett Crochet",
     "year": "2026",
-    "date": "May 7, 2026"
+    "date": "May 7, 2026",
+    "quantity": "7,500"
   },
   {
     "id": "roman-anthony-2026",
     "title": "Roman Anthony",
     "year": "2026",
-    "date": "April 6, 2026"
+    "date": "April 6, 2026",
+    "quantity": "7,500"
   },
   {
     "id": "rafael-devers-2025",
     "title": "Rafael Devers",
     "year": "2025",
-    "date": "May 23, 2025"
+    "date": "May 23, 2025",
+    "quantity": "7,500"
   },
   {
     "id": "ceddanne-rafaela-red-2025",
     "title": "Ceddanne Rafaela (Red)",
     "year": "2025",
-    "date": "May 6, 2025"
+    "date": "May 6, 2025",
+    "quantity": "7,500"
   },
   {
     "id": "ceddanne-rafaela-white-2025",
     "title": "Ceddanne Rafaela (White)",
     "year": "2025",
-    "date": "May 6, 2025"
+    "date": "May 6, 2025",
+    "quantity": "7,500"
   },
   {
     "id": "jarren-duran-2025",
     "title": "Jarren Duran",
     "year": "2025",
-    "date": "April 7, 2025"
+    "date": "April 7, 2025",
+    "quantity": "7,500"
   },
   {
     "id": "dave-roberts-2024",
     "title": "Dave Roberts",
     "year": "2024",
-    "date": "August 29, 2024"
+    "date": "August 29, 2024",
+    "quantity": "7,500"
   },
   {
     "id": "triston-casas-2024",
     "title": "Triston Casas",
     "year": "2024",
-    "date": "May 14, 2024"
+    "date": "May 14, 2024",
+    "quantity": "7,500"
   },
   {
     "id": "brayan-bello-2024",
     "title": "Brayan Bello",
     "year": "2024",
-    "date": "April 12, 2024"
+    "date": "April 12, 2024",
+    "quantity": "7,500"
   },
   {
     "id": "rafael-devers-wbc-2023",
     "title": "Rafael Devers (WBC)",
     "year": "2023",
-    "date": "September 22, 2023"
+    "date": "September 22, 2023",
+    "quantity": "7,500"
   },
   {
     "id": "bad-bunny-2023",
@@ -69,7 +79,8 @@
     "id": "kike-hernandez-wbc-2023",
     "title": "Kike Hernandez (WBC)",
     "year": "2023",
-    "date": "August 9, 2023"
+    "date": "August 9, 2023",
+    "quantity": "7,500"
   },
   {
     "id": "2013-world-championship-2023",
@@ -81,7 +92,8 @@
     "id": "trevor-story-2022",
     "title": "Trevor Story",
     "year": "2022",
-    "date": "September 28, 2022"
+    "date": "September 28, 2022",
+    "quantity": "7,500"
   },
   {
     "id": "alex-verdugo-jedi-devers-also-this-month-star-wars-2022",
@@ -93,25 +105,29 @@
     "id": "kike-hernandez-bat-flip-2022",
     "title": "Kike Hernandez (\"Bat Flip\")",
     "year": "2022",
-    "date": "May 31, 2022"
+    "date": "May 31, 2022",
+    "quantity": "7,500"
   },
   {
     "id": "jd-martinez-hr-cart-2021",
     "title": "J.D. Martinez (HR Cart)",
     "year": "2021",
-    "date": "September 21, 2021"
+    "date": "September 21, 2021",
+    "quantity": "7,500"
   },
   {
     "id": "alex-verdugo-2021",
     "title": "Alex Verdugo",
     "year": "2021",
-    "date": "September 8, 2021"
+    "date": "September 8, 2021",
+    "quantity": "7,500"
   },
   {
     "id": "rafael-devers-2021",
     "title": "Rafael Devers",
     "year": "2021",
-    "date": "June 29, 2021"
+    "date": "June 29, 2021",
+    "quantity": "7,500"
   },
   {
     "id": "david-ortiz-hall-of-fame-2021",
@@ -165,19 +181,22 @@
     "id": "pedro-martinez-2018",
     "title": "Pedro Martinez",
     "year": "2018",
-    "date": "September 25, 2018"
+    "date": "September 25, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "mookie-betts-splash-2018",
     "title": "Mookie Betts (\"Splash\")",
     "year": "2018",
-    "date": "September 14, 2018"
+    "date": "September 14, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "chris-sale-k-slayer-2018",
     "title": "Chris Sale (\"K Slayer\")",
     "year": "2018",
-    "date": "August 21, 2018"
+    "date": "August 21, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "snoopy-2018",
@@ -189,7 +208,8 @@
     "id": "xander-bogaerts-splash-2018",
     "title": "Xander Bogaerts (\"Splash\")",
     "year": "2018",
-    "date": "July 31, 2018"
+    "date": "July 31, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "dustin-pedroia-wwe-themed-2018",
@@ -201,13 +221,15 @@
     "id": "jackie-bradley-jr-2018",
     "title": "Jackie Bradley Jr.",
     "year": "2018",
-    "date": "June 27, 2018"
+    "date": "June 27, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "andrew-benintendi-splash-2018",
     "title": "Andrew Benintendi (\"Splash\")",
     "year": "2018",
-    "date": "June 6, 2018"
+    "date": "June 6, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "mensch-on-a-bench-red-sox-2018",
@@ -225,7 +247,8 @@
     "id": "chris-sale-k-counter-2018",
     "title": "Chris Sale (\"K-Counter\")",
     "year": "2018",
-    "date": "April 13, 2018"
+    "date": "April 13, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "tuukka-rask-2017",
@@ -237,7 +260,8 @@
     "id": "jackie-bradley-jr-2017",
     "title": "Jackie Bradley Jr.",
     "year": "2017",
-    "date": "August 3, 2017"
+    "date": "August 3, 2017",
+    "quantity": "12,000"
   },
   {
     "id": "billy-joel-2017",
@@ -261,43 +285,50 @@
     "id": "manny-ramirez-2017",
     "title": "Manny Ramirez",
     "year": "2017",
-    "date": "June 27, 2017"
+    "date": "June 27, 2017",
+    "quantity": "12,000"
   },
   {
     "id": "chris-sale-2017",
     "title": "Chris Sale",
     "year": "2017",
-    "date": "June 12, 2017"
+    "date": "June 12, 2017",
+    "quantity": "12,000"
   },
   {
     "id": "craig-kimbrel-2017",
     "title": "Craig Kimbrel",
     "year": "2017",
-    "date": "May 24, 2017"
+    "date": "May 24, 2017",
+    "quantity": "12,000"
   },
   {
     "id": "mookie-betts-jedi-star-wars-2017",
     "title": "Mookie Betts (Jedi, Star Wars)",
     "year": "2017",
-    "date": "May 4, 2017"
+    "date": "May 4, 2017",
+    "quantity": "12,000"
   },
   {
     "id": "mookie-betts-awards-2017",
     "title": "Mookie Betts (Awards)",
     "year": "2017",
-    "date": "April 14, 2017"
+    "date": "April 14, 2017",
+    "quantity": "12,000"
   },
   {
     "id": "rick-porcello-cy-young-2017",
     "title": "Rick Porcello (Cy Young)",
     "year": "2017",
-    "date": "April 5, 2017"
+    "date": "April 5, 2017",
+    "quantity": "12,000"
   },
   {
     "id": "xander-bogaerts-2016",
     "title": "Xander Bogaerts",
     "year": "2016",
-    "date": "August 30, 2016"
+    "date": "August 30, 2016",
+    "quantity": "15,000"
   },
   {
     "id": "wally-tessie-2016",
@@ -309,19 +340,22 @@
     "id": "jason-varitek-2016",
     "title": "Jason Varitek",
     "year": "2016",
-    "date": "June 14, 2016"
+    "date": "June 14, 2016",
+    "quantity": "15,000"
   },
   {
     "id": "david-price-2016",
     "title": "David Price",
     "year": "2016",
-    "date": "May 10, 2016"
+    "date": "May 10, 2016",
+    "quantity": "15,000"
   },
   {
     "id": "mookie-betts-2016",
     "title": "Mookie Betts",
     "year": "2016",
-    "date": "April 19, 2016"
+    "date": "April 19, 2016",
+    "quantity": "15,000"
   },
   {
     "id": "fred-lynn-2015",

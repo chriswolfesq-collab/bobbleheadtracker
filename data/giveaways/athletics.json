@@ -143,7 +143,8 @@
     "title": "Sean Manaea (No-Hitter)",
     "year": "2018",
     "date": "September 21, 2018",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/idsawtefrwe9yxqoggm4.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/idsawtefrwe9yxqoggm4.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "portuguese-heritage-night-2018",
@@ -157,7 +158,8 @@
     "title": "Sugar Skull",
     "year": "2018",
     "date": "September 9, 2018",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/juerqeipnhz5lzlhwint.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/juerqeipnhz5lzlhwint.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "korean-heritage-night-2018",
@@ -192,7 +194,8 @@
     "title": "Rickey Henderson (\"Bobble-Legs\")",
     "year": "2018",
     "date": "July 22, 2018",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/bxcelxbz4kxlo7i93rwj.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/bxcelxbz4kxlo7i93rwj.jpg",
+    "quantity": "24,000"
   },
   {
     "id": "matt-olson-chewbacca-2018",
@@ -206,138 +209,158 @@
     "title": "Black Panther",
     "year": "2018",
     "date": "May 5, 2018",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/hgaduzk8ghehwawrapht.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/hgaduzk8ghehwawrapht.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "dennis-eckersley-2017",
     "title": "Dennis Eckersley",
     "year": "2017",
-    "date": "August 26, 2017"
+    "date": "August 26, 2017",
+    "quantity": "15,000"
   },
   {
     "id": "g-eazy-with-sound-2017",
     "title": "G-Eazy (with sound)",
     "year": "2017",
     "date": "July 28, 2017",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/adrfsjqqlwwsqlnnshun.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/adrfsjqqlwwsqlnnshun.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "miguel-tejada-barry-zito-2017",
     "title": "Miguel Tejada & Barry Zito",
     "year": "2017",
-    "date": "July 1, 2017"
+    "date": "July 1, 2017",
+    "quantity": "15,000"
   },
   {
     "id": "khris-davis-2017",
     "title": "Khris Davis",
     "year": "2017",
     "date": "June 3, 2017",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/f1nydeyymydciqm9444z.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/f1nydeyymydciqm9444z.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "bob-melvin-2017",
     "title": "Bob Melvin",
     "year": "2017",
     "date": "May 6, 2017",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/xfoiqsisc98ijaqx1nha.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/xfoiqsisc98ijaqx1nha.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "jose-canseco-2016",
     "title": "Jose Canseco",
     "year": "2016",
     "date": "September 3, 2016",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/hzpamshskd5nkgkgak3x.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/hzpamshskd5nkgkgak3x.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "hello-kitty-2016",
     "title": "Hello Kitty",
     "year": "2016",
     "date": "July 16, 2016",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/hsyrls4lknjvmjstmkri.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/hsyrls4lknjvmjstmkri.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "josh-reddick-2016",
     "title": "Josh Reddick",
     "year": "2016",
     "date": "May 28, 2016",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/sg7b2mclkj0mjsizvvs5.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/sg7b2mclkj0mjsizvvs5.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "mark-mcgwire-2015",
     "title": "Mark McGwire",
     "year": "2015",
     "date": "August 18, 2015",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/rkxxeseedmfjrtbir1li.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/rkxxeseedmfjrtbir1li.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "hello-kitty-2015",
     "title": "Hello Kitty",
     "year": "2015",
     "date": "July 18, 2015",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/ydz1f5zlvn1zf5yruvil.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/ydz1f5zlvn1zf5yruvil.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "stephen-vogt-referee-2015",
     "title": "Stephen Vogt (Referee)",
     "year": "2015",
     "date": "May 28, 2015",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/z7isanzhgge2etmvamfa.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/z7isanzhgge2etmvamfa.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "tony-la-russa-hall-of-fame-2014",
     "title": "Tony La Russa (Hall of Fame)",
     "year": "2014",
     "date": "August 9, 2014",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/kldhx5hzj1ffq7ljt9bo.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/kldhx5hzj1ffq7ljt9bo.jpg",
+    "quantity": "20,000"
   },
   {
     "id": "catfish-hunter-2014",
     "title": "Catfish Hunter",
     "year": "2014",
     "date": "May 31, 2014",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/ca4cjxpmiopv7oo9epwq.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/ca4cjxpmiopv7oo9epwq.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "josh-donaldson-tarp-catch-diorama-2014",
     "title": "Josh Donaldson Tarp Catch Diorama",
     "year": "2014",
     "date": "April 19, 2014",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/oienr5hw9l2jgqomgkub.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/oienr5hw9l2jgqomgkub.jpg",
+    "quantity": "20,000"
   },
   {
     "id": "yoenis-cespedes-2013",
     "title": "Yoenis Cespedes",
     "year": "2013",
     "date": "August 17, 2013",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/spxm0qumktipu5xube89.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/spxm0qumktipu5xube89.jpg",
+    "quantity": "10,000"
   },
   {
     "id": "coco-crisp-coco-lean-2013",
     "title": "Coco Crisp (\"Coco Lean\")",
     "year": "2013",
     "date": "June 29, 2013",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/dqh5o4k9spdpxwqruz4n.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/dqh5o4k9spdpxwqruz4n.jpg",
+    "quantity": "10,000"
   },
   {
     "id": "reggie-jackson-1973-2013",
     "title": "Reggie Jackson (1973)",
     "year": "2013",
     "date": "April 27, 2013",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/orerkyuc8c2y9psz5sog.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/orerkyuc8c2y9psz5sog.jpg",
+    "quantity": "10,000"
   },
   {
     "id": "scott-hatteberg-2012",
     "title": "Scott Hatteberg",
     "year": "2012",
     "date": "August 18, 2012",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/xau4e2aczrqzgvkkunzh.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/xau4e2aczrqzgvkkunzh.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "rollie-fingers-2012",
     "title": "Rollie Fingers",
     "year": "2012",
     "date": "April 21, 2012",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/e3i7ep3obamswqhe3stg.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/e3i7ep3obamswqhe3stg.jpg",
+    "quantity": "10,000"
   },
   {
     "id": "ray-fosse-2011",
@@ -649,7 +672,8 @@
     "title": "Jason Giambi (2000 MVP)",
     "year": "2001",
     "date": "May 19, 2001",
-    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/vbjchmyhlvgxtsm0sxxt.jpg"
+    "imageUrl": "https://img.mlbstatic.com/mlb-images/image/private/t_4x5/t_w372/mlb/vbjchmyhlvgxtsm0sxxt.jpg",
+    "quantity": "15,000"
   },
   {
     "id": "rollie-fingers-cooperstown-collection-unknown",

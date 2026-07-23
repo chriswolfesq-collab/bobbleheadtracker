@@ -9,7 +9,8 @@
     "id": "paul-skenes-2025",
     "title": "Paul Skenes",
     "year": "2025",
-    "date": "April 19, 2025"
+    "date": "April 19, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "yeet-2025",
@@ -21,55 +22,64 @@
     "id": "mac-miller-2025",
     "title": "Mac Miller",
     "year": "2025",
-    "date": "July 19, 2025"
+    "date": "July 19, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "bryan-reynolds-2025",
     "title": "Bryan Reynolds",
     "year": "2025",
-    "date": "September 6, 2025"
+    "date": "September 6, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "mitch-keller-2024",
     "title": "Mitch Keller",
     "year": "2024",
-    "date": "May 4, 2024"
+    "date": "May 4, 2024",
+    "quantity": "20,000"
   },
   {
     "id": "dave-parker-2024",
     "title": "Dave Parker",
     "year": "2024",
-    "date": "May 25, 2024"
+    "date": "May 25, 2024",
+    "quantity": "20,000"
   },
   {
     "id": "andrew-mccutchen-2024",
     "title": "Andrew McCutchen",
     "year": "2024",
-    "date": "June 22, 2024"
+    "date": "June 22, 2024",
+    "quantity": "20,000"
   },
   {
     "id": "wiz-khalifa-2024",
     "title": "Wiz Khalifa",
     "year": "2024",
-    "date": "July 20, 2024"
+    "date": "July 20, 2024",
+    "quantity": "20,000"
   },
   {
     "id": "bryan-reynolds-2022",
     "title": "Bryan Reynolds",
     "year": "2022",
-    "date": "June 18, 2022"
+    "date": "June 18, 2022",
+    "quantity": "20,000"
   },
   {
     "id": "bill-mazeroski-gold-glove-2022",
     "title": "Bill Mazeroski (Gold Glove)",
     "year": "2022",
-    "date": "July 5, 2022"
+    "date": "July 5, 2022",
+    "quantity": "20,000"
   },
   {
     "id": "doug-drabek-cy-young-2022",
     "title": "Doug Drabek (Cy Young)",
     "year": "2022",
-    "date": "September 24, 2022"
+    "date": "September 24, 2022",
+    "quantity": "20,000"
   },
   {
     "id": "wonder-woman-2021",
@@ -81,31 +91,36 @@
     "id": "jameson-taillon-star-wars-2019",
     "title": "Jameson Taillon (Star Wars)",
     "year": "2019",
-    "date": "April 5, 2019"
+    "date": "April 5, 2019",
+    "quantity": "20,000"
   },
   {
     "id": "chris-archer-2019",
     "title": "Chris Archer",
     "year": "2019",
-    "date": "June 1, 2019"
+    "date": "June 1, 2019",
+    "quantity": "20,000"
   },
   {
     "id": "vintage-bobblehead-2019",
     "title": "Vintage Bobblehead",
     "year": "2019",
-    "date": "July 20, 2019"
+    "date": "July 20, 2019",
+    "quantity": "20,000"
   },
   {
     "id": "spider-man-2019",
     "title": "Spider-Man",
     "year": "2019",
-    "date": "September 7, 2019"
+    "date": "September 7, 2019",
+    "quantity": "20,000"
   },
   {
     "id": "steve-blass-dual-player-broadcaster-2019",
     "title": "Steve Blass (Dual Player/Broadcaster)",
     "year": "2019",
-    "date": "September 28, 2019"
+    "date": "September 28, 2019",
+    "quantity": "20,000"
   },
   {
     "id": "pirates-vintage-2018",
@@ -117,13 +132,15 @@
     "id": "sean-rodriguez-walk-off-2018",
     "title": "Sean Rodriguez (Walk-Off)",
     "year": "2018",
-    "date": "June 23, 2018"
+    "date": "June 23, 2018",
+    "quantity": "20,000"
   },
   {
     "id": "josh-bell-2018",
     "title": "Josh Bell",
     "year": "2018",
-    "date": "July 14, 2018"
+    "date": "July 14, 2018",
+    "quantity": "20,000"
   },
   {
     "id": "hulk-kids-2018",
@@ -135,31 +152,36 @@
     "id": "andy-van-slyke-2018",
     "title": "Andy Van Slyke",
     "year": "2018",
-    "date": "August 4, 2018"
+    "date": "August 4, 2018",
+    "quantity": "20,000"
   },
   {
     "id": "felipe-vazquez-2018",
     "title": "Felipe Vazquez",
     "year": "2018",
-    "date": "September 8, 2018"
+    "date": "September 8, 2018",
+    "quantity": "20,000"
   },
   {
     "id": "francisco-cervelli-thats-amore-singing-2017",
     "title": "Francisco Cervelli (\"That's Amore\" Singing)",
     "year": "2017",
-    "date": "April 8, 2017"
+    "date": "April 8, 2017",
+    "quantity": "20,000"
   },
   {
     "id": "jordy-mercer-2017",
     "title": "Jordy Mercer",
     "year": "2017",
-    "date": "June 17, 2017"
+    "date": "June 17, 2017",
+    "quantity": "20,000"
   },
   {
     "id": "charlie-brown-2017",
     "title": "Charlie Brown",
     "year": "2017",
-    "date": "August 3, 2017"
+    "date": "August 3, 2017",
+    "quantity": "20,000"
   },
   {
     "id": "gregory-polanco-el-coffee-2017",
@@ -177,55 +199,64 @@
     "id": "gerrit-cole-2016",
     "title": "Gerrit Cole",
     "year": "2016",
-    "date": "June 23, 2016"
+    "date": "June 23, 2016",
+    "quantity": "20,000"
   },
   {
     "id": "jung-ho-kang-2016",
     "title": "Jung Ho Kang",
     "year": "2016",
-    "date": "August 11, 2016"
+    "date": "August 11, 2016",
+    "quantity": "20,000"
   },
   {
     "id": "josh-harrison-2015",
     "title": "Josh Harrison",
     "year": "2015",
-    "date": "May 23, 2015"
+    "date": "May 23, 2015",
+    "quantity": "20,000"
   },
   {
     "id": "starling-marte-2015",
     "title": "Starling Marte",
     "year": "2015",
-    "date": "June 27, 2015"
+    "date": "June 27, 2015",
+    "quantity": "20,000"
   },
   {
     "id": "pedro-alvarez-silver-slugger-2014",
     "title": "Pedro Alvarez (Silver Slugger)",
     "year": "2014",
-    "date": "May 24, 2014"
+    "date": "May 24, 2014",
+    "quantity": "25,000"
   },
   {
     "id": "andrew-mccutchen-nl-mvp-2014",
     "title": "Andrew McCutchen (N.L. MVP)",
     "year": "2014",
-    "date": "June 28, 2014"
+    "date": "June 28, 2014",
+    "quantity": "25,000"
   },
   {
     "id": "honus-wagner-2014",
     "title": "Honus Wagner",
     "year": "2014",
-    "date": "August 12, 2014"
+    "date": "August 12, 2014",
+    "quantity": "25,000"
   },
   {
     "id": "andrew-mccutchen-awards-2013",
     "title": "Andrew McCutchen (Awards)",
     "year": "2013",
-    "date": "April 23, 2013"
+    "date": "April 23, 2013",
+    "quantity": "25,000"
   },
   {
     "id": "aj-burnett-camo-jersey-2013",
     "title": "A.J. Burnett (Camo Jersey)",
     "year": "2013",
-    "date": "May 18, 2013"
+    "date": "May 18, 2013",
+    "quantity": "25,000"
   },
   {
     "id": "joel-hanrahan-2012",
@@ -249,7 +280,8 @@
     "id": "pirate-parrot-mascot-2011",
     "title": "Pirate Parrot (Mascot)",
     "year": "2011",
-    "date": "June 12, 2011"
+    "date": "June 12, 2011",
+    "quantity": "5,000"
   },
   {
     "id": "garrett-jones-figurine-2010",

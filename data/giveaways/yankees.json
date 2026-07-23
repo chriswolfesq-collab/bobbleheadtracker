@@ -3,37 +3,43 @@
     "id": "josh-hart-no-32-elston-howard-tribute-2026",
     "title": "Josh Hart (No. 32, Elston Howard Tribute)",
     "year": "2026",
-    "date": "September 25, 2026"
+    "date": "September 25, 2026",
+    "quantity": "18,000"
   },
   {
     "id": "george-costanza-calzone-2026",
     "title": "George Costanza (Calzone)",
     "year": "2026",
-    "date": "August 27, 2026"
+    "date": "August 27, 2026",
+    "quantity": "18,000"
   },
   {
     "id": "hello-kitty-2026",
     "title": "Hello Kitty",
     "year": "2026",
-    "date": "August 22, 2026"
+    "date": "August 22, 2026",
+    "quantity": "18,000"
   },
   {
     "id": "cody-bellinger-2026",
     "title": "Cody Bellinger",
     "year": "2026",
-    "date": "August 21, 2026"
+    "date": "August 21, 2026",
+    "quantity": "18,000"
   },
   {
     "id": "aaron-judge-mvp-2nd-consecutive-2026",
     "title": "Aaron Judge (MVP, 2nd Consecutive)",
     "year": "2026",
-    "date": "June 20, 2026"
+    "date": "June 20, 2026",
+    "quantity": "18,000"
   },
   {
     "id": "max-fried-mandalorian-with-grogu-2026",
     "title": "Max Fried (Mandalorian, with Grogu)",
     "year": "2026",
-    "date": "May 2, 2026"
+    "date": "May 2, 2026",
+    "quantity": "18,000"
   },
   {
     "id": "house-random-bobblehead-2026",
@@ -51,43 +57,50 @@
     "id": "george-costanza-2025",
     "title": "George Costanza",
     "year": "2025",
-    "date": "August 21, 2025"
+    "date": "August 21, 2025",
+    "quantity": "18,000"
   },
   {
     "id": "aaron-judge-2025-8-13",
     "title": "Aaron Judge",
     "year": "2025",
-    "date": "August 13, 2025"
+    "date": "August 13, 2025",
+    "quantity": "18,000"
   },
   {
     "id": "anthony-volpe-2025",
     "title": "Anthony Volpe",
     "year": "2025",
-    "date": "July 25, 2025"
+    "date": "July 25, 2025",
+    "quantity": "18,000"
   },
   {
     "id": "billy-joel-2025",
     "title": "Billy Joel",
     "year": "2025",
-    "date": "July 11, 2025"
+    "date": "July 11, 2025",
+    "quantity": "18,000"
   },
   {
     "id": "aaron-judge-2025-6-20",
     "title": "Aaron Judge",
     "year": "2025",
-    "date": "June 20, 2025"
+    "date": "June 20, 2025",
+    "quantity": "18,000"
   },
   {
     "id": "yogi-berra-2025",
     "title": "Yogi Berra",
     "year": "2025",
-    "date": "June 6, 2025"
+    "date": "June 6, 2025",
+    "quantity": "18,000"
   },
   {
     "id": "giancarlo-stanton-2025",
     "title": "Giancarlo Stanton",
     "year": "2025",
-    "date": "May 4, 2025"
+    "date": "May 4, 2025",
+    "quantity": "18,000"
   },
   {
     "id": "frank-sinatra-2024",
@@ -105,13 +118,15 @@
     "id": "anthony-volpe-2024",
     "title": "Anthony Volpe",
     "year": "2024",
-    "date": "August 11, 2024"
+    "date": "August 11, 2024",
+    "quantity": "18,000"
   },
   {
     "id": "eli-manning-2024",
     "title": "Eli Manning",
     "year": "2024",
-    "date": "August 4, 2024"
+    "date": "August 4, 2024",
+    "quantity": "18,000"
   },
   {
     "id": "the-pigeon-2024",
@@ -123,25 +138,29 @@
     "id": "gerrit-cole-2024-7-19",
     "title": "Gerrit Cole",
     "year": "2024",
-    "date": "July 19, 2024"
+    "date": "July 19, 2024",
+    "quantity": "18,000"
   },
   {
     "id": "george-costanza-2024",
     "title": "George Costanza",
     "year": "2024",
-    "date": "July 5, 2024"
+    "date": "July 5, 2024",
+    "quantity": "18,000"
   },
   {
     "id": "gerrit-cole-2024-5-4",
     "title": "Gerrit Cole",
     "year": "2024",
-    "date": "May 4, 2024"
+    "date": "May 4, 2024",
+    "quantity": "18,000"
   },
   {
     "id": "aaron-judge-2024",
     "title": "Aaron Judge",
     "year": "2024",
-    "date": "April 20, 2024"
+    "date": "April 20, 2024",
+    "quantity": "18,000"
   },
   {
     "id": "aaron-judge-2023",
@@ -153,13 +172,15 @@
     "id": "roger-maris-61-2023",
     "title": "Roger Maris (#61)",
     "year": "2023",
-    "date": "August 20, 2023"
+    "date": "August 20, 2023",
+    "quantity": "18,000"
   },
   {
     "id": "bucky-dent-2023",
     "title": "Bucky Dent",
     "year": "2023",
-    "date": "August 4, 2023"
+    "date": "August 4, 2023",
+    "quantity": "18,000"
   },
   {
     "id": "jerry-garcia-2023",
@@ -171,19 +192,22 @@
     "id": "nestor-cortes-2023",
     "title": "Nestor Cortes",
     "year": "2023",
-    "date": "July 21, 2023"
+    "date": "July 21, 2023",
+    "quantity": "18,000"
   },
   {
     "id": "luis-severino-2023",
     "title": "Luis Severino",
     "year": "2023",
-    "date": "July 7, 2023"
+    "date": "July 7, 2023",
+    "quantity": "18,000"
   },
   {
     "id": "derek-jeter-captain-america-2023",
     "title": "Derek Jeter (Captain America)",
     "year": "2023",
-    "date": "June 23, 2023"
+    "date": "June 23, 2023",
+    "quantity": "18,000"
   },
   {
     "id": "frank-sinatra-2023",
@@ -195,7 +219,8 @@
     "id": "anthony-rizzo-mandalorian-2023",
     "title": "Anthony Rizzo (Mandalorian)",
     "year": "2023",
-    "date": "May 12, 2023"
+    "date": "May 12, 2023",
+    "quantity": "18,000"
   },
   {
     "id": "satchel-paige-2023",
@@ -207,43 +232,50 @@
     "id": "tino-martinez-2023",
     "title": "Tino Martinez",
     "year": "2023",
-    "date": "April 14, 2023"
+    "date": "April 14, 2023",
+    "quantity": "18,000"
   },
   {
     "id": "gerrit-cole-2022",
     "title": "Gerrit Cole",
     "year": "2022",
-    "date": "September 30, 2022"
+    "date": "September 30, 2022",
+    "quantity": "18,000"
   },
   {
     "id": "john-sterling-suzyn-waldman-talking-2022",
     "title": "John Sterling & Suzyn Waldman (Talking)",
     "year": "2022",
-    "date": "August 19, 2022"
+    "date": "August 19, 2022",
+    "quantity": "10,000"
   },
   {
     "id": "jerry-garcia-2022",
     "title": "Jerry Garcia",
     "year": "2022",
-    "date": "August 1, 2022"
+    "date": "August 1, 2022",
+    "quantity": "1,000"
   },
   {
     "id": "andy-pettitte-2022",
     "title": "Andy Pettitte",
     "year": "2022",
-    "date": "June 10, 2022"
+    "date": "June 10, 2022",
+    "quantity": "18,000"
   },
   {
     "id": "aaron-judge-2022",
     "title": "Aaron Judge",
     "year": "2022",
-    "date": "June 3, 2022"
+    "date": "June 3, 2022",
+    "quantity": "18,000"
   },
   {
     "id": "yoda-star-wars-2022",
     "title": "Yoda (Star Wars)",
     "year": "2022",
-    "date": "May 25, 2022"
+    "date": "May 25, 2022",
+    "quantity": "18,000"
   },
   {
     "id": "scooby-doo-2022",
@@ -255,55 +287,64 @@
     "id": "elston-howard-2022",
     "title": "Elston Howard",
     "year": "2022",
-    "date": "April 14, 2022"
+    "date": "April 14, 2022",
+    "quantity": "18,000"
   },
   {
     "id": "don-mattingly-2021",
     "title": "Don Mattingly",
     "year": "2021",
-    "date": "September 18, 2021"
+    "date": "September 18, 2021",
+    "quantity": "18,000"
   },
   {
     "id": "scooby-doo-2021",
     "title": "Scooby-Doo",
     "year": "2021",
-    "date": "August 22, 2021"
+    "date": "August 22, 2021",
+    "quantity": "10,000"
   },
   {
     "id": "dj-lemahieu-2021",
     "title": "DJ LeMahieu",
     "year": "2021",
-    "date": "August 20, 2021"
+    "date": "August 20, 2021",
+    "quantity": "18,000"
   },
   {
     "id": "gerrit-cole-top-gun-2021",
     "title": "Gerrit Cole (Top Gun)",
     "year": "2021",
-    "date": "August 6, 2021"
+    "date": "August 6, 2021",
+    "quantity": "18,000"
   },
   {
     "id": "gleyber-torres-2019",
     "title": "Gleyber Torres",
     "year": "2019",
-    "date": "August 30, 2019"
+    "date": "August 30, 2019",
+    "quantity": "18,000"
   },
   {
     "id": "david-cone-2019",
     "title": "David Cone",
     "year": "2019",
-    "date": "July 18, 2019"
+    "date": "July 18, 2019",
+    "quantity": "18,000"
   },
   {
     "id": "mariano-rivera-captain-america-2019",
     "title": "Mariano Rivera (Captain America)",
     "year": "2019",
-    "date": "July 12, 2019"
+    "date": "July 12, 2019",
+    "quantity": "18,000"
   },
   {
     "id": "giancarlo-stanton-2019",
     "title": "Giancarlo Stanton",
     "year": "2019",
-    "date": "May 27, 2019"
+    "date": "May 27, 2019",
+    "quantity": "18,000"
   },
   {
     "id": "cc-sabathia-jedi-2019",
@@ -315,7 +356,8 @@
     "id": "bernie-williams-2019",
     "title": "Bernie Williams",
     "year": "2019",
-    "date": "April 12, 2019"
+    "date": "April 12, 2019",
+    "quantity": "18,000"
   },
   {
     "id": "didi-gregorius-spring-training-2019",
@@ -327,7 +369,8 @@
     "id": "brett-gardner-2018",
     "title": "Brett Gardner",
     "year": "2018",
-    "date": "August 31, 2018"
+    "date": "August 31, 2018",
+    "quantity": "18,000"
   },
   {
     "id": "cc-sabathia-2018",
@@ -339,55 +382,64 @@
     "id": "ron-guidry-2018",
     "title": "Ron Guidry",
     "year": "2018",
-    "date": "June 14, 2018"
+    "date": "June 14, 2018",
+    "quantity": "18,000"
   },
   {
     "id": "aaron-judge-jedi-star-wars-2018",
     "title": "Aaron Judge (Jedi, Star Wars)",
     "year": "2018",
-    "date": "May 4, 2018"
+    "date": "May 4, 2018",
+    "quantity": "40,000"
   },
   {
     "id": "david-wells-2018",
     "title": "David Wells",
     "year": "2018",
-    "date": "April 23, 2018"
+    "date": "April 23, 2018",
+    "quantity": "18,000"
   },
   {
     "id": "aroldis-chapman-2017",
     "title": "Aroldis Chapman",
     "year": "2017",
-    "date": "August 27, 2017"
+    "date": "August 27, 2017",
+    "quantity": "18,000"
   },
   {
     "id": "whitey-ford-2017",
     "title": "Whitey Ford",
     "year": "2017",
-    "date": "July 9, 2017"
+    "date": "July 9, 2017",
+    "quantity": "18,000"
   },
   {
     "id": "reggie-jackson-2017",
     "title": "Reggie Jackson",
     "year": "2017",
-    "date": "June 9, 2017"
+    "date": "June 9, 2017",
+    "quantity": "18,000"
   },
   {
     "id": "gary-sanchez-2017",
     "title": "Gary Sanchez",
     "year": "2017",
-    "date": "April 30, 2017"
+    "date": "April 30, 2017",
+    "quantity": "18,000"
   },
   {
     "id": "roger-maris-2016",
     "title": "Roger Maris",
     "year": "2016",
-    "date": "October 1, 2016"
+    "date": "October 1, 2016",
+    "quantity": "18,000"
   },
   {
     "id": "dellin-betances-2016",
     "title": "Dellin Betances",
     "year": "2016",
-    "date": "September 10, 2016"
+    "date": "September 10, 2016",
+    "quantity": "18,000"
   },
   {
     "id": "peanuts-5-2016",
@@ -399,19 +451,22 @@
     "id": "didi-gregorius-2016",
     "title": "Didi Gregorius",
     "year": "2016",
-    "date": "August 7, 2016"
+    "date": "August 7, 2016",
+    "quantity": "18,000"
   },
   {
     "id": "mickey-mantle-triple-crown-2016",
     "title": "Mickey Mantle (Triple Crown)",
     "year": "2016",
-    "date": "June 24, 2016"
+    "date": "June 24, 2016",
+    "quantity": "18,000"
   },
   {
     "id": "babe-ruth-2016",
     "title": "Babe Ruth",
     "year": "2016",
-    "date": "April 23, 2016"
+    "date": "April 23, 2016",
+    "quantity": "18,000"
   },
   {
     "id": "babe-ruth-2015",
@@ -429,91 +484,106 @@
     "id": "jacoby-ellsbury-2015",
     "title": "Jacoby Ellsbury",
     "year": "2015",
-    "date": "August 24, 2015"
+    "date": "August 24, 2015",
+    "quantity": "18,000"
   },
   {
     "id": "thurman-munson-2015",
     "title": "Thurman Munson",
     "year": "2015",
-    "date": "June 18, 2015"
+    "date": "June 18, 2015",
+    "quantity": "18,000"
   },
   {
     "id": "masahiro-tanaka-2015",
     "title": "Masahiro Tanaka",
     "year": "2015",
-    "date": "April 28, 2015"
+    "date": "April 28, 2015",
+    "quantity": "18,000"
   },
   {
     "id": "lucy-peanuts-3rd-series-2014",
     "title": "Lucy (Peanuts, 3rd Series)",
     "year": "2014",
-    "date": "September 9, 2014"
+    "date": "September 9, 2014",
+    "quantity": "18,000"
   },
   {
     "id": "yankees-hello-kitty-2014",
     "title": "Yankees Hello Kitty",
     "year": "2014",
-    "date": "August 24, 2014"
+    "date": "August 24, 2014",
+    "quantity": "18,000"
   },
   {
     "id": "joe-girardi-2014",
     "title": "Joe Girardi",
     "year": "2014",
-    "date": "August 20, 2014"
+    "date": "August 20, 2014",
+    "quantity": "18,000"
   },
   {
     "id": "paul-oneill-2014",
     "title": "Paul O'Neill",
     "year": "2014",
-    "date": "July 27, 2014"
+    "date": "July 27, 2014",
+    "quantity": "18,000"
   },
   {
     "id": "lou-gehrig-2014",
     "title": "Lou Gehrig",
     "year": "2014",
-    "date": "July 2, 2014"
+    "date": "July 2, 2014",
+    "quantity": "18,000"
   },
   {
     "id": "mark-teixeira-2014",
     "title": "Mark Teixeira",
     "year": "2014",
-    "date": "June 19, 2014"
+    "date": "June 19, 2014",
+    "quantity": "18,000"
   },
   {
     "id": "charlie-brown-2013",
     "title": "Charlie Brown",
     "year": "2013",
-    "date": "September 25, 2013"
+    "date": "September 25, 2013",
+    "quantity": "18,000"
   },
   {
     "id": "mariano-rivera-2013",
     "title": "Mariano Rivera",
     "year": "2013",
-    "date": "September 24, 2013"
+    "date": "September 24, 2013",
+    "quantity": "18,000"
   },
   {
     "id": "yogi-berra-2013",
     "title": "Yogi Berra",
     "year": "2013",
-    "date": "August 30, 2013"
+    "date": "August 30, 2013",
+    "quantity": "18,000"
   },
   {
     "id": "hideki-matsui-2013",
     "title": "Hideki Matsui",
     "year": "2013",
-    "date": "July 28, 2013"
+    "date": "July 28, 2013",
+    "quantity": "18,000"
   },
   {
     "id": "derek-jeter-2013",
     "title": "Derek Jeter",
     "year": "2013",
-    "date": "July 8, 2013"
+    "date": "July 8, 2013",
+    "quantity": "18,000"
   },
   {
     "id": "snoopy-2012",
     "title": "Snoopy",
     "year": "2012",
-    "date": "September 19, 2012"
+    "date": "September 19, 2012",
+    "quantity": "18,000"
   },
   {
     "id": "mark-teixeira-figurine-2012",
@@ -639,7 +709,8 @@
     "id": "paul-oneill-2002",
     "title": "Paul O'Neill",
     "year": "2002",
-    "date": "September 10, 2002"
+    "date": "September 10, 2002",
+    "quantity": "8,800"
   },
   {
     "id": "jorge-posada-2002",

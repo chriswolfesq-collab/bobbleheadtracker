@@ -3,121 +3,141 @@
     "id": "ben-zobrist-2026",
     "title": "Ben Zobrist",
     "year": "2026",
-    "date": "April 11, 2026"
+    "date": "April 11, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "ron-santo-2026",
     "title": "Ron Santo",
     "year": "2026",
-    "date": "April 18, 2026"
+    "date": "April 18, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "kerry-wood-2026",
     "title": "Kerry Wood",
     "year": "2026",
-    "date": "May 2, 2026"
+    "date": "May 2, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "ryne-sandberg-2026",
     "title": "Ryne Sandberg",
     "year": "2026",
-    "date": "May 24, 2026"
+    "date": "May 24, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "harry-caray-2026",
     "title": "Harry Caray",
     "year": "2026",
-    "date": "August 30, 2026"
+    "date": "August 30, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "sammy-sosa-2026",
     "title": "Sammy Sosa",
     "year": "2026",
-    "date": "September 13, 2026"
+    "date": "September 13, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "seiya-suzuki-2026",
     "title": "Seiya Suzuki",
     "year": "2026",
-    "date": "September 14, 2026"
+    "date": "September 14, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "pete-crow-armstrong-2025",
     "title": "Pete Crow-Armstrong",
     "year": "2025",
-    "date": "April 19, 2025"
+    "date": "April 19, 2025",
+    "quantity": "10,000"
   },
   {
     "id": "clark-the-cub-2025",
     "title": "Clark the Cub",
     "year": "2025",
-    "date": "April 26, 2025"
+    "date": "April 26, 2025",
+    "quantity": "10,000"
   },
   {
     "id": "shota-imanaga-2025",
     "title": "Shota Imanaga",
     "year": "2025",
-    "date": "June 1, 2025"
+    "date": "June 1, 2025",
+    "quantity": "10,000"
   },
   {
     "id": "michael-busch-2025",
     "title": "Michael Busch",
     "year": "2025",
-    "date": "June 22, 2025"
+    "date": "June 22, 2025",
+    "quantity": "10,000"
   },
   {
     "id": "greg-maddux-2025",
     "title": "Greg Maddux",
     "year": "2025",
-    "date": "August 3, 2025"
+    "date": "August 3, 2025",
+    "quantity": "10,000"
   },
   {
     "id": "dansby-mallory-swanson-2025",
     "title": "Dansby & Mallory Swanson",
     "year": "2025",
-    "date": "August 17, 2025"
+    "date": "August 17, 2025",
+    "quantity": "10,000"
   },
   {
     "id": "seiya-suzuki-2025",
     "title": "Seiya Suzuki",
     "year": "2025",
-    "date": "September 13, 2025"
+    "date": "September 13, 2025",
+    "quantity": "10,000"
   },
   {
     "id": "bill-murray-2025",
     "title": "Bill Murray",
     "year": "2025",
-    "date": "September 14, 2025"
+    "date": "September 14, 2025",
+    "quantity": "10,000"
   },
   {
     "id": "christopher-morel-2024",
     "title": "Christopher Morel",
     "year": "2024",
-    "date": "June 1, 2024"
+    "date": "June 1, 2024",
+    "quantity": "10,000"
   },
   {
     "id": "adbert-alzolay-2024",
     "title": "Adbert Alzolay",
     "year": "2024",
-    "date": "June 22, 2024"
+    "date": "June 22, 2024",
+    "quantity": "10,000"
   },
   {
     "id": "ryne-sandberg-2024",
     "title": "Ryne Sandberg",
     "year": "2024",
-    "date": "June 23, 2024"
+    "date": "June 23, 2024",
+    "quantity": "10,000"
   },
   {
     "id": "justin-steele-american-flag-2024",
     "title": "Justin Steele (American Flag)",
     "year": "2024",
-    "date": "July 6, 2024"
+    "date": "July 6, 2024",
+    "quantity": "10,000"
   },
   {
     "id": "ian-happ-2024",
     "title": "Ian Happ",
     "year": "2024",
-    "date": "August 1, 2024"
+    "date": "August 1, 2024",
+    "quantity": "10,000"
   },
   {
     "id": "cody-bellinger-2024",
@@ -135,7 +155,8 @@
     "id": "billy-williams-statue-2023",
     "title": "Billy Williams (Statue)",
     "year": "2023",
-    "date": "May 27, 2023"
+    "date": "May 27, 2023",
+    "quantity": "10,000"
   },
   {
     "id": "boog-jd-talking-2023",
@@ -165,7 +186,8 @@
     "id": "ernie-banks-statue-2023",
     "title": "Ernie Banks (Statue)",
     "year": "2023",
-    "date": "July 19, 2023"
+    "date": "July 19, 2023",
+    "quantity": "10,000"
   },
   {
     "id": "nico-hoerner-jedi-2023",
@@ -177,31 +199,36 @@
     "id": "ron-santo-statue-2023",
     "title": "Ron Santo (Statue)",
     "year": "2023",
-    "date": "August 20, 2023"
+    "date": "August 20, 2023",
+    "quantity": "10,000"
   },
   {
     "id": "harry-caray-statue-2023",
     "title": "Harry Caray (Statue)",
     "year": "2023",
-    "date": "September 9, 2023"
+    "date": "September 9, 2023",
+    "quantity": "10,000"
   },
   {
     "id": "david-ross-2022",
     "title": "David Ross",
     "year": "2022",
-    "date": "May 7, 2022"
+    "date": "May 7, 2022",
+    "quantity": "10,000"
   },
   {
     "id": "patrick-wisdom-2022",
     "title": "Patrick Wisdom",
     "year": "2022",
-    "date": "May 21, 2022"
+    "date": "May 21, 2022",
+    "quantity": "10,000"
   },
   {
     "id": "nick-madrigal-2022",
     "title": "Nick Madrigal",
     "year": "2022",
-    "date": "August 6, 2022"
+    "date": "August 6, 2022",
+    "quantity": "10,000"
   },
   {
     "id": "star-wars-mandalorian-2022",
@@ -213,73 +240,85 @@
     "id": "nico-hoerner-2022",
     "title": "Nico Hoerner",
     "year": "2022",
-    "date": "September 10, 2022"
+    "date": "September 10, 2022",
+    "quantity": "10,000"
   },
   {
     "id": "marcus-stroman-2022",
     "title": "Marcus Stroman",
     "year": "2022",
-    "date": "September 17, 2022"
+    "date": "September 17, 2022",
+    "quantity": "10,000"
   },
   {
     "id": "cole-hamels-hang-loose-2019",
     "title": "Cole Hamels (\"Hang Loose\")",
     "year": "2019",
-    "date": "May 10, 2019"
+    "date": "May 10, 2019",
+    "quantity": "10,000"
   },
   {
     "id": "anthony-rizzo-out-on-the-water-2019",
     "title": "Anthony Rizzo (\"Out on the Water\")",
     "year": "2019",
-    "date": "June 21, 2019"
+    "date": "June 21, 2019",
+    "quantity": "10,000"
   },
   {
     "id": "kris-bryant-round-of-golf-2019",
     "title": "Kris Bryant (\"Round of Golf\")",
     "year": "2019",
-    "date": "July 15, 2019"
+    "date": "July 15, 2019",
+    "quantity": "10,000"
   },
   {
     "id": "jon-lester-2019",
     "title": "Jon Lester",
     "year": "2019",
-    "date": "July 19, 2019"
+    "date": "July 19, 2019",
+    "quantity": "10,000"
   },
   {
     "id": "clark-the-cub-2019",
     "title": "Clark (the Cub)",
     "year": "2019",
-    "date": "August 4, 2019"
+    "date": "August 4, 2019",
+    "quantity": "5,000"
   },
   {
     "id": "willson-contreras-2018",
     "title": "Willson Contreras",
     "year": "2018",
-    "date": "May 11, 2018"
+    "date": "May 11, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "jason-heyward-2018",
     "title": "Jason Heyward",
     "year": "2018",
-    "date": "June 18, 2018"
+    "date": "June 18, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "javier-baez-2018",
     "title": "Javier Baez",
     "year": "2018",
-    "date": "July 23, 2018"
+    "date": "July 23, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "kyle-hendricks-2018",
     "title": "Kyle Hendricks",
     "year": "2018",
-    "date": "August 15, 2018"
+    "date": "August 15, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "albert-almora-2018",
     "title": "Albert Almora",
     "year": "2018",
-    "date": "August 16, 2018"
+    "date": "August 16, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "the-final-out-2017",
@@ -291,7 +330,8 @@
     "id": "ben-zobrist-world-series-mvp-2017",
     "title": "Ben Zobrist (World Series MVP)",
     "year": "2017",
-    "date": "June 8, 2017"
+    "date": "June 8, 2017",
+    "quantity": "10,000"
   },
   {
     "id": "turning-two-2017",
@@ -309,91 +349,106 @@
     "id": "anthony-rizzo-tarp-catch-2016",
     "title": "Anthony Rizzo (\"Tarp Catch\")",
     "year": "2016",
-    "date": "July 5, 2016"
+    "date": "July 5, 2016",
+    "quantity": "10,000"
   },
   {
     "id": "kris-bryant-2016",
     "title": "Kris Bryant",
     "year": "2016",
-    "date": "August 1, 2016"
+    "date": "August 1, 2016",
+    "quantity": "10,000"
   },
   {
     "id": "joe-maddon-2016",
     "title": "Joe Maddon",
     "year": "2016",
-    "date": "August 16, 2016"
+    "date": "August 16, 2016",
+    "quantity": "10,000"
   },
   {
     "id": "kyle-schwarber-home-run-2016",
     "title": "Kyle Schwarber (Home Run)",
     "year": "2016",
-    "date": "September 16, 2016"
+    "date": "September 16, 2016",
+    "quantity": "10,000"
   },
   {
     "id": "clark-w-flag-2015",
     "title": "Clark (\"W\" Flag)",
     "year": "2015",
-    "date": "May 31, 2015"
+    "date": "May 31, 2015",
+    "quantity": "5,000"
   },
   {
     "id": "joe-maddon-cubs-debut-2015",
     "title": "Joe Maddon (Cubs Debut)",
     "year": "2015",
-    "date": "June 13, 2015"
+    "date": "June 13, 2015",
+    "quantity": "10,000"
   },
   {
     "id": "jorge-soler-cubs-debut-2015",
     "title": "Jorge Soler (Cubs Debut)",
     "year": "2015",
-    "date": "July 25, 2015"
+    "date": "July 25, 2015",
+    "quantity": "10,000"
   },
   {
     "id": "jon-lester-cubs-debut-2015",
     "title": "Jon Lester (Cubs Debut)",
     "year": "2015",
-    "date": "August 22, 2015"
+    "date": "August 22, 2015",
+    "quantity": "10,000"
   },
   {
     "id": "kris-bryant-cubs-debut-2015",
     "title": "Kris Bryant (Cubs Debut)",
     "year": "2015",
-    "date": "August 26, 2015"
+    "date": "August 26, 2015",
+    "quantity": "10,000"
   },
   {
     "id": "joe-tinker-2014",
     "title": "Joe Tinker",
     "year": "2014",
-    "date": "April 18, 2014"
+    "date": "April 18, 2014",
+    "quantity": "10,000"
   },
   {
     "id": "red-grange-2014",
     "title": "Red Grange",
     "year": "2014",
-    "date": "May 2, 2014"
+    "date": "May 2, 2014",
+    "quantity": "10,000"
   },
   {
     "id": "babe-ruth-called-shot-2014",
     "title": "Babe Ruth (\"Called Shot\")",
     "year": "2014",
-    "date": "May 16, 2014"
+    "date": "May 16, 2014",
+    "quantity": "10,000"
   },
   {
     "id": "all-american-girls-2014",
     "title": "All American Girls",
     "year": "2014",
-    "date": "June 6, 2014"
+    "date": "June 6, 2014",
+    "quantity": "10,000"
   },
   {
     "id": "ernie-banks-2014",
     "title": "Ernie Banks",
     "year": "2014",
-    "date": "June 20, 2014"
+    "date": "June 20, 2014",
+    "quantity": "10,000"
   },
   {
     "id": "gale-sayers-2014",
     "title": "Gale Sayers",
     "year": "2014",
-    "date": "July 11, 2014"
+    "date": "July 11, 2014",
+    "quantity": "10,000"
   },
   {
     "id": "first-night-game-2014",
@@ -411,13 +466,15 @@
     "id": "kerry-wood-20-strikeout-game-2014",
     "title": "Kerry Wood (20-Strikeout Game)",
     "year": "2014",
-    "date": "August 22, 2014"
+    "date": "August 22, 2014",
+    "quantity": "10,000"
   },
   {
     "id": "greg-maddux-3-000th-strikeout-2014",
     "title": "Greg Maddux (3,000th Strikeout)",
     "year": "2014",
-    "date": "September 5, 2014"
+    "date": "September 5, 2014",
+    "quantity": "10,000"
   },
   {
     "id": "darwin-barney-2013",
@@ -429,43 +486,50 @@
     "id": "edwin-jackson-2013",
     "title": "Edwin Jackson",
     "year": "2013",
-    "date": "June 22, 2013"
+    "date": "June 22, 2013",
+    "quantity": "10,000"
   },
   {
     "id": "kyuji-fujikawa-2013",
     "title": "Kyuji Fujikawa",
     "year": "2013",
-    "date": "August 3, 2013"
+    "date": "August 3, 2013",
+    "quantity": "10,000"
   },
   {
     "id": "anthony-rizzo-2013",
     "title": "Anthony Rizzo",
     "year": "2013",
-    "date": "August 31, 2013"
+    "date": "August 31, 2013",
+    "quantity": "10,000"
   },
   {
     "id": "ryan-dempster-2012",
     "title": "Ryan Dempster",
     "year": "2012",
-    "date": "May 9, 2012"
+    "date": "May 9, 2012",
+    "quantity": "10,000"
   },
   {
     "id": "jeff-samardzija-2012",
     "title": "Jeff Samardzija",
     "year": "2012",
-    "date": "May 29, 2012"
+    "date": "May 29, 2012",
+    "quantity": "20,000"
   },
   {
     "id": "david-dejesus-2012",
     "title": "David DeJesus",
     "year": "2012",
-    "date": "June 25, 2012"
+    "date": "June 25, 2012",
+    "quantity": "10,000"
   },
   {
     "id": "starlin-castro-2012",
     "title": "Starlin Castro",
     "year": "2012",
-    "date": "August 13, 2012"
+    "date": "August 13, 2012",
+    "quantity": "10,000"
   },
   {
     "id": "starlin-castro-2011",
@@ -537,55 +601,64 @@
     "id": "derrek-lee-2008",
     "title": "Derrek Lee",
     "year": "2008",
-    "date": "April 18, 2008"
+    "date": "April 18, 2008",
+    "quantity": "10,000"
   },
   {
     "id": "alfonso-soriano-2008",
     "title": "Alfonso Soriano",
     "year": "2008",
-    "date": "May 13, 2008"
+    "date": "May 13, 2008",
+    "quantity": "10,000"
   },
   {
     "id": "kosuke-fukudome-2008",
     "title": "Kosuke Fukudome",
     "year": "2008",
-    "date": "May 27, 2008"
+    "date": "May 27, 2008",
+    "quantity": "10,000"
   },
   {
     "id": "carlos-zambrano-2008",
     "title": "Carlos Zambrano",
     "year": "2008",
-    "date": "September 17, 2008"
+    "date": "September 17, 2008",
+    "quantity": "10,000"
   },
   {
     "id": "lou-piniella-2007",
     "title": "Lou Piniella",
     "year": "2007",
-    "date": "April 15, 2007"
+    "date": "April 15, 2007",
+    "quantity": "10,000"
   },
   {
     "id": "alfonso-soriano-2007",
     "title": "Alfonso Soriano",
     "year": "2007",
-    "date": "May 30, 2007"
+    "date": "May 30, 2007",
+    "quantity": "10,000"
   },
   {
     "id": "michael-barrett-2007",
     "title": "Michael Barrett",
     "year": "2007",
-    "date": "July 1, 2007"
+    "date": "July 1, 2007",
+    "quantity": "10,000"
   },
   {
     "id": "carlos-zambrano-2007",
     "title": "Carlos Zambrano",
     "year": "2007",
-    "date": "July 21, 2007"
+    "date": "July 21, 2007",
+    "quantity": "10,000"
   },
   {
     "id": "aramis-ramirez-2007",
     "title": "Aramis Ramirez",
     "year": "2007",
-    "date": "August 15, 2007"
+    "date": "August 15, 2007",
+    "quantity": "10,000"
   },
   {
     "id": "empire-today-2007",
@@ -597,7 +670,8 @@
     "id": "derrek-lee-2007",
     "title": "Derrek Lee",
     "year": "2007",
-    "date": "September 5, 2007"
+    "date": "September 5, 2007",
+    "quantity": "10,000"
   },
   {
     "id": "sammy-sosa-2002",

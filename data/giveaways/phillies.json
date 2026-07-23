@@ -93,19 +93,22 @@
     "id": "miles-teller-rooster-2022",
     "title": "Miles Teller (Rooster)",
     "year": "2022",
-    "date": "June 1, 2022"
+    "date": "June 1, 2022",
+    "quantity": "1,500"
   },
   {
     "id": "scooby-doo-2021",
     "title": "Scooby-Doo",
     "year": "2021",
-    "date": "August 24, 2021"
+    "date": "August 24, 2021",
+    "quantity": "2,500"
   },
   {
     "id": "schroeder-peanuts-2021",
     "title": "Schroeder (Peanuts)",
     "year": "2021",
-    "date": "May 4, 2021"
+    "date": "May 4, 2021",
+    "quantity": "3,000"
   },
   {
     "id": "mystery-bobblehead-2021",
@@ -129,7 +132,8 @@
     "id": "linus-2019",
     "title": "Linus",
     "year": "2019",
-    "date": "July 31, 2019"
+    "date": "July 31, 2019",
+    "quantity": "3,000"
   },
   {
     "id": "jake-arrieta-jedi-bobble-figurine-2019",
@@ -159,7 +163,8 @@
     "id": "hulk-2018",
     "title": "Hulk",
     "year": "2018",
-    "date": "August 29, 2018"
+    "date": "August 29, 2018",
+    "quantity": "5,000"
   },
   {
     "id": "brad-lidge-2018",
@@ -177,13 +182,15 @@
     "id": "phanatic-iron-throne-2018",
     "title": "Phanatic (Iron Throne)",
     "year": "2018",
-    "date": "June 18, 2018"
+    "date": "June 18, 2018",
+    "quantity": "3,500"
   },
   {
     "id": "ham-porter-2018",
     "title": "\"Ham\" Porter",
     "year": "2018",
-    "date": "June 9, 2018"
+    "date": "June 9, 2018",
+    "quantity": "2,500"
   },
   {
     "id": "han-nola-aaron-nola-star-wars-2018",
@@ -213,19 +220,22 @@
     "id": "charlie-brown-50th-anniversary-2017",
     "title": "Charlie Brown (50th Anniversary)",
     "year": "2017",
-    "date": "July 5, 2017"
+    "date": "July 5, 2017",
+    "quantity": "2,000"
   },
   {
     "id": "phanatic-star-wars-2017",
     "title": "Phanatic (Star Wars)",
     "year": "2017",
-    "date": "June 21, 2017"
+    "date": "June 21, 2017",
+    "quantity": "7,000"
   },
   {
     "id": "phanatic-band-themed-2016",
     "title": "Phanatic (Band Themed)",
     "year": "2016",
-    "date": "2016"
+    "date": "2016",
+    "quantity": "5,000"
   },
   {
     "id": "phoebe-phanatic-stitch-n-pitch-2016",
@@ -243,7 +253,8 @@
     "id": "phanatic-master-phanatic-star-wars-2016",
     "title": "Phanatic (\"Master Phanatic\", Star Wars)",
     "year": "2016",
-    "date": "July 21, 2016"
+    "date": "July 21, 2016",
+    "quantity": "5,000"
   },
   {
     "id": "maikel-franco-2016",

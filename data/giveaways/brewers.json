@@ -3,13 +3,15 @@
     "id": "jacob-misiorowski-2026",
     "title": "Jacob Misiorowski",
     "year": "2026",
-    "date": "April 11, 2026"
+    "date": "April 11, 2026",
+    "quantity": "25,000"
   },
   {
     "id": "sal-frelick-star-wars-2024",
     "title": "Sal Frelick (Star Wars)",
     "year": "2024",
-    "date": "June 15, 2024"
+    "date": "June 15, 2024",
+    "quantity": "30,000"
   },
   {
     "id": "bernies-chalet-snow-globe-2024",
@@ -21,19 +23,22 @@
     "id": "william-contreras-2023",
     "title": "William Contreras",
     "year": "2023",
-    "date": "September 16, 2023"
+    "date": "September 16, 2023",
+    "quantity": "30,000"
   },
   {
     "id": "rowdy-tellez-2023",
     "title": "Rowdy Tellez",
     "year": "2023",
-    "date": "August 26, 2023"
+    "date": "August 26, 2023",
+    "quantity": "30,000"
   },
   {
     "id": "devin-williams-2023",
     "title": "Devin Williams",
     "year": "2023",
-    "date": "August 5, 2023"
+    "date": "August 5, 2023",
+    "quantity": "30,000"
   },
   {
     "id": "cookie-monster-2023",
@@ -63,19 +68,22 @@
     "id": "giannis-antetokounmpo-2022",
     "title": "Giannis Antetokounmpo",
     "year": "2022",
-    "date": "September 11, 2022"
+    "date": "September 11, 2022",
+    "quantity": "35,000"
   },
   {
     "id": "omar-narvaez-2022",
     "title": "Omar Narvaez",
     "year": "2022",
-    "date": "July 24, 2022"
+    "date": "July 24, 2022",
+    "quantity": "35,000"
   },
   {
     "id": "freddy-peralta-2022",
     "title": "Freddy Peralta",
     "year": "2022",
-    "date": "July 10, 2022"
+    "date": "July 10, 2022",
+    "quantity": "35,000"
   },
   {
     "id": "elmo-2022",
@@ -87,80 +95,93 @@
     "id": "corbin-burnes-2022",
     "title": "Corbin Burnes",
     "year": "2022",
-    "date": "June 26, 2022"
+    "date": "June 26, 2022",
+    "quantity": "35,000"
   },
   {
     "id": "brandon-woodruff-2022",
     "title": "Brandon Woodruff",
     "year": "2022",
-    "date": "June 5, 2022"
+    "date": "June 5, 2022",
+    "quantity": "35,000"
   },
   {
     "id": "willy-adames-2022",
     "title": "Willy Adames",
     "year": "2022",
-    "date": "May 22, 2022"
+    "date": "May 22, 2022",
+    "quantity": "35,000"
   },
   {
     "id": "bob-uecker-talking-2021",
     "title": "Bob Uecker (Talking)",
     "year": "2021",
-    "date": "September 26, 2021"
+    "date": "September 26, 2021",
+    "quantity": "35,000"
   },
   {
     "id": "bob-uecker-wwe-2021",
     "title": "Bob Uecker (WWE)",
     "year": "2021",
-    "date": "September 25, 2021"
+    "date": "September 25, 2021",
+    "quantity": "35,000"
   },
   {
     "id": "ryan-braun-50th-anniversary-2021",
     "title": "Ryan Braun (50th Anniversary)",
     "year": "2021",
     "date": "September 5, 2021",
-    "imageUrl": "https://i.ebayimg.com/images/g/m9EAAOSwhDRh4135/s-l1200.jpg"
+    "imageUrl": "https://i.ebayimg.com/images/g/m9EAAOSwhDRh4135/s-l1200.jpg",
+    "quantity": "35,000"
   },
   {
     "id": "lorenzo-cain-jedi-2021",
     "title": "Lorenzo Cain (Jedi)",
     "year": "2021",
-    "date": "September 4, 2021"
+    "date": "September 4, 2021",
+    "quantity": "35,000"
   },
   {
     "id": "ben-sheets-2000s-2021",
     "title": "Ben Sheets (2000s)",
     "year": "2021",
-    "date": "August 22, 2021"
+    "date": "August 22, 2021",
+    "quantity": "35,000"
   },
   {
     "id": "christian-yelich-30-sb-2021",
     "title": "Christian Yelich (30-SB)",
     "year": "2021",
-    "date": "August 8, 2021"
+    "date": "August 8, 2021",
+    "quantity": "35,000"
   },
   {
     "id": "lorenzo-cain-gold-glove-2021",
     "title": "Lorenzo Cain (Gold Glove)",
     "year": "2021",
-    "date": "July 25, 2021"
+    "date": "July 25, 2021",
+    "quantity": "35,000"
   },
   {
     "id": "robin-yount-1990s-2021",
     "title": "Robin Yount (1990s)",
     "year": "2021",
-    "date": "July 11, 2021"
+    "date": "July 11, 2021",
+    "quantity": "35,000"
   },
   {
     "id": "paul-molitor-1980s-2021",
     "title": "Paul Molitor (1980s)",
     "year": "2021",
-    "date": "June 27, 2021"
+    "date": "June 27, 2021",
+    "quantity": "35,000"
   },
   {
     "id": "christian-yelich-40-hr-2021",
     "title": "Christian Yelich (40-HR)",
     "year": "2021",
-    "date": "June 13, 2021"
+    "date": "June 13, 2021",
+    "quantity": "35,000"
   },
   {
     "id": "hank-aaron-1970s-2021",
@@ -184,7 +205,8 @@
     "id": "scooby-doo-2019",
     "title": "Scooby-Doo",
     "year": "2019",
-    "date": "August 24, 2019"
+    "date": "August 24, 2019",
+    "quantity": "5,004"
   },
   {
     "id": "josh-hader-2019",
@@ -448,7 +470,8 @@
     "id": "jonathan-lucroy-doubles-record-2015",
     "title": "Jonathan Lucroy (Doubles Record)",
     "year": "2015",
-    "date": "August 16, 2015"
+    "date": "August 16, 2015",
+    "quantity": "5,000"
   },
   {
     "id": "bob-uecker-2015",
@@ -484,7 +507,8 @@
     "id": "hank-stitch-n-pitch-2015",
     "title": "Hank (Stitch 'N Pitch)",
     "year": "2015",
-    "date": "June 11, 2015"
+    "date": "June 11, 2015",
+    "quantity": "1,400"
   },
   {
     "id": "bud-selig-1970s-2015",
@@ -496,13 +520,15 @@
     "id": "jonathan-lucroy-jedi-luc-2015",
     "title": "Jonathan Lucroy (\"Jedi Luc\")",
     "year": "2015",
-    "date": "May 30, 2015"
+    "date": "May 30, 2015",
+    "quantity": "5,000"
   },
   {
     "id": "hank-mothers-day-2015",
     "title": "Hank (Mother's Day)",
     "year": "2015",
-    "date": "May 10, 2015"
+    "date": "May 10, 2015",
+    "quantity": "1,400"
   },
   {
     "id": "wily-peralta-2015",
@@ -514,7 +540,8 @@
     "id": "jonathan-lucroy-2015",
     "title": "Jonathan Lucroy",
     "year": "2015",
-    "date": "April 20, 2015"
+    "date": "April 20, 2015",
+    "quantity": "5,000"
   },
   {
     "id": "rob-deer-2015",
@@ -532,7 +559,8 @@
     "id": "jean-segura-2014",
     "title": "Jean Segura",
     "year": "2014",
-    "date": "August 24, 2014"
+    "date": "August 24, 2014",
+    "quantity": "6,000"
   },
   {
     "id": "chorizo-2014",
@@ -610,7 +638,8 @@
     "id": "ryan-braun-2013",
     "title": "Ryan Braun",
     "year": "2013",
-    "date": "May 26, 2013"
+    "date": "May 26, 2013",
+    "quantity": "2,000"
   },
   {
     "id": "corey-hart-1913-anniversary-2013",
@@ -634,7 +663,8 @@
     "id": "aramis-ramirez-2012",
     "title": "Aramis Ramirez",
     "year": "2012",
-    "date": "September 16, 2012"
+    "date": "September 16, 2012",
+    "quantity": "5,000"
   },
   {
     "id": "bob-uecker-2012",
@@ -742,7 +772,8 @@
     "id": "miller-lite-beer-vendor-2010",
     "title": "Miller Lite Beer Vendor",
     "year": "2010",
-    "date": "August 28, 2010"
+    "date": "August 28, 2010",
+    "quantity": "15,000"
   },
   {
     "id": "italian-racing-sausage-2010",
@@ -772,7 +803,8 @@
     "id": "bernie-brewer-2010",
     "title": "Bernie Brewer",
     "year": "2010",
-    "date": "April 11, 2010"
+    "date": "April 11, 2010",
+    "quantity": "1,000"
   },
   {
     "id": "jeff-suppan-2010",
@@ -820,7 +852,8 @@
     "id": "ryan-braun-2009",
     "title": "Ryan Braun",
     "year": "2009",
-    "date": "May 3, 2009"
+    "date": "May 3, 2009",
+    "quantity": "1,000"
   },
   {
     "id": "barrelman-mascot-2009",
@@ -880,7 +913,8 @@
     "id": "rickie-weeks-2007",
     "title": "Rickie Weeks",
     "year": "2007",
-    "date": "September 30, 2007"
+    "date": "September 30, 2007",
+    "quantity": "5,000"
   },
   {
     "id": "don-money-2007",
@@ -910,7 +944,8 @@
     "id": "chris-capuano-2007",
     "title": "Chris Capuano",
     "year": "2007",
-    "date": "August 5, 2007"
+    "date": "August 5, 2007",
+    "quantity": "5,000"
   },
   {
     "id": "ben-oglivie-2007",
@@ -940,7 +975,8 @@
     "id": "bill-hall-2007",
     "title": "Bill Hall",
     "year": "2007",
-    "date": "June 24, 2007"
+    "date": "June 24, 2007",
+    "quantity": "5,000"
   },
   {
     "id": "mike-caldwell-2007",
@@ -952,7 +988,8 @@
     "id": "prince-fielder-2007",
     "title": "Prince Fielder",
     "year": "2007",
-    "date": "June 3, 2007"
+    "date": "June 3, 2007",
+    "quantity": "5,000"
   },
   {
     "id": "don-sutton-2007",
@@ -994,7 +1031,8 @@
     "id": "bill-hall-mini-2006",
     "title": "Bill Hall (Mini)",
     "year": "2006",
-    "date": "August 20, 2006"
+    "date": "August 20, 2006",
+    "quantity": "10,000"
   },
   {
     "id": "klement-hot-dog-mascot-2006",
@@ -1012,7 +1050,8 @@
     "id": "brady-clark-mini-2006",
     "title": "Brady Clark (Mini)",
     "year": "2006",
-    "date": "June 11, 2006"
+    "date": "June 11, 2006",
+    "quantity": "10,000"
   },
   {
     "id": "damian-miller-2006",
@@ -1024,7 +1063,8 @@
     "id": "chris-capuano-mini-2006",
     "title": "Chris Capuano (Mini)",
     "year": "2006",
-    "date": "May 20, 2006"
+    "date": "May 20, 2006",
+    "quantity": "10,000"
   },
   {
     "id": "derrick-turnbow-2006",
@@ -1042,7 +1082,8 @@
     "id": "ned-yost-mini-2005",
     "title": "Ned Yost (Mini)",
     "year": "2005",
-    "date": "August 14, 2005"
+    "date": "August 14, 2005",
+    "quantity": "10,000"
   },
   {
     "id": "lyle-overbay-2005",
@@ -1060,13 +1101,15 @@
     "id": "doug-davis-mini-2005",
     "title": "Doug Davis (Mini)",
     "year": "2005",
-    "date": "July 3, 2005"
+    "date": "July 3, 2005",
+    "quantity": "10,000"
   },
   {
     "id": "junior-spivey-mini-2005",
     "title": "Junior Spivey (Mini)",
     "year": "2005",
-    "date": "May 29, 2005"
+    "date": "May 29, 2005",
+    "quantity": "10,000"
   },
   {
     "id": "ben-sheets-2005",
@@ -1078,7 +1121,8 @@
     "id": "craig-counsell-mini-2004",
     "title": "Craig Counsell (Mini)",
     "year": "2004",
-    "date": "August 15, 2004"
+    "date": "August 15, 2004",
+    "quantity": "10,000"
   },
   {
     "id": "jim-gantner-2004",
@@ -1096,31 +1140,36 @@
     "id": "wes-helms-mini-2004",
     "title": "Wes Helms (Mini)",
     "year": "2004",
-    "date": "June 20, 2004"
+    "date": "June 20, 2004",
+    "quantity": "10,000"
   },
   {
     "id": "scott-podsednik-2004",
     "title": "Scott Podsednik",
     "year": "2004",
-    "date": "June 12, 2004"
+    "date": "June 12, 2004",
+    "quantity": "5,000"
   },
   {
     "id": "geoff-jenkins-mini-2004",
     "title": "Geoff Jenkins (Mini)",
     "year": "2004",
-    "date": "May 30, 2004"
+    "date": "May 30, 2004",
+    "quantity": "10,000"
   },
   {
     "id": "italian-sausage-2003",
     "title": "Italian Sausage",
     "year": "2003",
-    "date": "August 24, 2003"
+    "date": "August 24, 2003",
+    "quantity": "10,000"
   },
   {
     "id": "paul-molitor-2003",
     "title": "Paul Molitor",
     "year": "2003",
-    "date": "August 10, 2003"
+    "date": "August 10, 2003",
+    "quantity": "4,000"
   },
   {
     "id": "jeffrey-hammonds-2003",
@@ -1132,7 +1181,8 @@
     "id": "polish-sausage-2003",
     "title": "Polish Sausage",
     "year": "2003",
-    "date": "July 6, 2003"
+    "date": "July 6, 2003",
+    "quantity": "10,000"
   },
   {
     "id": "brat-sausage-2003",
@@ -1144,42 +1194,49 @@
     "id": "hank-aaron-2002",
     "title": "Hank Aaron",
     "year": "2002",
-    "date": "August 11, 2002"
+    "date": "August 11, 2002",
+    "quantity": "10,000"
   },
   {
     "id": "ben-sheets-future-stars-2002",
     "title": "Ben Sheets (Future Stars)",
     "year": "2002",
-    "date": "June 16, 2002"
+    "date": "June 16, 2002",
+    "quantity": "10,000"
   },
   {
     "id": "ben-sheets-2002",
     "title": "Ben Sheets",
     "year": "2002",
-    "date": "June 16, 2002"
+    "date": "June 16, 2002",
+    "quantity": "10,000"
   },
   {
     "id": "richie-sexson-2002",
     "title": "Richie Sexson",
     "year": "2002",
-    "date": "May 26, 2002"
+    "date": "May 26, 2002",
+    "quantity": "10,000"
   },
   {
     "id": "robin-yount-2001",
     "title": "Robin Yount",
     "year": "2001",
-    "date": "August 26, 2001"
+    "date": "August 26, 2001",
+    "quantity": "10,000"
   },
   {
     "id": "bob-uecker-2001",
     "title": "Bob Uecker",
     "year": "2001",
-    "date": "July 29, 2001"
+    "date": "July 29, 2001",
+    "quantity": "10,000"
   },
   {
     "id": "geoff-jenkins-2001",
     "title": "Geoff Jenkins",
     "year": "2001",
-    "date": "June 17, 2001"
+    "date": "June 17, 2001",
+    "quantity": "10,000"
   }
 ]

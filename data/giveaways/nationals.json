@@ -65,7 +65,8 @@
     "id": "jacob-young-2025-8-2",
     "title": "Jacob Young",
     "year": "2025",
-    "date": "August 2, 2025"
+    "date": "August 2, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "josh-gibson-2025",
@@ -109,7 +110,8 @@
     "id": "1924-championship-2024",
     "title": "1924 Championship",
     "year": "2024",
-    "date": "September 14, 2024"
+    "date": "September 14, 2024",
+    "quantity": "20,000"
   },
   {
     "id": "cj-abrams-2024",
@@ -128,7 +130,8 @@
     "id": "mackenzie-gore-2024",
     "title": "MacKenzie Gore",
     "year": "2024",
-    "date": "July 20, 2024"
+    "date": "July 20, 2024",
+    "quantity": "20,000"
   },
   {
     "id": "mike-rizzo-2024",
@@ -155,7 +158,8 @@
     "id": "lane-thomas-sth-only-2024",
     "title": "Lane Thomas (STH Only)",
     "year": "2024",
-    "date": "April 1, 2024"
+    "date": "April 1, 2024",
+    "quantity": "20,000"
   },
   {
     "id": "keibert-ruiz-2023",
@@ -209,7 +213,8 @@
     "id": "josiah-gray-sth-only-2023",
     "title": "Josiah Gray (STH Only)",
     "year": "2023",
-    "date": "April 1, 2023"
+    "date": "April 1, 2023",
+    "quantity": "20,000"
   },
   {
     "id": "wonder-woman-2022",
@@ -243,7 +248,8 @@
     "id": "stephen-strasburg-2022",
     "title": "Stephen Strasburg",
     "year": "2022",
-    "date": "April 8, 2022"
+    "date": "April 8, 2022",
+    "quantity": "20,000"
   },
   {
     "id": "victor-robles-spring-training-2022",
@@ -302,7 +308,8 @@
     "id": "davey-martinez-world-series-2021-4-3",
     "title": "Davey Martinez (World Series)",
     "year": "2021",
-    "date": "April 3, 2021"
+    "date": "April 3, 2021",
+    "quantity": "25,000"
   },
   {
     "id": "anthony-rendon-2019",

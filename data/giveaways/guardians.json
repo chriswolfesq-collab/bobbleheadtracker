@@ -3,49 +3,57 @@
     "id": "tanner-bibee-2025",
     "title": "Tanner Bibee",
     "year": "2025",
-    "date": "May 31, 2025"
+    "date": "May 31, 2025",
+    "quantity": "15,000"
   },
   {
     "id": "larry-doby-2025",
     "title": "Larry Doby",
     "year": "2025",
-    "date": "July 5, 2025"
+    "date": "July 5, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "stephen-vogt-2025",
     "title": "Stephen Vogt",
     "year": "2025",
-    "date": "July 19, 2025"
+    "date": "July 19, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "tom-hamilton-2025",
     "title": "Tom Hamilton",
     "year": "2025",
-    "date": "August 16, 2025"
+    "date": "August 16, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "jose-ramirez-2024",
     "title": "Jose Ramirez",
     "year": "2024",
-    "date": "May 18, 2024"
+    "date": "May 18, 2024",
+    "quantity": "12,500"
   },
   {
     "id": "josh-naylor-2024",
     "title": "Josh Naylor",
     "year": "2024",
-    "date": "June 22, 2024"
+    "date": "June 22, 2024",
+    "quantity": "15,000"
   },
   {
     "id": "triston-mckenzie-2024",
     "title": "Triston McKenzie",
     "year": "2024",
-    "date": "July 6, 2024"
+    "date": "July 6, 2024",
+    "quantity": "15,000"
   },
   {
     "id": "cc-sabathia-2024",
     "title": "CC Sabathia",
     "year": "2024",
-    "date": "August 3, 2024"
+    "date": "August 3, 2024",
+    "quantity": "15,000"
   },
   {
     "id": "peanuts-lucy-2023",
@@ -59,21 +67,24 @@
     "title": "Andrés Giménez",
     "year": "2023",
     "date": "June 24, 2023",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "steven-kwan-2023",
     "title": "Steven Kwan",
     "year": "2023",
     "date": "July 22, 2023",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "manny-ramirez-2023",
     "title": "Manny Ramirez",
     "year": "2023",
     "date": "August 19, 2023",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "linus-2023",
@@ -87,20 +98,23 @@
     "title": "Emmanuel Clase",
     "year": "2023",
     "date": "September 2, 2023",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "kid-cudi-2023",
     "title": "Kid Cudi",
     "year": "2023",
-    "date": "September 22, 2023"
+    "date": "September 22, 2023",
+    "quantity": "10,000"
   },
   {
     "id": "aaron-civale-2022",
     "title": "Aaron Civale",
     "year": "2022",
     "date": "June 11, 2022",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "charlie-brown-2022",
@@ -114,7 +128,8 @@
     "title": "José Ramírez",
     "year": "2022",
     "date": "July 16, 2022",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "15,000"
   },
   {
     "id": "franmil-reyes-2022",
@@ -135,35 +150,40 @@
     "title": "Roberto Perez",
     "year": "2021",
     "date": "June 12, 2021",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "shane-bieber-cy-young-award-2021",
     "title": "Shane Bieber Cy Young Award",
     "year": "2021",
     "date": "August 21, 2021",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "jose-ramirez-2019",
     "title": "Jose Ramirez",
     "year": "2019",
     "date": "March 9, 2019",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "2,000"
   },
   {
     "id": "francisco-lindor-2019",
     "title": "Francisco Lindor",
     "year": "2019",
     "date": "May 25, 2019",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "15,000"
   },
   {
     "id": "mike-clevinger-2019",
     "title": "Mike Clevinger",
     "year": "2019",
     "date": "June 5, 2019",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "trevor-bauer-2019",
@@ -177,7 +197,8 @@
     "title": "Sandy Alomar",
     "year": "2019",
     "date": "August 24, 2019",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "trevor-bauer-2018",
@@ -191,63 +212,72 @@
     "title": "Corey Kluber",
     "year": "2018",
     "date": "May 28, 2018",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "15,000"
   },
   {
     "id": "andrew-miller-2018",
     "title": "Andrew Miller",
     "year": "2018",
     "date": "June 16, 2018",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "carlos-carrasco-2018",
     "title": "Carlos Carrasco",
     "year": "2018",
     "date": "July 12, 2018",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "edwin-encarnacion-2018",
     "title": "Edwin Encarnacion",
     "year": "2018",
     "date": "August 29, 2018",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "spring-training-corey-kluber-2017",
     "title": "Spring Training Corey Kluber",
     "year": "2017",
     "date": "March 11, 2017",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "2,000"
   },
   {
     "id": "jose-ramirez-2017",
     "title": "Jose Ramirez",
     "year": "2017",
     "date": "May 27, 2017",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "francisco-lindor-2017",
     "title": "Francisco Lindor",
     "year": "2017",
     "date": "July 4, 2017",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "15,000"
   },
   {
     "id": "jason-kipnis-2017",
     "title": "Jason Kipnis",
     "year": "2017",
     "date": "July 22, 2017",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "terry-francona-2017",
     "title": "Terry Francona",
     "year": "2017",
     "date": "August 23, 2017",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "jason-kipnis-2016",
@@ -261,7 +291,8 @@
     "title": "Yan Gomes",
     "year": "2016",
     "date": "July 9, 2016",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "hall-of-fame-inductee-2016",
@@ -275,49 +306,56 @@
     "title": "Bob Feller",
     "year": "2016",
     "date": "August 13, 2016",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "michael-brantley-2015-3-7",
     "title": "Michael Brantley",
     "year": "2015",
     "date": "March 7, 2015",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "1,500"
   },
   {
     "id": "corey-kluber-2015",
     "title": "Corey Kluber",
     "year": "2015",
     "date": "June 6, 2015",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "17,500"
   },
   {
     "id": "carlos-santana-2015",
     "title": "Carlos Santana",
     "year": "2015",
     "date": "July 8, 2015",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "10,000"
   },
   {
     "id": "michael-brantley-2015-8-8",
     "title": "Michael Brantley",
     "year": "2015",
     "date": "August 8, 2015",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "15,000"
   },
   {
     "id": "terry-francona-red-scooter-2015",
     "title": "Terry Francona Red Scooter",
     "year": "2015",
     "date": "September 12, 2015",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "10,000"
   },
   {
     "id": "orel-hershiser-2014",
     "title": "Orel Hershiser",
     "year": "2014",
     "date": "May 3, 2014",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "10,000"
   },
   {
     "id": "brohio-2014",
@@ -331,70 +369,80 @@
     "title": "Michael Bourn",
     "year": "2014",
     "date": "June 3, 2014",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "10,000"
   },
   {
     "id": "jason-kipnis-2014",
     "title": "Jason Kipnis",
     "year": "2014",
     "date": "July 8, 2014",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "michael-brantley-2014",
     "title": "Michael Brantley",
     "year": "2014",
     "date": "September 1, 2014",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "12,500"
   },
   {
     "id": "albert-belle-2013",
     "title": "Albert Belle",
     "year": "2013",
     "date": "June 1, 2013",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "10,000"
   },
   {
     "id": "omar-vizquel-2013",
     "title": "Omar Vizquel",
     "year": "2013",
     "date": "July 8, 2013",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "10,000"
   },
   {
     "id": "joe-carter-2012",
     "title": "Joe Carter",
     "year": "2012",
     "date": "May 20, 2012",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "15,000"
   },
   {
     "id": "carlos-baerga-2012",
     "title": "Carlos Baerga",
     "year": "2012",
     "date": "June 3, 2012",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "15,000"
   },
   {
     "id": "asdrubal-cabrera-2012",
     "title": "Asdrubal Cabrera",
     "year": "2012",
     "date": "June 18, 2012",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "15,000"
   },
   {
     "id": "sandy-alomar-jr-2012",
     "title": "Sandy Alomar Jr.",
     "year": "2012",
     "date": "July 4, 2012",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "15,000"
   },
   {
     "id": "gaylord-perry-2012",
     "title": "Gaylord Perry",
     "year": "2012",
     "date": "August 12, 2012",
-    "imageUrl": null
+    "imageUrl": null,
+    "quantity": "15,000"
   },
   {
     "id": "mike-hargrove-2011",

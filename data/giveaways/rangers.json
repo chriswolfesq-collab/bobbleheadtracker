@@ -9,91 +9,106 @@
     "id": "nathan-eovaldi-flying-ace-2026",
     "title": "Nathan Eovaldi (Flying Ace)",
     "year": "2026",
-    "date": "September 16, 2026"
+    "date": "September 16, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "powerade-bath-2026",
     "title": "Powerade Bath",
     "year": "2026",
-    "date": "September 6, 2026"
+    "date": "September 6, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "block-captain-2026",
     "title": "Block Captain",
     "year": "2026",
-    "date": "August 21, 2026"
+    "date": "August 21, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "nolan-ryan-brawl-2026",
     "title": "Nolan Ryan (Brawl)",
     "year": "2026",
-    "date": "July 20, 2026"
+    "date": "July 20, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "wyatt-langford-sliding-catch-2026",
     "title": "Wyatt Langford (Sliding Catch)",
     "year": "2026",
-    "date": "July 9, 2026"
+    "date": "July 9, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "corey-seager-swing-action-2026",
     "title": "Corey Seager (Swing Action)",
     "year": "2026",
-    "date": "July 2, 2026"
+    "date": "July 2, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "jacob-degrom-city-connect-2026",
     "title": "Jacob deGrom (City Connect)",
     "year": "2026",
-    "date": "June 19, 2026"
+    "date": "June 19, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "brandon-nimmo-bull-riding-2026",
     "title": "Brandon Nimmo (Bull Riding)",
     "year": "2026",
-    "date": "June 7, 2026"
+    "date": "June 7, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "grogu-star-wars-2026",
     "title": "Grogu (Star Wars)",
     "year": "2026",
-    "date": "May 31, 2026"
+    "date": "May 31, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "rangers-captain-kubota-2026",
     "title": "Rangers Captain (Kubota)",
     "year": "2026",
-    "date": "May 11, 2026"
+    "date": "May 11, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "jack-leiter-city-connect-2026",
     "title": "Jack Leiter (City Connect)",
     "year": "2026",
-    "date": "May 8, 2026"
+    "date": "May 8, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "nathan-eovaldi-city-connect-2026",
     "title": "Nathan Eovaldi (City Connect)",
     "year": "2026",
-    "date": "April 24, 2026"
+    "date": "April 24, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "ivan-pudge-rodriguez-baseball-card-2026",
     "title": "Ivan \"Pudge\" Rodriguez (Baseball Card)",
     "year": "2026",
-    "date": "April 22, 2026"
+    "date": "April 22, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "retro-ceramic-2026",
     "title": "Retro Ceramic",
     "year": "2026",
-    "date": "April 8, 2026"
+    "date": "April 8, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "dot-race-results-2026",
     "title": "Dot Race Results",
     "year": "2026",
-    "date": "April 4, 2026"
+    "date": "April 4, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "elvis-andrus-retirement-2025",
@@ -236,7 +251,8 @@
     "id": "adolis-garcia-call-of-duty-2024",
     "title": "Adolis Garcia (Call of Duty)",
     "year": "2024",
-    "date": "May 15, 2024"
+    "date": "May 15, 2024",
+    "quantity": "15,000"
   },
   {
     "id": "corey-seager-replica-world-series-ring-2024",
@@ -276,7 +292,8 @@
     "id": "evan-carter-2023-alcs-the-catch-2024",
     "title": "Evan Carter (2023 ALCS The Catch)",
     "year": "2024",
-    "date": "April 8, 2024"
+    "date": "April 8, 2024",
+    "quantity": "15,000"
   },
   {
     "id": "globe-life-field-stadium-replica-2023",
@@ -309,7 +326,8 @@
     "id": "jon-gray-shark-week-2023",
     "title": "Jon Gray (Shark Week)",
     "year": "2023",
-    "date": "July 17, 2023"
+    "date": "July 17, 2023",
+    "quantity": "15,000"
   },
   {
     "id": "martin-perez-2023",
@@ -322,7 +340,8 @@
     "id": "rangers-captain-20th-anniversary-2023",
     "title": "Rangers Captain (20th Anniversary)",
     "year": "2023",
-    "date": "July 1, 2023"
+    "date": "July 1, 2023",
+    "quantity": "15,000"
   },
   {
     "id": "jacob-degrom-city-connect-3-of-3-2023",
@@ -335,7 +354,8 @@
     "id": "nathaniel-lowe-silver-slugger-2023",
     "title": "Nathaniel Lowe (Silver Slugger)",
     "year": "2023",
-    "date": "June 3, 2023"
+    "date": "June 3, 2023",
+    "quantity": "15,000"
   },
   {
     "id": "corey-seager-city-connect-2-of-3-2023",
@@ -424,7 +444,8 @@
     "id": "corey-seager-2022",
     "title": "Corey Seager",
     "year": "2022",
-    "date": "July 9, 2022"
+    "date": "July 9, 2022",
+    "quantity": "15,000"
   },
   {
     "id": "mount-crushmore-statue-2022",
@@ -444,7 +465,8 @@
     "id": "adolis-garcia-el-bombi-al-rookie-of-the-year-2022",
     "title": "Adolis Garcia (El Bombi AL Rookie of the Year)",
     "year": "2022",
-    "date": "June 13, 2022"
+    "date": "June 13, 2022",
+    "quantity": "15,000"
   },
   {
     "id": "jim-sundberg-50th-anniversary-2022",
@@ -518,7 +540,8 @@
     "id": "adrian-beltre-texas-legend-2021",
     "title": "Adrián Beltre (Texas Legend)",
     "year": "2021",
-    "date": "April 10, 2021"
+    "date": "April 10, 2021",
+    "quantity": "7,000"
   },
   {
     "id": "mike-minor-lance-lynn-dueling-aces-2020",
@@ -705,7 +728,8 @@
     "id": "rougned-odor-rougie-smokey-the-horse-2018",
     "title": "Rougned Odor (Rougie & Smokey the Horse)",
     "year": "2018",
-    "date": "June 30, 2018"
+    "date": "June 30, 2018",
+    "quantity": "15,000"
   },
   {
     "id": "adrian-beltre-best-friends-1-of-2-2018",
@@ -745,7 +769,8 @@
     "id": "adrian-beltre-home-run-counter-2018",
     "title": "Adrian Beltre (Home Run Counter)",
     "year": "2018",
-    "date": "March 31, 2018"
+    "date": "March 31, 2018",
+    "quantity": "15,000"
   },
   {
     "id": "jonathan-lucroy-star-wars-master-lucroy-2017",

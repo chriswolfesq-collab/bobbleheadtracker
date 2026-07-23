@@ -3,7 +3,8 @@
     "id": "byron-buxton-2026",
     "title": "Byron Buxton",
     "year": "2026",
-    "date": "June 27, 2026"
+    "date": "June 27, 2026",
+    "quantity": "10,000"
   },
   {
     "id": "grogu-star-wars-theme-ticket-2026",
@@ -15,13 +16,15 @@
     "id": "byron-buxton-2025",
     "title": "Byron Buxton",
     "year": "2025",
-    "date": "July 12, 2025"
+    "date": "July 12, 2025",
+    "quantity": "10,000"
   },
   {
     "id": "royce-lewis-2025",
     "title": "Royce Lewis",
     "year": "2025",
-    "date": "May 24, 2025"
+    "date": "May 24, 2025",
+    "quantity": "10,000"
   },
   {
     "id": "carlos-correa-2025",
@@ -33,31 +36,36 @@
     "id": "sugar-skull-2024",
     "title": "Sugar Skull",
     "year": "2024",
-    "date": "September 15, 2024"
+    "date": "September 15, 2024",
+    "quantity": "10,000"
   },
   {
     "id": "pablo-lopez-2024",
     "title": "Pablo Lopez",
     "year": "2024",
-    "date": "July 6, 2024"
+    "date": "July 6, 2024",
+    "quantity": "10,000"
   },
   {
     "id": "jhoan-duran-2024",
     "title": "Jhoan Duran",
     "year": "2024",
-    "date": "May 25, 2024"
+    "date": "May 25, 2024",
+    "quantity": "10,000"
   },
   {
     "id": "carlos-correa-2023",
     "title": "Carlos Correa",
     "year": "2023",
-    "date": "July 7, 2023"
+    "date": "July 7, 2023",
+    "quantity": "10,000"
   },
   {
     "id": "joe-ryan-2023",
     "title": "Joe Ryan",
     "year": "2023",
-    "date": "June 3, 2023"
+    "date": "June 3, 2023",
+    "quantity": "10,000"
   },
   {
     "id": "batman-2023",
@@ -69,19 +77,22 @@
     "id": "byron-buxton-2022",
     "title": "Byron Buxton",
     "year": "2022",
-    "date": "August 27, 2022"
+    "date": "August 27, 2022",
+    "quantity": "10,000"
   },
   {
     "id": "tony-oliva-2022",
     "title": "Tony Oliva",
     "year": "2022",
-    "date": "August 6, 2022"
+    "date": "August 6, 2022",
+    "quantity": "10,000"
   },
   {
     "id": "jim-kaat-2022",
     "title": "Jim Kaat",
     "year": "2022",
-    "date": "July 16, 2022"
+    "date": "July 16, 2022",
+    "quantity": "10,000"
   },
   {
     "id": "big-bird-twins-2022",
@@ -99,13 +110,15 @@
     "id": "justin-morneau-hall-of-fame-2021",
     "title": "Justin Morneau (Hall of Fame)",
     "year": "2021",
-    "date": "September 25, 2021"
+    "date": "September 25, 2021",
+    "quantity": "10,000"
   },
   {
     "id": "josh-donaldson-bringer-of-rain-2021",
     "title": "Josh Donaldson (\"Bringer of Rain\")",
     "year": "2021",
-    "date": "July 23, 2021"
+    "date": "July 23, 2021",
+    "quantity": "10,000"
   },
   {
     "id": "30-hr-bomba-club-2021",
@@ -123,25 +136,29 @@
     "id": "joe-mauer-2019-9-7",
     "title": "Joe Mauer",
     "year": "2019",
-    "date": "September 7, 2019"
+    "date": "September 7, 2019",
+    "quantity": "10,000"
   },
   {
     "id": "joe-mauer-2019-8-24",
     "title": "Joe Mauer",
     "year": "2019",
-    "date": "August 24, 2019"
+    "date": "August 24, 2019",
+    "quantity": "10,000"
   },
   {
     "id": "joe-nathan-hall-of-fame-2019",
     "title": "Joe Nathan (Hall of Fame)",
     "year": "2019",
-    "date": "August 3, 2019"
+    "date": "August 3, 2019",
+    "quantity": "10,000"
   },
   {
     "id": "joe-mauer-2019-7-19",
     "title": "Joe Mauer",
     "year": "2019",
-    "date": "July 19, 2019"
+    "date": "July 19, 2019",
+    "quantity": "10,000"
   },
   {
     "id": "tc-mascot-2019",
@@ -159,7 +176,8 @@
     "id": "joe-mauer-2019-5-24",
     "title": "Joe Mauer",
     "year": "2019",
-    "date": "May 24, 2019"
+    "date": "May 24, 2019",
+    "quantity": "10,000"
   },
   {
     "id": "jim-thome-babe-dual-2018",
@@ -171,25 +189,29 @@
     "id": "johan-santana-hall-of-fame-2018",
     "title": "Johan Santana (Hall of Fame)",
     "year": "2018",
-    "date": "August 4, 2018"
+    "date": "August 4, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "eddie-rosario-nothing-falls-but-raindrops-2018",
     "title": "Eddie Rosario (\"Nothing Falls But Raindrops\")",
     "year": "2018",
-    "date": "July 13, 2018"
+    "date": "July 13, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "byron-buxton-nothing-falls-but-raindrops-2018",
     "title": "Byron Buxton (\"Nothing Falls But Raindrops\")",
     "year": "2018",
-    "date": "June 22, 2018"
+    "date": "June 22, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "max-kepler-nothing-falls-but-raindrops-2018",
     "title": "Max Kepler (\"Nothing Falls But Raindrops\")",
     "year": "2018",
-    "date": "June 1, 2018"
+    "date": "June 1, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "joe-solo-mauer-star-wars-2018",
@@ -201,19 +223,22 @@
     "id": "michael-cuddyer-hall-of-fame-2017",
     "title": "Michael Cuddyer (Hall of Fame)",
     "year": "2017",
-    "date": "August 19, 2017"
+    "date": "August 19, 2017",
+    "quantity": "10,000"
   },
   {
     "id": "rod-carew-2017",
     "title": "Rod Carew",
     "year": "2017",
-    "date": "August 18, 2017"
+    "date": "August 18, 2017",
+    "quantity": "10,000"
   },
   {
     "id": "tc-mascot-2017",
     "title": "T.C. (Mascot)",
     "year": "2017",
-    "date": "August 6, 2017"
+    "date": "August 6, 2017",
+    "quantity": "10,000"
   },
   {
     "id": "brian-dozier-stormtrooper-2017",
@@ -225,7 +250,8 @@
     "id": "rocket-raccoon-2017",
     "title": "Rocket Raccoon",
     "year": "2017",
-    "date": "May 6, 2017"
+    "date": "May 6, 2017",
+    "quantity": "10,000"
   },
   {
     "id": "twins-vintage-2016",
@@ -237,19 +263,22 @@
     "id": "torii-hunter-hall-of-fame-2016",
     "title": "Torii Hunter (Hall of Fame)",
     "year": "2016",
-    "date": "July 16, 2016"
+    "date": "July 16, 2016",
+    "quantity": "10,000"
   },
   {
     "id": "ervin-santana-2016",
     "title": "Ervin Santana",
     "year": "2016",
-    "date": "July 2, 2016"
+    "date": "July 2, 2016",
+    "quantity": "10,000"
   },
   {
     "id": "miguel-sano-2016",
     "title": "Miguel Sano",
     "year": "2016",
-    "date": "June 18, 2016"
+    "date": "June 18, 2016",
+    "quantity": "10,000"
   },
   {
     "id": "trevor-plouffe-skywalker-star-wars-2016",
@@ -267,49 +296,57 @@
     "id": "brian-dozier-2015",
     "title": "Brian Dozier",
     "year": "2015",
-    "date": "July 25, 2015"
+    "date": "July 25, 2015",
+    "quantity": "10,000"
   },
   {
     "id": "phil-hughes-2015",
     "title": "Phil Hughes",
     "year": "2015",
-    "date": "July 11, 2015"
+    "date": "July 11, 2015",
+    "quantity": "10,000"
   },
   {
     "id": "paul-molitor-2015",
     "title": "Paul Molitor",
     "year": "2015",
-    "date": "June 19, 2015"
+    "date": "June 19, 2015",
+    "quantity": "10,000"
   },
   {
     "id": "phil-hughes-star-wars-2015",
     "title": "Phil Hughes (Star Wars)",
     "year": "2015",
-    "date": "May 4, 2015"
+    "date": "May 4, 2015",
+    "quantity": "10,000"
   },
   {
     "id": "glen-perkins-2014-all-star-game-2014",
     "title": "Glen Perkins (2014 All-Star Game)",
     "year": "2014",
-    "date": "September 6, 2014"
+    "date": "September 6, 2014",
+    "quantity": "10,000"
   },
   {
     "id": "tom-brunansky-1985-all-star-game-2014",
     "title": "Tom Brunansky (1985 All-Star Game)",
     "year": "2014",
-    "date": "July 5, 2014"
+    "date": "July 5, 2014",
+    "quantity": "10,000"
   },
   {
     "id": "lou-gehrig-2014",
     "title": "Lou Gehrig",
     "year": "2014",
-    "date": "July 4, 2014"
+    "date": "July 4, 2014",
+    "quantity": "10,000"
   },
   {
     "id": "harmon-killebrew-1965-all-star-game-2014",
     "title": "Harmon Killebrew (1965 All-Star Game)",
     "year": "2014",
-    "date": "June 20, 2014"
+    "date": "June 20, 2014",
+    "quantity": "10,000"
   },
   {
     "id": "snoopy-all-star-game-figurine-2014",
@@ -321,13 +358,15 @@
     "id": "joe-mauer-justin-morneau-double-2013",
     "title": "Joe Mauer & Justin Morneau (Double)",
     "year": "2013",
-    "date": "July 19, 2013"
+    "date": "July 19, 2013",
+    "quantity": "10,000"
   },
   {
     "id": "josh-willingham-willing-hammer-2013",
     "title": "Josh Willingham (\"Willing-Hammer\")",
     "year": "2013",
-    "date": "May 10, 2013"
+    "date": "May 10, 2013",
+    "quantity": "10,000"
   },
   {
     "id": "ron-gant-kent-hrbek-dual-2011",
@@ -381,7 +420,8 @@
     "id": "rick-aguilera-2008",
     "title": "Rick Aguilera",
     "year": "2008",
-    "date": "September 6, 2008"
+    "date": "September 6, 2008",
+    "quantity": "10,000"
   },
   {
     "id": "jack-morris-2008",
@@ -393,7 +433,8 @@
     "id": "delmon-young-2008",
     "title": "Delmon Young",
     "year": "2008",
-    "date": "July 19, 2008"
+    "date": "July 19, 2008",
+    "quantity": "10,000"
   },
   {
     "id": "paul-molitor-2008",
@@ -405,13 +446,15 @@
     "id": "dan-gladden-2008",
     "title": "Dan Gladden",
     "year": "2008",
-    "date": "June 20, 2008"
+    "date": "June 20, 2008",
+    "quantity": "10,000"
   },
   {
     "id": "ron-gardenhire-2008",
     "title": "Ron Gardenhire",
     "year": "2008",
-    "date": "May 4, 2008"
+    "date": "May 4, 2008",
+    "quantity": "10,000"
   },
   {
     "id": "random-season-2008",
@@ -423,7 +466,8 @@
     "id": "michael-cuddyer-2007",
     "title": "Michael Cuddyer",
     "year": "2007",
-    "date": "September 15, 2007"
+    "date": "September 15, 2007",
+    "quantity": "10,000"
   },
   {
     "id": "kirby-puckett-2007",
@@ -435,13 +479,15 @@
     "id": "gary-gaetti-2007",
     "title": "Gary Gaetti",
     "year": "2007",
-    "date": "August 19, 2007"
+    "date": "August 19, 2007",
+    "quantity": "10,000"
   },
   {
     "id": "justin-morneau-al-mvp-2007",
     "title": "Justin Morneau (AL MVP)",
     "year": "2007",
-    "date": "July 20, 2007"
+    "date": "July 20, 2007",
+    "quantity": "10,000"
   },
   {
     "id": "bert-blyleven-2007",
@@ -453,7 +499,8 @@
     "id": "joe-mauer-al-batting-champ-2007",
     "title": "Joe Mauer (AL Batting Champ)",
     "year": "2007",
-    "date": "June 9, 2007"
+    "date": "June 9, 2007",
+    "quantity": "10,000"
   },
   {
     "id": "earl-battey-season-ticket-2007",
@@ -471,7 +518,8 @@
     "id": "jack-morris-2006",
     "title": "Jack Morris",
     "year": "2006",
-    "date": "September 9, 2006"
+    "date": "September 9, 2006",
+    "quantity": "10,000"
   },
   {
     "id": "tony-oliva-2006",
@@ -483,13 +531,15 @@
     "id": "billy-martin-2006",
     "title": "Billy Martin",
     "year": "2006",
-    "date": "July 29, 2006"
+    "date": "July 29, 2006",
+    "quantity": "10,000"
   },
   {
     "id": "brad-radke-2006",
     "title": "Brad Radke",
     "year": "2006",
-    "date": "June 11, 2006"
+    "date": "June 11, 2006",
+    "quantity": "10,000"
   },
   {
     "id": "kent-hrbek-2006",
@@ -501,7 +551,8 @@
     "id": "torii-hunter-gold-glove-2006",
     "title": "Torii Hunter (Gold Glove)",
     "year": "2006",
-    "date": "May 5, 2006"
+    "date": "May 5, 2006",
+    "quantity": "10,000"
   },
   {
     "id": "harmon-killebrew-sth-red-variant-2006",
@@ -532,31 +583,36 @@
     "id": "johan-santana-2005-9-16",
     "title": "Johan Santana",
     "year": "2005",
-    "date": "September 16, 2005"
+    "date": "September 16, 2005",
+    "quantity": "10,000"
   },
   {
     "id": "johan-santana-2005-7-2",
     "title": "Johan Santana",
     "year": "2005",
-    "date": "July 2, 2005"
+    "date": "July 2, 2005",
+    "quantity": "10,000"
   },
   {
     "id": "joe-nathan-2005",
     "title": "Joe Nathan",
     "year": "2005",
-    "date": "July 1, 2005"
+    "date": "July 1, 2005",
+    "quantity": "10,000"
   },
   {
     "id": "harmon-killebrew-2005",
     "title": "Harmon Killebrew",
     "year": "2005",
-    "date": "June 19, 2005"
+    "date": "June 19, 2005",
+    "quantity": "1,000"
   },
   {
     "id": "jacque-jones-2005",
     "title": "Jacque Jones",
     "year": "2005",
-    "date": "May 15, 2005"
+    "date": "May 15, 2005",
+    "quantity": "10,000"
   },
   {
     "id": "random-season-2005",
@@ -568,31 +624,36 @@
     "id": "joe-mauer-2004",
     "title": "Joe Mauer",
     "year": "2004",
-    "date": "October 2, 2004"
+    "date": "October 2, 2004",
+    "quantity": "10,000"
   },
   {
     "id": "walter-johnson-2004",
     "title": "Walter Johnson",
     "year": "2004",
-    "date": "September 19, 2004"
+    "date": "September 19, 2004",
+    "quantity": "10,000"
   },
   {
     "id": "paul-molitor-2004",
     "title": "Paul Molitor",
     "year": "2004",
-    "date": "August 21, 2004"
+    "date": "August 21, 2004",
+    "quantity": "10,000"
   },
   {
     "id": "al-newman-2004",
     "title": "Al Newman",
     "year": "2004",
-    "date": "July 9, 2004"
+    "date": "July 9, 2004",
+    "quantity": "10,000"
   },
   {
     "id": "shannon-stewart-2004",
     "title": "Shannon Stewart",
     "year": "2004",
-    "date": "June 6, 2004"
+    "date": "June 6, 2004",
+    "quantity": "10,000"
   },
   {
     "id": "random-season-2004-3-16",
@@ -622,25 +683,29 @@
     "id": "corey-koskie-super-hero-2003",
     "title": "Corey Koskie (Super Hero)",
     "year": "2003",
-    "date": "August 22, 2003"
+    "date": "August 22, 2003",
+    "quantity": "10,000"
   },
   {
     "id": "corey-koskie-2003",
     "title": "Corey Koskie",
     "year": "2003",
-    "date": "August 3, 2003"
+    "date": "August 3, 2003",
+    "quantity": "10,000"
   },
   {
     "id": "torii-hunter-2003",
     "title": "Torii Hunter",
     "year": "2003",
-    "date": "July 4, 2003"
+    "date": "July 4, 2003",
+    "quantity": "10,000"
   },
   {
     "id": "eddie-guardado-2003",
     "title": "Eddie Guardado",
     "year": "2003",
-    "date": "June 27, 2003"
+    "date": "June 27, 2003",
+    "quantity": "10,000"
   },
   {
     "id": "random-season-2003-3-13",
@@ -664,19 +729,22 @@
     "id": "tom-kelly-2002",
     "title": "Tom Kelly",
     "year": "2002",
-    "date": "August 4, 2002"
+    "date": "August 4, 2002",
+    "quantity": "10,000"
   },
   {
     "id": "jim-kaat-2002",
     "title": "Jim Kaat",
     "year": "2002",
-    "date": "July 12, 2002"
+    "date": "July 12, 2002",
+    "quantity": "10,000"
   },
   {
     "id": "doug-mientkiewicz-2002",
     "title": "Doug Mientkiewicz",
     "year": "2002",
-    "date": "June 9, 2002"
+    "date": "June 9, 2002",
+    "quantity": "10,000"
   },
   {
     "id": "random-season-2002-3-16",
@@ -694,48 +762,56 @@
     "id": "kirby-puckett-2001",
     "title": "Kirby Puckett",
     "year": "2001",
-    "date": "August 19, 2001"
+    "date": "August 19, 2001",
+    "quantity": "15,000"
   },
   {
     "id": "dave-winfield-2001",
     "title": "Dave Winfield",
     "year": "2001",
-    "date": "July 22, 2001"
+    "date": "July 22, 2001",
+    "quantity": "10,000"
   },
   {
     "id": "rod-carew-2001",
     "title": "Rod Carew",
     "year": "2001",
-    "date": "July 6, 2001"
+    "date": "July 6, 2001",
+    "quantity": "10,000"
   },
   {
     "id": "bert-blyleven-2001",
     "title": "Bert Blyleven",
     "year": "2001",
-    "date": "June 8, 2001"
+    "date": "June 8, 2001",
+    "quantity": "10,000"
   },
   {
     "id": "kirby-puckett-2000",
     "title": "Kirby Puckett",
     "year": "2000",
-    "date": "August 13, 2000"
+    "date": "August 13, 2000",
+    "quantity": "10,000"
   },
   {
     "id": "tony-oliva-2000",
     "title": "Tony Oliva",
     "year": "2000",
-    "date": "July 21, 2000"
+    "date": "July 21, 2000",
+    "quantity": "10,000"
   },
   {
     "id": "kent-hrbek-2000",
     "title": "Kent Hrbek",
     "year": "2000",
-    "date": "June 17, 2000"
+    "date": "June 17, 2000",
+    "quantity": "5,000"
   },
   {
     "id": "harmon-killebrew-2000",
     "title": "Harmon Killebrew",
     "year": "2000",
-    "date": "June 9, 2000"
+    "date": "June 9, 2000",
+    "quantity": "5,000"
   }
 ]

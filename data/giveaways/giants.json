@@ -9,31 +9,36 @@
     "id": "barry-bonds-2025",
     "title": "Barry Bonds",
     "year": "2025",
-    "date": "July 12, 2025"
+    "date": "July 12, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "stephen-curry-2025",
     "title": "Stephen Curry",
     "year": "2025",
-    "date": "July 26, 2025"
+    "date": "July 26, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "heliot-ramos-2025",
     "title": "Heliot Ramos",
     "year": "2025",
-    "date": "August 17, 2025"
+    "date": "August 17, 2025",
+    "quantity": "20,000"
   },
   {
     "id": "camilo-doval-2024",
     "title": "Camilo Doval",
     "year": "2024",
-    "date": "April 6, 2024"
+    "date": "April 6, 2024",
+    "quantity": "15,000"
   },
   {
     "id": "patrick-bailey-2024",
     "title": "Patrick Bailey",
     "year": "2024",
-    "date": "April 20, 2024"
+    "date": "April 20, 2024",
+    "quantity": "15,000"
   },
   {
     "id": "godzilla-2024",
@@ -45,19 +50,22 @@
     "id": "willie-mays-2024",
     "title": "Willie Mays",
     "year": "2024",
-    "date": "May 31, 2024"
+    "date": "May 31, 2024",
+    "quantity": "20,000"
   },
   {
     "id": "lamonte-wade-jr-2024",
     "title": "LaMonte Wade Jr.",
     "year": "2024",
-    "date": "June 2, 2024"
+    "date": "June 2, 2024",
+    "quantity": "20,000"
   },
   {
     "id": "jung-hoo-lee-2024",
     "title": "Jung Hoo Lee",
     "year": "2024",
-    "date": "July 28, 2024"
+    "date": "July 28, 2024",
+    "quantity": "20,000"
   },
   {
     "id": "superman-2023",
@@ -81,37 +89,43 @@
     "id": "lou-seal-splash-hits-counter-2023",
     "title": "Lou Seal (Splash Hits Counter)",
     "year": "2023",
-    "date": "May 20, 2023"
+    "date": "May 20, 2023",
+    "quantity": "20,000"
   },
   {
     "id": "logan-webb-2023",
     "title": "Logan Webb",
     "year": "2023",
-    "date": "June 3, 2023"
+    "date": "June 3, 2023",
+    "quantity": "20,000"
   },
   {
     "id": "joc-pederson-indiana-jones-2023",
     "title": "Joc Pederson (Indiana Jones)",
     "year": "2023",
-    "date": "June 21, 2023"
+    "date": "June 21, 2023",
+    "quantity": "20,000"
   },
   {
     "id": "joc-pederson-2023",
     "title": "Joc Pederson",
     "year": "2023",
-    "date": "July 9, 2023"
+    "date": "July 9, 2023",
+    "quantity": "20,000"
   },
   {
     "id": "lou-seal-greek-heritage-2023",
     "title": "Lou Seal (Greek Heritage)",
     "year": "2023",
-    "date": "July 26, 2023"
+    "date": "July 26, 2023",
+    "quantity": "20,000"
   },
   {
     "id": "elmo-2023",
     "title": "Elmo",
     "year": "2023",
-    "date": "July 30, 2023"
+    "date": "July 30, 2023",
+    "quantity": "20,000"
   },
   {
     "id": "lucy-2023",
@@ -129,7 +143,8 @@
     "id": "e-40-2022",
     "title": "E-40",
     "year": "2022",
-    "date": "June 25, 2022"
+    "date": "June 25, 2022",
+    "quantity": "15,000"
   },
   {
     "id": "year-of-the-tiger-2022",
@@ -141,7 +156,8 @@
     "id": "lamonte-wade-jr-2022",
     "title": "LaMonte Wade Jr.",
     "year": "2022",
-    "date": "July 2, 2022"
+    "date": "July 2, 2022",
+    "quantity": "20,000"
   },
   {
     "id": "lou-seal-2022",
@@ -177,7 +193,8 @@
     "id": "mike-yastrzemski-2021",
     "title": "Mike Yastrzemski",
     "year": "2021",
-    "date": "June 26, 2021"
+    "date": "June 26, 2021",
+    "quantity": "15,000"
   },
   {
     "id": "shang-chi-2021",
@@ -195,7 +212,8 @@
     "id": "evan-longoria-2019",
     "title": "Evan Longoria",
     "year": "2019",
-    "date": "April 6, 2019"
+    "date": "April 6, 2019",
+    "quantity": "30,000"
   },
   {
     "id": "year-of-the-pig-2019",
@@ -207,7 +225,8 @@
     "id": "willie-mays-20th-anniversary-2019",
     "title": "Willie Mays (20th Anniversary)",
     "year": "2019",
-    "date": "April 27, 2019"
+    "date": "April 27, 2019",
+    "quantity": "35,000"
   },
   {
     "id": "let-pablo-pitch-2019",
@@ -249,7 +268,8 @@
     "id": "dereck-rodriguez-2019",
     "title": "Dereck Rodriguez",
     "year": "2019",
-    "date": "June 29, 2019"
+    "date": "June 29, 2019",
+    "quantity": "30,000"
   },
   {
     "id": "kirk-rueter-woody-luxo-ball-2019",
@@ -291,7 +311,8 @@
     "id": "peanuts-woodstock-2019",
     "title": "Peanuts Woodstock",
     "year": "2019",
-    "date": "August 31, 2019"
+    "date": "August 31, 2019",
+    "quantity": "20,000"
   },
   {
     "id": "alou-brothers-2019",
@@ -309,7 +330,8 @@
     "id": "brandon-crawford-star-wars-2019",
     "title": "Brandon Crawford (Star Wars)",
     "year": "2019",
-    "date": "September 15, 2019"
+    "date": "September 15, 2019",
+    "quantity": "20,000"
   },
   {
     "id": "lou-seal-sj-sharkie-zamboni-2019",
@@ -327,13 +349,15 @@
     "id": "matt-williams-2018",
     "title": "Matt Williams",
     "year": "2018",
-    "date": "February 27, 2018"
+    "date": "February 27, 2018",
+    "quantity": "10,000"
   },
   {
     "id": "willie-mays-60th-anniversary-2018",
     "title": "Willie Mays (60th Anniversary)",
     "year": "2018",
-    "date": "April 7, 2018"
+    "date": "April 7, 2018",
+    "quantity": "35,000"
   },
   {
     "id": "year-of-the-dog-2018",
@@ -357,7 +381,8 @@
     "id": "willie-mccovey-60th-anniversary-2018",
     "title": "Willie McCovey (60th Anniversary)",
     "year": "2018",
-    "date": "June 3, 2018"
+    "date": "June 3, 2018",
+    "quantity": "35,000"
   },
   {
     "id": "bonds-father-son-2018",
@@ -399,7 +424,8 @@
     "id": "johnny-cueto-shimmy-2017",
     "title": "Johnny Cueto (Shimmy)",
     "year": "2017",
-    "date": "April 15, 2017"
+    "date": "April 15, 2017",
+    "quantity": "40,000"
   },
   {
     "id": "rocket-raccoon-2017",
@@ -478,7 +504,8 @@
     "title": "Frank Robinson",
     "year": "2017",
     "date": "September 13, 2017",
-    "imageUrl": "https://i.pinimg.com/736x/95/d1/a7/95d1a77e3017c94e1e2b6cb372953aee.jpg"
+    "imageUrl": "https://i.pinimg.com/736x/95/d1/a7/95d1a77e3017c94e1e2b6cb372953aee.jpg",
+    "quantity": "40,000"
   },
   {
     "id": "giants-thor-2017",
@@ -496,7 +523,8 @@
     "id": "matt-duffy-2016",
     "title": "Matt Duffy",
     "year": "2016",
-    "date": "April 23, 2016"
+    "date": "April 23, 2016",
+    "quantity": "40,000"
   },
   {
     "id": "year-of-the-monkey-2016",
@@ -526,13 +554,15 @@
     "id": "madison-bumgarner-2016",
     "title": "Madison Bumgarner",
     "year": "2016",
-    "date": "June 25, 2016"
+    "date": "June 25, 2016",
+    "quantity": "40,000"
   },
   {
     "id": "hunter-pence-solar-bobblebody-2016",
     "title": "Hunter Pence (Solar Bobblebody)",
     "year": "2016",
-    "date": "August 14, 2016"
+    "date": "August 14, 2016",
+    "quantity": "20,000"
   },
   {
     "id": "bill-graham-father-time-2016",
@@ -556,7 +586,8 @@
     "id": "mike-krukow-2016",
     "title": "Mike Krukow",
     "year": "2016",
-    "date": "August 28, 2016"
+    "date": "August 28, 2016",
+    "quantity": "40,000"
   },
   {
     "id": "denard-span-2016",
@@ -574,7 +605,8 @@
     "id": "bruce-bochy-vulcan-2016",
     "title": "Bruce Bochy (Vulcan)",
     "year": "2016",
-    "date": "September 16, 2016"
+    "date": "September 16, 2016",
+    "quantity": "30,000"
   },
   {
     "id": "tito-fuentes-2016",
@@ -592,13 +624,15 @@
     "id": "madison-bumgarner-stormtrooper-2016",
     "title": "Madison Bumgarner (Stormtrooper)",
     "year": "2016",
-    "date": "October 1, 2016"
+    "date": "October 1, 2016",
+    "quantity": "40,000"
   },
   {
     "id": "madison-bumgarner-postseason-mvp-2015",
     "title": "Madison Bumgarner (Postseason MVP)",
     "year": "2015",
-    "date": "April 18, 2015"
+    "date": "April 18, 2015",
+    "quantity": "40,000"
   },
   {
     "id": "tim-lincecum-filipino-heritage-2015",
@@ -610,7 +644,8 @@
     "id": "hunter-pence-fence-catch-2015",
     "title": "Hunter Pence (\"Fence Catch\")",
     "year": "2015",
-    "date": "May 9, 2015"
+    "date": "May 9, 2015",
+    "quantity": "40,000"
   },
   {
     "id": "stan-lee-2015",
@@ -653,13 +688,15 @@
     "id": "hello-kitty-2015",
     "title": "Hello Kitty",
     "year": "2015",
-    "date": "June 28, 2015"
+    "date": "June 28, 2015",
+    "quantity": "20,000"
   },
   {
     "id": "bruce-lee-75th-birthday-2015",
     "title": "Bruce Lee (75th Birthday)",
     "year": "2015",
-    "date": "July 7, 2015"
+    "date": "July 7, 2015",
+    "quantity": "3,000"
   },
   {
     "id": "tim-hudson-2015",
@@ -671,13 +708,15 @@
     "id": "hunter-pence-2014",
     "title": "Hunter Pence",
     "year": "2014",
-    "date": "April 9, 2014"
+    "date": "April 9, 2014",
+    "quantity": "40,000"
   },
   {
     "id": "duane-kuiper-2014",
     "title": "Duane Kuiper",
     "year": "2014",
-    "date": "April 28, 2014"
+    "date": "April 28, 2014",
+    "quantity": "40,000"
   },
   {
     "id": "korean-heritage-2014",
@@ -719,7 +758,8 @@
     "id": "angel-pagan-2014",
     "title": "Angel Pagan",
     "year": "2014",
-    "date": "July 13, 2014"
+    "date": "July 13, 2014",
+    "quantity": "40,000"
   },
   {
     "id": "javier-lopez-2014",
@@ -737,20 +777,23 @@
     "id": "buster-posey-nl-mvp-2013",
     "title": "Buster Posey (NL MVP)",
     "year": "2013",
-    "date": "April 6, 2013"
+    "date": "April 6, 2013",
+    "quantity": "40,000"
   },
   {
     "id": "barry-zito-2013",
     "title": "Barry Zito",
     "year": "2013",
     "date": "May 25, 2013",
-    "imageUrl": "http://www.stadiumgiveawayexchange.com/wp-content/uploads/2013/08/Giants052613-Bobblehead.jpg.webp"
+    "imageUrl": "http://www.stadiumgiveawayexchange.com/wp-content/uploads/2013/08/Giants052613-Bobblehead.jpg.webp",
+    "quantity": "40,000"
   },
   {
     "id": "ryan-vogelsong-2013",
     "title": "Ryan Vogelsong",
     "year": "2013",
-    "date": "June 22, 2013"
+    "date": "June 22, 2013",
+    "quantity": "40,000"
   },
   {
     "id": "brandon-belt-2013",
@@ -768,13 +811,15 @@
     "id": "buster-posey-stormtrooper-2013",
     "title": "Buster Posey (Stormtrooper)",
     "year": "2013",
-    "date": "September 8, 2013"
+    "date": "September 8, 2013",
+    "quantity": "40,000"
   },
   {
     "id": "buster-posey-stormtrooper-vip-2013",
     "title": "Buster Posey (Stormtrooper VIP)",
     "year": "2013",
-    "date": "September 8, 2013"
+    "date": "September 8, 2013",
+    "quantity": "40,000"
   },
   {
     "id": "elvis-2013",
@@ -786,13 +831,15 @@
     "id": "sergio-romo-cinco-de-mayo-2012",
     "title": "Sergio Romo (Cinco de Mayo)",
     "year": "2012",
-    "date": "May 5, 2012"
+    "date": "May 5, 2012",
+    "quantity": "25,000"
   },
   {
     "id": "sergio-romo-2012",
     "title": "Sergio Romo",
     "year": "2012",
-    "date": "May 5, 2012"
+    "date": "May 5, 2012",
+    "quantity": "25,000"
   },
   {
     "id": "will-clark-2012",
@@ -810,13 +857,15 @@
     "id": "jeff-kent-2002-world-series-reunion-2012",
     "title": "Jeff Kent (2002 World Series Reunion)",
     "year": "2012",
-    "date": "June 30, 2012"
+    "date": "June 30, 2012",
+    "quantity": "5,000"
   },
   {
     "id": "madison-bumgarner-2012",
     "title": "Madison Bumgarner",
     "year": "2012",
-    "date": "July 15, 2012"
+    "date": "July 15, 2012",
+    "quantity": "25,000"
   },
   {
     "id": "jerry-garcia-2012",
@@ -834,7 +883,8 @@
     "id": "pablo-sandoval-2012",
     "title": "Pablo Sandoval",
     "year": "2012",
-    "date": "August 26, 2012"
+    "date": "August 26, 2012",
+    "quantity": "25,000"
   },
   {
     "id": "bruce-lee-year-of-the-dragon-2012",
@@ -1056,7 +1106,8 @@
     "id": "matt-cain-2008",
     "title": "Matt Cain",
     "year": "2008",
-    "date": "July 27, 2008"
+    "date": "July 27, 2008",
+    "quantity": "20,000"
   },
   {
     "id": "renel-brooks-moon-2008",
@@ -1068,7 +1119,8 @@
     "id": "bengie-molina-2008",
     "title": "Bengie Molina",
     "year": "2008",
-    "date": "September 6, 2008"
+    "date": "September 6, 2008",
+    "quantity": "20,000"
   },
   {
     "id": "lefty-odoul-2008",
@@ -1080,7 +1132,8 @@
     "id": "barry-zito-2007",
     "title": "Barry Zito",
     "year": "2007",
-    "date": "June 30, 2007"
+    "date": "June 30, 2007",
+    "quantity": "20,000"
   },
   {
     "id": "will-clark-2007",
@@ -1092,7 +1145,8 @@
     "id": "kevin-mitchell-2007",
     "title": "Kevin Mitchell",
     "year": "2007",
-    "date": "July 29, 2007"
+    "date": "July 29, 2007",
+    "quantity": "5,000"
   },
   {
     "id": "robby-thompson-2007",
@@ -1116,7 +1170,8 @@
     "id": "joe-cool-snoopy-2007",
     "title": "\"Joe Cool\" Snoopy",
     "year": "2007",
-    "date": "August 11, 2007"
+    "date": "August 11, 2007",
+    "quantity": "10,000"
   },
   {
     "id": "lou-seal-oktoberfest-2007",
@@ -1152,7 +1207,8 @@
     "id": "charlie-brown-2005",
     "title": "Charlie Brown",
     "year": "2005",
-    "date": "May 28, 2005"
+    "date": "May 28, 2005",
+    "quantity": "5,000"
   },
   {
     "id": "gaylord-perry-2005",
@@ -1206,18 +1262,21 @@
     "id": "willie-mccovey-2001",
     "title": "Willie McCovey",
     "year": "2001",
-    "date": "May 13, 2001"
+    "date": "May 13, 2001",
+    "quantity": "20,000"
   },
   {
     "id": "barry-bonds-2000",
     "title": "Barry Bonds",
     "year": "2000",
-    "date": "June 11, 2000"
+    "date": "June 11, 2000",
+    "quantity": "20,000"
   },
   {
     "id": "willie-mays-1999",
     "title": "Willie Mays",
     "year": "1999",
-    "date": "May 9, 1999"
+    "date": "May 9, 1999",
+    "quantity": "20,000"
   }
 ]

@@ -3,49 +3,57 @@
     "id": "manny-machado-2026",
     "title": "Manny Machado",
     "year": "2026",
-    "date": "April 9, 2026"
+    "date": "April 9, 2026",
+    "quantity": "40,000"
   },
   {
     "id": "mason-miller-2026",
     "title": "Mason Miller",
     "year": "2026",
-    "date": "May 7, 2026"
+    "date": "May 7, 2026",
+    "quantity": "40,000"
   },
   {
     "id": "jackson-merrill-2025",
     "title": "Jackson Merrill",
     "year": "2025",
-    "date": "March 31, 2025"
+    "date": "March 31, 2025",
+    "quantity": "40,000"
   },
   {
     "id": "tony-gwynn-2025",
     "title": "Tony Gwynn",
     "year": "2025",
-    "date": "April 29, 2025"
+    "date": "April 29, 2025",
+    "quantity": "40,000"
   },
   {
     "id": "fernando-tatis-jr-2025",
     "title": "Fernando Tatis Jr.",
     "year": "2025",
-    "date": "June 23, 2025"
+    "date": "June 23, 2025",
+    "quantity": "40,000"
   },
   {
     "id": "michael-king-2025",
     "title": "Michael King",
     "year": "2025",
-    "date": "August 20, 2025"
+    "date": "August 20, 2025",
+    "quantity": "40,000"
   },
   {
     "id": "dylan-cease-2025",
     "title": "Dylan Cease",
     "year": "2025",
-    "date": "September 10, 2025"
+    "date": "September 10, 2025",
+    "quantity": "40,000"
   },
   {
     "id": "luis-arraez-la-regadera-2025",
     "title": "Luis Arraez (\"La Regadera\")",
     "year": "2025",
-    "date": "September 22, 2025"
+    "date": "September 22, 2025",
+    "quantity": "40,000"
   },
   {
     "id": "manny-machado-2024",
@@ -57,19 +65,22 @@
     "id": "joe-musgrove-dog-theo-2024",
     "title": "Joe Musgrove & Dog Theo",
     "year": "2024",
-    "date": "May 14, 2024"
+    "date": "May 14, 2024",
+    "quantity": "40,000"
   },
   {
     "id": "xander-bogaerts-2024",
     "title": "Xander Bogaerts",
     "year": "2024",
-    "date": "June 10, 2024"
+    "date": "June 10, 2024",
+    "quantity": "40,000"
   },
   {
     "id": "ha-seong-kim-2024",
     "title": "Ha-Seong Kim",
     "year": "2024",
-    "date": "June 25, 2024"
+    "date": "June 25, 2024",
+    "quantity": "40,000"
   },
   {
     "id": "luis-arraez-2024",
@@ -81,25 +92,29 @@
     "id": "fernando-tatis-jr-2024",
     "title": "Fernando Tatis Jr.",
     "year": "2024",
-    "date": "September 18, 2024"
+    "date": "September 18, 2024",
+    "quantity": "40,000"
   },
   {
     "id": "juan-soto-soto-shuffle-2023",
     "title": "Juan Soto (\"Soto Shuffle\")",
     "year": "2023",
-    "date": "April 13, 2023"
+    "date": "April 13, 2023",
+    "quantity": "40,000"
   },
   {
     "id": "manny-machado-city-connect-2023",
     "title": "Manny Machado (City Connect)",
     "year": "2023",
-    "date": "May 15, 2023"
+    "date": "May 15, 2023",
+    "quantity": "40,000"
   },
   {
     "id": "yu-darvish-3-000-strikeouts-2023",
     "title": "Yu Darvish (3,000 Strikeouts)",
     "year": "2023",
-    "date": "July 24, 2023"
+    "date": "July 24, 2023",
+    "quantity": "40,000"
   },
   {
     "id": "don-orsillo-mark-grant-don-and-mud-2023",
@@ -111,13 +126,15 @@
     "id": "ha-seong-kim-2023",
     "title": "Ha-Seong Kim",
     "year": "2023",
-    "date": "August 22, 2023"
+    "date": "August 22, 2023",
+    "quantity": "40,000"
   },
   {
     "id": "fernando-tatis-jr-2023",
     "title": "Fernando Tatis Jr.",
     "year": "2023",
-    "date": "September 5, 2023"
+    "date": "September 5, 2023",
+    "quantity": "40,000"
   },
   {
     "id": "padres-giveaway-bobblehead-2022",
@@ -129,7 +146,8 @@
     "id": "jake-cronenworth-2022",
     "title": "Jake Cronenworth",
     "year": "2022",
-    "date": "June 23, 2022"
+    "date": "June 23, 2022",
+    "quantity": "35,000"
   },
   {
     "id": "fernando-tatis-jr-nala-pumba-2022",
@@ -147,7 +165,8 @@
     "id": "joe-musgrove-2022",
     "title": "Joe Musgrove",
     "year": "2022",
-    "date": "August 18, 2022"
+    "date": "August 18, 2022",
+    "quantity": "35,000"
   },
   {
     "id": "linus-2022",
@@ -256,7 +275,8 @@
     "id": "ham-porter-2018",
     "title": "\"Ham Porter\"",
     "year": "2018",
-    "date": "September 2, 2018"
+    "date": "September 2, 2018",
+    "quantity": "1,000"
   },
   {
     "id": "padres-themed-zombie-2016",
@@ -280,7 +300,8 @@
     "id": "chase-headley-2013",
     "title": "Chase Headley",
     "year": "2013",
-    "date": "April 13, 2013"
+    "date": "April 13, 2013",
+    "quantity": "25,000"
   },
   {
     "id": "bud-black-2011",
