@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
+import { AuthWidget } from "@/components/AuthWidget";
 import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { FavoriteButton } from "@/components/FavoriteButton";
@@ -179,12 +180,12 @@ export function CuratedBobbleheadPage({
         {/* Always-dark team hero; `dark` scopes its contents to dark-surface
             styling so they stay legible when the page is in light mode. */}
         <section
-          className="dark grid gap-6 border-b border-white/10 p-5 lg:grid-cols-[190px_1fr]"
+          className="dark border-b border-white/10 p-5"
           style={{
             background: `radial-gradient(circle at 72% 10%, ${team.primary}44, transparent 34%), linear-gradient(135deg, #08131f 0%, #0b1d2e 52%, #07111d 100%)`,
           }}
         >
-          <aside className="lg:border-r lg:border-white/10 lg:pr-5">
+          <div className="flex items-center justify-between gap-3">
             <Link
               href={`/teams/${team.slug}`}
               className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-accent-hover"
@@ -192,12 +193,15 @@ export function CuratedBobbleheadPage({
               <span aria-hidden>←</span>
               Back to team
             </Link>
-
-            <div className="mt-3">
+            <div className="flex flex-wrap items-center justify-end gap-2">
               <AdminModeBadge />
+              <AuthWidget />
             </div>
+          </div>
 
-            <div className="mt-5 rounded border border-white/15 bg-black/25 p-3 text-center">
+          <div className="mt-6 grid gap-6 lg:grid-cols-[190px_1fr]">
+          <aside className="lg:border-r lg:border-white/10 lg:pr-5">
+            <div className="rounded border border-white/15 bg-black/25 p-3 text-center">
               <div className="relative flex h-44 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
                 <BobbleheadImage
                   src={imageSrc}
@@ -260,6 +264,7 @@ export function CuratedBobbleheadPage({
                 {isLoggedIn ? "Log ownership and photos for this bobblehead." : "Log in to track this bobblehead in your collection."}
               </p>
             </div>
+          </div>
           </div>
         </section>
 

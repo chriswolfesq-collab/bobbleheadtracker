@@ -332,27 +332,28 @@ export function TeamPageClient({
                   styling so shared chrome (AuthWidget, etc.) stays legible on it
                   even when the rest of the page is in light mode. */}
               <section
-                className="dark grid gap-4 border-b border-white/10 p-4 sm:gap-6 sm:p-5 lg:grid-cols-[220px_1fr]"
+                className="dark border-b border-white/10 p-4 sm:p-5"
                 style={{
                   background: `radial-gradient(circle at 74% 14%, ${team.primary}44, transparent 34%), linear-gradient(135deg, #08131f 0%, #0b1d2e 52%, #07111d 100%)`,
                 }}
               >
-                <aside className="lg:border-r lg:border-white/10 lg:pr-5">
-                  <div className="flex items-center justify-between gap-3">
-                    <Link
-                      href="/"
-                      className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-accent-hover"
-                    >
-                      <span aria-hidden>←</span>
-                      Back to shelf
-                    </Link>
-                  </div>
-                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                <div className="flex items-center justify-between gap-3">
+                  <Link
+                    href="/"
+                    className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-accent-hover"
+                  >
+                    <span aria-hidden>←</span>
+                    Back to shelf
+                  </Link>
+                  <div className="flex flex-wrap items-center justify-end gap-2">
                     <AdminModeBadge />
                     <AuthWidget />
                   </div>
+                </div>
 
-                  <div className="mt-5 hidden rounded border border-white/15 bg-black/25 p-3 text-center lg:block">
+                <div className="mt-4 grid gap-4 sm:mt-6 sm:gap-6 lg:grid-cols-[220px_1fr]">
+                <aside className="lg:border-r lg:border-white/10 lg:pr-5">
+                  <div className="hidden rounded border border-white/15 bg-black/25 p-3 text-center lg:block">
                     <div className="flex h-48 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
                       <Image
                         src={publicAsset(`/bobbleheads/${team.slug}.png`)}
@@ -422,6 +423,7 @@ export function TeamPageClient({
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
               </section>
 
