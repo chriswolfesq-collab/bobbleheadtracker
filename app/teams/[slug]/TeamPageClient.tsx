@@ -210,7 +210,7 @@ function SubmitBobbleheadForm({
         replicas, gnomes, or other non-bobblehead promos.
       </p>
       <label className="min-w-0">
-        <span className="text-xs font-black uppercase tracking-wide text-accent">Name</span>
+        <span className="text-xs font-black uppercase tracking-wide text-accent">Player Name</span>
         <input
           required
           value={title}

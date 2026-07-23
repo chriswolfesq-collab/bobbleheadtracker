@@ -99,7 +99,7 @@ export function EditBobbleheadDialog({
           }}
         >
           <div className="grid gap-1.5">
-            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Title</label>
+            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Player Name</label>
             <input
               required
               type="text"
