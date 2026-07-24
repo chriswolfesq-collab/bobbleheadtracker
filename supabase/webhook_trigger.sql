@@ -87,7 +87,12 @@ declare
 begin
   select email into v_email from auth.users where id = new.submitted_by;
 
-  if v_email is not null then
+  -- Skip self-approvals. A team rep/admin submitting for a team they manage
+  -- auto-approves their own row in the same session, so auth.uid() equals the
+  -- submitter — no point emailing them "your submission was approved." A manual
+  -- review on the review page runs as a different reviewer, so is distinct from
+  -- keeps that notification (and treats an unknown/null reviewer as "still send").
+  if v_email is not null and new.submitted_by is distinct from auth.uid() then
     perform net.http_post(
       url := 'https://mawwzvnlihhsagatmolq.supabase.co/functions/v1/notify-new-submission',
       headers := jsonb_build_object(
