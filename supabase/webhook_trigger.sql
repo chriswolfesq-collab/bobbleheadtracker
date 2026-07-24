@@ -16,14 +16,22 @@ security definer
 set search_path = public
 as $$
 begin
-  perform net.http_post(
-    url := 'https://mawwzvnlihhsagatmolq.supabase.co/functions/v1/notify-new-submission',
-    headers := jsonb_build_object(
-      'Content-Type', 'application/json',
-      'x-webhook-secret', '<WEBHOOK_SECRET>'
-    ),
-    body := jsonb_build_object('type', 'INSERT', 'table', 'submissions', 'record', row_to_json(new))
-  );
+  -- Only notify the admin about submissions that actually need review. A team
+  -- rep or admin submitting for a team they manage auto-approves instantly (see
+  -- maybeAutoApprove in lib/submissions.ts), so it never enters the queue —
+  -- emailing "pending review" for it is just noise. can_edit_team() runs against
+  -- the submitter's session here, so it's the same rights check that gates the
+  -- auto-approve.
+  if not public.can_edit_team(new.team_slug) then
+    perform net.http_post(
+      url := 'https://mawwzvnlihhsagatmolq.supabase.co/functions/v1/notify-new-submission',
+      headers := jsonb_build_object(
+        'Content-Type', 'application/json',
+        'x-webhook-secret', '<WEBHOOK_SECRET>'
+      ),
+      body := jsonb_build_object('type', 'INSERT', 'table', 'submissions', 'record', row_to_json(new))
+    );
+  end if;
   return new;
 end;
 $$;
