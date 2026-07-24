@@ -3,9 +3,10 @@
 import type { User } from "@supabase/supabase-js";
 import type { GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+import { storageKeyForFile } from "@/lib/storageKey";
 
 async function uploadPhotoDirect(file: File): Promise<string> {
-  const path = `${crypto.randomUUID()}-${file.name}`;
+  const path = storageKeyForFile(file.name);
 
   const { error } = await supabase.storage.from("bobblehead-approved").upload(path, file, {
     cacheControl: "3600",

@@ -4,6 +4,7 @@ import type { User } from "@supabase/supabase-js";
 import { approveSubmission, type ApprovableSubmission } from "@/lib/approveSubmission";
 import { submissionError } from "@/lib/rateLimit";
 import { supabase } from "@/lib/supabase";
+import { storageKeyForFile } from "@/lib/storageKey";
 
 export type SubmitResult = { autoApproved: boolean };
 
@@ -32,7 +33,7 @@ async function maybeAutoApprove(submission: ApprovableSubmission): Promise<boole
 }
 
 async function uploadPendingPhoto(user: User, file: File): Promise<string> {
-  const path = `${user.id}/${crypto.randomUUID()}-${file.name}`;
+  const path = storageKeyForFile(file.name, user.id);
   const { error } = await supabase.storage.from("bobblehead-pending").upload(path, file, {
     cacheControl: "3600",
     upsert: false,
