@@ -149,7 +149,7 @@ function SubmitBobbleheadForm({
   teamSlug: string;
   communityBobbleheads: DuplicateCandidate[];
   isDeleted: BobbleheadOverridesLookup["isDeleted"];
-  onDone: (autoApproved: boolean) => void;
+  onDone: (result: { autoApproved: boolean; autoApproveError?: string }) => void;
 }) {
   const { user } = useAuth();
   const [title, setTitle] = useState("");
@@ -197,7 +197,7 @@ function SubmitBobbleheadForm({
             date: dateUnknown ? "N/A" : formatSubmissionDate(date),
             file,
           });
-          onDone(result.autoApproved);
+          onDone(result);
         } catch (submitError) {
           setError(submitError instanceof Error ? submitError.message : "Could not submit bobblehead.");
         } finally {
@@ -311,6 +311,7 @@ export function TeamPageClient({
   const [isAdding, setIsAdding] = useState(false);
   const [justSubmitted, setJustSubmitted] = useState(false);
   const [justApproved, setJustApproved] = useState(false);
+  const [autoApproveError, setAutoApproveError] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<SortOrder>(DEFAULT_SORT_ORDER);
   const { communityBobbleheads } = useCommunityBobbleheads(team.slug);
   const { photoUrlById } = useApprovedPhotos(team.slug);
@@ -461,6 +462,7 @@ export function TeamPageClient({
                       onClick={() => {
                         setJustSubmitted(false);
                         setJustApproved(false);
+                        setAutoApproveError(null);
                         setIsAdding((current) => !current);
                       }}
                     >
@@ -476,15 +478,18 @@ export function TeamPageClient({
                     <div className="mb-5 rounded-lg border border-accent/35 bg-accent/10 p-4 text-sm font-semibold text-accent">
                       {justApproved
                         ? "Added — it's live for everyone now."
-                        : "Submitted — the admin will review it before it appears for everyone."}
+                        : autoApproveError
+                          ? `Couldn't publish it automatically, so it's been sent to review. (${autoApproveError})`
+                          : "Submitted — the admin will review it before it appears for everyone."}
                     </div>
                   ) : (
                     <SubmitBobbleheadForm
                       teamSlug={team.slug}
                       communityBobbleheads={communityBobbleheads}
                       isDeleted={isDeleted}
-                      onDone={(autoApproved) => {
-                        setJustApproved(autoApproved);
+                      onDone={(result) => {
+                        setJustApproved(result.autoApproved);
+                        setAutoApproveError(result.autoApproveError ?? null);
                         setJustSubmitted(true);
                       }}
                     />

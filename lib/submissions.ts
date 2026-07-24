@@ -6,29 +6,39 @@ import { submissionError } from "@/lib/rateLimit";
 import { supabase } from "@/lib/supabase";
 import { storageKeyForFile } from "@/lib/storageKey";
 
-export type SubmitResult = { autoApproved: boolean };
+// autoApproved: the submission went live immediately. autoApproveError: set only
+// when the submitter IS an editor and instant publish was expected but failed —
+// so the UI can tell them it fell back to review, and why, instead of showing the
+// same "an admin will review it" message a normal submitter sees. It stays
+// undefined for a non-editor's ordinary pending submission.
+export type SubmitResult = { autoApproved: boolean; autoApproveError?: string };
 
 // An admin or team rep submitting for a team they manage doesn't need the review
 // queue — approve their submission straight away so it goes live immediately.
 // Authorization is the same server-side check the review page relies on:
 // can_edit_team() gates the RPC below and is re-enforced inside approve_submission,
 // so a submitter without rights simply falls back to a normal pending review.
-async function maybeAutoApprove(submission: ApprovableSubmission): Promise<boolean> {
+async function maybeAutoApprove(submission: ApprovableSubmission): Promise<SubmitResult> {
   const { data: canEdit, error } = await supabase.rpc("can_edit_team", {
     p_team_slug: submission.team_slug,
   });
 
   if (error || !canEdit) {
-    return false;
+    // Not an editor for this team (or the check itself failed) — a normal pending
+    // submission, nothing surprising to report.
+    return { autoApproved: false };
   }
 
   try {
     await approveSubmission(submission);
-    return true;
-  } catch {
-    // The submission row already exists as 'pending'; if auto-approval fails for
-    // any reason it just stays in the review queue to be handled manually.
-    return false;
+    return { autoApproved: true };
+  } catch (approveError) {
+    // The submission row already exists as 'pending', so it safely falls back to
+    // the manual review queue. But this submitter is an editor — instant publish
+    // was expected — so surface why it didn't happen instead of hiding it.
+    const reason = approveError instanceof Error ? approveError.message : "Unknown error";
+    console.error("Auto-approve failed; submission left in the review queue:", approveError);
+    return { autoApproved: false, autoApproveError: reason };
   }
 }
 
@@ -75,15 +85,13 @@ export async function submitPhotoForExisting({
     throw submissionError(error);
   }
 
-  const autoApproved = await maybeAutoApprove({
+  return maybeAutoApprove({
     id: data.id,
     kind: "photo_for_existing",
     target_bobblehead_id: bobbleheadId,
     team_slug: teamSlug,
     storage_path: storagePath,
   });
-
-  return { autoApproved };
 }
 
 export async function submitNewBobblehead({
@@ -124,13 +132,11 @@ export async function submitNewBobblehead({
     throw submissionError(error);
   }
 
-  const autoApproved = await maybeAutoApprove({
+  return maybeAutoApprove({
     id: data.id,
     kind: "new_bobblehead",
     target_bobblehead_id: null,
     team_slug: teamSlug,
     storage_path: storagePath,
   });
-
-  return { autoApproved };
 }
