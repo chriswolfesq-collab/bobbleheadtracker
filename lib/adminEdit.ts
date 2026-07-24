@@ -5,6 +5,22 @@ import type { GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { storageKeyForFile } from "@/lib/storageKey";
 
+// A write that returns no error but touches zero rows was silently filtered by
+// row-level security — the classic symptom of a stale/expired session that no
+// longer satisfies can_edit_team — or it targeted a row that no longer exists.
+// Either way the change did NOT persist. Supabase reports success (error: null,
+// HTTP 200) for this, so without an explicit row-count check the UI closes the
+// dialog as if the edit took. We turn it into a visible, actionable error
+// instead. Relies on every target table having a public SELECT policy, so the
+// returned rows reflect exactly what was written.
+function assertPersisted<T>(rows: T[] | null, subject: string): void {
+  if (!rows || rows.length === 0) {
+    throw new Error(
+      `${subject} wasn't saved — your edit access may have expired. Sign out and back in, then try again.`,
+    );
+  }
+}
+
 async function uploadPhotoDirect(file: File): Promise<string> {
   const path = storageKeyForFile(file.name);
 
@@ -25,17 +41,22 @@ async function uploadPhotoDirect(file: File): Promise<string> {
 async function savePhoto(user: User, teamSlug: string, bobbleheadId: string, file: File) {
   const imageUrl = await uploadPhotoDirect(file);
 
-  const { error } = await supabase.from("approved_photos").upsert({
-    bobblehead_id: bobbleheadId,
-    team_slug: teamSlug,
-    image_url: imageUrl,
-    approved_by: user.id,
-    updated_at: new Date().toISOString(),
-  });
+  const { data, error } = await supabase
+    .from("approved_photos")
+    .upsert({
+      bobblehead_id: bobbleheadId,
+      team_slug: teamSlug,
+      image_url: imageUrl,
+      approved_by: user.id,
+      updated_at: new Date().toISOString(),
+    })
+    .select();
 
   if (error) {
     throw new Error(error.message);
   }
+
+  assertPersisted(data, "The photo");
 
   return imageUrl;
 }
@@ -63,21 +84,26 @@ export async function saveCuratedBobblehead({
 }) {
   const imageUrl = file ? await savePhoto(user, teamSlug, bobbleheadId, file) : null;
 
-  const { error } = await supabase.from("bobblehead_overrides").upsert({
-    team_slug: teamSlug,
-    bobblehead_id: bobbleheadId,
-    title,
-    nickname: nickname.trim() || null,
-    quantity: quantity.trim() || null,
-    year,
-    date,
-    updated_by: user.id,
-    updated_at: new Date().toISOString(),
-  });
+  const { data, error } = await supabase
+    .from("bobblehead_overrides")
+    .upsert({
+      team_slug: teamSlug,
+      bobblehead_id: bobbleheadId,
+      title,
+      nickname: nickname.trim() || null,
+      quantity: quantity.trim() || null,
+      year,
+      date,
+      updated_by: user.id,
+      updated_at: new Date().toISOString(),
+    })
+    .select();
 
   if (error) {
     throw new Error(error.message);
   }
+
+  assertPersisted(data, "Your changes");
 
   return { imageUrl };
 }
@@ -156,24 +182,33 @@ export async function setGalleryPhotoAsMain({
     throw new Error(error.message);
   }
 
-  const { error: galleryError } = await supabase
+  const { data: deletedGalleryRows, error: galleryError } = await supabase
     .from("bobblehead_gallery_photos")
     .delete()
-    .eq("id", photo.id);
+    .eq("id", photo.id)
+    .select();
 
   if (galleryError) {
     throw new Error(galleryError.message);
   }
 
+  assertPersisted(deletedGalleryRows, "The photo change");
+
   return { demotedPhoto };
 }
 
 export async function deleteGalleryPhoto(photo: { id: string; imageUrl: string }) {
-  const { error } = await supabase.from("bobblehead_gallery_photos").delete().eq("id", photo.id);
+  const { data, error } = await supabase
+    .from("bobblehead_gallery_photos")
+    .delete()
+    .eq("id", photo.id)
+    .select();
 
   if (error) {
     throw new Error(error.message);
   }
+
+  assertPersisted(data, "The photo");
 
   await removeApprovedFile(photo.imageUrl);
 }
@@ -264,14 +299,17 @@ export async function saveCommunityBobblehead({
 }) {
   const imageUrl = file ? await savePhoto(user, teamSlug, bobbleheadId, file) : null;
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("community_bobbleheads")
     .update({ title, nickname: nickname.trim() || null, quantity: quantity.trim() || null, year, date })
-    .eq("id", bobbleheadId);
+    .eq("id", bobbleheadId)
+    .select();
 
   if (error) {
     throw new Error(error.message);
   }
+
+  assertPersisted(data, "Your changes");
 
   return { imageUrl };
 }
