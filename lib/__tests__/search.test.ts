@@ -5,6 +5,7 @@ function result(overrides: Partial<SearchResult>): SearchResult {
   return {
     id: "test-id",
     title: "Test Player",
+    nickname: null,
     date: "July 4, 2020",
     year: "2020",
     imageUrl: null,
@@ -20,6 +21,7 @@ function result(overrides: Partial<SearchResult>): SearchResult {
 const INDEX: SearchResult[] = [
   result({ id: "kirk-gibson-2018", title: "Kirk Gibson", date: "August 8, 2018", year: "2018" }),
   result({ id: "mike-trout-2024", title: "Mike Trout", teamSlug: "angels", teamName: "Angels", teamCity: "Anaheim", date: "June 7, 2024", year: "2024" }),
+  result({ id: "luis-arraez-2025", title: "Luis Arraez", nickname: "La Regadera", teamSlug: "padres", teamName: "Padres", teamCity: "San Diego", date: "September 22, 2025", year: "2025" }),
   result({ id: "community-mystery", title: "Mystery Bobblehead", source: "community" }),
 ];
 
@@ -37,6 +39,10 @@ describe("searchGiveaways", () => {
   it("requires every term to match (across fields)", () => {
     expect(searchGiveaways(INDEX, "trout anaheim").map((m) => m.id)).toEqual(["mike-trout-2024"]);
     expect(searchGiveaways(INDEX, "trout dodgers")).toEqual([]);
+  });
+
+  it("matches on nickname", () => {
+    expect(searchGiveaways(INDEX, "regadera").map((m) => m.id)).toEqual(["luis-arraez-2025"]);
   });
 
   it("matches on team name, city, and date fields", () => {

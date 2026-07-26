@@ -42,8 +42,17 @@ export function splitTitle(title: string): { primary: string; secondary: string 
  * line scales relative to the parent font size, so it works for both small cards
  * and large detail headings.
  */
+// Some listings carry a punctuation-only nickname ("_", "-") — a hand-added
+// spacer from when a missing second line made neighboring cards sit at
+// different heights. The cards align on their own now, so treat these as no
+// nickname rather than rendering a stray character.
+function isSpacerNickname(value: string): boolean {
+  return /^[_\-–—.·•\s]+$/.test(value);
+}
+
 export function BobbleheadTitle({ title, nickname }: { title: string; nickname?: string | null }) {
-  const explicitNickname = nickname?.trim();
+  const trimmedNickname = nickname?.trim();
+  const explicitNickname = trimmedNickname && !isSpacerNickname(trimmedNickname) ? trimmedNickname : undefined;
   const { primary, secondary } = explicitNickname
     ? { primary: title.trim(), secondary: explicitNickname }
     : splitTitle(title);

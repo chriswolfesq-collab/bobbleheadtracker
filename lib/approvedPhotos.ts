@@ -9,6 +9,40 @@ type ApprovedPhotoMap = Record<string, string>;
 // lib/curatedListing.ts) so the first client paint matches the server HTML.
 // The effect still refetches the full team map to fill in the rest and pick up
 // changes made this session.
+// Every team's approved photos at once, keyed by bobblehead id (which is the
+// table's primary key, so ids don't collide across teams). Used by the search
+// results page, whose grid spans all teams — the curated build-time data mostly
+// has no imageUrl of its own, so without this the results are all placeholders.
+export function useAllApprovedPhotos() {
+  const [photoUrlById, setPhotoUrlById] = useState<ApprovedPhotoMap>({});
+
+  useEffect(() => {
+    let cancelled = false;
+
+    supabase
+      .from("approved_photos")
+      .select("bobblehead_id, image_url")
+      .then(({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load approved photos:", error.message);
+          return;
+        }
+
+        setPhotoUrlById(
+          Object.fromEntries((data ?? []).map((row) => [row.bobblehead_id, row.image_url])),
+        );
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return photoUrlById;
+}
+
 export function useApprovedPhotos(teamSlug: string, seed?: ApprovedPhotoMap) {
   const [photoUrlById, setPhotoUrlById] = useState<ApprovedPhotoMap>(seed ?? {});
   const [isLoading, setIsLoading] = useState(!seed);

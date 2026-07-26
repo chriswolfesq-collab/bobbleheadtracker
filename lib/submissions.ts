@@ -2,6 +2,7 @@
 
 import type { User } from "@supabase/supabase-js";
 import { approveSubmission, type ApprovableSubmission } from "@/lib/approveSubmission";
+import { extractYear } from "@/lib/extractYear";
 import { submissionError } from "@/lib/rateLimit";
 import { supabase } from "@/lib/supabase";
 import { storageKeyForFile } from "@/lib/storageKey";
@@ -121,6 +122,10 @@ export async function submitNewBobblehead({
       title,
       nickname: nickname.trim() || null,
       quantity: quantity.trim() || null,
+      // Derived from the date; approve_submission copies it onto the listing so
+      // the team page's Year filter works without a separate year field. Null
+      // when the date carries no year — the SQL coalesces it to 'Unknown'.
+      year: extractYear(date || "N/A", "") || null,
       date: date || "N/A",
       storage_path: storagePath,
       submitted_by: user.id,

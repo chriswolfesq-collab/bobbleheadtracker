@@ -2,32 +2,11 @@
 
 import { useState } from "react";
 import { formatQuantity } from "@/lib/formatQuantity";
+import { useDialog } from "@/lib/useDialog";
 
-export type EditBobbleheadValues = { title: string; nickname: string; quantity: string; year: string; date: string };
+export type EditBobbleheadValues = { title: string; nickname: string; quantity: string; date: string };
 
-// The National League's first season; no MLB bobblehead predates it. Upper bound
-// leaves a little room for next-season promos that get catalogued early.
-const MIN_YEAR = 1876;
-const MAX_YEAR = new Date().getFullYear() + 2;
-
-// Returns an error message if the year/date pair is invalid, or null if it's OK.
-// Year must be a plausible 4-digit season, and when the free-text date carries a
-// year of its own the two have to agree (no more "Year 2016 / Date April 2020").
-function validateYearAndDate(year: string, date: string): string | null {
-  const trimmedYear = year.trim();
-  if (!/^\d{4}$/.test(trimmedYear)) {
-    return "Year must be a 4-digit year, e.g. 2020.";
-  }
-  const yearNumber = Number(trimmedYear);
-  if (yearNumber < MIN_YEAR || yearNumber > MAX_YEAR) {
-    return `Year must be between ${MIN_YEAR} and ${MAX_YEAR}.`;
-  }
-  const dateYear = date.match(/\b(\d{4})\b/)?.[1];
-  if (dateYear && dateYear !== trimmedYear) {
-    return `Year (${trimmedYear}) doesn't match the date's year (${dateYear}).`;
-  }
-  return null;
-}
+const UNKNOWN_QUANTITY = "Unknown";
 
 // The caller only mounts this (`{isOpen && <EditBobbleheadDialog ... />}`) while
 // open, so a fresh instance — and fresh form state from `initial` — is
@@ -49,8 +28,8 @@ export function EditBobbleheadDialog({
 }) {
   const [title, setTitle] = useState(initial.title);
   const [nickname, setNickname] = useState(initial.nickname);
-  const [quantity, setQuantity] = useState(initial.quantity);
-  const [year, setYear] = useState(initial.year);
+  const [quantity, setQuantity] = useState(initial.quantity === UNKNOWN_QUANTITY ? "" : initial.quantity);
+  const [quantityUnknown, setQuantityUnknown] = useState(initial.quantity === UNKNOWN_QUANTITY);
   const [date, setDate] = useState(initial.date);
   const [file, setFile] = useState<File | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -66,30 +45,32 @@ export function EditBobbleheadDialog({
     onClose();
   };
 
+  const panelRef = useDialog<HTMLDivElement>(true, close);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-8" onClick={close}>
       <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="edit-bobblehead-title"
         className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50 dark:border-white/10 dark:bg-[#0b1a2b]"
         onClick={(event) => event.stopPropagation()}
       >
-        <h2 className="text-lg font-black text-zinc-900 dark:text-white">Edit bobblehead</h2>
+        <h2 id="edit-bobblehead-title" className="text-lg font-black text-zinc-900 dark:text-white">Edit bobblehead</h2>
 
         <form
           className="mt-5 grid gap-3"
           onSubmit={async (event) => {
             event.preventDefault();
             setError(null);
-
-            const validationError = validateYearAndDate(year, date);
-            if (validationError) {
-              setError(validationError);
-              return;
-            }
-
             setIsSaving(true);
 
             try {
-              await onSave({ title, nickname, quantity: formatQuantity(quantity), year, date }, file);
+              await onSave(
+                { title, nickname, quantity: quantityUnknown ? UNKNOWN_QUANTITY : formatQuantity(quantity), date },
+                file,
+              );
               onClose();
             } catch (saveError) {
               setError(saveError instanceof Error ? saveError.message : "Could not save changes.");
@@ -130,38 +111,34 @@ export function EditBobbleheadDialog({
             <input
               type="text"
               value={quantity}
+              disabled={quantityUnknown}
               onChange={(event) => setQuantity(event.target.value)}
               onBlur={(event) => setQuantity(formatQuantity(event.target.value))}
               placeholder="e.g. 25,000"
-              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent disabled:opacity-50 dark:border-white/15 dark:bg-[#07111d] dark:text-white"
             />
+            <label className="flex items-center gap-1.5">
+              <input
+                type="checkbox"
+                checked={quantityUnknown}
+                onChange={(event) => setQuantityUnknown(event.target.checked)}
+                className="h-3.5 w-3.5 accent-accent"
+              />
+              <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">Quantity unknown</span>
+            </label>
             <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">
               How many were handed out — a hint at how rare it is.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="grid gap-1.5">
-              <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Year</label>
-              <input
-                required
-                type="text"
-                inputMode="numeric"
-                maxLength={4}
-                value={year}
-                onChange={(event) => setYear(event.target.value)}
-                className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
-              />
-            </div>
-            <div className="grid gap-1.5">
-              <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Date</label>
-              <input
-                required
-                type="text"
-                value={date}
-                onChange={(event) => setDate(event.target.value)}
-                className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
-              />
-            </div>
+          <div className="grid gap-1.5">
+            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Date</label>
+            <input
+              required
+              type="text"
+              value={date}
+              onChange={(event) => setDate(event.target.value)}
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+            />
           </div>
           <div className="grid gap-1.5">
             <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Replace photo</label>

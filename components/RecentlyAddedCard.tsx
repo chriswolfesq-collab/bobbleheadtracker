@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { WantedButton } from "@/components/WantedButton";
 import type { CommunityBobbleheadWithTeam } from "@/lib/communityBobbleheads";
+import { isUnoptimizedImage } from "@/lib/imageOptimization";
 import { publicAsset } from "@/lib/paths";
 import { getTeamBySlug } from "@/lib/teams";
 
@@ -38,7 +39,7 @@ export function RecentlyAddedCard({
             alt={`${bobblehead.title} bobblehead`}
             width={268}
             height={630}
-            unoptimized={imageSrc.startsWith("http")}
+            unoptimized={isUnoptimizedImage(imageSrc)}
             className="h-20 w-auto object-contain drop-shadow-[0_8px_10px_rgba(0,0,0,0.6)] sm:h-24"
           />
         </div>

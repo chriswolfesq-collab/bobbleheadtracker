@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import type { Database } from "@/lib/database.types";
 
 // A client authenticated with the service-role key, so it bypasses RLS. Used
 // exclusively by the nightly dead-image sweep (app/api/dead-image-sweep) to read
@@ -19,7 +20,7 @@ export function createServiceSupabase() {
     );
   }
 
-  return createClient(url, serviceRoleKey, {
+  return createClient<Database>(url, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 }

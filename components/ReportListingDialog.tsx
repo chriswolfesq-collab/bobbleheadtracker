@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAuth } from "@/lib/auth";
 import { submitListingReport, type ReportReason } from "@/lib/reports";
+import { useDialog } from "@/lib/useDialog";
 
 const REASON_OPTIONS: { value: ReportReason; label: string }[] = [
   { value: "not_real", label: "Not a real listing" },
@@ -31,13 +32,19 @@ function ReportListingDialog({
     onClose();
   };
 
+  const panelRef = useDialog<HTMLDivElement>(true, close);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-8" onClick={close}>
       <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="report-listing-title"
         className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50 dark:border-white/10 dark:bg-[#0b1a2b]"
         onClick={(event) => event.stopPropagation()}
       >
-        <h2 className="text-lg font-black text-zinc-900 dark:text-white">Report this listing</h2>
+        <h2 id="report-listing-title" className="text-lg font-black text-zinc-900 dark:text-white">Report this listing</h2>
         <p className="mt-1 text-xs leading-5 text-zinc-600 dark:text-zinc-400">
           Tell the admin what&apos;s wrong. Reports are reviewed before anything changes.
         </p>

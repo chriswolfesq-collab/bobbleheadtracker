@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { AuthWidget } from "@/components/AuthWidget";
@@ -5,6 +6,21 @@ import DisplayCase from "@/components/DisplayCase";
 import { HomeWelcomeModal } from "@/components/HomeWelcomeModal";
 import RecentlyAdded from "@/components/RecentlyAdded";
 import { SiteSearch } from "@/components/SiteSearch";
+
+// The homepage otherwise inherits the layout's generic title; give it a
+// canonical title/description and let the file-based app/opengraph-image.png
+// supply the share card (file metadata outranks anything declared here).
+const title = "Bobbleshelf — every MLB stadium giveaway bobblehead";
+const description =
+  "Browse every MLB SGA bobblehead by team and track the ones you own. All 30 teams, every stadium giveaway, in one place.";
+
+export const metadata: Metadata = {
+  title,
+  description,
+  alternates: { canonical: "/" },
+  openGraph: { title, description, type: "website", url: "/" },
+  twitter: { card: "summary_large_image", title, description },
+};
 
 export default function Home() {
   return (

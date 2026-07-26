@@ -62,7 +62,9 @@ export async function approveSubmission(submission: ApprovableSubmission) {
 
   const { error: rpcError } = await supabase.rpc("approve_submission", {
     p_submission_id: submission.id,
-    p_image_url: moved?.publicUrl ?? null,
+    // The SQL function accepts NULL (a photoless new_bobblehead), but the
+    // generated arg type is non-nullable text, so assert past it.
+    p_image_url: (moved?.publicUrl ?? null) as string,
     p_curated_has_photo: curatedHasPhoto,
   });
 

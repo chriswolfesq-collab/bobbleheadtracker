@@ -1,7 +1,10 @@
 import { GIVEAWAYS_BY_TEAM } from "@/lib/bobbleheads";
+import type { Database } from "@/lib/database.types";
 import { normalizeTitle, scrapeAll, type ScrapeCandidate } from "@/lib/giveawayScraper";
 import { PROMO_SOURCES } from "@/lib/promoSources";
 import { createServiceSupabase } from "@/lib/supabaseService";
+
+type ScrapedGiveawayInsert = Database["public"]["Tables"]["scraped_giveaways"]["Insert"];
 
 // Scheduled giveaway scraper, triggered by Vercel Cron (see vercel.json).
 // Crawls each team's promo-schedule page (lib/promoSources.ts), extracts
@@ -70,7 +73,7 @@ export async function GET(request: Request) {
   for (const row of queued ?? []) queuedIdByKey.set(`${row.team_slug}/${row.dedupe_key}`, row.id);
 
   const nowIso = new Date().toISOString();
-  const toInsert: Record<string, unknown>[] = [];
+  const toInsert: ScrapedGiveawayInsert[] = [];
   const toTouch: string[] = [];
 
   // Dedupe fresh candidates by (team, dedupe_key) so a single insert batch can't

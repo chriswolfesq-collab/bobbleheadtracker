@@ -48,9 +48,9 @@ export function AdminUserProfile() {
   const source = { userId: targetId, client: supabase };
   const { countByTeamSlug, totalOwned, isLoading: isCollectionLoading } = useCollectionSummary(source);
   const { totalByTeamSlug, siteTotal, isLoading: isSiteTotalLoading } = useSiteBobbleheadCounts();
-  const { submissions, isLoading: isSubmissionsLoading } = useMySubmissions(source);
-  const { favorites, isLoading: isFavoritesLoading } = useMyFavorites(source);
-  const { wanted, isLoading: isWantedLoading } = useMyWanted(source);
+  const { submissions, isLoading: isSubmissionsLoading, error: submissionsError } = useMySubmissions(source);
+  const { favorites, isLoading: isFavoritesLoading, error: favoritesError } = useMyFavorites(source);
+  const { wanted, isLoading: isWantedLoading, error: wantedError } = useMyWanted(source);
 
   useEffect(() => {
     if (!isAdmin || !targetId) return;
@@ -151,10 +151,13 @@ export function AdminUserProfile() {
             totalByTeamSlug={totalByTeamSlug}
             favorites={favorites}
             isFavoritesLoading={isFavoritesLoading}
+            favoritesError={favoritesError}
             wanted={wanted}
             isWantedLoading={isWantedLoading}
+            wantedError={wantedError}
             submissions={submissions}
             isSubmissionsLoading={isSubmissionsLoading}
+            submissionsError={submissionsError}
             isOtherUser
           />
         </div>

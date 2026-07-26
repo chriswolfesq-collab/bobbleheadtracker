@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { sendAdminEmail } from "@/lib/adminEmail";
+import { useDialog } from "@/lib/useDialog";
 
 export type EmailRecipient = {
   id: string;
@@ -39,6 +40,8 @@ export function AdminEmailComposer({
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const panelRef = useDialog<HTMLDivElement>(true, onClose);
+
   const send = async () => {
     if (!subject.trim() || !message.trim()) {
       setError("A subject and a message are both required.");
@@ -73,12 +76,16 @@ export function AdminEmailComposer({
       onClick={onClose}
     >
       <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="admin-email-title"
         className="w-full max-w-lg rounded-lg border border-black/10 bg-white p-6 text-zinc-900 shadow-2xl dark:border-white/10 dark:bg-[#0b1a29] dark:text-zinc-100"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h2 className="text-lg font-black uppercase tracking-wide">Send email</h2>
+            <h2 id="admin-email-title" className="text-lg font-black uppercase tracking-wide">Send email</h2>
             <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
               To <span className="font-semibold text-accent">{recipientLabel(target)}</span>
             </p>

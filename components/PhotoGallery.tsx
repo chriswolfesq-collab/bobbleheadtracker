@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import type { GalleryPhoto } from "@/lib/bobbleheadGallery";
+import { isUnoptimizedImage } from "@/lib/imageOptimization";
 
 export function PhotoGallery({
   photos,
@@ -31,7 +32,7 @@ export function PhotoGallery({
               alt="Community-submitted photo"
               width={80}
               height={80}
-              unoptimized
+              unoptimized={isUnoptimizedImage(photo.imageUrl)}
               className="h-full w-full object-cover"
             />
           </a>

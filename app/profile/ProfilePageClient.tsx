@@ -19,9 +19,9 @@ export function ProfilePageClient() {
   const { user, isLoading: isAuthLoading, updateDisplayName } = useAuth();
   const { countByTeamSlug, totalOwned, isLoading: isCollectionLoading } = useCollectionSummary();
   const { totalByTeamSlug, siteTotal, isLoading: isSiteTotalLoading } = useSiteBobbleheadCounts();
-  const { submissions, isLoading: isSubmissionsLoading } = useMySubmissions();
-  const { favorites, isLoading: isFavoritesLoading } = useMyFavorites();
-  const { wanted, isLoading: isWantedLoading } = useMyWanted();
+  const { submissions, isLoading: isSubmissionsLoading, error: submissionsError } = useMySubmissions();
+  const { favorites, isLoading: isFavoritesLoading, error: favoritesError } = useMyFavorites();
+  const { wanted, isLoading: isWantedLoading, error: wantedError } = useMyWanted();
   // Called once here and passed down: both share buttons need it, and each
   // calling the hook would refetch the same row. (The public-shelf privacy
   // toggle now lives on the settings page.)
@@ -133,10 +133,13 @@ export function ProfilePageClient() {
             isCollectionLoading={isCollectionLoading || isSiteTotalLoading}
             favorites={favorites}
             isFavoritesLoading={isFavoritesLoading}
+            favoritesError={favoritesError}
             wanted={wanted}
             isWantedLoading={isWantedLoading}
+            wantedError={wantedError}
             submissions={submissions}
             isSubmissionsLoading={isSubmissionsLoading}
+            submissionsError={submissionsError}
           />
         </div>
       )}

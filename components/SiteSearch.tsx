@@ -5,11 +5,10 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { BobbleheadImage } from "@/components/BobbleheadImage";
-import { useBobbleheadOverrides } from "@/lib/bobbleheadOverrides";
-import { useAllCommunityBobbleheads } from "@/lib/communityBobbleheads";
+import { isUnoptimizedImage } from "@/lib/imageOptimization";
 import { publicAsset } from "@/lib/paths";
-import { CURATED_SEARCH_INDEX, searchGiveaways, type SearchResult } from "@/lib/search";
-import { getTeamBySlug } from "@/lib/teams";
+import { searchGiveaways } from "@/lib/search";
+import { useSearchIndex } from "@/lib/useSearchIndex";
 
 export function SiteSearch({
   teamSlug,
@@ -23,47 +22,13 @@ export function SiteSearch({
   const [activeIndex, setActiveIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { communityBobbleheads } = useAllCommunityBobbleheads();
-  const { isDeleted, getOverride } = useBobbleheadOverrides();
-
-  const index = useMemo<SearchResult[]>(() => {
-    const community: SearchResult[] = communityBobbleheads.map((giveaway) => {
-      const team = getTeamBySlug(giveaway.teamSlug);
-      return {
-        id: giveaway.id,
-        title: giveaway.title,
-        date: giveaway.date,
-        year: giveaway.year,
-        imageUrl: giveaway.imageUrl,
-        teamSlug: giveaway.teamSlug,
-        teamName: team?.name ?? giveaway.teamSlug,
-        teamCity: team?.city ?? "",
-        href: `/teams/${giveaway.teamSlug}/community?id=${encodeURIComponent(giveaway.id)}`,
-        source: "community",
-      };
-    });
-
-    // Curated entries are indexed from build-time data, so admin edits
-    // (bobblehead_overrides) have to be applied here or search would keep
-    // matching and showing the pre-edit title/year/date.
-    const curated = CURATED_SEARCH_INDEX.filter((result) => !isDeleted(result.teamSlug, result.id)).map(
-      (result) => {
-        const override = getOverride(result.teamSlug, result.id);
-        if (!override) return result;
-        return {
-          ...result,
-          title: override.title ?? result.title,
-          year: override.year ?? result.year,
-          date: override.date ?? result.date,
-        };
-      },
-    );
-    const combined = [...curated, ...community];
-    return teamSlug ? combined.filter((result) => result.teamSlug === teamSlug) : combined;
-  }, [communityBobbleheads, teamSlug, isDeleted, getOverride]);
+  const index = useSearchIndex(teamSlug);
 
   const results = useMemo(() => searchGiveaways(index, query), [index, query]);
   const showResults = isFocused && query.trim().length > 0;
+  const allResultsHref = `/search?q=${encodeURIComponent(query.trim())}${
+    teamSlug ? `&team=${encodeURIComponent(teamSlug)}` : ""
+  }`;
 
   const closeSearch = () => {
     setIsFocused(false);
@@ -87,10 +52,12 @@ export function SiteSearch({
       event.preventDefault();
       setActiveIndex((current) => (current > 0 ? current - 1 : results.length - 1));
     } else if (event.key === "Enter") {
-      const active = results[activeIndex] ?? results[0];
       event.preventDefault();
       setIsFocused(false);
-      router.push(active.href);
+      // Enter on a highlighted result opens it; plain Enter goes to the full
+      // results page so nothing is lost when the user comes back.
+      const active = activeIndex >= 0 ? results[activeIndex] : null;
+      router.push(active ? active.href : allResultsHref);
     }
   };
 
@@ -214,12 +181,17 @@ export function SiteSearch({
                         alt=""
                         width={30}
                         height={70}
-                        unoptimized={!!result.imageUrl?.startsWith("http")}
+                        unoptimized={isUnoptimizedImage(result.imageUrl)}
                         className="relative h-9 w-auto object-contain"
                       />
                     </span>
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-semibold text-zinc-900 dark:text-white">{result.title}</p>
+                      <p className="truncate text-sm font-semibold text-zinc-900 dark:text-white">
+                        {result.title}
+                        {result.nickname ? (
+                          <span className="font-normal text-zinc-600 dark:text-zinc-400"> “{result.nickname}”</span>
+                        ) : null}
+                      </p>
                       <p className="truncate text-xs text-zinc-600 dark:text-zinc-400">
                         {teamSlug ? result.date : `${result.teamCity} ${result.teamName} · ${result.date}`}
                       </p>
@@ -231,6 +203,15 @@ export function SiteSearch({
           ) : (
             <p className="px-3 py-4 text-center text-sm text-zinc-600 dark:text-zinc-400">No bobbleheads found.</p>
           )}
+          {results.length > 0 ? (
+            <Link
+              href={allResultsHref}
+              onClick={() => setIsFocused(false)}
+              className="block border-t border-black/[0.06] px-3 py-2.5 text-center text-xs font-black uppercase tracking-wide text-accent transition hover:bg-black/[0.04] dark:border-white/5 dark:hover:bg-white/5"
+            >
+              View all results →
+            </Link>
+          ) : null}
         </div>
       ) : null}
     </div>
