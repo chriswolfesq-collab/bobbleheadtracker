@@ -4,6 +4,7 @@ import { TEAMS } from "./teams";
 export type SearchResult = {
   id: string;
   title: string;
+  nickname: string | null;
   date: string;
   year: string;
   imageUrl?: string | null;
@@ -23,6 +24,7 @@ function buildCuratedIndex(): SearchResult[] {
       results.push({
         id: giveaway.id,
         title: giveaway.title,
+        nickname: giveaway.nickname ?? null,
         date: giveaway.date,
         year: giveaway.year,
         imageUrl: giveaway.imageUrl,
@@ -50,7 +52,8 @@ export function searchGiveaways(
 
   const matches: SearchResult[] = [];
   for (const result of results) {
-    const haystack = `${result.title} ${result.date} ${result.year} ${result.teamName} ${result.teamCity} ${result.teamSlug}`.toLowerCase();
+    const haystack =
+      `${result.title} ${result.nickname ?? ""} ${result.date} ${result.year} ${result.teamName} ${result.teamCity} ${result.teamSlug}`.toLowerCase();
     if (terms.every((term) => haystack.includes(term))) {
       matches.push(result);
       if (matches.length >= limit) break;

@@ -24,8 +24,11 @@ const REPLY_TO = "chriswolfesq@gmail.com";
 const RESEND_BATCH_LIMIT = 100;
 
 Deno.serve(async (req) => {
+  // Fail closed: an unset WEBHOOK_SECRET rejects every request rather than
+  // waving them through, so a misconfigured deploy can't leave this public
+  // mailer open to spam.
   const webhookSecret = Deno.env.get("WEBHOOK_SECRET");
-  if (webhookSecret && req.headers.get("x-webhook-secret") !== webhookSecret) {
+  if (!webhookSecret || req.headers.get("x-webhook-secret") !== webhookSecret) {
     return new Response("Unauthorized", { status: 401 });
   }
 

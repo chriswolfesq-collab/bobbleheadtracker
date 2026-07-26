@@ -1,0 +1,716 @@
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
+export type Database = {
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "14.5"
+  }
+  public: {
+    Tables: {
+      admins: {
+        Row: {
+          created_at: string
+          email: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+        }
+        Relationships: []
+      }
+      approved_photos: {
+        Row: {
+          approved_by: string | null
+          bobblehead_id: string
+          image_url: string
+          team_slug: string
+          updated_at: string
+        }
+        Insert: {
+          approved_by?: string | null
+          bobblehead_id: string
+          image_url: string
+          team_slug: string
+          updated_at?: string
+        }
+        Update: {
+          approved_by?: string | null
+          bobblehead_id?: string
+          image_url?: string
+          team_slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      bobblehead_gallery_photos: {
+        Row: {
+          approved_by: string | null
+          bobblehead_id: string
+          created_at: string
+          id: string
+          image_url: string
+          team_slug: string
+        }
+        Insert: {
+          approved_by?: string | null
+          bobblehead_id: string
+          created_at?: string
+          id?: string
+          image_url: string
+          team_slug: string
+        }
+        Update: {
+          approved_by?: string | null
+          bobblehead_id?: string
+          created_at?: string
+          id?: string
+          image_url?: string
+          team_slug?: string
+        }
+        Relationships: []
+      }
+      bobblehead_overrides: {
+        Row: {
+          bobblehead_id: string
+          date: string | null
+          deleted: boolean
+          nickname: string | null
+          quantity: string | null
+          team_slug: string
+          title: string | null
+          updated_at: string
+          updated_by: string | null
+          year: string | null
+        }
+        Insert: {
+          bobblehead_id: string
+          date?: string | null
+          deleted?: boolean
+          nickname?: string | null
+          quantity?: string | null
+          team_slug: string
+          title?: string | null
+          updated_at?: string
+          updated_by?: string | null
+          year?: string | null
+        }
+        Update: {
+          bobblehead_id?: string
+          date?: string | null
+          deleted?: boolean
+          nickname?: string | null
+          quantity?: string | null
+          team_slug?: string
+          title?: string | null
+          updated_at?: string
+          updated_by?: string | null
+          year?: string | null
+        }
+        Relationships: []
+      }
+      community_bobbleheads: {
+        Row: {
+          approved_by: string | null
+          created_at: string
+          date: string
+          id: string
+          image_url: string | null
+          nickname: string | null
+          quantity: string | null
+          team_slug: string
+          title: string
+          year: string
+        }
+        Insert: {
+          approved_by?: string | null
+          created_at?: string
+          date?: string
+          id: string
+          image_url?: string | null
+          nickname?: string | null
+          quantity?: string | null
+          team_slug: string
+          title: string
+          year?: string
+        }
+        Update: {
+          approved_by?: string | null
+          created_at?: string
+          date?: string
+          id?: string
+          image_url?: string | null
+          nickname?: string | null
+          quantity?: string | null
+          team_slug?: string
+          title?: string
+          year?: string
+        }
+        Relationships: []
+      }
+      dead_images: {
+        Row: {
+          bobblehead_id: string
+          error: string | null
+          first_seen_at: string
+          http_status: number | null
+          id: string
+          image_url: string
+          last_checked_at: string
+          listing_kind: string
+          resolved_at: string | null
+          source: string
+          status: string
+          team_slug: string
+          title: string | null
+        }
+        Insert: {
+          bobblehead_id: string
+          error?: string | null
+          first_seen_at?: string
+          http_status?: number | null
+          id?: string
+          image_url: string
+          last_checked_at?: string
+          listing_kind: string
+          resolved_at?: string | null
+          source: string
+          status?: string
+          team_slug: string
+          title?: string | null
+        }
+        Update: {
+          bobblehead_id?: string
+          error?: string | null
+          first_seen_at?: string
+          http_status?: number | null
+          id?: string
+          image_url?: string
+          last_checked_at?: string
+          listing_kind?: string
+          resolved_at?: string | null
+          source?: string
+          status?: string
+          team_slug?: string
+          title?: string | null
+        }
+        Relationships: []
+      }
+      listing_reports: {
+        Row: {
+          bobblehead_id: string
+          created_at: string
+          details: string | null
+          id: string
+          reason: string
+          reviewed_at: string | null
+          source: string
+          status: string
+          submitted_by: string
+          team_slug: string
+          title: string
+        }
+        Insert: {
+          bobblehead_id: string
+          created_at?: string
+          details?: string | null
+          id?: string
+          reason: string
+          reviewed_at?: string | null
+          source: string
+          status?: string
+          submitted_by: string
+          team_slug: string
+          title: string
+        }
+        Update: {
+          bobblehead_id?: string
+          created_at?: string
+          details?: string | null
+          id?: string
+          reason?: string
+          reviewed_at?: string | null
+          source?: string
+          status?: string
+          submitted_by?: string
+          team_slug?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string
+          email_wishlist_alerts: boolean
+          gallery_public: boolean
+          id: string
+          is_public: boolean
+          slug: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string
+          email_wishlist_alerts?: boolean
+          gallery_public?: boolean
+          id: string
+          is_public?: boolean
+          slug?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          email_wishlist_alerts?: boolean
+          gallery_public?: boolean
+          id?: string
+          is_public?: boolean
+          slug?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      scraped_giveaways: {
+        Row: {
+          approved_community_id: string | null
+          date: string
+          dedupe_key: string
+          detected_text: string | null
+          first_seen_at: string
+          id: string
+          last_seen_at: string
+          reviewed_at: string | null
+          source_url: string
+          status: string
+          team_slug: string
+          title: string
+          year: string
+        }
+        Insert: {
+          approved_community_id?: string | null
+          date: string
+          dedupe_key: string
+          detected_text?: string | null
+          first_seen_at?: string
+          id?: string
+          last_seen_at?: string
+          reviewed_at?: string | null
+          source_url: string
+          status?: string
+          team_slug: string
+          title: string
+          year: string
+        }
+        Update: {
+          approved_community_id?: string | null
+          date?: string
+          dedupe_key?: string
+          detected_text?: string | null
+          first_seen_at?: string
+          id?: string
+          last_seen_at?: string
+          reviewed_at?: string | null
+          source_url?: string
+          status?: string
+          team_slug?: string
+          title?: string
+          year?: string
+        }
+        Relationships: []
+      }
+      submissions: {
+        Row: {
+          created_at: string
+          date: string | null
+          id: string
+          kind: string
+          nickname: string | null
+          quantity: string | null
+          reviewed_at: string | null
+          status: string
+          storage_path: string | null
+          submitted_by: string
+          target_bobblehead_id: string | null
+          team_slug: string
+          title: string | null
+          year: string | null
+        }
+        Insert: {
+          created_at?: string
+          date?: string | null
+          id?: string
+          kind: string
+          nickname?: string | null
+          quantity?: string | null
+          reviewed_at?: string | null
+          status?: string
+          storage_path?: string | null
+          submitted_by: string
+          target_bobblehead_id?: string | null
+          team_slug: string
+          title?: string | null
+          year?: string | null
+        }
+        Update: {
+          created_at?: string
+          date?: string | null
+          id?: string
+          kind?: string
+          nickname?: string | null
+          quantity?: string | null
+          reviewed_at?: string | null
+          status?: string
+          storage_path?: string | null
+          submitted_by?: string
+          target_bobblehead_id?: string | null
+          team_slug?: string
+          title?: string | null
+          year?: string | null
+        }
+        Relationships: []
+      }
+      team_reps: {
+        Row: {
+          created_at: string
+          email: string
+          team_slug: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          team_slug: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          team_slug?: string
+        }
+        Relationships: []
+      }
+      user_collections: {
+        Row: {
+          bobblehead_id: string
+          owned: boolean
+          team_slug: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bobblehead_id: string
+          owned?: boolean
+          team_slug: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bobblehead_id?: string
+          owned?: boolean
+          team_slug?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_favorites: {
+        Row: {
+          bobblehead_id: string
+          favorited: boolean
+          team_slug: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bobblehead_id: string
+          favorited?: boolean
+          team_slug: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bobblehead_id?: string
+          favorited?: boolean
+          team_slug?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_wants: {
+        Row: {
+          bobblehead_id: string
+          team_slug: string
+          updated_at: string
+          user_id: string
+          wanted: boolean
+        }
+        Insert: {
+          bobblehead_id: string
+          team_slug: string
+          updated_at?: string
+          user_id: string
+          wanted?: boolean
+        }
+        Update: {
+          bobblehead_id?: string
+          team_slug?: string
+          updated_at?: string
+          user_id?: string
+          wanted?: boolean
+        }
+        Relationships: []
+      }
+      wishlist_alerts_sent: {
+        Row: {
+          bobblehead_id: string
+          created_at: string
+          user_id: string
+        }
+        Insert: {
+          bobblehead_id: string
+          created_at?: string
+          user_id: string
+        }
+        Update: {
+          bobblehead_id?: string
+          created_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      admin_assign_team_rep: {
+        Args: { p_email: string; p_team_slug: string }
+        Returns: undefined
+      }
+      admin_dashboard_stats: { Args: never; Returns: Json }
+      admin_delete_bobblehead: {
+        Args: { p_bobblehead_id: string; p_source: string; p_team_slug: string }
+        Returns: undefined
+      }
+      admin_delete_user: { Args: { p_user_id: string }; Returns: undefined }
+      admin_get_user: {
+        Args: { p_user_id: string }
+        Returns: {
+          created_at: string
+          display_name: string
+          email: string
+          id: string
+          last_sign_in_at: string
+        }[]
+      }
+      admin_list_team_reps: {
+        Args: never
+        Returns: {
+          created_at: string
+          email: string
+          team_slug: string
+        }[]
+      }
+      admin_list_users: {
+        Args: never
+        Returns: {
+          created_at: string
+          display_name: string
+          email: string
+          favorite_count: number
+          id: string
+          last_sign_in_at: string
+          owned_count: number
+          report_count: number
+          submission_count: number
+          wanted_count: number
+        }[]
+      }
+      admin_remove_team_rep: {
+        Args: { p_email: string; p_team_slug: string }
+        Returns: undefined
+      }
+      admin_update_display_name: {
+        Args: { p_display_name: string; p_user_id: string }
+        Returns: undefined
+      }
+      approve_scraped_giveaway: { Args: { p_id: string }; Returns: string }
+      approve_submission: {
+        Args: {
+          p_curated_has_photo?: boolean
+          p_image_url: string
+          p_submission_id: string
+        }
+        Returns: undefined
+      }
+      can_edit_team: { Args: { p_team_slug: string }; Returns: boolean }
+      disable_public_shelf: { Args: never; Returns: undefined }
+      display_name_of: { Args: { p_meta: Json }; Returns: string }
+      enable_public_shelf: { Args: never; Returns: string }
+      get_public_gallery: {
+        Args: { p_slug: string }
+        Returns: {
+          bobblehead_id: string
+          kind: string
+          team_slug: string
+        }[]
+      }
+      get_public_shelf: {
+        Args: { p_slug: string }
+        Returns: {
+          counts: Json
+          display_name: string
+        }[]
+      }
+      is_admin: { Args: never; Returns: boolean }
+      is_team_rep: { Args: never; Returns: boolean }
+      my_editable_teams: { Args: never; Returns: string[] }
+      reject_submission: {
+        Args: { p_submission_id: string }
+        Returns: undefined
+      }
+      set_gallery_public: { Args: { p_enabled: boolean }; Returns: undefined }
+      set_wishlist_alerts: { Args: { p_enabled: boolean }; Returns: undefined }
+      slugify: { Args: { p_text: string }; Returns: string }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
+}
+
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
+
+export type Tables<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Row: infer R
+    }
+    ? R
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
+    : never
+
+export type TablesInsert<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Insert: infer I
+    }
+    ? I
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
+    : never
+
+export type TablesUpdate<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Update: infer U
+    }
+    ? U
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
+    : never
+
+export type Enums<
+  DefaultSchemaEnumNameOrOptions extends
+    | keyof DefaultSchema["Enums"]
+    | { schema: keyof DatabaseWithoutInternals },
+  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    : never = never,
+> = DefaultSchemaEnumNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
+    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof DefaultSchema["CompositeTypes"]
+    | { schema: keyof DatabaseWithoutInternals },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
+    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+    : never
+
+export const Constants = {
+  public: {
+    Enums: {},
+  },
+} as const

@@ -1,9 +1,15 @@
 "use client";
 
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
-import { getGiveawayById } from "@/lib/bobbleheads";
 import { useAdminAuth } from "@/lib/adminAuth";
+import { buildBobbleheadResolver } from "@/lib/bobbleheadIdentity";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
+
+// The owned/wanted/favorited table + flag are chosen at runtime, which the
+// per-table generated types can't express; that one query uses an untyped view
+// of the client while every static query keeps full typing.
+const untyped = supabase as unknown as SupabaseClient;
 
 // One row in an admin "browse a collection type site-wide" list. The same shape
 // backs owned/wanted/favorited, community listings, and gallery photos so a
@@ -39,47 +45,6 @@ export type UserItemKind = keyof typeof USER_ITEM_TABLES;
 
 type AdminUserRow = { id: string; email: string | null; display_name: string | null };
 
-// A bobblehead's identity (title + image) is split across the curated catalog
-// (lib/bobbleheads.ts, client-side TS), the community_bobbleheads table, and any
-// admin-approved main photo — the same three sources lib/profile.ts resolves
-// against. This helper builds the lookup maps for a set of teams and returns a
-// resolver keyed by (team_slug, bobblehead_id).
-async function buildBobbleheadResolver(teamSlugs: string[]) {
-  const [{ data: communityRows }, { data: photoRows }] = await Promise.all([
-    supabase
-      .from("community_bobbleheads")
-      .select("id, team_slug, title, image_url")
-      .in("team_slug", teamSlugs),
-    supabase
-      .from("approved_photos")
-      .select("bobblehead_id, team_slug, image_url")
-      .in("team_slug", teamSlugs),
-  ]);
-
-  const communityByKey = new Map(
-    (communityRows ?? []).map((row) => [`${row.team_slug}:${row.id}`, row]),
-  );
-  const photoByKey = new Map(
-    (photoRows ?? []).map((row) => [`${row.team_slug}:${row.bobblehead_id}`, row.image_url]),
-  );
-
-  return (teamSlug: string, bobbleheadId: string) => {
-    const key = `${teamSlug}:${bobbleheadId}`;
-    const curated = getGiveawayById(bobbleheadId, teamSlug);
-    const community = communityByKey.get(key);
-
-    return {
-      title: curated?.title ?? community?.title ?? "Bobblehead",
-      imageUrl: photoByKey.get(key) ?? curated?.imageUrl ?? community?.image_url ?? null,
-      // Curated listings have a dedicated page; community-only ones open through
-      // the community view with the id as a query param.
-      href: curated
-        ? `/teams/${teamSlug}/bobbleheads/${bobbleheadId}`
-        : `/teams/${teamSlug}/community?id=${encodeURIComponent(bobbleheadId)}`,
-    };
-  };
-}
-
 // Site-wide list of every owned / wanted / favorited row across all users. Each
 // row becomes one item labelled with the bobblehead and its owner. Reads through
 // the admin client, allowed by the "<table>: admin select" RLS policies.
@@ -98,7 +63,7 @@ export function useAdminUserItems(kind: UserItemKind): AdminItemsResult {
     (async () => {
       const [{ data: rows, error: rowsError }, { data: userRows, error: usersError }] =
         await Promise.all([
-          supabase.from(table).select("bobblehead_id, team_slug, user_id").eq(flag, true),
+          untyped.from(table).select("bobblehead_id, team_slug, user_id").eq(flag, true),
           supabase.rpc("admin_list_users"),
         ]);
 
@@ -119,15 +84,14 @@ export function useAdminUserItems(kind: UserItemKind): AdminItemsResult {
       );
 
       const teamSlugs = Array.from(new Set((rows ?? []).map((row) => row.team_slug)));
-      const resolve =
-        teamSlugs.length > 0
-          ? await buildBobbleheadResolver(teamSlugs)
-          : () => ({ title: "Bobblehead", imageUrl: null, href: "/" });
+      // Only built when there are rows to resolve; a non-empty `rows` guarantees
+      // a non-empty `teamSlugs`, so `resolve` is set wherever it's called below.
+      const resolve = teamSlugs.length > 0 ? await buildBobbleheadResolver(supabase, teamSlugs) : null;
 
       if (cancelled) return;
 
       const resolved: AdminCollectionItem[] = (rows ?? []).map((row) => {
-        const bobblehead = resolve(row.team_slug, row.bobblehead_id);
+        const bobblehead = resolve!(row.team_slug, row.bobblehead_id);
         return {
           key: `${row.user_id}:${row.team_slug}:${row.bobblehead_id}`,
           title: bobblehead.title,
@@ -239,7 +203,9 @@ export function useAdminPublicShelves() {
           .filter((row) => row.slug)
           .map((row) => ({
             id: row.id,
-            slug: row.slug,
+            // Non-null by the filter above; the generated type still sees `slug`
+            // as nullable because the DB column is.
+            slug: row.slug!,
             displayName: row.display_name?.trim() || "Member",
           }));
 
@@ -285,15 +251,14 @@ export function useAdminGalleryPhotos(): AdminItemsResult {
 
         const rows = data ?? [];
         const teamSlugs = Array.from(new Set(rows.map((row) => row.team_slug)));
-        const resolve =
-          teamSlugs.length > 0
-            ? await buildBobbleheadResolver(teamSlugs)
-            : () => ({ title: "Bobblehead", imageUrl: null, href: "/" });
+        // Only built when there are rows to resolve; a non-empty `rows`
+        // guarantees a non-empty `teamSlugs`, so `resolve` is set below.
+        const resolve = teamSlugs.length > 0 ? await buildBobbleheadResolver(supabase, teamSlugs) : null;
 
         if (cancelled) return;
 
         const resolved: AdminCollectionItem[] = rows.map((row) => {
-          const bobblehead = resolve(row.team_slug, row.bobblehead_id);
+          const bobblehead = resolve!(row.team_slug, row.bobblehead_id);
           return {
             key: row.id,
             title: bobblehead.title,

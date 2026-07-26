@@ -27,6 +27,12 @@ function submissionLabel(submission: MySubmission): string {
   return "Photo for existing bobblehead";
 }
 
+// A failed load previously rendered identically to an empty list. This gives it
+// a distinct message so "couldn't load" doesn't read as "nothing here".
+function SectionError({ message }: { message: string }) {
+  return <p className="text-sm font-semibold text-red-500 dark:text-red-400">{message}</p>;
+}
+
 // The Collection / Favorites / Submissions body shared by the user's own
 // profile page (app/profile) and the admin read-only "view profile" page
 // (app/admin/users/view). All data is passed in as props so the same markup
@@ -40,10 +46,13 @@ export function ProfileSections({
   isCollectionLoading = false,
   favorites,
   isFavoritesLoading,
+  favoritesError = null,
   wanted,
   isWantedLoading,
+  wantedError = null,
   submissions,
   isSubmissionsLoading,
+  submissionsError = null,
   isOtherUser = false,
 }: {
   countByTeamSlug: Record<string, number>;
@@ -61,10 +70,15 @@ export function ProfileSections({
   isCollectionLoading?: boolean;
   favorites: MyFavorite[];
   isFavoritesLoading: boolean;
+  /** Non-null when the favorites load failed, so the empty state can read as an
+   *  error instead of masquerading as "no favorites yet". Same for the two below. */
+  favoritesError?: string | null;
   wanted: MyWanted[];
   isWantedLoading: boolean;
+  wantedError?: string | null;
   submissions: MySubmission[];
   isSubmissionsLoading: boolean;
+  submissionsError?: string | null;
 }) {
   // Shared with the public /shelf/<slug> page so a collector's own profile and
   // the link they hand out always agree on the numbers.
@@ -155,6 +169,8 @@ export function ProfileSections({
         </h2>
         {isFavoritesLoading ? (
           <p className="text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
+        ) : favoritesError ? (
+          <SectionError message={favoritesError} />
         ) : favorites.length === 0 ? (
           <p className="text-sm text-zinc-600 dark:text-zinc-400">No favorites yet.</p>
         ) : (
@@ -199,6 +215,8 @@ export function ProfileSections({
         </h2>
         {isWantedLoading ? (
           <p className="text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
+        ) : wantedError ? (
+          <SectionError message={wantedError} />
         ) : wanted.length === 0 ? (
           <p className="text-sm text-zinc-600 dark:text-zinc-400">
             {isOtherUser
@@ -247,6 +265,8 @@ export function ProfileSections({
         </h2>
         {isSubmissionsLoading ? (
           <p className="text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
+        ) : submissionsError ? (
+          <SectionError message={submissionsError} />
         ) : submissions.length === 0 ? (
           <p className="text-sm text-zinc-600 dark:text-zinc-400">Nothing submitted yet.</p>
         ) : (

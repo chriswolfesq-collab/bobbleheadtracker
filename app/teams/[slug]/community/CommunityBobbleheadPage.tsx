@@ -8,6 +8,7 @@ import { AuthWidget } from "@/components/AuthWidget";
 import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { BobbleheadTitle } from "@/components/BobbleheadTitle";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
+import { extractYear } from "@/lib/extractYear";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
@@ -20,6 +21,7 @@ import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { useCommunityBobblehead } from "@/lib/communityBobbleheads";
 import { publicAsset } from "@/lib/paths";
+import { isUnoptimizedImage } from "@/lib/imageOptimization";
 import type { Team } from "@/lib/teams";
 import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
@@ -93,8 +95,10 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
   const title = localOverride?.title ?? giveaway.title;
   const nickname = localOverride?.nickname ?? giveaway.nickname ?? null;
   const quantity = localOverride?.quantity ?? giveaway.quantity ?? null;
-  const year = localOverride?.year ?? giveaway.year;
   const date = localOverride?.date ?? giveaway.date;
+  // Year is no longer edited directly — it's derived from the date, keeping
+  // the stored year when the date doesn't carry one ("N/A").
+  const year = extractYear(date, giveaway.year);
   // A community listing's photo is always admin-removable: either an
   // approved_photos row or the row's own image_url.
   const removableMainPhotoUrl = mainPhotoRemoved
@@ -128,7 +132,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
       title: values.title,
       nickname: values.nickname,
       quantity: values.quantity,
-      year: values.year,
+      year: extractYear(values.date, year),
       date: values.date,
       file: file ?? undefined,
     });
@@ -226,7 +230,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
                   width={268}
                   height={630}
                   eager
-                  unoptimized={imageSrc.startsWith("http")}
+                  unoptimized={isUnoptimizedImage(imageSrc)}
                   className="relative h-40 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.65)]"
                 />
               </div>
@@ -350,7 +354,7 @@ export function CommunityBobbleheadPage({ team }: { team: Team }) {
       {isEditOpen ? (
         <EditBobbleheadDialog
           onClose={() => setIsEditOpen(false)}
-          initial={{ title, nickname: nickname ?? "", quantity: quantity ?? "", year, date }}
+          initial={{ title, nickname: nickname ?? "", quantity: quantity ?? "", date }}
           onSave={handleEditSave}
           onDelete={handleDelete}
           onRemovePhoto={removableMainPhotoUrl ? handleRemoveMainPhoto : undefined}

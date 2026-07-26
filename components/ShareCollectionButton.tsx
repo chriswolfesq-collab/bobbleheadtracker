@@ -1,6 +1,5 @@
 "use client";
 
-import { toCanvas } from "html-to-image";
 import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import DisplayCase from "@/components/DisplayCase";
@@ -118,6 +117,11 @@ export function ShareCollectionButton({
 
       await waitForImages(node);
       await document.fonts?.ready;
+
+      // Loaded on demand: html-to-image is only needed when someone actually
+      // saves the shelf image, so importing it here keeps it out of the bundle
+      // every other viewer of a shelf/profile page downloads.
+      const { toCanvas } = await import("html-to-image");
 
       // toCanvas rather than toBlob so the result can be encoded as JPEG: the
       // shelf is photographic and the PNG toBlob returns runs ~2.8MB, which is a

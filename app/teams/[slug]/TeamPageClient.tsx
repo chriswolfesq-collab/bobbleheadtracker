@@ -155,6 +155,7 @@ function SubmitBobbleheadForm({
   const [title, setTitle] = useState("");
   const [nickname, setNickname] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [quantityUnknown, setQuantityUnknown] = useState(false);
   const [date, setDate] = useState("");
   const [dateUnknown, setDateUnknown] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -193,7 +194,7 @@ function SubmitBobbleheadForm({
             teamSlug,
             title,
             nickname,
-            quantity,
+            quantity: quantityUnknown ? "Unknown" : quantity,
             date: dateUnknown ? "N/A" : formatSubmissionDate(date),
             file,
           });
@@ -235,10 +236,22 @@ function SubmitBobbleheadForm({
         <span className="text-xs font-black uppercase tracking-wide text-accent">Number Given Away</span>
         <input
           value={quantity}
+          disabled={quantityUnknown}
           onChange={(event) => setQuantity(event.target.value)}
           placeholder="25,000 (optional)"
-          className="mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+          className="mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent disabled:opacity-50 dark:border-white/15 dark:bg-[#07111d] dark:text-white"
         />
+        <span className="mt-1.5 flex items-center gap-1.5">
+          <input
+            type="checkbox"
+            checked={quantityUnknown}
+            onChange={(event) => setQuantityUnknown(event.target.checked)}
+            className="h-3.5 w-3.5 accent-accent"
+          />
+          <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+            Quantity Unknown
+          </span>
+        </span>
       </label>
       <label className="min-w-0">
         <span className="text-xs font-black uppercase tracking-wide text-accent">Date</span>

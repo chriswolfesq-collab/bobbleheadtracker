@@ -626,12 +626,15 @@ create policy "bobblehead_overrides: admin update"
 
 -- submissions: anyone logged in can create their own; they can see their own,
 -- the admin can see everything. Status changes only happen via the RPC
--- functions below.
+-- functions below, so a new row must land as 'pending' — without this a user
+-- could directly insert their own row already marked 'approved' and pollute the
+-- review queue and dashboard counts (it still wouldn't get promoted to a
+-- community listing, which only the RPCs do).
 drop policy if exists "submissions: submitter insert" on public.submissions;
 create policy "submissions: submitter insert"
   on public.submissions for insert
   to authenticated
-  with check (auth.uid() = submitted_by);
+  with check (auth.uid() = submitted_by and status = 'pending');
 
 -- The submitter sees their own; the team's editor (admin or that team's rep)
 -- sees the whole pending queue for their team. can_edit_team() already folds
@@ -643,12 +646,14 @@ create policy "submissions: submitter or admin select"
   using (auth.uid() = submitted_by or public.can_edit_team(team_slug));
 
 -- listing_reports: anyone logged in can report a listing and see their own
--- reports; only the admin can see and resolve/dismiss the full queue.
+-- reports; only the admin can see and resolve/dismiss the full queue. A new
+-- report must land as 'pending' for the same reason as submissions above —
+-- resolution status is the admin's to set, via the update policy / RPCs.
 drop policy if exists "listing_reports: submitter insert" on public.listing_reports;
 create policy "listing_reports: submitter insert"
   on public.listing_reports for insert
   to authenticated
-  with check (auth.uid() = submitted_by);
+  with check (auth.uid() = submitted_by and status = 'pending');
 
 drop policy if exists "listing_reports: submitter or admin select" on public.listing_reports;
 create policy "listing_reports: submitter or admin select"

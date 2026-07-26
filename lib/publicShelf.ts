@@ -1,6 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 import { cache } from "react";
-import { getGiveawayById, getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
+import { buildBobbleheadResolver } from "@/lib/bobbleheadIdentity";
+import type { Database } from "@/lib/database.types";
+import { getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
 import { computeShelfStats, type ShelfStats } from "@/lib/shelfStats";
 import { TEAMS } from "@/lib/teams";
 
@@ -26,7 +28,7 @@ export type PublicGalleryItem = {
 // that ever wrote a session to it would leak that session between visitors.
 // This one holds no session at all and only ever calls the public RPC.
 function createServerClient() {
-  return createClient(
+  return createClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
     { auth: { persistSession: false, autoRefreshToken: false } },
@@ -112,46 +114,10 @@ export const getPublicGallery = cache(async (slug: string): Promise<PublicGaller
   if (rows.length === 0) return [];
 
   const teamSlugs = Array.from(new Set(rows.map((row) => row.team_slug)));
+  const resolve = await buildBobbleheadResolver(client, teamSlugs);
 
-  const [communityResult, photoResult] = await Promise.all([
-    client
-      .from("community_bobbleheads")
-      .select("id, team_slug, title, image_url")
-      .in("team_slug", teamSlugs),
-    client
-      .from("approved_photos")
-      .select("bobblehead_id, team_slug, image_url")
-      .in("team_slug", teamSlugs),
-  ]);
-
-  if (communityResult.error) {
-    console.error("Failed to load community bobbleheads for gallery:", communityResult.error.message);
-  }
-  if (photoResult.error) {
-    console.error("Failed to load approved photos for gallery:", photoResult.error.message);
-  }
-
-  const communityByKey = new Map(
-    (communityResult.data ?? []).map((row) => [`${row.team_slug}:${row.id}`, row]),
-  );
-  const photoByKey = new Map(
-    (photoResult.data ?? []).map((row) => [`${row.team_slug}:${row.bobblehead_id}`, row.image_url]),
-  );
-
-  return rows.map((row) => {
-    const key = `${row.team_slug}:${row.bobblehead_id}`;
-    const curated = getGiveawayById(row.bobblehead_id, row.team_slug);
-    const community = communityByKey.get(key);
-
-    return {
-      kind: row.kind === "favorite" ? "favorite" : "owned",
-      bobbleheadId: row.bobblehead_id,
-      teamSlug: row.team_slug,
-      title: curated?.title ?? community?.title ?? "Bobblehead",
-      imageUrl: photoByKey.get(key) ?? curated?.imageUrl ?? community?.image_url ?? null,
-      href: curated
-        ? `/teams/${row.team_slug}/bobbleheads/${row.bobblehead_id}`
-        : `/teams/${row.team_slug}/community?id=${encodeURIComponent(row.bobblehead_id)}`,
-    };
-  });
+  return rows.map((row) => ({
+    kind: row.kind === "favorite" ? ("favorite" as const) : ("owned" as const),
+    ...resolve(row.team_slug, row.bobblehead_id),
+  }));
 });

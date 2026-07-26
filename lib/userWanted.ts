@@ -4,73 +4,21 @@ import { useCallback, useEffect, useState } from "react";
 import { useToast } from "@/components/Toast";
 import { useAuth } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
+import { useUserFlagMap } from "@/lib/useUserFlagMap";
 
 type WantedMap = Record<string, boolean>;
 
+// Per-team map of bobblehead_id -> wanted, with an optimistic setter. Thin
+// wrapper over the shared useUserFlagMap; see there for the mechanics.
 export function useUserWanted(teamSlug: string) {
-  const { user } = useAuth();
-  const { showError } = useToast();
-  const [wantedByIdRaw, setWantedByIdRaw] = useState<WantedMap>({});
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!user) return;
-
-    let cancelled = false;
-
-    supabase
-      .from("user_wants")
-      .select("bobblehead_id, wanted")
-      .eq("user_id", user.id)
-      .eq("team_slug", teamSlug)
-      .then(({ data, error }) => {
-        if (cancelled) return;
-
-        if (error) {
-          console.error("Failed to load your wanted list:", error.message);
-          setWantedByIdRaw({});
-        } else {
-          setWantedByIdRaw(
-            Object.fromEntries((data ?? []).map((row) => [row.bobblehead_id, row.wanted])),
-          );
-        }
-
-        setIsLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [user, teamSlug]);
-
-  const wantedById = user ? wantedByIdRaw : {};
-
-  const setWanted = useCallback(
-    async (bobbleheadId: string, wanted: boolean) => {
-      if (!user) return;
-
-      // Optimistic update; reverted below if the save fails.
-      const previousWanted = wantedByIdRaw[bobbleheadId] ?? false;
-      setWantedByIdRaw((current) => ({ ...current, [bobbleheadId]: wanted }));
-
-      const { error } = await supabase.from("user_wants").upsert({
-        user_id: user.id,
-        bobblehead_id: bobbleheadId,
-        team_slug: teamSlug,
-        wanted,
-        updated_at: new Date().toISOString(),
-      });
-
-      if (error) {
-        console.error("Failed to save wanted status:", error.message);
-        setWantedByIdRaw((current) => ({ ...current, [bobbleheadId]: previousWanted }));
-        showError("Couldn't save that. Please try again.");
-      }
-    },
-    [user, teamSlug, wantedByIdRaw, showError],
+  const { mapById, isLoading, setFlag, isLoggedIn } = useUserFlagMap(
+    teamSlug,
+    "user_wants",
+    "wanted",
+    "Couldn't save that. Please try again.",
   );
 
-  return { wantedById, isLoading: user ? isLoading : false, setWanted, isLoggedIn: Boolean(user) };
+  return { wantedById: mapById, isLoading, setWanted: setFlag, isLoggedIn };
 }
 
 // Cross-team variant for pages that mix bobbleheads from many teams (recently

@@ -3,7 +3,8 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth";
-import { getGiveawayById, getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
+import { type BobbleheadIdentity, bobbleheadHref, buildBobbleheadResolver } from "@/lib/bobbleheadIdentity";
+import { getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
 import { supabase } from "@/lib/supabase";
 import { TEAMS } from "@/lib/teams";
 
@@ -404,36 +405,66 @@ async function signPendingImageUrls(
   );
 }
 
-// A submission only becomes a real listing once it's approved. photo_for_existing
-// points at either a curated bobblehead (static list) or a community one; new_bobblehead
-// becomes a community_bobbleheads row whose generated id ends in the submission's
-// first 8 chars (see approve_submission() in supabase/schema.sql), so we look it up that way.
-async function resolveSubmissionHref(
+// The DB columns kind/status are `text` (generated as `string`), but a CHECK
+// constrains them to these unions, so the row is narrowed to MySubmission's
+// literal types once at the query boundary.
+type SubmissionRow = {
+  id: string;
+  kind: MySubmission["kind"];
+  status: MySubmission["status"];
+  team_slug: string;
+  title: string | null;
+  created_at: string;
+  storage_path: string | null;
+  target_bobblehead_id: string | null;
+};
+
+// A new_bobblehead submission becomes a community_bobbleheads row whose generated
+// id ends in the submission's first 8 chars (see approve_submission() in
+// supabase/schema.sql). Rather than one lookup per approved submission (an N+1),
+// fetch every community row for the relevant teams once and match in memory,
+// returning a submissionId -> href map. Only approved new_bobblehead rows need it.
+async function fetchNewBobbleheadHrefs(
   client: SupabaseClient,
-  status: MySubmission["status"],
-  kind: MySubmission["kind"],
-  submissionId: string,
-  teamSlug: string,
-  targetBobbleheadId: string | null,
-): Promise<string | null> {
-  if (status !== "approved") return null;
+  rows: SubmissionRow[],
+): Promise<Map<string, string>> {
+  const approvedNew = rows.filter((r) => r.status === "approved" && r.kind === "new_bobblehead");
+  if (approvedNew.length === 0) return new Map();
 
-  if (kind === "photo_for_existing") {
-    if (!targetBobbleheadId) return null;
-    const isCurated = getGiveawaysByTeamSlug(teamSlug).some((g) => g.id === targetBobbleheadId);
-    return isCurated
-      ? `/teams/${teamSlug}/bobbleheads/${targetBobbleheadId}`
-      : `/teams/${teamSlug}/community?id=${encodeURIComponent(targetBobbleheadId)}`;
-  }
-
+  const teamSlugs = Array.from(new Set(approvedNew.map((r) => r.team_slug)));
   const { data } = await client
     .from("community_bobbleheads")
-    .select("id")
-    .eq("team_slug", teamSlug)
-    .like("id", `%-${submissionId.slice(0, 8)}`)
-    .maybeSingle();
+    .select("id, team_slug")
+    .in("team_slug", teamSlugs);
 
-  return data ? `/teams/${teamSlug}/community?id=${encodeURIComponent(data.id)}` : null;
+  const communityRows = data ?? [];
+  const hrefBySubmissionId = new Map<string, string>();
+  for (const submission of approvedNew) {
+    const suffix = `-${submission.id.slice(0, 8)}`;
+    const match = communityRows.find(
+      (c) => c.team_slug === submission.team_slug && c.id.endsWith(suffix),
+    );
+    if (match) {
+      hrefBySubmissionId.set(submission.id, bobbleheadHref(submission.team_slug, match.id, false));
+    }
+  }
+
+  return hrefBySubmissionId;
+}
+
+// A submission only becomes a real listing once it's approved. photo_for_existing
+// points at either a curated bobblehead (static list) or a community one, resolved
+// synchronously; new_bobblehead uses the batched lookup above.
+function submissionHref(row: SubmissionRow, newBobbleheadHrefs: Map<string, string>): string | null {
+  if (row.status !== "approved") return null;
+
+  if (row.kind === "photo_for_existing") {
+    if (!row.target_bobblehead_id) return null;
+    const isCurated = getGiveawaysByTeamSlug(row.team_slug).some((g) => g.id === row.target_bobblehead_id);
+    return bobbleheadHref(row.team_slug, row.target_bobblehead_id, isCurated);
+  }
+
+  return newBobbleheadHrefs.get(row.id) ?? null;
 }
 
 export function useMySubmissions(source?: ProfileSource) {
@@ -442,6 +473,7 @@ export function useMySubmissions(source?: ProfileSource) {
   const userId = source?.userId ?? user?.id ?? null;
   const [submissions, setSubmissions] = useState<MySubmission[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!userId) return;
@@ -453,49 +485,47 @@ export function useMySubmissions(source?: ProfileSource) {
       .select("id, kind, team_slug, title, status, created_at, storage_path, target_bobblehead_id")
       .eq("submitted_by", userId)
       .order("created_at", { ascending: false })
-      .then(async ({ data, error }) => {
+      .then(async ({ data, error: queryError }) => {
         if (cancelled) return;
 
-        if (error) {
-          console.error("Failed to load your submissions:", error.message);
+        if (queryError) {
+          console.error("Failed to load your submissions:", queryError.message);
+          setError("Couldn't load your submissions. Please refresh.");
           setSubmissions([]);
           setIsLoading(false);
           return;
         }
 
-        const rows = data ?? [];
-        const signedUrlByPath = await signPendingImageUrls(
-          client,
-          rows.filter((row) => row.status !== "approved").map((row) => row.storage_path),
-        );
+        const rows = (data ?? []) as unknown as SubmissionRow[];
+        // Two batched round-trips regardless of row count: sign the pending
+        // images, and resolve the approved new_bobblehead hrefs in one query.
+        const [signedUrlByPath, newBobbleheadHrefs] = await Promise.all([
+          signPendingImageUrls(
+            client,
+            rows.filter((row) => row.status !== "approved").map((row) => row.storage_path),
+          ),
+          fetchNewBobbleheadHrefs(client, rows),
+        ]);
 
         if (cancelled) return;
 
-        const withDetails = await Promise.all(
-          rows.map(async (row) => ({
-            id: row.id,
-            kind: row.kind,
-            teamSlug: row.team_slug,
-            title: row.title,
-            status: row.status,
-            createdAt: row.created_at,
-            imageUrl:
-              row.status === "approved"
-                ? approvedSubmissionImageUrl(client, row.id, row.storage_path)
-                : ((row.storage_path && signedUrlByPath.get(row.storage_path)) ?? null),
-            href: await resolveSubmissionHref(
-              client,
-              row.status,
-              row.kind,
-              row.id,
-              row.team_slug,
-              row.target_bobblehead_id,
-            ),
-          })),
-        );
+        const withDetails = rows.map((row) => ({
+          id: row.id,
+          kind: row.kind,
+          teamSlug: row.team_slug,
+          title: row.title,
+          status: row.status,
+          createdAt: row.created_at,
+          imageUrl:
+            row.status === "approved"
+              ? approvedSubmissionImageUrl(client, row.id, row.storage_path)
+              : ((row.storage_path && signedUrlByPath.get(row.storage_path)) ?? null),
+          href: submissionHref(row, newBobbleheadHrefs),
+        }));
 
         if (cancelled) return;
 
+        setError(null);
         setSubmissions(withDetails);
         setIsLoading(false);
       });
@@ -505,286 +535,101 @@ export function useMySubmissions(source?: ProfileSource) {
     };
   }, [userId, client]);
 
-  return { submissions: userId ? submissions : [], isLoading: userId ? isLoading : false };
+  return { submissions: userId ? submissions : [], isLoading: userId ? isLoading : false, error };
 }
 
-export type MyFavorite = {
-  bobbleheadId: string;
-  teamSlug: string;
-  title: string;
-  imageUrl: string | null;
-  href: string;
-};
+// Favorites, wanted, and owned are each stored per-team as a boolean flag, so
+// building the cross-team list for the profile page means resolving every row's
+// title and image against the curated / community / approved-photo sources.
+// That resolution is shared (lib/bobbleheadIdentity.ts); the three lists differ
+// only in which table and flag column they read, so they share this one hook.
+function useMyBobbleheadList(
+  table: string,
+  flag: string,
+  source: ProfileSource | undefined,
+) {
+  const { user } = useAuth();
+  const client = source?.client ?? supabase;
+  const userId = source?.userId ?? user?.id ?? null;
+  const [items, setItems] = useState<BobbleheadIdentity[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-// Favorites are stored per-team (like user_collections), so building the
-// cross-team list for the profile page means resolving each row's title and
-// image against either the curated giveaway list or the community_bobbleheads
-// table, the same split used elsewhere for a bobblehead's identity.
+  useEffect(() => {
+    if (!userId) return;
+
+    let cancelled = false;
+
+    // The table/flag are chosen at runtime, which the per-table generated types
+    // can't express, so this one query goes through an untyped view of the
+    // client. buildBobbleheadResolver below still uses the typed client.
+    const untyped = client as unknown as SupabaseClient;
+
+    untyped
+      .from(table)
+      .select("bobblehead_id, team_slug")
+      .eq("user_id", userId)
+      .eq(flag, true)
+      .then(async ({ data, error: queryError }) => {
+        if (cancelled) return;
+
+        if (queryError) {
+          console.error(`Failed to load ${table}:`, queryError.message);
+          setError("Couldn't load this list. Please refresh.");
+          setItems([]);
+          setIsLoading(false);
+          return;
+        }
+
+        const rows = (data ?? []) as Array<{ bobblehead_id: string; team_slug: string }>;
+
+        if (rows.length === 0) {
+          setItems([]);
+          setError(null);
+          setIsLoading(false);
+          return;
+        }
+
+        const teamSlugs = Array.from(new Set(rows.map((row) => row.team_slug)));
+        const resolve = await buildBobbleheadResolver(client, teamSlugs);
+
+        if (cancelled) return;
+
+        setItems(rows.map((row) => resolve(row.team_slug, row.bobblehead_id)));
+        setError(null);
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId, client, table, flag]);
+
+  return { items: userId ? items : [], isLoading: userId ? isLoading : false, error };
+}
+
+// Structurally identical lists; the aliases keep the call sites self-documenting
+// and preserve the previously-exported type names.
+export type MyFavorite = BobbleheadIdentity;
+export type MyWanted = BobbleheadIdentity;
+export type MyOwned = BobbleheadIdentity;
+
 export function useMyFavorites(source?: ProfileSource) {
-  const { user } = useAuth();
-  const client = source?.client ?? supabase;
-  const userId = source?.userId ?? user?.id ?? null;
-  const [favorites, setFavorites] = useState<MyFavorite[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!userId) return;
-
-    let cancelled = false;
-
-    client
-      .from("user_favorites")
-      .select("bobblehead_id, team_slug")
-      .eq("user_id", userId)
-      .eq("favorited", true)
-      .then(async ({ data, error }) => {
-        if (cancelled) return;
-
-        if (error) {
-          console.error("Failed to load your favorites:", error.message);
-          setFavorites([]);
-          setIsLoading(false);
-          return;
-        }
-
-        const rows = data ?? [];
-
-        if (rows.length === 0) {
-          setFavorites([]);
-          setIsLoading(false);
-          return;
-        }
-
-        const teamSlugs = Array.from(new Set(rows.map((row) => row.team_slug)));
-
-        const [{ data: communityRows }, { data: photoRows }] = await Promise.all([
-          client
-            .from("community_bobbleheads")
-            .select("id, team_slug, title, image_url")
-            .in("team_slug", teamSlugs),
-          client.from("approved_photos").select("bobblehead_id, team_slug, image_url").in("team_slug", teamSlugs),
-        ]);
-
-        if (cancelled) return;
-
-        const communityByKey = new Map(
-          (communityRows ?? []).map((row) => [`${row.team_slug}:${row.id}`, row]),
-        );
-        const photoByKey = new Map(
-          (photoRows ?? []).map((row) => [`${row.team_slug}:${row.bobblehead_id}`, row.image_url]),
-        );
-
-        const resolved: MyFavorite[] = rows.map((row) => {
-          const key = `${row.team_slug}:${row.bobblehead_id}`;
-          const curated = getGiveawayById(row.bobblehead_id, row.team_slug);
-          const community = communityByKey.get(key);
-
-          return {
-            bobbleheadId: row.bobblehead_id,
-            teamSlug: row.team_slug,
-            title: curated?.title ?? community?.title ?? "Bobblehead",
-            imageUrl: photoByKey.get(key) ?? curated?.imageUrl ?? community?.image_url ?? null,
-            href: curated
-              ? `/teams/${row.team_slug}/bobbleheads/${row.bobblehead_id}`
-              : `/teams/${row.team_slug}/community?id=${encodeURIComponent(row.bobblehead_id)}`,
-          };
-        });
-
-        setFavorites(resolved);
-        setIsLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [userId, client]);
-
-  return { favorites: userId ? favorites : [], isLoading: userId ? isLoading : false };
+  const { items, isLoading, error } = useMyBobbleheadList("user_favorites", "favorited", source);
+  return { favorites: items, isLoading, error };
 }
 
-export type MyWanted = {
-  bobbleheadId: string;
-  teamSlug: string;
-  title: string;
-  imageUrl: string | null;
-  href: string;
-};
-
-// Wanted bobbleheads, same cross-team resolution as useMyFavorites above.
 export function useMyWanted(source?: ProfileSource) {
-  const { user } = useAuth();
-  const client = source?.client ?? supabase;
-  const userId = source?.userId ?? user?.id ?? null;
-  const [wanted, setWanted] = useState<MyWanted[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!userId) return;
-
-    let cancelled = false;
-
-    client
-      .from("user_wants")
-      .select("bobblehead_id, team_slug")
-      .eq("user_id", userId)
-      .eq("wanted", true)
-      .then(async ({ data, error }) => {
-        if (cancelled) return;
-
-        if (error) {
-          console.error("Failed to load your wanted list:", error.message);
-          setWanted([]);
-          setIsLoading(false);
-          return;
-        }
-
-        const rows = data ?? [];
-
-        if (rows.length === 0) {
-          setWanted([]);
-          setIsLoading(false);
-          return;
-        }
-
-        const teamSlugs = Array.from(new Set(rows.map((row) => row.team_slug)));
-
-        const [{ data: communityRows }, { data: photoRows }] = await Promise.all([
-          client
-            .from("community_bobbleheads")
-            .select("id, team_slug, title, image_url")
-            .in("team_slug", teamSlugs),
-          client.from("approved_photos").select("bobblehead_id, team_slug, image_url").in("team_slug", teamSlugs),
-        ]);
-
-        if (cancelled) return;
-
-        const communityByKey = new Map(
-          (communityRows ?? []).map((row) => [`${row.team_slug}:${row.id}`, row]),
-        );
-        const photoByKey = new Map(
-          (photoRows ?? []).map((row) => [`${row.team_slug}:${row.bobblehead_id}`, row.image_url]),
-        );
-
-        const resolved: MyWanted[] = rows.map((row) => {
-          const key = `${row.team_slug}:${row.bobblehead_id}`;
-          const curated = getGiveawayById(row.bobblehead_id, row.team_slug);
-          const community = communityByKey.get(key);
-
-          return {
-            bobbleheadId: row.bobblehead_id,
-            teamSlug: row.team_slug,
-            title: curated?.title ?? community?.title ?? "Bobblehead",
-            imageUrl: photoByKey.get(key) ?? curated?.imageUrl ?? community?.image_url ?? null,
-            href: curated
-              ? `/teams/${row.team_slug}/bobbleheads/${row.bobblehead_id}`
-              : `/teams/${row.team_slug}/community?id=${encodeURIComponent(row.bobblehead_id)}`,
-          };
-        });
-
-        setWanted(resolved);
-        setIsLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [userId, client]);
-
-  return { wanted: userId ? wanted : [], isLoading: userId ? isLoading : false };
+  const { items, isLoading, error } = useMyBobbleheadList("user_wants", "wanted", source);
+  return { wanted: items, isLoading, error };
 }
 
-export type MyOwned = {
-  bobbleheadId: string;
-  teamSlug: string;
-  title: string;
-  imageUrl: string | null;
-  href: string;
-};
-
-// The individual bobbleheads the user owns, resolved the same cross-team way as
-// useMyFavorites. useCollectionSummary above only returns per-team *counts*; the
-// public gallery needs the actual items. This reads user_collections where owned
-// — the exact rows get_public_gallery marks 'owned' — so the settings preview
-// can show the same owned grid the live shelf would, without a public RPC (which
-// stays gated on is_public and so returns nothing while the shelf is private).
+// useCollectionSummary above only returns per-team *counts*; this returns the
+// actual owned items, reading user_collections where owned — the exact rows
+// get_public_gallery marks 'owned' — so the settings preview can show the same
+// owned grid the live shelf would, without going through the is_public-gated
+// public RPC.
 export function useMyOwned(source?: ProfileSource) {
-  const { user } = useAuth();
-  const client = source?.client ?? supabase;
-  const userId = source?.userId ?? user?.id ?? null;
-  const [owned, setOwned] = useState<MyOwned[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!userId) return;
-
-    let cancelled = false;
-
-    client
-      .from("user_collections")
-      .select("bobblehead_id, team_slug")
-      .eq("user_id", userId)
-      .eq("owned", true)
-      .then(async ({ data, error }) => {
-        if (cancelled) return;
-
-        if (error) {
-          console.error("Failed to load your collection:", error.message);
-          setOwned([]);
-          setIsLoading(false);
-          return;
-        }
-
-        const rows = data ?? [];
-
-        if (rows.length === 0) {
-          setOwned([]);
-          setIsLoading(false);
-          return;
-        }
-
-        const teamSlugs = Array.from(new Set(rows.map((row) => row.team_slug)));
-
-        const [{ data: communityRows }, { data: photoRows }] = await Promise.all([
-          client
-            .from("community_bobbleheads")
-            .select("id, team_slug, title, image_url")
-            .in("team_slug", teamSlugs),
-          client.from("approved_photos").select("bobblehead_id, team_slug, image_url").in("team_slug", teamSlugs),
-        ]);
-
-        if (cancelled) return;
-
-        const communityByKey = new Map(
-          (communityRows ?? []).map((row) => [`${row.team_slug}:${row.id}`, row]),
-        );
-        const photoByKey = new Map(
-          (photoRows ?? []).map((row) => [`${row.team_slug}:${row.bobblehead_id}`, row.image_url]),
-        );
-
-        const resolved: MyOwned[] = rows.map((row) => {
-          const key = `${row.team_slug}:${row.bobblehead_id}`;
-          const curated = getGiveawayById(row.bobblehead_id, row.team_slug);
-          const community = communityByKey.get(key);
-
-          return {
-            bobbleheadId: row.bobblehead_id,
-            teamSlug: row.team_slug,
-            title: curated?.title ?? community?.title ?? "Bobblehead",
-            imageUrl: photoByKey.get(key) ?? curated?.imageUrl ?? community?.image_url ?? null,
-            href: curated
-              ? `/teams/${row.team_slug}/bobbleheads/${row.bobblehead_id}`
-              : `/teams/${row.team_slug}/community?id=${encodeURIComponent(row.bobblehead_id)}`,
-          };
-        });
-
-        setOwned(resolved);
-        setIsLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [userId, client]);
-
-  return { owned: userId ? owned : [], isLoading: userId ? isLoading : false };
+  const { items, isLoading, error } = useMyBobbleheadList("user_collections", "owned", source);
+  return { owned: items, isLoading, error };
 }

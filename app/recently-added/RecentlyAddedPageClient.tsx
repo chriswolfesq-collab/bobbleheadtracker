@@ -6,18 +6,17 @@ import { AuthWidget } from "@/components/AuthWidget";
 import { RecentlyAddedCard } from "@/components/RecentlyAddedCard";
 import { ToggleChip } from "@/components/ToggleChip";
 import { useRecentCommunityBobbleheads } from "@/lib/communityBobbleheads";
+import { extractYear, UNKNOWN_YEAR } from "@/lib/extractYear";
 import { getTeamBySlug } from "@/lib/teams";
 import { useMyWantedLookup } from "@/lib/userWanted";
 
 const RECENT_LIMIT = 200;
-const UNKNOWN_YEAR = "Unknown";
+// How many cards to render at once. The full filtered list can be hundreds of
+// items; rendering a page at a time and growing on demand keeps the initial
+// DOM (and its images) small without a server round-trip per filter change.
+const PAGE_SIZE = 48;
 const FIELD_CLASSES =
   "mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white";
-
-function extractYear(date: string): string {
-  const match = date.match(/\b(19|20)\d{2}\b/);
-  return match ? match[0] : UNKNOWN_YEAR;
-}
 
 export function RecentlyAddedPageClient() {
   const { communityBobbleheads, isLoading } = useRecentCommunityBobbleheads(RECENT_LIMIT);
@@ -58,7 +57,8 @@ export function RecentlyAddedPageClient() {
 
       if (terms.length > 0) {
         const team = getTeamBySlug(bobblehead.teamSlug);
-        const haystack = `${bobblehead.title} ${bobblehead.date} ${team?.name ?? ""} ${team?.city ?? ""} ${bobblehead.teamSlug}`.toLowerCase();
+        const haystack =
+          `${bobblehead.title} ${bobblehead.nickname ?? ""} ${bobblehead.date} ${team?.name ?? ""} ${team?.city ?? ""} ${bobblehead.teamSlug}`.toLowerCase();
         if (!terms.every((term) => haystack.includes(term))) return false;
       }
 
@@ -68,6 +68,20 @@ export function RecentlyAddedPageClient() {
 
   const hasActiveFilters =
     query.trim().length > 0 || teamFilter !== "" || yearFilter !== "" || wantedOnly;
+
+  // Reset the window whenever the filters change, so a new search starts from
+  // the top rather than deep in a previous result's "show more" state. Done by
+  // comparing against the previous filter signature during render (React's
+  // "adjust state during render" pattern) rather than in an effect.
+  const filterSignature = `${query}|${teamFilter}|${yearFilter}|${wantedOnly}`;
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [prevFilterSignature, setPrevFilterSignature] = useState(filterSignature);
+  if (prevFilterSignature !== filterSignature) {
+    setPrevFilterSignature(filterSignature);
+    setVisibleCount(PAGE_SIZE);
+  }
+
+  const visible = filtered.slice(0, visibleCount);
 
   return (
     <div
@@ -192,20 +206,33 @@ export function RecentlyAddedPageClient() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-            {filtered.map((bobblehead) => {
-              const key = `${bobblehead.teamSlug}:${bobblehead.id}`;
-              return (
-                <RecentlyAddedCard
-                  key={bobblehead.id}
-                  bobblehead={bobblehead}
-                  isWanted={wantedByKey[key] ?? false}
-                  isLoggedIn={isLoggedInForWanted}
-                  onToggleWanted={() => setWanted(bobblehead.teamSlug, bobblehead.id, !(wantedByKey[key] ?? false))}
-                />
-              );
-            })}
-          </div>
+          <>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+              {visible.map((bobblehead) => {
+                const key = `${bobblehead.teamSlug}:${bobblehead.id}`;
+                return (
+                  <RecentlyAddedCard
+                    key={bobblehead.id}
+                    bobblehead={bobblehead}
+                    isWanted={wantedByKey[key] ?? false}
+                    isLoggedIn={isLoggedInForWanted}
+                    onToggleWanted={() => setWanted(bobblehead.teamSlug, bobblehead.id, !(wantedByKey[key] ?? false))}
+                  />
+                );
+              })}
+            </div>
+            {visible.length < filtered.length ? (
+              <div className="mt-6 text-center">
+                <button
+                  type="button"
+                  onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+                  className="rounded-full border border-black/10 bg-black/[0.04] px-5 py-2 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:border-white/15 dark:bg-white/5 dark:text-zinc-300 dark:hover:text-accent-hover"
+                >
+                  Show more ({filtered.length - visible.length} more)
+                </button>
+              </div>
+            ) : null}
+          </>
         )}
       </div>
     </div>

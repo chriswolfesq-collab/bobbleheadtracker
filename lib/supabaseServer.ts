@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import type { Database } from "@/lib/database.types";
 
 // A session-less anon client for server-side reads. Deliberately not the
 // module-level singleton from lib/supabase.ts: that one persists a session and
@@ -7,7 +8,7 @@ import { createClient } from "@supabase/supabase-js";
 // one holds no session and only ever reads public data under RLS — the same
 // pattern lib/publicShelf.ts uses for the shelf pages.
 export function createServerSupabase() {
-  return createClient(
+  return createClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
     { auth: { persistSession: false, autoRefreshToken: false } },

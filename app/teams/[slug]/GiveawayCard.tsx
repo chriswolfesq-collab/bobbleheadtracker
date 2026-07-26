@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { createContext, useContext } from "react";
+import { createContext, memo, useContext, useMemo } from "react";
 import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { BobbleheadTitle } from "@/components/BobbleheadTitle";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { WantedButton } from "@/components/WantedButton";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { publicAsset } from "@/lib/paths";
+import { isUnoptimizedImage } from "@/lib/imageOptimization";
 import type { Team } from "@/lib/teams";
 import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
@@ -48,13 +49,19 @@ export function OwnershipProvider({
   const { ownedById, isLoggedIn, isLoading, setOwned } = useUserCollection(teamSlug);
   const ownedCount = Object.values(ownedById).filter(Boolean).length;
 
-  const value: OwnershipContextValue = {
-    ownedCount,
-    ownedById,
-    ownershipKnown: !isLoading,
-    isLoggedIn,
-    toggleOwned: (id: string) => setOwned(id, !ownedById[id]),
-  };
+  // Memoized so an unrelated re-render (e.g. the collection's filter/sort state
+  // changing) doesn't hand every consumer a fresh value object and re-render the
+  // whole card grid — only an actual ownership change should.
+  const value = useMemo<OwnershipContextValue>(
+    () => ({
+      ownedCount,
+      ownedById,
+      ownershipKnown: !isLoading,
+      isLoggedIn,
+      toggleOwned: (id: string) => setOwned(id, !ownedById[id]),
+    }),
+    [ownedCount, ownedById, isLoading, isLoggedIn, setOwned],
+  );
 
   return <OwnershipContext.Provider value={value}>{children}</OwnershipContext.Provider>;
 }
@@ -92,11 +99,14 @@ export function FavoritesProvider({
 }) {
   const { favoritedById, isLoggedIn, setFavorited } = useUserFavorites(teamSlug);
 
-  const value: FavoritesContextValue = {
-    favoritedById,
-    isLoggedIn,
-    toggleFavorited: (id: string) => setFavorited(id, !favoritedById[id]),
-  };
+  const value = useMemo<FavoritesContextValue>(
+    () => ({
+      favoritedById,
+      isLoggedIn,
+      toggleFavorited: (id: string) => setFavorited(id, !favoritedById[id]),
+    }),
+    [favoritedById, isLoggedIn, setFavorited],
+  );
 
   return <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>;
 }
@@ -128,16 +138,23 @@ export function WantedProvider({
 }) {
   const { wantedById, isLoggedIn, setWanted } = useUserWanted(teamSlug);
 
-  const value: WantedContextValue = {
-    wantedById,
-    isLoggedIn,
-    toggleWanted: (id: string) => setWanted(id, !wantedById[id]),
-  };
+  const value = useMemo<WantedContextValue>(
+    () => ({
+      wantedById,
+      isLoggedIn,
+      toggleWanted: (id: string) => setWanted(id, !wantedById[id]),
+    }),
+    [wantedById, isLoggedIn, setWanted],
+  );
 
   return <WantedContext.Provider value={value}>{children}</WantedContext.Provider>;
 }
 
-export function GiveawayCard({
+// Memoized so re-renders driven by the parent collection's own state (filter
+// text, sort order) skip cards whose giveaway/team/eager props are unchanged.
+// (A card still re-renders when the ownership/favorites/wanted context it
+// consumes changes — that's inherent to context.)
+function GiveawayCardInner({
   giveaway,
   team,
   eager = false,
@@ -160,7 +177,7 @@ export function GiveawayCard({
   const imageSrc = giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
 
   return (
-    <article className="relative overflow-hidden rounded-lg border border-black/10 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] dark:border-white/10 dark:bg-[#102032]">
+    <article className="relative flex h-full flex-col overflow-hidden rounded-lg border border-black/10 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] dark:border-white/10 dark:bg-[#102032]">
       <button
         type="button"
         aria-pressed={isOwned}
@@ -206,19 +223,22 @@ export function GiveawayCard({
             width={268}
             height={630}
             eager={eager}
-            unoptimized={imageSrc.startsWith("http")}
+            unoptimized={isUnoptimizedImage(imageSrc)}
             className="relative h-24 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.6)] sm:h-44"
           />
         </div>
       </Link>
 
-      <div className="border-t border-black/[0.06] bg-slate-50 px-2.5 pb-2.5 pt-2.5 text-center dark:border-white/[0.04] dark:bg-[#0d1a29]/70 sm:min-h-40 sm:px-4 sm:pb-3 sm:pt-3">
+      {/* flex-1 + mt-auto keep the Owned button pinned to the card's bottom
+          edge, so neighboring cards stay aligned even when one has an extra
+          nickname/detail line and the other doesn't. */}
+      <div className="flex flex-1 flex-col border-t border-black/[0.06] bg-slate-50 px-2.5 pb-2.5 pt-2.5 text-center dark:border-white/[0.04] dark:bg-[#0d1a29]/70 sm:min-h-40 sm:px-4 sm:pb-3 sm:pt-3">
         <h2 className="text-xs font-bold leading-tight text-zinc-900 dark:text-white sm:text-base">
           <BobbleheadTitle title={fullTitle} nickname={giveaway.nickname} />
         </h2>
         <p className="mt-1.5 text-[11px] text-zinc-700 dark:text-zinc-300 sm:mt-3 sm:text-sm">{giveaway.date}</p>
 
-        <div className="mt-2 sm:mt-3">
+        <div className="mt-auto pt-2 sm:pt-3">
           <button
             type="button"
             aria-pressed={isOwned}
@@ -245,3 +265,5 @@ export function GiveawayCard({
     </article>
   );
 }
+
+export const GiveawayCard = memo(GiveawayCardInner);
