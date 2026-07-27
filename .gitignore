@@ -41,6 +41,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# throwaway one-off debugging scripts
+scratchpad_*
+
 # claude code local settings
 .claude/settings.local.json
 supabase/.temp
