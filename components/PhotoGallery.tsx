@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import type { GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
+import { PhotoLightbox } from "@/components/PhotoLightbox";
 
 export function PhotoGallery({
   photos,
@@ -15,16 +17,19 @@ export function PhotoGallery({
   // Provided only in admin mode; renders a "set as profile photo" button.
   onSetAsMain?: (photo: GalleryPhoto) => void;
 }) {
+  // Index of the photo being viewed full-screen; null when the lightbox is closed.
+  const [zoomedIndex, setZoomedIndex] = useState<number | null>(null);
+
   if (photos.length === 0) return null;
 
   return (
     <div className="flex flex-wrap gap-2">
-      {photos.map((photo) => (
+      {photos.map((photo, index) => (
         <div key={photo.id} className="relative">
-          <a
-            href={photo.imageUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            aria-label="Enlarge this photo"
+            onClick={() => setZoomedIndex(index)}
             className="block h-20 w-20 shrink-0 overflow-hidden rounded border border-black/10 bg-black/30 transition hover:border-accent dark:border-white/15"
           >
             <Image
@@ -35,7 +40,7 @@ export function PhotoGallery({
               unoptimized={isUnoptimizedImage(photo.imageUrl)}
               className="h-full w-full object-cover"
             />
-          </a>
+          </button>
           {onSetAsMain ? (
             <button
               type="button"
@@ -60,6 +65,14 @@ export function PhotoGallery({
           ) : null}
         </div>
       ))}
+
+      {zoomedIndex !== null ? (
+        <PhotoLightbox
+          photos={photos.map((photo) => ({ url: photo.imageUrl, alt: "Community-submitted photo" }))}
+          startIndex={zoomedIndex}
+          onClose={() => setZoomedIndex(null)}
+        />
+      ) : null}
     </div>
   );
 }

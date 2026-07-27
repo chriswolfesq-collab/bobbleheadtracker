@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { AuthWidget } from "@/components/AuthWidget";
-import { BobbleheadImage } from "@/components/BobbleheadImage";
+import { EnlargeablePhoto } from "@/components/EnlargeablePhoto";
 import { BobbleheadTitle } from "@/components/BobbleheadTitle";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { FavoriteButton } from "@/components/FavoriteButton";
@@ -22,7 +22,6 @@ import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery
 import { useBobbleheadOverride, type BobbleheadOverride } from "@/lib/bobbleheadOverrides";
 import { extractYear } from "@/lib/extractYear";
 import { publicAsset } from "@/lib/paths";
-import { isUnoptimizedImage } from "@/lib/imageOptimization";
 import type { Team } from "@/lib/teams";
 import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
@@ -219,13 +218,11 @@ export function CuratedBobbleheadPage({
           <aside className="lg:border-r lg:border-white/10 lg:pr-5">
             <div className="rounded border border-white/15 bg-black/25 p-3 text-center">
               <div className="relative flex h-44 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
-                <BobbleheadImage
+                <EnlargeablePhoto
                   src={imageSrc}
                   alt={`${team.city} ${team.name} ${title} bobblehead`}
                   width={268}
                   height={630}
-                  eager
-                  unoptimized={isUnoptimizedImage(imageSrc)}
                   className="relative h-40 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.65)]"
                 />
               </div>
