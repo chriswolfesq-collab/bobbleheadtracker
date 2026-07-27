@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { AuthModal } from "@/components/AuthModal";
 import { BackToTopButton } from "@/components/BackToTopButton";
@@ -55,6 +56,7 @@ export default function RootLayout({
           </AuthProvider>
           <BackToTopButton />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
