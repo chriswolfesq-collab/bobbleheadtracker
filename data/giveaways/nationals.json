@@ -4,42 +4,48 @@
     "title": "James Wood",
     "year": "2026",
     "date": "August 29, 2026",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/nationals-photos/james-wood-2026.jpg"
   },
   {
     "id": "captain-america-2026",
     "title": "Captain America",
     "year": "2026",
     "date": "July 10, 2026",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/nationals-photos/captain-america-2026.jpg"
   },
   {
     "id": "daylen-lile-2026",
     "title": "Daylen Lile",
     "year": "2026",
     "date": "June 13, 2026",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/nationals-photos/daylen-lile-2026.jpg"
   },
   {
     "id": "cj-abrams-2026",
     "title": "CJ Abrams",
     "year": "2026",
     "date": "May 30, 2026",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/nationals-photos/cj-abrams-2026.jpg"
   },
   {
     "id": "alex-ovechkin-2026",
     "title": "Alex Ovechkin",
     "year": "2026",
     "date": "May 16, 2026",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/nationals-photos/alex-ovechkin-2026.jpg"
   },
   {
     "id": "grogu-2026",
     "title": "Grogu",
     "year": "2026",
     "date": "May 2, 2026",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/nationals-photos/grogu-2026.jpg"
   },
   {
     "id": "hello-kitty-city-connect-2025",
@@ -53,28 +59,32 @@
     "title": "Dylan Crews",
     "year": "2025",
     "date": "September 13, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/nationals-photos/dylan-crews-2025.jpg"
   },
   {
     "id": "jacob-young-2025",
     "title": "Jacob Young",
     "year": "2025",
     "date": "August 16, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/nationals-photos/jacob-young-2025.jpg"
   },
   {
     "id": "jacob-young-2025-8-2",
     "title": "Jacob Young",
     "year": "2025",
     "date": "August 2, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/nationals-photos/jacob-young-2025-8-2.jpg"
   },
   {
     "id": "josh-gibson-2025",
     "title": "Josh Gibson",
     "year": "2025",
     "date": "June 18, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/nationals-photos/josh-gibson-2025.jpg"
   },
   {
     "id": "ryan-zimmerman-jayson-werth-howie-kendrick-2025",
@@ -93,7 +103,8 @@
     "title": "James Wood",
     "year": "2025",
     "date": "April 22, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/nationals-photos/james-wood-2025.jpg"
   },
   {
     "id": "hello-kitty-red-2025",

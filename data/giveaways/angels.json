@@ -5,7 +5,8 @@
     "nickname": "400 HR",
     "year": "2026",
     "date": "April 7, 2026",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/angels-photos/mike-trout-400-hr-2026.jpg"
   },
   {
     "id": "mickey-mouse-d23-2026",
@@ -13,39 +14,45 @@
     "nickname": "D23",
     "year": "2026",
     "date": "August 12, 2026",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/angels-photos/mickey-mouse-d23-2026.jpg"
   },
   {
     "id": "mike-trout-2025",
     "title": "Mike Trout",
     "year": "2025",
-    "date": "September 8, 2025"
+    "date": "September 8, 2025",
+    "imageUrl": "/bobbleheads/angels-photos/mike-trout-2025.jpg"
   },
   {
     "id": "logan-ohoppe-2025",
     "title": "Logan O'Hoppe",
     "year": "2025",
-    "date": "August 22, 2025"
+    "date": "August 22, 2025",
+    "imageUrl": "/bobbleheads/angels-photos/logan-ohoppe-2025.jpg"
   },
   {
     "id": "zach-neto-2025",
     "title": "Zach Neto",
     "year": "2025",
     "date": "July 25, 2025",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/angels-photos/zach-neto-2025.jpg"
   },
   {
     "id": "nolan-schanuel-2025",
     "title": "Nolan Schanuel",
     "year": "2025",
-    "date": "June 21, 2025"
+    "date": "June 21, 2025",
+    "imageUrl": "/bobbleheads/angels-photos/nolan-schanuel-2025.jpg"
   },
   {
     "id": "ben-joyce-2025",
     "title": "Ben Joyce",
     "year": "2025",
     "date": "May 2, 2025",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/angels-photos/ben-joyce-2025.jpg"
   },
   {
     "id": "mickey-mouse-d23-2024",

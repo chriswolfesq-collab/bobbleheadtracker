@@ -4,35 +4,40 @@
     "title": "Colson Montgomery",
     "year": "2026",
     "date": "June 13, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/colson-montgomery-2026.jpg"
   },
   {
     "id": "kyle-teel-edgar-quero-2026",
     "title": "Kyle Teel & Edgar Quero",
     "year": "2026",
     "date": "May 30, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/kyle-teel-edgar-quero-2026.jpg"
   },
   {
     "id": "chase-meidroth-2026",
     "title": "Chase Meidroth",
     "year": "2026",
     "date": "May 25, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/chase-meidroth-2026.jpg"
   },
   {
     "id": "miguel-vargas-2026",
     "title": "Miguel Vargas",
     "year": "2026",
     "date": "April 24, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/miguel-vargas-2026.jpg"
   },
   {
     "id": "bobby-jenks-aj-pierzynski-2026",
     "title": "Bobby Jenks & A.J. Pierzynski",
     "year": "2026",
     "date": "April 5, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/bobby-jenks-aj-pierzynski-2026.jpg"
   },
   {
     "id": "munetaka-murakami-2026",
@@ -46,21 +51,24 @@
     "title": "Ice Cube",
     "year": "2025",
     "date": "August 28, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/ice-cube-2025.jpg"
   },
   {
     "id": "ken-griffey-jr-2025",
     "title": "Ken Griffey Jr.",
     "year": "2025",
     "date": "August 24, 2025",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/white-sox-photos/ken-griffey-jr-2025.jpg"
   },
   {
     "id": "ozzie-guillen-2025",
     "title": "Ozzie Guillen",
     "year": "2025",
     "date": "August 10, 2025",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/white-sox-photos/ozzie-guillen-2025.jpg"
   },
   {
     "id": "bill-veeck-1960-2025",
@@ -68,35 +76,40 @@
     "nickname": "1960",
     "year": "2025",
     "date": "August 9, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/bill-veeck-1960-2025.jpg"
   },
   {
     "id": "mark-buehrle-jon-garland-freddy-garcia-jose-contreras-2025",
     "title": "Mark Buehrle, Jon Garland, Freddy Garcia & Jose Contreras",
     "year": "2025",
     "date": "July 13, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/mark-buehrle-jon-garland-freddy-garcia-jose-contreras-2025.jpg"
   },
   {
     "id": "luis-aparicio-2025",
     "title": "Luis Aparicio",
     "year": "2025",
     "date": "June 29, 2025",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/white-sox-photos/luis-aparicio-2025.jpg"
   },
   {
     "id": "ray-durham-2025",
     "title": "Ray Durham",
     "year": "2025",
     "date": "June 8, 2025",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/white-sox-photos/ray-durham-2025.jpg"
   },
   {
     "id": "charles-comiskey-2025",
     "title": "Charles Comiskey",
     "year": "2025",
     "date": "May 25, 2025",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/white-sox-photos/charles-comiskey-2025.jpg"
   },
   {
     "id": "dick-allen-1972-mvp-2025",
@@ -104,7 +117,8 @@
     "nickname": "1972 MVP",
     "year": "2025",
     "date": "May 3, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/dick-allen-1972-mvp-2025.jpg"
   },
   {
     "id": "la-pantera-alebrije-2024",

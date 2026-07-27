@@ -17,14 +17,16 @@
     "title": "Hunter Brown",
     "year": "2026",
     "date": "July 5, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/hunter-brown-2026.jpg"
   },
   {
     "id": "carlos-correa-2026",
     "title": "Carlos Correa",
     "year": "2026",
     "date": "June 20, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/carlos-correa-2026.jpg"
   },
   {
     "id": "carlos-correa-mandalorian-grogu-2026",
@@ -51,21 +53,24 @@
     "title": "Sugar Skull",
     "year": "2025",
     "date": "September 20, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/sugar-skull-2025.jpg"
   },
   {
     "id": "mauricio-dubon-dogs-2025",
     "title": "Mauricio Dubon & Dogs",
     "year": "2025",
     "date": "August 30, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/mauricio-dubon-dogs-2025.jpg"
   },
   {
     "id": "billy-wagner-2025",
     "title": "Billy Wagner",
     "year": "2025",
     "date": "August 16, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/billy-wagner-2025.jpg"
   },
   {
     "id": "jose-altuve-superman-2025",
@@ -81,7 +86,8 @@
     "nickname": "City Connect",
     "year": "2025",
     "date": "August 11, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/yordan-alvarez-city-connect-2025.jpg"
   },
   {
     "id": "yordan-alvarez-card-2025",
@@ -89,28 +95,32 @@
     "nickname": "Card",
     "year": "2025",
     "date": "July 26, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/yordan-alvarez-card-2025.jpg"
   },
   {
     "id": "jose-altuve-christmas-2025",
     "title": "Jose Altuve Christmas",
     "year": "2025",
     "date": "July 24, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/jose-altuve-christmas-2025.jpg"
   },
   {
     "id": "framber-2025",
     "title": "Framber",
     "year": "2025",
     "date": "July 12, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/framber-2025.jpg"
   },
   {
     "id": "jose-altuve-silver-slugger-2025",
     "title": "Jose Altuve Silver Slugger",
     "year": "2025",
     "date": "June 28, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/jose-altuve-silver-slugger-2025.jpg"
   },
   {
     "id": "jeremy-pena-hawai-shirt-2025",
@@ -131,7 +141,8 @@
     "title": "Yordan Alvarez Cycle",
     "year": "2025",
     "date": "May 24, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/yordan-alvarez-cycle-2025.jpg"
   },
   {
     "id": "mauricio-dubon-starwars-2025",
@@ -151,7 +162,8 @@
     "title": "Jose Altuve Bubble Gum",
     "year": "2025",
     "date": "May 10, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/jose-altuve-bubble-gum-2025.jpg"
   },
   {
     "id": "charlie-brown-2025",
@@ -164,7 +176,8 @@
     "title": "Josh Hader Flames",
     "year": "2025",
     "date": "April 19, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/astros-photos/josh-hader-flames-2025.jpg"
   },
   {
     "id": "orbit-city-connect-2025",

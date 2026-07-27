@@ -4,7 +4,8 @@
     "title": "Byron Buxton",
     "year": "2026",
     "date": "June 27, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/byron-buxton-2026.jpg"
   },
   {
     "id": "grogu-star-wars-theme-ticket-2026",
@@ -18,14 +19,16 @@
     "title": "Byron Buxton",
     "year": "2025",
     "date": "July 12, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/byron-buxton-2025.jpg"
   },
   {
     "id": "royce-lewis-2025",
     "title": "Royce Lewis",
     "year": "2025",
     "date": "May 24, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/royce-lewis-2025.jpg"
   },
   {
     "id": "carlos-correa-2025",

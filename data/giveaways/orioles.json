@@ -31,55 +31,63 @@
     "title": "Adley Rutschman",
     "year": "2025",
     "date": "September 24, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/orioles-photos/adley-rutschman-2025.jpg"
   },
   {
     "id": "adam-jones-2025",
     "title": "Adam Jones",
     "year": "2025",
     "date": "August 9, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/orioles-photos/adam-jones-2025.jpg"
   },
   {
     "id": "jordan-westburg-2025",
     "title": "Jordan Westburg",
     "year": "2025",
     "date": "July 28, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/orioles-photos/jordan-westburg-2025.jpg"
   },
   {
     "id": "cal-ripken-jr-2025",
     "title": "Cal Ripken Jr.",
     "year": "2025",
     "date": "June 28, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/orioles-photos/cal-ripken-jr-2025.jpg"
   },
   {
     "id": "grayson-rodriguez-2025",
     "title": "Grayson Rodriguez",
     "year": "2025",
     "date": "May 31, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/orioles-photos/grayson-rodriguez-2025.jpg"
   },
   {
     "id": "gunnar-henderson-2025",
     "title": "Gunnar Henderson",
     "year": "2025",
     "date": "May 4, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/orioles-photos/gunnar-henderson-2025.jpg"
   },
   {
     "id": "colton-cowser-2025",
     "title": "Colton Cowser",
     "year": "2025",
-    "date": "May 2, 2025"
+    "date": "May 2, 2025",
+    "imageUrl": "/bobbleheads/orioles-photos/colton-cowser-2025.jpg"
   },
   {
     "id": "david-rubenstein-2025",
     "title": "David Rubenstein",
     "year": "2025",
     "date": "April 19, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/orioles-photos/david-rubenstein-2025.jpg"
   },
   {
     "id": "gunnar-henderson-2024",

@@ -3,28 +3,32 @@
     "id": "matt-chapman-2025",
     "title": "Matt Chapman",
     "year": "2025",
-    "date": "April 5, 2025"
+    "date": "April 5, 2025",
+    "imageUrl": "/bobbleheads/giants-photos/matt-chapman-2025.jpg"
   },
   {
     "id": "barry-bonds-2025",
     "title": "Barry Bonds",
     "year": "2025",
     "date": "July 12, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/giants-photos/barry-bonds-2025.jpg"
   },
   {
     "id": "stephen-curry-2025",
     "title": "Stephen Curry",
     "year": "2025",
     "date": "July 26, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/giants-photos/stephen-curry-2025.jpg"
   },
   {
     "id": "heliot-ramos-2025",
     "title": "Heliot Ramos",
     "year": "2025",
     "date": "August 17, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/giants-photos/heliot-ramos-2025.jpg"
   },
   {
     "id": "camilo-doval-2024",

@@ -4,49 +4,56 @@
     "title": "Manny Machado",
     "year": "2026",
     "date": "April 9, 2026",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/manny-machado-2026.jpg"
   },
   {
     "id": "mason-miller-2026",
     "title": "Mason Miller",
     "year": "2026",
     "date": "May 7, 2026",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/mason-miller-2026.jpg"
   },
   {
     "id": "jackson-merrill-2025",
     "title": "Jackson Merrill",
     "year": "2025",
     "date": "March 31, 2025",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/jackson-merrill-2025.jpg"
   },
   {
     "id": "tony-gwynn-2025",
     "title": "Tony Gwynn",
     "year": "2025",
     "date": "April 29, 2025",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/tony-gwynn-2025.jpg"
   },
   {
     "id": "fernando-tatis-jr-2025",
     "title": "Fernando Tatis Jr.",
     "year": "2025",
     "date": "June 23, 2025",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/fernando-tatis-jr-2025.jpg"
   },
   {
     "id": "michael-king-2025",
     "title": "Michael King",
     "year": "2025",
     "date": "August 20, 2025",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/michael-king-2025.jpg"
   },
   {
     "id": "dylan-cease-2025",
     "title": "Dylan Cease",
     "year": "2025",
     "date": "September 10, 2025",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/dylan-cease-2025.jpg"
   },
   {
     "id": "luis-arraez-la-regadera-2025",
@@ -54,7 +61,8 @@
     "nickname": "La Regadera",
     "year": "2025",
     "date": "September 22, 2025",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/luis-arraez-la-regadera-2025.jpg"
   },
   {
     "id": "manny-machado-2024",

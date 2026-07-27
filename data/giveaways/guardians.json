@@ -4,28 +4,32 @@
     "title": "Tanner Bibee",
     "year": "2025",
     "date": "May 31, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/guardians-photos/tanner-bibee-2025.jpg"
   },
   {
     "id": "larry-doby-2025",
     "title": "Larry Doby",
     "year": "2025",
     "date": "July 5, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/guardians-photos/larry-doby-2025.jpg"
   },
   {
     "id": "stephen-vogt-2025",
     "title": "Stephen Vogt",
     "year": "2025",
     "date": "July 19, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/guardians-photos/stephen-vogt-2025.jpg"
   },
   {
     "id": "tom-hamilton-2025",
     "title": "Tom Hamilton",
     "year": "2025",
     "date": "August 16, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/guardians-photos/tom-hamilton-2025.jpg"
   },
   {
     "id": "jose-ramirez-2024",

@@ -13,21 +13,24 @@
     "nickname": "Calzone",
     "year": "2026",
     "date": "August 27, 2026",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/george-costanza-calzone-2026.jpg"
   },
   {
     "id": "hello-kitty-2026",
     "title": "Hello Kitty",
     "year": "2026",
     "date": "August 22, 2026",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/hello-kitty-2026.jpg"
   },
   {
     "id": "cody-bellinger-2026",
     "title": "Cody Bellinger",
     "year": "2026",
     "date": "August 21, 2026",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/cody-bellinger-2026.jpg"
   },
   {
     "id": "aaron-judge-mvp-2nd-consecutive-2026",
@@ -35,7 +38,8 @@
     "nickname": "MVP, 2nd Consecutive",
     "year": "2026",
     "date": "June 20, 2026",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/aaron-judge-mvp-2nd-consecutive-2026.jpg"
   },
   {
     "id": "max-fried-mandalorian-with-grogu-2026",
@@ -43,7 +47,8 @@
     "nickname": "Mandalorian, with Grogu",
     "year": "2026",
     "date": "May 2, 2026",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/max-fried-mandalorian-with-grogu-2026.jpg"
   },
   {
     "id": "house-random-bobblehead-2026",
@@ -55,56 +60,64 @@
     "id": "bernie-williams-2025",
     "title": "Bernie Williams",
     "year": "2025",
-    "date": "September 25, 2025"
+    "date": "September 25, 2025",
+    "imageUrl": "/bobbleheads/yankees-photos/bernie-williams-2025.jpg"
   },
   {
     "id": "george-costanza-2025",
     "title": "George Costanza",
     "year": "2025",
     "date": "August 21, 2025",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/george-costanza-2025.jpg"
   },
   {
     "id": "aaron-judge-2025-8-13",
     "title": "Aaron Judge",
     "year": "2025",
     "date": "August 13, 2025",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/aaron-judge-2025-8-13.jpg"
   },
   {
     "id": "anthony-volpe-2025",
     "title": "Anthony Volpe",
     "year": "2025",
     "date": "July 25, 2025",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/anthony-volpe-2025.jpg"
   },
   {
     "id": "billy-joel-2025",
     "title": "Billy Joel",
     "year": "2025",
     "date": "July 11, 2025",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/billy-joel-2025.jpg"
   },
   {
     "id": "aaron-judge-2025-6-20",
     "title": "Aaron Judge",
     "year": "2025",
     "date": "June 20, 2025",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/aaron-judge-2025-6-20.jpg"
   },
   {
     "id": "yogi-berra-2025",
     "title": "Yogi Berra",
     "year": "2025",
     "date": "June 6, 2025",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/yogi-berra-2025.jpg"
   },
   {
     "id": "giancarlo-stanton-2025",
     "title": "Giancarlo Stanton",
     "year": "2025",
     "date": "May 4, 2025",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/giancarlo-stanton-2025.jpg"
   },
   {
     "id": "frank-sinatra-2024",

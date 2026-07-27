@@ -3,14 +3,16 @@
     "id": "paul-skenes-2026",
     "title": "Paul Skenes",
     "year": "2026",
-    "date": "April 18, 2026"
+    "date": "April 18, 2026",
+    "imageUrl": "/bobbleheads/pirates-photos/paul-skenes-2026.jpg"
   },
   {
     "id": "paul-skenes-2025",
     "title": "Paul Skenes",
     "year": "2025",
     "date": "April 19, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/paul-skenes-2025.jpg"
   },
   {
     "id": "yeet-2025",
@@ -23,14 +25,16 @@
     "title": "Mac Miller",
     "year": "2025",
     "date": "July 19, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/mac-miller-2025.jpg"
   },
   {
     "id": "bryan-reynolds-2025",
     "title": "Bryan Reynolds",
     "year": "2025",
     "date": "September 6, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/bryan-reynolds-2025.jpg"
   },
   {
     "id": "mitch-keller-2024",

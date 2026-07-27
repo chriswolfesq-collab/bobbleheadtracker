@@ -18,7 +18,8 @@
     "title": "Jose Bautista & Edwin Encarnacion",
     "year": "2026",
     "date": "May 22, 2026",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/blue-jays-photos/jose-bautista-edwin-encarnacion-2026.jpg"
   },
   {
     "id": "george-springer-jumpin-springer-dinger-2026",
@@ -26,14 +27,16 @@
     "nickname": "\"Jumpin'\", Springer Dinger",
     "year": "2026",
     "date": "April 10, 2026",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/blue-jays-photos/george-springer-jumpin-springer-dinger-2026.jpg"
   },
   {
     "id": "charlie-brown-2025",
     "title": "Charlie Brown",
     "year": "2025",
     "date": "September 13, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/blue-jays-photos/charlie-brown-2025.jpg"
   },
   {
     "id": "andres-gimenez-2025",

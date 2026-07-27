@@ -12,21 +12,24 @@
     "nickname": "Flying Ace",
     "year": "2026",
     "date": "September 16, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/nathan-eovaldi-flying-ace-2026.jpg"
   },
   {
     "id": "powerade-bath-2026",
     "title": "Powerade Bath",
     "year": "2026",
     "date": "September 6, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/powerade-bath-2026.jpg"
   },
   {
     "id": "block-captain-2026",
     "title": "Block Captain",
     "year": "2026",
     "date": "August 21, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/block-captain-2026.jpg"
   },
   {
     "id": "nolan-ryan-brawl-2026",
@@ -42,7 +45,8 @@
     "nickname": "Sliding Catch",
     "year": "2026",
     "date": "July 9, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/wyatt-langford-sliding-catch-2026.jpg"
   },
   {
     "id": "corey-seager-swing-action-2026",
@@ -50,7 +54,8 @@
     "nickname": "Swing Action",
     "year": "2026",
     "date": "July 2, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/corey-seager-swing-action-2026.jpg"
   },
   {
     "id": "jacob-degrom-city-connect-2026",
@@ -58,7 +63,8 @@
     "nickname": "City Connect",
     "year": "2026",
     "date": "June 19, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/jacob-degrom-city-connect-2026.jpg"
   },
   {
     "id": "brandon-nimmo-bull-riding-2026",
@@ -66,7 +72,8 @@
     "nickname": "Bull Riding",
     "year": "2026",
     "date": "June 7, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/brandon-nimmo-bull-riding-2026.jpg"
   },
   {
     "id": "grogu-star-wars-2026",
@@ -74,7 +81,8 @@
     "nickname": "Star Wars",
     "year": "2026",
     "date": "May 31, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/grogu-star-wars-2026.jpg"
   },
   {
     "id": "rangers-captain-kubota-2026",
@@ -82,7 +90,8 @@
     "nickname": "Kubota",
     "year": "2026",
     "date": "May 11, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/rangers-captain-kubota-2026.jpg"
   },
   {
     "id": "jack-leiter-city-connect-2026",
@@ -90,7 +99,8 @@
     "nickname": "City Connect",
     "year": "2026",
     "date": "May 8, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/jack-leiter-city-connect-2026.jpg"
   },
   {
     "id": "nathan-eovaldi-city-connect-2026",
@@ -98,7 +108,8 @@
     "nickname": "City Connect",
     "year": "2026",
     "date": "April 24, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/nathan-eovaldi-city-connect-2026.jpg"
   },
   {
     "id": "ivan-pudge-rodriguez-baseball-card-2026",
@@ -106,21 +117,24 @@
     "nickname": "Baseball Card",
     "year": "2026",
     "date": "April 22, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/ivan-pudge-rodriguez-baseball-card-2026.jpg"
   },
   {
     "id": "retro-ceramic-2026",
     "title": "Retro Ceramic",
     "year": "2026",
     "date": "April 8, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/retro-ceramic-2026.jpg"
   },
   {
     "id": "dot-race-results-2026",
     "title": "Dot Race Results",
     "year": "2026",
     "date": "April 4, 2026",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/dot-race-results-2026.jpg"
   },
   {
     "id": "elvis-andrus-retirement-2025",
@@ -128,7 +142,8 @@
     "nickname": "Retirement",
     "year": "2025",
     "date": "June 28, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/elvis-andrus-retirement-2025.jpg"
   },
   {
     "id": "josh-sborz-jonah-heim-final-out-2025",
@@ -144,7 +159,8 @@
     "nickname": "World Series",
     "year": "2025",
     "date": "May 27, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/bruce-bochy-world-series-2025.jpg"
   },
   {
     "id": "wyatt-langford-cycle-2025",
@@ -152,7 +168,8 @@
     "nickname": "Cycle",
     "year": "2025",
     "date": "May 12, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/wyatt-langford-cycle-2025.jpg"
   },
   {
     "id": "kumar-rocker-star-wars-mandokumar-2025",
@@ -167,7 +184,8 @@
     "nickname": "Baseball Card",
     "year": "2025",
     "date": "April 15, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/josh-jung-baseball-card-2025.jpg"
   },
   {
     "id": "texas-rangers-peagle-bobble-wings-2025",

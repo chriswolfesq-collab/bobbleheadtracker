@@ -5,13 +5,15 @@
     "nickname": "\"Blazin' Bat\"",
     "year": "2026",
     "date": "May 4, 2026",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/royals-photos/jac-caglianone-blazin-bat-2026.jpg"
   },
   {
     "id": "rock-paper-scissors-2026",
     "title": "Rock, Paper, Scissors",
     "year": "2026",
-    "date": "May 8, 2026"
+    "date": "May 8, 2026",
+    "imageUrl": "/bobbleheads/royals-photos/rock-paper-scissors-2026.jpg"
   },
   {
     "id": "lucas-erceg-lights-out-lucas-2026",
@@ -19,7 +21,8 @@
     "nickname": "\"Lights Out Lucas\"",
     "year": "2026",
     "date": "May 18, 2026",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/royals-photos/lucas-erceg-lights-out-lucas-2026.jpg"
   },
   {
     "id": "the-pasquatch-2026",
@@ -33,25 +36,29 @@
     "title": "\"Red, White & Bobby\"",
     "nickname": "Bobby Witt Jr.",
     "year": "2026",
-    "date": "July 4, 2026"
+    "date": "July 4, 2026",
+    "imageUrl": "/bobbleheads/royals-photos/red-white-bobby-2026.jpg"
   },
   {
     "id": "big-bobby-city-connect-2026",
     "title": "City Connect \"Big Bobby\"",
     "year": "2026",
-    "date": "July 17, 2026"
+    "date": "July 17, 2026",
+    "imageUrl": "/bobbleheads/royals-photos/big-bobby-city-connect-2026.jpg"
   },
   {
     "id": "big-bobby-2026-7-18",
     "title": "\"Big Bobby\"",
     "year": "2026",
-    "date": "July 18, 2026"
+    "date": "July 18, 2026",
+    "imageUrl": "/bobbleheads/royals-photos/big-bobby-2026-7-18.jpg"
   },
   {
     "id": "big-bobby-2026-7-19",
     "title": "\"Big Bobby\"",
     "year": "2026",
-    "date": "July 19, 2026"
+    "date": "July 19, 2026",
+    "imageUrl": "/bobbleheads/royals-photos/big-bobby-2026-7-19.jpg"
   },
   {
     "id": "maikel-garcia-big-time-bat-flip-2026",
@@ -59,7 +66,8 @@
     "nickname": "\"Big Time Bat Flip\"",
     "year": "2026",
     "date": "July 21, 2026",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/royals-photos/maikel-garcia-big-time-bat-flip-2026.jpg"
   },
   {
     "id": "salvador-perez-city-connect-2026",
@@ -67,7 +75,8 @@
     "nickname": "City Connect",
     "year": "2026",
     "date": "September 25, 2026",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/royals-photos/salvador-perez-city-connect-2026.jpg"
   },
   {
     "id": "sluggerrr-italian-heritage-2025",
@@ -81,7 +90,8 @@
     "title": "Salvador Perez",
     "year": "2025",
     "date": "September 19, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/royals-photos/salvador-perez-2025.jpg"
   },
   {
     "id": "sluggerrr-viva-los-royals-2025",
@@ -102,14 +112,16 @@
     "title": "Bobby Witt Jr.",
     "year": "2025",
     "date": "August 29, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/royals-photos/bobby-witt-jr-2025-8-29.jpg"
   },
   {
     "id": "eric-hosmer-2025",
     "title": "Eric Hosmer",
     "year": "2025",
     "date": "July 11, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/royals-photos/eric-hosmer-2025.jpg"
   },
   {
     "id": "salvador-perez-2025-7-9",
@@ -123,7 +135,8 @@
     "title": "Cole Ragans",
     "year": "2025",
     "date": "July 8, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/royals-photos/cole-ragans-2025.jpg"
   },
   {
     "id": "bobby-witt-jr-2025-6-14",
@@ -137,7 +150,8 @@
     "title": "Alex Gordon",
     "year": "2025",
     "date": "June 13, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/royals-photos/alex-gordon-2025.jpg"
   },
   {
     "id": "george-brett-bret-saberhagen-1985-championship-2025",
@@ -164,7 +178,8 @@
     "title": "Mike Moustakas",
     "year": "2025",
     "date": "April 26, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/royals-photos/mike-moustakas-2025.jpg"
   },
   {
     "id": "sluggerrr-irish-heritage-2025",
@@ -178,7 +193,8 @@
     "title": "Vinnie Pasquantino",
     "year": "2025",
     "date": "April 6, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/royals-photos/vinnie-pasquantino-2025.jpg"
   },
   {
     "id": "salvador-perez-2024",

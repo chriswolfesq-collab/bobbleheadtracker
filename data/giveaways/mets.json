@@ -5,7 +5,8 @@
     "nickname": "40/30",
     "year": "2026",
     "date": "April 11, 2026",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/mets-photos/juan-soto-40-30-2026.jpg"
   },
   {
     "id": "mr-met-unisphere-light-up-2026",
@@ -21,7 +22,8 @@
     "nickname": "Baseball Card",
     "year": "2026",
     "date": "June 25, 2026",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/mets-photos/juan-soto-baseball-card-2026.jpg"
   },
   {
     "id": "mrs-met-taxicab-2025",
@@ -29,21 +31,24 @@
     "nickname": "Taxicab",
     "year": "2025",
     "date": "September 13, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/mets-photos/mrs-met-taxicab-2025.jpg"
   },
   {
     "id": "francisco-lindor-2025",
     "title": "Francisco Lindor",
     "year": "2025",
     "date": "August 30, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/mets-photos/francisco-lindor-2025.jpg"
   },
   {
     "id": "juan-soto-2025",
     "title": "Juan Soto",
     "year": "2025",
     "date": "August 16, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/mets-photos/juan-soto-2025.jpg"
   },
   {
     "id": "mrs-met-gives-back-2025",
@@ -51,35 +56,40 @@
     "nickname": "Gives Back",
     "year": "2025",
     "date": "August 13, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/mets-photos/mrs-met-gives-back-2025.jpg"
   },
   {
     "id": "francisco-alvarez-2025",
     "title": "Francisco Alvarez",
     "year": "2025",
     "date": "August 2, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/mets-photos/francisco-alvarez-2025.jpg"
   },
   {
     "id": "david-wright-2025",
     "title": "David Wright",
     "year": "2025",
     "date": "July 20, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/mets-photos/david-wright-2025.jpg"
   },
   {
     "id": "mark-vientos-2025",
     "title": "Mark Vientos",
     "year": "2025",
     "date": "May 25, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/mets-photos/mark-vientos-2025.jpg"
   },
   {
     "id": "edwin-diaz-2025",
     "title": "Edwin Diaz",
     "year": "2025",
     "date": "May 10, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/mets-photos/edwin-diaz-2025.jpg"
   },
   {
     "id": "mr-met-empire-state-building-2025",
@@ -87,7 +97,8 @@
     "nickname": "Empire State Building",
     "year": "2025",
     "date": "April 19, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/mets-photos/mr-met-empire-state-building-2025.jpg"
   },
   {
     "id": "francisco-lindor-2024",

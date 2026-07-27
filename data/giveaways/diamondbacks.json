@@ -5,7 +5,8 @@
     "nickname": "Mandalorian",
     "year": "2026",
     "date": "May 9, 2026",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/diamondbacks-photos/gabriel-moreno-mandalorian-2026.jpg"
   },
   {
     "id": "geraldo-perdomo-audio-2026",
@@ -13,7 +14,8 @@
     "nickname": "Audio",
     "year": "2026",
     "date": "July 18, 2026",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/diamondbacks-photos/geraldo-perdomo-audio-2026.jpg"
   },
   {
     "id": "eugenio-suarez-2025",

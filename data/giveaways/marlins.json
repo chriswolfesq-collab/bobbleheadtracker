@@ -4,49 +4,56 @@
     "title": "Kyle Stowers",
     "year": "2026",
     "date": "March 27, 2026",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/marlins-photos/kyle-stowers-2026.jpg"
   },
   {
     "id": "jeff-conine-2025",
     "title": "Jeff Conine",
     "year": "2025",
     "date": "March 30, 2025",
-    "quantity": "8,000"
+    "quantity": "8,000",
+    "imageUrl": "/bobbleheads/marlins-photos/jeff-conine-2025.jpg"
   },
   {
     "id": "celia-cruz-2025",
     "title": "Celia Cruz",
     "year": "2025",
     "date": "May 18, 2025",
-    "quantity": "8,000"
+    "quantity": "8,000",
+    "imageUrl": "/bobbleheads/marlins-photos/celia-cruz-2025.jpg"
   },
   {
     "id": "jim-leyland-2025",
     "title": "Jim Leyland",
     "year": "2025",
     "date": "July 6, 2025",
-    "quantity": "8,000"
+    "quantity": "8,000",
+    "imageUrl": "/bobbleheads/marlins-photos/jim-leyland-2025.jpg"
   },
   {
     "id": "jack-mckeon-2025",
     "title": "Jack McKeon",
     "year": "2025",
     "date": "August 3, 2025",
-    "quantity": "8,000"
+    "quantity": "8,000",
+    "imageUrl": "/bobbleheads/marlins-photos/jack-mckeon-2025.jpg"
   },
   {
     "id": "luis-castillo-2025",
     "title": "Luis Castillo",
     "year": "2025",
     "date": "August 24, 2025",
-    "quantity": "8,000"
+    "quantity": "8,000",
+    "imageUrl": "/bobbleheads/marlins-photos/luis-castillo-2025.jpg"
   },
   {
     "id": "xavier-edwards-2025",
     "title": "Xavier Edwards",
     "year": "2025",
     "date": "September 14, 2025",
-    "quantity": "8,000"
+    "quantity": "8,000",
+    "imageUrl": "/bobbleheads/marlins-photos/xavier-edwards-2025.jpg"
   },
   {
     "id": "jake-burger-2024",

@@ -4,7 +4,8 @@
     "title": "Bryan Woo",
     "year": "2026",
     "date": "September 5, 2026",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/bryan-woo-2026.jpg"
   },
   {
     "id": "cal-raleigh-60-home-run-2026",
@@ -12,28 +13,32 @@
     "nickname": "\"60 Home Run\"",
     "year": "2026",
     "date": "March 28, 2026",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/mariners-photos/cal-raleigh-60-home-run-2026.jpg"
   },
   {
     "id": "randy-arozarena-2025",
     "title": "Randy Arozarena",
     "year": "2025",
     "date": "May 27, 2025",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/mariners-photos/randy-arozarena-2025.jpg"
   },
   {
     "id": "cal-raleigh-2025",
     "title": "Cal Raleigh",
     "year": "2025",
     "date": "April 7, 2025",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/mariners-photos/cal-raleigh-2025.jpg"
   },
   {
     "id": "julio-rodriguez-2025",
     "title": "Julio Rodriguez",
     "year": "2025",
     "date": "March 31, 2025",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/mariners-photos/julio-rodriguez-2025.jpg"
   },
   {
     "id": "ken-griffey-jr-2024",

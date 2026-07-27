@@ -4,21 +4,24 @@
     "title": "Dinger (Mascot) Bobblehead",
     "year": "2026",
     "date": "June 7, 2026",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/dinger-mascot-2026.jpg"
   },
   {
     "id": "brenton-doyle-2025",
     "title": "Brenton Doyle",
     "year": "2025",
     "date": "June 7, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/brenton-doyle-2025.jpg"
   },
   {
     "id": "ezequiel-tovar-2025",
     "title": "Ezequiel Tovar",
     "year": "2025",
     "date": "June 21, 2025",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/ezequiel-tovar-2025.jpg"
   },
   {
     "id": "nolan-jones-2024",
