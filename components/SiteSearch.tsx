@@ -152,9 +152,11 @@ export function SiteSearch({
       </div>
 
       {showResults ? (
-        <div className="absolute left-4 right-4 top-full z-40 mt-2 max-h-96 overflow-y-auto rounded-lg border border-black/10 bg-white shadow-2xl dark:border-white/15 dark:bg-[#0b1626] sm:left-0 sm:right-0">
+        <div className="absolute left-4 right-4 top-full z-40 mt-2 flex flex-col overflow-hidden rounded-lg border border-black/10 bg-white shadow-2xl dark:border-white/15 dark:bg-[#0b1626] sm:left-0 sm:right-0">
           {results.length > 0 ? (
-            <ul id="site-search-results" role="listbox">
+            // The list scrolls on its own so the "See all results" button below
+            // stays pinned in view instead of sitting past 20 rows of results.
+            <ul id="site-search-results" role="listbox" className="max-h-80 overflow-y-auto">
               {results.map((result, resultIndex) => (
                 <li
                   key={`${result.source}-${result.teamSlug}-${result.id}`}
@@ -204,13 +206,15 @@ export function SiteSearch({
             <p className="px-3 py-4 text-center text-sm text-zinc-600 dark:text-zinc-400">No bobbleheads found.</p>
           )}
           {results.length > 0 ? (
-            <Link
-              href={allResultsHref}
-              onClick={() => setIsFocused(false)}
-              className="block border-t border-black/[0.06] px-3 py-2.5 text-center text-xs font-black uppercase tracking-wide text-accent transition hover:bg-black/[0.04] dark:border-white/5 dark:hover:bg-white/5"
-            >
-              View all results →
-            </Link>
+            <div className="shrink-0 border-t border-black/[0.06] bg-white p-2 dark:border-white/5 dark:bg-[#0b1626]">
+              <Link
+                href={allResultsHref}
+                onClick={() => setIsFocused(false)}
+                className="block rounded-full bg-accent px-3 py-2 text-center text-xs font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover"
+              >
+                See All Results →
+              </Link>
+            </div>
           ) : null}
         </div>
       ) : null}

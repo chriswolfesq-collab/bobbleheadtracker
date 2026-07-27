@@ -102,6 +102,11 @@ function ShelfBobblehead({
             width={677}
             height={1607}
             sizes="(max-width: 640px) 9vw, 60px"
+            // The whole shelf is above the fold, so the default lazy deferral
+            // just means the empty shelf paints first and the figures pop in
+            // afterwards. Each one optimizes down to ~10KB, so load them with
+            // the rest of the page instead.
+            loading="eager"
             className={`h-full w-auto drop-shadow-[0_5px_6px_rgba(0,0,0,0.6)] ${
               isMuted ? "opacity-25 grayscale" : ""
             }`}
