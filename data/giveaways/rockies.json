@@ -25,14 +25,16 @@
     "title": "Nolan Jones",
     "year": "2024",
     "date": "June 22, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/nolan-jones-2024.jpg"
   },
   {
     "id": "todd-helton-2024",
     "title": "Todd Helton",
     "year": "2024",
     "date": "August 17, 2024",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/rockies-photos/todd-helton-2024.jpg"
   },
   {
     "id": "kris-bryant-jedi-2023",
@@ -40,14 +42,16 @@
     "nickname": "Jedi",
     "year": "2023",
     "date": "July 29, 2023",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/kris-bryant-jedi-2023.jpg"
   },
   {
     "id": "charlie-blackmon-2023",
     "title": "Charlie Blackmon",
     "year": "2023",
     "date": "September 2, 2023",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/charlie-blackmon-2023.jpg"
   },
   {
     "id": "german-marquez-all-star-2022",
@@ -55,21 +59,24 @@
     "nickname": "2021 All-Star Game",
     "year": "2022",
     "date": "June 18, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/german-marquez-all-star-2022.jpg"
   },
   {
     "id": "ryan-mcmahon-2022",
     "title": "Ryan McMahon",
     "year": "2022",
     "date": "July 31, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/ryan-mcmahon-2022.jpg"
   },
   {
     "id": "kris-bryant-2022",
     "title": "Kris Bryant",
     "year": "2022",
     "date": "August 13, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/kris-bryant-2022.jpg"
   },
   {
     "id": "chuck-nazty-charlie-blackmon-2021",
@@ -84,35 +91,40 @@
     "nickname": "\"Story Time\"",
     "year": "2021",
     "date": "June 19, 2021",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/trevor-story-time-2021.jpg"
   },
   {
     "id": "larry-walker-hof-2021",
     "title": "Larry Walker",
     "nickname": "Hall of Fame",
     "year": "2021",
-    "date": "September 25, 2021"
+    "date": "September 25, 2021",
+    "imageUrl": "/bobbleheads/rockies-photos/larry-walker-hof-2021.jpg"
   },
   {
     "id": "trevor-story-2019",
     "title": "Trevor Story",
     "year": "2019",
     "date": "June 30, 2019",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/trevor-story-2019.jpg"
   },
   {
     "id": "charlie-blackmon-2019",
     "title": "Charlie Blackmon",
     "year": "2019",
     "date": "July 14, 2019",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/charlie-blackmon-2019.jpg"
   },
   {
     "id": "kyle-freeland-2019",
     "title": "Kyle Freeland",
     "year": "2019",
     "date": "August 4, 2019",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/kyle-freeland-2019.jpg"
   },
   {
     "id": "charlie-blackmon-nl-batting-champion-2018",
@@ -120,7 +132,8 @@
     "nickname": "NL Batting Champion",
     "year": "2018",
     "date": "April 8, 2018",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/charlie-blackmon-nl-batting-champion-2018.jpg"
   },
   {
     "id": "nolan-arenado-walk-off-cycle-2018",
@@ -128,32 +141,37 @@
     "nickname": "Walk-Off Cycle",
     "year": "2018",
     "date": "July 14, 2018",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/nolan-arenado-walk-off-cycle-2018.jpg"
   },
   {
     "id": "dj-lemahieu-2017",
     "title": "DJ LeMahieu",
     "year": "2017",
-    "date": "April 8, 2017"
+    "date": "April 8, 2017",
+    "imageUrl": "/bobbleheads/rockies-photos/dj-lemahieu-2017.jpg"
   },
   {
     "id": "marvel-super-heroes-2017",
     "title": "Marvel Super Heroes",
     "year": "2017",
-    "date": "July 8, 2017"
+    "date": "July 8, 2017",
+    "imageUrl": "/bobbleheads/rockies-photos/marvel-super-heroes-2017.jpg"
   },
   {
     "id": "adam-ottavino-star-wars-2017",
     "title": "Adam Ottavino",
     "nickname": "Star Wars",
     "year": "2017",
-    "date": "July 22, 2017"
+    "date": "July 22, 2017",
+    "imageUrl": "/bobbleheads/rockies-photos/adam-ottavino-star-wars-2017.jpg"
   },
   {
     "id": "nolan-arenado-2017",
     "title": "Nolan Arenado",
     "year": "2017",
-    "date": "August 19, 2017"
+    "date": "August 19, 2017",
+    "imageUrl": "/bobbleheads/rockies-photos/nolan-arenado-2017.jpg"
   },
   {
     "id": "nolan-arenado-diamond-leader-2016",
@@ -161,7 +179,8 @@
     "nickname": "Diamond Leader",
     "year": "2016",
     "date": "April 10, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/nolan-arenado-diamond-leader-2016.jpg"
   },
   {
     "id": "charlie-blackmon-star-wars-2016",
@@ -169,7 +188,8 @@
     "nickname": "Star Wars",
     "year": "2016",
     "date": "July 23, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/charlie-blackmon-star-wars-2016.jpg"
   },
   {
     "id": "dj-lemahieu-ghostbusters-2016",
@@ -177,7 +197,8 @@
     "nickname": "Ghostbusters",
     "year": "2016",
     "date": "August 6, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/dj-lemahieu-ghostbusters-2016.jpg"
   },
   {
     "id": "nolan-arenado-gold-glove-mine-2016",
@@ -185,41 +206,47 @@
     "nickname": "Gold Glove Mine",
     "year": "2016",
     "date": "August 21, 2016",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/nolan-arenado-gold-glove-mine-2016.jpg"
   },
   {
     "id": "carlos-gonzalez-2016",
     "title": "Carlos Gonzalez",
     "year": "2016",
     "date": "September 4, 2016",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/carlos-gonzalez-2016.jpg"
   },
   {
     "id": "justin-morneau-batting-champ-2015",
     "title": "Justin Morneau",
     "nickname": "Batting Champ",
     "year": "2015",
-    "date": "April 12, 2015"
+    "date": "April 12, 2015",
+    "imageUrl": "/bobbleheads/rockies-photos/justin-morneau-batting-champ-2015.jpg"
   },
   {
     "id": "troy-tulowitzki-2015",
     "title": "Troy Tulowitzki",
     "year": "2015",
-    "date": "June 7, 2015"
+    "date": "June 7, 2015",
+    "imageUrl": "/bobbleheads/rockies-photos/troy-tulowitzki-2015.jpg"
   },
   {
     "id": "charlie-blackmon-2015",
     "title": "Charlie Blackmon",
     "year": "2015",
     "date": "July 24, 2015",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rockies-photos/charlie-blackmon-2015.jpg"
   },
   {
     "id": "nolan-arenado-gold-glove-2015",
     "title": "Nolan Arenado",
     "nickname": "Gold Glove",
     "year": "2015",
-    "date": "July 26, 2015"
+    "date": "July 26, 2015",
+    "imageUrl": "/bobbleheads/rockies-photos/nolan-arenado-gold-glove-2015.jpg"
   },
   {
     "id": "cargo-fett-carlos-gonzalez-star-wars-2015",
@@ -227,19 +254,22 @@
     "nickname": "Star Wars",
     "year": "2015",
     "date": "August 22, 2015",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rockies-photos/cargo-fett-carlos-gonzalez-star-wars-2015.jpg"
   },
   {
     "id": "jorge-de-la-rosa-2015",
     "title": "Jorge De La Rosa",
     "year": "2015",
-    "date": "August 23, 2015"
+    "date": "August 23, 2015",
+    "imageUrl": "/bobbleheads/rockies-photos/jorge-de-la-rosa-2015.jpg"
   },
   {
     "id": "batting-champ-gnome-2014",
     "title": "Batting Champ Bobblehead Gnome",
     "year": "2014",
-    "date": "April 6, 2014"
+    "date": "April 6, 2014",
+    "imageUrl": "/bobbleheads/rockies-photos/batting-champ-gnome-2014.jpg"
   },
   {
     "id": "dinger-bunny-gnome-2014",
@@ -252,14 +282,16 @@
     "id": "super-cargo-gnome-2014",
     "title": "Super Cargo Bobblehead Gnome",
     "year": "2014",
-    "date": "May 18, 2014"
+    "date": "May 18, 2014",
+    "imageUrl": "/bobbleheads/rockies-photos/super-cargo-gnome-2014.jpg"
   },
   {
     "id": "sasquatch-gnome-2014",
     "title": "Sasquatch Bobblehead Gnome",
     "year": "2014",
     "date": "June 8, 2014",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/sasquatch-gnome-2014.jpg"
   },
   {
     "id": "obi-wan-owitzki-gnome-2014",
@@ -271,13 +303,15 @@
     "id": "skipper-gnome-2014",
     "title": "The Skipper Bobblehead Gnome",
     "year": "2014",
-    "date": "July 6, 2014"
+    "date": "July 6, 2014",
+    "imageUrl": "/bobbleheads/rockies-photos/skipper-gnome-2014.jpg"
   },
   {
     "id": "golden-arenado-gnome-2014",
     "title": "Golden Arenado Bobblehead Gnome",
     "year": "2014",
-    "date": "July 13, 2014"
+    "date": "July 13, 2014",
+    "imageUrl": "/bobbleheads/rockies-photos/golden-arenado-gnome-2014.jpg"
   },
   {
     "id": "todd-helton-farewell-2014",
@@ -285,7 +319,8 @@
     "nickname": "\"Farewell\"",
     "year": "2014",
     "date": "August 15, 2014",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/todd-helton-farewell-2014.jpg"
   },
   {
     "id": "todd-helton-retire-17-gnome-2014",
@@ -293,13 +328,15 @@
     "nickname": "\"Retire 17\" Gnome",
     "year": "2014",
     "date": "August 17, 2014",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/todd-helton-retire-17-gnome-2014.jpg"
   },
   {
     "id": "baby-bull-gnome-2014",
     "title": "Baby Bull Bobblehead Gnome",
     "year": "2014",
-    "date": "September 7, 2014"
+    "date": "September 7, 2014",
+    "imageUrl": "/bobbleheads/rockies-photos/baby-bull-gnome-2014.jpg"
   },
   {
     "id": "eric-young-20th-anniversary-2013",
@@ -307,7 +344,8 @@
     "nickname": "20th Anniversary",
     "year": "2013",
     "date": "April 21, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/eric-young-20th-anniversary-2013.jpg"
   },
   {
     "id": "vinny-castilla-20th-anniversary-2013",
@@ -315,7 +353,8 @@
     "nickname": "20th Anniversary",
     "year": "2013",
     "date": "May 5, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/vinny-castilla-20th-anniversary-2013.jpg"
   },
   {
     "id": "dante-bichette-20th-anniversary-2013",
@@ -323,7 +362,8 @@
     "nickname": "20th Anniversary",
     "year": "2013",
     "date": "May 19, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/dante-bichette-20th-anniversary-2013.jpg"
   },
   {
     "id": "andres-galarraga-20th-anniversary-2013",
@@ -331,7 +371,8 @@
     "nickname": "20th Anniversary",
     "year": "2013",
     "date": "June 2, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/andres-galarraga-20th-anniversary-2013.jpg"
   },
   {
     "id": "walt-weiss-20th-anniversary-2013",
@@ -339,7 +380,8 @@
     "nickname": "20th Anniversary",
     "year": "2013",
     "date": "June 16, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/walt-weiss-20th-anniversary-2013.jpg"
   },
   {
     "id": "larry-walker-20th-anniversary-2013",
@@ -347,7 +389,8 @@
     "nickname": "20th Anniversary",
     "year": "2013",
     "date": "June 30, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/larry-walker-20th-anniversary-2013.jpg"
   },
   {
     "id": "troy-tulowitzki-20th-anniversary-2013",
@@ -355,7 +398,8 @@
     "nickname": "20th Anniversary",
     "year": "2013",
     "date": "July 21, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/troy-tulowitzki-20th-anniversary-2013.jpg"
   },
   {
     "id": "ellis-burks-20th-anniversary-2013",
@@ -371,7 +415,8 @@
     "nickname": "20th Anniversary",
     "year": "2013",
     "date": "September 25, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/todd-helton-20th-anniversary-2013.jpg"
   },
   {
     "id": "ubaldo-jimenez-2011",

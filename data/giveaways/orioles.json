@@ -85,7 +85,8 @@
     "id": "gunnar-henderson-2024",
     "title": "Gunnar Henderson",
     "year": "2024",
-    "date": "August 23, 2024"
+    "date": "August 23, 2024",
+    "imageUrl": "/bobbleheads/orioles-photos/gunnar-henderson-2024.jpg"
   },
   {
     "id": "corbin-burnes-2024",
@@ -97,64 +98,74 @@
     "id": "adley-rutschman-2024",
     "title": "Adley Rutschman",
     "year": "2024",
-    "date": "July 28, 2024"
+    "date": "July 28, 2024",
+    "imageUrl": "/bobbleheads/orioles-photos/adley-rutschman-2024.jpg"
   },
   {
     "id": "anthony-santander-2024",
     "title": "Anthony Santander",
     "year": "2024",
-    "date": "June 1, 2024"
+    "date": "June 1, 2024",
+    "imageUrl": "/bobbleheads/orioles-photos/anthony-santander-2024.jpg"
   },
   {
     "id": "mr-splash-2024",
     "title": "\"Mr. Splash\"",
     "year": "2024",
-    "date": "May 10, 2024"
+    "date": "May 10, 2024",
+    "imageUrl": "/bobbleheads/orioles-photos/mr-splash-2024.jpg"
   },
   {
     "id": "brandon-hyde-2024",
     "title": "Brandon Hyde",
     "year": "2024",
-    "date": "April 27, 2024"
+    "date": "April 27, 2024",
+    "imageUrl": "/bobbleheads/orioles-photos/brandon-hyde-2024.jpg"
   },
   {
     "id": "felix-bautista-2023",
     "title": "Felix Bautista",
     "year": "2023",
-    "date": "August 26, 2023"
+    "date": "August 26, 2023",
+    "imageUrl": "/bobbleheads/orioles-photos/felix-bautista-2023.jpg"
   },
   {
     "id": "eddie-murray-1983-world-series-2023",
     "title": "Eddie Murray",
     "nickname": "1983 World Series",
     "year": "2023",
-    "date": "August 5, 2023"
+    "date": "August 5, 2023",
+    "imageUrl": "/bobbleheads/orioles-photos/eddie-murray-1983-world-series-2023.jpg"
   },
   {
     "id": "adley-rutschman-captain-america-2023",
     "title": "Adley Rutschman",
     "nickname": "Captain America",
     "year": "2023",
-    "date": "June 10, 2023"
+    "date": "June 10, 2023",
+    "imageUrl": "/bobbleheads/orioles-photos/adley-rutschman-captain-america-2023.jpg"
   },
   {
     "id": "ryan-mountcastle-2023",
     "title": "Ryan Mountcastle",
     "year": "2023",
-    "date": "May 27, 2023"
+    "date": "May 27, 2023",
+    "imageUrl": "/bobbleheads/orioles-photos/ryan-mountcastle-2023.jpg"
   },
   {
     "id": "oriole-bird-2023",
     "title": "Oriole Bird",
     "year": "2023",
-    "date": "April 9, 2023"
+    "date": "April 9, 2023",
+    "imageUrl": "/bobbleheads/orioles-photos/oriole-bird-2023.jpg"
   },
   {
     "id": "boog-powell-2022",
     "title": "Boog Powell",
     "year": "2022",
     "date": "August 20, 2022",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/orioles-photos/boog-powell-2022.jpg"
   },
   {
     "id": "cedric-mullins-30-30-club-2022",
@@ -169,7 +180,8 @@
     "title": "Oriole Bird",
     "nickname": "Hall of Fame, Spring Training",
     "year": "2022",
-    "date": "March 19, 2022"
+    "date": "March 19, 2022",
+    "imageUrl": "/bobbleheads/orioles-photos/oriole-bird-hall-of-fame-spring-training-2022.jpg"
   },
   {
     "id": "john-means-business-2021",
@@ -177,7 +189,8 @@
     "nickname": "\"Business\"",
     "year": "2021",
     "date": "August 21, 2021",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/orioles-photos/john-means-business-2021.jpg"
   },
   {
     "id": "oriole-bird-hall-of-fame-2021",
@@ -185,21 +198,24 @@
     "nickname": "Hall of Fame",
     "year": "2021",
     "date": "August 7, 2021",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/orioles-photos/oriole-bird-hall-of-fame-2021.jpg"
   },
   {
     "id": "jim-palmer-2021",
     "title": "Jim Palmer",
     "year": "2021",
     "date": "July 24, 2021",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/orioles-photos/jim-palmer-2021.jpg"
   },
   {
     "id": "oriole-bird-stranger-things-2019",
     "title": "Oriole Bird",
     "nickname": "Stranger Things",
     "year": "2019",
-    "date": "August 2, 2019"
+    "date": "August 2, 2019",
+    "imageUrl": "/bobbleheads/orioles-photos/oriole-bird-stranger-things-2019.jpg"
   },
   {
     "id": "brooks-robinson-2019",
@@ -213,49 +229,56 @@
     "title": "Trey Mancini & BB-8",
     "nickname": "Star Wars",
     "year": "2019",
-    "date": "May 4, 2019"
+    "date": "May 4, 2019",
+    "imageUrl": "/bobbleheads/orioles-photos/trey-mancini-bb-8-star-wars-2019.jpg"
   },
   {
     "id": "kevin-gausman-game-of-thrones-2018",
     "title": "Kevin Gausman",
     "nickname": "Game of Thrones",
     "year": "2018",
-    "date": "August 14, 2018"
+    "date": "August 14, 2018",
+    "imageUrl": "/bobbleheads/orioles-photos/kevin-gausman-game-of-thrones-2018.jpg"
   },
   {
     "id": "trey-mancini-2018",
     "title": "Trey Mancini",
     "year": "2018",
     "date": "July 28, 2018",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/trey-mancini-2018.jpg"
   },
   {
     "id": "dylan-bundy-2018",
     "title": "Dylan Bundy",
     "year": "2018",
     "date": "June 12, 2018",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/dylan-bundy-2018.jpg"
   },
   {
     "id": "oday-wan-kenobi-darren-oday-star-wars-2018",
     "title": "\"O'Day-Wan Kenobi\"",
     "nickname": "Darren O'Day, Star Wars",
     "year": "2018",
-    "date": "May 11, 2018"
+    "date": "May 11, 2018",
+    "imageUrl": "/bobbleheads/orioles-photos/oday-wan-kenobi-darren-oday-star-wars-2018.jpg"
   },
   {
     "id": "oriole-bird-toothbrush-holder-2017",
     "title": "Oriole Bird",
     "nickname": "Toothbrush Holder",
     "year": "2017",
-    "date": "September 24, 2017"
+    "date": "September 24, 2017",
+    "imageUrl": "/bobbleheads/orioles-photos/oriole-bird-toothbrush-holder-2017.jpg"
   },
   {
     "id": "jonathan-schoop-2017",
     "title": "Jonathan Schoop",
     "year": "2017",
     "date": "August 5, 2017",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/jonathan-schoop-2017.jpg"
   },
   {
     "id": "zach-britton-2016",
@@ -274,7 +297,8 @@
     "id": "crush-davis-samson-2016",
     "title": "Crush Davis & Samson",
     "year": "2016",
-    "date": "August 20, 2016"
+    "date": "August 20, 2016",
+    "imageUrl": "/bobbleheads/orioles-photos/crush-davis-samson-2016.jpg"
   },
   {
     "id": "steve-pearce-fans-choice-2015",
@@ -289,7 +313,8 @@
     "title": "Oriole Bird",
     "year": "2015",
     "date": "August 1, 2015",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/oriole-bird-2015.jpg"
   },
   {
     "id": "chris-tillman-fans-choice-2014",
@@ -297,21 +322,24 @@
     "nickname": "Fans' Choice",
     "year": "2014",
     "date": "September 21, 2014",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/chris-tillman-fans-choice-2014.jpg"
   },
   {
     "id": "adam-jones-2014",
     "title": "Adam Jones",
     "year": "2014",
     "date": "September 1, 2014",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/adam-jones-2014.jpg"
   },
   {
     "id": "manny-machado-2014",
     "title": "Manny Machado",
     "year": "2014",
     "date": "June 7, 2014",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/manny-machado-2014.jpg"
   },
   {
     "id": "chris-davis-fans-choice-2013",
@@ -319,7 +347,8 @@
     "nickname": "Fans' Choice",
     "year": "2013",
     "date": "September 29, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/orioles-photos/chris-davis-fans-choice-2013.jpg"
   },
   {
     "id": "jj-hardy-2012",

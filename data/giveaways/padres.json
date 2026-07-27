@@ -60,14 +60,16 @@
     "id": "manny-machado-2024",
     "title": "Manny Machado",
     "year": "2024",
-    "date": "April 10, 2024"
+    "date": "April 10, 2024",
+    "imageUrl": "/bobbleheads/padres-photos/manny-machado-2024.jpg"
   },
   {
     "id": "joe-musgrove-dog-theo-2024",
     "title": "Joe Musgrove & Dog Theo",
     "year": "2024",
     "date": "May 14, 2024",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/joe-musgrove-dog-theo-2024.jpg"
   },
   {
     "id": "xander-bogaerts-2024",
@@ -81,7 +83,8 @@
     "title": "Ha-Seong Kim",
     "year": "2024",
     "date": "June 25, 2024",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/ha-seong-kim-2024.jpg"
   },
   {
     "id": "luis-arraez-2024",
@@ -94,7 +97,8 @@
     "title": "Fernando Tatis Jr.",
     "year": "2024",
     "date": "September 18, 2024",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/fernando-tatis-jr-2024.jpg"
   },
   {
     "id": "juan-soto-soto-shuffle-2023",
@@ -102,7 +106,8 @@
     "nickname": "Soto Shuffle",
     "year": "2023",
     "date": "April 13, 2023",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/juan-soto-soto-shuffle-2023.jpg"
   },
   {
     "id": "manny-machado-city-connect-2023",
@@ -110,7 +115,8 @@
     "nickname": "City Connect",
     "year": "2023",
     "date": "May 15, 2023",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/manny-machado-city-connect-2023.jpg"
   },
   {
     "id": "yu-darvish-3-000-strikeouts-2023",
@@ -118,47 +124,54 @@
     "nickname": "3,000 Strikeouts",
     "year": "2023",
     "date": "July 24, 2023",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/yu-darvish-3-000-strikeouts-2023.jpg"
   },
   {
     "id": "don-orsillo-mark-grant-don-and-mud-2023",
     "title": "Don Orsillo & Mark Grant",
     "nickname": "Don and Mud",
     "year": "2023",
-    "date": "August 17, 2023"
+    "date": "August 17, 2023",
+    "imageUrl": "/bobbleheads/padres-photos/don-orsillo-mark-grant-don-and-mud-2023.jpg"
   },
   {
     "id": "ha-seong-kim-2023",
     "title": "Ha-Seong Kim",
     "year": "2023",
     "date": "August 22, 2023",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/ha-seong-kim-2023.jpg"
   },
   {
     "id": "fernando-tatis-jr-2023",
     "title": "Fernando Tatis Jr.",
     "year": "2023",
     "date": "September 5, 2023",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/fernando-tatis-jr-2023.jpg"
   },
   {
     "id": "padres-giveaway-bobblehead-2022",
     "title": "Padres Giveaway Bobblehead",
     "year": "2022",
-    "date": "May 24, 2022"
+    "date": "May 24, 2022",
+    "imageUrl": "/bobbleheads/padres-photos/padres-giveaway-bobblehead-2022.jpg"
   },
   {
     "id": "jake-cronenworth-2022",
     "title": "Jake Cronenworth",
     "year": "2022",
     "date": "June 23, 2022",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/padres-photos/jake-cronenworth-2022.jpg"
   },
   {
     "id": "fernando-tatis-jr-nala-pumba-2022",
     "title": "Fernando Tatis Jr., Nala & Pumba",
     "year": "2022",
-    "date": "July 9, 2022"
+    "date": "July 9, 2022",
+    "imageUrl": "/bobbleheads/padres-photos/fernando-tatis-jr-nala-pumba-2022.jpg"
   },
   {
     "id": "manny-mandalorian-2022",
@@ -171,103 +184,119 @@
     "title": "Joe Musgrove",
     "year": "2022",
     "date": "August 18, 2022",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/padres-photos/joe-musgrove-2022.jpg"
   },
   {
     "id": "linus-2022",
     "title": "Linus",
     "year": "2022",
-    "date": "August 20, 2022"
+    "date": "August 20, 2022",
+    "imageUrl": "/bobbleheads/padres-photos/linus-2022.jpg"
   },
   {
     "id": "hello-kitty-2022",
     "title": "Hello Kitty",
     "year": "2022",
-    "date": "September 11, 2022"
+    "date": "September 11, 2022",
+    "imageUrl": "/bobbleheads/padres-photos/hello-kitty-2022.jpg"
   },
   {
     "id": "snoopy-2021",
     "title": "Snoopy",
     "year": "2021",
-    "date": "June 27, 2021"
+    "date": "June 27, 2021",
+    "imageUrl": "/bobbleheads/padres-photos/snoopy-2021.jpg"
   },
   {
     "id": "fernando-tatis-jr-2021",
     "title": "Fernando Tatis Jr.",
     "year": "2021",
-    "date": "July 31, 2021"
+    "date": "July 31, 2021",
+    "imageUrl": "/bobbleheads/padres-photos/fernando-tatis-jr-2021.jpg"
   },
   {
     "id": "swingin-friar-50th-anniversary-2019",
     "title": "Swingin' Friar",
     "nickname": "50th Anniversary",
     "year": "2019",
-    "date": "March 30, 2019"
+    "date": "March 30, 2019",
+    "imageUrl": "/bobbleheads/padres-photos/swingin-friar-50th-anniversary-2019.jpg"
   },
   {
     "id": "charlie-brown-2019",
     "title": "Charlie Brown",
     "year": "2019",
-    "date": "July 14, 2019"
+    "date": "July 14, 2019",
+    "imageUrl": "/bobbleheads/padres-photos/charlie-brown-2019.jpg"
   },
   {
     "id": "san-diego-chicken-2019",
     "title": "San Diego Chicken",
     "year": "2019",
-    "date": "July 27, 2019"
+    "date": "July 27, 2019",
+    "imageUrl": "/bobbleheads/padres-photos/san-diego-chicken-2019.jpg"
   },
   {
     "id": "hello-kitty-2019",
     "title": "Hello Kitty",
     "year": "2019",
-    "date": "September 8, 2019"
+    "date": "September 8, 2019",
+    "imageUrl": "/bobbleheads/padres-photos/hello-kitty-2019.jpg"
   },
   {
     "id": "scooby-doo-2019",
     "title": "Scooby-Doo",
     "year": "2019",
-    "date": "September 24, 2019"
+    "date": "September 24, 2019",
+    "imageUrl": "/bobbleheads/padres-photos/scooby-doo-2019.jpg"
   },
   {
     "id": "iron-man-or-captain-america-2018",
     "title": "Iron Man or Captain America",
     "year": "2018",
-    "date": "April 13, 2018"
+    "date": "April 13, 2018",
+    "imageUrl": "/bobbleheads/padres-photos/iron-man-or-captain-america-2018.jpg"
   },
   {
     "id": "tony-gwynn-98-commemorative-2018",
     "title": "Tony Gwynn",
     "nickname": "'98 Commemorative",
     "year": "2018",
-    "date": "May 10, 2018"
+    "date": "May 10, 2018",
+    "imageUrl": "/bobbleheads/padres-photos/tony-gwynn-98-commemorative-2018.jpg"
   },
   {
     "id": "ken-caminiti-98-commemorative-2018",
     "title": "Ken Caminiti",
     "nickname": "'98 Commemorative",
     "year": "2018",
-    "date": "May 11, 2018"
+    "date": "May 11, 2018",
+    "imageUrl": "/bobbleheads/padres-photos/ken-caminiti-98-commemorative-2018.jpg"
   },
   {
     "id": "trevor-hoffman-98-commemorative-2018",
     "title": "Trevor Hoffman",
     "nickname": "'98 Commemorative",
     "year": "2018",
-    "date": "May 12, 2018"
+    "date": "May 12, 2018",
+    "imageUrl": "/bobbleheads/padres-photos/trevor-hoffman-98-commemorative-2018.jpg"
   },
   {
     "id": "greg-vaughn-98-commemorative-2018",
     "title": "Greg Vaughn",
     "nickname": "'98 Commemorative",
     "year": "2018",
-    "date": "May 13, 2018"
+    "date": "May 13, 2018",
+    "imageUrl": "/bobbleheads/padres-photos/greg-vaughn-98-commemorative-2018.jpg"
   },
   {
     "id": "han-myers-wil-myers-2018",
     "title": "\"Han Myers\"",
     "nickname": "Wil Myers",
     "year": "2018",
-    "date": "June 1, 2018"
+    "date": "June 1, 2018",
+    "imageUrl": "/bobbleheads/padres-photos/han-myers-wil-myers-2018.jpg"
   },
   {
     "id": "trevor-hoffman-500th-save-2018",
@@ -281,27 +310,31 @@
     "id": "ant-man-and-the-wasp-2018",
     "title": "Ant-Man and The Wasp",
     "year": "2018",
-    "date": "July 27, 2018"
+    "date": "July 27, 2018",
+    "imageUrl": "/bobbleheads/padres-photos/ant-man-and-the-wasp-2018.jpg"
   },
   {
     "id": "ham-porter-2018",
     "title": "\"Ham Porter\"",
     "year": "2018",
     "date": "September 2, 2018",
-    "quantity": "1,000"
+    "quantity": "1,000",
+    "imageUrl": "/bobbleheads/padres-photos/ham-porter-2018.jpg"
   },
   {
     "id": "padres-themed-zombie-2016",
     "title": "Padres-Themed Zombie",
     "year": "2016",
-    "date": "June 7, 2016"
+    "date": "June 7, 2016",
+    "imageUrl": "/bobbleheads/padres-photos/padres-themed-zombie-2016.jpg"
   },
   {
     "id": "wil-myers-ghostbusters-2016",
     "title": "Wil Myers",
     "nickname": "Ghostbusters",
     "year": "2016",
-    "date": "July 15, 2016"
+    "date": "July 15, 2016",
+    "imageUrl": "/bobbleheads/padres-photos/wil-myers-ghostbusters-2016.jpg"
   },
   {
     "id": "jedi-andy-andy-green-2016",
@@ -315,7 +348,8 @@
     "title": "Chase Headley",
     "year": "2013",
     "date": "April 13, 2013",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/padres-photos/chase-headley-2013.jpg"
   },
   {
     "id": "bud-black-2011",

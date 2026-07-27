@@ -123,7 +123,8 @@
     "title": "Anthony Volpe",
     "year": "2024",
     "date": "August 11, 2024",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/anthony-volpe-2024.jpg"
   },
   {
     "id": "eli-manning-2024",
@@ -143,34 +144,39 @@
     "title": "Gerrit Cole",
     "year": "2024",
     "date": "July 19, 2024",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/gerrit-cole-2024-7-19.jpg"
   },
   {
     "id": "george-costanza-2024",
     "title": "George Costanza",
     "year": "2024",
     "date": "July 5, 2024",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/george-costanza-2024.jpg"
   },
   {
     "id": "gerrit-cole-2024-5-4",
     "title": "Gerrit Cole",
     "year": "2024",
     "date": "May 4, 2024",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/gerrit-cole-2024-5-4.jpg"
   },
   {
     "id": "aaron-judge-2024",
     "title": "Aaron Judge",
     "year": "2024",
     "date": "April 20, 2024",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/aaron-judge-2024.jpg"
   },
   {
     "id": "aaron-judge-2023",
     "title": "Aaron Judge",
     "year": "2023",
-    "date": "September 23, 2023"
+    "date": "September 23, 2023",
+    "imageUrl": "/bobbleheads/yankees-photos/aaron-judge-2023.jpg"
   },
   {
     "id": "roger-maris-61-2023",
@@ -178,34 +184,39 @@
     "nickname": "#61",
     "year": "2023",
     "date": "August 20, 2023",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/roger-maris-61-2023.jpg"
   },
   {
     "id": "bucky-dent-2023",
     "title": "Bucky Dent",
     "year": "2023",
     "date": "August 4, 2023",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/bucky-dent-2023.jpg"
   },
   {
     "id": "jerry-garcia-2023",
     "title": "Jerry Garcia",
     "year": "2023",
-    "date": "August 1, 2023"
+    "date": "August 1, 2023",
+    "imageUrl": "/bobbleheads/yankees-photos/jerry-garcia-2023.jpg"
   },
   {
     "id": "nestor-cortes-2023",
     "title": "Nestor Cortes",
     "year": "2023",
     "date": "July 21, 2023",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/nestor-cortes-2023.jpg"
   },
   {
     "id": "luis-severino-2023",
     "title": "Luis Severino",
     "year": "2023",
     "date": "July 7, 2023",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/luis-severino-2023.jpg"
   },
   {
     "id": "derek-jeter-captain-america-2023",
@@ -213,13 +224,15 @@
     "nickname": "Captain America",
     "year": "2023",
     "date": "June 23, 2023",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/derek-jeter-captain-america-2023.jpg"
   },
   {
     "id": "frank-sinatra-2023",
     "title": "Frank Sinatra",
     "year": "2023",
-    "date": "June 6, 2023"
+    "date": "June 6, 2023",
+    "imageUrl": "/bobbleheads/yankees-photos/frank-sinatra-2023.jpg"
   },
   {
     "id": "anthony-rizzo-mandalorian-2023",
@@ -227,27 +240,31 @@
     "nickname": "Mandalorian",
     "year": "2023",
     "date": "May 12, 2023",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/anthony-rizzo-mandalorian-2023.jpg"
   },
   {
     "id": "satchel-paige-2023",
     "title": "Satchel Paige",
     "year": "2023",
-    "date": "May 11, 2023"
+    "date": "May 11, 2023",
+    "imageUrl": "/bobbleheads/yankees-photos/satchel-paige-2023.jpg"
   },
   {
     "id": "tino-martinez-2023",
     "title": "Tino Martinez",
     "year": "2023",
     "date": "April 14, 2023",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/tino-martinez-2023.jpg"
   },
   {
     "id": "gerrit-cole-2022",
     "title": "Gerrit Cole",
     "year": "2022",
     "date": "September 30, 2022",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/gerrit-cole-2022.jpg"
   },
   {
     "id": "john-sterling-suzyn-waldman-talking-2022",
@@ -255,14 +272,16 @@
     "nickname": "Talking",
     "year": "2022",
     "date": "August 19, 2022",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/yankees-photos/john-sterling-suzyn-waldman-talking-2022.jpg"
   },
   {
     "id": "jerry-garcia-2022",
     "title": "Jerry Garcia",
     "year": "2022",
     "date": "August 1, 2022",
-    "quantity": "1,000"
+    "quantity": "1,000",
+    "imageUrl": "/bobbleheads/yankees-photos/jerry-garcia-2022.jpg"
   },
   {
     "id": "andy-pettitte-2022",
@@ -276,7 +295,8 @@
     "title": "Aaron Judge",
     "year": "2022",
     "date": "June 3, 2022",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/aaron-judge-2022.jpg"
   },
   {
     "id": "yoda-star-wars-2022",
@@ -290,35 +310,40 @@
     "id": "scooby-doo-2022",
     "title": "Scooby-Doo",
     "year": "2022",
-    "date": "April 24, 2022"
+    "date": "April 24, 2022",
+    "imageUrl": "/bobbleheads/yankees-photos/scooby-doo-2022.jpg"
   },
   {
     "id": "elston-howard-2022",
     "title": "Elston Howard",
     "year": "2022",
     "date": "April 14, 2022",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/elston-howard-2022.jpg"
   },
   {
     "id": "don-mattingly-2021",
     "title": "Don Mattingly",
     "year": "2021",
     "date": "September 18, 2021",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/don-mattingly-2021.jpg"
   },
   {
     "id": "scooby-doo-2021",
     "title": "Scooby-Doo",
     "year": "2021",
     "date": "August 22, 2021",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/yankees-photos/scooby-doo-2021.jpg"
   },
   {
     "id": "dj-lemahieu-2021",
     "title": "DJ LeMahieu",
     "year": "2021",
     "date": "August 20, 2021",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/dj-lemahieu-2021.jpg"
   },
   {
     "id": "gerrit-cole-top-gun-2021",
@@ -326,21 +351,24 @@
     "nickname": "Top Gun",
     "year": "2021",
     "date": "August 6, 2021",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/gerrit-cole-top-gun-2021.jpg"
   },
   {
     "id": "gleyber-torres-2019",
     "title": "Gleyber Torres",
     "year": "2019",
     "date": "August 30, 2019",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/gleyber-torres-2019.jpg"
   },
   {
     "id": "david-cone-2019",
     "title": "David Cone",
     "year": "2019",
     "date": "July 18, 2019",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/david-cone-2019.jpg"
   },
   {
     "id": "mariano-rivera-captain-america-2019",
@@ -348,28 +376,32 @@
     "nickname": "Captain America",
     "year": "2019",
     "date": "July 12, 2019",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/mariano-rivera-captain-america-2019.jpg"
   },
   {
     "id": "giancarlo-stanton-2019",
     "title": "Giancarlo Stanton",
     "year": "2019",
     "date": "May 27, 2019",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/giancarlo-stanton-2019.jpg"
   },
   {
     "id": "cc-sabathia-jedi-2019",
     "title": "CC Sabathia",
     "nickname": "Jedi",
     "year": "2019",
-    "date": "May 4, 2019"
+    "date": "May 4, 2019",
+    "imageUrl": "/bobbleheads/yankees-photos/cc-sabathia-jedi-2019.jpg"
   },
   {
     "id": "bernie-williams-2019",
     "title": "Bernie Williams",
     "year": "2019",
     "date": "April 12, 2019",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/bernie-williams-2019.jpg"
   },
   {
     "id": "didi-gregorius-spring-training-2019",
@@ -383,20 +415,23 @@
     "title": "Brett Gardner",
     "year": "2018",
     "date": "August 31, 2018",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/brett-gardner-2018.jpg"
   },
   {
     "id": "cc-sabathia-2018",
     "title": "CC Sabathia",
     "year": "2018",
-    "date": "July 27, 2018"
+    "date": "July 27, 2018",
+    "imageUrl": "/bobbleheads/yankees-photos/cc-sabathia-2018.jpg"
   },
   {
     "id": "ron-guidry-2018",
     "title": "Ron Guidry",
     "year": "2018",
     "date": "June 14, 2018",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/ron-guidry-2018.jpg"
   },
   {
     "id": "aaron-judge-jedi-star-wars-2018",
@@ -404,56 +439,64 @@
     "nickname": "Jedi, Star Wars",
     "year": "2018",
     "date": "May 4, 2018",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/yankees-photos/aaron-judge-jedi-star-wars-2018.jpg"
   },
   {
     "id": "david-wells-2018",
     "title": "David Wells",
     "year": "2018",
     "date": "April 23, 2018",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/david-wells-2018.jpg"
   },
   {
     "id": "aroldis-chapman-2017",
     "title": "Aroldis Chapman",
     "year": "2017",
     "date": "August 27, 2017",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/aroldis-chapman-2017.jpg"
   },
   {
     "id": "whitey-ford-2017",
     "title": "Whitey Ford",
     "year": "2017",
     "date": "July 9, 2017",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/whitey-ford-2017.jpg"
   },
   {
     "id": "reggie-jackson-2017",
     "title": "Reggie Jackson",
     "year": "2017",
     "date": "June 9, 2017",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/reggie-jackson-2017.jpg"
   },
   {
     "id": "gary-sanchez-2017",
     "title": "Gary Sanchez",
     "year": "2017",
     "date": "April 30, 2017",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/gary-sanchez-2017.jpg"
   },
   {
     "id": "roger-maris-2016",
     "title": "Roger Maris",
     "year": "2016",
     "date": "October 1, 2016",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/roger-maris-2016.jpg"
   },
   {
     "id": "dellin-betances-2016",
     "title": "Dellin Betances",
     "year": "2016",
     "date": "September 10, 2016",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/dellin-betances-2016.jpg"
   },
   {
     "id": "peanuts-5-2016",
@@ -467,7 +510,8 @@
     "title": "Didi Gregorius",
     "year": "2016",
     "date": "August 7, 2016",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/didi-gregorius-2016.jpg"
   },
   {
     "id": "mickey-mantle-triple-crown-2016",
@@ -475,47 +519,54 @@
     "nickname": "Triple Crown",
     "year": "2016",
     "date": "June 24, 2016",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/mickey-mantle-triple-crown-2016.jpg"
   },
   {
     "id": "babe-ruth-2016",
     "title": "Babe Ruth",
     "year": "2016",
     "date": "April 23, 2016",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/babe-ruth-2016.jpg"
   },
   {
     "id": "babe-ruth-2015",
     "title": "Babe Ruth",
     "year": "2015",
-    "date": "September 10, 2015"
+    "date": "September 10, 2015",
+    "imageUrl": "/bobbleheads/yankees-photos/babe-ruth-2015.jpg"
   },
   {
     "id": "peanuts-2015",
     "title": "Peanuts",
     "year": "2015",
-    "date": "September 9, 2015"
+    "date": "September 9, 2015",
+    "imageUrl": "/bobbleheads/yankees-photos/peanuts-2015.jpg"
   },
   {
     "id": "jacoby-ellsbury-2015",
     "title": "Jacoby Ellsbury",
     "year": "2015",
     "date": "August 24, 2015",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/jacoby-ellsbury-2015.jpg"
   },
   {
     "id": "thurman-munson-2015",
     "title": "Thurman Munson",
     "year": "2015",
     "date": "June 18, 2015",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/thurman-munson-2015.jpg"
   },
   {
     "id": "masahiro-tanaka-2015",
     "title": "Masahiro Tanaka",
     "year": "2015",
     "date": "April 28, 2015",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/masahiro-tanaka-2015.jpg"
   },
   {
     "id": "lucy-peanuts-3rd-series-2014",
@@ -523,21 +574,24 @@
     "nickname": "Peanuts, 3rd Series",
     "year": "2014",
     "date": "September 9, 2014",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/lucy-peanuts-3rd-series-2014.jpg"
   },
   {
     "id": "yankees-hello-kitty-2014",
     "title": "Yankees Hello Kitty",
     "year": "2014",
     "date": "August 24, 2014",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/yankees-hello-kitty-2014.jpg"
   },
   {
     "id": "joe-girardi-2014",
     "title": "Joe Girardi",
     "year": "2014",
     "date": "August 20, 2014",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/joe-girardi-2014.jpg"
   },
   {
     "id": "paul-oneill-2014",
@@ -551,21 +605,24 @@
     "title": "Lou Gehrig",
     "year": "2014",
     "date": "July 2, 2014",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/lou-gehrig-2014.jpg"
   },
   {
     "id": "mark-teixeira-2014",
     "title": "Mark Teixeira",
     "year": "2014",
     "date": "June 19, 2014",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/mark-teixeira-2014.jpg"
   },
   {
     "id": "charlie-brown-2013",
     "title": "Charlie Brown",
     "year": "2013",
     "date": "September 25, 2013",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/charlie-brown-2013.jpg"
   },
   {
     "id": "mariano-rivera-2013",
@@ -579,14 +636,16 @@
     "title": "Yogi Berra",
     "year": "2013",
     "date": "August 30, 2013",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/yogi-berra-2013.jpg"
   },
   {
     "id": "hideki-matsui-2013",
     "title": "Hideki Matsui",
     "year": "2013",
     "date": "July 28, 2013",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/hideki-matsui-2013.jpg"
   },
   {
     "id": "derek-jeter-2013",

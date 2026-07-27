@@ -38,75 +38,86 @@
     "title": "Sugar Skull",
     "year": "2024",
     "date": "September 15, 2024",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/sugar-skull-2024.jpg"
   },
   {
     "id": "pablo-lopez-2024",
     "title": "Pablo Lopez",
     "year": "2024",
     "date": "July 6, 2024",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/pablo-lopez-2024.jpg"
   },
   {
     "id": "jhoan-duran-2024",
     "title": "Jhoan Duran",
     "year": "2024",
     "date": "May 25, 2024",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/jhoan-duran-2024.jpg"
   },
   {
     "id": "carlos-correa-2023",
     "title": "Carlos Correa",
     "year": "2023",
     "date": "July 7, 2023",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/carlos-correa-2023.jpg"
   },
   {
     "id": "joe-ryan-2023",
     "title": "Joe Ryan",
     "year": "2023",
     "date": "June 3, 2023",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/joe-ryan-2023.jpg"
   },
   {
     "id": "batman-2023",
     "title": "Batman",
     "year": "2023",
-    "date": "May 12, 2023"
+    "date": "May 12, 2023",
+    "imageUrl": "/bobbleheads/twins-photos/batman-2023.jpg"
   },
   {
     "id": "byron-buxton-2022",
     "title": "Byron Buxton",
     "year": "2022",
     "date": "August 27, 2022",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/byron-buxton-2022.jpg"
   },
   {
     "id": "tony-oliva-2022",
     "title": "Tony Oliva",
     "year": "2022",
     "date": "August 6, 2022",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/tony-oliva-2022.jpg"
   },
   {
     "id": "jim-kaat-2022",
     "title": "Jim Kaat",
     "year": "2022",
     "date": "July 16, 2022",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/jim-kaat-2022.jpg"
   },
   {
     "id": "big-bird-twins-2022",
     "title": "Big Bird",
     "nickname": "Twins",
     "year": "2022",
-    "date": "June 25, 2022"
+    "date": "June 25, 2022",
+    "imageUrl": "/bobbleheads/twins-photos/big-bird-twins-2022.jpg"
   },
   {
     "id": "mandalorian-2022",
     "title": "Mandalorian",
     "year": "2022",
-    "date": "May 11, 2022"
+    "date": "May 11, 2022",
+    "imageUrl": "/bobbleheads/twins-photos/mandalorian-2022.jpg"
   },
   {
     "id": "justin-morneau-hall-of-fame-2021",
@@ -114,7 +125,8 @@
     "nickname": "Hall of Fame",
     "year": "2021",
     "date": "September 25, 2021",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/justin-morneau-hall-of-fame-2021.jpg"
   },
   {
     "id": "josh-donaldson-bringer-of-rain-2021",
@@ -122,34 +134,39 @@
     "nickname": "\"Bringer of Rain\"",
     "year": "2021",
     "date": "July 23, 2021",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/josh-donaldson-bringer-of-rain-2021.jpg"
   },
   {
     "id": "30-hr-bomba-club-2021",
     "title": "\"30 HR Bomba Club\"",
     "nickname": "Sano, Rosario, Garver, Cruz, Kepler",
     "year": "2021",
-    "date": "July 10, 2021"
+    "date": "July 10, 2021",
+    "imageUrl": "/bobbleheads/twins-photos/30-hr-bomba-club-2021.jpg"
   },
   {
     "id": "snoopy-2019",
     "title": "Snoopy",
     "year": "2019",
-    "date": "September 12, 2019"
+    "date": "September 12, 2019",
+    "imageUrl": "/bobbleheads/twins-photos/snoopy-2019.jpg"
   },
   {
     "id": "joe-mauer-2019-9-7",
     "title": "Joe Mauer",
     "year": "2019",
     "date": "September 7, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/joe-mauer-2019-9-7.jpg"
   },
   {
     "id": "joe-mauer-2019-8-24",
     "title": "Joe Mauer",
     "year": "2019",
     "date": "August 24, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/joe-mauer-2019-8-24.jpg"
   },
   {
     "id": "joe-nathan-hall-of-fame-2019",
@@ -157,42 +174,48 @@
     "nickname": "Hall of Fame",
     "year": "2019",
     "date": "August 3, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/joe-nathan-hall-of-fame-2019.jpg"
   },
   {
     "id": "joe-mauer-2019-7-19",
     "title": "Joe Mauer",
     "year": "2019",
     "date": "July 19, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/joe-mauer-2019-7-19.jpg"
   },
   {
     "id": "tc-mascot-2019",
     "title": "T.C.",
     "nickname": "Mascot",
     "year": "2019",
-    "date": "June 27, 2019"
+    "date": "June 27, 2019",
+    "imageUrl": "/bobbleheads/twins-photos/tc-mascot-2019.jpg"
   },
   {
     "id": "obi-wan-kepleroni-2019",
     "title": "\"Obi-Wan Kepleroni\"",
     "nickname": "Max Kepler",
     "year": "2019",
-    "date": "June 26, 2019"
+    "date": "June 26, 2019",
+    "imageUrl": "/bobbleheads/twins-photos/obi-wan-kepleroni-2019.jpg"
   },
   {
     "id": "joe-mauer-2019-5-24",
     "title": "Joe Mauer",
     "year": "2019",
     "date": "May 24, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/joe-mauer-2019-5-24.jpg"
   },
   {
     "id": "jim-thome-babe-dual-2018",
     "title": "Jim Thome & Babe",
     "nickname": "Dual",
     "year": "2018",
-    "date": "August 25, 2018"
+    "date": "August 25, 2018",
+    "imageUrl": "/bobbleheads/twins-photos/jim-thome-babe-dual-2018.jpg"
   },
   {
     "id": "johan-santana-hall-of-fame-2018",
@@ -200,7 +223,8 @@
     "nickname": "Hall of Fame",
     "year": "2018",
     "date": "August 4, 2018",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/johan-santana-hall-of-fame-2018.jpg"
   },
   {
     "id": "eddie-rosario-nothing-falls-but-raindrops-2018",
@@ -208,7 +232,8 @@
     "nickname": "\"Nothing Falls But Raindrops\"",
     "year": "2018",
     "date": "July 13, 2018",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/eddie-rosario-nothing-falls-but-raindrops-2018.jpg"
   },
   {
     "id": "byron-buxton-nothing-falls-but-raindrops-2018",
@@ -216,7 +241,8 @@
     "nickname": "\"Nothing Falls But Raindrops\"",
     "year": "2018",
     "date": "June 22, 2018",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/byron-buxton-nothing-falls-but-raindrops-2018.jpg"
   },
   {
     "id": "max-kepler-nothing-falls-but-raindrops-2018",
@@ -224,14 +250,16 @@
     "nickname": "\"Nothing Falls But Raindrops\"",
     "year": "2018",
     "date": "June 1, 2018",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/max-kepler-nothing-falls-but-raindrops-2018.jpg"
   },
   {
     "id": "joe-solo-mauer-star-wars-2018",
     "title": "Joe \"Solo\" Mauer",
     "nickname": "Star Wars",
     "year": "2018",
-    "date": "May 22, 2018"
+    "date": "May 22, 2018",
+    "imageUrl": "/bobbleheads/twins-photos/joe-solo-mauer-star-wars-2018.jpg"
   },
   {
     "id": "michael-cuddyer-hall-of-fame-2017",
@@ -239,14 +267,16 @@
     "nickname": "Hall of Fame",
     "year": "2017",
     "date": "August 19, 2017",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/michael-cuddyer-hall-of-fame-2017.jpg"
   },
   {
     "id": "rod-carew-2017",
     "title": "Rod Carew",
     "year": "2017",
     "date": "August 18, 2017",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/rod-carew-2017.jpg"
   },
   {
     "id": "tc-mascot-2017",
@@ -254,27 +284,31 @@
     "nickname": "Mascot",
     "year": "2017",
     "date": "August 6, 2017",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/tc-mascot-2017.jpg"
   },
   {
     "id": "brian-dozier-stormtrooper-2017",
     "title": "Brian Dozier",
     "nickname": "Stormtrooper",
     "year": "2017",
-    "date": "June 21, 2017"
+    "date": "June 21, 2017",
+    "imageUrl": "/bobbleheads/twins-photos/brian-dozier-stormtrooper-2017.jpg"
   },
   {
     "id": "rocket-raccoon-2017",
     "title": "Rocket Raccoon",
     "year": "2017",
     "date": "May 6, 2017",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/rocket-raccoon-2017.jpg"
   },
   {
     "id": "twins-vintage-2016",
     "title": "Twins Vintage",
     "year": "2016",
-    "date": "July 31, 2016"
+    "date": "July 31, 2016",
+    "imageUrl": "/bobbleheads/twins-photos/twins-vintage-2016.jpg"
   },
   {
     "id": "torii-hunter-hall-of-fame-2016",
@@ -282,21 +316,24 @@
     "nickname": "Hall of Fame",
     "year": "2016",
     "date": "July 16, 2016",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/torii-hunter-hall-of-fame-2016.jpg"
   },
   {
     "id": "ervin-santana-2016",
     "title": "Ervin Santana",
     "year": "2016",
     "date": "July 2, 2016",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/ervin-santana-2016.jpg"
   },
   {
     "id": "miguel-sano-2016",
     "title": "Miguel Sano",
     "year": "2016",
     "date": "June 18, 2016",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/miguel-sano-2016.jpg"
   },
   {
     "id": "trevor-plouffe-skywalker-star-wars-2016",
@@ -309,28 +346,32 @@
     "id": "twins-1965-vintage-2015",
     "title": "Twins 1965 Vintage",
     "year": "2015",
-    "date": "August 1, 2015"
+    "date": "August 1, 2015",
+    "imageUrl": "/bobbleheads/twins-photos/twins-1965-vintage-2015.jpg"
   },
   {
     "id": "brian-dozier-2015",
     "title": "Brian Dozier",
     "year": "2015",
     "date": "July 25, 2015",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/brian-dozier-2015.jpg"
   },
   {
     "id": "phil-hughes-2015",
     "title": "Phil Hughes",
     "year": "2015",
     "date": "July 11, 2015",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/phil-hughes-2015.jpg"
   },
   {
     "id": "paul-molitor-2015",
     "title": "Paul Molitor",
     "year": "2015",
     "date": "June 19, 2015",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/paul-molitor-2015.jpg"
   },
   {
     "id": "phil-hughes-star-wars-2015",
@@ -346,7 +387,8 @@
     "nickname": "2014 All-Star Game",
     "year": "2014",
     "date": "September 6, 2014",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/glen-perkins-2014-all-star-game-2014.jpg"
   },
   {
     "id": "tom-brunansky-1985-all-star-game-2014",
@@ -354,14 +396,16 @@
     "nickname": "1985 All-Star Game",
     "year": "2014",
     "date": "July 5, 2014",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/tom-brunansky-1985-all-star-game-2014.jpg"
   },
   {
     "id": "lou-gehrig-2014",
     "title": "Lou Gehrig",
     "year": "2014",
     "date": "July 4, 2014",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/lou-gehrig-2014.jpg"
   },
   {
     "id": "harmon-killebrew-1965-all-star-game-2014",
@@ -369,7 +413,8 @@
     "nickname": "1965 All-Star Game",
     "year": "2014",
     "date": "June 20, 2014",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/harmon-killebrew-1965-all-star-game-2014.jpg"
   },
   {
     "id": "snoopy-all-star-game-figurine-2014",
@@ -384,7 +429,8 @@
     "nickname": "Double",
     "year": "2013",
     "date": "July 19, 2013",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/joe-mauer-justin-morneau-double-2013.jpg"
   },
   {
     "id": "josh-willingham-willing-hammer-2013",
@@ -392,7 +438,8 @@
     "nickname": "\"Willing-Hammer\"",
     "year": "2013",
     "date": "May 10, 2013",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/josh-willingham-willing-hammer-2013.jpg"
   },
   {
     "id": "ron-gant-kent-hrbek-dual-2011",

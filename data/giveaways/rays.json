@@ -28,40 +28,46 @@
     "title": "Fred McGriff",
     "year": "2024",
     "date": "September 1, 2024",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/rays-photos/fred-mcgriff-2024.jpg"
   },
   {
     "id": "peter-fairbanks-2024",
     "title": "Peter Fairbanks",
     "year": "2024",
     "date": "July 28, 2024",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/rays-photos/peter-fairbanks-2024.jpg"
   },
   {
     "id": "yandy-diaz-2024",
     "title": "Yandy Diaz",
     "year": "2024",
     "date": "June 30, 2024",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/rays-photos/yandy-diaz-2024.jpg"
   },
   {
     "id": "batman-2023",
     "title": "Batman",
     "year": "2023",
-    "date": "September 10, 2023"
+    "date": "September 10, 2023",
+    "imageUrl": "/bobbleheads/rays-photos/batman-2023.jpg"
   },
   {
     "id": "carl-crawford-mystery-3-poses-2023",
     "title": "Carl Crawford",
     "nickname": "Mystery, 3 poses",
     "year": "2023",
-    "date": "August 26, 2023"
+    "date": "August 26, 2023",
+    "imageUrl": "/bobbleheads/rays-photos/carl-crawford-mystery-3-poses-2023.jpg"
   },
   {
     "id": "shane-mcclanahan-2023",
     "title": "Shane McClanahan",
     "year": "2023",
-    "date": "August 12, 2023"
+    "date": "August 12, 2023",
+    "imageUrl": "/bobbleheads/rays-photos/shane-mcclanahan-2023.jpg"
   },
   {
     "id": "groot-2023",
@@ -74,71 +80,82 @@
     "title": "\"Zim Bear\"",
     "nickname": "Don Zimmer",
     "year": "2023",
-    "date": "April 2, 2023"
+    "date": "April 2, 2023",
+    "imageUrl": "/bobbleheads/rays-photos/zim-bear-don-zimmer-2023.jpg"
   },
   {
     "id": "wander-franco-2022",
     "title": "Wander Franco",
     "year": "2022",
-    "date": "July 16, 2022"
+    "date": "July 16, 2022",
+    "imageUrl": "/bobbleheads/rays-photos/wander-franco-2022.jpg"
   },
   {
     "id": "mike-zunino-florida-man-2022",
     "title": "Mike Zunino",
     "nickname": "\"Florida Man\"",
     "year": "2022",
-    "date": "June 21, 2022"
+    "date": "June 21, 2022",
+    "imageUrl": "/bobbleheads/rays-photos/mike-zunino-florida-man-2022.jpg"
   },
   {
     "id": "randy-arozarena-2022",
     "title": "Randy Arozarena",
     "year": "2022",
-    "date": "April 23, 2022"
+    "date": "April 23, 2022",
+    "imageUrl": "/bobbleheads/rays-photos/randy-arozarena-2022.jpg"
   },
   {
     "id": "tyler-glasnow-2021",
     "title": "Tyler Glasnow",
     "year": "2021",
-    "date": "August 21, 2021"
+    "date": "August 21, 2021",
+    "imageUrl": "/bobbleheads/rays-photos/tyler-glasnow-2021.jpg"
   },
   {
     "id": "austin-meadows-2021",
     "title": "Austin Meadows",
     "year": "2021",
-    "date": "July 6, 2021"
+    "date": "July 6, 2021",
+    "imageUrl": "/bobbleheads/rays-photos/austin-meadows-2021.jpg"
   },
   {
     "id": "brandon-lowe-delayed-2021",
     "title": "Brandon Lowe",
     "nickname": "Delayed",
     "year": "2021",
-    "date": "June 26, 2021"
+    "date": "June 26, 2021",
+    "imageUrl": "/bobbleheads/rays-photos/brandon-lowe-delayed-2021.jpg"
   },
   {
     "id": "willy-adames-audio-2021",
     "title": "Willy Adames",
     "nickname": "Audio",
     "year": "2021",
-    "date": "June 9, 2021"
+    "date": "June 9, 2021",
+    "imageUrl": "/bobbleheads/rays-photos/willy-adames-audio-2021.jpg"
   },
   {
     "id": "willy-adames-2019",
     "title": "Willy Adames",
     "year": "2019",
-    "date": "August 17, 2019"
+    "date": "August 17, 2019",
+    "imageUrl": "/bobbleheads/rays-photos/willy-adames-2019.jpg"
   },
   {
     "id": "tommy-pham-2019",
     "title": "Tommy Pham",
     "year": "2019",
-    "date": "June 1, 2019"
+    "date": "June 1, 2019",
+    "imageUrl": "/bobbleheads/rays-photos/tommy-pham-2019.jpg"
   },
   {
     "id": "blake-snell-cy-zilla-2019",
     "title": "Blake Snell",
     "nickname": "\"Cy Zilla\"",
     "year": "2019",
-    "date": "March 30, 2019"
+    "date": "March 30, 2019",
+    "imageUrl": "/bobbleheads/rays-photos/blake-snell-cy-zilla-2019.jpg"
   },
   {
     "id": "jake-bauers-willy-adames-double-season-ticket-holders-2019",
@@ -158,31 +175,36 @@
     "id": "dan-johnson-2018",
     "title": "Dan Johnson",
     "year": "2018",
-    "date": "September 29, 2018"
+    "date": "September 29, 2018",
+    "imageUrl": "/bobbleheads/rays-photos/dan-johnson-2018.jpg"
   },
   {
     "id": "wade-boggs-2018",
     "title": "Wade Boggs",
     "year": "2018",
-    "date": "August 25, 2018"
+    "date": "August 25, 2018",
+    "imageUrl": "/bobbleheads/rays-photos/wade-boggs-2018.jpg"
   },
   {
     "id": "akinori-iwamura-2018",
     "title": "Akinori Iwamura",
     "year": "2018",
-    "date": "August 4, 2018"
+    "date": "August 4, 2018",
+    "imageUrl": "/bobbleheads/rays-photos/akinori-iwamura-2018.jpg"
   },
   {
     "id": "fred-mcgriff-tino-martinez-2018",
     "title": "Fred McGriff & Tino Martinez",
     "year": "2018",
-    "date": "June 9, 2018"
+    "date": "June 9, 2018",
+    "imageUrl": "/bobbleheads/rays-photos/fred-mcgriff-tino-martinez-2018.jpg"
   },
   {
     "id": "carl-crawford-2018",
     "title": "Carl Crawford",
     "year": "2018",
-    "date": "April 14, 2018"
+    "date": "April 14, 2018",
+    "imageUrl": "/bobbleheads/rays-photos/carl-crawford-2018.jpg"
   },
   {
     "id": "evan-longoria-fan-fest-game-162-2018",
@@ -196,7 +218,8 @@
     "title": "Blake Snell",
     "year": "2017",
     "date": "September 16, 2017",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rays-photos/blake-snell-2017.jpg"
   },
   {
     "id": "iron-man-marvel-2017",
@@ -204,7 +227,8 @@
     "nickname": "Marvel",
     "year": "2017",
     "date": "August 5, 2017",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rays-photos/iron-man-marvel-2017.jpg"
   },
   {
     "id": "evan-longoria-game-of-thrones-2017",
@@ -212,7 +236,8 @@
     "nickname": "Game of Thrones",
     "year": "2017",
     "date": "July 8, 2017",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rays-photos/evan-longoria-game-of-thrones-2017.jpg"
   },
   {
     "id": "kevin-kiermaier-star-wars-2017",
@@ -220,7 +245,8 @@
     "nickname": "Star Wars",
     "year": "2017",
     "date": "June 24, 2017",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rays-photos/kevin-kiermaier-star-wars-2017.jpg"
   },
   {
     "id": "matt-duffy-double-play-2017",
@@ -228,54 +254,62 @@
     "nickname": "Double Play",
     "year": "2017",
     "date": "June 10, 2017",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rays-photos/matt-duffy-double-play-2017.jpg"
   },
   {
     "id": "logan-forsythe-2016",
     "title": "Logan Forsythe",
     "year": "2016",
-    "date": "September 3, 2016"
+    "date": "September 3, 2016",
+    "imageUrl": "/bobbleheads/rays-photos/logan-forsythe-2016.jpg"
   },
   {
     "id": "raymond-dj-kitty-double-2016",
     "title": "Raymond & DJ Kitty",
     "nickname": "Double",
     "year": "2016",
-    "date": "August 21, 2016"
+    "date": "August 21, 2016",
+    "imageUrl": "/bobbleheads/rays-photos/raymond-dj-kitty-double-2016.jpg"
   },
   {
     "id": "kevin-kiermaier-claus-2016",
     "title": "Kevin Kiermaier",
     "nickname": "\"Claus\"",
     "year": "2016",
-    "date": "July 17, 2016"
+    "date": "July 17, 2016",
+    "imageUrl": "/bobbleheads/rays-photos/kevin-kiermaier-claus-2016.jpg"
   },
   {
     "id": "chris-archer-stormtrooper-2016",
     "title": "Chris Archer",
     "nickname": "Stormtrooper",
     "year": "2016",
-    "date": "June 11, 2016"
+    "date": "June 11, 2016",
+    "imageUrl": "/bobbleheads/rays-photos/chris-archer-stormtrooper-2016.jpg"
   },
   {
     "id": "chris-archer-k-counter-2016",
     "title": "Chris Archer",
     "nickname": "K-Counter",
     "year": "2016",
-    "date": "April 30, 2016"
+    "date": "April 30, 2016",
+    "imageUrl": "/bobbleheads/rays-photos/chris-archer-k-counter-2016.jpg"
   },
   {
     "id": "kevin-kiermaier-platinum-glove-2016",
     "title": "Kevin Kiermaier",
     "nickname": "Platinum Glove",
     "year": "2016",
-    "date": "April 16, 2016"
+    "date": "April 16, 2016",
+    "imageUrl": "/bobbleheads/rays-photos/kevin-kiermaier-platinum-glove-2016.jpg"
   },
   {
     "id": "jake-odorizzi-2015",
     "title": "Jake Odorizzi",
     "year": "2015",
-    "date": "September 19, 2015"
+    "date": "September 19, 2015",
+    "imageUrl": "/bobbleheads/rays-photos/jake-odorizzi-2015.jpg"
   },
   {
     "id": "han-longo-evan-longoria-star-wars-2015",
@@ -289,13 +323,15 @@
     "title": "Evan Longoria",
     "nickname": "Walkup Music",
     "year": "2015",
-    "date": "May 9, 2015"
+    "date": "May 9, 2015",
+    "imageUrl": "/bobbleheads/rays-photos/evan-longoria-walkup-music-2015.jpg"
   },
   {
     "id": "chris-archer-2015",
     "title": "Chris Archer",
     "year": "2015",
-    "date": "April 25, 2015"
+    "date": "April 25, 2015",
+    "imageUrl": "/bobbleheads/rays-photos/chris-archer-2015.jpg"
   },
   {
     "id": "evan-longoria-80s-hair-band-2014",
@@ -303,7 +339,8 @@
     "nickname": "'80s Hair Band",
     "year": "2014",
     "date": "September 6, 2014",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rays-photos/evan-longoria-80s-hair-band-2014.jpg"
   },
   {
     "id": "wil-myers-star-wars-2014",
@@ -311,20 +348,23 @@
     "nickname": "Star Wars",
     "year": "2014",
     "date": "August 30, 2014",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rays-photos/wil-myers-star-wars-2014.jpg"
   },
   {
     "id": "mr-happy-2014",
     "title": "\"Mr. Happy\"",
     "year": "2014",
-    "date": "August 17, 2014"
+    "date": "August 17, 2014",
+    "imageUrl": "/bobbleheads/rays-photos/mr-happy-2014.jpg"
   },
   {
     "id": "alex-cobb-military-themed-2014",
     "title": "Alex Cobb",
     "nickname": "Military Themed",
     "year": "2014",
-    "date": "May 23, 2014"
+    "date": "May 23, 2014",
+    "imageUrl": "/bobbleheads/rays-photos/alex-cobb-military-themed-2014.jpg"
   },
   {
     "id": "wil-myers-rookie-of-the-year-2014",
@@ -339,7 +379,8 @@
     "title": "Raymond",
     "nickname": "\"Bobble Belly\"",
     "year": "2013",
-    "date": "September 22, 2013"
+    "date": "September 22, 2013",
+    "imageUrl": "/bobbleheads/rays-photos/raymond-bobble-belly-2013.jpg"
   },
   {
     "id": "ben-zobrist-jedi-zo-star-wars-2013",

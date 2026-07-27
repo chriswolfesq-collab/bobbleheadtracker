@@ -12,7 +12,8 @@
     "nickname": "Star Wars",
     "year": "2024",
     "date": "June 15, 2024",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/brewers-photos/sal-frelick-star-wars-2024.jpg"
   },
   {
     "id": "bernies-chalet-snow-globe-2024",
@@ -199,7 +200,8 @@
     "nickname": "1990s",
     "year": "2021",
     "date": "July 11, 2021",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/robin-yount-1990s-2021.jpg"
   },
   {
     "id": "paul-molitor-1980s-2021",
@@ -363,7 +365,8 @@
     "title": "Bernie Brewer",
     "nickname": "Yarn, Mini",
     "year": "2018",
-    "date": "June 11, 2018"
+    "date": "June 11, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/bernie-brewer-yarn-mini-2018.jpg"
   },
   {
     "id": "travis-shaw-mayor-of-ding-dong-city-2018",
@@ -423,7 +426,8 @@
     "title": "Bernie Brewer",
     "nickname": "Iron Throne",
     "year": "2017",
-    "date": "August 15, 2017"
+    "date": "August 15, 2017",
+    "imageUrl": "/bobbleheads/brewers-photos/bernie-brewer-iron-throne-2017.jpg"
   },
   {
     "id": "zach-davies-2017",
@@ -479,7 +483,8 @@
     "id": "craig-counsell-2016",
     "title": "Craig Counsell",
     "year": "2016",
-    "date": "August 14, 2016"
+    "date": "August 14, 2016",
+    "imageUrl": "/bobbleheads/brewers-photos/craig-counsell-2016.jpg"
   },
   {
     "id": "jimmy-nelson-2016",
@@ -500,7 +505,8 @@
     "id": "greg-vaughn-2016",
     "title": "Greg Vaughn",
     "year": "2016",
-    "date": "June 26, 2016"
+    "date": "June 26, 2016",
+    "imageUrl": "/bobbleheads/brewers-photos/greg-vaughn-2016.jpg"
   },
   {
     "id": "hank-barking-2016",
@@ -734,7 +740,8 @@
     "id": "gorman-thomas-2013",
     "title": "Gorman Thomas",
     "year": "2013",
-    "date": "September 1, 2013"
+    "date": "September 1, 2013",
+    "imageUrl": "/bobbleheads/brewers-photos/gorman-thomas-2013.jpg"
   },
   {
     "id": "harvey-kuenn-2013",

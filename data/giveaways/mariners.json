@@ -55,13 +55,15 @@
     "nickname": "Dominican Republic",
     "year": "2023",
     "date": "September 11, 2023",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/julio-rodriguez-dominican-republic-2023.jpg"
   },
   {
     "id": "charlie-brown-2023",
     "title": "Charlie Brown",
     "year": "2023",
-    "date": "August 29, 2023"
+    "date": "August 29, 2023",
+    "imageUrl": "/bobbleheads/mariners-photos/charlie-brown-2023.jpg"
   },
   {
     "id": "felix-hernandez-2023",
@@ -80,21 +82,24 @@
     "id": "wonder-woman-2023",
     "title": "Wonder Woman",
     "year": "2023",
-    "date": "July 19, 2023"
+    "date": "July 19, 2023",
+    "imageUrl": "/bobbleheads/mariners-photos/wonder-woman-2023.jpg"
   },
   {
     "id": "ty-france-2023",
     "title": "Ty France",
     "year": "2023",
     "date": "July 18, 2023",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/ty-france-2023.jpg"
   },
   {
     "id": "logan-gilbert-indiana-jones-2023",
     "title": "Logan Gilbert",
     "nickname": "Indiana Jones",
     "year": "2023",
-    "date": "June 26, 2023"
+    "date": "June 26, 2023",
+    "imageUrl": "/bobbleheads/mariners-photos/logan-gilbert-indiana-jones-2023.jpg"
   },
   {
     "id": "cal-raleigh-superman-2023",
@@ -102,7 +107,8 @@
     "nickname": "Superman",
     "year": "2023",
     "date": "May 8, 2023",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/cal-raleigh-superman-2023.jpg"
   },
   {
     "id": "cal-raleigh-the-clinch-2023",
@@ -110,34 +116,39 @@
     "nickname": "\"The Clinch\"",
     "year": "2023",
     "date": "April 14, 2023",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/cal-raleigh-the-clinch-2023.jpg"
   },
   {
     "id": "julio-rodriguez-2023",
     "title": "Julio Rodriguez",
     "year": "2023",
     "date": "April 1, 2023",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/julio-rodriguez-2023.jpg"
   },
   {
     "id": "ichiro-suzuki-2022",
     "title": "Ichiro Suzuki",
     "year": "2022",
     "date": "August 28, 2022",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/ichiro-suzuki-2022.jpg"
   },
   {
     "id": "batman-2022",
     "title": "Batman",
     "year": "2022",
-    "date": "May 6, 2022"
+    "date": "May 6, 2022",
+    "imageUrl": "/bobbleheads/mariners-photos/batman-2022.jpg"
   },
   {
     "id": "jp-crawford-2022",
     "title": "J.P. Crawford",
     "year": "2022",
     "date": "May 6, 2022",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/jp-crawford-2022.jpg"
   },
   {
     "id": "ken-griffey-jr-42-2022",
@@ -145,7 +156,8 @@
     "nickname": "\"42\"",
     "year": "2022",
     "date": "April 16, 2022",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/ken-griffey-jr-42-2022.jpg"
   },
   {
     "id": "marco-gonzales-2021",
@@ -160,14 +172,16 @@
     "nickname": "Hall of Fame",
     "year": "2019",
     "date": "August 9, 2019",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/mariners-photos/edgar-martinez-hall-of-fame-2019.jpg"
   },
   {
     "id": "fred-hutchinson-2019",
     "title": "Fred Hutchinson",
     "year": "2019",
     "date": "July 7, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/mariners-photos/fred-hutchinson-2019.jpg"
   },
   {
     "id": "ken-griffey-jr-rookie-year-2019",
@@ -175,14 +189,16 @@
     "nickname": "\"Rookie Year\"",
     "year": "2019",
     "date": "May 18, 2019",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/ken-griffey-jr-rookie-year-2019.jpg"
   },
   {
     "id": "mitch-haniger-2019",
     "title": "Mitch Haniger",
     "year": "2019",
     "date": "May 16, 2019",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/mitch-haniger-2019.jpg"
   },
   {
     "id": "mitch-haniger-five-tool-2019",
@@ -190,14 +206,16 @@
     "nickname": "\"Five-Tool\"",
     "year": "2019",
     "date": "April 27, 2019",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/mitch-haniger-five-tool-2019.jpg"
   },
   {
     "id": "dee-gordon-2018",
     "title": "Dee Gordon",
     "year": "2018",
     "date": "July 21, 2018",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/dee-gordon-2018.jpg"
   },
   {
     "id": "james-paxton-big-maple-2018",
@@ -205,7 +223,8 @@
     "nickname": "\"Big Maple\"",
     "year": "2018",
     "date": "July 1, 2018",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/james-paxton-big-maple-2018.jpg"
   },
   {
     "id": "felix-hernandez-infield-grass-2018",
@@ -219,63 +238,72 @@
     "id": "chewbacca-2018",
     "title": "Chewbacca",
     "year": "2018",
-    "date": "May 4, 2018"
+    "date": "May 4, 2018",
+    "imageUrl": "/bobbleheads/mariners-photos/chewbacca-2018.jpg"
   },
   {
     "id": "han-seago-star-wars-2018",
     "title": "\"Han Seago\"",
     "nickname": "Star Wars",
     "year": "2018",
-    "date": "May 4, 2018"
+    "date": "May 4, 2018",
+    "imageUrl": "/bobbleheads/mariners-photos/han-seago-star-wars-2018.jpg"
   },
   {
     "id": "robinson-cano-2018",
     "title": "Robinson Cano",
     "year": "2018",
     "date": "March 31, 2018",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/robinson-cano-2018.jpg"
   },
   {
     "id": "robinson-cano-2017",
     "title": "Robinson Cano",
     "year": "2017",
     "date": "September 9, 2017",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/robinson-cano-2017.jpg"
   },
   {
     "id": "edgar-martinez-2017",
     "title": "Edgar Martinez",
     "year": "2017",
     "date": "August 11, 2017",
-    "quantity": "45,000"
+    "quantity": "45,000",
+    "imageUrl": "/bobbleheads/mariners-photos/edgar-martinez-2017.jpg"
   },
   {
     "id": "kyle-seager-2017",
     "title": "Kyle Seager",
     "year": "2017",
     "date": "July 8, 2017",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/kyle-seager-2017.jpg"
   },
   {
     "id": "nelson-cruz-2017",
     "title": "Nelson Cruz",
     "year": "2017",
     "date": "June 3, 2017",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/nelson-cruz-2017.jpg"
   },
   {
     "id": "jay-buhner-2017",
     "title": "Jay Buhner",
     "year": "2017",
     "date": "May 20, 2017",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/jay-buhner-2017.jpg"
   },
   {
     "id": "felix-hernandez-2017",
     "title": "Felix Hernandez",
     "year": "2017",
     "date": "May 6, 2017",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/felix-hernandez-2017.jpg"
   },
   {
     "id": "ichiro-dual-2017",
@@ -283,7 +311,8 @@
     "nickname": "Dual",
     "year": "2017",
     "date": "April 19, 2017",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/ichiro-dual-2017.jpg"
   },
   {
     "id": "taijuan-walker-sky-walker-2016",
@@ -291,7 +320,8 @@
     "nickname": "\"Sky Walker\"",
     "year": "2016",
     "date": "August 21, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/taijuan-walker-sky-walker-2016.jpg"
   },
   {
     "id": "ken-griffey-jr-hall-of-fame-2016",
@@ -299,28 +329,32 @@
     "nickname": "Hall of Fame",
     "year": "2016",
     "date": "August 5, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/ken-griffey-jr-hall-of-fame-2016.jpg"
   },
   {
     "id": "robinson-cano-2016",
     "title": "Robinson Cano",
     "year": "2016",
     "date": "July 16, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/robinson-cano-2016.jpg"
   },
   {
     "id": "felix-hernandez-2016",
     "title": "Felix Hernandez",
     "year": "2016",
     "date": "June 24, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/felix-hernandez-2016.jpg"
   },
   {
     "id": "kyle-seager-2016",
     "title": "Kyle Seager",
     "year": "2016",
     "date": "May 14, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/kyle-seager-2016.jpg"
   },
   {
     "id": "nelson-cruz-boomstick-2016",
@@ -328,56 +362,64 @@
     "nickname": "\"Boomstick\"",
     "year": "2016",
     "date": "April 30, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/nelson-cruz-boomstick-2016.jpg"
   },
   {
     "id": "robinson-cano-2015",
     "title": "Robinson Cano",
     "year": "2015",
     "date": "August 22, 2015",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/robinson-cano-2015.jpg"
   },
   {
     "id": "jamie-moyer-2015",
     "title": "Jamie Moyer",
     "year": "2015",
     "date": "August 8, 2015",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/jamie-moyer-2015.jpg"
   },
   {
     "id": "nelson-cruz-2015",
     "title": "Nelson Cruz",
     "year": "2015",
     "date": "July 11, 2015",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/nelson-cruz-2015.jpg"
   },
   {
     "id": "kyle-seager-2015",
     "title": "Kyle Seager",
     "year": "2015",
     "date": "June 2, 2015",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/kyle-seager-2015.jpg"
   },
   {
     "id": "fernando-rodney-2015",
     "title": "Fernando Rodney",
     "year": "2015",
     "date": "May 9, 2015",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/fernando-rodney-2015.jpg"
   },
   {
     "id": "felix-hernandez-2015",
     "title": "Felix Hernandez",
     "year": "2015",
     "date": "April 18, 2015",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/felix-hernandez-2015.jpg"
   },
   {
     "id": "felix-hernandez-2014",
     "title": "Felix Hernandez",
     "year": "2014",
     "date": "August 30, 2014",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/felix-hernandez-2014.jpg"
   },
   {
     "id": "lou-piniella-hall-of-fame-2014",
@@ -385,14 +427,16 @@
     "nickname": "Hall of Fame",
     "year": "2014",
     "date": "August 9, 2014",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/lou-piniella-hall-of-fame-2014.jpg"
   },
   {
     "id": "hisashi-iwakuma-2014",
     "title": "Hisashi Iwakuma",
     "year": "2014",
     "date": "July 12, 2014",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/hisashi-iwakuma-2014.jpg"
   },
   {
     "id": "macklemore-2014",
@@ -407,7 +451,8 @@
     "title": "Robinson Cano",
     "year": "2014",
     "date": "May 31, 2014",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/robinson-cano-2014.jpg"
   },
   {
     "id": "ken-griffey-jr-hall-of-fame-2013",
@@ -423,7 +468,8 @@
     "nickname": "\"Perfect Game\"",
     "year": "2013",
     "date": "May 25, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/felix-hernandez-perfect-game-2013.jpg"
   },
   {
     "id": "randy-johnson-dan-wilson-dual-2012",

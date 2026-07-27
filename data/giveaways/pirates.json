@@ -37,14 +37,16 @@
     "title": "Mitch Keller",
     "year": "2024",
     "date": "May 4, 2024",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/mitch-keller-2024.jpg"
   },
   {
     "id": "dave-parker-2024",
     "title": "Dave Parker",
     "year": "2024",
     "date": "May 25, 2024",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/dave-parker-2024.jpg"
   },
   {
     "id": "andrew-mccutchen-2024",
@@ -65,7 +67,8 @@
     "title": "Bryan Reynolds",
     "year": "2022",
     "date": "June 18, 2022",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/bryan-reynolds-2022.jpg"
   },
   {
     "id": "bill-mazeroski-gold-glove-2022",
@@ -73,7 +76,8 @@
     "nickname": "Gold Glove",
     "year": "2022",
     "date": "July 5, 2022",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/bill-mazeroski-gold-glove-2022.jpg"
   },
   {
     "id": "doug-drabek-cy-young-2022",
@@ -81,7 +85,8 @@
     "nickname": "Cy Young",
     "year": "2022",
     "date": "September 24, 2022",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/doug-drabek-cy-young-2022.jpg"
   },
   {
     "id": "wonder-woman-2021",
@@ -102,21 +107,24 @@
     "title": "Chris Archer",
     "year": "2019",
     "date": "June 1, 2019",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/chris-archer-2019.jpg"
   },
   {
     "id": "vintage-bobblehead-2019",
     "title": "Vintage Bobblehead",
     "year": "2019",
     "date": "July 20, 2019",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/vintage-bobblehead-2019.jpg"
   },
   {
     "id": "spider-man-2019",
     "title": "Spider-Man",
     "year": "2019",
     "date": "September 7, 2019",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/spider-man-2019.jpg"
   },
   {
     "id": "steve-blass-dual-player-broadcaster-2019",
@@ -124,13 +132,15 @@
     "nickname": "Dual Player/Broadcaster",
     "year": "2019",
     "date": "September 28, 2019",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/steve-blass-dual-player-broadcaster-2019.jpg"
   },
   {
     "id": "pirates-vintage-2018",
     "title": "Pirates Vintage",
     "year": "2018",
-    "date": "May 19, 2018"
+    "date": "May 19, 2018",
+    "imageUrl": "/bobbleheads/pirates-photos/pirates-vintage-2018.jpg"
   },
   {
     "id": "sean-rodriguez-walk-off-2018",
@@ -138,35 +148,40 @@
     "nickname": "Walk-Off",
     "year": "2018",
     "date": "June 23, 2018",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/sean-rodriguez-walk-off-2018.jpg"
   },
   {
     "id": "josh-bell-2018",
     "title": "Josh Bell",
     "year": "2018",
     "date": "July 14, 2018",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/josh-bell-2018.jpg"
   },
   {
     "id": "hulk-kids-2018",
     "title": "Hulk",
     "nickname": "Kids",
     "year": "2018",
-    "date": "July 29, 2018"
+    "date": "July 29, 2018",
+    "imageUrl": "/bobbleheads/pirates-photos/hulk-kids-2018.jpg"
   },
   {
     "id": "andy-van-slyke-2018",
     "title": "Andy Van Slyke",
     "year": "2018",
     "date": "August 4, 2018",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/andy-van-slyke-2018.jpg"
   },
   {
     "id": "felipe-vazquez-2018",
     "title": "Felipe Vazquez",
     "year": "2018",
     "date": "September 8, 2018",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/felipe-vazquez-2018.jpg"
   },
   {
     "id": "francisco-cervelli-thats-amore-singing-2017",
@@ -174,62 +189,71 @@
     "nickname": "\"That's Amore\" Singing",
     "year": "2017",
     "date": "April 8, 2017",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/francisco-cervelli-thats-amore-singing-2017.jpg"
   },
   {
     "id": "jordy-mercer-2017",
     "title": "Jordy Mercer",
     "year": "2017",
     "date": "June 17, 2017",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/jordy-mercer-2017.jpg"
   },
   {
     "id": "charlie-brown-2017",
     "title": "Charlie Brown",
     "year": "2017",
     "date": "August 3, 2017",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/charlie-brown-2017.jpg"
   },
   {
     "id": "gregory-polanco-el-coffee-2017",
     "title": "Gregory Polanco",
     "nickname": "\"El Coffee\"",
     "year": "2017",
-    "date": "August 19, 2017"
+    "date": "August 19, 2017",
+    "imageUrl": "/bobbleheads/pirates-photos/gregory-polanco-el-coffee-2017.jpg"
   },
   {
     "id": "raise-the-jolly-roger-2016",
     "title": "\"Raise the Jolly Roger\"",
     "year": "2016",
-    "date": "May 21, 2016"
+    "date": "May 21, 2016",
+    "imageUrl": "/bobbleheads/pirates-photos/raise-the-jolly-roger-2016.jpg"
   },
   {
     "id": "gerrit-cole-2016",
     "title": "Gerrit Cole",
     "year": "2016",
     "date": "June 23, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/gerrit-cole-2016.jpg"
   },
   {
     "id": "jung-ho-kang-2016",
     "title": "Jung Ho Kang",
     "year": "2016",
     "date": "August 11, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/jung-ho-kang-2016.jpg"
   },
   {
     "id": "josh-harrison-2015",
     "title": "Josh Harrison",
     "year": "2015",
     "date": "May 23, 2015",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/josh-harrison-2015.jpg"
   },
   {
     "id": "starling-marte-2015",
     "title": "Starling Marte",
     "year": "2015",
     "date": "June 27, 2015",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/starling-marte-2015.jpg"
   },
   {
     "id": "pedro-alvarez-silver-slugger-2014",
@@ -245,14 +269,16 @@
     "nickname": "N.L. MVP",
     "year": "2014",
     "date": "June 28, 2014",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/pirates-photos/andrew-mccutchen-nl-mvp-2014.jpg"
   },
   {
     "id": "honus-wagner-2014",
     "title": "Honus Wagner",
     "year": "2014",
     "date": "August 12, 2014",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/pirates-photos/honus-wagner-2014.jpg"
   },
   {
     "id": "andrew-mccutchen-awards-2013",
@@ -268,7 +294,8 @@
     "nickname": "Camo Jersey",
     "year": "2013",
     "date": "May 18, 2013",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/pirates-photos/aj-burnett-camo-jersey-2013.jpg"
   },
   {
     "id": "joel-hanrahan-2012",

@@ -35,25 +35,29 @@
     "title": "Ranger Suarez",
     "nickname": "Mandalorian",
     "year": "2024",
-    "date": "August 26, 2024"
+    "date": "August 26, 2024",
+    "imageUrl": "/bobbleheads/phillies-photos/ranger-suarez-mandalorian-2024.jpg"
   },
   {
     "id": "trea-turner-2024",
     "title": "Trea Turner",
     "year": "2024",
-    "date": "July 26, 2024"
+    "date": "July 26, 2024",
+    "imageUrl": "/bobbleheads/phillies-photos/trea-turner-2024.jpg"
   },
   {
     "id": "bryson-stott-2024",
     "title": "Bryson Stott",
     "year": "2024",
-    "date": "May 17, 2024"
+    "date": "May 17, 2024",
+    "imageUrl": "/bobbleheads/phillies-photos/bryson-stott-2024.jpg"
   },
   {
     "id": "peppermint-patty-2023",
     "title": "Peppermint Patty",
     "year": "2023",
-    "date": "September 8, 2023"
+    "date": "September 8, 2023",
+    "imageUrl": "/bobbleheads/phillies-photos/peppermint-patty-2023.jpg"
   },
   {
     "id": "kyle-schwarber-2023",
@@ -72,25 +76,29 @@
     "title": "Rob Thomson",
     "nickname": "\"Papa Elf\"",
     "year": "2023",
-    "date": "July 25, 2023"
+    "date": "July 25, 2023",
+    "imageUrl": "/bobbleheads/phillies-photos/rob-thomson-papa-elf-2023.jpg"
   },
   {
     "id": "dick-allen-2023",
     "title": "Dick Allen",
     "year": "2023",
-    "date": "June 9, 2023"
+    "date": "June 9, 2023",
+    "imageUrl": "/bobbleheads/phillies-photos/dick-allen-2023.jpg"
   },
   {
     "id": "lucy-2022",
     "title": "Lucy",
     "year": "2022",
-    "date": "August 22, 2022"
+    "date": "August 22, 2022",
+    "imageUrl": "/bobbleheads/phillies-photos/lucy-2022.jpg"
   },
   {
     "id": "bryce-harper-2022",
     "title": "Bryce Harper",
     "year": "2022",
-    "date": "June 10, 2022"
+    "date": "June 10, 2022",
+    "imageUrl": "/bobbleheads/phillies-photos/bryce-harper-2022.jpg"
   },
   {
     "id": "miles-teller-rooster-2022",
@@ -98,14 +106,16 @@
     "nickname": "Rooster",
     "year": "2022",
     "date": "June 1, 2022",
-    "quantity": "1,500"
+    "quantity": "1,500",
+    "imageUrl": "/bobbleheads/phillies-photos/miles-teller-rooster-2022.jpg"
   },
   {
     "id": "scooby-doo-2021",
     "title": "Scooby-Doo",
     "year": "2021",
     "date": "August 24, 2021",
-    "quantity": "2,500"
+    "quantity": "2,500",
+    "imageUrl": "/bobbleheads/phillies-photos/scooby-doo-2021.jpg"
   },
   {
     "id": "schroeder-peanuts-2021",
@@ -113,79 +123,91 @@
     "nickname": "Peanuts",
     "year": "2021",
     "date": "May 4, 2021",
-    "quantity": "3,000"
+    "quantity": "3,000",
+    "imageUrl": "/bobbleheads/phillies-photos/schroeder-peanuts-2021.jpg"
   },
   {
     "id": "mystery-bobblehead-2021",
     "title": "Mystery Bobblehead",
     "year": "2021",
-    "date": "April 7, 2021"
+    "date": "April 7, 2021",
+    "imageUrl": "/bobbleheads/phillies-photos/mystery-bobblehead-2021.jpg"
   },
   {
     "id": "aaron-nola-bobble-figurine-2019",
     "title": "Aaron Nola",
     "nickname": "Bobble Figurine",
     "year": "2019",
-    "date": "August 18, 2019"
+    "date": "August 18, 2019",
+    "imageUrl": "/bobbleheads/phillies-photos/aaron-nola-bobble-figurine-2019.jpg"
   },
   {
     "id": "spider-man-2019",
     "title": "Spider-Man",
     "year": "2019",
-    "date": "August 16, 2019"
+    "date": "August 16, 2019",
+    "imageUrl": "/bobbleheads/phillies-photos/spider-man-2019.jpg"
   },
   {
     "id": "linus-2019",
     "title": "Linus",
     "year": "2019",
     "date": "July 31, 2019",
-    "quantity": "3,000"
+    "quantity": "3,000",
+    "imageUrl": "/bobbleheads/phillies-photos/linus-2019.jpg"
   },
   {
     "id": "jake-arrieta-jedi-bobble-figurine-2019",
     "title": "Jake Arrieta",
     "nickname": "Jedi, Bobble Figurine",
     "year": "2019",
-    "date": "July 17, 2019"
+    "date": "July 17, 2019",
+    "imageUrl": "/bobbleheads/phillies-photos/jake-arrieta-jedi-bobble-figurine-2019.jpg"
   },
   {
     "id": "ryan-howard-2019",
     "title": "Ryan Howard",
     "year": "2019",
-    "date": "July 14, 2019"
+    "date": "July 14, 2019",
+    "imageUrl": "/bobbleheads/phillies-photos/ryan-howard-2019.jpg"
   },
   {
     "id": "chase-utley-bobble-figurine-2019",
     "title": "Chase Utley",
     "nickname": "Bobble Figurine",
     "year": "2019",
-    "date": "June 21, 2019"
+    "date": "June 21, 2019",
+    "imageUrl": "/bobbleheads/phillies-photos/chase-utley-bobble-figurine-2019.jpg"
   },
   {
     "id": "seranthony-dominguez-bobble-figurine-2019",
     "title": "Seranthony Dominguez",
     "nickname": "Bobble Figurine",
     "year": "2019",
-    "date": "May 13, 2019"
+    "date": "May 13, 2019",
+    "imageUrl": "/bobbleheads/phillies-photos/seranthony-dominguez-bobble-figurine-2019.jpg"
   },
   {
     "id": "hulk-2018",
     "title": "Hulk",
     "year": "2018",
     "date": "August 29, 2018",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/phillies-photos/hulk-2018.jpg"
   },
   {
     "id": "brad-lidge-2018",
     "title": "Brad Lidge",
     "year": "2018",
-    "date": "August 5, 2018"
+    "date": "August 5, 2018",
+    "imageUrl": "/bobbleheads/phillies-photos/brad-lidge-2018.jpg"
   },
   {
     "id": "snoopy-2018",
     "title": "Snoopy",
     "year": "2018",
-    "date": "July 3, 2018"
+    "date": "July 3, 2018",
+    "imageUrl": "/bobbleheads/phillies-photos/snoopy-2018.jpg"
   },
   {
     "id": "phanatic-iron-throne-2018",
@@ -193,27 +215,31 @@
     "nickname": "Iron Throne",
     "year": "2018",
     "date": "June 18, 2018",
-    "quantity": "3,500"
+    "quantity": "3,500",
+    "imageUrl": "/bobbleheads/phillies-photos/phanatic-iron-throne-2018.jpg"
   },
   {
     "id": "ham-porter-2018",
     "title": "\"Ham\" Porter",
     "year": "2018",
     "date": "June 9, 2018",
-    "quantity": "2,500"
+    "quantity": "2,500",
+    "imageUrl": "/bobbleheads/phillies-photos/ham-porter-2018.jpg"
   },
   {
     "id": "han-nola-aaron-nola-star-wars-2018",
     "title": "\"Han Nola\"",
     "nickname": "Aaron Nola, Star Wars",
     "year": "2018",
-    "date": "May 23, 2018"
+    "date": "May 23, 2018",
+    "imageUrl": "/bobbleheads/phillies-photos/han-nola-aaron-nola-star-wars-2018.jpg"
   },
   {
     "id": "star-trek-2017",
     "title": "Star Trek",
     "year": "2017",
-    "date": "September 26, 2017"
+    "date": "September 26, 2017",
+    "imageUrl": "/bobbleheads/phillies-photos/star-trek-2017.jpg"
   },
   {
     "id": "billy-joel-2017",
@@ -225,7 +251,8 @@
     "id": "mike-schmidt-2017",
     "title": "Mike Schmidt",
     "year": "2017",
-    "date": "July 8, 2017"
+    "date": "July 8, 2017",
+    "imageUrl": "/bobbleheads/phillies-photos/mike-schmidt-2017.jpg"
   },
   {
     "id": "charlie-brown-50th-anniversary-2017",
@@ -233,7 +260,8 @@
     "nickname": "50th Anniversary",
     "year": "2017",
     "date": "July 5, 2017",
-    "quantity": "2,000"
+    "quantity": "2,000",
+    "imageUrl": "/bobbleheads/phillies-photos/charlie-brown-50th-anniversary-2017.jpg"
   },
   {
     "id": "phanatic-star-wars-2017",
@@ -241,7 +269,8 @@
     "nickname": "Star Wars",
     "year": "2017",
     "date": "June 21, 2017",
-    "quantity": "7,000"
+    "quantity": "7,000",
+    "imageUrl": "/bobbleheads/phillies-photos/phanatic-star-wars-2017.jpg"
   },
   {
     "id": "phanatic-band-themed-2016",
@@ -256,7 +285,8 @@
     "title": "Phoebe Phanatic",
     "nickname": "Stitch 'n Pitch",
     "year": "2016",
-    "date": "August 29, 2016"
+    "date": "August 29, 2016",
+    "imageUrl": "/bobbleheads/phillies-photos/phoebe-phanatic-stitch-n-pitch-2016.jpg"
   },
   {
     "id": "phillie-phanatic-variant-2016",
@@ -271,50 +301,58 @@
     "nickname": "\"Master Phanatic\", Star Wars",
     "year": "2016",
     "date": "July 21, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/phillies-photos/phanatic-master-phanatic-star-wars-2016.jpg"
   },
   {
     "id": "maikel-franco-2016",
     "title": "Maikel Franco",
     "year": "2016",
-    "date": "June 18, 2016"
+    "date": "June 18, 2016",
+    "imageUrl": "/bobbleheads/phillies-photos/maikel-franco-2016.jpg"
   },
   {
     "id": "larry-bowa-2015",
     "title": "Larry Bowa",
     "year": "2015",
-    "date": "August 18, 2015"
+    "date": "August 18, 2015",
+    "imageUrl": "/bobbleheads/phillies-photos/larry-bowa-2015.jpg"
   },
   {
     "id": "vintage-phillies-gold-base-variant-2015",
     "title": "Vintage Phillies",
     "nickname": "Gold Base Variant",
     "year": "2015",
-    "date": "June 19, 2015"
+    "date": "June 19, 2015",
+    "imageUrl": "/bobbleheads/phillies-photos/vintage-phillies-gold-base-variant-2015.jpg"
   },
   {
     "id": "vintage-phillies-2015",
     "title": "Vintage Phillies",
     "year": "2015",
-    "date": "June 2, 2015"
+    "date": "June 2, 2015",
+    "imageUrl": "/bobbleheads/phillies-photos/vintage-phillies-2015.jpg"
   },
   {
     "id": "ryan-howard-2014",
     "title": "Ryan Howard",
     "year": "2014",
-    "date": "August 19, 2014"
+    "date": "August 19, 2014",
+    "imageUrl": "/bobbleheads/phillies-photos/ryan-howard-2014.jpg"
   },
   {
     "id": "roy-halladay-2014",
     "title": "Roy Halladay",
     "year": "2014",
-    "date": "August 8, 2014"
+    "date": "August 8, 2014",
+    "imageUrl": "/bobbleheads/phillies-photos/roy-halladay-2014.jpg"
   },
   {
     "id": "chase-utley-2014",
     "title": "Chase Utley",
     "year": "2014",
-    "date": "June 10, 2014"
+    "date": "June 10, 2014",
+    "imageUrl": "/bobbleheads/phillies-photos/chase-utley-2014.jpg"
   },
   {
     "id": "john-kruk-action-figure-2013",
@@ -327,13 +365,15 @@
     "id": "cole-hamels-2013",
     "title": "Cole Hamels",
     "year": "2013",
-    "date": "August 21, 2013"
+    "date": "August 21, 2013",
+    "imageUrl": "/bobbleheads/phillies-photos/cole-hamels-2013.jpg"
   },
   {
     "id": "carlos-ruiz-2013",
     "title": "Carlos Ruiz",
     "year": "2013",
-    "date": "June 4, 2013"
+    "date": "June 4, 2013",
+    "imageUrl": "/bobbleheads/phillies-photos/carlos-ruiz-2013.jpg"
   },
   {
     "id": "hunter-pence-2012",

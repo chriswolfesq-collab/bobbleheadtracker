@@ -32,21 +32,24 @@
     "title": "Jose Ramirez",
     "year": "2024",
     "date": "May 18, 2024",
-    "quantity": "12,500"
+    "quantity": "12,500",
+    "imageUrl": "/bobbleheads/guardians-photos/jose-ramirez-2024.jpg"
   },
   {
     "id": "josh-naylor-2024",
     "title": "Josh Naylor",
     "year": "2024",
     "date": "June 22, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/guardians-photos/josh-naylor-2024.jpg"
   },
   {
     "id": "triston-mckenzie-2024",
     "title": "Triston McKenzie",
     "year": "2024",
     "date": "July 6, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/guardians-photos/triston-mckenzie-2024.jpg"
   },
   {
     "id": "cc-sabathia-2024",
@@ -60,14 +63,14 @@
     "title": "Peanuts Lucy",
     "year": "2023",
     "date": "June 6, 2023",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/peanuts-lucy-2023.jpg"
   },
   {
     "id": "andres-gimenez-2023",
     "title": "Andrés Giménez",
     "year": "2023",
     "date": "June 24, 2023",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/andres-gimenez-2023.jpg",
     "quantity": "12,500"
   },
   {
@@ -75,7 +78,7 @@
     "title": "Steven Kwan",
     "year": "2023",
     "date": "July 22, 2023",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/steven-kwan-2023.jpg",
     "quantity": "12,500"
   },
   {
@@ -91,14 +94,14 @@
     "title": "Linus",
     "year": "2023",
     "date": "August 22, 2023",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/linus-2023.jpg"
   },
   {
     "id": "emmanuel-clase-2023",
     "title": "Emmanuel Clase",
     "year": "2023",
     "date": "September 2, 2023",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/emmanuel-clase-2023.jpg",
     "quantity": "12,500"
   },
   {
@@ -113,7 +116,7 @@
     "title": "Aaron Civale",
     "year": "2022",
     "date": "June 11, 2022",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/aaron-civale-2022.jpg",
     "quantity": "12,500"
   },
   {
@@ -121,14 +124,14 @@
     "title": "Charlie Brown",
     "year": "2022",
     "date": "June 28, 2022",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/charlie-brown-2022.jpg"
   },
   {
     "id": "jose-ramirez-2022",
     "title": "José Ramírez",
     "year": "2022",
     "date": "July 16, 2022",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/jose-ramirez-2022.jpg",
     "quantity": "15,000"
   },
   {
@@ -136,21 +139,21 @@
     "title": "Franmil Reyes",
     "year": "2022",
     "date": "September 3, 2022",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/franmil-reyes-2022.jpg"
   },
   {
     "id": "woodstock-2022",
     "title": "Woodstock",
     "year": "2022",
     "date": "September 13, 2022",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/woodstock-2022.jpg"
   },
   {
     "id": "roberto-perez-2021",
     "title": "Roberto Perez",
     "year": "2021",
     "date": "June 12, 2021",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/roberto-perez-2021.jpg",
     "quantity": "12,500"
   },
   {
@@ -166,7 +169,7 @@
     "title": "Jose Ramirez",
     "year": "2019",
     "date": "March 9, 2019",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/jose-ramirez-2019.jpg",
     "quantity": "2,000"
   },
   {
@@ -174,7 +177,7 @@
     "title": "Francisco Lindor",
     "year": "2019",
     "date": "May 25, 2019",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/francisco-lindor-2019.jpg",
     "quantity": "15,000"
   },
   {
@@ -182,7 +185,7 @@
     "title": "Mike Clevinger",
     "year": "2019",
     "date": "June 5, 2019",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/mike-clevinger-2019.jpg",
     "quantity": "12,500"
   },
   {
@@ -190,14 +193,14 @@
     "title": "Trevor Bauer",
     "year": "2019",
     "date": "July 17, 2019",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/trevor-bauer-2019.jpg"
   },
   {
     "id": "sandy-alomar-2019",
     "title": "Sandy Alomar",
     "year": "2019",
     "date": "August 24, 2019",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/sandy-alomar-2019.jpg",
     "quantity": "12,500"
   },
   {
@@ -205,14 +208,14 @@
     "title": "Trevor Bauer",
     "year": "2018",
     "date": "March 3, 2018",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/trevor-bauer-2018.jpg"
   },
   {
     "id": "corey-kluber-2018",
     "title": "Corey Kluber",
     "year": "2018",
     "date": "May 28, 2018",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/corey-kluber-2018.jpg",
     "quantity": "15,000"
   },
   {
@@ -220,7 +223,7 @@
     "title": "Andrew Miller",
     "year": "2018",
     "date": "June 16, 2018",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/andrew-miller-2018.jpg",
     "quantity": "12,500"
   },
   {
@@ -228,7 +231,7 @@
     "title": "Carlos Carrasco",
     "year": "2018",
     "date": "July 12, 2018",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/carlos-carrasco-2018.jpg",
     "quantity": "12,500"
   },
   {
@@ -236,7 +239,7 @@
     "title": "Edwin Encarnacion",
     "year": "2018",
     "date": "August 29, 2018",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/edwin-encarnacion-2018.jpg",
     "quantity": "12,500"
   },
   {
@@ -244,7 +247,7 @@
     "title": "Spring Training Corey Kluber",
     "year": "2017",
     "date": "March 11, 2017",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/spring-training-corey-kluber-2017.jpg",
     "quantity": "2,000"
   },
   {
@@ -252,7 +255,7 @@
     "title": "Jose Ramirez",
     "year": "2017",
     "date": "May 27, 2017",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/jose-ramirez-2017.jpg",
     "quantity": "12,500"
   },
   {
@@ -260,7 +263,7 @@
     "title": "Francisco Lindor",
     "year": "2017",
     "date": "July 4, 2017",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/francisco-lindor-2017.jpg",
     "quantity": "15,000"
   },
   {
@@ -268,7 +271,7 @@
     "title": "Jason Kipnis",
     "year": "2017",
     "date": "July 22, 2017",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/jason-kipnis-2017.jpg",
     "quantity": "12,500"
   },
   {
@@ -276,7 +279,7 @@
     "title": "Terry Francona",
     "year": "2017",
     "date": "August 23, 2017",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/terry-francona-2017.jpg",
     "quantity": "12,500"
   },
   {
@@ -284,14 +287,14 @@
     "title": "Jason Kipnis",
     "year": "2016",
     "date": "March 5, 2016",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/jason-kipnis-2016.jpg"
   },
   {
     "id": "yan-gomes-2016",
     "title": "Yan Gomes",
     "year": "2016",
     "date": "July 9, 2016",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/yan-gomes-2016.jpg",
     "quantity": "12,500"
   },
   {
@@ -299,14 +302,14 @@
     "title": "Hall of Fame Inductee",
     "year": "2016",
     "date": "July 30, 2016",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/hall-of-fame-inductee-2016.jpg"
   },
   {
     "id": "bob-feller-2016",
     "title": "Bob Feller",
     "year": "2016",
     "date": "August 13, 2016",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/bob-feller-2016.jpg",
     "quantity": "12,500"
   },
   {
@@ -314,7 +317,7 @@
     "title": "Michael Brantley",
     "year": "2015",
     "date": "March 7, 2015",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/michael-brantley-2015-3-7.jpg",
     "quantity": "1,500"
   },
   {
@@ -322,7 +325,7 @@
     "title": "Corey Kluber",
     "year": "2015",
     "date": "June 6, 2015",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/corey-kluber-2015.jpg",
     "quantity": "17,500"
   },
   {
@@ -330,7 +333,7 @@
     "title": "Carlos Santana",
     "year": "2015",
     "date": "July 8, 2015",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/carlos-santana-2015.jpg",
     "quantity": "10,000"
   },
   {
@@ -338,7 +341,7 @@
     "title": "Michael Brantley",
     "year": "2015",
     "date": "August 8, 2015",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/michael-brantley-2015-8-8.jpg",
     "quantity": "15,000"
   },
   {
@@ -346,7 +349,7 @@
     "title": "Terry Francona Red Scooter",
     "year": "2015",
     "date": "September 12, 2015",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/terry-francona-red-scooter-2015.jpg",
     "quantity": "10,000"
   },
   {
@@ -354,7 +357,7 @@
     "title": "Orel Hershiser",
     "year": "2014",
     "date": "May 3, 2014",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/orel-hershiser-2014.jpg",
     "quantity": "10,000"
   },
   {
@@ -369,7 +372,7 @@
     "title": "Michael Bourn",
     "year": "2014",
     "date": "June 3, 2014",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/michael-bourn-2014.jpg",
     "quantity": "10,000"
   },
   {
@@ -377,7 +380,7 @@
     "title": "Jason Kipnis",
     "year": "2014",
     "date": "July 8, 2014",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/jason-kipnis-2014.jpg",
     "quantity": "12,500"
   },
   {
@@ -401,7 +404,7 @@
     "title": "Omar Vizquel",
     "year": "2013",
     "date": "July 8, 2013",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/omar-vizquel-2013.jpg",
     "quantity": "10,000"
   },
   {

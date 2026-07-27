@@ -109,21 +109,24 @@
     "title": "Christopher Morel",
     "year": "2024",
     "date": "June 1, 2024",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/christopher-morel-2024.jpg"
   },
   {
     "id": "adbert-alzolay-2024",
     "title": "Adbert Alzolay",
     "year": "2024",
     "date": "June 22, 2024",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/adbert-alzolay-2024.jpg"
   },
   {
     "id": "ryne-sandberg-2024",
     "title": "Ryne Sandberg",
     "year": "2024",
     "date": "June 23, 2024",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/ryne-sandberg-2024.jpg"
   },
   {
     "id": "justin-steele-american-flag-2024",
@@ -131,14 +134,16 @@
     "nickname": "American Flag",
     "year": "2024",
     "date": "July 6, 2024",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/justin-steele-american-flag-2024.jpg"
   },
   {
     "id": "ian-happ-2024",
     "title": "Ian Happ",
     "year": "2024",
     "date": "August 1, 2024",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/ian-happ-2024.jpg"
   },
   {
     "id": "cody-bellinger-2024",
@@ -150,7 +155,8 @@
     "id": "grateful-dead-2023",
     "title": "Grateful Dead",
     "year": "2023",
-    "date": "May 23, 2023"
+    "date": "May 23, 2023",
+    "imageUrl": "/bobbleheads/cubs-photos/grateful-dead-2023.jpg"
   },
   {
     "id": "billy-williams-statue-2023",
@@ -158,32 +164,37 @@
     "nickname": "Statue",
     "year": "2023",
     "date": "May 27, 2023",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/billy-williams-statue-2023.jpg"
   },
   {
     "id": "boog-jd-talking-2023",
     "title": "Boog & JD",
     "nickname": "Talking",
     "year": "2023",
-    "date": "June 17, 2023"
+    "date": "June 17, 2023",
+    "imageUrl": "/bobbleheads/cubs-photos/boog-jd-talking-2023.jpg"
   },
   {
     "id": "nascar-themed-2023",
     "title": "NASCAR-Themed",
     "year": "2023",
-    "date": "June 29, 2023"
+    "date": "June 29, 2023",
+    "imageUrl": "/bobbleheads/cubs-photos/nascar-themed-2023.jpg"
   },
   {
     "id": "henry-rowengartner-2023",
     "title": "Henry Rowengartner",
     "year": "2023",
-    "date": "July 2, 2023"
+    "date": "July 2, 2023",
+    "imageUrl": "/bobbleheads/cubs-photos/henry-rowengartner-2023.jpg"
   },
   {
     "id": "loki-2023",
     "title": "Loki",
     "year": "2023",
-    "date": "July 18, 2023"
+    "date": "July 18, 2023",
+    "imageUrl": "/bobbleheads/cubs-photos/loki-2023.jpg"
   },
   {
     "id": "ernie-banks-statue-2023",
@@ -191,14 +202,16 @@
     "nickname": "Statue",
     "year": "2023",
     "date": "July 19, 2023",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/ernie-banks-statue-2023.jpg"
   },
   {
     "id": "nico-hoerner-jedi-2023",
     "title": "Nico Hoerner",
     "nickname": "Jedi",
     "year": "2023",
-    "date": "August 2, 2023"
+    "date": "August 2, 2023",
+    "imageUrl": "/bobbleheads/cubs-photos/nico-hoerner-jedi-2023.jpg"
   },
   {
     "id": "ron-santo-statue-2023",
@@ -206,7 +219,8 @@
     "nickname": "Statue",
     "year": "2023",
     "date": "August 20, 2023",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/ron-santo-statue-2023.jpg"
   },
   {
     "id": "harry-caray-statue-2023",
@@ -214,48 +228,55 @@
     "nickname": "Statue",
     "year": "2023",
     "date": "September 9, 2023",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/harry-caray-statue-2023.jpg"
   },
   {
     "id": "david-ross-2022",
     "title": "David Ross",
     "year": "2022",
     "date": "May 7, 2022",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/david-ross-2022.jpg"
   },
   {
     "id": "patrick-wisdom-2022",
     "title": "Patrick Wisdom",
     "year": "2022",
     "date": "May 21, 2022",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/patrick-wisdom-2022.jpg"
   },
   {
     "id": "nick-madrigal-2022",
     "title": "Nick Madrigal",
     "year": "2022",
     "date": "August 6, 2022",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/nick-madrigal-2022.jpg"
   },
   {
     "id": "star-wars-mandalorian-2022",
     "title": "Star Wars Mandalorian",
     "year": "2022",
-    "date": "August 8, 2022"
+    "date": "August 8, 2022",
+    "imageUrl": "/bobbleheads/cubs-photos/star-wars-mandalorian-2022.jpg"
   },
   {
     "id": "nico-hoerner-2022",
     "title": "Nico Hoerner",
     "year": "2022",
     "date": "September 10, 2022",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/nico-hoerner-2022.jpg"
   },
   {
     "id": "marcus-stroman-2022",
     "title": "Marcus Stroman",
     "year": "2022",
     "date": "September 17, 2022",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/marcus-stroman-2022.jpg"
   },
   {
     "id": "cole-hamels-hang-loose-2019",
@@ -263,7 +284,8 @@
     "nickname": "\"Hang Loose\"",
     "year": "2019",
     "date": "May 10, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/cole-hamels-hang-loose-2019.jpg"
   },
   {
     "id": "anthony-rizzo-out-on-the-water-2019",
@@ -271,7 +293,8 @@
     "nickname": "\"Out on the Water\"",
     "year": "2019",
     "date": "June 21, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/anthony-rizzo-out-on-the-water-2019.jpg"
   },
   {
     "id": "kris-bryant-round-of-golf-2019",
@@ -279,14 +302,16 @@
     "nickname": "\"Round of Golf\"",
     "year": "2019",
     "date": "July 15, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/kris-bryant-round-of-golf-2019.jpg"
   },
   {
     "id": "jon-lester-2019",
     "title": "Jon Lester",
     "year": "2019",
     "date": "July 19, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/jon-lester-2019.jpg"
   },
   {
     "id": "clark-the-cub-2019",
@@ -294,35 +319,40 @@
     "nickname": "the Cub",
     "year": "2019",
     "date": "August 4, 2019",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/cubs-photos/clark-the-cub-2019.jpg"
   },
   {
     "id": "willson-contreras-2018",
     "title": "Willson Contreras",
     "year": "2018",
     "date": "May 11, 2018",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/willson-contreras-2018.jpg"
   },
   {
     "id": "jason-heyward-2018",
     "title": "Jason Heyward",
     "year": "2018",
     "date": "June 18, 2018",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/jason-heyward-2018.jpg"
   },
   {
     "id": "javier-baez-2018",
     "title": "Javier Baez",
     "year": "2018",
     "date": "July 23, 2018",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/javier-baez-2018.jpg"
   },
   {
     "id": "kyle-hendricks-2018",
     "title": "Kyle Hendricks",
     "year": "2018",
     "date": "August 15, 2018",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/kyle-hendricks-2018.jpg"
   },
   {
     "id": "albert-almora-2018",
@@ -335,7 +365,8 @@
     "id": "the-final-out-2017",
     "title": "\"The Final Out\"",
     "year": "2017",
-    "date": "May 20, 2017"
+    "date": "May 20, 2017",
+    "imageUrl": "/bobbleheads/cubs-photos/the-final-out-2017.jpg"
   },
   {
     "id": "ben-zobrist-world-series-mvp-2017",
@@ -343,19 +374,22 @@
     "nickname": "World Series MVP",
     "year": "2017",
     "date": "June 8, 2017",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/ben-zobrist-world-series-mvp-2017.jpg"
   },
   {
     "id": "turning-two-2017",
     "title": "\"Turning Two\"",
     "year": "2017",
-    "date": "July 5, 2017"
+    "date": "July 5, 2017",
+    "imageUrl": "/bobbleheads/cubs-photos/turning-two-2017.jpg"
   },
   {
     "id": "starting-aces-2017",
     "title": "\"Starting Aces\"",
     "year": "2017",
-    "date": "August 17, 2017"
+    "date": "August 17, 2017",
+    "imageUrl": "/bobbleheads/cubs-photos/starting-aces-2017.jpg"
   },
   {
     "id": "anthony-rizzo-tarp-catch-2016",
@@ -363,21 +397,24 @@
     "nickname": "\"Tarp Catch\"",
     "year": "2016",
     "date": "July 5, 2016",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/anthony-rizzo-tarp-catch-2016.jpg"
   },
   {
     "id": "kris-bryant-2016",
     "title": "Kris Bryant",
     "year": "2016",
     "date": "August 1, 2016",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/kris-bryant-2016.jpg"
   },
   {
     "id": "joe-maddon-2016",
     "title": "Joe Maddon",
     "year": "2016",
     "date": "August 16, 2016",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/joe-maddon-2016.jpg"
   },
   {
     "id": "kyle-schwarber-home-run-2016",
@@ -385,7 +422,8 @@
     "nickname": "Home Run",
     "year": "2016",
     "date": "September 16, 2016",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/kyle-schwarber-home-run-2016.jpg"
   },
   {
     "id": "clark-w-flag-2015",
@@ -393,7 +431,8 @@
     "nickname": "\"W\" Flag",
     "year": "2015",
     "date": "May 31, 2015",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/cubs-photos/clark-w-flag-2015.jpg"
   },
   {
     "id": "joe-maddon-cubs-debut-2015",
@@ -401,7 +440,8 @@
     "nickname": "Cubs Debut",
     "year": "2015",
     "date": "June 13, 2015",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/joe-maddon-cubs-debut-2015.jpg"
   },
   {
     "id": "jorge-soler-cubs-debut-2015",
@@ -409,7 +449,8 @@
     "nickname": "Cubs Debut",
     "year": "2015",
     "date": "July 25, 2015",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/jorge-soler-cubs-debut-2015.jpg"
   },
   {
     "id": "jon-lester-cubs-debut-2015",
@@ -417,7 +458,8 @@
     "nickname": "Cubs Debut",
     "year": "2015",
     "date": "August 22, 2015",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/jon-lester-cubs-debut-2015.jpg"
   },
   {
     "id": "kris-bryant-cubs-debut-2015",
@@ -432,14 +474,16 @@
     "title": "Joe Tinker",
     "year": "2014",
     "date": "April 18, 2014",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/joe-tinker-2014.jpg"
   },
   {
     "id": "red-grange-2014",
     "title": "Red Grange",
     "year": "2014",
     "date": "May 2, 2014",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/red-grange-2014.jpg"
   },
   {
     "id": "babe-ruth-called-shot-2014",
@@ -447,40 +491,46 @@
     "nickname": "\"Called Shot\"",
     "year": "2014",
     "date": "May 16, 2014",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/babe-ruth-called-shot-2014.jpg"
   },
   {
     "id": "all-american-girls-2014",
     "title": "All American Girls",
     "year": "2014",
     "date": "June 6, 2014",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/all-american-girls-2014.jpg"
   },
   {
     "id": "ernie-banks-2014",
     "title": "Ernie Banks",
     "year": "2014",
     "date": "June 20, 2014",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/ernie-banks-2014.jpg"
   },
   {
     "id": "gale-sayers-2014",
     "title": "Gale Sayers",
     "year": "2014",
     "date": "July 11, 2014",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/gale-sayers-2014.jpg"
   },
   {
     "id": "first-night-game-2014",
     "title": "\"First Night Game\"",
     "year": "2014",
-    "date": "August 8, 2014"
+    "date": "August 8, 2014",
+    "imageUrl": "/bobbleheads/cubs-photos/first-night-game-2014.jpg"
   },
   {
     "id": "jedi-rizzo-2014",
     "title": "\"Jedi Rizzo\"",
     "year": "2014",
-    "date": "August 20, 2014"
+    "date": "August 20, 2014",
+    "imageUrl": "/bobbleheads/cubs-photos/jedi-rizzo-2014.jpg"
   },
   {
     "id": "kerry-wood-20-strikeout-game-2014",
@@ -488,7 +538,8 @@
     "nickname": "20-Strikeout Game",
     "year": "2014",
     "date": "August 22, 2014",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/kerry-wood-20-strikeout-game-2014.jpg"
   },
   {
     "id": "greg-maddux-3-000th-strikeout-2014",
@@ -502,28 +553,32 @@
     "id": "darwin-barney-2013",
     "title": "Darwin Barney",
     "year": "2013",
-    "date": "June 1, 2013"
+    "date": "June 1, 2013",
+    "imageUrl": "/bobbleheads/cubs-photos/darwin-barney-2013.jpg"
   },
   {
     "id": "edwin-jackson-2013",
     "title": "Edwin Jackson",
     "year": "2013",
     "date": "June 22, 2013",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/edwin-jackson-2013.jpg"
   },
   {
     "id": "kyuji-fujikawa-2013",
     "title": "Kyuji Fujikawa",
     "year": "2013",
     "date": "August 3, 2013",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/kyuji-fujikawa-2013.jpg"
   },
   {
     "id": "anthony-rizzo-2013",
     "title": "Anthony Rizzo",
     "year": "2013",
     "date": "August 31, 2013",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/anthony-rizzo-2013.jpg"
   },
   {
     "id": "ryan-dempster-2012",

@@ -53,28 +53,32 @@
     "title": "Jake Burger",
     "year": "2024",
     "date": "May 19, 2024",
-    "quantity": "8,000"
+    "quantity": "8,000",
+    "imageUrl": "/bobbleheads/marlins-photos/jake-burger-2024.jpg"
   },
   {
     "id": "eury-perez-2024",
     "title": "Eury Perez",
     "year": "2024",
     "date": "June 2, 2024",
-    "quantity": "8,000"
+    "quantity": "8,000",
+    "imageUrl": "/bobbleheads/marlins-photos/eury-perez-2024.jpg"
   },
   {
     "id": "dontrelle-willis-2024",
     "title": "Dontrelle Willis",
     "year": "2024",
     "date": "June 9, 2024",
-    "quantity": "8,000"
+    "quantity": "8,000",
+    "imageUrl": "/bobbleheads/marlins-photos/dontrelle-willis-2024.jpg"
   },
   {
     "id": "sandy-alcantara-2023",
     "title": "Sandy Alcantara",
     "year": "2023",
     "date": "June 25, 2023",
-    "quantity": "8,000"
+    "quantity": "8,000",
+    "imageUrl": "/bobbleheads/marlins-photos/sandy-alcantara-2023.jpg"
   },
   {
     "id": "chuck-carr-2023",
@@ -95,75 +99,86 @@
     "title": "Jazz Chisholm Jr.",
     "year": "2022",
     "date": "June 25, 2022",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/marlins-photos/jazz-chisholm-jr-2022.jpg"
   },
   {
     "id": "trevor-rogers-2022",
     "title": "Trevor Rogers",
     "year": "2022",
     "date": "July 16, 2022",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/marlins-photos/trevor-rogers-2022.jpg"
   },
   {
     "id": "avisail-garcia-2022",
     "title": "Avisail Garcia",
     "year": "2022",
     "date": "August 27, 2022",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/marlins-photos/avisail-garcia-2022.jpg"
   },
   {
     "id": "jorge-alfaro-2021",
     "title": "Jorge Alfaro",
     "year": "2021",
-    "date": "May 22, 2021"
+    "date": "May 22, 2021",
+    "imageUrl": "/bobbleheads/marlins-photos/jorge-alfaro-2021.jpg"
   },
   {
     "id": "kevin-millar-2021",
     "title": "Kevin Millar",
     "year": "2021",
-    "date": "June 12, 2021"
+    "date": "June 12, 2021",
+    "imageUrl": "/bobbleheads/marlins-photos/kevin-millar-2021.jpg"
   },
   {
     "id": "sandy-alcantara-2021",
     "title": "Sandy Alcantara",
     "year": "2021",
     "date": "June 26, 2021",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/marlins-photos/sandy-alcantara-2021.jpg"
   },
   {
     "id": "miguel-rojas-2019",
     "title": "Miguel Rojas",
     "year": "2019",
     "date": "June 29, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/marlins-photos/miguel-rojas-2019.jpg"
   },
   {
     "id": "jose-urena-2019",
     "title": "Jose Urena",
     "year": "2019",
     "date": "August 10, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/marlins-photos/jose-urena-2019.jpg"
   },
   {
     "id": "billy-the-marlin-2019",
     "title": "Billy the Marlin",
     "year": "2019",
     "date": "August 24, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/marlins-photos/billy-the-marlin-2019.jpg"
   },
   {
     "id": "brian-anderson-2019",
     "title": "Brian Anderson",
     "year": "2019",
     "date": "September 7, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/marlins-photos/brian-anderson-2019.jpg"
   },
   {
     "id": "pablo-lopez-2019",
     "title": "Pablo Lopez",
     "year": "2019",
     "date": "September 21, 2019",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/marlins-photos/pablo-lopez-2019.jpg"
   },
   {
     "id": "charlie-hough-season-ticket-holders-2018",
@@ -183,13 +198,15 @@
     "id": "squints-2018",
     "title": "Squints",
     "year": "2018",
-    "date": "July 15, 2018"
+    "date": "July 15, 2018",
+    "imageUrl": "/bobbleheads/marlins-photos/squints-2018.jpg"
   },
   {
     "id": "hamilton-ham-porter-2018",
     "title": "Hamilton (\"Ham\") Porter",
     "year": "2018",
-    "date": "July 15, 2018"
+    "date": "July 15, 2018",
+    "imageUrl": "/bobbleheads/marlins-photos/hamilton-ham-porter-2018.jpg"
   },
   {
     "id": "pitbull-2018",
@@ -208,14 +225,16 @@
     "title": "Don Mattingly",
     "year": "2017",
     "date": "April 14, 2017",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/marlins-photos/don-mattingly-2017.jpg"
   },
   {
     "id": "felo-ramirez-2017",
     "title": "Felo Ramirez",
     "year": "2017",
     "date": "May 28, 2017",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/felo-ramirez-2017.jpg"
   },
   {
     "id": "giancarlo-stanton-2016-home-run-derby-2017",
@@ -223,14 +242,16 @@
     "nickname": "2016 Home Run Derby",
     "year": "2017",
     "date": "June 3, 2017",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/marlins-photos/giancarlo-stanton-2016-home-run-derby-2017.jpg"
   },
   {
     "id": "jon-snow-tom-koehler-game-of-thrones-2017",
     "title": "Jon Snow / Tom Koehler",
     "nickname": "Game of Thrones",
     "year": "2017",
-    "date": "July 14, 2017"
+    "date": "July 14, 2017",
+    "imageUrl": "/bobbleheads/marlins-photos/jon-snow-tom-koehler-game-of-thrones-2017.jpg"
   },
   {
     "id": "dee-gordon-2017",
@@ -243,7 +264,8 @@
     "id": "hulk-2017",
     "title": "Hulk",
     "year": "2017",
-    "date": "August 11, 2017"
+    "date": "August 11, 2017",
+    "imageUrl": "/bobbleheads/marlins-photos/hulk-2017.jpg"
   },
   {
     "id": "billy-the-marlin-birthday-2017",
@@ -251,14 +273,16 @@
     "nickname": "Birthday",
     "year": "2017",
     "date": "August 13, 2017",
-    "quantity": "7,000"
+    "quantity": "7,000",
+    "imageUrl": "/bobbleheads/marlins-photos/billy-the-marlin-birthday-2017.jpg"
   },
   {
     "id": "jt-realmuto-2017",
     "title": "J.T. Realmuto",
     "year": "2017",
     "date": "August 25, 2017",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/marlins-photos/jt-realmuto-2017.jpg"
   },
   {
     "id": "fortune-teller-baseball-2017",
@@ -272,21 +296,24 @@
     "nickname": "Aviation",
     "year": "2017",
     "date": "September 16, 2017",
-    "quantity": "7,000"
+    "quantity": "7,000",
+    "imageUrl": "/bobbleheads/marlins-photos/billy-the-marlin-aviation-2017.jpg"
   },
   {
     "id": "christian-yelich-2017",
     "title": "Christian Yelich",
     "year": "2017",
     "date": "September 17, 2017",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/marlins-photos/christian-yelich-2017.jpg"
   },
   {
     "id": "adam-conley-stormtrooper-2017",
     "title": "Adam Conley",
     "nickname": "Stormtrooper",
     "year": "2017",
-    "date": "September 30, 2017"
+    "date": "September 30, 2017",
+    "imageUrl": "/bobbleheads/marlins-photos/adam-conley-stormtrooper-2017.jpg"
   },
   {
     "id": "charles-johnson-1997-all-star-2016",
@@ -294,7 +321,8 @@
     "nickname": "1997 All-Star",
     "year": "2016",
     "date": "April 16, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/charles-johnson-1997-all-star-2016.jpg"
   },
   {
     "id": "jeff-conine-1995-all-star-2016",
@@ -302,7 +330,8 @@
     "nickname": "1995 All-Star",
     "year": "2016",
     "date": "May 7, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/jeff-conine-1995-all-star-2016.jpg"
   },
   {
     "id": "kevin-brown-1997-all-star-2016",
@@ -310,7 +339,8 @@
     "nickname": "1997 All-Star",
     "year": "2016",
     "date": "May 21, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/kevin-brown-1997-all-star-2016.jpg"
   },
   {
     "id": "ichiro-suzuki-hit-counter-2016",
@@ -318,7 +348,8 @@
     "nickname": "Hit-Counter",
     "year": "2016",
     "date": "May 22, 2016",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/marlins-photos/ichiro-suzuki-hit-counter-2016.jpg"
   },
   {
     "id": "mike-lowell-2003-all-star-2016",
@@ -326,7 +357,8 @@
     "nickname": "2003 All-Star",
     "year": "2016",
     "date": "June 4, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/mike-lowell-2003-all-star-2016.jpg"
   },
   {
     "id": "luis-castillo-2002-all-star-2016",
@@ -334,7 +366,8 @@
     "nickname": "2002 All-Star",
     "year": "2016",
     "date": "June 18, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/luis-castillo-2002-all-star-2016.jpg"
   },
   {
     "id": "moises-alou-1997-all-star-2016",
@@ -342,7 +375,8 @@
     "nickname": "1997 All-Star",
     "year": "2016",
     "date": "June 25, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/moises-alou-1997-all-star-2016.jpg"
   },
   {
     "id": "edgar-renteria-1998-all-star-2016",
@@ -350,7 +384,8 @@
     "nickname": "1998 All-Star",
     "year": "2016",
     "date": "July 9, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/edgar-renteria-1998-all-star-2016.jpg"
   },
   {
     "id": "dontrelle-willis-2005-all-star-2016",
@@ -358,7 +393,8 @@
     "nickname": "2005 All-Star",
     "year": "2016",
     "date": "July 23, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/dontrelle-willis-2005-all-star-2016.jpg"
   },
   {
     "id": "alex-gonzalez-1999-all-star-2016",
@@ -366,7 +402,8 @@
     "nickname": "1999 All-Star",
     "year": "2016",
     "date": "July 30, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/alex-gonzalez-1999-all-star-2016.jpg"
   },
   {
     "id": "cliff-floyd-2001-all-star-2016",
@@ -374,7 +411,8 @@
     "nickname": "2001 All-Star",
     "year": "2016",
     "date": "August 13, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/cliff-floyd-2001-all-star-2016.jpg"
   },
   {
     "id": "jack-mckeon-2004-all-star-2016",
@@ -382,7 +420,8 @@
     "nickname": "2004 All-Star",
     "year": "2016",
     "date": "August 27, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/jack-mckeon-2004-all-star-2016.jpg"
   },
   {
     "id": "al-leiter-1996-all-star-2016",
@@ -390,7 +429,8 @@
     "nickname": "1996 All-Star",
     "year": "2016",
     "date": "September 10, 2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/marlins-photos/al-leiter-1996-all-star-2016.jpg"
   },
   {
     "id": "jim-leyland-1998-all-star-2016",
@@ -405,7 +445,8 @@
     "title": "Henderson Alvarez",
     "year": "2015",
     "date": "July 12, 2015",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/marlins-photos/henderson-alvarez-2015.jpg"
   },
   {
     "id": "billy-the-marlin-stormtrooper-2015",
@@ -419,21 +460,24 @@
     "title": "Marcell Ozuna",
     "year": "2015",
     "date": "September 6, 2015",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/marlins-photos/marcell-ozuna-2015.jpg"
   },
   {
     "id": "billy-mcfly-back-to-the-future-2015",
     "title": "Billy McFly",
     "nickname": "Back to the Future",
     "year": "2015",
-    "date": "September 25, 2015"
+    "date": "September 25, 2015",
+    "imageUrl": "/bobbleheads/marlins-photos/billy-mcfly-back-to-the-future-2015.jpg"
   },
   {
     "id": "christian-yelich-2014",
     "title": "Christian Yelich",
     "year": "2014",
     "date": "August 3, 2014",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/marlins-photos/christian-yelich-2014.jpg"
   },
   {
     "id": "jedi-billy-2014",
@@ -446,7 +490,8 @@
     "title": "Jose Fernandez",
     "year": "2014",
     "date": "September 21, 2014",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/marlins-photos/jose-fernandez-2014.jpg"
   },
   {
     "id": "juan-pierre-20th-anniversary-franchise-2013",

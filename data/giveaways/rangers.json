@@ -191,7 +191,8 @@
     "nickname": "Cartwheel Bobblehead",
     "year": "2024",
     "date": "September 21, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adolis-garcia-cartwheel-bobblehead-2024.jpg"
   },
   {
     "id": "josh-jung-star-wars-jung-jedi-2024",
@@ -206,7 +207,8 @@
     "nickname": "Silver Slugger",
     "year": "2024",
     "date": "August 30, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/corey-seager-silver-slugger-2024.jpg"
   },
   {
     "id": "nathan-eovaldi-replica-world-series-ring-2024",
@@ -222,7 +224,8 @@
     "nickname": "Gold Glove",
     "year": "2024",
     "date": "July 24, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/jonah-heim-gold-glove-2024.jpg"
   },
   {
     "id": "adolis-garcia-replica-world-series-ring-2024",
@@ -238,7 +241,8 @@
     "nickname": "Gold Glove",
     "year": "2024",
     "date": "July 2, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/nathaniel-lowe-gold-glove-2024.jpg"
   },
   {
     "id": "max-scherzer-shark-week-2024",
@@ -260,7 +264,8 @@
     "title": "Nathan Eovaldi",
     "year": "2024",
     "date": "June 5, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/nathan-eovaldi-2024.jpg"
   },
   {
     "id": "marcus-semien-replica-world-series-ring-2024",
@@ -276,7 +281,8 @@
     "nickname": "ALCS MVP/Gold Glove",
     "year": "2024",
     "date": "May 28, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adolis-garcia-alcs-mvp-gold-glove-2024.jpg"
   },
   {
     "id": "adolis-garcia-call-of-duty-2024",
@@ -307,7 +313,8 @@
     "nickname": "Silver Slugger",
     "year": "2024",
     "date": "April 30, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/marcus-semien-silver-slugger-2024.jpg"
   },
   {
     "id": "corey-seager-2023-world-series-mvp-2024",
@@ -315,7 +322,8 @@
     "nickname": "2023 World Series MVP",
     "year": "2024",
     "date": "April 24, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/corey-seager-2023-world-series-mvp-2024.jpg"
   },
   {
     "id": "world-series-replica-trophy-statue-2024",
@@ -331,7 +339,8 @@
     "nickname": "2023 ALCS The Catch",
     "year": "2024",
     "date": "April 8, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/evan-carter-2023-alcs-the-catch-2024.jpg"
   },
   {
     "id": "globe-life-field-stadium-replica-2023",
@@ -345,7 +354,8 @@
     "title": "Adolis García",
     "year": "2023",
     "date": "September 23, 2023",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adolis-garcia-2023.jpg"
   },
   {
     "id": "nathaniel-lowe-star-wars-stormtrooper-2023",
@@ -353,7 +363,8 @@
     "nickname": "Star Wars Stormtrooper",
     "year": "2023",
     "date": "September 2, 2023",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/nathaniel-lowe-star-wars-stormtrooper-2023.jpg"
   },
   {
     "id": "nolan-ryan-baseball-card-2023",
@@ -361,7 +372,8 @@
     "nickname": "Baseball Card",
     "year": "2023",
     "date": "August 19, 2023",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/nolan-ryan-baseball-card-2023.jpg"
   },
   {
     "id": "jon-gray-shark-week-2023",
@@ -369,14 +381,16 @@
     "nickname": "Shark Week",
     "year": "2023",
     "date": "July 17, 2023",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/jon-gray-shark-week-2023.jpg"
   },
   {
     "id": "martin-perez-2023",
     "title": "Martín Pérez",
     "year": "2023",
     "date": "July 15, 2023",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/martin-perez-2023.jpg"
   },
   {
     "id": "rangers-captain-20th-anniversary-2023",
@@ -384,7 +398,8 @@
     "nickname": "20th Anniversary",
     "year": "2023",
     "date": "July 1, 2023",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/rangers-captain-20th-anniversary-2023.jpg"
   },
   {
     "id": "jacob-degrom-city-connect-3-of-3-2023",
@@ -392,7 +407,8 @@
     "nickname": "3 of 3",
     "year": "2023",
     "date": "June 16, 2023",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/jacob-degrom-city-connect-3-of-3-2023.jpg"
   },
   {
     "id": "nathaniel-lowe-silver-slugger-2023",
@@ -400,7 +416,8 @@
     "nickname": "Silver Slugger",
     "year": "2023",
     "date": "June 3, 2023",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/nathaniel-lowe-silver-slugger-2023.jpg"
   },
   {
     "id": "corey-seager-city-connect-2-of-3-2023",
@@ -408,7 +425,8 @@
     "nickname": "2 of 3",
     "year": "2023",
     "date": "May 19, 2023",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/corey-seager-city-connect-2-of-3-2023.jpg"
   },
   {
     "id": "arlington-stadium-stadium-replica-2023",
@@ -424,7 +442,8 @@
     "nickname": "1 of 3",
     "year": "2023",
     "date": "April 21, 2023",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/marcus-semien-city-connect-1-of-3-2023.jpg"
   },
   {
     "id": "tom-grieve-2022",
@@ -439,7 +458,8 @@
     "nickname": "Star Wars Mandalorian",
     "year": "2022",
     "date": "September 24, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adolis-garcia-star-wars-mandalorian-2022.jpg"
   },
   {
     "id": "juan-gonzalez-50th-anniversary-2022",
@@ -447,7 +467,8 @@
     "nickname": "50th Anniversary",
     "year": "2022",
     "date": "September 24, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/juan-gonzalez-50th-anniversary-2022.jpg"
   },
   {
     "id": "adrian-beltre-on-deck-circle-2022",
@@ -455,7 +476,8 @@
     "nickname": "On-deck Circle",
     "year": "2022",
     "date": "August 27, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adrian-beltre-on-deck-circle-2022.jpg"
   },
   {
     "id": "michael-young-50th-anniversary-2022",
@@ -463,7 +485,8 @@
     "nickname": "50th Anniversary",
     "year": "2022",
     "date": "August 13, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/michael-young-50th-anniversary-2022.jpg"
   },
   {
     "id": "ivan-pudge-rodriguez-50th-anniversary-2022",
@@ -478,14 +501,16 @@
     "title": "Jon Gray",
     "nickname": "The Dealer",
     "year": "2022",
-    "date": "August 5, 2022"
+    "date": "August 5, 2022",
+    "imageUrl": "/bobbleheads/rangers-photos/jon-gray-the-dealer-2022.jpg"
   },
   {
     "id": "marcus-semien-2022",
     "title": "Marcus Semien",
     "year": "2022",
     "date": "July 15, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/marcus-semien-2022.jpg"
   },
   {
     "id": "corey-seager-shark-week-2022",
@@ -493,14 +518,16 @@
     "nickname": "Shark Week",
     "year": "2022",
     "date": "July 13, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/corey-seager-shark-week-2022.jpg"
   },
   {
     "id": "corey-seager-2022",
     "title": "Corey Seager",
     "year": "2022",
     "date": "July 9, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/corey-seager-2022.jpg"
   },
   {
     "id": "mount-crushmore-statue-2022",
@@ -516,7 +543,8 @@
     "nickname": "50th Anniversary",
     "year": "2022",
     "date": "June 25, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/nolan-ryan-50th-anniversary-2022.jpg"
   },
   {
     "id": "adolis-garcia-el-bombi-al-rookie-of-the-year-2022",
@@ -524,7 +552,8 @@
     "nickname": "El Bombi AL Rookie of the Year",
     "year": "2022",
     "date": "June 13, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adolis-garcia-el-bombi-al-rookie-of-the-year-2022.jpg"
   },
   {
     "id": "jim-sundberg-50th-anniversary-2022",
@@ -532,14 +561,16 @@
     "nickname": "50th Anniversary",
     "year": "2022",
     "date": "April 30, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/jim-sundberg-50th-anniversary-2022.jpg"
   },
   {
     "id": "charley-pride-2022",
     "title": "Charley Pride",
     "year": "2022",
     "date": "April 15, 2022",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/charley-pride-2022.jpg"
   },
   {
     "id": "isiah-kiner-falefa-2020-gold-glove-award-winner-2021",
@@ -547,7 +578,8 @@
     "nickname": "2020 Gold Glove Award Winner",
     "year": "2021",
     "date": "August 14, 2021",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/isiah-kiner-falefa-2020-gold-glove-award-winner-2021.jpg"
   },
   {
     "id": "nick-solak-star-wars-han-solak-2021",
@@ -562,7 +594,8 @@
     "nickname": "2020 Gold Glove Award Winner",
     "year": "2021",
     "date": "July 31, 2021",
-    "quantity": "7,000"
+    "quantity": "7,000",
+    "imageUrl": "/bobbleheads/rangers-photos/joey-gallo-2020-gold-glove-award-winner-2021.jpg"
   },
   {
     "id": "elvis-andrus-stealing-home-2021",
@@ -570,7 +603,8 @@
     "nickname": "Stealing Home",
     "year": "2021",
     "date": "June 21, 2021",
-    "quantity": "14,000"
+    "quantity": "14,000",
+    "imageUrl": "/bobbleheads/rangers-photos/elvis-andrus-stealing-home-2021.jpg"
   },
   {
     "id": "joey-gallo-2019-all-star-game-2021",
@@ -578,14 +612,16 @@
     "nickname": "2019 All-Star Game",
     "year": "2021",
     "date": "June 19, 2021",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/joey-gallo-2019-all-star-game-2021.jpg"
   },
   {
     "id": "willie-calhoun-game-of-thrones-calhoun-drogo-2021",
     "title": "Willie Calhoun",
     "nickname": "Game of Thrones Calhoun Drogo",
     "year": "2021",
-    "date": "June 8, 2021"
+    "date": "June 8, 2021",
+    "imageUrl": "/bobbleheads/rangers-photos/willie-calhoun-game-of-thrones-calhoun-drogo-2021.jpg"
   },
   {
     "id": "shin-soo-choo-leadoff-home-run-2021",
@@ -593,7 +629,8 @@
     "nickname": "Leadoff Home Run",
     "year": "2021",
     "date": "June 5, 2021",
-    "quantity": "7,000"
+    "quantity": "7,000",
+    "imageUrl": "/bobbleheads/rangers-photos/shin-soo-choo-leadoff-home-run-2021.jpg"
   },
   {
     "id": "nolan-ryan-george-w-hw-bush-2010-world-series-first-pitch-2021",
@@ -601,7 +638,8 @@
     "nickname": "2010 World Series First Pitch",
     "year": "2021",
     "date": "April 17, 2021",
-    "quantity": "7,000"
+    "quantity": "7,000",
+    "imageUrl": "/bobbleheads/rangers-photos/nolan-ryan-george-w-hw-bush-2010-world-series-first-pitch-2021.jpg"
   },
   {
     "id": "adrian-beltre-texas-legend-2021",
@@ -609,21 +647,24 @@
     "nickname": "Texas Legend",
     "year": "2021",
     "date": "April 10, 2021",
-    "quantity": "7,000"
+    "quantity": "7,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adrian-beltre-texas-legend-2021.jpg"
   },
   {
     "id": "mike-minor-lance-lynn-dueling-aces-2020",
     "title": "Mike Minor / Lance Lynn",
     "nickname": "Dueling Aces",
     "year": "2020",
-    "date": "June 19, 2020"
+    "date": "June 19, 2020",
+    "imageUrl": "/bobbleheads/rangers-photos/mike-minor-lance-lynn-dueling-aces-2020.jpg"
   },
   {
     "id": "joey-gallo-the-great-batsby-2020",
     "title": "Joey Gallo",
     "nickname": "The Great Batsby",
     "year": "2020",
-    "date": "April 24, 2020"
+    "date": "April 24, 2020",
+    "imageUrl": "/bobbleheads/rangers-photos/joey-gallo-the-great-batsby-2020.jpg"
   },
   {
     "id": "2010-al-pennant-scoreboard-replica-2019",
@@ -637,14 +678,16 @@
     "nickname": "Top Moments - Hello AL Pennant The Last Out",
     "year": "2019",
     "date": "September 14, 2019",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/neftali-feliz-bengie-molina-dual-top-moments-hello-al-pennant-the-last-out-2019.jpg"
   },
   {
     "id": "rougned-odor-star-wars-first-odor-stormtrooper-2019",
     "title": "Rougned Odor",
     "nickname": "Star Wars First Odor Stormtrooper",
     "year": "2019",
-    "date": "August 31, 2019"
+    "date": "August 31, 2019",
+    "imageUrl": "/bobbleheads/rangers-photos/rougned-odor-star-wars-first-odor-stormtrooper-2019.jpg"
   },
   {
     "id": "kenny-rogers-top-moments-the-perfect-game-2019",
@@ -652,14 +695,16 @@
     "nickname": "Top Moments - The Perfect Game",
     "year": "2019",
     "date": "August 17, 2019",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/kenny-rogers-top-moments-the-perfect-game-2019.jpg"
   },
   {
     "id": "isiah-kiner-falefa-dashboard-bobblehead-2019",
     "title": "Isiah Kiner-Falefa",
     "nickname": "Dashboard Bobblehead",
     "year": "2019",
-    "date": "August 15, 2019"
+    "date": "August 15, 2019",
+    "imageUrl": "/bobbleheads/rangers-photos/isiah-kiner-falefa-dashboard-bobblehead-2019.jpg"
   },
   {
     "id": "rusty-greer-top-moments-the-rusty-dive-2019",
@@ -667,7 +712,8 @@
     "nickname": "Top Moments - The Rusty Dive",
     "year": "2019",
     "date": "August 3, 2019",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/rusty-greer-top-moments-the-rusty-dive-2019.jpg"
   },
   {
     "id": "juan-gonzalez-top-moments-the-96-clinch-2019",
@@ -675,14 +721,16 @@
     "nickname": "Top Moments - The '96 Clinch",
     "year": "2019",
     "date": "July 13, 2019",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/juan-gonzalez-top-moments-the-96-clinch-2019.jpg"
   },
   {
     "id": "joey-gallo-galileo-moon-shot-2019",
     "title": "Joey Gallo",
     "nickname": "GALiLeO Moon Shot",
     "year": "2019",
-    "date": "July 12, 2019"
+    "date": "July 12, 2019",
+    "imageUrl": "/bobbleheads/rangers-photos/joey-gallo-galileo-moon-shot-2019.jpg"
   },
   {
     "id": "ivan-pudge-rodriguez-top-moments-95-all-star-game-2019",
@@ -690,7 +738,8 @@
     "nickname": "Top Moments - '95 All-Star Game",
     "year": "2019",
     "date": "June 22, 2019",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/ivan-pudge-rodriguez-top-moments-95-all-star-game-2019.jpg"
   },
   {
     "id": "adrian-beltre-top-moments-the-3-000th-hit-2019",
@@ -698,7 +747,8 @@
     "nickname": "Top Moments - The 3,000th Hit",
     "year": "2019",
     "date": "June 8, 2019",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adrian-beltre-top-moments-the-3-000th-hit-2019.jpg"
   },
   {
     "id": "josh-hamilton-top-moments-the-batting-champs-1-of-2-2019",
@@ -706,14 +756,16 @@
     "nickname": "1 of 2",
     "year": "2019",
     "date": "June 1, 2019",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/josh-hamilton-top-moments-the-batting-champs-1-of-2-2019.jpg"
   },
   {
     "id": "the-knight-king-game-of-thrones-night-2019",
     "title": "The Knight King",
     "nickname": "Game of Thrones Night",
     "year": "2019",
-    "date": "May 30, 2019"
+    "date": "May 30, 2019",
+    "imageUrl": "/bobbleheads/rangers-photos/the-knight-king-game-of-thrones-night-2019.jpg"
   },
   {
     "id": "gary-mathews-jr-top-moments-the-catch-2019",
@@ -729,7 +781,8 @@
     "nickname": "2 of 2",
     "year": "2019",
     "date": "April 20, 2019",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/michael-young-top-moments-the-batting-champs-2-of-2-2019.jpg"
   },
   {
     "id": "rougned-odor-game-of-thrones-rougned-hodor-2018",
@@ -745,7 +798,8 @@
     "nickname": "Mascot",
     "year": "2018",
     "date": "September 1, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/rangers-captain-mascot-2018.jpg"
   },
   {
     "id": "robinson-chirinos-removable-mask-2018",
@@ -753,14 +807,16 @@
     "nickname": "Removable Mask",
     "year": "2018",
     "date": "August 28, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/robinson-chirinos-removable-mask-2018.jpg"
   },
   {
     "id": "nomar-mazara-2018",
     "title": "Nomar Mazara",
     "year": "2018",
     "date": "August 18, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/nomar-mazara-2018.jpg"
   },
   {
     "id": "the-very-hungry-caterpillar-2018",
@@ -774,7 +830,8 @@
     "nickname": "First Rangers Manager",
     "year": "2018",
     "date": "August 5, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/ted-williams-first-rangers-manager-2018.jpg"
   },
   {
     "id": "vladimir-guerrero-hall-of-fame-2018",
@@ -782,7 +839,8 @@
     "nickname": "Hall of Fame",
     "year": "2018",
     "date": "August 4, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/vladimir-guerrero-hall-of-fame-2018.jpg"
   },
   {
     "id": "eric-nadel-40th-anniversary-microphone-2018",
@@ -806,7 +864,8 @@
     "nickname": "2 of 2",
     "year": "2018",
     "date": "July 21, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/elvis-andrus-best-friends-2-of-2-2018.jpg"
   },
   {
     "id": "celebration-snow-globe-2018",
@@ -821,7 +880,8 @@
     "nickname": "Rougie & Smokey the Horse",
     "year": "2018",
     "date": "June 30, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/rougned-odor-rougie-smokey-the-horse-2018.jpg"
   },
   {
     "id": "adrian-beltre-best-friends-1-of-2-2018",
@@ -829,7 +889,8 @@
     "nickname": "1 of 2",
     "year": "2018",
     "date": "June 16, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adrian-beltre-best-friends-1-of-2-2018.jpg"
   },
   {
     "id": "joey-gallo-tape-measure-2018",
@@ -837,13 +898,15 @@
     "nickname": "Tape Measure",
     "year": "2018",
     "date": "June 9, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/joey-gallo-tape-measure-2018.jpg"
   },
   {
     "id": "beltre-the-giraffe-2018",
     "title": "Beltre the Giraffe",
     "year": "2018",
-    "date": "June 8, 2018"
+    "date": "June 8, 2018",
+    "imageUrl": "/bobbleheads/rangers-photos/beltre-the-giraffe-2018.jpg"
   },
   {
     "id": "joey-gallo-star-wars-han-gallo-2018",
@@ -851,14 +914,16 @@
     "nickname": "Star Wars Han Gallo",
     "year": "2018",
     "date": "May 26, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/joey-gallo-star-wars-han-gallo-2018.jpg"
   },
   {
     "id": "elvis-andrus-2018",
     "title": "Elvis Andrus",
     "year": "2018",
     "date": "April 7, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/elvis-andrus-2018.jpg"
   },
   {
     "id": "adrian-beltre-home-run-counter-2018",
@@ -866,7 +931,8 @@
     "nickname": "Home Run Counter",
     "year": "2018",
     "date": "March 31, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adrian-beltre-home-run-counter-2018.jpg"
   },
   {
     "id": "jonathan-lucroy-star-wars-master-lucroy-2017",
@@ -874,7 +940,8 @@
     "nickname": "Star Wars Master Lucroy",
     "year": "2017",
     "date": "September 2, 2017",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/jonathan-lucroy-star-wars-master-lucroy-2017.jpg"
   },
   {
     "id": "adrian-beltre-starting-lineup-figurine-2017",
@@ -890,7 +957,8 @@
     "nickname": "Baseball HOF",
     "year": "2017",
     "date": "August 12, 2017",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/ivan-pudge-rodriguez-baseball-hof-2017.jpg"
   },
   {
     "id": "rougned-odor-high-five-2-of-2-2017",
@@ -898,7 +966,8 @@
     "nickname": "2 of 2",
     "year": "2017",
     "date": "July 29, 2017",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/rougned-odor-high-five-2-of-2-2017.jpg"
   },
   {
     "id": "jeff-bannister-game-of-thrones-house-banister-2017",
@@ -913,7 +982,8 @@
     "nickname": "Super Hero",
     "year": "2017",
     "date": "June 3, 2017",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rangers-photos/cole-hamels-super-hero-2017.jpg"
   },
   {
     "id": "elvis-andrus-high-five-1-of-2-2017",
@@ -921,7 +991,8 @@
     "nickname": "1 of 2",
     "year": "2017",
     "date": "May 13, 2017",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/elvis-andrus-high-five-1-of-2-2017.jpg"
   },
   {
     "id": "adrian-beltre-dancing-legs-2017",
@@ -929,14 +1000,16 @@
     "nickname": "Dancing Legs",
     "year": "2017",
     "date": "April 29, 2017",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adrian-beltre-dancing-legs-2017.jpg"
   },
   {
     "id": "colby-lewis-2016",
     "title": "Colby Lewis",
     "year": "2016",
     "date": "October 1, 2016",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/colby-lewis-2016.jpg"
   },
   {
     "id": "red-dot-racer-3-of-3-2016",
@@ -944,7 +1017,8 @@
     "nickname": "3 of 3",
     "year": "2016",
     "date": "September 3, 2016",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/red-dot-racer-3-of-3-2016.jpg"
   },
   {
     "id": "elvis-andrus-star-wars-landrus-calrissian-2016",
@@ -952,7 +1026,8 @@
     "nickname": "Star Wars Landrus Calrissian",
     "year": "2016",
     "date": "August 27, 2016",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/elvis-andrus-star-wars-landrus-calrissian-2016.jpg"
   },
   {
     "id": "adrian-beltre-removable-helmet-2016",
@@ -960,7 +1035,8 @@
     "nickname": "Removable Helmet",
     "year": "2016",
     "date": "August 14, 2016",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adrian-beltre-removable-helmet-2016.jpg"
   },
   {
     "id": "green-dot-racer-2-of-3-2016",
@@ -968,21 +1044,24 @@
     "nickname": "2 of 3",
     "year": "2016",
     "date": "July 31, 2016",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/green-dot-racer-2-of-3-2016.jpg"
   },
   {
     "id": "franchise-four-quad-2016",
     "title": "Franchise Four Quad",
     "year": "2016",
     "date": "July 30, 2016",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/franchise-four-quad-2016.jpg"
   },
   {
     "id": "cole-hamels-2016",
     "title": "Cole Hamels",
     "year": "2016",
     "date": "July 10, 2016",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/cole-hamels-2016.jpg"
   },
   {
     "id": "blue-dot-racer-1-of-3-2016",
@@ -990,21 +1069,24 @@
     "nickname": "1 of 3",
     "year": "2016",
     "date": "May 29, 2016",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/blue-dot-racer-1-of-3-2016.jpg"
   },
   {
     "id": "rougned-odor-2016",
     "title": "Rougned Odor",
     "year": "2016",
     "date": "May 14, 2016",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/rougned-odor-2016.jpg"
   },
   {
     "id": "jeff-banister-2016",
     "title": "Jeff Banister",
     "year": "2016",
     "date": "April 19, 2016",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/jeff-banister-2016.jpg"
   },
   {
     "id": "yu-darvish-garden-gnome-2015",
@@ -1019,21 +1101,24 @@
     "title": "Adrian Beltre",
     "year": "2015",
     "date": "August 16, 2015",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/adrian-beltre-2015.jpg"
   },
   {
     "id": "michael-young-2015",
     "title": "Michael Young",
     "year": "2015",
     "date": "July 12, 2015",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/michael-young-2015.jpg"
   },
   {
     "id": "prince-fielder-2015",
     "title": "Prince Fielder",
     "year": "2015",
     "date": "June 23, 2015",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/prince-fielder-2015.jpg"
   },
   {
     "id": "elvis-andrus-stolen-base-garden-gnome-2015",
@@ -1056,7 +1141,8 @@
     "title": "Shin-Soo Choo",
     "year": "2014",
     "date": "September 4, 2014",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/shin-soo-choo-2014.jpg"
   },
   {
     "id": "ivan-pudge-rodriguez-gold-glove-s-2014",
@@ -1064,7 +1150,8 @@
     "nickname": "s",
     "year": "2014",
     "date": "August 12, 2014",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/ivan-pudge-rodriguez-gold-glove-s-2014.jpg"
   },
   {
     "id": "eric-nadel-at-desk-2014",
@@ -1072,14 +1159,16 @@
     "nickname": "at desk",
     "year": "2014",
     "date": "July 12, 2014",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/eric-nadel-at-desk-2014.jpg"
   },
   {
     "id": "prince-fielder-2014",
     "title": "Prince Fielder",
     "year": "2014",
     "date": "May 18, 2014",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rangers-photos/prince-fielder-2014.jpg"
   },
   {
     "id": "yu-darvish-strikeout-king-2014",
@@ -1103,7 +1192,8 @@
     "nickname": "blue variant",
     "year": "2013",
     "date": "September 24, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rangers-photos/yu-darvish-k-counter-blue-variant-2013.jpg"
   },
   {
     "id": "rangers-garden-gnome-2013",
@@ -1133,7 +1223,8 @@
     "nickname": "Duster",
     "year": "2013",
     "date": "May 21, 2013",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/rangers-photos/nolan-ryan-duster-2013.jpg"
   },
   {
     "id": "ron-washington-2012",
