@@ -26,95 +26,109 @@
     "title": "William Contreras",
     "year": "2023",
     "date": "September 16, 2023",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/brewers-photos/william-contreras-2023.jpg"
   },
   {
     "id": "rowdy-tellez-2023",
     "title": "Rowdy Tellez",
     "year": "2023",
     "date": "August 26, 2023",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/brewers-photos/rowdy-tellez-2023.jpg"
   },
   {
     "id": "devin-williams-2023",
     "title": "Devin Williams",
     "year": "2023",
     "date": "August 5, 2023",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/brewers-photos/devin-williams-2023.jpg"
   },
   {
     "id": "cookie-monster-2023",
     "title": "Cookie Monster",
     "year": "2023",
-    "date": "July 8, 2023"
+    "date": "July 8, 2023",
+    "imageUrl": "/bobbleheads/brewers-photos/cookie-monster-2023.jpg"
   },
   {
     "id": "craig-counsell-indiana-jones-2023",
     "title": "Craig Counsell",
     "nickname": "Indiana Jones",
     "year": "2023",
-    "date": "June 17, 2023"
+    "date": "June 17, 2023",
+    "imageUrl": "/bobbleheads/brewers-photos/craig-counsell-indiana-jones-2023.jpg"
   },
   {
     "id": "paige-spiranac-2023",
     "title": "Paige Spiranac",
     "year": "2023",
-    "date": "June 16, 2023"
+    "date": "June 16, 2023",
+    "imageUrl": "/bobbleheads/brewers-photos/paige-spiranac-2023.jpg"
   },
   {
     "id": "ueck-skywalker-bob-uecker-2023",
     "title": "\"Ueck Skywalker\"",
     "nickname": "Bob Uecker",
     "year": "2023",
-    "date": "May 13, 2023"
+    "date": "May 13, 2023",
+    "imageUrl": "/bobbleheads/brewers-photos/ueck-skywalker-bob-uecker-2023.jpg"
   },
   {
     "id": "giannis-antetokounmpo-2022",
     "title": "Giannis Antetokounmpo",
     "year": "2022",
     "date": "September 11, 2022",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/giannis-antetokounmpo-2022.jpg"
   },
   {
     "id": "omar-narvaez-2022",
     "title": "Omar Narvaez",
     "year": "2022",
     "date": "July 24, 2022",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/omar-narvaez-2022.jpg"
   },
   {
     "id": "freddy-peralta-2022",
     "title": "Freddy Peralta",
     "year": "2022",
     "date": "July 10, 2022",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/freddy-peralta-2022.jpg"
   },
   {
     "id": "elmo-2022",
     "title": "Elmo",
     "year": "2022",
-    "date": "July 9, 2022"
+    "date": "July 9, 2022",
+    "imageUrl": "/bobbleheads/brewers-photos/elmo-2022.jpg"
   },
   {
     "id": "corbin-burnes-2022",
     "title": "Corbin Burnes",
     "year": "2022",
     "date": "June 26, 2022",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/corbin-burnes-2022.jpg"
   },
   {
     "id": "brandon-woodruff-2022",
     "title": "Brandon Woodruff",
     "year": "2022",
     "date": "June 5, 2022",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/brandon-woodruff-2022.jpg"
   },
   {
     "id": "willy-adames-2022",
     "title": "Willy Adames",
     "year": "2022",
     "date": "May 22, 2022",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/willy-adames-2022.jpg"
   },
   {
     "id": "bob-uecker-talking-2021",
@@ -122,7 +136,8 @@
     "nickname": "Talking",
     "year": "2021",
     "date": "September 26, 2021",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/bob-uecker-talking-2021.jpg"
   },
   {
     "id": "bob-uecker-wwe-2021",
@@ -130,7 +145,8 @@
     "nickname": "WWE",
     "year": "2021",
     "date": "September 25, 2021",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/bob-uecker-wwe-2021.jpg"
   },
   {
     "id": "ryan-braun-50th-anniversary-2021",
@@ -147,7 +163,8 @@
     "nickname": "Jedi",
     "year": "2021",
     "date": "September 4, 2021",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/lorenzo-cain-jedi-2021.jpg"
   },
   {
     "id": "ben-sheets-2000s-2021",
@@ -155,7 +172,8 @@
     "nickname": "2000s",
     "year": "2021",
     "date": "August 22, 2021",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/ben-sheets-2000s-2021.jpg"
   },
   {
     "id": "christian-yelich-30-sb-2021",
@@ -163,7 +181,8 @@
     "nickname": "30-SB",
     "year": "2021",
     "date": "August 8, 2021",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/christian-yelich-30-sb-2021.jpg"
   },
   {
     "id": "lorenzo-cain-gold-glove-2021",
@@ -171,7 +190,8 @@
     "nickname": "Gold Glove",
     "year": "2021",
     "date": "July 25, 2021",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/lorenzo-cain-gold-glove-2021.jpg"
   },
   {
     "id": "robin-yount-1990s-2021",
@@ -187,7 +207,8 @@
     "nickname": "1980s",
     "year": "2021",
     "date": "June 27, 2021",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/paul-molitor-1980s-2021.jpg"
   },
   {
     "id": "christian-yelich-40-hr-2021",
@@ -195,127 +216,147 @@
     "nickname": "40-HR",
     "year": "2021",
     "date": "June 13, 2021",
-    "quantity": "35,000"
+    "quantity": "35,000",
+    "imageUrl": "/bobbleheads/brewers-photos/christian-yelich-40-hr-2021.jpg"
   },
   {
     "id": "hank-aaron-1970s-2021",
     "title": "Hank Aaron",
     "nickname": "1970s",
     "year": "2021",
-    "date": "June 6, 2021"
+    "date": "June 6, 2021",
+    "imageUrl": "/bobbleheads/brewers-photos/hank-aaron-1970s-2021.jpg"
   },
   {
     "id": "woodstock-2021",
     "title": "Woodstock",
     "year": "2021",
-    "date": "June 5, 2021"
+    "date": "June 5, 2021",
+    "imageUrl": "/bobbleheads/brewers-photos/woodstock-2021.jpg"
   },
   {
     "id": "yasmani-grandal-2019",
     "title": "Yasmani Grandal",
     "year": "2019",
-    "date": "August 25, 2019"
+    "date": "August 25, 2019",
+    "imageUrl": "/bobbleheads/brewers-photos/yasmani-grandal-2019.jpg"
   },
   {
     "id": "scooby-doo-2019",
     "title": "Scooby-Doo",
     "year": "2019",
     "date": "August 24, 2019",
-    "quantity": "5,004"
+    "quantity": "5,004",
+    "imageUrl": "/bobbleheads/brewers-photos/scooby-doo-2019.jpg"
   },
   {
     "id": "josh-hader-2019",
     "title": "Josh Hader",
     "year": "2019",
-    "date": "August 11, 2019"
+    "date": "August 11, 2019",
+    "imageUrl": "/bobbleheads/brewers-photos/josh-hader-2019.jpg"
   },
   {
     "id": "cerveceros-sugar-skull-2019",
     "title": "Cerveceros Sugar Skull",
     "year": "2019",
-    "date": "July 13, 2019"
+    "date": "July 13, 2019",
+    "imageUrl": "/bobbleheads/brewers-photos/cerveceros-sugar-skull-2019.jpg"
   },
   {
     "id": "prince-fielder-2019",
     "title": "Prince Fielder",
     "year": "2019",
-    "date": "June 30, 2019"
+    "date": "June 30, 2019",
+    "imageUrl": "/bobbleheads/brewers-photos/prince-fielder-2019.jpg"
   },
   {
     "id": "lorenzo-cain-superhero-2019",
     "title": "Lorenzo Cain",
     "nickname": "Superhero",
     "year": "2019",
-    "date": "June 22, 2019"
+    "date": "June 22, 2019",
+    "imageUrl": "/bobbleheads/brewers-photos/lorenzo-cain-superhero-2019.jpg"
   },
   {
     "id": "christian-yelich-2019",
     "title": "Christian Yelich",
     "year": "2019",
-    "date": "June 9, 2019"
+    "date": "June 9, 2019",
+    "imageUrl": "/bobbleheads/brewers-photos/christian-yelich-2019.jpg"
   },
   {
     "id": "jeremy-jeffress-2019",
     "title": "Jeremy Jeffress",
     "year": "2019",
-    "date": "May 5, 2019"
+    "date": "May 5, 2019",
+    "imageUrl": "/bobbleheads/brewers-photos/jeremy-jeffress-2019.jpg"
   },
   {
     "id": "orlando-calrissian-orlando-arcia-2019",
     "title": "\"Orlando Calrissian\"",
     "nickname": "Orlando Arcia",
     "year": "2019",
-    "date": "May 4, 2019"
+    "date": "May 4, 2019",
+    "imageUrl": "/bobbleheads/brewers-photos/orlando-calrissian-orlando-arcia-2019.jpg"
   },
   {
     "id": "jesus-aguilar-2019",
     "title": "Jesus Aguilar",
     "year": "2019",
-    "date": "March 31, 2019"
+    "date": "March 31, 2019",
+    "imageUrl": "/bobbleheads/brewers-photos/jesus-aguilar-2019.jpg"
   },
   {
     "id": "ed-sedar-mini-2018",
     "title": "Ed Sedar",
     "nickname": "Mini",
     "year": "2018",
-    "date": "September 15, 2018"
+    "date": "September 15, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/ed-sedar-mini-2018.jpg"
   },
   {
     "id": "lorenzo-cain-2018",
     "title": "Lorenzo Cain",
     "year": "2018",
-    "date": "August 26, 2018"
+    "date": "August 26, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/lorenzo-cain-2018.jpg"
   },
   {
     "id": "brewers-themed-snoopy-2018",
     "title": "Brewers-Themed Snoopy",
     "year": "2018",
-    "date": "August 25, 2018"
+    "date": "August 25, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/brewers-themed-snoopy-2018.jpg"
   },
   {
     "id": "corey-knebel-king-in-the-north-2018",
     "title": "Corey Knebel",
     "nickname": "\"King in the North\"",
     "year": "2018",
-    "date": "August 7, 2018"
+    "date": "August 7, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/corey-knebel-king-in-the-north-2018.jpg"
   },
   {
     "id": "great-hambino-2018",
     "title": "\"Great Hambino\"",
     "year": "2018",
-    "date": "August 4, 2018"
+    "date": "August 4, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/great-hambino-2018.jpg"
   },
   {
     "id": "sugar-skull-2018",
     "title": "Sugar Skull",
     "year": "2018",
-    "date": "July 7, 2018"
+    "date": "July 7, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/sugar-skull-2018.jpg"
   },
   {
     "id": "gauntlet-2018",
     "title": "\"Gauntlet\"",
     "year": "2018",
-    "date": "June 24, 2018"
+    "date": "June 24, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/gauntlet-2018.jpg"
   },
   {
     "id": "bernie-brewer-yarn-mini-2018",
@@ -329,46 +370,53 @@
     "title": "Travis Shaw",
     "nickname": "\"Mayor of Ding Dong City\"",
     "year": "2018",
-    "date": "May 27, 2018"
+    "date": "May 27, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/travis-shaw-mayor-of-ding-dong-city-2018.jpg"
   },
   {
     "id": "famous-racing-sausage-2018",
     "title": "Famous Racing Sausage",
     "year": "2018",
-    "date": "May 5, 2018"
+    "date": "May 5, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/famous-racing-sausage-2018.jpg"
   },
   {
     "id": "braun-solo-ryan-braun-2018",
     "title": "\"Braun Solo\"",
     "nickname": "Ryan Braun",
     "year": "2018",
-    "date": "May 4, 2018"
+    "date": "May 4, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/braun-solo-ryan-braun-2018.jpg"
   },
   {
     "id": "eric-thames-2018",
     "title": "Eric Thames",
     "year": "2018",
-    "date": "April 22, 2018"
+    "date": "April 22, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/eric-thames-2018.jpg"
   },
   {
     "id": "captain-america-2018",
     "title": "Captain America",
     "year": "2018",
-    "date": "April 21, 2018"
+    "date": "April 21, 2018",
+    "imageUrl": "/bobbleheads/brewers-photos/captain-america-2018.jpg"
   },
   {
     "id": "bill-schroeder-disco-pose-2017",
     "title": "Bill Schroeder",
     "nickname": "Disco Pose",
     "year": "2017",
-    "date": "September 23, 2017"
+    "date": "September 23, 2017",
+    "imageUrl": "/bobbleheads/brewers-photos/bill-schroeder-disco-pose-2017.jpg"
   },
   {
     "id": "craig-counsell-mini-2017",
     "title": "Craig Counsell",
     "nickname": "Mini",
     "year": "2017",
-    "date": "September 2, 2017"
+    "date": "September 2, 2017",
+    "imageUrl": "/bobbleheads/brewers-photos/craig-counsell-mini-2017.jpg"
   },
   {
     "id": "bernie-brewer-iron-throne-2017",
@@ -381,44 +429,51 @@
     "id": "zach-davies-2017",
     "title": "Zach Davies",
     "year": "2017",
-    "date": "July 2, 2017"
+    "date": "July 2, 2017",
+    "imageUrl": "/bobbleheads/brewers-photos/zach-davies-2017.jpg"
   },
   {
     "id": "charlie-brown-2017",
     "title": "Charlie Brown",
     "year": "2017",
-    "date": "June 16, 2017"
+    "date": "June 16, 2017",
+    "imageUrl": "/bobbleheads/brewers-photos/charlie-brown-2017.jpg"
   },
   {
     "id": "stitch-n-pitch-2017",
     "title": "\"Stitch 'N Pitch\"",
     "year": "2017",
-    "date": "June 7, 2017"
+    "date": "June 7, 2017",
+    "imageUrl": "/bobbleheads/brewers-photos/stitch-n-pitch-2017.jpg"
   },
   {
     "id": "iron-man-2017",
     "title": "Iron Man",
     "year": "2017",
-    "date": "June 3, 2017"
+    "date": "June 3, 2017",
+    "imageUrl": "/bobbleheads/brewers-photos/iron-man-2017.jpg"
   },
   {
     "id": "robin-yount-2017",
     "title": "Robin Yount",
     "year": "2017",
-    "date": "May 28, 2017"
+    "date": "May 28, 2017",
+    "imageUrl": "/bobbleheads/brewers-photos/robin-yount-2017.jpg"
   },
   {
     "id": "jedi-keon-keon-broxton-2017",
     "title": "\"Jedi Keon\"",
     "nickname": "Keon Broxton",
     "year": "2017",
-    "date": "May 13, 2017"
+    "date": "May 13, 2017",
+    "imageUrl": "/bobbleheads/brewers-photos/jedi-keon-keon-broxton-2017.jpg"
   },
   {
     "id": "jonathan-villar-2017",
     "title": "Jonathan Villar",
     "year": "2017",
-    "date": "April 23, 2017"
+    "date": "April 23, 2017",
+    "imageUrl": "/bobbleheads/brewers-photos/jonathan-villar-2017.jpg"
   },
   {
     "id": "craig-counsell-2016",
@@ -430,14 +485,16 @@
     "id": "jimmy-nelson-2016",
     "title": "Jimmy Nelson",
     "year": "2016",
-    "date": "July 31, 2016"
+    "date": "July 31, 2016",
+    "imageUrl": "/bobbleheads/brewers-photos/jimmy-nelson-2016.jpg"
   },
   {
     "id": "ghostbusters-quad-2016",
     "title": "Ghostbusters",
     "nickname": "Quad",
     "year": "2016",
-    "date": "July 9, 2016"
+    "date": "July 9, 2016",
+    "imageUrl": "/bobbleheads/brewers-photos/ghostbusters-quad-2016.jpg"
   },
   {
     "id": "greg-vaughn-2016",
@@ -450,52 +507,60 @@
     "title": "Hank",
     "nickname": "Barking",
     "year": "2016",
-    "date": "June 12, 2016"
+    "date": "June 12, 2016",
+    "imageUrl": "/bobbleheads/brewers-photos/hank-barking-2016.jpg"
   },
   {
     "id": "stormin-gorman-gorman-thomas-stormtrooper-2016",
     "title": "\"Stormin' Gorman\"",
     "nickname": "Gorman Thomas, Stormtrooper",
     "year": "2016",
-    "date": "June 11, 2016"
+    "date": "June 11, 2016",
+    "imageUrl": "/bobbleheads/brewers-photos/stormin-gorman-gorman-thomas-stormtrooper-2016.jpg"
   },
   {
     "id": "barrelman-2016",
     "title": "Barrelman",
     "year": "2016",
-    "date": "June 9, 2016"
+    "date": "June 9, 2016",
+    "imageUrl": "/bobbleheads/brewers-photos/barrelman-2016.jpg"
   },
   {
     "id": "bernie-brewer-paint-your-own-2016",
     "title": "Bernie Brewer",
     "nickname": "Paint Your Own",
     "year": "2016",
-    "date": "May 26, 2016"
+    "date": "May 26, 2016",
+    "imageUrl": "/bobbleheads/brewers-photos/bernie-brewer-paint-your-own-2016.jpg"
   },
   {
     "id": "ryan-braun-2016",
     "title": "Ryan Braun",
     "year": "2016",
-    "date": "May 1, 2016"
+    "date": "May 1, 2016",
+    "imageUrl": "/bobbleheads/brewers-photos/ryan-braun-2016.jpg"
   },
   {
     "id": "jonathan-lucroy-superhero-2016",
     "title": "Jonathan Lucroy",
     "nickname": "Superhero",
     "year": "2016",
-    "date": "April 30, 2016"
+    "date": "April 30, 2016",
+    "imageUrl": "/bobbleheads/brewers-photos/jonathan-lucroy-superhero-2016.jpg"
   },
   {
     "id": "vintage-brewer-2016",
     "title": "Vintage Brewer",
     "year": "2016",
-    "date": "April 10, 2016"
+    "date": "April 10, 2016",
+    "imageUrl": "/bobbleheads/brewers-photos/vintage-brewer-2016.jpg"
   },
   {
     "id": "vintage-brewer-2015",
     "title": "Vintage Brewer",
     "year": "2015",
-    "date": "August 30, 2015"
+    "date": "August 30, 2015",
+    "imageUrl": "/bobbleheads/brewers-photos/vintage-brewer-2015.jpg"
   },
   {
     "id": "jonathan-lucroy-doubles-record-2015",
@@ -503,39 +568,45 @@
     "nickname": "Doubles Record",
     "year": "2015",
     "date": "August 16, 2015",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/brewers-photos/jonathan-lucroy-doubles-record-2015.jpg"
   },
   {
     "id": "bob-uecker-2015",
     "title": "Bob Uecker",
     "year": "2015",
-    "date": "August 9, 2015"
+    "date": "August 9, 2015",
+    "imageUrl": "/bobbleheads/brewers-photos/bob-uecker-2015.jpg"
   },
   {
     "id": "harry-doyle-bob-uecker-2015",
     "title": "Harry Doyle",
     "nickname": "Bob Uecker",
     "year": "2015",
-    "date": "July 21, 2015"
+    "date": "July 21, 2015",
+    "imageUrl": "/bobbleheads/brewers-photos/harry-doyle-bob-uecker-2015.jpg"
   },
   {
     "id": "khris-davis-2015",
     "title": "Khris Davis",
     "year": "2015",
-    "date": "July 19, 2015"
+    "date": "July 19, 2015",
+    "imageUrl": "/bobbleheads/brewers-photos/khris-davis-2015.jpg"
   },
   {
     "id": "paul-molitor-2015",
     "title": "Paul Molitor",
     "year": "2015",
-    "date": "June 28, 2015"
+    "date": "June 28, 2015",
+    "imageUrl": "/bobbleheads/brewers-photos/paul-molitor-2015.jpg"
   },
   {
     "id": "carlos-gomez-all-star-2015",
     "title": "Carlos Gomez",
     "nickname": "All-Star",
     "year": "2015",
-    "date": "June 14, 2015"
+    "date": "June 14, 2015",
+    "imageUrl": "/bobbleheads/brewers-photos/carlos-gomez-all-star-2015.jpg"
   },
   {
     "id": "hank-stitch-n-pitch-2015",
@@ -543,14 +614,16 @@
     "nickname": "Stitch 'N Pitch",
     "year": "2015",
     "date": "June 11, 2015",
-    "quantity": "1,400"
+    "quantity": "1,400",
+    "imageUrl": "/bobbleheads/brewers-photos/hank-stitch-n-pitch-2015.jpg"
   },
   {
     "id": "bud-selig-1970s-2015",
     "title": "Bud Selig",
     "nickname": "1970s",
     "year": "2015",
-    "date": "May 31, 2015"
+    "date": "May 31, 2015",
+    "imageUrl": "/bobbleheads/brewers-photos/bud-selig-1970s-2015.jpg"
   },
   {
     "id": "jonathan-lucroy-jedi-luc-2015",
@@ -558,7 +631,8 @@
     "nickname": "\"Jedi Luc\"",
     "year": "2015",
     "date": "May 30, 2015",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/brewers-photos/jonathan-lucroy-jedi-luc-2015.jpg"
   },
   {
     "id": "hank-mothers-day-2015",
@@ -566,82 +640,95 @@
     "nickname": "Mother's Day",
     "year": "2015",
     "date": "May 10, 2015",
-    "quantity": "1,400"
+    "quantity": "1,400",
+    "imageUrl": "/bobbleheads/brewers-photos/hank-mothers-day-2015.jpg"
   },
   {
     "id": "wily-peralta-2015",
     "title": "Wily Peralta",
     "year": "2015",
-    "date": "April 26, 2015"
+    "date": "April 26, 2015",
+    "imageUrl": "/bobbleheads/brewers-photos/wily-peralta-2015.jpg"
   },
   {
     "id": "jonathan-lucroy-2015",
     "title": "Jonathan Lucroy",
     "year": "2015",
     "date": "April 20, 2015",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/brewers-photos/jonathan-lucroy-2015.jpg"
   },
   {
     "id": "rob-deer-2015",
     "title": "Rob Deer",
     "year": "2015",
-    "date": "April 12, 2015"
+    "date": "April 12, 2015",
+    "imageUrl": "/bobbleheads/brewers-photos/rob-deer-2015.jpg"
   },
   {
     "id": "robin-yount-2014",
     "title": "Robin Yount",
     "year": "2014",
-    "date": "September 14, 2014"
+    "date": "September 14, 2014",
+    "imageUrl": "/bobbleheads/brewers-photos/robin-yount-2014.jpg"
   },
   {
     "id": "jean-segura-2014",
     "title": "Jean Segura",
     "year": "2014",
     "date": "August 24, 2014",
-    "quantity": "6,000"
+    "quantity": "6,000",
+    "imageUrl": "/bobbleheads/brewers-photos/jean-segura-2014.jpg"
   },
   {
     "id": "chorizo-2014",
     "title": "Chorizo",
     "year": "2014",
-    "date": "August 10, 2014"
+    "date": "August 10, 2014",
+    "imageUrl": "/bobbleheads/brewers-photos/chorizo-2014.jpg"
   },
   {
     "id": "jim-henderson-2014",
     "title": "Jim Henderson",
     "year": "2014",
-    "date": "July 27, 2014"
+    "date": "July 27, 2014",
+    "imageUrl": "/bobbleheads/brewers-photos/jim-henderson-2014.jpg"
   },
   {
     "id": "scooter-gennett-2014",
     "title": "Scooter Gennett",
     "year": "2014",
-    "date": "June 29, 2014"
+    "date": "June 29, 2014",
+    "imageUrl": "/bobbleheads/brewers-photos/scooter-gennett-2014.jpg"
   },
   {
     "id": "vintage-brewer-2014",
     "title": "Vintage Brewer",
     "year": "2014",
-    "date": "June 25, 2014"
+    "date": "June 25, 2014",
+    "imageUrl": "/bobbleheads/brewers-photos/vintage-brewer-2014.jpg"
   },
   {
     "id": "kyle-lohse-2014",
     "title": "Kyle Lohse",
     "year": "2014",
-    "date": "May 11, 2014"
+    "date": "May 11, 2014",
+    "imageUrl": "/bobbleheads/brewers-photos/kyle-lohse-2014.jpg"
   },
   {
     "id": "carlos-gomez-gold-glove-2014",
     "title": "Carlos Gomez",
     "nickname": "Gold Glove",
     "year": "2014",
-    "date": "April 27, 2014"
+    "date": "April 27, 2014",
+    "imageUrl": "/bobbleheads/brewers-photos/carlos-gomez-gold-glove-2014.jpg"
   },
   {
     "id": "ben-oglivie-2013",
     "title": "Ben Oglivie",
     "year": "2013",
-    "date": "September 15, 2013"
+    "date": "September 15, 2013",
+    "imageUrl": "/bobbleheads/brewers-photos/ben-oglivie-2013.jpg"
   },
   {
     "id": "gorman-thomas-2013",
@@ -653,51 +740,59 @@
     "id": "harvey-kuenn-2013",
     "title": "Harvey Kuenn",
     "year": "2013",
-    "date": "August 4, 2013"
+    "date": "August 4, 2013",
+    "imageUrl": "/bobbleheads/brewers-photos/harvey-kuenn-2013.jpg"
   },
   {
     "id": "hank-aaron-2013",
     "title": "Hank Aaron",
     "year": "2013",
-    "date": "July 7, 2013"
+    "date": "July 7, 2013",
+    "imageUrl": "/bobbleheads/brewers-photos/hank-aaron-2013.jpg"
   },
   {
     "id": "polish-racing-sausage-2013",
     "title": "Polish Racing Sausage",
     "year": "2013",
-    "date": "June 23, 2013"
+    "date": "June 23, 2013",
+    "imageUrl": "/bobbleheads/brewers-photos/polish-racing-sausage-2013.jpg"
   },
   {
     "id": "carlos-gomez-2013",
     "title": "Carlos Gomez",
     "year": "2013",
-    "date": "June 9, 2013"
+    "date": "June 9, 2013",
+    "imageUrl": "/bobbleheads/brewers-photos/carlos-gomez-2013.jpg"
   },
   {
     "id": "ryan-braun-2013",
     "title": "Ryan Braun",
     "year": "2013",
     "date": "May 26, 2013",
-    "quantity": "2,000"
+    "quantity": "2,000",
+    "imageUrl": "/bobbleheads/brewers-photos/ryan-braun-2013.jpg"
   },
   {
     "id": "corey-hart-1913-anniversary-2013",
     "title": "Corey Hart",
     "nickname": "1913 Anniversary",
     "year": "2013",
-    "date": "May 5, 2013"
+    "date": "May 5, 2013",
+    "imageUrl": "/bobbleheads/brewers-photos/corey-hart-1913-anniversary-2013.jpg"
   },
   {
     "id": "george-scott-2013",
     "title": "George Scott",
     "year": "2013",
-    "date": "April 21, 2013"
+    "date": "April 21, 2013",
+    "imageUrl": "/bobbleheads/brewers-photos/george-scott-2013.jpg"
   },
   {
     "id": "norichika-aoki-2013",
     "title": "Norichika Aoki",
     "year": "2013",
-    "date": "April 7, 2013"
+    "date": "April 7, 2013",
+    "imageUrl": "/bobbleheads/brewers-photos/norichika-aoki-2013.jpg"
   },
   {
     "id": "aramis-ramirez-2012",
