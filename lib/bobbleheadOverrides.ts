@@ -10,6 +10,9 @@ export type BobbleheadOverride = {
   year: string | null;
   date: string | null;
   deleted: boolean;
+  // Curated listings carry a seed photo in data/giveaways/*.json that isn't a
+  // DB row, so removing it is recorded here rather than by deleting anything.
+  photoHidden: boolean;
 };
 
 // `seed` carries the override already resolved on the server (see
@@ -29,7 +32,7 @@ export function useBobbleheadOverride(
 
     supabase
       .from("bobblehead_overrides")
-      .select("title, nickname, quantity, year, date, deleted")
+      .select("title, nickname, quantity, year, date, deleted, photo_hidden")
       .eq("team_slug", teamSlug)
       .eq("bobblehead_id", bobbleheadId)
       .maybeSingle()
@@ -40,7 +43,19 @@ export function useBobbleheadOverride(
           console.error("Failed to load bobblehead override:", error.message);
           setOverride(null);
         } else {
-          setOverride(data ?? null);
+          setOverride(
+            data
+              ? {
+                  title: data.title,
+                  nickname: data.nickname,
+                  quantity: data.quantity,
+                  year: data.year,
+                  date: data.date,
+                  deleted: data.deleted,
+                  photoHidden: data.photo_hidden,
+                }
+              : null,
+          );
         }
 
         setIsLoading(false);
@@ -76,7 +91,7 @@ const NONE: BobbleheadOverridesLookup = { isDeleted: () => false, getOverride: (
 export async function fetchBobbleheadOverrides(): Promise<BobbleheadOverridesLookup> {
   const { data, error } = await supabase
     .from("bobblehead_overrides")
-    .select("team_slug, bobblehead_id, title, nickname, quantity, year, date, deleted");
+    .select("team_slug, bobblehead_id, title, nickname, quantity, year, date, deleted, photo_hidden");
 
   if (error) {
     console.error("Failed to load bobblehead overrides:", error.message);
@@ -86,7 +101,15 @@ export async function fetchBobbleheadOverrides(): Promise<BobbleheadOverridesLoo
   const byKey = new Map(
     (data ?? []).map((row) => [
       overrideKey(row.team_slug, row.bobblehead_id),
-      { title: row.title, nickname: row.nickname, quantity: row.quantity, year: row.year, date: row.date, deleted: row.deleted },
+      {
+        title: row.title,
+        nickname: row.nickname,
+        quantity: row.quantity,
+        year: row.year,
+        date: row.date,
+        deleted: row.deleted,
+        photoHidden: row.photo_hidden,
+      },
     ]),
   );
 

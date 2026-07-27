@@ -15,7 +15,7 @@ import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { useToast } from "@/components/Toast";
 import { WantedButton } from "@/components/WantedButton";
 import { useAdminAuth } from "@/lib/adminAuth";
-import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, saveCuratedBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
+import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, hideCuratedSeedPhoto, saveCuratedBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
@@ -58,6 +58,7 @@ export function CuratedBobbleheadPage({
   const [localOverride, setLocalOverride] = useState<EditBobbleheadValues | null>(null);
   const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
   const [mainPhotoRemoved, setMainPhotoRemoved] = useState(false);
+  const [seedPhotoRemoved, setSeedPhotoRemoved] = useState(false);
 
   // The page itself is statically generated from the hardcoded giveaway list,
   // so a listing the admin deleted still has a route — the tombstone is what
@@ -91,14 +92,17 @@ export function CuratedBobbleheadPage({
   // Year is no longer edited directly — it's derived from the date, keeping
   // the stored year when the date doesn't carry one ("N/A").
   const year = extractYear(date, override?.year ?? giveaway.year);
-  // The removable "main photo" is an approved_photos row (or one the admin
-  // just uploaded); the curated seed imageUrl is build-time data and stays.
-  const removableMainPhotoUrl = mainPhotoRemoved ? null : (localImageUrl ?? photoUrlById[giveaway.id] ?? null);
+  // Two layers can supply the profile photo. The approved_photos row (or one the
+  // admin just uploaded) sits on top and is removed by deleting it; underneath
+  // is the curated seed imageUrl, build-time data with no row of its own, which
+  // is removed by flagging the override instead (photoHidden).
+  const approvedMainPhotoUrl = mainPhotoRemoved ? null : (localImageUrl ?? photoUrlById[giveaway.id] ?? null);
+  const seedPhotoUrl = seedPhotoRemoved || override?.photoHidden ? null : (giveaway.imageUrl ?? null);
+  const mainPhotoUrl = approvedMainPhotoUrl ?? seedPhotoUrl;
   // With no profile photo of its own, a listing borrows its first gallery
   // photo as the profile image rather than showing the team placeholder.
   const galleryFallbackUrl = galleryPhotos[0]?.imageUrl ?? null;
-  const imageSrc =
-    removableMainPhotoUrl ?? giveaway.imageUrl ?? galleryFallbackUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+  const imageSrc = mainPhotoUrl ?? galleryFallbackUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
   // Don't show the photo twice when it's standing in as the profile image.
   const galleryPhotosToShow = galleryPhotos.filter((photo) => photo.imageUrl !== imageSrc);
   const isOwned = ownedById[giveaway.id] ?? false;
@@ -142,12 +146,24 @@ export function CuratedBobbleheadPage({
     router.replace(`/teams/${team.slug}`);
   };
 
+  // Peels off one layer at a time: with an approved photo showing, this removes
+  // it and reveals whatever curated seed photo was underneath; a second removal
+  // hides the seed too. That keeps the pre-existing "fall back to the seed"
+  // behavior intact while still letting a seed photo be cleared.
   const handleRemoveMainPhoto = async () => {
+    if (!approvedMainPhotoUrl) {
+      if (!adminUser) return;
+
+      await hideCuratedSeedPhoto({ user: adminUser, teamSlug: team.slug, bobbleheadId: giveaway.id });
+      setSeedPhotoRemoved(true);
+      return;
+    }
+
     await deleteMainPhoto({
       teamSlug: team.slug,
       bobbleheadId: giveaway.id,
       source: "curated",
-      imageUrl: removableMainPhotoUrl,
+      imageUrl: approvedMainPhotoUrl,
     });
     setLocalImageUrl(null);
     setMainPhotoRemoved(true);
@@ -171,8 +187,9 @@ export function CuratedBobbleheadPage({
       // The photo currently serving as the profile image moves down into the
       // gallery. The curated seed counts (it's what shows with no approved
       // photo); the gallery-fallback and team placeholder don't — the fallback
-      // is already a gallery row and the placeholder isn't a real photo.
-      const previousMainUrl = removableMainPhotoUrl ?? giveaway.imageUrl ?? null;
+      // is already a gallery row and the placeholder isn't a real photo. A seed
+      // the admin already removed doesn't come back this way either.
+      const previousMainUrl = mainPhotoUrl;
       const { demotedPhoto } = await setGalleryPhotoAsMain({
         user: adminUser,
         teamSlug: team.slug,
@@ -365,7 +382,7 @@ export function CuratedBobbleheadPage({
           initial={{ title, nickname: nickname ?? "", quantity: quantity ?? "", date }}
           onSave={handleEditSave}
           onDelete={handleDelete}
-          onRemovePhoto={removableMainPhotoUrl ? handleRemoveMainPhoto : undefined}
+          onRemovePhoto={mainPhotoUrl ? handleRemoveMainPhoto : undefined}
         />
       ) : null}
     </main>

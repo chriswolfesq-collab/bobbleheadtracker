@@ -22,8 +22,9 @@ export function EditBobbleheadDialog({
   initial: EditBobbleheadValues;
   onSave: (values: EditBobbleheadValues, file: File | null) => Promise<void>;
   onDelete: () => Promise<void>;
-  // Only passed when the listing has a removable photo (an approved_photos
-  // row or a community image), not for build-time curated seed photos.
+  // Only passed when a photo is actually on screen to remove. For a curated
+  // listing with both an approved photo and a seed photo it takes two removals:
+  // the first reveals the seed, the second clears it.
   onRemovePhoto?: () => Promise<void>;
 }) {
   const [title, setTitle] = useState(initial.title);

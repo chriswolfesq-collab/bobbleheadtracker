@@ -328,6 +328,11 @@ alter table public.bobblehead_overrides
 alter table public.bobblehead_overrides
   add column if not exists quantity text;
 
+-- Suppresses the curated seed photo baked into data/giveaways/*.json, which has
+-- no approved_photos row to delete. See supabase/hide_curated_photo.sql.
+alter table public.bobblehead_overrides
+  add column if not exists photo_hidden boolean not null default false;
+
 create table if not exists public.submissions (
   id uuid primary key default gen_random_uuid(),
   kind text not null check (kind in ('photo_for_existing', 'new_bobblehead')),

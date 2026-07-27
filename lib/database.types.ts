@@ -86,6 +86,7 @@ export type Database = {
           date: string | null
           deleted: boolean
           nickname: string | null
+          photo_hidden: boolean
           quantity: string | null
           team_slug: string
           title: string | null
@@ -98,6 +99,7 @@ export type Database = {
           date?: string | null
           deleted?: boolean
           nickname?: string | null
+          photo_hidden?: boolean
           quantity?: string | null
           team_slug: string
           title?: string | null
@@ -110,6 +112,7 @@ export type Database = {
           date?: string | null
           deleted?: boolean
           nickname?: string | null
+          photo_hidden?: boolean
           quantity?: string | null
           team_slug?: string
           title?: string | null

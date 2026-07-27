@@ -341,7 +341,9 @@ export function TeamPageClient({
           nickname: override?.nickname ?? giveaway.nickname ?? null,
           year: override?.year ?? giveaway.year,
           date: override?.date ?? giveaway.date,
-          imageUrl: photoUrlById[giveaway.id] ?? giveaway.imageUrl,
+          // A removed seed photo leaves nothing behind, so the card falls back
+          // to the team placeholder — same as a listing that never had one.
+          imageUrl: photoUrlById[giveaway.id] ?? (override?.photoHidden ? undefined : giveaway.imageUrl),
           source: "curated",
         };
       });

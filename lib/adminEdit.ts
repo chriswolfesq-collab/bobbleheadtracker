@@ -253,6 +253,40 @@ export async function deleteMainPhoto({
   }
 }
 
+// Clears a curated listing's seed photo — the imageUrl baked into
+// data/giveaways/*.json at build time. There's no row to delete and no file we
+// own, so removal is a flag on the override row instead; the detail and team
+// pages fall through to the gallery photo or team placeholder once it's set.
+// Only reachable when the seed image is the one actually on screen: with an
+// approved photo layered on top, "remove" peels that off first and reveals the
+// seed, same as before.
+export async function hideCuratedSeedPhoto({
+  user,
+  teamSlug,
+  bobbleheadId,
+}: {
+  user: User;
+  teamSlug: string;
+  bobbleheadId: string;
+}) {
+  const { data, error } = await supabase
+    .from("bobblehead_overrides")
+    .upsert({
+      team_slug: teamSlug,
+      bobblehead_id: bobbleheadId,
+      photo_hidden: true,
+      updated_by: user.id,
+      updated_at: new Date().toISOString(),
+    })
+    .select();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  assertPersisted(data, "The photo");
+}
+
 // Deletes the listing and everything attached to it (photos, gallery,
 // ownership, favorites, reports). Irreversible from the UI: a deleted curated
 // listing can only come back by clearing its `deleted` flag in the SQL editor.
