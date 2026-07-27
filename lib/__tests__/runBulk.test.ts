@@ -44,29 +44,20 @@ describe("runBulk", () => {
   it("never runs more than `concurrency` actions at once", async () => {
     let active = 0;
     let peak = 0;
-    const resolvers: Array<() => void> = [];
 
-    const action = () =>
-      new Promise<void>((resolve) => {
-        active += 1;
-        peak = Math.max(peak, active);
-        resolvers.push(() => {
-          active -= 1;
-          resolve();
-        });
-      });
+    // Each action parks on a timer, so every worker that is allowed to start
+    // overlaps with the others and `peak` records the real high-water mark. An
+    // unbounded runBulk would reach 5 here rather than the requested 2.
+    const action = async () => {
+      active += 1;
+      peak = Math.max(peak, active);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      active -= 1;
+    };
 
-    const promise = runBulk([1, 2, 3, 4, 5], action, { concurrency: 2 });
+    await runBulk([1, 2, 3, 4, 5], action, { concurrency: 2 });
 
-    // Drain the queued actions a tick at a time so the peak can be observed.
-    while (resolvers.length < 5) {
-      await Promise.resolve();
-      resolvers.shift()?.();
-    }
-    resolvers.forEach((resolve) => resolve());
-    await promise;
-
-    expect(peak).toBeLessThanOrEqual(2);
+    expect(peak).toBe(2);
   });
 
   it("does nothing for an empty list", async () => {
