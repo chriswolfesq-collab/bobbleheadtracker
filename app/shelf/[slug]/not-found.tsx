@@ -18,8 +18,8 @@ export default function ShelfNotFound() {
       <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-accent/80">
         MLB Bobblehead Shelf
       </p>
-      <h1 className="mt-3 text-2xl font-black text-zinc-900 dark:text-white">This shelf isn&apos;t here</h1>
-      <p className="mt-2 max-w-sm text-sm text-zinc-600 dark:text-zinc-400">
+      <h1 className="mt-3 text-2xl font-black text-zinc-900">This shelf isn&apos;t here</h1>
+      <p className="mt-2 max-w-sm text-sm text-zinc-600">
         The link may be wrong, or its owner has made their shelf private.
       </p>
 

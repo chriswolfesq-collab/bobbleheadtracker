@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { createContext, memo, useContext, useMemo } from "react";
 import { BobbleheadImage } from "@/components/BobbleheadImage";
-import { BobbleheadTitle } from "@/components/BobbleheadTitle";
+import { resolveTitleParts } from "@/components/BobbleheadTitle";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { WantedButton } from "@/components/WantedButton";
 import type { Giveaway } from "@/lib/bobbleheads";
@@ -171,13 +171,28 @@ function GiveawayCardInner({
   const isWanted = wantedById[giveaway.id] ?? false;
   const href =
     giveaway.source === "community"
-      ? `/teams/${team.slug}/community?id=${encodeURIComponent(giveaway.id)}`
+      ? `/teams/${team.slug}/community/${encodeURIComponent(giveaway.id)}`
       : `/teams/${team.slug}/bobbleheads/${giveaway.id}`;
   const fullTitle = giveaway.title;
   const imageSrc = giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+  const { primary, secondary } = resolveTitleParts(fullTitle, giveaway.nickname);
+  // Player names stay on one line; longer names shrink instead of wrapping.
+  const nameSizeClass =
+    primary.length > 22
+      ? "text-[10px] sm:text-xs"
+      : primary.length > 16
+        ? "text-[11px] sm:text-sm"
+        : "text-xs sm:text-base";
+
+  // Marking something owned also removes it from the wanted list — you no
+  // longer "want" what's on your shelf (un-owning doesn't re-add it).
+  const handleToggleOwned = () => {
+    if (!isOwned && isWanted) toggleWanted(giveaway.id);
+    toggleOwned(giveaway.id);
+  };
 
   return (
-    <article className="relative flex h-full flex-col overflow-hidden rounded-lg border border-black/10 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] dark:border-white/10 dark:bg-[#102032]">
+    <article className="relative flex h-full flex-col overflow-hidden rounded-xl border border-border-soft bg-white shadow-sm transition hover:shadow-md">
       <button
         type="button"
         aria-pressed={isOwned}
@@ -188,15 +203,15 @@ function GiveawayCardInner({
             : `${fullTitle} is ${isOwned ? "owned" : "not owned"} — log in to track`
         }
         title={isLoggedIn ? (isOwned ? "Remove as owned" : "Mark as owned") : "Log in to track"}
-        onClick={() => toggleOwned(giveaway.id)}
-        className="absolute left-3 top-3 z-10 grid h-6 w-6 place-items-center rounded border border-zinc-300/80 bg-white/80 text-xs text-zinc-800 transition hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed enabled:cursor-pointer dark:bg-[#0a1522]/80 dark:text-zinc-200"
+        onClick={handleToggleOwned}
+        className="absolute left-3 top-3 z-10 grid h-6 w-6 place-items-center rounded border border-zinc-300 bg-white/90 text-xs text-zinc-800 shadow-sm transition hover:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed enabled:cursor-pointer"
       >
         {isOwned ? (
-          <span className="grid h-full w-full place-items-center rounded bg-green-500 font-black text-[#06110a]">
+          <span className="grid h-full w-full place-items-center rounded bg-green-600 font-black text-white">
             ✓
           </span>
         ) : isLoggedIn && !ownershipKnown ? (
-          <span aria-hidden className="h-full w-full animate-pulse rounded bg-black/10 dark:bg-white/10" />
+          <span aria-hidden className="h-full w-full animate-pulse rounded bg-black/10" />
         ) : null}
       </button>
 
@@ -205,18 +220,20 @@ function GiveawayCardInner({
           isWanted={isWanted}
           isLoggedIn={isLoggedInForWanted}
           onToggle={() => toggleWanted(giveaway.id)}
+          itemLabel={fullTitle}
           className="h-6 w-6 text-sm"
         />
         <FavoriteButton
           isFavorited={isFavorited}
           isLoggedIn={isLoggedInForFavorites}
           onToggle={() => toggleFavorited(giveaway.id)}
+          itemLabel={fullTitle}
           className="h-6 w-6 text-sm"
         />
       </div>
 
       <Link href={href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
-        <div className="relative flex h-32 items-end justify-center bg-[radial-gradient(circle_at_50%_22%,rgba(255,255,255,0.14),rgba(255,255,255,0)_42%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.22))] px-3 pt-4 sm:h-52 sm:px-4 sm:pt-6">
+        <div className="relative flex h-32 items-end justify-center bg-[radial-gradient(circle_at_50%_18%,#ffffff,#f2ead9_78%)] px-3 pt-4 sm:h-52 sm:px-4 sm:pt-6">
           <BobbleheadImage
             src={imageSrc}
             alt={`${fullTitle} bobblehead`}
@@ -224,41 +241,48 @@ function GiveawayCardInner({
             height={630}
             eager={eager}
             unoptimized={isUnoptimizedImage(imageSrc)}
-            className="relative h-24 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.6)] sm:h-44"
+            className="relative h-24 w-auto object-contain mix-blend-multiply drop-shadow-[0_10px_12px_rgba(58,36,18,0.35)] sm:h-44"
           />
         </div>
       </Link>
 
       {/* flex-1 + mt-auto keep the Owned button pinned to the card's bottom
           edge, so neighboring cards stay aligned even when one has an extra
-          nickname/detail line and the other doesn't. */}
-      <div className="flex flex-1 flex-col border-t border-black/[0.06] bg-slate-50 px-2.5 pb-2.5 pt-2.5 text-center dark:border-white/[0.04] dark:bg-[#0d1a29]/70 sm:min-h-40 sm:px-4 sm:pb-3 sm:pt-3">
-        <h2 className="text-xs font-bold leading-tight text-zinc-900 dark:text-white sm:text-base">
-          <BobbleheadTitle title={fullTitle} nickname={giveaway.nickname} />
+          descriptor line and the other doesn't. */}
+      <div className="flex flex-1 flex-col border-t border-border-soft bg-surface px-2.5 pb-2.5 pt-2.5 text-center sm:min-h-36 sm:px-4 sm:pb-3 sm:pt-3">
+        <h2
+          className={`overflow-hidden whitespace-nowrap font-bold leading-tight text-navy ${nameSizeClass}`}
+        >
+          {primary}
         </h2>
-        <p className="mt-1.5 text-[11px] text-zinc-700 dark:text-zinc-300 sm:mt-3 sm:text-sm">{giveaway.date}</p>
+        {secondary ? (
+          <p className="mt-0.5 truncate text-[10px] font-semibold text-zinc-600 sm:text-xs">
+            {secondary}
+          </p>
+        ) : null}
+        <p className="mt-1 text-[11px] text-zinc-600 sm:mt-2 sm:text-sm">{giveaway.date}</p>
 
         <div className="mt-auto pt-2 sm:pt-3">
           <button
             type="button"
             aria-pressed={isOwned}
             disabled={!isLoggedIn || !ownershipKnown}
-            className={`w-full rounded px-2 py-2 text-[10px] font-bold uppercase tracking-wide transition disabled:cursor-not-allowed disabled:opacity-50 sm:text-xs ${
+            className={`w-full rounded px-2 py-2 text-[10px] font-black uppercase tracking-wide transition disabled:cursor-not-allowed disabled:opacity-50 sm:text-xs ${
               isLoggedIn && !ownershipKnown
-                ? "border border-black/10 text-zinc-500 dark:border-white/15 dark:text-zinc-400"
+                ? "border border-border-soft text-zinc-500"
                 : isOwned
-                  ? "bg-green-500 text-[#06110a] hover:bg-green-400"
-                  : "border border-accent text-accent hover:bg-accent-hover hover:text-accent-fg"
+                  ? "bg-green-600 text-white hover:bg-green-500"
+                  : "bg-accent text-accent-fg hover:bg-accent-hover"
             }`}
-            onClick={() => toggleOwned(giveaway.id)}
+            onClick={handleToggleOwned}
           >
             {!isLoggedIn
               ? "Log in to track"
               : !ownershipKnown
                 ? "…"
                 : isOwned
-                  ? "✓ Owned"
-                  : "Mark as Owned"}
+                  ? "✓ I Own It"
+                  : "I Own It"}
           </button>
         </div>
       </div>

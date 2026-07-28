@@ -38,7 +38,7 @@
     "nickname": "Backflip",
     "year": "2025",
     "date": "July 24, 2025",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCKMf6-EPC5xt3PX_fnCbNF5WIzZaCPTwuvg&s",
+    "imageUrl": "/bobbleheads/cardinals-photos/ozzie-smith-2025.jpg",
     "quantity": "20,000"
   },
   {
@@ -76,7 +76,7 @@
     "title": "Scott Rolen",
     "year": "2024",
     "date": "August 17, 2024",
-    "imageUrl": "https://i.ebayimg.com/00/s/MTYwMFgxNjAw/z/3d4AAOSwOh5mgh6u/$_57.JPG?set_id=880000500F",
+    "imageUrl": "/bobbleheads/cardinals-photos/scott-rolen-2024.jpg",
     "quantity": "25,000"
   },
   {
@@ -85,7 +85,7 @@
     "year": "2024",
     "date": "September 20, 2024",
     "quantity": "25,000",
-    "imageUrl": "/bobbleheads/cardinals-photos/lars-nootbaar-2024.jpg"
+    "imageUrl": null
   },
   {
     "id": "yadier-molina-albert-pujols-mystery-pitching-2023",
@@ -990,7 +990,7 @@
     "nickname": "Mini",
     "year": "2016",
     "date": "September 27, 2016",
-    "imageUrl": "/bobbleheads/cardinals-photos/randy-flores-mini-2016.jpg"
+    "imageUrl": null
   },
   {
     "id": "david-eckstein-2016",

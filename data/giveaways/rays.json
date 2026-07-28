@@ -33,7 +33,7 @@
     "year": "2024",
     "date": "September 1, 2024",
     "quantity": "12,000",
-    "imageUrl": "/bobbleheads/rays-photos/fred-mcgriff-2024.jpg"
+    "imageUrl": null
   },
   {
     "id": "peter-fairbanks-2024",
@@ -114,14 +114,14 @@
     "title": "Tyler Glasnow",
     "year": "2021",
     "date": "August 21, 2021",
-    "imageUrl": "/bobbleheads/rays-photos/tyler-glasnow-2021.jpg"
+    "imageUrl": null
   },
   {
     "id": "austin-meadows-2021",
     "title": "Austin Meadows",
     "year": "2021",
     "date": "July 6, 2021",
-    "imageUrl": "/bobbleheads/rays-photos/austin-meadows-2021.jpg"
+    "imageUrl": null
   },
   {
     "id": "brandon-lowe-delayed-2021",
@@ -166,7 +166,8 @@
     "title": "Jake Bauers & Willy Adames",
     "nickname": "Double, Season Ticket Holders",
     "year": "2019",
-    "date": "2019"
+    "date": "2019",
+    "distribution": "STH Reward"
   },
   {
     "id": "blake-snell-season-ticket-holders-2019",
@@ -174,7 +175,8 @@
     "nickname": "Season Ticket Holders",
     "year": "2019",
     "date": "2019",
-    "imageUrl": "/bobbleheads/rays-photos/blake-snell-season-ticket-holders-2019.jpg"
+    "imageUrl": "/bobbleheads/rays-photos/blake-snell-season-ticket-holders-2019.jpg",
+    "distribution": "STH Reward"
   },
   {
     "id": "dan-johnson-2018",
@@ -217,7 +219,8 @@
     "nickname": "Fan Fest, Game 162",
     "year": "2018",
     "date": "2018",
-    "imageUrl": "/bobbleheads/rays-photos/evan-longoria-fan-fest-game-162-2018.jpg"
+    "imageUrl": "/bobbleheads/rays-photos/evan-longoria-fan-fest-game-162-2018.jpg",
+    "distribution": "Fan Reward"
   },
   {
     "id": "blake-snell-2017",

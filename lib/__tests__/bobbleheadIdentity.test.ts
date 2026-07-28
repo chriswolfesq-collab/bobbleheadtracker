@@ -10,13 +10,13 @@ describe("bobbleheadHref", () => {
 
   it("links community-only listings through the community view with the id as a query param", () => {
     expect(bobbleheadHref("dodgers", "fan-submitted-99", false)).toBe(
-      "/teams/dodgers/community?id=fan-submitted-99",
+      "/teams/dodgers/community/fan-submitted-99",
     );
   });
 
   it("url-encodes ids that contain query-unsafe characters", () => {
     expect(bobbleheadHref("mets", "a b&c", false)).toBe(
-      "/teams/mets/community?id=a%20b%26c",
+      "/teams/mets/community/a%20b%26c",
     );
   });
 });

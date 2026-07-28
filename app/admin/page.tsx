@@ -11,7 +11,7 @@ function NotificationBadge({ count }: { count: number }) {
   if (count <= 0) return null;
 
   return (
-    <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[11px] font-black text-white ring-2 ring-slate-50 dark:ring-[#15110d]">
+    <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[11px] font-black text-white ring-2 ring-slate-50">
       {count > 99 ? "99+" : count}
     </span>
   );
@@ -81,7 +81,7 @@ export default function AdminPage() {
 
   if (!user) {
     return (
-      <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-zinc-900 dark:text-zinc-100">
+      <main className="min-h-full bg-slate-50 px-4 py-10 text-zinc-900">
         <AdminLoginForm />
       </main>
     );
@@ -89,13 +89,13 @@ export default function AdminPage() {
 
   if (!canAccess) {
     return (
-      <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-center text-zinc-900 dark:text-zinc-100">
-        <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">Not authorized</p>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{user.email} isn&apos;t an approved admin or team-rep account.</p>
+      <main className="min-h-full bg-slate-50 px-4 py-10 text-center text-zinc-900">
+        <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Not authorized</p>
+        <p className="mt-2 text-sm text-zinc-600">{user.email} isn&apos;t an approved admin or team-rep account.</p>
         <button
           type="button"
           onClick={() => signOut()}
-          className="mt-6 rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
+          className="mt-6 rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover"
         >
           Log out
         </button>
@@ -104,21 +104,21 @@ export default function AdminPage() {
   }
 
   const cardClass =
-    "relative rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-[#0b1a29] p-5 transition hover:border-accent/60";
+    "relative rounded-lg border border-black/10 bg-white p-5 transition hover:border-accent/60";
 
   return (
-    <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-zinc-900 dark:text-zinc-100">
+    <main className="min-h-full bg-slate-50 px-4 py-10 text-zinc-900">
       <div className="mx-auto max-w-2xl">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-black uppercase tracking-wide">
               {isAdmin ? "Admin mode" : "Team rep mode"}
             </h1>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">Signed in as {user.email}</p>
+            <p className="mt-1 text-sm text-zinc-600">Signed in as {user.email}</p>
             {isRep ? (
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              <p className="mt-1 text-sm text-zinc-600">
                 You can edit{" "}
-                <span className="font-semibold text-zinc-800 dark:text-zinc-200">
+                <span className="font-semibold text-zinc-800">
                   {editableTeams.map(teamName).join(", ")}
                 </span>
                 .
@@ -126,7 +126,7 @@ export default function AdminPage() {
             ) : null}
             <Link
               href="/"
-              className="mt-2 inline-block text-xs font-bold text-accent hover:text-accent-hover dark:hover:text-accent-hover"
+              className="mt-2 inline-block text-xs font-bold text-accent hover:text-accent-hover"
             >
               ← Back to Bobble Shelf
             </Link>
@@ -134,7 +134,7 @@ export default function AdminPage() {
           <button
             type="button"
             onClick={() => signOut()}
-            className="rounded border border-black/15 dark:border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
+            className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover"
           >
             Log out
           </button>
@@ -146,10 +146,10 @@ export default function AdminPage() {
           {isRep
             ? editableTeams.map((slug) => (
                 <Link key={slug} href={`/teams/${slug}`} className={cardClass}>
-                  <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">
+                  <p className="text-sm font-black uppercase tracking-wide text-zinc-900">
                     Edit {teamName(slug)} page
                   </p>
-                  <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                  <p className="mt-2 text-sm text-zinc-600">
                     Open your team page — Edit buttons appear on each bobblehead.
                   </p>
                 </Link>
@@ -158,15 +158,15 @@ export default function AdminPage() {
 
           <Link href="/admin/review" className={cardClass}>
             <NotificationBadge count={pendingSubmissions} />
-            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Review submissions</p>
-            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Review submissions</p>
+            <p className="mt-2 text-sm text-zinc-600">
               Approve or deny pending photo and bobblehead submissions{isRep ? " for your team" : ""}.
             </p>
           </Link>
           <Link href="/admin/reports" className={cardClass}>
             <NotificationBadge count={pendingReports} />
-            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Listing reports</p>
-            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Listing reports</p>
+            <p className="mt-2 text-sm text-zinc-600">
               Resolve or dismiss reports that a listing has wrong info{isRep ? " for your team" : ""}.
             </p>
           </Link>
@@ -175,36 +175,36 @@ export default function AdminPage() {
             <>
               <Link href="/admin/dead-images" className={cardClass}>
                 <NotificationBadge count={openDeadImages} />
-                <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Dead images</p>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Fix listing photos the nightly sweep couldn&apos;t load.</p>
+                <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Dead images</p>
+                <p className="mt-2 text-sm text-zinc-600">Fix listing photos the nightly sweep couldn&apos;t load.</p>
               </Link>
               <Link href="/admin/scraped-giveaways" className={cardClass}>
                 <NotificationBadge count={pendingScraped} />
-                <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">New giveaways</p>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Review bobblehead promos the scraper found on team schedule pages.</p>
+                <p className="text-sm font-black uppercase tracking-wide text-zinc-900">New giveaways</p>
+                <p className="mt-2 text-sm text-zinc-600">Review bobblehead promos the scraper found on team schedule pages.</p>
               </Link>
               <Link href="/" className={cardClass}>
-                <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Edit bobbleheads</p>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Edit bobbleheads</p>
+                <p className="mt-2 text-sm text-zinc-600">
                   Browse to any team or bobblehead page — an Edit button now appears there.
                 </p>
               </Link>
               <Link href="/admin/reps" className={cardClass}>
-                <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Manage reps</p>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Manage reps</p>
+                <p className="mt-2 text-sm text-zinc-600">
                   Give a person edit access to one team&apos;s page, or remove it.
                 </p>
               </Link>
               <Link href="/admin/users" className={cardClass}>
-                <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Manage users</p>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Manage users</p>
+                <p className="mt-2 text-sm text-zinc-600">
                   Review every account, edit display names, remove a user, or email one, a group, or
                   everyone.
                 </p>
               </Link>
               <Link href="/admin/stats" className={cardClass}>
-                <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Site stats</p>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">User growth, collection totals, queue throughput, and top teams.</p>
+                <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Site stats</p>
+                <p className="mt-2 text-sm text-zinc-600">User growth, collection totals, queue throughput, and top teams.</p>
               </Link>
             </>
           ) : null}

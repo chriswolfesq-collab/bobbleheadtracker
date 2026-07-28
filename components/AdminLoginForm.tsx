@@ -14,9 +14,9 @@ export function AdminLoginForm() {
 
   return (
     <div className="mx-auto mt-10 max-w-sm">
-      <div className="rounded-2xl border border-black/10 bg-white p-6 text-center shadow-2xl shadow-black/50 dark:border-white/10 dark:bg-[#0b1a2b]">
-        <h1 className="text-lg font-black text-zinc-900 dark:text-white">Sign in to continue</h1>
-        <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+      <div className="rounded-2xl border border-black/10 bg-white p-6 text-center shadow-2xl shadow-black/50">
+        <h1 className="text-lg font-black text-zinc-900">Sign in to continue</h1>
+        <p className="mt-2 text-sm leading-6 text-zinc-600">
           Admin and team-rep tools use your normal Bobble Shelf account. Sign in and your access
           appears automatically.
         </p>

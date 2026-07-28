@@ -55,10 +55,10 @@ export function EditBobbleheadDialog({
         role="dialog"
         aria-modal="true"
         aria-labelledby="edit-bobblehead-title"
-        className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50 dark:border-white/10 dark:bg-[#0b1a2b]"
+        className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50"
         onClick={(event) => event.stopPropagation()}
       >
-        <h2 id="edit-bobblehead-title" className="text-lg font-black text-zinc-900 dark:text-white">Edit bobblehead</h2>
+        <h2 id="edit-bobblehead-title" className="text-lg font-black text-zinc-900">Edit bobblehead</h2>
 
         <form
           className="mt-5 grid gap-3"
@@ -81,33 +81,33 @@ export function EditBobbleheadDialog({
           }}
         >
           <div className="grid gap-1.5">
-            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Player Name</label>
+            <label className="text-xs font-bold text-zinc-700">Player Name</label>
             <input
               required
               type="text"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
-              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent"
             />
           </div>
           <div className="grid gap-1.5">
-            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
-              Nickname <span className="font-medium text-zinc-500 dark:text-zinc-400">(optional)</span>
+            <label className="text-xs font-bold text-zinc-700">
+              Nickname <span className="font-medium text-zinc-500">(optional)</span>
             </label>
             <input
               type="text"
               value={nickname}
               onChange={(event) => setNickname(event.target.value)}
               placeholder="e.g. “La Regadera”"
-              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent"
             />
-            <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">
+            <p className="text-[11px] leading-4 text-zinc-500">
               Shown on a second line beneath the title.
             </p>
           </div>
           <div className="grid gap-1.5">
-            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
-              Number given away <span className="font-medium text-zinc-500 dark:text-zinc-400">(optional)</span>
+            <label className="text-xs font-bold text-zinc-700">
+              Number given away <span className="font-medium text-zinc-500">(optional)</span>
             </label>
             <input
               type="text"
@@ -116,7 +116,7 @@ export function EditBobbleheadDialog({
               onChange={(event) => setQuantity(event.target.value)}
               onBlur={(event) => setQuantity(formatQuantity(event.target.value))}
               placeholder="e.g. 25,000"
-              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent disabled:opacity-50 dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent disabled:opacity-50"
             />
             <label className="flex items-center gap-1.5">
               <input
@@ -125,29 +125,29 @@ export function EditBobbleheadDialog({
                 onChange={(event) => setQuantityUnknown(event.target.checked)}
                 className="h-3.5 w-3.5 accent-accent"
               />
-              <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">Quantity unknown</span>
+              <span className="text-xs font-semibold text-zinc-700">Quantity unknown</span>
             </label>
-            <p className="text-[11px] leading-4 text-zinc-500 dark:text-zinc-400">
+            <p className="text-[11px] leading-4 text-zinc-500">
               How many were handed out — a hint at how rare it is.
             </p>
           </div>
           <div className="grid gap-1.5">
-            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Date</label>
+            <label className="text-xs font-bold text-zinc-700">Date</label>
             <input
               required
               type="text"
               value={date}
               onChange={(event) => setDate(event.target.value)}
-              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent"
             />
           </div>
           <div className="grid gap-1.5">
-            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Replace photo</label>
+            <label className="text-xs font-bold text-zinc-700">Replace photo</label>
             <input
               type="file"
               accept="image/*"
               onChange={(event) => setFile(event.currentTarget.files?.[0] ?? null)}
-              className="w-full text-xs text-zinc-700 dark:text-zinc-300 file:mr-3 file:rounded file:border-0 file:bg-accent file:px-3 file:py-1.5 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-accent-fg"
+              className="w-full text-xs text-zinc-700 file:mr-3 file:rounded file:border-0 file:bg-accent file:px-3 file:py-1.5 file:text-xs file:font-black file:uppercase file:tracking-wide file:text-accent-fg"
             />
             {onRemovePhoto ? (
               <button
@@ -189,14 +189,14 @@ export function EditBobbleheadDialog({
               type="button"
               onClick={close}
               disabled={isBusy}
-              className="rounded-lg border border-black/10 px-4 py-2.5 text-sm font-bold text-zinc-700 transition hover:border-accent/60 disabled:opacity-60 dark:border-white/15 dark:text-zinc-300"
+              className="rounded-lg border border-black/10 px-4 py-2.5 text-sm font-bold text-zinc-700 transition hover:border-accent/60 disabled:opacity-60"
             >
               Cancel
             </button>
           </div>
         </form>
 
-        <div className="mt-5 border-t border-black/10 pt-4 dark:border-white/10">
+        <div className="mt-5 border-t border-black/10 pt-4">
           {isConfirmingDelete ? (
             <div className="rounded-lg border border-red-500/40 bg-red-500/10 p-3">
               <p className="text-xs font-bold text-red-200">
@@ -227,7 +227,7 @@ export function EditBobbleheadDialog({
                   type="button"
                   disabled={isBusy}
                   onClick={() => setIsConfirmingDelete(false)}
-                  className="rounded-lg border border-black/10 px-4 py-2 text-xs font-bold text-zinc-700 transition hover:border-accent/60 disabled:opacity-60 dark:border-white/15 dark:text-zinc-300"
+                  className="rounded-lg border border-black/10 px-4 py-2 text-xs font-bold text-zinc-700 transition hover:border-accent/60 disabled:opacity-60"
                 >
                   Keep it
                 </button>

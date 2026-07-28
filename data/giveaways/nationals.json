@@ -53,7 +53,7 @@
     "nickname": "City Connect",
     "year": "2025",
     "date": "September 27, 2025",
-    "imageUrl": "/bobbleheads/nationals-photos/hello-kitty-city-connect-2025.jpg"
+    "imageUrl": null
   },
   {
     "id": "dylan-crews-2025",
@@ -121,7 +121,8 @@
     "nickname": "STH Only",
     "year": "2025",
     "date": "April 1, 2025",
-    "imageUrl": "/bobbleheads/nationals-photos/mackenzie-gore-sth-only-2025.jpg"
+    "imageUrl": "/bobbleheads/nationals-photos/mackenzie-gore-sth-only-2025.jpg",
+    "distribution": "STH Reward"
   },
   {
     "id": "1924-championship-2024",
@@ -136,7 +137,7 @@
     "year": "2024",
     "date": "August 31, 2024",
     "quantity": "20,000",
-    "imageUrl": "/bobbleheads/nationals-photos/cj-abrams-2024.jpg"
+    "imageUrl": null
   },
   {
     "id": "divine-nine-majorette-2024",
@@ -183,7 +184,8 @@
     "year": "2024",
     "date": "April 1, 2024",
     "quantity": "20,000",
-    "imageUrl": "/bobbleheads/nationals-photos/lane-thomas-sth-only-2024.jpg"
+    "imageUrl": "/bobbleheads/nationals-photos/lane-thomas-sth-only-2024.jpg",
+    "distribution": "STH Reward"
   },
   {
     "id": "keibert-ruiz-2023",
@@ -251,7 +253,8 @@
     "year": "2023",
     "date": "April 1, 2023",
     "quantity": "20,000",
-    "imageUrl": "/bobbleheads/nationals-photos/josiah-gray-sth-only-2023.jpg"
+    "imageUrl": "/bobbleheads/nationals-photos/josiah-gray-sth-only-2023.jpg",
+    "distribution": "STH Reward"
   },
   {
     "id": "wonder-woman-2022",
@@ -310,7 +313,7 @@
     "nickname": "Spring Training",
     "year": "2022",
     "date": "March 18, 2022",
-    "imageUrl": "/bobbleheads/nationals-photos/ryan-zimmerman-spring-training-2022.jpg"
+    "imageUrl": null
   },
   {
     "id": "george-mason-screech-2021",
@@ -774,7 +777,7 @@
     "title": "Stephen Strasburg",
     "year": "2012",
     "date": "June 28, 2012",
-    "imageUrl": "https://i.ebayimg.com/images/g/09IAAOSwuHRim2XG/s-l400.jpg",
+    "imageUrl": "/bobbleheads/nationals-photos/stephen-strasburg-2012.jpg",
     "quantity": "15,000"
   },
   {
@@ -790,7 +793,8 @@
     "nickname": "Kids Club",
     "year": "2012",
     "date": "2012",
-    "imageUrl": "/bobbleheads/nationals-photos/screech-kids-club-2012.jpg"
+    "imageUrl": "/bobbleheads/nationals-photos/screech-kids-club-2012.jpg",
+    "distribution": "Fan Reward"
   },
   {
     "id": "danny-espinosa-2011",

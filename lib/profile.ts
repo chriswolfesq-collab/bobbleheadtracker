@@ -21,30 +21,44 @@ export type ProfileSource = { userId?: string; client?: SupabaseClient };
 // community-submitted bobbleheads that have been approved for that team.
 export function useSiteBobbleheadCounts() {
   const [communityCountByTeamSlug, setCommunityCountByTeamSlug] = useState<Record<string, number>>({});
+  const [deletedCountByTeamSlug, setDeletedCountByTeamSlug] = useState<Record<string, number>>({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
 
-    supabase
-      .from("community_bobbleheads")
-      .select("team_slug")
-      .then(({ data, error }) => {
-        if (cancelled) return;
+    // Curated totals must subtract admin-deleted listings or the profile's
+    // denominator disagrees with what the team pages actually show.
+    Promise.all([
+      supabase.from("community_bobbleheads").select("team_slug"),
+      supabase.from("bobblehead_overrides").select("team_slug").eq("deleted", true),
+    ]).then(([community, deleted]) => {
+      if (cancelled) return;
 
-        if (error) {
-          console.error("Failed to load community bobblehead counts:", error.message);
-          setCommunityCountByTeamSlug({});
-        } else {
-          const counts: Record<string, number> = {};
-          for (const row of data ?? []) {
-            counts[row.team_slug] = (counts[row.team_slug] ?? 0) + 1;
-          }
-          setCommunityCountByTeamSlug(counts);
+      if (community.error) {
+        console.error("Failed to load community bobblehead counts:", community.error.message);
+        setCommunityCountByTeamSlug({});
+      } else {
+        const counts: Record<string, number> = {};
+        for (const row of community.data ?? []) {
+          counts[row.team_slug] = (counts[row.team_slug] ?? 0) + 1;
         }
+        setCommunityCountByTeamSlug(counts);
+      }
 
-        setIsLoading(false);
-      });
+      if (deleted.error) {
+        console.error("Failed to load deleted listing counts:", deleted.error.message);
+        setDeletedCountByTeamSlug({});
+      } else {
+        const counts: Record<string, number> = {};
+        for (const row of deleted.data ?? []) {
+          counts[row.team_slug] = (counts[row.team_slug] ?? 0) + 1;
+        }
+        setDeletedCountByTeamSlug(counts);
+      }
+
+      setIsLoading(false);
+    });
 
     return () => {
       cancelled = true;
@@ -53,8 +67,12 @@ export function useSiteBobbleheadCounts() {
 
   const totalByTeamSlug: Record<string, number> = {};
   for (const team of TEAMS) {
-    totalByTeamSlug[team.slug] =
-      getGiveawaysByTeamSlug(team.slug).length + (communityCountByTeamSlug[team.slug] ?? 0);
+    totalByTeamSlug[team.slug] = Math.max(
+      0,
+      getGiveawaysByTeamSlug(team.slug).length -
+        (deletedCountByTeamSlug[team.slug] ?? 0) +
+        (communityCountByTeamSlug[team.slug] ?? 0),
+    );
   }
   const siteTotal = Object.values(totalByTeamSlug).reduce((sum, count) => sum + count, 0);
 

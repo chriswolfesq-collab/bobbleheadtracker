@@ -70,18 +70,18 @@ export function AuthModal() {
         role="dialog"
         aria-modal="true"
         aria-label={mode === "sign-in" ? "Sign in" : "Create your account"}
-        className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50 dark:border-white/10 dark:bg-[#0b1a2b]"
+        className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50"
         onClick={(event) => event.stopPropagation()}
       >
         {confirmationSent ? (
           <div className="grid gap-4 text-center">
-            <p className="text-sm leading-6 text-zinc-800 dark:text-zinc-200">
+            <p className="text-sm leading-6 text-zinc-800">
               Check your email to confirm your account, then log in.
             </p>
             <button
               type="button"
               onClick={resetAndClose}
-              className="mx-auto rounded border border-black/10 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-700 dark:border-white/15 dark:text-zinc-300"
+              className="mx-auto rounded border border-black/10 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-700"
             >
               Close
             </button>
@@ -93,10 +93,10 @@ export function AuthModal() {
                 🏆
               </div>
               <div>
-                <h2 className="text-lg font-black text-zinc-900 dark:text-white">
+                <h2 className="text-lg font-black text-zinc-900">
                   {mode === "sign-in" ? "Sign in" : "Create your account"}
                 </h2>
-                <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
+                <p className="mt-1 text-xs text-zinc-600">
                   {mode === "sign-in"
                     ? "Welcome back! Please sign in to continue."
                     : "Welcome! Please fill in the details to get started."}
@@ -108,16 +108,16 @@ export function AuthModal() {
               type="button"
               onClick={handleOAuth}
               disabled={oauthLoading}
-              className="flex w-full items-center justify-center gap-2 rounded-lg border border-black/10 bg-black/[0.04] px-3 py-2.5 text-sm font-bold text-zinc-900 transition hover:border-accent/60 hover:bg-black/[0.06] disabled:opacity-60 dark:border-white/15 dark:bg-white/5 dark:text-zinc-100 dark:hover:bg-white/10"
+              className="flex w-full items-center justify-center gap-2 rounded-lg border border-black/10 bg-black/[0.04] px-3 py-2.5 text-sm font-bold text-zinc-900 transition hover:border-accent/60 hover:bg-black/[0.06] disabled:opacity-60"
             >
               <GoogleIcon />
               {oauthLoading ? "Connecting…" : "Continue with Google"}
             </button>
 
             <div className="my-4 flex items-center gap-3">
-              <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
+              <div className="h-px flex-1 bg-black/10" />
               <span className="text-xs uppercase tracking-wide text-zinc-500">or</span>
-              <div className="h-px flex-1 bg-black/10 dark:bg-white/10" />
+              <div className="h-px flex-1 bg-black/10" />
             </div>
 
             <form
@@ -164,7 +164,7 @@ export function AuthModal() {
             >
               {mode === "sign-up" ? (
                 <div className="grid gap-1.5">
-                  <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Your name</label>
+                  <label className="text-xs font-bold text-zinc-700">Your name</label>
                   <input
                     required
                     type="text"
@@ -172,23 +172,23 @@ export function AuthModal() {
                     value={displayName}
                     onChange={(event) => setDisplayName(event.target.value)}
                     placeholder="Enter your name"
-                    className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+                    className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent"
                   />
                 </div>
               ) : null}
               <div className="grid gap-1.5">
-                <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Email address</label>
+                <label className="text-xs font-bold text-zinc-700">Email address</label>
                 <input
                   required
                   type="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder="Enter your email address"
-                  className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+                  className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent"
                 />
               </div>
               <div className="grid gap-1.5">
-                <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">Password</label>
+                <label className="text-xs font-bold text-zinc-700">Password</label>
                 <input
                   required
                   type="password"
@@ -196,17 +196,17 @@ export function AuthModal() {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   placeholder="Enter your password"
-                  className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+                  className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent"
                 />
               </div>
               {mode === "sign-up" ? (
-                <label className="flex items-start gap-2 text-xs text-zinc-700 dark:text-zinc-300">
+                <label className="flex items-start gap-2 text-xs text-zinc-700">
                   <input
                     required
                     type="checkbox"
                     checked={acceptedTerms}
                     onChange={(event) => setAcceptedTerms(event.target.checked)}
-                    className="mt-0.5 h-3.5 w-3.5 shrink-0 rounded border-black/20 bg-white accent-accent dark:border-white/30 dark:bg-[#07111d]"
+                    className="mt-0.5 h-3.5 w-3.5 shrink-0 rounded border-black/20 bg-white accent-accent"
                   />
                   <span>
                     I accept the{" "}
@@ -231,7 +231,7 @@ export function AuthModal() {
               </button>
             </form>
 
-            <div className="mt-5 border-t border-black/10 pt-4 text-center text-xs text-zinc-600 dark:border-white/10 dark:text-zinc-400">
+            <div className="mt-5 border-t border-black/10 pt-4 text-center text-xs text-zinc-600">
               {mode === "sign-in" ? "Don't have an account?" : "Already have an account?"}{" "}
               <button
                 type="button"
@@ -249,7 +249,7 @@ export function AuthModal() {
             <button
               type="button"
               onClick={resetAndClose}
-              className="mt-3 w-full text-center text-xs font-bold uppercase tracking-wide text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
+              className="mt-3 w-full text-center text-xs font-bold uppercase tracking-wide text-zinc-500 hover:text-zinc-700"
             >
               Cancel
             </button>

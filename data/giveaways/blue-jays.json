@@ -611,28 +611,32 @@
     "title": "Vernon Wells",
     "nickname": "Spring Training Season Ticket",
     "year": "2007",
-    "date": "2007"
+    "date": "2007",
+    "distribution": "STH Reward"
   },
   {
     "id": "greg-zaun-junior-jays-2007",
     "title": "Greg Zaun",
     "nickname": "Junior Jays",
     "year": "2007",
-    "date": "2007"
+    "date": "2007",
+    "distribution": "Fan Reward"
   },
   {
     "id": "aaron-hill-junior-jays-2007",
     "title": "Aaron Hill",
     "nickname": "Junior Jays",
     "year": "2007",
-    "date": "2007"
+    "date": "2007",
+    "distribution": "Fan Reward"
   },
   {
     "id": "aj-burnett-junior-jays-2007",
     "title": "A.J. Burnett",
     "nickname": "Junior Jays",
     "year": "2007",
-    "date": "2007"
+    "date": "2007",
+    "distribution": "Fan Reward"
   },
   {
     "id": "reed-johnson-flex-plan-2007",
@@ -713,7 +717,8 @@
     "nickname": "Fan Rewards",
     "year": "2003",
     "date": "2003",
-    "imageUrl": "/bobbleheads/blue-jays-photos/roy-halladay-fan-rewards-2003.jpg"
+    "imageUrl": "/bobbleheads/blue-jays-photos/roy-halladay-fan-rewards-2003.jpg",
+    "distribution": "Fan Reward"
   },
   {
     "id": "pat-borders-2002",

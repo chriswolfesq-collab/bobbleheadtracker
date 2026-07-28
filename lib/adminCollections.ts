@@ -144,7 +144,7 @@ export function useAdminCommunityListings(): AdminItemsResult {
         const resolved: AdminCollectionItem[] = (data ?? []).map((row) => ({
           key: `${row.team_slug}:${row.id}`,
           title: row.title,
-          href: `/teams/${row.team_slug}/community?id=${encodeURIComponent(row.id)}`,
+          href: `/teams/${row.team_slug}/community/${encodeURIComponent(row.id)}`,
           imageUrl: row.image_url,
           teamSlug: row.team_slug,
         }));

@@ -25,7 +25,9 @@ export function SiteSearch({
   const index = useSearchIndex(teamSlug);
 
   const results = useMemo(() => searchGiveaways(index, query), [index, query]);
-  const showResults = isFocused && query.trim().length > 0;
+  // Any typed input opens the panel — including whitespace-only, which shows
+  // the "no results" message instead of silently showing nothing.
+  const showResults = isFocused && query.length > 0;
   const allResultsHref = `/search?q=${encodeURIComponent(query.trim())}${
     teamSlug ? `&team=${encodeURIComponent(teamSlug)}` : ""
   }`;
@@ -98,7 +100,7 @@ export function SiteSearch({
             });
             inputRef.current?.focus();
           }}
-          className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-5 py-2.5 text-sm font-semibold text-zinc-900 backdrop-blur transition hover:border-accent hover:text-accent-hover dark:border-white/15 dark:bg-[#101827]/70 dark:text-white dark:hover:text-accent-hover"
+          className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-5 py-2.5 text-sm font-semibold text-zinc-900 backdrop-blur transition hover:border-accent hover:text-accent-hover"
         >
           <span aria-hidden>⌕</span>
           {buttonLabel}
@@ -119,7 +121,7 @@ export function SiteSearch({
       <div className="relative">
         <span
           aria-hidden
-          className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-600 dark:text-zinc-400"
+          className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-600"
         >
           ⌕
         </span>
@@ -139,20 +141,20 @@ export function SiteSearch({
           aria-expanded={showResults}
           aria-controls="site-search-results"
           aria-activedescendant={activeIndex >= 0 ? `site-search-result-${activeIndex}` : undefined}
-          className="w-full rounded-full border border-black/10 bg-white/70 py-2.5 pl-10 pr-9 text-sm text-zinc-900 outline-none backdrop-blur transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#101827]/70 dark:text-white [&::-webkit-search-cancel-button]:appearance-none"
+          className="w-full rounded-full border border-black/10 bg-white/70 py-2.5 pl-10 pr-9 text-sm text-zinc-900 outline-none backdrop-blur transition placeholder:text-zinc-500 focus:border-accent [&::-webkit-search-cancel-button]:appearance-none"
         />
         <button
           type="button"
           onClick={closeSearch}
           aria-label="Close search"
-          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-600 transition hover:text-accent-hover dark:text-zinc-400 dark:hover:text-accent-hover"
+          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-600 transition hover:text-accent-hover"
         >
           ✕
         </button>
       </div>
 
       {showResults ? (
-        <div className="absolute left-4 right-4 top-full z-40 mt-2 flex flex-col overflow-hidden rounded-lg border border-black/10 bg-white shadow-2xl dark:border-white/15 dark:bg-[#0b1626] sm:left-0 sm:right-0">
+        <div className="absolute left-4 right-4 top-full z-40 mt-2 flex flex-col overflow-hidden rounded-lg border border-black/10 bg-white shadow-2xl sm:left-0 sm:right-0">
           {results.length > 0 ? (
             // The list scrolls on its own so the "See all results" button below
             // stays pinned in view instead of sitting past 20 rows of results.
@@ -173,8 +175,8 @@ export function SiteSearch({
                     href={result.href}
                     onClick={() => setIsFocused(false)}
                     onMouseEnter={() => setActiveIndex(resultIndex)}
-                    className={`flex items-center gap-3 border-b border-black/[0.06] px-3 py-2 last:border-0 dark:border-white/5 ${
-                      resultIndex === activeIndex ? "bg-black/[0.04] dark:bg-white/5" : ""
+                    className={`flex items-center gap-3 border-b border-black/[0.06] px-3 py-2 last:border-0 ${
+                      resultIndex === activeIndex ? "bg-black/[0.04]" : ""
                     }`}
                   >
                     <span className="relative flex h-9 w-6 shrink-0 items-center justify-center">
@@ -188,13 +190,13 @@ export function SiteSearch({
                       />
                     </span>
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-semibold text-zinc-900 dark:text-white">
+                      <p className="truncate text-sm font-semibold text-zinc-900">
                         {result.title}
                         {result.nickname ? (
-                          <span className="font-normal text-zinc-600 dark:text-zinc-400"> “{result.nickname}”</span>
+                          <span className="font-normal text-zinc-600"> “{result.nickname}”</span>
                         ) : null}
                       </p>
-                      <p className="truncate text-xs text-zinc-600 dark:text-zinc-400">
+                      <p className="truncate text-xs text-zinc-600">
                         {teamSlug ? result.date : `${result.teamCity} ${result.teamName} · ${result.date}`}
                       </p>
                     </div>
@@ -203,10 +205,10 @@ export function SiteSearch({
               ))}
             </ul>
           ) : (
-            <p className="px-3 py-4 text-center text-sm text-zinc-600 dark:text-zinc-400">No bobbleheads found.</p>
+            <p className="px-3 py-4 text-center text-sm text-zinc-600">No bobbleheads found.</p>
           )}
           {results.length > 0 ? (
-            <div className="shrink-0 border-t border-black/[0.06] bg-white p-2 dark:border-white/5 dark:bg-[#0b1626]">
+            <div className="shrink-0 border-t border-black/[0.06] bg-white p-2">
               <Link
                 href={allResultsHref}
                 onClick={() => setIsFocused(false)}

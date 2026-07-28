@@ -21,7 +21,7 @@ export function RecentlyAddedCard({
   const imageSrc = bobblehead.imageUrl ?? publicAsset(`/bobbleheads/${bobblehead.teamSlug}.png`);
 
   return (
-    <div className="group relative overflow-hidden rounded-lg border border-black/10 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition hover:border-accent/50 dark:border-white/10 dark:bg-[#102032]">
+    <div className="group relative overflow-hidden rounded-lg border border-black/10 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition hover:border-accent/50">
       <WantedButton
         isWanted={isWanted}
         isLoggedIn={isLoggedIn}
@@ -30,26 +30,29 @@ export function RecentlyAddedCard({
       />
 
       <Link
-        href={`/teams/${bobblehead.teamSlug}/community?id=${encodeURIComponent(bobblehead.id)}`}
+        href={`/teams/${bobblehead.teamSlug}/community/${encodeURIComponent(bobblehead.id)}`}
         className="flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
-        <div className="flex h-24 items-end justify-center px-2 pt-2 sm:h-28 dark:bg-[radial-gradient(circle_at_50%_22%,rgba(255,255,255,0.14),rgba(255,255,255,0)_42%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.22))]">
+        <div className="flex h-24 items-end justify-center px-2 pt-2 sm:h-28">
           <Image
             src={imageSrc}
             alt={`${bobblehead.title} bobblehead`}
             width={268}
             height={630}
             unoptimized={isUnoptimizedImage(imageSrc)}
-            className="h-20 w-auto object-contain drop-shadow-[0_8px_10px_rgba(0,0,0,0.6)] sm:h-24"
+            className="h-20 w-auto object-contain mix-blend-multiply drop-shadow-[0_8px_10px_rgba(58,36,18,0.35)] sm:h-24"
           />
         </div>
-        <div className="px-2 py-2 text-center dark:border-t dark:border-white/[0.04] dark:bg-[#0d1a29]/70">
-          <p className="truncate text-[10px] font-bold leading-tight text-zinc-900 sm:text-[11px] dark:text-white">
+        <div className="px-2 py-2 text-center">
+          <p className="truncate text-[10px] font-bold leading-tight text-zinc-900 sm:text-[11px]">
             {bobblehead.title}
           </p>
-          <p className="mt-1 truncate text-[9px] uppercase tracking-wide text-zinc-600 sm:text-[10px] dark:text-zinc-400">
+          <p className="mt-1 truncate text-[9px] uppercase tracking-wide text-zinc-600 sm:text-[10px]">
             {team ? `${team.city} ${team.name}` : bobblehead.teamSlug}
           </p>
+          {bobblehead.date && bobblehead.date !== "N/A" ? (
+            <p className="mt-0.5 truncate text-[9px] text-zinc-500 sm:text-[10px]">{bobblehead.date}</p>
+          ) : null}
         </div>
       </Link>
     </div>

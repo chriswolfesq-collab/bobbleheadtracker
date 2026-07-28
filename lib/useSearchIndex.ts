@@ -27,7 +27,7 @@ export function useSearchIndex(teamSlug?: string): SearchResult[] {
         teamSlug: giveaway.teamSlug,
         teamName: team?.name ?? giveaway.teamSlug,
         teamCity: team?.city ?? "",
-        href: `/teams/${giveaway.teamSlug}/community?id=${encodeURIComponent(giveaway.id)}`,
+        href: `/teams/${giveaway.teamSlug}/community/${encodeURIComponent(giveaway.id)}`,
         source: "community",
       };
     });

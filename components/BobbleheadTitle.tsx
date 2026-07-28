@@ -50,6 +50,22 @@ function isSpacerNickname(value: string): boolean {
   return /^[_\-–—.·•\s]+$/.test(value);
 }
 
+/**
+ * Resolves the primary/secondary display lines for a bobblehead without
+ * rendering them — for callers that need to style the two lines differently
+ * (e.g. the card's single-line auto-shrinking name).
+ */
+export function resolveTitleParts(
+  title: string,
+  nickname?: string | null,
+): { primary: string; secondary: string | null } {
+  const trimmedNickname = nickname?.trim();
+  const explicitNickname = trimmedNickname && !isSpacerNickname(trimmedNickname) ? trimmedNickname : undefined;
+  return explicitNickname
+    ? { primary: title.trim(), secondary: explicitNickname }
+    : splitTitle(title);
+}
+
 export function BobbleheadTitle({ title, nickname }: { title: string; nickname?: string | null }) {
   const trimmedNickname = nickname?.trim();
   const explicitNickname = trimmedNickname && !isSpacerNickname(trimmedNickname) ? trimmedNickname : undefined;

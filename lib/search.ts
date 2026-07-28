@@ -42,23 +42,51 @@ function buildCuratedIndex(): SearchResult[] {
 
 export const CURATED_SEARCH_INDEX: SearchResult[] = buildCuratedIndex();
 
+// Lowercase + strip diacritics, so "pena" finds "Peña" and vice versa.
+function fold(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "");
+}
+
 export function searchGiveaways(
   results: SearchResult[],
   query: string,
   limit = 20,
 ): SearchResult[] {
-  const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const terms = fold(query.trim()).split(/\s+/).filter(Boolean);
   if (terms.length === 0) return [];
 
-  const matches: SearchResult[] = [];
+  // Rank by where the terms match rather than returning index order (which is
+  // team-then-date, so e.g. "2025" would only ever surface the first team):
+  // name matches beat descriptor matches beat team/date matches, and
+  // starts-with beats contains.
+  const scored: { result: SearchResult; score: number }[] = [];
   for (const result of results) {
-    const haystack =
-      `${result.title} ${result.nickname ?? ""} ${result.date} ${result.year} ${result.teamName} ${result.teamCity} ${result.teamSlug}`.toLowerCase();
-    if (terms.every((term) => haystack.includes(term))) {
-      matches.push(result);
-      if (matches.length >= limit) break;
+    const title = fold(result.title);
+    const nickname = fold(result.nickname ?? "");
+    const teamText = fold(`${result.teamName} ${result.teamCity} ${result.teamSlug}`);
+    const dateText = fold(`${result.date} ${result.year}`);
+
+    let score = 0;
+    let matchesAll = true;
+    for (const term of terms) {
+      if (title.startsWith(term)) score += 8;
+      else if (title.includes(term)) score += 6;
+      else if (nickname.includes(term)) score += 4;
+      else if (teamText.includes(term)) score += 2;
+      else if (dateText.includes(term)) score += 1;
+      else {
+        matchesAll = false;
+        break;
+      }
     }
+    if (matchesAll) scored.push({ result, score });
   }
 
-  return matches;
+  return scored
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((entry) => entry.result);
 }

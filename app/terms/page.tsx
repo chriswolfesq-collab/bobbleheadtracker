@@ -19,10 +19,10 @@ export default function TermsPage() {
           ← Back home
         </Link>
 
-        <h1 className="mt-4 text-2xl font-black text-zinc-900 sm:text-3xl dark:text-white">Terms of Service</h1>
+        <h1 className="mt-4 text-2xl font-black text-zinc-900 sm:text-3xl">Terms of Service</h1>
         <p className="mt-2 text-xs text-zinc-500">Last updated July 16, 2026</p>
 
-        <div className="mt-8 grid gap-6 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
+        <div className="mt-8 grid gap-6 text-sm leading-6 text-zinc-700">
           <section>
             <h2 className="mb-2 text-sm font-black uppercase tracking-wide text-accent">
               1. Acceptance of terms

@@ -59,7 +59,7 @@ export function RepWelcomeBanner() {
     <div className="pointer-events-none fixed inset-x-0 bottom-4 z-[60] flex justify-center px-4">
       <div
         role="status"
-        className="pointer-events-auto w-full max-w-md rounded-lg border border-accent/50 bg-white p-4 shadow-2xl backdrop-blur dark:bg-[#0b1a29]"
+        className="pointer-events-auto w-full max-w-md rounded-lg border border-accent/50 bg-white p-4 shadow-2xl backdrop-blur"
       >
         <div className="flex items-start justify-between gap-3">
           <p className="text-sm font-black uppercase tracking-wide text-accent">
@@ -69,14 +69,14 @@ export function RepWelcomeBanner() {
             type="button"
             onClick={dismiss}
             aria-label="Dismiss"
-            className="-mr-1 -mt-1 rounded p-1 text-lg leading-none text-zinc-400 transition hover:text-zinc-700 dark:hover:text-zinc-200"
+            className="-mr-1 -mt-1 rounded p-1 text-lg leading-none text-zinc-400 transition hover:text-zinc-700"
           >
             ×
           </button>
         </div>
-        <p className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">
+        <p className="mt-2 text-sm text-zinc-700">
           You can now edit{" "}
-          <span className="font-semibold text-zinc-900 dark:text-zinc-100">{teamLabel}</span> — fix
+          <span className="font-semibold text-zinc-900">{teamLabel}</span> — fix
           bobblehead details, review submissions, and resolve listing reports for your team.
         </p>
         <div className="mt-3 flex items-center gap-4">
@@ -90,7 +90,7 @@ export function RepWelcomeBanner() {
           <button
             type="button"
             onClick={dismiss}
-            className="text-xs font-bold text-zinc-500 transition hover:text-zinc-800 dark:hover:text-zinc-200"
+            className="text-xs font-bold text-zinc-500 transition hover:text-zinc-800"
           >
             Got it
           </button>

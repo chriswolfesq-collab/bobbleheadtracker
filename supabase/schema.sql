@@ -261,13 +261,31 @@ create table if not exists public.profiles (
   updated_at timestamptz not null default now()
 );
 
+-- Keyed by (team_slug, bobblehead_id): curated ids ("hello-kitty-2019",
+-- "spider-man-2019") repeat across teams, so the bare id is not unique.
 create table if not exists public.approved_photos (
-  bobblehead_id text primary key,
+  bobblehead_id text not null,
   team_slug text not null,
   image_url text not null,
   approved_by uuid references auth.users (id),
-  updated_at timestamptz not null default now()
+  updated_at timestamptz not null default now(),
+  primary key (team_slug, bobblehead_id)
 );
+
+-- Databases created before the composite key still have the old single-column
+-- primary key; swap it in place. (See supabase/fix_photo_team_collisions.sql.)
+do $$
+begin
+  if exists (
+    select 1 from pg_constraint
+    where conrelid = 'public.approved_photos'::regclass
+      and contype = 'p'
+      and array_length(conkey, 1) = 1
+  ) then
+    alter table public.approved_photos drop constraint approved_photos_pkey;
+    alter table public.approved_photos add primary key (team_slug, bobblehead_id);
+  end if;
+end $$;
 
 create table if not exists public.community_bobbleheads (
   id text primary key,
@@ -728,14 +746,20 @@ begin
       raise exception 'missing target_bobblehead_id for photo_for_existing submission';
     end if;
 
+    -- Scoped to the submission's team: the same bobblehead id can exist for
+    -- several teams, and another team's photo must not divert this one into
+    -- the gallery.
     v_has_existing_photo := p_curated_has_photo
       or exists (
         select 1 from public.approved_photos ap
-          where ap.bobblehead_id = v_submission.target_bobblehead_id
+          where ap.team_slug = v_submission.team_slug
+            and ap.bobblehead_id = v_submission.target_bobblehead_id
       )
       or exists (
         select 1 from public.community_bobbleheads cb
-          where cb.id = v_submission.target_bobblehead_id and cb.image_url is not null
+          where cb.id = v_submission.target_bobblehead_id
+            and cb.team_slug = v_submission.team_slug
+            and cb.image_url is not null
       );
 
     if v_has_existing_photo then
@@ -744,7 +768,7 @@ begin
     else
       insert into public.approved_photos (bobblehead_id, team_slug, image_url, approved_by, updated_at)
       values (v_submission.target_bobblehead_id, v_submission.team_slug, p_image_url, auth.uid(), now())
-      on conflict (bobblehead_id) do update
+      on conflict (team_slug, bobblehead_id) do update
         set image_url = excluded.image_url,
             approved_by = excluded.approved_by,
             updated_at = now();

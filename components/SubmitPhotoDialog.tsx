@@ -77,7 +77,7 @@ export function SubmitPhotoButton({
         }}
       />
       {status === "uploading" ? (
-        <span className="text-xs font-black uppercase tracking-wide text-zinc-600 dark:text-zinc-400">Uploading…</span>
+        <span className="text-xs font-black uppercase tracking-wide text-zinc-600">Uploading…</span>
       ) : message ? (
         <span className="text-center text-xs font-semibold text-red-400">{message}</span>
       ) : (

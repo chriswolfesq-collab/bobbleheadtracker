@@ -20,7 +20,7 @@ export type BobbleheadIdentity = {
 export function bobbleheadHref(teamSlug: string, bobbleheadId: string, isCurated: boolean): string {
   return isCurated
     ? `/teams/${teamSlug}/bobbleheads/${bobbleheadId}`
-    : `/teams/${teamSlug}/community?id=${encodeURIComponent(bobbleheadId)}`;
+    : `/teams/${teamSlug}/community/${encodeURIComponent(bobbleheadId)}`;
 }
 
 // Fetches the community + approved-photo rows for a set of teams once, then

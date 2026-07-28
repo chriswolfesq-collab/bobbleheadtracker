@@ -76,7 +76,7 @@ export function ProfileWelcomeModal({ userId }: { userId: string }) {
       onClick={dismiss}
     >
       <div
-        className="max-h-full w-full max-w-md overflow-y-auto rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50 dark:border-white/10 dark:bg-[#0b1a2b]"
+        className="max-h-full w-full max-w-md overflow-y-auto rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-5 flex flex-col items-center gap-3 text-center">
@@ -84,10 +84,10 @@ export function ProfileWelcomeModal({ userId }: { userId: string }) {
             🏆
           </div>
           <div>
-            <h2 id="profile-welcome-title" className="text-lg font-black text-zinc-900 dark:text-white">
+            <h2 id="profile-welcome-title" className="text-lg font-black text-zinc-900">
               Welcome to your profile
             </h2>
-            <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
+            <p className="mt-1 text-xs text-zinc-600">
               Here&apos;s everything you can do from here.
             </p>
           </div>
@@ -98,13 +98,13 @@ export function ProfileWelcomeModal({ userId }: { userId: string }) {
             <li key={feature.title} className="flex items-start gap-3">
               <span
                 aria-hidden
-                className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg border border-black/10 bg-black/[0.04] text-sm text-accent dark:border-white/10 dark:bg-white/5"
+                className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg border border-black/10 bg-black/[0.04] text-sm text-accent"
               >
                 {feature.icon}
               </span>
               <span className="min-w-0">
-                <span className="block text-sm font-bold text-zinc-900 dark:text-zinc-100">{feature.title}</span>
-                <span className="text-xs leading-5 text-zinc-600 dark:text-zinc-400">{feature.body}</span>
+                <span className="block text-sm font-bold text-zinc-900">{feature.title}</span>
+                <span className="text-xs leading-5 text-zinc-600">{feature.body}</span>
               </span>
             </li>
           ))}

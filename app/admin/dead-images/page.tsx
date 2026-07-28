@@ -145,9 +145,9 @@ export default function AdminDeadImagesPage() {
 
   if (!user || !isAdmin) {
     return (
-      <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-center text-zinc-900 dark:text-zinc-100">
-        <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">Not authorized</p>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Log in with an admin-mode account to continue.</p>
+      <main className="min-h-full bg-slate-50 px-4 py-10 text-center text-zinc-900">
+        <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Not authorized</p>
+        <p className="mt-2 text-sm text-zinc-600">Log in with an admin-mode account to continue.</p>
         <Link
           href="/admin"
           className="mt-6 inline-block rounded border border-accent px-4 py-2 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg"
@@ -159,23 +159,23 @@ export default function AdminDeadImagesPage() {
   }
 
   return (
-    <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-8 text-zinc-900 dark:text-zinc-100 sm:px-8">
+    <main className="min-h-full bg-slate-50 px-4 py-8 text-zinc-900 sm:px-8">
       <div className="mx-auto flex max-w-4xl items-center justify-between">
         <div>
-          <Link href="/admin" className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white hover:text-accent-hover dark:hover:text-accent-hover">
+          <Link href="/admin" className="text-sm font-black uppercase tracking-wide text-zinc-900 hover:text-accent-hover">
             ← Back to admin
           </Link>
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">Dead images</h1>
-          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+          <p className="mt-1 text-sm text-zinc-600">
             Listing images the nightly sweep couldn&apos;t load. Fix the photo, then mark it fixed.
           </p>
         </div>
         <div className="flex items-center gap-3 text-sm">
-          <span className="font-semibold text-zinc-800 dark:text-zinc-200">{user.email}</span>
+          <span className="font-semibold text-zinc-800">{user.email}</span>
           <button
             type="button"
             onClick={() => signOut()}
-            className="rounded border border-black/15 dark:border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
+            className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover"
           >
             Log out
           </button>
@@ -215,23 +215,23 @@ export default function AdminDeadImagesPage() {
 
       <div className="mx-auto mt-6 max-w-4xl space-y-4">
         {isLoadingRows ? (
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
+          <p className="text-sm text-zinc-600">Loading…</p>
         ) : rows.length === 0 ? (
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">No dead images. Every listing photo loaded on the last sweep.</p>
+          <p className="text-sm text-zinc-600">No dead images. Every listing photo loaded on the last sweep.</p>
         ) : filtered.length === 0 ? (
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">No images match your search.</p>
+          <p className="text-sm text-zinc-600">No images match your search.</p>
         ) : (
           filtered.map((row) => {
             const href =
               row.listing_kind === "community"
-                ? `/teams/${row.team_slug}/community?id=${encodeURIComponent(row.bobblehead_id)}`
+                ? `/teams/${row.team_slug}/community/${encodeURIComponent(row.bobblehead_id)}`
                 : `/teams/${row.team_slug}/bobbleheads/${row.bobblehead_id}`;
 
             return (
               <div
                 key={row.id}
-                className={`grid gap-4 rounded-lg border bg-white dark:bg-[#0b1a29] p-4 sm:grid-cols-[auto_auto_1fr_auto] ${
-                  selection.isSelected(row.id) ? "border-accent/70 ring-1 ring-accent/40" : "border-black/10 dark:border-white/10"
+                className={`grid gap-4 rounded-lg border bg-white p-4 sm:grid-cols-[auto_auto_1fr_auto] ${
+                  selection.isSelected(row.id) ? "border-accent/70 ring-1 ring-accent/40" : "border-black/10"
                 }`}
               >
                 <label className="flex items-start justify-center pt-1 sm:items-center sm:pt-0">
@@ -258,12 +258,12 @@ export default function AdminDeadImagesPage() {
                   <p className="font-black uppercase tracking-wide text-accent">
                     {SOURCE_LABELS[row.source]} · {reason(row)}
                   </p>
-                  <p className="mt-1 text-zinc-800 dark:text-zinc-200">
+                  <p className="mt-1 text-zinc-800">
                     Team: <span className="font-semibold">{row.team_slug}</span>
                   </p>
-                  <p className="text-zinc-800 dark:text-zinc-200">
+                  <p className="text-zinc-800">
                     Listing:{" "}
-                    <Link href={href} className="font-semibold underline hover:text-accent-hover dark:hover:text-accent-hover">
+                    <Link href={href} className="font-semibold underline hover:text-accent-hover">
                       {row.title ?? row.bobblehead_id}
                     </Link>
                   </p>
@@ -271,7 +271,7 @@ export default function AdminDeadImagesPage() {
                     href={row.image_url}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-1 block truncate text-xs text-zinc-600 dark:text-zinc-400 underline hover:text-accent-hover dark:hover:text-accent-hover"
+                    className="mt-1 block truncate text-xs text-zinc-600 underline hover:text-accent-hover"
                   >
                     {row.image_url}
                   </a>

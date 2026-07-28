@@ -36,7 +36,7 @@
     "year": "2024",
     "date": "August 17, 2024",
     "quantity": "15,000",
-    "imageUrl": "/bobbleheads/tigers-photos/riley-greene-2024.jpg"
+    "imageUrl": null
   },
   {
     "id": "dan-dickerson-2024",
@@ -105,7 +105,7 @@
     "nickname": "500 HR",
     "year": "2022",
     "date": "June 10, 2022",
-    "imageUrl": "/bobbleheads/tigers-photos/miguel-cabrera-500-hr-2022.jpg"
+    "imageUrl": null
   },
   {
     "id": "niko-goodrum-desk-mate-2021",
@@ -345,7 +345,7 @@
     "title": "Prince Fielder",
     "year": "2012",
     "date": "August 5, 2012",
-    "imageUrl": "https://m.media-amazon.com/images/I/81KXj65YxjL.jpg",
+    "imageUrl": "/bobbleheads/tigers-photos/prince-fielder-2012.jpg",
     "quantity": "10,000"
   },
   {

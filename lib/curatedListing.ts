@@ -86,3 +86,51 @@ export async function getCuratedListingData(
   const [overrides, photos] = await Promise.all([getOverridesMap(), getApprovedPhotosMap()]);
   return { override: overrides[key] ?? null, imageUrl: photos[key] ?? null };
 }
+
+// Every listing an admin has soft-deleted, as "teamSlug/bobbleheadId" keys.
+// Used to 404 deleted detail pages, drop them from the sitemap, and skip them
+// in prev/next navigation.
+export async function getDeletedListingKeys(): Promise<Set<string>> {
+  const overrides = await getOverridesMap();
+  return new Set(
+    Object.entries(overrides)
+      .filter(([, override]) => override.deleted)
+      .map(([key]) => key),
+  );
+}
+
+// Approved community listings per team, for server-rendered counts (team page
+// <title>). Cached like the other maps; busted by the same revalidate tag.
+const getCommunityCountsMap = unstable_cache(
+  async (): Promise<Record<string, number>> => {
+    const client = createServerSupabase();
+    const { data, error } = await client.from("community_bobbleheads").select("team_slug");
+
+    if (error) {
+      console.error("Failed to load community counts (server):", error.message);
+      return {};
+    }
+
+    const map: Record<string, number> = {};
+    for (const row of data ?? []) {
+      map[row.team_slug] = (map[row.team_slug] ?? 0) + 1;
+    }
+    return map;
+  },
+  ["curated-community-counts"],
+  { tags: [CURATED_DATA_TAG], revalidate: false },
+);
+
+// The listing count a team page actually displays: curated minus deleted plus
+// community additions. Keeps <title> in agreement with the page body.
+export async function getTeamListingCount(teamSlug: string, curatedCount: number): Promise<number> {
+  const [deletedKeys, communityCounts] = await Promise.all([
+    getDeletedListingKeys(),
+    getCommunityCountsMap(),
+  ]);
+  let deleted = 0;
+  for (const key of deletedKeys) {
+    if (key.startsWith(`${teamSlug}/`)) deleted += 1;
+  }
+  return Math.max(0, curatedCount - deleted + (communityCounts[teamSlug] ?? 0));
+}

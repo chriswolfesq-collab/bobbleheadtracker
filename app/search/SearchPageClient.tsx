@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
-import { AuthWidget } from "@/components/AuthWidget";
 import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { useAllApprovedPhotos } from "@/lib/approvedPhotos";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
@@ -21,28 +20,28 @@ function ResultCard({ result, photoUrl }: { result: SearchResult; photoUrl?: str
   return (
     <Link
       href={result.href}
-      className="group relative flex flex-col overflow-hidden rounded-lg border border-black/10 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition hover:border-accent/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent dark:border-white/10 dark:bg-[#102032]"
+      className="group relative flex flex-col overflow-hidden rounded-lg border border-black/10 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition hover:border-accent/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
     >
-      <div className="flex h-28 items-end justify-center px-2 pt-2 sm:h-32 dark:bg-[radial-gradient(circle_at_50%_22%,rgba(255,255,255,0.14),rgba(255,255,255,0)_42%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.22))]">
+      <div className="flex h-28 items-end justify-center px-2 pt-2 sm:h-32">
         <BobbleheadImage
           src={imageSrc}
           alt={`${result.title} bobblehead`}
           width={268}
           height={630}
           unoptimized={isUnoptimizedImage(imageSrc)}
-          className="h-24 w-auto object-contain drop-shadow-[0_8px_10px_rgba(0,0,0,0.6)] sm:h-28"
+          className="h-24 w-auto object-contain mix-blend-multiply drop-shadow-[0_8px_10px_rgba(58,36,18,0.35)] sm:h-28"
         />
       </div>
-      <div className="flex flex-1 flex-col px-2 py-2 text-center dark:border-t dark:border-white/[0.04] dark:bg-[#0d1a29]/70">
-        <p className="truncate text-[11px] font-bold leading-tight text-zinc-900 sm:text-xs dark:text-white">
+      <div className="flex flex-1 flex-col px-2 py-2 text-center">
+        <p className="truncate text-[11px] font-bold leading-tight text-zinc-900 sm:text-xs">
           {result.title}
         </p>
         {result.nickname ? (
-          <p className="truncate text-[10px] font-semibold text-zinc-600 sm:text-[11px] dark:text-zinc-400">
+          <p className="truncate text-[10px] font-semibold text-zinc-600 sm:text-[11px]">
             “{result.nickname}”
           </p>
         ) : null}
-        <div className="mt-auto pt-1 text-[9px] uppercase tracking-wide text-zinc-600 sm:text-[10px] dark:text-zinc-400">
+        <div className="mt-auto pt-1 text-[9px] uppercase tracking-wide text-zinc-600 sm:text-[10px]">
           <p className="truncate">
             {result.teamCity} {result.teamName}
           </p>
@@ -60,7 +59,7 @@ export function SearchPageClient() {
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
 
   const index = useSearchIndex(team ? team.slug : undefined);
-  const photoUrlById = useAllApprovedPhotos();
+  const photoUrlByListing = useAllApprovedPhotos();
   const results = useMemo(() => searchGiveaways(index, query, PAGE_RESULT_LIMIT), [index, query]);
 
   // Keep the URL shareable/bookmarkable as the user refines the query. The
@@ -79,11 +78,10 @@ export function SearchPageClient() {
       <div className="flex items-center justify-between px-4 pt-4 sm:px-6">
         <Link
           href={team ? `/teams/${team.slug}` : "/"}
-          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-700 transition hover:text-accent-hover dark:text-zinc-300 dark:hover:text-accent-hover"
+          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-700 transition hover:text-accent-hover"
         >
           <span aria-hidden>←</span> {team ? `Back to ${team.name}` : "Back to home"}
         </Link>
-        <AuthWidget />
       </div>
 
       <div className="mx-auto w-full max-w-5xl px-4 pb-24 pt-6 sm:px-6">
@@ -97,7 +95,7 @@ export function SearchPageClient() {
           <div className="relative">
             <span
               aria-hidden
-              className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-600 dark:text-zinc-400"
+              className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-600"
             >
               ⌕
             </span>
@@ -107,11 +105,11 @@ export function SearchPageClient() {
               onChange={(event) => updateQuery(event.target.value)}
               placeholder={team ? `Search ${team.name} players, dates…` : "Search players, teams, dates…"}
               aria-label="Search bobbleheads"
-              className="w-full rounded-full border border-black/10 bg-white/70 py-2.5 pl-10 pr-4 text-sm text-zinc-900 outline-none backdrop-blur transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#101827]/70 dark:text-white [&::-webkit-search-cancel-button]:appearance-none"
+              className="w-full rounded-full border border-black/10 bg-white/70 py-2.5 pl-10 pr-4 text-sm text-zinc-900 outline-none backdrop-blur transition placeholder:text-zinc-500 focus:border-accent [&::-webkit-search-cancel-button]:appearance-none"
             />
           </div>
           {team ? (
-            <p className="mt-2 text-center text-xs text-zinc-600 dark:text-zinc-400">
+            <p className="mt-2 text-center text-xs text-zinc-600">
               Searching the {team.city} {team.name} only.{" "}
               <Link
                 href={`/search?q=${encodeURIComponent(query.trim())}`}
@@ -124,21 +122,21 @@ export function SearchPageClient() {
         </div>
 
         {query.trim().length === 0 ? (
-          <p className="text-center text-sm text-zinc-600 dark:text-zinc-400">
+          <p className="text-center text-sm text-zinc-600">
             Type above to search the whole catalog.
           </p>
         ) : results.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-black/10 bg-black/15 p-8 text-center dark:border-white/15">
-            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">
+          <div className="rounded-lg border border-dashed border-black/10 bg-black/15 p-8 text-center">
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900">
               No bobbleheads found
             </p>
-            <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+            <p className="mt-2 text-sm leading-6 text-zinc-600">
               Try a different player, team, or year.
             </p>
           </div>
         ) : (
           <>
-            <p className="mb-3 text-xs text-zinc-600 dark:text-zinc-400">
+            <p className="mb-3 text-xs text-zinc-600">
               {results.length === 1 ? "1 result" : `${results.length} results`} for “{query.trim()}”
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
@@ -146,7 +144,7 @@ export function SearchPageClient() {
                 <ResultCard
                   key={`${result.source}-${result.teamSlug}-${result.id}`}
                   result={result}
-                  photoUrl={photoUrlById[result.id]}
+                  photoUrl={photoUrlByListing[`${result.teamSlug}/${result.id}`]}
                 />
               ))}
             </div>

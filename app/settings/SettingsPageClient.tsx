@@ -1,11 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { AuthWidget } from "@/components/AuthWidget";
 import { EmailAlertsToggle } from "@/components/EmailAlertsToggle";
 import { GalleryToggle } from "@/components/GalleryToggle";
 import { ShelfSharingToggle } from "@/components/ShelfSharingToggle";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { useAuth } from "@/lib/auth";
 import { useEmailAlerts, useGallerySharing, useMyShelf } from "@/lib/profile";
 
@@ -23,17 +21,16 @@ export function SettingsPageClient() {
       <div className="flex items-center justify-between px-4 pt-4 sm:px-6">
         <Link
           href="/"
-          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-700 transition hover:text-accent-hover dark:text-zinc-300 dark:hover:text-accent-hover"
+          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-700 transition hover:text-accent-hover"
         >
           <span aria-hidden>←</span> Back to home
         </Link>
-        <AuthWidget hideSettingsLink />
       </div>
 
       {isAuthLoading ? null : !user ? (
         <div className="mx-auto flex max-w-md flex-1 flex-col items-center justify-center gap-3 px-4 pb-24 text-center">
-          <h1 className="text-lg font-black text-zinc-900 dark:text-white">Sign in to see your settings</h1>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">
+          <h1 className="text-lg font-black text-zinc-900">Sign in to see your settings</h1>
+          <p className="text-sm text-zinc-600">
             Log in to manage your public shelf and other preferences.
           </p>
         </div>
@@ -45,7 +42,6 @@ export function SettingsPageClient() {
             </p>
           </header>
 
-          <ThemeToggle />
           <ShelfSharingToggle sharing={sharing} />
           {/* The gallery only has an effect on a public shelf, so it appears as a
               sub-option: shown right under sharing, and only once sharing is on. */}

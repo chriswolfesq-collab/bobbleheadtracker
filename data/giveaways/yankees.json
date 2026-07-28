@@ -139,7 +139,7 @@
     "year": "2024",
     "date": "August 11, 2024",
     "quantity": "18,000",
-    "imageUrl": "/bobbleheads/yankees-photos/anthony-volpe-2024.jpg"
+    "imageUrl": null
   },
   {
     "id": "eli-manning-2024",
@@ -532,7 +532,7 @@
     "year": "2016",
     "date": "August 7, 2016",
     "quantity": "18,000",
-    "imageUrl": "/bobbleheads/yankees-photos/didi-gregorius-2016.jpg"
+    "imageUrl": null
   },
   {
     "id": "mickey-mantle-triple-crown-2016",
@@ -790,7 +790,7 @@
     "title": "Jason Giambi",
     "year": "2003",
     "date": "September 13, 2003",
-    "imageUrl": "/bobbleheads/yankees-photos/jason-giambi-2003.jpg"
+    "imageUrl": null
   },
   {
     "id": "hideki-matsui-2003",

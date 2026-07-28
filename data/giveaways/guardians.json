@@ -164,11 +164,12 @@
   },
   {
     "id": "shane-bieber-cy-young-award-2021",
-    "title": "Shane Bieber Cy Young Award",
+    "title": "Shane Bieber",
     "year": "2021",
     "date": "August 21, 2021",
     "imageUrl": "/bobbleheads/guardians-photos/shane-bieber-cy-young-award-2021.jpg",
-    "quantity": "12,500"
+    "quantity": "12,500",
+    "nickname": "Cy Young Award"
   },
   {
     "id": "jose-ramirez-2019",
@@ -250,11 +251,12 @@
   },
   {
     "id": "spring-training-corey-kluber-2017",
-    "title": "Spring Training Corey Kluber",
+    "title": "Corey Kluber",
     "year": "2017",
     "date": "March 11, 2017",
     "imageUrl": "/bobbleheads/guardians-photos/spring-training-corey-kluber-2017.jpg",
-    "quantity": "2,000"
+    "quantity": "2,000",
+    "nickname": "Spring Training"
   },
   {
     "id": "jose-ramirez-2017",
@@ -352,11 +354,12 @@
   },
   {
     "id": "terry-francona-red-scooter-2015",
-    "title": "Terry Francona Red Scooter",
+    "title": "Terry Francona",
     "year": "2015",
     "date": "September 12, 2015",
     "imageUrl": "/bobbleheads/guardians-photos/terry-francona-red-scooter-2015.jpg",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "nickname": "Red Scooter"
   },
   {
     "id": "orel-hershiser-2014",
@@ -490,10 +493,11 @@
   },
   {
     "id": "cliff-lee-cy-young-2009",
-    "title": "Cliff Lee Cy Young",
+    "title": "Cliff Lee",
     "year": "2009",
     "date": "May 9, 2009",
-    "imageUrl": "/bobbleheads/guardians-photos/cliff-lee-cy-young-2009.jpg"
+    "imageUrl": "/bobbleheads/guardians-photos/cliff-lee-cy-young-2009.jpg",
+    "nickname": "Cy Young"
   },
   {
     "id": "shin-soo-choo-2009",
@@ -511,10 +515,11 @@
   },
   {
     "id": "grady-sizemore-surfer-2009",
-    "title": "Grady Sizemore Surfer",
+    "title": "Grady Sizemore",
     "year": "2009",
     "date": "July 18, 2009",
-    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-surfer-2009.jpg"
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-surfer-2009.jpg",
+    "nickname": "Surfer"
   },
   {
     "id": "slider-lifeguard-mascot-2009",
@@ -533,10 +538,11 @@
   },
   {
     "id": "grady-sizemore-diving-catch-2009",
-    "title": "Grady Sizemore Diving Catch",
+    "title": "Grady Sizemore",
     "year": "2009",
     "date": "September 26, 2009",
-    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-diving-catch-2009.jpg"
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-diving-catch-2009.jpg",
+    "nickname": "Diving Catch"
   },
   {
     "id": "c-c-sabathia-cy-young-2008",
@@ -547,24 +553,27 @@
   },
   {
     "id": "grady-sizemore-gold-glove-2008",
-    "title": "Grady Sizemore Gold Glove",
+    "title": "Grady Sizemore",
     "year": "2008",
     "date": "May 24, 2008",
-    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-gold-glove-2008.jpg"
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-gold-glove-2008.jpg",
+    "nickname": "Gold Glove"
   },
   {
     "id": "travis-hafner-mini-2008",
-    "title": "Travis Hafner Mini",
+    "title": "Travis Hafner",
     "year": "2008",
     "date": "June 24, 2008",
-    "imageUrl": "/bobbleheads/guardians-photos/travis-hafner-mini-2008.jpg"
+    "imageUrl": "/bobbleheads/guardians-photos/travis-hafner-mini-2008.jpg",
+    "nickname": "Mini"
   },
   {
     "id": "jhonny-peralta-mini-2008",
-    "title": "Jhonny Peralta Mini",
+    "title": "Jhonny Peralta",
     "year": "2008",
     "date": "August 11, 2008",
-    "imageUrl": "/bobbleheads/guardians-photos/jhonny-peralta-mini-2008.jpg"
+    "imageUrl": "/bobbleheads/guardians-photos/jhonny-peralta-mini-2008.jpg",
+    "nickname": "Mini"
   },
   {
     "id": "asdrubal-cabrera-2008",
@@ -575,10 +584,11 @@
   },
   {
     "id": "grady-sizemore-in-a-car-2008",
-    "title": "Grady Sizemore In A Car",
+    "title": "Grady Sizemore",
     "year": "2008",
     "date": "September 13, 2008",
-    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-in-a-car-2008.jpg"
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-in-a-car-2008.jpg",
+    "nickname": "In A Car"
   },
   {
     "id": "fausto-carmona-2008",
@@ -716,10 +726,11 @@
   },
   {
     "id": "jody-gerut-mini-2004",
-    "title": "Jody Gerut Mini",
+    "title": "Jody Gerut",
     "year": "2004",
     "date": "April 18, 2004",
-    "imageUrl": null
+    "imageUrl": null,
+    "nickname": "Mini"
   },
   {
     "id": "omar-vizquel-dave-concepcion-2004",
@@ -730,10 +741,11 @@
   },
   {
     "id": "slider-bobble-belly-mascot-2003",
-    "title": "Slider - Bobble Belly Mascot",
+    "title": "Slider",
     "year": "2003",
     "date": "March 9, 2003",
-    "imageUrl": null
+    "imageUrl": null,
+    "nickname": "- Bobble Belly Mascot"
   },
   {
     "id": "omar-vizquel-2003",
@@ -751,10 +763,11 @@
   },
   {
     "id": "omar-vizquel-talking-2003",
-    "title": "Omar Vizquel Talking",
+    "title": "Omar Vizquel",
     "year": "2003",
     "date": "May 18, 2003",
-    "imageUrl": "/bobbleheads/guardians-photos/omar-vizquel-talking-2003.jpg"
+    "imageUrl": "/bobbleheads/guardians-photos/omar-vizquel-talking-2003.jpg",
+    "nickname": "Talking"
   },
   {
     "id": "c-c-sabathia-josh-bard-2003",
@@ -786,10 +799,11 @@
   },
   {
     "id": "slider-mascot-2002",
-    "title": "Slider - Mascot",
+    "title": "Slider",
     "year": "2002",
     "date": "June 2, 2002",
-    "imageUrl": "/bobbleheads/guardians-photos/slider-mascot-2002.jpg"
+    "imageUrl": "/bobbleheads/guardians-photos/slider-mascot-2002.jpg",
+    "nickname": "- Mascot"
   },
   {
     "id": "einar-diaz-2002",
@@ -807,10 +821,11 @@
   },
   {
     "id": "jim-thome-hr-king-2002",
-    "title": "Jim Thome HR King",
+    "title": "Jim Thome",
     "year": "2002",
     "date": "August 7, 2002",
-    "imageUrl": "/bobbleheads/guardians-photos/jim-thome-hr-king-2002.jpg"
+    "imageUrl": "/bobbleheads/guardians-photos/jim-thome-hr-king-2002.jpg",
+    "nickname": "HR King"
   },
   {
     "id": "omar-vizquel-2001",

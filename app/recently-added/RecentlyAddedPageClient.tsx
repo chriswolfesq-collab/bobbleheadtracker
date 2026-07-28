@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { AuthWidget } from "@/components/AuthWidget";
 import { RecentlyAddedCard } from "@/components/RecentlyAddedCard";
 import { ToggleChip } from "@/components/ToggleChip";
 import { useRecentCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { extractYear, UNKNOWN_YEAR } from "@/lib/extractYear";
 import { getTeamBySlug } from "@/lib/teams";
+import { useMyOwnedLookup } from "@/lib/userCollections";
 import { useMyWantedLookup } from "@/lib/userWanted";
 
 const RECENT_LIMIT = 200;
@@ -16,15 +16,18 @@ const RECENT_LIMIT = 200;
 // DOM (and its images) small without a server round-trip per filter change.
 const PAGE_SIZE = 48;
 const FIELD_CLASSES =
-  "mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white";
+  "mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent";
 
 export function RecentlyAddedPageClient() {
   const { communityBobbleheads, isLoading } = useRecentCommunityBobbleheads(RECENT_LIMIT);
   const { wantedByKey, isLoggedIn: isLoggedInForWanted, setWanted } = useMyWantedLookup();
+  const { ownedByKey, isLoggedIn: isLoggedInForOwned } = useMyOwnedLookup();
   const [query, setQuery] = useState("");
   const [teamFilter, setTeamFilter] = useState("");
   const [yearFilter, setYearFilter] = useState("");
   const [wantedOnly, setWantedOnly] = useState(false);
+  const [ownedFilter, setOwnedFilter] = useState<"all" | "owned" | "unowned">("all");
+  const [sortOrder, setSortOrder] = useState<"newest" | "oldest" | "name">("newest");
 
   const teamOptions = useMemo(() => {
     const seen = new Map<string, string>();
@@ -54,6 +57,8 @@ export function RecentlyAddedPageClient() {
       if (teamFilter && bobblehead.teamSlug !== teamFilter) return false;
       if (yearFilter && extractYear(bobblehead.date) !== yearFilter) return false;
       if (wantedOnly && !wantedByKey[`${bobblehead.teamSlug}:${bobblehead.id}`]) return false;
+      if (ownedFilter === "owned" && !ownedByKey[`${bobblehead.teamSlug}:${bobblehead.id}`]) return false;
+      if (ownedFilter === "unowned" && ownedByKey[`${bobblehead.teamSlug}:${bobblehead.id}`]) return false;
 
       if (terms.length > 0) {
         const team = getTeamBySlug(bobblehead.teamSlug);
@@ -64,16 +69,27 @@ export function RecentlyAddedPageClient() {
 
       return true;
     });
-  }, [communityBobbleheads, query, teamFilter, yearFilter, wantedOnly, wantedByKey]);
+  }, [communityBobbleheads, query, teamFilter, yearFilter, wantedOnly, wantedByKey, ownedFilter, ownedByKey]);
+
+  const sorted = useMemo(() => {
+    if (sortOrder === "newest") return filtered;
+    const list = [...filtered];
+    if (sortOrder === "name") {
+      list.sort((a, b) => a.title.localeCompare(b.title));
+    } else {
+      list.reverse();
+    }
+    return list;
+  }, [filtered, sortOrder]);
 
   const hasActiveFilters =
-    query.trim().length > 0 || teamFilter !== "" || yearFilter !== "" || wantedOnly;
+    query.trim().length > 0 || teamFilter !== "" || yearFilter !== "" || wantedOnly || ownedFilter !== "all";
 
   // Reset the window whenever the filters change, so a new search starts from
   // the top rather than deep in a previous result's "show more" state. Done by
   // comparing against the previous filter signature during render (React's
   // "adjust state during render" pattern) rather than in an effect.
-  const filterSignature = `${query}|${teamFilter}|${yearFilter}|${wantedOnly}`;
+  const filterSignature = `${query}|${teamFilter}|${yearFilter}|${wantedOnly}|${ownedFilter}|${sortOrder}`;
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [prevFilterSignature, setPrevFilterSignature] = useState(filterSignature);
   if (prevFilterSignature !== filterSignature) {
@@ -81,7 +97,7 @@ export function RecentlyAddedPageClient() {
     setVisibleCount(PAGE_SIZE);
   }
 
-  const visible = filtered.slice(0, visibleCount);
+  const visible = sorted.slice(0, visibleCount);
 
   return (
     <div
@@ -91,11 +107,10 @@ export function RecentlyAddedPageClient() {
       <div className="flex items-center justify-between px-4 pt-4 sm:px-6">
         <Link
           href="/"
-          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-700 transition hover:text-accent-hover dark:text-zinc-300 dark:hover:text-accent-hover"
+          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-700 transition hover:text-accent-hover"
         >
           <span aria-hidden>←</span> Back to home
         </Link>
-        <AuthWidget />
       </div>
 
       <div className="mx-auto w-full max-w-5xl px-4 pb-24 pt-6 sm:px-6">
@@ -107,7 +122,7 @@ export function RecentlyAddedPageClient() {
 
         {!isLoading && communityBobbleheads.length > 0 ? (
           <div className="mb-6">
-            <div className="grid gap-3 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_auto]">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)_auto]">
               <label className="min-w-0">
                 <span className="text-xs font-black uppercase tracking-wide text-accent">
                   Search
@@ -119,14 +134,14 @@ export function RecentlyAddedPageClient() {
                     onChange={(event) => setQuery(event.target.value)}
                     placeholder="Search by player, team…"
                     aria-label="Search recently added bobbleheads"
-                    className="w-full rounded border border-black/10 bg-white px-3 py-2 pr-9 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+                    className="w-full rounded border border-black/10 bg-white px-3 py-2 pr-9 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent"
                   />
                   {query ? (
                     <button
                       type="button"
                       onClick={() => setQuery("")}
                       aria-label="Clear search"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-600 transition hover:text-accent-hover dark:text-zinc-400 dark:hover:text-accent-hover"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-600 transition hover:text-accent-hover"
                     >
                       ✕
                     </button>
@@ -165,14 +180,45 @@ export function RecentlyAddedPageClient() {
                   ))}
                 </select>
               </label>
+              {isLoggedInForOwned ? (
+                <label className="min-w-0">
+                  <span className="text-xs font-black uppercase tracking-wide text-accent">Ownership</span>
+                  <select
+                    value={ownedFilter}
+                    onChange={(event) => setOwnedFilter(event.target.value as "all" | "owned" | "unowned")}
+                    aria-label="Filter by ownership"
+                    className={FIELD_CLASSES}
+                  >
+                    <option value="all">All</option>
+                    <option value="owned">Owned</option>
+                    <option value="unowned">Unowned</option>
+                  </select>
+                </label>
+              ) : null}
+              <label className="min-w-0">
+                <span className="text-xs font-black uppercase tracking-wide text-accent">Sort</span>
+                <select
+                  value={sortOrder}
+                  onChange={(event) => setSortOrder(event.target.value as "newest" | "oldest" | "name")}
+                  aria-label="Sort"
+                  className={FIELD_CLASSES}
+                >
+                  <option value="newest">Newest first</option>
+                  <option value="oldest">Oldest first</option>
+                  <option value="name">Name (A–Z)</option>
+                </select>
+              </label>
               <div className="flex items-end">
                 <ToggleChip label="Wanted" active={wantedOnly} onClick={() => setWantedOnly((v) => !v)} />
               </div>
             </div>
 
             <div className="mt-3 flex items-center justify-between gap-3">
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                Showing {filtered.length} of {communityBobbleheads.length}
+              <p className="text-xs text-zinc-600">
+                Showing {visible.length} of {filtered.length}
+                {filtered.length !== communityBobbleheads.length
+                  ? ` (${communityBobbleheads.length} total)`
+                  : ""}
               </p>
               {hasActiveFilters ? (
                 <button
@@ -182,8 +228,9 @@ export function RecentlyAddedPageClient() {
                     setTeamFilter("");
                     setYearFilter("");
                     setWantedOnly(false);
+                    setOwnedFilter("all");
                   }}
-                  className="text-xs font-semibold uppercase tracking-wide text-zinc-600 transition hover:text-accent-hover dark:text-zinc-400 dark:hover:text-accent-hover"
+                  className="text-xs font-semibold uppercase tracking-wide text-zinc-600 transition hover:text-accent-hover"
                 >
                   Clear filters
                 </button>
@@ -193,15 +240,15 @@ export function RecentlyAddedPageClient() {
         ) : null}
 
         {isLoading ? null : communityBobbleheads.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-black/10 bg-black/15 p-8 text-center dark:border-white/15">
-            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">
+          <div className="rounded-lg border border-dashed border-black/10 bg-black/15 p-8 text-center">
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900">
               Nothing added yet
             </p>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-black/10 bg-black/15 p-8 text-center dark:border-white/15">
-            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">No matches</p>
-            <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+          <div className="rounded-lg border border-dashed border-black/10 bg-black/15 p-8 text-center">
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900">No matches</p>
+            <p className="mt-2 text-sm leading-6 text-zinc-600">
               Try a different search term or filter.
             </p>
           </div>
@@ -226,7 +273,7 @@ export function RecentlyAddedPageClient() {
                 <button
                   type="button"
                   onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
-                  className="rounded-full border border-black/10 bg-black/[0.04] px-5 py-2 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:border-white/15 dark:bg-white/5 dark:text-zinc-300 dark:hover:text-accent-hover"
+                  className="rounded-full border border-black/10 bg-black/[0.04] px-5 py-2 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover"
                 >
                   Show more ({filtered.length - visible.length} more)
                 </button>

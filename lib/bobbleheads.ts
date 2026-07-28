@@ -48,6 +48,13 @@ export interface Giveaway {
   year: string;
   date: string;
   imageUrl?: string | null;
+  /**
+   * Optional standardized distribution method shown on the detail page:
+   * "Gate Giveaway", "Theme Item", "Fan Reward", "STH Reward", or "Other".
+   */
+  distribution?: string | null;
+  /** Optional 1–2 sentence story about the occasion behind the bobblehead. */
+  story?: string | null;
 }
 
 // The curated giveaway data lives in one JSON file per team under

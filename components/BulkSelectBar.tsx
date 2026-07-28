@@ -38,9 +38,9 @@ export function BulkSelectBar({
   }, [count, allSelected]);
 
   return (
-    <div className="sticky top-0 z-10 -mx-4 mb-4 bg-slate-50/95 px-4 py-3 backdrop-blur dark:bg-[#15110d]/95 sm:-mx-8 sm:px-8">
-      <div className="mx-auto flex max-w-4xl flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border border-black/10 bg-white px-4 py-3 dark:border-white/10 dark:bg-[#0b1a29]">
-        <label className="flex cursor-pointer items-center gap-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200">
+    <div className="sticky top-0 z-10 -mx-4 mb-4 bg-slate-50/95 px-4 py-3 backdrop-blur sm:-mx-8 sm:px-8">
+      <div className="mx-auto flex max-w-4xl flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border border-black/10 bg-white px-4 py-3">
+        <label className="flex cursor-pointer items-center gap-2 text-xs font-black uppercase tracking-wide text-zinc-800">
           <input
             ref={checkboxRef}
             type="checkbox"
@@ -52,12 +52,12 @@ export function BulkSelectBar({
           />
           Select all
         </label>
-        <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">
+        <span className="text-xs font-semibold text-zinc-600">
           {count} of {total} selected
         </span>
         <div className="ml-auto flex items-center gap-2">
           {busy && progress ? (
-            <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-400" role="status">
+            <span className="text-xs font-semibold text-zinc-600" role="status">
               {progress.done}/{progress.total}…
             </span>
           ) : null}
@@ -108,7 +108,7 @@ export function BulkSecondaryButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`${BASE_BUTTON} border border-black/15 text-zinc-800 hover:border-red-400 hover:text-red-300 dark:border-white/20 dark:text-zinc-200`}
+      className={`${BASE_BUTTON} border border-black/15 text-zinc-800 hover:border-red-400 hover:text-red-300`}
     >
       {children}
     </button>

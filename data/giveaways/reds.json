@@ -108,7 +108,7 @@
     "nickname": "City Connect",
     "year": "2024",
     "date": "September 1, 2024",
-    "imageUrl": "/bobbleheads/reds-photos/hunter-greene-city-connect-2024.jpg"
+    "imageUrl": null
   },
   {
     "id": "mandalorian-2023",
@@ -326,7 +326,7 @@
     "nickname": "Wild Horse",
     "year": "2019",
     "date": "July 18, 2019",
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnbfVJ0XfNwCS9oEoWYGTybZR5ph6naQ-y0A&s",
+    "imageUrl": "/bobbleheads/reds-photos/yasiel-puig-2019.jpg",
     "quantity": "20,000"
   },
   {

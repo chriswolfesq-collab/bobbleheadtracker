@@ -80,20 +80,20 @@ export function AdminEmailComposer({
         role="dialog"
         aria-modal="true"
         aria-labelledby="admin-email-title"
-        className="w-full max-w-lg rounded-lg border border-black/10 bg-white p-6 text-zinc-900 shadow-2xl dark:border-white/10 dark:bg-[#0b1a29] dark:text-zinc-100"
+        className="w-full max-w-lg rounded-lg border border-black/10 bg-white p-6 text-zinc-900 shadow-2xl"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
           <div>
             <h2 id="admin-email-title" className="text-lg font-black uppercase tracking-wide">Send email</h2>
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="mt-1 text-sm text-zinc-600">
               To <span className="font-semibold text-accent">{recipientLabel(target)}</span>
             </p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="rounded border border-black/15 px-2 py-1 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-300 dark:hover:text-accent-hover"
+            className="rounded border border-black/15 px-2 py-1 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover"
           >
             Close
           </button>
@@ -107,25 +107,25 @@ export function AdminEmailComposer({
           }}
         >
           <label className="block text-sm">
-            <span className="font-black uppercase tracking-wide text-zinc-700 dark:text-zinc-300">Subject</span>
+            <span className="font-black uppercase tracking-wide text-zinc-700">Subject</span>
             <input
               autoFocus
               type="text"
               required
               value={subject}
               onChange={(event) => setSubject(event.target.value)}
-              className="mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+              className="mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-accent"
             />
           </label>
 
           <label className="block text-sm">
-            <span className="font-black uppercase tracking-wide text-zinc-700 dark:text-zinc-300">Message</span>
+            <span className="font-black uppercase tracking-wide text-zinc-700">Message</span>
             <textarea
               required
               rows={8}
               value={message}
               onChange={(event) => setMessage(event.target.value)}
-              className="mt-1 w-full resize-y rounded border border-black/10 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+              className="mt-1 w-full resize-y rounded border border-black/10 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-accent"
             />
           </label>
 
@@ -136,7 +136,7 @@ export function AdminEmailComposer({
               type="button"
               onClick={onClose}
               disabled={isSending}
-              className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover disabled:opacity-60 dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
+              className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover disabled:opacity-60"
             >
               Cancel
             </button>

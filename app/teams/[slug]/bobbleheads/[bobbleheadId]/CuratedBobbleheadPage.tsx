@@ -2,41 +2,124 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { AdminModeBadge } from "@/components/AdminModeBadge";
-import { AuthWidget } from "@/components/AuthWidget";
+import { useEffect, useRef, useState } from "react";
 import { EnlargeablePhoto } from "@/components/EnlargeablePhoto";
-import { BobbleheadTitle } from "@/components/BobbleheadTitle";
+import { resolveTitleParts } from "@/components/BobbleheadTitle";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { useToast } from "@/components/Toast";
-import { WantedButton } from "@/components/WantedButton";
+import { NamePlate } from "@/components/ui/NamePlate";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, hideCuratedSeedPhoto, saveCuratedBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { useBobbleheadOverride, type BobbleheadOverride } from "@/lib/bobbleheadOverrides";
+import { copyText } from "@/lib/clipboard";
 import { extractYear } from "@/lib/extractYear";
 import { publicAsset } from "@/lib/paths";
+import { getRarity } from "@/lib/rarity";
+import { siteUrl } from "@/lib/siteUrl";
 import type { Team } from "@/lib/teams";
 import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
 import { useUserWanted } from "@/lib/userWanted";
+
+export type ListingNav = {
+  position: number;
+  total: number;
+  prev: { id: string; title: string } | null;
+  next: { id: string; title: string } | null;
+  /** nearby listings rendered as "related bobbleheads" links */
+  related: { id: string; title: string }[];
+};
+
+const RARITY_BADGE_CLASSES: Record<string, string> = {
+  "ultra-rare": "bg-purple-700 text-white",
+  rare: "bg-purple-600 text-white",
+  limited: "brass-plate text-navy-deep",
+};
+
+function ShareCard({ url, title }: { url: string; title: string }) {
+  const { showError } = useToast();
+  const [copied, setCopied] = useState(false);
+  const encodedUrl = encodeURIComponent(url);
+  const encodedTitle = encodeURIComponent(`${title} bobblehead`);
+  const shareLinkClass =
+    "grid h-10 w-10 place-items-center rounded-full border border-border-soft bg-white text-navy transition hover:border-accent hover:text-accent";
+
+  return (
+    <div className="rounded-xl border border-border-soft bg-surface p-5">
+      <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">Share</h2>
+      <div className="mt-3 flex items-center gap-2.5">
+        <button
+          type="button"
+          aria-label="Copy link"
+          title="Copy link"
+          onClick={async () => {
+            const ok = await copyText(url);
+            if (!ok) {
+              showError("Couldn't copy the link.");
+              return;
+            }
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+          }}
+          className={shareLinkClass}
+        >
+          <span aria-hidden>{copied ? "✓" : "🔗"}</span>
+        </button>
+        <a
+          href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on Facebook"
+          title="Share on Facebook"
+          className={shareLinkClass}
+        >
+          <span aria-hidden className="font-black">f</span>
+        </a>
+        <a
+          href={`https://x.com/intent/post?url=${encodedUrl}&text=${encodedTitle}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on X"
+          title="Share on X"
+          className={shareLinkClass}
+        >
+          <span aria-hidden className="font-black">𝕏</span>
+        </a>
+        <a
+          href={`https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on Reddit"
+          title="Share on Reddit"
+          className={shareLinkClass}
+        >
+          <span aria-hidden className="text-xs font-black">reddit</span>
+        </a>
+      </div>
+      {copied ? <p className="mt-2 text-xs font-semibold text-green-700">Link copied.</p> : null}
+    </div>
+  );
+}
 
 export function CuratedBobbleheadPage({
   giveaway,
   team,
   initialOverride,
   initialImageUrl,
+  nav,
 }: {
   giveaway: Giveaway;
   team: Team;
   initialOverride: BobbleheadOverride | null;
   initialImageUrl: string | null;
+  nav: ListingNav;
 }) {
   const router = useRouter();
   const { canEditTeam, user: adminUser } = useAdminAuth();
@@ -59,29 +142,60 @@ export function CuratedBobbleheadPage({
   const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
   const [mainPhotoRemoved, setMainPhotoRemoved] = useState(false);
   const [seedPhotoRemoved, setSeedPhotoRemoved] = useState(false);
+  const [selectedPhotoUrl, setSelectedPhotoUrl] = useState<string | null>(null);
 
-  // The page itself is statically generated from the hardcoded giveaway list,
-  // so a listing the admin deleted still has a route — the tombstone is what
-  // tells us it's gone.
+  const prevHref = nav.prev ? `/teams/${team.slug}/bobbleheads/${nav.prev.id}` : null;
+  const nextHref = nav.next ? `/teams/${team.slug}/bobbleheads/${nav.next.id}` : null;
+
+  // Left/right swipe moves between bobbleheads on touch screens, matching the
+  // prev/next arrows. Vertical drags (scrolling) are ignored.
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  useEffect(() => {
+    function handleTouchStart(event: TouchEvent) {
+      const touch = event.touches[0];
+      touchStart.current = { x: touch.clientX, y: touch.clientY };
+    }
+    function handleTouchEnd(event: TouchEvent) {
+      const start = touchStart.current;
+      touchStart.current = null;
+      if (!start) return;
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - start.x;
+      const dy = touch.clientY - start.y;
+      if (Math.abs(dx) < 70 || Math.abs(dy) > Math.abs(dx) * 0.6) return;
+      if (dx < 0 && nextHref) router.push(nextHref);
+      if (dx > 0 && prevHref) router.push(prevHref);
+    }
+    document.addEventListener("touchstart", handleTouchStart, { passive: true });
+    document.addEventListener("touchend", handleTouchEnd, { passive: true });
+    return () => {
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [prevHref, nextHref, router]);
+
+  // The page itself is statically generated from the hardcoded giveaway list;
+  // the server 404s deleted listings, but an admin can also delete one live
+  // from this very page — the tombstone covers that.
   if (!isOverrideLoading && override?.deleted) {
     return (
-      <main className="min-h-full bg-slate-50 px-3 py-3 text-zinc-900 dark:bg-[#15110d] dark:text-zinc-100 sm:px-5 sm:py-5">
-        <div className="mx-auto max-w-3xl rounded-xl border border-black bg-white p-6 shadow-2xl dark:bg-[#08131f]">
+      <div className="flex min-h-full flex-1 flex-col px-4 py-10" style={{ background: "var(--page-gradient)" }}>
+        <div className="mx-auto w-full max-w-3xl rounded-xl border border-border-soft bg-surface p-6">
           <Link
             href={`/teams/${team.slug}`}
-            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-zinc-900 hover:text-accent-hover dark:text-white dark:hover:text-accent-hover"
+            className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-navy hover:text-accent-hover"
           >
             <span aria-hidden>←</span>
             Back to team
           </Link>
-          <div className="mt-8 rounded-lg border border-dashed border-black/10 bg-black/15 p-8 text-center dark:border-white/15">
-            <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">Bobblehead removed</p>
-            <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+          <div className="mt-8 rounded-lg border border-dashed border-border-soft bg-surface-muted p-8 text-center">
+            <p className="text-sm font-black uppercase tracking-wide text-navy">Bobblehead removed</p>
+            <p className="mt-2 text-sm leading-6 text-zinc-600">
               The site admin removed this listing from the catalog.
             </p>
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -102,9 +216,19 @@ export function CuratedBobbleheadPage({
   // With no profile photo of its own, a listing borrows its first gallery
   // photo as the profile image rather than showing the team placeholder.
   const galleryFallbackUrl = galleryPhotos[0]?.imageUrl ?? null;
-  const imageSrc = mainPhotoUrl ?? galleryFallbackUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+  const defaultPhotoUrl = mainPhotoUrl ?? galleryFallbackUrl;
+  const hasRealPhoto = Boolean(defaultPhotoUrl);
+  // The community-photo tag applies when the showing photo came from the
+  // community pipeline (approved/gallery), not the curated seed data.
+  const isCommunityPhoto = hasRealPhoto && !seedPhotoUrl;
+  const imageSrc = selectedPhotoUrl ?? defaultPhotoUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+  // Thumbnails: the profile photo plus every distinct gallery photo.
+  const thumbnails = [
+    ...(defaultPhotoUrl ? [defaultPhotoUrl] : []),
+    ...galleryPhotos.map((photo) => photo.imageUrl).filter((url) => url !== defaultPhotoUrl),
+  ];
   // Don't show the photo twice when it's standing in as the profile image.
-  const galleryPhotosToShow = galleryPhotos.filter((photo) => photo.imageUrl !== imageSrc);
+  const galleryPhotosToShow = galleryPhotos.filter((photo) => photo.imageUrl !== defaultPhotoUrl);
   const isOwned = ownedById[giveaway.id] ?? false;
   // The collection loads client-side after mount, so until it arrives we don't
   // actually know whether this bobblehead is owned — treating "not yet loaded"
@@ -113,11 +237,28 @@ export function CuratedBobbleheadPage({
   const ownershipKnown = !isCollectionLoading;
   const isFavorited = favoritedById[giveaway.id] ?? false;
   const isWanted = wantedById[giveaway.id] ?? false;
-  const details = [
+  const rarity = getRarity(quantity);
+  const { primary: primaryName, secondary: descriptor } = resolveTitleParts(title, nickname);
+  const pageUrl = `${siteUrl()}/teams/${team.slug}/bobbleheads/${giveaway.id}`;
+
+  const details: [string, string][] = [
     ["Release Date", date],
-    ["Team", `${team.city} ${team.name}`],
-    ...(quantity?.trim() ? [["Number Given Away", quantity]] : []),
+    ...(giveaway.distribution ? [["Distribution", giveaway.distribution] as [string, string]] : []),
+    ...(quantity?.trim() ? [["Quantity Issued", quantity] as [string, string]] : []),
   ];
+
+  const story =
+    giveaway.story ??
+    `This ${primaryName} bobblehead was given away to ${team.city} ${team.name} fans${
+      date && date !== "N/A" ? ` on ${date}` : year !== "Unknown" ? ` in ${year}` : ""
+    }${quantity?.trim() ? `, with ${quantity} issued` : ""}.`;
+
+  // Marking something owned also removes it from the wanted list — you no
+  // longer "want" what's on your shelf (un-owning doesn't re-add it).
+  const handleToggleOwned = () => {
+    if (!isOwned && isWanted) setWanted(giveaway.id, false);
+    setOwned(giveaway.id, !isOwned);
+  };
 
   const handleEditSave = async (values: EditBobbleheadValues, file: File | null) => {
     if (!adminUser) return;
@@ -206,174 +347,325 @@ export function CuratedBobbleheadPage({
     }
   };
 
+  const ownButtonClass = `w-full rounded-lg px-5 py-3.5 font-display text-base font-bold uppercase tracking-wider transition disabled:cursor-not-allowed disabled:opacity-50 ${
+    isLoggedIn && !ownershipKnown
+      ? "border border-border-soft text-zinc-500"
+      : isOwned
+        ? "bg-green-600 text-white hover:bg-green-500"
+        : "bg-accent text-accent-fg hover:bg-accent-hover"
+  }`;
+
   return (
-    <main className="min-h-full bg-slate-50 px-3 py-3 text-zinc-900 dark:bg-[#15110d] dark:text-zinc-100 sm:px-5 sm:py-5">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-xl border border-black bg-white shadow-2xl dark:bg-[#08131f]">
-        {/* Always-dark team hero; `dark` scopes its contents to dark-surface
-            styling so they stay legible when the page is in light mode. */}
-        <section
-          className="dark border-b border-white/10 p-5"
-          style={{
-            background: `radial-gradient(circle at 72% 10%, ${team.primary}44, transparent 34%), linear-gradient(135deg, #08131f 0%, #0b1d2e 52%, #07111d 100%)`,
-          }}
-        >
-          <div className="flex items-center justify-between gap-3">
+    <div className="flex min-h-full flex-1 flex-col" style={{ background: "var(--page-gradient)" }}>
+      {/* Persistent nav bar: true back first, team link second, position counter */}
+      <div className="sticky top-14 z-30 border-b border-border-soft bg-background/95 backdrop-blur">
+        <div className="mx-auto flex h-11 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+          <div className="flex min-w-0 items-center gap-4">
+            <button
+              type="button"
+              onClick={() => router.back()}
+              className="inline-flex shrink-0 items-center gap-1.5 text-sm font-black uppercase tracking-wide text-navy transition hover:text-accent-hover"
+            >
+              <span aria-hidden>←</span> Back
+            </button>
             <Link
               href={`/teams/${team.slug}`}
-              className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white hover:text-accent-hover"
+              className="truncate text-sm font-semibold text-zinc-600 transition hover:text-accent-hover"
             >
-              <span aria-hidden>←</span>
-              Back to team
+              {team.name} team page
             </Link>
-            <div className="flex flex-wrap items-center justify-end gap-2">
-              <AdminModeBadge />
-              <AuthWidget />
-            </div>
           </div>
+          <p className="shrink-0 text-xs font-semibold uppercase tracking-wide text-zinc-500">
+            {nav.position} of {nav.total}
+          </p>
+        </div>
+      </div>
 
-          <div className="mt-6 grid gap-6 lg:grid-cols-[190px_1fr]">
-          <aside className="lg:border-r lg:border-white/10 lg:pr-5">
-            <div className="rounded border border-white/15 bg-black/25 p-3 text-center">
-              <div className="relative flex h-44 items-end justify-center rounded bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.18),rgba(255,255,255,0)_46%)]">
-                <EnlargeablePhoto
-                  src={imageSrc}
-                  alt={`${team.city} ${team.name} ${title} bobblehead`}
-                  width={268}
-                  height={630}
-                  className="relative h-40 w-auto object-contain drop-shadow-[0_12px_16px_rgba(0,0,0,0.65)]"
-                />
-              </div>
-              <div className="mt-2 rounded bg-black/45 px-2 py-1 text-sm font-black uppercase tracking-wide text-zinc-100">
-                {team.name}
-              </div>
-            </div>
-          </aside>
+      {/* Prev/next edge arrows */}
+      {prevHref ? (
+        <Link
+          href={prevHref}
+          aria-label={`Previous: ${nav.prev?.title}`}
+          title={nav.prev?.title}
+          className="fixed left-2 top-1/2 z-30 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-border-soft bg-surface text-xl text-navy shadow-lg transition hover:border-accent hover:text-accent md:grid"
+        >
+          <span aria-hidden>‹</span>
+        </Link>
+      ) : null}
+      {nextHref ? (
+        <Link
+          href={nextHref}
+          aria-label={`Next: ${nav.next?.title}`}
+          title={nav.next?.title}
+          className="fixed right-2 top-1/2 z-30 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-border-soft bg-surface text-xl text-navy shadow-lg transition hover:border-accent hover:text-accent md:grid"
+        >
+          <span aria-hidden>›</span>
+        </Link>
+      ) : null}
 
-          <div className="grid gap-6 xl:grid-cols-[1fr_210px]">
-            <div>
-              <p className="text-sm font-black uppercase tracking-[0.22em] text-accent">
-                {team.city} {team.name}
-              </p>
-              <h1 className="mt-3 flex flex-wrap items-center gap-3 text-4xl font-black uppercase leading-none tracking-wide text-white sm:text-5xl 2xl:text-6xl">
-                <span>
-                  <BobbleheadTitle title={title} nickname={nickname} />
+      <div className="mx-auto w-full max-w-6xl px-4 pb-16 pt-6 sm:px-6">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+          {/* Left column: photo + about + details */}
+          <div className="flex flex-col gap-5">
+            <div className="relative overflow-hidden rounded-xl border border-border-soft bg-white">
+              {isCommunityPhoto ? (
+                <span className="absolute left-3 top-3 z-10 rounded bg-navy/85 px-2 py-1 text-[10px] font-black uppercase tracking-wider text-white">
+                  Community photo
                 </span>
-                <WantedButton
-                  isWanted={isWanted}
-                  isLoggedIn={isLoggedInForWanted}
-                  onToggle={() => setWanted(giveaway.id, !isWanted)}
-                  className="h-9 w-9 text-xl sm:h-10 sm:w-10 sm:text-2xl"
-                />
+              ) : null}
+              <div className="absolute right-3 top-3 z-10 flex items-center gap-2">
                 <FavoriteButton
                   isFavorited={isFavorited}
                   isLoggedIn={isLoggedInForFavorites}
                   onToggle={() => setFavorited(giveaway.id, !isFavorited)}
-                  className="h-9 w-9 text-xl sm:h-10 sm:w-10 sm:text-2xl"
+                  itemLabel={title}
+                  className="h-9 w-9 text-lg"
                 />
-              </h1>
-              <dl className="mt-6 grid max-w-4xl gap-x-8 gap-y-3 text-sm sm:grid-cols-2 xl:grid-cols-4">
+              </div>
+              {hasRealPhoto ? (
+                <div className="flex min-h-80 items-center justify-center bg-[radial-gradient(circle_at_50%_30%,#ffffff,#f2ead9_85%)] p-6 sm:min-h-[28rem]">
+                  <EnlargeablePhoto
+                    src={imageSrc}
+                    alt={`${team.city} ${team.name} ${title} bobblehead`}
+                    width={800}
+                    height={800}
+                    className="max-h-[26rem] w-auto max-w-full object-contain mix-blend-multiply drop-shadow-[0_16px_20px_rgba(58,36,18,0.3)]"
+                  />
+                </div>
+              ) : (
+                <div className="flex min-h-80 flex-col items-center justify-center gap-4 bg-[radial-gradient(circle_at_50%_30%,#ffffff,#f2ead9_85%)] p-8 text-center sm:min-h-[28rem]">
+                  <EnlargeablePhoto
+                    src={imageSrc}
+                    alt={`${team.city} ${team.name} placeholder bobblehead`}
+                    width={268}
+                    height={630}
+                    className="h-40 w-auto object-contain opacity-70"
+                  />
+                  <p className="font-display text-lg font-bold uppercase tracking-wide text-navy">
+                    No photo yet
+                  </p>
+                  <p className="max-w-sm text-sm leading-6 text-zinc-600">
+                    Nobody has shared a photo of this bobblehead. Have one on your shelf?
+                  </p>
+                  <SubmitPhotoButton
+                    bobbleheadId={giveaway.id}
+                    teamSlug={team.slug}
+                    label="Submit the first photo"
+                    className="inline-flex cursor-pointer items-center gap-2 rounded bg-accent px-5 py-2.5 font-display text-sm font-bold uppercase tracking-wider text-accent-fg transition hover:bg-accent-hover"
+                  >
+                    <span aria-hidden>▣</span> Submit the first photo
+                  </SubmitPhotoButton>
+                </div>
+              )}
+            </div>
+
+            {thumbnails.length > 1 ? (
+              <div className="flex gap-2 overflow-x-auto pb-1">
+                {thumbnails.map((url) => (
+                  <button
+                    key={url}
+                    type="button"
+                    onClick={() => setSelectedPhotoUrl(url)}
+                    aria-label="Show this photo"
+                    aria-pressed={url === imageSrc}
+                    className={`h-20 w-20 shrink-0 overflow-hidden rounded-lg border-2 bg-white transition ${
+                      url === imageSrc ? "border-accent" : "border-border-soft hover:border-accent/50"
+                    }`}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={url} alt="" className="h-full w-full object-contain" />
+                  </button>
+                ))}
+              </div>
+            ) : null}
+
+            <div className="rounded-xl border border-border-soft bg-surface p-5">
+              <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
+                About This Bobblehead
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-zinc-700">{story}</p>
+            </div>
+
+            <div className="rounded-xl border border-border-soft bg-surface p-5">
+              <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
+                Details
+              </h2>
+              <dl className="mt-3 divide-y divide-border-soft">
                 {details.map(([label, value]) => (
-                  <div key={label} className="min-w-0">
-                    <dt className="text-xs font-black uppercase tracking-wide text-zinc-400">{label}</dt>
-                    <dd className="mt-1 truncate text-base font-semibold text-zinc-100">{value}</dd>
+                  <div key={label} className="flex items-center justify-between gap-6 py-2.5">
+                    <dt className="text-sm font-semibold text-zinc-500">{label}</dt>
+                    <dd className="text-right text-sm font-semibold text-navy">{value}</dd>
                   </div>
                 ))}
               </dl>
             </div>
-
-            <div className="flex flex-col items-start gap-4 xl:items-end">
-              {canEdit ? (
-                <button
-                  type="button"
-                  onClick={() => setIsEditOpen(true)}
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-5 py-3 text-sm font-bold uppercase tracking-wide text-zinc-100 transition hover:border-accent hover:text-accent-hover"
-                >
-                  <span>✎</span>
-                  Edit bobblehead
-                </button>
-              ) : null}
-              <p className="text-sm leading-6 text-zinc-300 xl:text-right">
-                {isLoggedIn ? "Log ownership and photos for this bobblehead." : "Log in to track this bobblehead in your collection."}
-              </p>
-            </div>
           </div>
-          </div>
-        </section>
 
-        <section className="m-2 rounded-lg border border-black/10 bg-white p-4 dark:border-white/10 dark:bg-[#0b1a29] sm:m-3 sm:p-6">
-          <div className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b border-black/10 pb-3 dark:border-white/15">
+          {/* Right rail: identity + actions */}
+          <div className="flex flex-col gap-5">
             <div>
-              <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Photos</p>
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                Have a better photo? Submit it for the admin to review.
-              </p>
+              <Link href={`/teams/${team.slug}`} className="inline-block">
+                <NamePlate variant="brass">{team.city} {team.name}</NamePlate>
+              </Link>
+              <h1 className="mt-3 font-display text-4xl font-bold uppercase leading-none tracking-wide text-navy sm:text-5xl">
+                {primaryName}
+              </h1>
+              {descriptor ? (
+                <p className="mt-2 text-lg font-semibold text-zinc-600">{descriptor}</p>
+              ) : null}
+              {rarity ? (
+                <span
+                  className={`mt-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider ${RARITY_BADGE_CLASSES[rarity.tier]}`}
+                >
+                  <span aria-hidden>◆</span> {rarity.label}
+                </span>
+              ) : null}
             </div>
-          </div>
-          {galleryPhotosToShow.length > 0 ? (
-            <div className="mb-5">
-              <PhotoGallery
-                photos={galleryPhotosToShow}
-                onDelete={canEdit ? handleDeleteGalleryPhoto : undefined}
-                onSetAsMain={canEdit ? handleSetGalleryPhotoAsMain : undefined}
-              />
+
+            <div className="flex gap-3">
+              <button
+                type="button"
+                aria-pressed={isOwned}
+                disabled={!isLoggedIn || !ownershipKnown}
+                onClick={handleToggleOwned}
+                className={ownButtonClass}
+              >
+                {!isLoggedIn
+                  ? "Log in to track"
+                  : !ownershipKnown
+                    ? "Loading…"
+                    : isOwned
+                      ? "✓ I Own It"
+                      : "I Own It"}
+              </button>
+              <button
+                type="button"
+                aria-pressed={isWanted}
+                onClick={() => {
+                  if (!isLoggedInForWanted) return;
+                  setWanted(giveaway.id, !isWanted);
+                }}
+                disabled={!isLoggedInForWanted}
+                className={`w-full rounded-lg border px-5 py-3.5 font-display text-base font-bold uppercase tracking-wider transition disabled:cursor-not-allowed disabled:opacity-50 ${
+                  isWanted
+                    ? "border-accent bg-accent/10 text-accent"
+                    : "border-accent text-accent hover:bg-accent hover:text-accent-fg"
+                }`}
+              >
+                {isWanted ? "★ Wanted" : "☆ Want It"}
+              </button>
             </div>
-          ) : null}
-          <div className="space-y-5">
-            {ownershipKnown && !isOwned ? (
-              <div className="rounded-lg border border-accent/50 bg-accent/10 p-4">
-                <p className="text-sm font-black uppercase tracking-wide text-accent">
-                  Mark this one as owned
+
+            <div className="rounded-xl border border-border-soft bg-surface p-5">
+              <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
+                Collection Status
+              </h2>
+              {!isLoggedIn ? (
+                <p className="mt-2 text-sm leading-6 text-zinc-600">
+                  Log in to track this bobblehead in your collection.
                 </p>
-                <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
-                  {isLoggedIn
-                    ? "Track this bobblehead in your own collection."
-                    : "Log in to track this bobblehead in your own collection."}
+              ) : !ownershipKnown ? (
+                <p className="mt-2 text-sm text-zinc-500">Loading your collection…</p>
+              ) : isOwned ? (
+                <p className="mt-2 text-sm font-semibold text-green-700">
+                  You own this bobblehead.
                 </p>
+              ) : (
+                <p className="mt-2 text-sm leading-6 text-zinc-600">
+                  Not on your shelf yet{isWanted ? " — it's on your wanted list." : "."}
+                </p>
+              )}
+            </div>
+
+            {rarity ? (
+              <div className="rounded-xl border border-border-soft bg-surface p-5">
+                <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
+                  Rarity
+                </h2>
+                <p className={`mt-2 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider ${RARITY_BADGE_CLASSES[rarity.tier]}`}>
+                  <span aria-hidden>◆</span> {rarity.label}
+                </p>
+                <p className="mt-2 text-sm text-zinc-600">{rarity.reason}.</p>
               </div>
             ) : null}
 
-            <SubmitPhotoButton
-              bobbleheadId={giveaway.id}
-              teamSlug={team.slug}
-              label="Add photos"
-              className="flex w-full cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-zinc-400/70 px-5 py-5 text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:text-zinc-200 dark:hover:text-accent-hover"
-            >
-              <span className="text-3xl">▣</span>
-              <span className="mt-1 text-lg font-black uppercase tracking-wide">Submit a photo</span>
-              <span className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">Reviewed by the admin before it goes live</span>
-            </SubmitPhotoButton>
+            <ShareCard url={pageUrl} title={title} />
 
-            <button
-              type="button"
-              aria-pressed={isOwned}
-              disabled={!isLoggedIn || !ownershipKnown}
-              className={`w-full rounded-lg px-5 py-4 text-base font-black uppercase tracking-wide shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] transition disabled:cursor-not-allowed disabled:opacity-50 ${
-                isLoggedIn && !ownershipKnown
-                  ? "border border-black/10 text-zinc-500 dark:border-white/15 dark:text-zinc-400"
-                  : isOwned
-                    ? "bg-green-500 text-[#06110a] hover:bg-green-400"
-                    : "border border-accent text-accent hover:bg-accent-hover hover:text-accent-fg"
-              }`}
-              onClick={() => setOwned(giveaway.id, !isOwned)}
-            >
-              {!isLoggedIn
-                ? "Log in to track"
-                : !ownershipKnown
-                  ? "Loading…"
-                  : isOwned
-                    ? "✓ Owned"
-                    : "Mark as owned"}
-            </button>
+            <div className="rounded-xl border border-border-soft bg-surface p-5">
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
+                  Community Photos{galleryPhotosToShow.length > 0 ? ` (${galleryPhotosToShow.length})` : ""}
+                </h2>
+                <SubmitPhotoButton
+                  bobbleheadId={giveaway.id}
+                  teamSlug={team.slug}
+                  label="Add photos"
+                  className="shrink-0 cursor-pointer text-xs font-black uppercase tracking-wide text-accent transition hover:text-accent-hover"
+                >
+                  + Add photos
+                </SubmitPhotoButton>
+              </div>
+              {galleryPhotosToShow.length > 0 ? (
+                <div className="mt-3">
+                  <PhotoGallery
+                    photos={galleryPhotosToShow}
+                    onDelete={canEdit ? handleDeleteGalleryPhoto : undefined}
+                    onSetAsMain={canEdit ? handleSetGalleryPhotoAsMain : undefined}
+                  />
+                </div>
+              ) : (
+                <p className="mt-2 text-sm leading-6 text-zinc-600">
+                  No community photos yet — submit one and it&apos;ll appear here after review.
+                </p>
+              )}
+            </div>
 
-            <ReportListingButton
-              teamSlug={team.slug}
-              bobbleheadId={giveaway.id}
-              source="curated"
-              title={title}
-              className="mx-auto block text-center text-xs font-bold uppercase tracking-wide text-zinc-500 transition hover:text-accent-hover dark:hover:text-accent-hover"
-            />
+            {canEdit ? (
+              <button
+                type="button"
+                onClick={() => setIsEditOpen(true)}
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-border-soft bg-surface px-5 py-3 text-sm font-bold uppercase tracking-wide text-navy transition hover:border-accent hover:text-accent"
+              >
+                <span aria-hidden>✎</span>
+                Edit bobblehead (admin)
+              </button>
+            ) : null}
           </div>
-        </section>
+        </div>
+
+        {nav.related.length > 0 ? (
+          <div className="mt-8">
+            <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
+              More {team.name} bobbleheads
+            </h2>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {nav.related.map((entry) => (
+                <Link
+                  key={entry.id}
+                  href={`/teams/${team.slug}/bobbleheads/${entry.id}`}
+                  className="rounded-full border border-border-soft bg-surface px-3.5 py-1.5 text-sm font-semibold text-navy transition hover:border-accent hover:text-accent"
+                >
+                  {entry.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        {/* Bottom bar: report/update */}
+        <div className="mt-8 flex flex-col items-center justify-between gap-3 rounded-xl border border-border-soft bg-surface px-6 py-5 sm:flex-row">
+          <p className="text-sm text-zinc-700">
+            <span aria-hidden>ⓘ</span> Found an error or have more info? Help keep our database accurate.
+          </p>
+          <ReportListingButton
+            teamSlug={team.slug}
+            bobbleheadId={giveaway.id}
+            source="curated"
+            title={title}
+            label="✎ Submit an Update"
+            className="shrink-0 rounded border border-accent px-4 py-2 font-display text-sm font-bold uppercase tracking-wider text-accent transition hover:bg-accent hover:text-accent-fg"
+          />
+        </div>
       </div>
 
       {isEditOpen ? (
@@ -385,6 +677,6 @@ export function CuratedBobbleheadPage({
           onRemovePhoto={mainPhotoUrl ? handleRemoveMainPhoto : undefined}
         />
       ) : null}
-    </main>
+    </div>
   );
 }

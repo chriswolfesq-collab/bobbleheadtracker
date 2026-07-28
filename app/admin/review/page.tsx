@@ -221,9 +221,9 @@ export default function AdminReviewPage() {
 
   if (!user || !canReview) {
     return (
-      <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-10 text-center text-zinc-900 dark:text-zinc-100">
-        <p className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-zinc-100">Not authorized</p>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Log in with an admin-mode account to continue.</p>
+      <main className="min-h-full bg-slate-50 px-4 py-10 text-center text-zinc-900">
+        <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Not authorized</p>
+        <p className="mt-2 text-sm text-zinc-600">Log in with an admin-mode account to continue.</p>
         <Link
           href="/admin"
           className="mt-6 inline-block rounded border border-accent px-4 py-2 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg"
@@ -235,20 +235,20 @@ export default function AdminReviewPage() {
   }
 
   return (
-    <main className="min-h-full bg-slate-50 dark:bg-[#15110d] px-4 py-8 text-zinc-900 dark:text-zinc-100 sm:px-8">
+    <main className="min-h-full bg-slate-50 px-4 py-8 text-zinc-900 sm:px-8">
       <div className="mx-auto flex max-w-4xl items-center justify-between">
         <div>
-          <Link href="/admin" className="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white hover:text-accent-hover dark:hover:text-accent-hover">
+          <Link href="/admin" className="text-sm font-black uppercase tracking-wide text-zinc-900 hover:text-accent-hover">
             ← Back to admin
           </Link>
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">Review submissions</h1>
         </div>
         <div className="flex items-center gap-3 text-sm">
-          <span className="font-semibold text-zinc-800 dark:text-zinc-200">{user.email}</span>
+          <span className="font-semibold text-zinc-800">{user.email}</span>
           <button
             type="button"
             onClick={() => signOut()}
-            className="rounded border border-black/15 dark:border-white/20 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
+            className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover"
           >
             Log out
           </button>
@@ -298,11 +298,11 @@ export default function AdminReviewPage() {
 
       <div className="mx-auto mt-6 max-w-4xl space-y-4">
         {isLoadingRows ? (
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">Loading…</p>
+          <p className="text-sm text-zinc-600">Loading…</p>
         ) : rows.length === 0 ? (
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">Nothing pending review.</p>
+          <p className="text-sm text-zinc-600">Nothing pending review.</p>
         ) : filtered.length === 0 ? (
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">No submissions match your search.</p>
+          <p className="text-sm text-zinc-600">No submissions match your search.</p>
         ) : (
           filtered.map((row) => {
             // A photo submission targets an existing listing; submissions don't
@@ -312,15 +312,15 @@ export default function AdminReviewPage() {
               row.kind === "photo_for_existing" && row.target_bobblehead_id
                 ? GIVEAWAYS_BY_TEAM[row.team_slug]?.some((g) => g.id === row.target_bobblehead_id)
                   ? `/teams/${row.team_slug}/bobbleheads/${row.target_bobblehead_id}`
-                  : `/teams/${row.team_slug}/community?id=${encodeURIComponent(row.target_bobblehead_id)}`
+                  : `/teams/${row.team_slug}/community/${encodeURIComponent(row.target_bobblehead_id)}`
                 : null;
 
             return (
             <div
               key={row.id}
               onClick={() => setDetailId(row.id)}
-              className={`grid cursor-pointer gap-4 rounded-lg border bg-white p-4 transition hover:border-accent/50 dark:bg-[#0b1a29] sm:grid-cols-[auto_160px_1fr_auto] ${
-                selection.isSelected(row.id) ? "border-accent/70 ring-1 ring-accent/40" : "border-black/10 dark:border-white/10"
+              className={`grid cursor-pointer gap-4 rounded-lg border bg-white p-4 transition hover:border-accent/50 sm:grid-cols-[auto_160px_1fr_auto] ${
+                selection.isSelected(row.id) ? "border-accent/70 ring-1 ring-accent/40" : "border-black/10"
               }`}
             >
               <label
@@ -368,12 +368,12 @@ export default function AdminReviewPage() {
                 >
                   {row.kind === "new_bobblehead" ? "New bobblehead" : "Photo for existing bobblehead"}
                 </button>
-                <p className="mt-1 text-zinc-800 dark:text-zinc-200">
+                <p className="mt-1 text-zinc-800">
                   Team: <span className="font-semibold">{row.team_slug}</span>
                 </p>
                 {row.kind === "new_bobblehead" ? (
                   <>
-                    <p className="text-zinc-800 dark:text-zinc-200">
+                    <p className="text-zinc-800">
                       {row.title} · {row.date}
                     </p>
                     {row.duplicateOf ? (
@@ -383,10 +383,10 @@ export default function AdminReviewPage() {
                     ) : null}
                   </>
                 ) : (
-                  <p className="text-zinc-800 dark:text-zinc-200">
+                  <p className="text-zinc-800">
                     Target:{" "}
                     {listingHref ? (
-                      <Link href={listingHref} onClick={(event) => event.stopPropagation()} className="font-semibold underline hover:text-accent-hover dark:hover:text-accent-hover">
+                      <Link href={listingHref} onClick={(event) => event.stopPropagation()} className="font-semibold underline hover:text-accent-hover">
                         {row.target_bobblehead_id}
                       </Link>
                     ) : (
@@ -406,7 +406,7 @@ export default function AdminReviewPage() {
                   <>
                     <Link
                       href={`/admin/users/view?id=${encodeURIComponent(row.submitted_by)}&from=review`}
-                      className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover"
+                      className="rounded border border-black/15 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover"
                     >
                       View profile
                     </Link>
@@ -414,7 +414,7 @@ export default function AdminReviewPage() {
                       type="button"
                       disabled={messagingId === row.submitted_by || bulk.busy}
                       onClick={() => messageSubmitter(row.submitted_by)}
-                      className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-accent hover:text-accent-hover dark:hover:text-accent-hover disabled:opacity-60"
+                      className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover disabled:opacity-60"
                     >
                       {messagingId === row.submitted_by ? "Opening…" : "Message"}
                     </button>
@@ -432,7 +432,7 @@ export default function AdminReviewPage() {
                   type="button"
                   disabled={busyId === row.id || bulk.busy}
                   onClick={() => reject(row)}
-                  className="rounded border border-black/15 dark:border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 dark:text-zinc-200 transition hover:border-red-400 hover:text-red-300 disabled:opacity-60"
+                  className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-red-400 hover:text-red-300 disabled:opacity-60"
                 >
                   Reject
                 </button>
@@ -451,7 +451,7 @@ export default function AdminReviewPage() {
           detail.kind === "photo_for_existing" && detail.target_bobblehead_id
             ? GIVEAWAYS_BY_TEAM[detail.team_slug]?.some((g) => g.id === detail.target_bobblehead_id)
               ? `/teams/${detail.team_slug}/bobbleheads/${detail.target_bobblehead_id}`
-              : `/teams/${detail.team_slug}/community?id=${encodeURIComponent(detail.target_bobblehead_id)}`
+              : `/teams/${detail.team_slug}/community/${encodeURIComponent(detail.target_bobblehead_id)}`
             : null;
 
         return (
@@ -460,22 +460,22 @@ export default function AdminReviewPage() {
             onClick={() => setDetailId(null)}
           >
             <div
-              className="flex max-h-full w-full max-w-3xl flex-col overflow-hidden rounded-lg border border-black/10 bg-white text-zinc-900 shadow-2xl dark:border-white/10 dark:bg-[#0b1a29] dark:text-zinc-100"
+              className="flex max-h-full w-full max-w-3xl flex-col overflow-hidden rounded-lg border border-black/10 bg-white text-zinc-900 shadow-2xl"
               onClick={(event) => event.stopPropagation()}
             >
-              <div className="flex items-start justify-between gap-4 border-b border-black/10 p-5 dark:border-white/10">
+              <div className="flex items-start justify-between gap-4 border-b border-black/10 p-5">
                 <div>
                   <p className="text-lg font-black uppercase tracking-wide text-accent">
                     {detail.kind === "new_bobblehead" ? "New bobblehead" : "Photo for existing bobblehead"}
                   </p>
-                  <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                    Team: <span className="font-semibold text-zinc-800 dark:text-zinc-200">{detail.team_slug}</span>
+                  <p className="mt-1 text-sm text-zinc-600">
+                    Team: <span className="font-semibold text-zinc-800">{detail.team_slug}</span>
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setDetailId(null)}
-                  className="rounded border border-black/15 px-2 py-1 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-300 dark:hover:text-accent-hover"
+                  className="rounded border border-black/15 px-2 py-1 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover"
                 >
                   Close
                 </button>
@@ -499,7 +499,7 @@ export default function AdminReviewPage() {
                   {detail.kind === "new_bobblehead" ? (
                     <div className="flex gap-2">
                       <dt className="w-32 shrink-0 font-black uppercase tracking-wide text-zinc-500">Bobblehead</dt>
-                      <dd className="text-zinc-800 dark:text-zinc-200">
+                      <dd className="text-zinc-800">
                         {detail.title ?? "—"}
                         {detail.date ? <> · {detail.date}</> : null}
                       </dd>
@@ -507,7 +507,7 @@ export default function AdminReviewPage() {
                   ) : (
                     <div className="flex gap-2">
                       <dt className="w-32 shrink-0 font-black uppercase tracking-wide text-zinc-500">Target</dt>
-                      <dd className="text-zinc-800 dark:text-zinc-200">
+                      <dd className="text-zinc-800">
                         {detailListingHref ? (
                           <Link href={detailListingHref} className="font-semibold underline hover:text-accent-hover">
                             {detail.target_bobblehead_id}
@@ -528,17 +528,17 @@ export default function AdminReviewPage() {
                   ) : null}
                   <div className="flex gap-2">
                     <dt className="w-32 shrink-0 font-black uppercase tracking-wide text-zinc-500">Submitted</dt>
-                    <dd className="text-zinc-800 dark:text-zinc-200">{new Date(detail.created_at).toLocaleString()}</dd>
+                    <dd className="text-zinc-800">{new Date(detail.created_at).toLocaleString()}</dd>
                   </div>
                 </dl>
               </div>
 
-              <div className="flex flex-wrap items-center justify-end gap-2 border-t border-black/10 p-5 dark:border-white/10">
+              <div className="flex flex-wrap items-center justify-end gap-2 border-t border-black/10 p-5">
                 {isAdmin ? (
                   <>
                     <Link
                       href={`/admin/users/view?id=${encodeURIComponent(detail.submitted_by)}&from=review`}
-                      className="rounded border border-black/15 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
+                      className="rounded border border-black/15 px-4 py-2 text-center text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover"
                     >
                       View profile
                     </Link>
@@ -549,7 +549,7 @@ export default function AdminReviewPage() {
                         setDetailId(null);
                         messageSubmitter(detail.submitted_by);
                       }}
-                      className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover disabled:opacity-60 dark:border-white/20 dark:text-zinc-200 dark:hover:text-accent-hover"
+                      className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover disabled:opacity-60"
                     >
                       Message
                     </button>
@@ -559,7 +559,7 @@ export default function AdminReviewPage() {
                   type="button"
                   disabled={busyId === detail.id || bulk.busy}
                   onClick={() => reject(detail)}
-                  className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-red-400 hover:text-red-300 disabled:opacity-60 dark:border-white/20 dark:text-zinc-200"
+                  className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-red-400 hover:text-red-300 disabled:opacity-60"
                 >
                   Reject
                 </button>

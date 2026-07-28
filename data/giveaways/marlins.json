@@ -193,7 +193,8 @@
     "title": "Charlie Hough",
     "nickname": "Season Ticket Holders",
     "year": "2018",
-    "date": "N/A"
+    "date": "N/A",
+    "distribution": "STH Reward"
   },
   {
     "id": "justin-bour-home-run-derby-superhero-2018",
@@ -208,7 +209,7 @@
     "title": "Squints",
     "year": "2018",
     "date": "July 15, 2018",
-    "imageUrl": "/bobbleheads/marlins-photos/squints-2018.jpg"
+    "imageUrl": null
   },
   {
     "id": "hamilton-ham-porter-2018",

@@ -41,15 +41,21 @@ async function uploadPhotoDirect(file: File): Promise<string> {
 async function savePhoto(user: User, teamSlug: string, bobbleheadId: string, file: File) {
   const imageUrl = await uploadPhotoDirect(file);
 
+  // Conflict target must include team_slug: curated ids ("spider-man-2019")
+  // repeat across teams, and a bare-id upsert would try to update another
+  // team's row — which RLS then filters to zero rows.
   const { data, error } = await supabase
     .from("approved_photos")
-    .upsert({
-      bobblehead_id: bobbleheadId,
-      team_slug: teamSlug,
-      image_url: imageUrl,
-      approved_by: user.id,
-      updated_at: new Date().toISOString(),
-    })
+    .upsert(
+      {
+        bobblehead_id: bobbleheadId,
+        team_slug: teamSlug,
+        image_url: imageUrl,
+        approved_by: user.id,
+        updated_at: new Date().toISOString(),
+      },
+      { onConflict: "team_slug,bobblehead_id" },
+    )
     .select();
 
   if (error) {
@@ -170,13 +176,16 @@ export async function setGalleryPhotoAsMain({
     demotedPhoto = { id: data.id, imageUrl: data.image_url };
   }
 
-  const { error } = await supabase.from("approved_photos").upsert({
-    bobblehead_id: bobbleheadId,
-    team_slug: teamSlug,
-    image_url: photo.imageUrl,
-    approved_by: user.id,
-    updated_at: new Date().toISOString(),
-  });
+  const { error } = await supabase.from("approved_photos").upsert(
+    {
+      bobblehead_id: bobbleheadId,
+      team_slug: teamSlug,
+      image_url: photo.imageUrl,
+      approved_by: user.id,
+      updated_at: new Date().toISOString(),
+    },
+    { onConflict: "team_slug,bobblehead_id" },
+  );
 
   if (error) {
     throw new Error(error.message);

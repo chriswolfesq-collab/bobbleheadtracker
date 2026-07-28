@@ -30,7 +30,7 @@ export function PhotoGallery({
             type="button"
             aria-label="Enlarge this photo"
             onClick={() => setZoomedIndex(index)}
-            className="block h-20 w-20 shrink-0 overflow-hidden rounded border border-black/10 bg-black/30 transition hover:border-accent dark:border-white/15"
+            className="block h-20 w-20 shrink-0 overflow-hidden rounded border border-black/10 bg-black/30 transition hover:border-accent"
           >
             <Image
               src={photo.imageUrl}
@@ -47,7 +47,7 @@ export function PhotoGallery({
               aria-label="Set as profile photo"
               title="Set as profile photo"
               onClick={() => onSetAsMain(photo)}
-              className="absolute -left-1.5 -top-1.5 grid h-5 w-5 place-items-center rounded-full border border-accent/70 bg-white text-[10px] font-black text-accent transition hover:bg-accent hover:text-accent-fg dark:bg-[#0b1a29]"
+              className="absolute -left-1.5 -top-1.5 grid h-5 w-5 place-items-center rounded-full border border-accent/70 bg-white text-[10px] font-black text-accent transition hover:bg-accent hover:text-accent-fg"
             >
               ★
             </button>
@@ -58,7 +58,7 @@ export function PhotoGallery({
               aria-label="Remove this photo"
               title="Remove this photo"
               onClick={() => onDelete(photo)}
-              className="absolute -right-1.5 -top-1.5 grid h-5 w-5 place-items-center rounded-full border border-red-400/60 bg-red-50 text-[10px] font-black text-red-500 transition hover:bg-red-500 hover:text-white dark:bg-[#2a1013] dark:text-red-300"
+              className="absolute -right-1.5 -top-1.5 grid h-5 w-5 place-items-center rounded-full border border-red-400/60 bg-red-50 text-[10px] font-black text-red-500 transition hover:bg-red-500 hover:text-white"
             >
               ✕
             </button>

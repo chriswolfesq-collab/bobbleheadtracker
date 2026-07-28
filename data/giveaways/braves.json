@@ -839,7 +839,7 @@
     "year": "2014",
     "date": "May 22, 2014",
     "quantity": "20,000",
-    "imageUrl": "/bobbleheads/braves-photos/andrelton-simmons-2014.jpg"
+    "imageUrl": null
   },
   {
     "id": "greg-maddux-2014",
@@ -847,7 +847,7 @@
     "year": "2014",
     "date": "June 17, 2014",
     "quantity": "20,000",
-    "imageUrl": "/bobbleheads/braves-photos/greg-maddux-2014.jpg"
+    "imageUrl": null
   },
   {
     "id": "evan-gattis-2014",

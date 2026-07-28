@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { SearchPageClient } from "./SearchPageClient";
 
 export const metadata: Metadata = {
-  title: "Search — MLB Bobblehead Collection",
+  title: "Search — BobbleShelf",
 };
 
 export default function SearchPage() {

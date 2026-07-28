@@ -1,65 +1,131 @@
 @import "tailwindcss";
 
-/* Manual light/dark theming.
-   The `dark:` variant is driven by a `.dark` class on <html> (set by the theme
-   provider / no-flash script) instead of the OS `prefers-color-scheme`. That is
-   what lets the in-app toggle force a theme; "System" mode simply mirrors the OS
-   preference onto that class. */
-@custom-variant dark (&:where(.dark, .dark *));
-
 :root {
-  --background: #f4f7fc;
-  --foreground: #171717;
-  --app-font-sans: Arial, Helvetica, sans-serif;
+  /* BobbleShelf brand palette. ONE canonical cream and ONE canonical navy —
+     every surface derives from these tokens so the background can never drift
+     between pages again. */
+  --background: #f0e8dc;      /* the cream: page background everywhere */
+  --surface: #faf5eb;         /* raised cards */
+  --surface-muted: #e7dcc9;   /* wells, filter bars, photo backdrops */
+  --border-soft: #d8cbb2;
+  --foreground: #26313d;      /* body ink */
+
+  --navy: #1e3a5f;            /* the navy: wordmark, headings, solid buttons */
+  --navy-deep: #142c49;
+  --brass: #b08d3f;           /* nameplates, EST. years, division plaques */
+  --brass-light: #d9b96a;
+  --wood-dark: #5a3a22;
+  --wood: #7b4f2c;
+  --wood-light: #9d6b40;
+
+  --app-font-sans: var(--font-inter), Arial, Helvetica, sans-serif;
   --app-font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
-  /* Shared radial page backdrop used across most full-page routes. Defined as a
-     token so a single `background: var(--page-gradient)` flips with the theme. */
+  /* Shared page backdrop used across most full-page routes; a soft cream
+     vignette that resolves to the canonical background. */
   --page-gradient: radial-gradient(
     ellipse 80% 50% at 50% -10%,
-    #dbe7ff 0%,
-    #eaf0fb 45%,
-    #f4f7fc 100%
+    #f6efe2 0%,
+    #f2eadd 45%,
+    #f0e8dc 100%
   );
 
-  /* Brand accent. Gold reads poorly on a light background, so light mode uses a
-     deep blue that ties to the navy dark theme; dark mode keeps the original
-     amber gold. Used app-wide via the `accent` / `accent-hover` / `accent-fg`
-     utility colors (see @theme inline below), so the whole accent flips here.
+  /* Brand accent = the navy. Used app-wide via the `accent` / `accent-hover` /
+     `accent-fg` utility colors (see @theme inline below).
      `-fg` is the text/icon color that sits ON a solid accent button. */
-  --accent: #2563eb;        /* blue-600 */
-  --accent-hover: #1d4ed8;  /* blue-700 */
-  --accent-fg: #ffffff;
-}
-
-.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --page-gradient: radial-gradient(
-    ellipse 80% 50% at 50% -10%,
-    #1b2a4a 0%,
-    #0e1626 45%,
-    #090e1a 100%
-  );
-  --accent: #fbbf24;        /* amber-400 */
-  --accent-hover: #fcd34d;  /* amber-300 */
-  --accent-fg: #07111d;
+  --accent: var(--navy);
+  --accent-hover: #2b4f7d;
+  --accent-fg: #f7f1e4;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border-soft: var(--border-soft);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-brass: var(--brass);
+  --color-brass-light: var(--brass-light);
+  --color-wood: var(--wood);
+  --color-wood-dark: var(--wood-dark);
+  --color-wood-light: var(--wood-light);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-fg: var(--accent-fg);
   --font-sans: var(--app-font-sans);
   --font-mono: var(--app-font-mono);
+  --font-display: var(--font-oswald), var(--app-font-sans);
+  --font-script: var(--font-pacifico), cursive;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--app-font-sans);
+}
+
+/* --- Wood & brass treatments -------------------------------------------- */
+
+/* A framed wood panel: layered tone gradients + subtle grain streaks + an
+   SVG-noise overlay for texture. Used by the homepage display case, the
+   /teams banner, and division shelf sections. */
+.wood-panel {
+  position: relative;
+  background:
+    repeating-linear-gradient(
+      92deg,
+      rgba(0, 0, 0, 0.055) 0px,
+      rgba(0, 0, 0, 0) 3px,
+      rgba(255, 255, 255, 0.03) 6px,
+      rgba(0, 0, 0, 0) 11px,
+      rgba(0, 0, 0, 0.045) 17px
+    ),
+    linear-gradient(180deg, var(--wood-light), var(--wood) 42%, var(--wood-dark));
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.22),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.38),
+    0 6px 18px rgba(58, 36, 18, 0.28);
+}
+.wood-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.011 0.13' numOctaves='2' seed='7'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.14'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* A shelf ledge that bobblehead figures stand on. Apply to a container whose
+   contents use `flex items-end`; the ::after bar is the shelf lip. */
+.wood-shelf {
+  position: relative;
+  padding-bottom: 16px;
+}
+.wood-shelf::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 14px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--wood-light), var(--wood) 45%, var(--wood-dark));
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    0 5px 8px rgba(58, 36, 18, 0.4);
+}
+
+/* Engraved brass plate. Base styling shared by the NamePlate component. */
+.brass-plate {
+  background: linear-gradient(180deg, var(--brass-light), var(--brass) 55%, #8f7132);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.55),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.35),
+    0 2px 4px rgba(58, 36, 18, 0.35);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
 }
 
 @keyframes bobble {

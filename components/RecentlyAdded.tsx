@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { RecentlyAddedCard } from "@/components/RecentlyAddedCard";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useRecentCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { useMyWantedLookup } from "@/lib/userWanted";
 
@@ -16,20 +16,13 @@ export default function RecentlyAdded() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-2xl px-4 pb-2 sm:px-6">
-      <div className="flex items-center justify-between gap-3">
-        <h2 className="text-[11px] font-semibold uppercase tracking-[0.35em] text-accent/80 sm:text-xs">
-          Recently added by the community
-        </h2>
-        <Link
-          href="/recently-added"
-          className="shrink-0 text-[11px] font-semibold uppercase tracking-wide text-zinc-600 transition hover:text-accent-hover dark:text-zinc-400 dark:hover:text-accent-hover"
-        >
-          View more
-        </Link>
-      </div>
-
-      <div className="mt-4 grid grid-cols-2 gap-3">
+    <div>
+      <SectionHeading
+        title="Recently Added"
+        eyebrow="By the community"
+        viewAllHref="/recently-added"
+      />
+      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {communityBobbleheads.map((bobblehead) => {
           const key = `${bobblehead.teamSlug}:${bobblehead.id}`;
           return (
@@ -43,6 +36,6 @@ export default function RecentlyAdded() {
           );
         })}
       </div>
-    </section>
+    </div>
   );
 }

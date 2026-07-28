@@ -115,7 +115,7 @@
     "year": "2024",
     "date": "July 12, 2024",
     "quantity": "15,000",
-    "imageUrl": "/bobbleheads/mets-photos/brandon-nimmo-2024.jpg"
+    "imageUrl": null
   },
   {
     "id": "darryl-strawberry-2024",
@@ -247,7 +247,7 @@
     "year": "2022",
     "date": "July 9, 2022",
     "quantity": "25,000",
-    "imageUrl": "/bobbleheads/mets-photos/keith-hernandez-2022.jpg"
+    "imageUrl": null
   },
   {
     "id": "pete-alonso-polar-bear-2022",
@@ -413,7 +413,8 @@
     "year": "2018",
     "date": "2018",
     "quantity": "25,000",
-    "imageUrl": "/bobbleheads/mets-photos/noah-syndergaard-season-ticket-holders-2018.jpg"
+    "imageUrl": "/bobbleheads/mets-photos/noah-syndergaard-season-ticket-holders-2018.jpg",
+    "distribution": "STH Reward"
   },
   {
     "id": "yoenis-cespedes-2017",

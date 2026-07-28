@@ -41,11 +41,11 @@ function ReportListingDialog({
         role="dialog"
         aria-modal="true"
         aria-labelledby="report-listing-title"
-        className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50 dark:border-white/10 dark:bg-[#0b1a2b]"
+        className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50"
         onClick={(event) => event.stopPropagation()}
       >
-        <h2 id="report-listing-title" className="text-lg font-black text-zinc-900 dark:text-white">Report this listing</h2>
-        <p className="mt-1 text-xs leading-5 text-zinc-600 dark:text-zinc-400">
+        <h2 id="report-listing-title" className="text-lg font-black text-zinc-900">Report this listing</h2>
+        <p className="mt-1 text-xs leading-5 text-zinc-600">
           Tell the admin what&apos;s wrong. Reports are reviewed before anything changes.
         </p>
 
@@ -72,11 +72,11 @@ function ReportListingDialog({
           }}
         >
           <div className="grid gap-1.5">
-            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">What&apos;s wrong?</label>
+            <label className="text-xs font-bold text-zinc-700">What&apos;s wrong?</label>
             <select
               value={reason}
               onChange={(event) => setReason(event.target.value as ReportReason)}
-              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent"
             >
               {REASON_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -86,15 +86,15 @@ function ReportListingDialog({
             </select>
           </div>
           <div className="grid gap-1.5">
-            <label className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
-              Details {reason === "other" ? "" : "(optional)"}
-            </label>
+            <label className="text-xs font-bold text-zinc-700">Details</label>
             <textarea
               value={details}
               onChange={(event) => setDetails(event.target.value)}
               rows={3}
+              required
+              maxLength={2000}
               placeholder="Anything that helps the admin fix it"
-              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm text-zinc-900 outline-none transition focus:border-accent dark:border-white/15 dark:bg-[#07111d] dark:text-white"
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm text-zinc-900 outline-none transition focus:border-accent"
             />
           </div>
 
@@ -112,7 +112,7 @@ function ReportListingDialog({
               type="button"
               onClick={close}
               disabled={isSubmitting}
-              className="rounded-lg border border-black/10 px-4 py-2.5 text-sm font-bold text-zinc-700 transition hover:border-accent/60 disabled:opacity-60 dark:border-white/15 dark:text-zinc-300"
+              className="rounded-lg border border-black/10 px-4 py-2.5 text-sm font-bold text-zinc-700 transition hover:border-accent/60 disabled:opacity-60"
             >
               Cancel
             </button>
@@ -129,12 +129,14 @@ export function ReportListingButton({
   source,
   title,
   className,
+  label = "Report an issue with this listing",
 }: {
   teamSlug: string;
   bobbleheadId: string;
   source: "curated" | "community";
   title: string;
   className: string;
+  label?: string;
 }) {
   const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -163,7 +165,7 @@ export function ReportListingButton({
           setIsOpen(true);
         }}
       >
-        {message ? <span className="text-red-300">{message}</span> : "Report an issue with this listing"}
+        {message ? <span className="text-red-300">{message}</span> : label}
       </button>
 
       {isOpen && user ? (

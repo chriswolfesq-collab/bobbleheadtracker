@@ -156,7 +156,7 @@
     "nickname": "50th Anniversary",
     "year": "2021",
     "date": "September 5, 2021",
-    "imageUrl": "https://i.ebayimg.com/images/g/m9EAAOSwhDRh4135/s-l1200.jpg",
+    "imageUrl": "/bobbleheads/brewers-photos/ryan-braun-50th-anniversary-2021.jpg",
     "quantity": "35,000"
   },
   {
@@ -202,7 +202,7 @@
     "year": "2021",
     "date": "July 11, 2021",
     "quantity": "35,000",
-    "imageUrl": "/bobbleheads/brewers-photos/robin-yount-1990s-2021.jpg"
+    "imageUrl": null
   },
   {
     "id": "paul-molitor-1980s-2021",
@@ -367,7 +367,7 @@
     "nickname": "Yarn, Mini",
     "year": "2018",
     "date": "June 11, 2018",
-    "imageUrl": "/bobbleheads/brewers-photos/bernie-brewer-yarn-mini-2018.jpg"
+    "imageUrl": null
   },
   {
     "id": "travis-shaw-mayor-of-ding-dong-city-2018",
