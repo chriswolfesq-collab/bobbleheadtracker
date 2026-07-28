@@ -118,6 +118,33 @@ body {
     0 5px 8px rgba(58, 36, 18, 0.4);
 }
 
+/* The parchment wall behind the display shelves (the /teams grid and the
+   profile/share collection case). Tones sampled from the case artwork so the
+   photographed planks sit on it without a seam. */
+.shelf-wall {
+  position: relative;
+  border-radius: 1rem;
+  background: radial-gradient(
+    ellipse 120% 70% at 50% 0%,
+    #eddcc7 0%,
+    #e4d0b8 55%,
+    #d8c1a5 100%
+  );
+  box-shadow:
+    inset 0 0 48px rgba(90, 58, 34, 0.16),
+    inset 0 2px 6px rgba(255, 255, 255, 0.4),
+    0 10px 24px rgba(58, 36, 18, 0.12);
+}
+.shelf-wall::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.011 0.13' numOctaves='2' seed='7'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.14'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 /* Engraved brass plate. Base styling shared by the NamePlate component. */
 .brass-plate {
   background: linear-gradient(180deg, var(--brass-light), var(--brass) 55%, #8f7132);
@@ -138,3 +165,4 @@ body {
 .group:hover .group-hover\:animate-bobble {
   animation: bobble 0.5s ease-in-out infinite;
 }
+

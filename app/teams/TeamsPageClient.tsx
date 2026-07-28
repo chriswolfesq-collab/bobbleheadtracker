@@ -3,7 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { CaseBanner } from "@/components/CaseBanner";
 import { FeatureStrip } from "@/components/FeatureStrip";
+import { PlankShelf } from "@/components/PlankShelf";
 import { NamePlate } from "@/components/ui/NamePlate";
 import { publicAsset } from "@/lib/paths";
 import { TEAMS, type Team } from "@/lib/teams";
@@ -29,20 +31,40 @@ function divisionOf(team: Team): DivisionKey {
   return `${team.league} ${team.division}`;
 }
 
-function TeamFigure({ team }: { team: Team }) {
+// Five plates share one plank, so both the figures and their plates step up
+// with the shelf's own width rather than the viewport's.
+const PLATE_SIZE =
+  "px-1 py-[2px] text-[8px] tracking-wide @min-[520px]:px-2 @min-[520px]:py-[3px] @min-[520px]:text-[10px] @min-[760px]:px-3 @min-[760px]:py-1 @min-[760px]:text-xs @min-[760px]:tracking-widest";
+const PLAQUE_SIZE =
+  "px-2.5 py-[2px] text-[10px] @min-[520px]:px-3 @min-[520px]:py-1 @min-[520px]:text-xs @min-[760px]:px-4 @min-[760px]:text-sm";
+
+function ShelfFigure({ team }: { team: Team }) {
   return (
     <Link
       href={`/teams/${team.slug}`}
-      className="group flex w-24 flex-col items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:w-28"
+      className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
     >
       <Image
         src={publicAsset(`/bobbleheads/${team.slug}.png`)}
         alt={`${team.city} ${team.name} bobblehead`}
         width={135}
         height={321}
-        className="h-24 w-auto object-contain drop-shadow-[0_8px_8px_rgba(58,36,18,0.4)] transition group-hover:scale-105 group-hover:animate-bobble sm:h-28"
+        sizes="(max-width: 640px) 20vw, 140px"
+        className="h-16 w-auto object-contain drop-shadow-[0_8px_8px_rgba(58,36,18,0.4)] transition group-hover:scale-105 group-hover:animate-bobble @min-[520px]:h-24 @min-[760px]:h-32"
       />
-      <NamePlate className="mt-2 w-full max-w-[7.5rem] truncate">{team.name}</NamePlate>
+    </Link>
+  );
+}
+
+function ShelfPlate({ team }: { team: Team }) {
+  return (
+    <Link
+      href={`/teams/${team.slug}`}
+      className="min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+    >
+      <NamePlate size={PLATE_SIZE} className="max-w-full truncate">
+        {team.name}
+      </NamePlate>
     </Link>
   );
 }
@@ -82,25 +104,40 @@ export function TeamsPageClient() {
       style={{ background: "var(--page-gradient)" }}
     >
       <div className="mx-auto w-full max-w-6xl px-4 pb-16 pt-6 sm:px-6">
-        {/* Wood banner */}
-        <section className="wood-panel rounded-2xl p-3 sm:p-4">
-          <div className="flex flex-col items-center justify-between gap-6 rounded-lg bg-[radial-gradient(ellipse_at_50%_0%,#fbf6ec,#efe5d3_75%)] px-6 py-10 shadow-[inset_0_0_24px_rgba(58,36,18,0.18)] sm:flex-row sm:px-10">
-            <div className="text-center sm:text-left">
-              <h1 className="font-display text-4xl font-bold uppercase tracking-wide text-navy sm:text-5xl">
+        {/* Display-case banner */}
+        <CaseBanner
+          preload
+          overlay={
+            <>
+              <h1 className="font-display text-3xl font-bold uppercase tracking-wide text-navy lg:text-5xl">
                 All Teams
               </h1>
-              <p className="mt-2 text-base text-zinc-600">Browse all 30 MLB teams</p>
-            </div>
-            <div className="rounded-lg border border-border-soft bg-surface px-6 py-4 text-center shadow-sm">
-              <p className="font-display text-2xl font-bold uppercase tracking-wide text-navy">
+              <p className="mt-1 text-sm text-zinc-600 lg:text-base">Browse all 30 MLB teams</p>
+            </>
+          }
+          card={
+            <div className="w-full rounded-lg border border-border-soft bg-surface/90 px-3 py-2.5 text-center shadow-sm lg:px-4 lg:py-4">
+              <p className="font-display text-lg font-bold uppercase tracking-wide text-navy lg:text-2xl">
                 {TEAMS.length} Teams
               </p>
-              <p className="mt-1 text-sm text-zinc-600">
-                One collection. Every team.
+              <p className="mt-0.5 text-[11px] leading-snug text-zinc-600 lg:text-sm">
+                One collection.
+                <br />
+                Every team.
               </p>
             </div>
-          </div>
-        </section>
+          }
+          mobile={
+            <>
+              <p className="font-display text-4xl font-bold uppercase tracking-wide text-navy">
+                All Teams
+              </p>
+              <p className="mt-2 text-base text-zinc-600">
+                Browse all {TEAMS.length} MLB teams. One collection. Every team.
+              </p>
+            </>
+          }
+        />
 
         {/* Filter bar */}
         <div className="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-border-soft bg-surface px-4 py-3">
@@ -184,21 +221,27 @@ export function TeamsPageClient() {
             <p className="mt-2 text-sm text-zinc-600">Try clearing a filter or two.</p>
           </div>
         ) : view === "grid" ? (
-          <div className="mt-8 flex flex-col gap-10">
+          <div className="shelf-wall @container mt-8 flex flex-col gap-10 px-2 pb-10 pt-12 sm:gap-14 sm:px-4">
             {DIVISIONS.map((d) => {
               const teams = byDivision.get(d) ?? [];
               if (teams.length === 0) return null;
               return (
-                <section key={d} aria-label={d}>
-                  <div className="wood-shelf flex flex-wrap items-end justify-center gap-2 px-4 sm:gap-6">
-                    {teams.map((team) => (
-                      <TeamFigure key={team.slug} team={team} />
-                    ))}
-                  </div>
-                  <div className="mt-3 flex justify-center">
-                    <NamePlate variant="brass">{d}</NamePlate>
-                  </div>
-                </section>
+                <PlankShelf
+                  key={d}
+                  ariaLabel={d}
+                  plankClassName="h-8 @min-[520px]:h-11 @min-[760px]:h-14"
+                  figures={teams.map((team) => (
+                    <ShelfFigure key={team.slug} team={team} />
+                  ))}
+                  plates={teams.map((team) => (
+                    <ShelfPlate key={team.slug} team={team} />
+                  ))}
+                  plaque={
+                    <NamePlate variant="brass" size={PLAQUE_SIZE}>
+                      {d}
+                    </NamePlate>
+                  }
+                />
               );
             })}
           </div>

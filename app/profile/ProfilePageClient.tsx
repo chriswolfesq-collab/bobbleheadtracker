@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { CaseBanner } from "@/components/CaseBanner";
 import { ProfileSections } from "@/components/ProfileSections";
 import { ProfileWelcomeModal } from "@/components/ProfileWelcomeModal";
 import { getDisplayName, MAX_DISPLAY_NAME_LENGTH, useAuth } from "@/lib/auth";
@@ -54,13 +55,72 @@ export function ProfilePageClient() {
       ) : (
         <div className="mx-auto w-full max-w-2xl px-4 pb-24 pt-2 sm:px-6">
           <ProfileWelcomeModal userId={user.id} />
-          <header className="mb-8 text-center">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-accent/80 sm:text-xs">
-              My Profile
-            </p>
+
+          {/* The display case carries the profile header: name inside the lit
+              recess, owned count on the card. The name is the edit affordance,
+              but the editor itself renders under the artwork — an input and two
+              buttons don't fit inside the case's text region. */}
+          <CaseBanner
+            preload
+            overlay={
+              <>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brass lg:text-[11px]">
+                  My Profile
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setNameDraft(getDisplayName(user));
+                    setIsEditingName(true);
+                  }}
+                  title="Edit your name"
+                  className="mt-1 w-full truncate text-left font-display text-xl font-bold uppercase tracking-wide text-navy transition hover:text-accent-hover lg:text-2xl"
+                >
+                  {getDisplayName(user)}
+                </button>
+              </>
+            }
+            card={
+              <div className="w-full rounded-lg border border-border-soft bg-surface/90 px-2 py-2 text-center shadow-sm lg:px-3 lg:py-3">
+                <p className="font-display text-base font-bold uppercase tracking-wide tabular-nums text-navy lg:text-xl">
+                  {isCollectionLoading || isSiteTotalLoading ? "—" : `${totalOwned}/${siteTotal}`}
+                </p>
+                <p className="mt-0.5 text-[10px] leading-snug text-zinc-600 lg:text-xs">
+                  Bobbleheads
+                  <br />
+                  owned
+                </p>
+              </div>
+            }
+            mobile={
+              <>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-brass">
+                  My Profile
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setNameDraft(getDisplayName(user));
+                    setIsEditingName(true);
+                  }}
+                  title="Edit your name"
+                  className="mt-2 max-w-full truncate font-display text-3xl font-bold uppercase tracking-wide text-navy transition hover:text-accent-hover"
+                >
+                  {getDisplayName(user)}
+                </button>
+                <p className="mt-2 text-sm font-semibold text-zinc-600">
+                  {isCollectionLoading || isSiteTotalLoading
+                    ? "Loading…"
+                    : `${totalOwned}/${siteTotal} bobbleheads owned`}
+                </p>
+              </>
+            }
+          />
+
+          <header className={isEditingName || nameError ? "mb-8 text-center" : "mb-8"}>
             {isEditingName ? (
               <form
-                className="mt-2 flex items-center justify-center gap-2"
+                className="mt-4 flex flex-wrap items-center justify-center gap-2"
                 onSubmit={async (event) => {
                   event.preventDefault();
                   setNameError(null);
@@ -102,25 +162,8 @@ export function ProfilePageClient() {
                   Cancel
                 </button>
               </form>
-            ) : (
-              <button
-                type="button"
-                onClick={() => {
-                  setNameDraft(getDisplayName(user));
-                  setIsEditingName(true);
-                }}
-                className="mt-2 text-2xl font-black text-zinc-900 transition hover:text-accent-hover"
-                title="Edit your name"
-              >
-                {getDisplayName(user)}
-              </button>
-            )}
+            ) : null}
             {nameError ? <p className="mt-1 text-xs font-semibold text-red-400">{nameError}</p> : null}
-            <p className="mt-3 text-sm font-semibold text-zinc-600">
-              {isCollectionLoading || isSiteTotalLoading
-                ? "Loading…"
-                : `${totalOwned}/${siteTotal} bobbleheads owned`}
-            </p>
           </header>
 
           <ProfileSections
