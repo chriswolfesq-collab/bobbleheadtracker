@@ -14,7 +14,8 @@
     "nickname": "Unisphere Light-Up",
     "year": "2026",
     "date": "April 25, 2026",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/mets-photos/mr-met-unisphere-light-up-2026.jpg"
   },
   {
     "id": "juan-soto-baseball-card-2026",
@@ -279,7 +280,8 @@
     "id": "jeff-mcneil-2021",
     "title": "Jeff McNeil",
     "year": "2021",
-    "date": "June 12, 2021"
+    "date": "June 12, 2021",
+    "imageUrl": "/bobbleheads/mets-photos/jeff-mcneil-2021.jpg"
   },
   {
     "id": "mrs-met-wonder-woman-2021",
@@ -325,13 +327,15 @@
     "nickname": "7 Line Army 100th",
     "year": "2019",
     "date": "June 29, 2019",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mets-photos/mr-met-7-line-army-100th-2019.jpg"
   },
   {
     "id": "obi-wan-canobi-2019",
     "title": "\"Obi-Wan Canobi\"",
     "year": "2019",
-    "date": "May 25, 2019"
+    "date": "May 25, 2019",
+    "imageUrl": "/bobbleheads/mets-photos/obi-wan-canobi-2019.jpg"
   },
   {
     "id": "noah-syndergaard-game-of-thrones-2019",
@@ -408,7 +412,8 @@
     "nickname": "Season Ticket Holders",
     "year": "2018",
     "date": "2018",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mets-photos/noah-syndergaard-season-ticket-holders-2018.jpg"
   },
   {
     "id": "yoenis-cespedes-2017",
@@ -520,7 +525,8 @@
     "nickname": "All-Star",
     "year": "2013",
     "date": "August 25, 2013",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mets-photos/tom-seaver-all-star-2013.jpg"
   },
   {
     "id": "jay-horwitz-2013",
@@ -544,7 +550,8 @@
     "nickname": "All-Star",
     "year": "2013",
     "date": "July 21, 2013",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mets-photos/dwight-gooden-all-star-2013.jpg"
   },
   {
     "id": "david-wright-all-star-2013",
@@ -560,7 +567,8 @@
     "title": "John Franco",
     "year": "2013",
     "date": "May 25, 2013",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mets-photos/john-franco-2013.jpg"
   },
   {
     "id": "mr-met-knitting-2013",
@@ -584,54 +592,62 @@
     "title": "Mike Piazza",
     "year": "2012",
     "date": "August 25, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mets-photos/mike-piazza-2012.jpg"
   },
   {
     "id": "edgardo-alfonzo-2012",
     "title": "Edgardo Alfonzo",
     "year": "2012",
     "date": "July 21, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mets-photos/edgardo-alfonzo-2012.jpg"
   },
   {
     "id": "keith-hernandez-2012",
     "title": "Keith Hernandez",
     "year": "2012",
     "date": "June 17, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mets-photos/keith-hernandez-2012.jpg"
   },
   {
     "id": "rusty-staub-2012",
     "title": "Rusty Staub",
     "year": "2012",
     "date": "May 26, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mets-photos/rusty-staub-2012.jpg"
   },
   {
     "id": "tom-seaver-2012",
     "title": "Tom Seaver",
     "year": "2012",
     "date": "May 5, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mets-photos/tom-seaver-2012.jpg"
   },
   {
     "id": "ike-davis-2011",
     "title": "Ike Davis",
     "year": "2011",
-    "date": "July 19, 2011"
+    "date": "July 19, 2011",
+    "imageUrl": "/bobbleheads/mets-photos/ike-davis-2011.jpg"
   },
   {
     "id": "mr-met-mascot-2011",
     "title": "Mr. Met",
     "nickname": "Mascot",
     "year": "2011",
-    "date": "April 8, 2011"
+    "date": "April 8, 2011",
+    "imageUrl": "/bobbleheads/mets-photos/mr-met-mascot-2011.jpg"
   },
   {
     "id": "jason-bay-2010",
     "title": "Jason Bay",
     "year": "2010",
-    "date": "July 11, 2010"
+    "date": "July 11, 2010",
+    "imageUrl": "/bobbleheads/mets-photos/jason-bay-2010.jpg"
   },
   {
     "id": "jeff-francoeur-2010",
@@ -652,7 +668,8 @@
     "id": "frankie-rodriguez-2009",
     "title": "Frankie Rodriguez",
     "year": "2009",
-    "date": "September 6, 2009"
+    "date": "September 6, 2009",
+    "imageUrl": "/bobbleheads/mets-photos/frankie-rodriguez-2009.jpg"
   },
   {
     "id": "daniel-murphy-2009",
@@ -665,13 +682,15 @@
     "id": "johan-santana-2008",
     "title": "Johan Santana",
     "year": "2008",
-    "date": "September 7, 2008"
+    "date": "September 7, 2008",
+    "imageUrl": "/bobbleheads/mets-photos/johan-santana-2008.jpg"
   },
   {
     "id": "billy-wagner-2008",
     "title": "Billy Wagner",
     "year": "2008",
-    "date": "August 10, 2008"
+    "date": "August 10, 2008",
+    "imageUrl": "/bobbleheads/mets-photos/billy-wagner-2008.jpg"
   },
   {
     "id": "endy-chavez-2007",
@@ -689,50 +708,58 @@
     "id": "david-wright-2006",
     "title": "David Wright",
     "year": "2006",
-    "date": "September 10, 2006"
+    "date": "September 10, 2006",
+    "imageUrl": "/bobbleheads/mets-photos/david-wright-2006.jpg"
   },
   {
     "id": "carlos-delgado-2006",
     "title": "Carlos Delgado",
     "year": "2006",
-    "date": "2006"
+    "date": "2006",
+    "imageUrl": "/bobbleheads/mets-photos/carlos-delgado-2006.jpg"
   },
   {
     "id": "willie-randolph-2005",
     "title": "Willie Randolph",
     "year": "2005",
-    "date": "September 18, 2005"
+    "date": "September 18, 2005",
+    "imageUrl": "/bobbleheads/mets-photos/willie-randolph-2005.jpg"
   },
   {
     "id": "pedro-martinez-2005",
     "title": "Pedro Martinez",
     "year": "2005",
-    "date": "August 7, 2005"
+    "date": "August 7, 2005",
+    "imageUrl": "/bobbleheads/mets-photos/pedro-martinez-2005.jpg"
   },
   {
     "id": "carlos-beltran-2005",
     "title": "Carlos Beltran",
     "year": "2005",
-    "date": "July 2, 2005"
+    "date": "July 2, 2005",
+    "imageUrl": "/bobbleheads/mets-photos/carlos-beltran-2005.jpg"
   },
   {
     "id": "jose-reyes-2004",
     "title": "Jose Reyes",
     "year": "2004",
-    "date": "July 17, 2004"
+    "date": "July 17, 2004",
+    "imageUrl": "/bobbleheads/mets-photos/jose-reyes-2004.jpg"
   },
   {
     "id": "kazuo-matsui-2004",
     "title": "Kazuo Matsui",
     "year": "2004",
-    "date": "June 6, 2004"
+    "date": "June 6, 2004",
+    "imageUrl": "/bobbleheads/mets-photos/kazuo-matsui-2004.jpg"
   },
   {
     "id": "mr-met-mascot-2004",
     "title": "Mr. Met",
     "nickname": "Mascot",
     "year": "2004",
-    "date": "May 22, 2004"
+    "date": "May 22, 2004",
+    "imageUrl": "/bobbleheads/mets-photos/mr-met-mascot-2004.jpg"
   },
   {
     "id": "steve-trachsel-2004",
@@ -744,54 +771,63 @@
     "id": "ralph-kiner-bob-murphy-2003",
     "title": "Ralph Kiner & Bob Murphy",
     "year": "2003",
-    "date": "July 27, 2003"
+    "date": "July 27, 2003",
+    "imageUrl": "/bobbleheads/mets-photos/ralph-kiner-bob-murphy-2003.jpg"
   },
   {
     "id": "tom-glavine-2003",
     "title": "Tom Glavine",
     "year": "2003",
-    "date": "July 26, 2003"
+    "date": "July 26, 2003",
+    "imageUrl": "/bobbleheads/mets-photos/tom-glavine-2003.jpg"
   },
   {
     "id": "john-franco-2003",
     "title": "John Franco",
     "year": "2003",
-    "date": "June 8, 2003"
+    "date": "June 8, 2003",
+    "imageUrl": "/bobbleheads/mets-photos/john-franco-2003.jpg"
   },
   {
     "id": "mo-vaughn-2003",
     "title": "Mo Vaughn",
     "year": "2003",
-    "date": "May 10, 2003"
+    "date": "May 10, 2003",
+    "imageUrl": "/bobbleheads/mets-photos/mo-vaughn-2003.jpg"
   },
   {
     "id": "al-leiter-2002",
     "title": "Al Leiter",
     "year": "2002",
-    "date": "August 3, 2002"
+    "date": "August 3, 2002",
+    "imageUrl": "/bobbleheads/mets-photos/al-leiter-2002.jpg"
   },
   {
     "id": "roberto-alomar-2002",
     "title": "Roberto Alomar",
     "year": "2002",
-    "date": "July 14, 2002"
+    "date": "July 14, 2002",
+    "imageUrl": "/bobbleheads/mets-photos/roberto-alomar-2002.jpg"
   },
   {
     "id": "mike-piazza-2002",
     "title": "Mike Piazza",
     "year": "2002",
-    "date": "April 28, 2002"
+    "date": "April 28, 2002",
+    "imageUrl": "/bobbleheads/mets-photos/mike-piazza-2002.jpg"
   },
   {
     "id": "mookie-wilson-2001",
     "title": "Mookie Wilson",
     "year": "2001",
-    "date": "June 23, 2001"
+    "date": "June 23, 2001",
+    "imageUrl": "/bobbleheads/mets-photos/mookie-wilson-2001.jpg"
   },
   {
     "id": "tom-seaver-2000",
     "title": "Tom Seaver",
     "year": "2000",
-    "date": "June 25, 2000"
+    "date": "June 25, 2000",
+    "imageUrl": "/bobbleheads/mets-photos/tom-seaver-2000.jpg"
   }
 ]

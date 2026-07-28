@@ -92,7 +92,8 @@
     "title": "Chuck Carr",
     "year": "2023",
     "date": "July 9, 2023",
-    "quantity": "8,000"
+    "quantity": "8,000",
+    "imageUrl": "/bobbleheads/marlins-photos/chuck-carr-2023.jpg"
   },
   {
     "id": "livan-hernandez-2023",
@@ -199,7 +200,8 @@
     "title": "Justin Bour",
     "nickname": "Home Run Derby Superhero",
     "year": "2018",
-    "date": "July 1, 2018"
+    "date": "July 1, 2018",
+    "imageUrl": "/bobbleheads/marlins-photos/justin-bour-home-run-derby-superhero-2018.jpg"
   },
   {
     "id": "squints-2018",
@@ -219,13 +221,15 @@
     "id": "pitbull-2018",
     "title": "Pitbull",
     "year": "2018",
-    "date": "July 29, 2018"
+    "date": "July 29, 2018",
+    "imageUrl": "/bobbleheads/marlins-photos/pitbull-2018.jpg"
   },
   {
     "id": "dj-khaled-2018",
     "title": "DJ Khaled",
     "year": "2018",
-    "date": "August 12, 2018"
+    "date": "August 12, 2018",
+    "imageUrl": "/bobbleheads/marlins-photos/dj-khaled-2018.jpg"
   },
   {
     "id": "don-mattingly-2017",
@@ -265,7 +269,8 @@
     "title": "Dee Gordon",
     "year": "2017",
     "date": "July 29, 2017",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/marlins-photos/dee-gordon-2017.jpg"
   },
   {
     "id": "hulk-2017",
@@ -460,7 +465,8 @@
     "title": "Billy the Marlin",
     "nickname": "Stormtrooper",
     "year": "2015",
-    "date": "September 4, 2015"
+    "date": "September 4, 2015",
+    "imageUrl": "/bobbleheads/marlins-photos/billy-the-marlin-stormtrooper-2015.jpg"
   },
   {
     "id": "marcell-ozuna-2015",
@@ -490,7 +496,8 @@
     "id": "jedi-billy-2014",
     "title": "Jedi Billy",
     "year": "2014",
-    "date": "September 6, 2014"
+    "date": "September 6, 2014",
+    "imageUrl": "/bobbleheads/marlins-photos/jedi-billy-2014.jpg"
   },
   {
     "id": "jose-fernandez-2014",
@@ -521,21 +528,24 @@
     "title": "Josh Johnson",
     "year": "2012",
     "date": "June 27, 2012",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/marlins-photos/josh-johnson-2012.jpg"
   },
   {
     "id": "giancarlo-stanton-2012",
     "title": "Giancarlo Stanton",
     "year": "2012",
     "date": "August 29, 2012",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/marlins-photos/giancarlo-stanton-2012.jpg"
   },
   {
     "id": "jose-reyes-2012",
     "title": "Jose Reyes",
     "year": "2012",
     "date": "September 19, 2012",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/marlins-photos/jose-reyes-2012.jpg"
   },
   {
     "id": "cody-ross-billy-bingo-prize-2010",
@@ -543,7 +553,8 @@
     "nickname": "Billy Bingo Prize",
     "year": "2010",
     "date": "May 28, 2010",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/marlins-photos/cody-ross-billy-bingo-prize-2010.jpg"
   },
   {
     "id": "chris-coghlan-billy-bingo-prize-2010",
@@ -551,7 +562,8 @@
     "nickname": "Billy Bingo Prize",
     "year": "2010",
     "date": "June 25, 2010",
-    "quantity": "2,500"
+    "quantity": "2,500",
+    "imageUrl": "/bobbleheads/marlins-photos/chris-coghlan-billy-bingo-prize-2010.jpg"
   },
   {
     "id": "hanley-ramirez-2009",
@@ -578,7 +590,8 @@
     "id": "billy-the-marlin-2006",
     "title": "Billy the Marlin",
     "year": "2006",
-    "date": "August 27, 2006"
+    "date": "August 27, 2006",
+    "imageUrl": "/bobbleheads/marlins-photos/billy-the-marlin-2006.jpg"
   },
   {
     "id": "aj-burnett-mini-2005",
@@ -598,67 +611,78 @@
     "id": "ryan-dempster-2003",
     "title": "Ryan Dempster",
     "year": "2003",
-    "date": "May 30, 2003"
+    "date": "May 30, 2003",
+    "imageUrl": "/bobbleheads/marlins-photos/ryan-dempster-2003.jpg"
   },
   {
     "id": "charlie-hough-2003",
     "title": "Charlie Hough",
     "year": "2003",
-    "date": "June 7, 2003"
+    "date": "June 7, 2003",
+    "imageUrl": "/bobbleheads/marlins-photos/charlie-hough-2003.jpg"
   },
   {
     "id": "jeff-conine-2003",
     "title": "Jeff Conine",
     "year": "2003",
-    "date": "July 20, 2003"
+    "date": "July 20, 2003",
+    "imageUrl": "/bobbleheads/marlins-photos/jeff-conine-2003.jpg"
   },
   {
     "id": "luis-castillo-2003",
     "title": "Luis Castillo",
     "year": "2003",
-    "date": "July 26, 2003"
+    "date": "July 26, 2003",
+    "imageUrl": "/bobbleheads/marlins-photos/luis-castillo-2003.jpg"
   },
   {
     "id": "ivan-rodriguez-2003",
     "title": "Ivan Rodriguez",
     "year": "2003",
-    "date": "August 2, 2003"
+    "date": "August 2, 2003",
+    "imageUrl": "/bobbleheads/marlins-photos/ivan-rodriguez-2003.jpg"
   },
   {
     "id": "craig-counsell-2003",
     "title": "Craig Counsell",
     "year": "2003",
-    "date": "September 13, 2003"
+    "date": "September 13, 2003",
+    "imageUrl": "/bobbleheads/marlins-photos/craig-counsell-2003.jpg"
   },
   {
     "id": "aj-burnett-2002",
     "title": "A.J. Burnett",
     "year": "2002",
-    "date": "September 13, 2002"
+    "date": "September 13, 2002",
+    "imageUrl": "/bobbleheads/marlins-photos/aj-burnett-2002.jpg"
   },
   {
     "id": "josh-beckett-2002",
     "title": "Josh Beckett",
     "year": "2002",
-    "date": "September 14, 2002"
+    "date": "September 14, 2002",
+    "imageUrl": "/bobbleheads/marlins-photos/josh-beckett-2002.jpg"
   },
   {
     "id": "julian-tavarez-2002",
     "title": "Julian Tavarez",
     "year": "2002",
-    "date": "September 15, 2002"
+    "date": "September 15, 2002",
+    "imageUrl": "/bobbleheads/marlins-photos/julian-tavarez-2002.jpg"
   },
   {
     "id": "brad-penny-2002",
     "title": "Brad Penny",
     "year": "2002",
-    "date": "September 16, 2002"
+    "date": "September 16, 2002",
+    "imageUrl": "/bobbleheads/marlins-photos/brad-penny-2002.jpg"
   },
   {
     "id": "cliff-floyd-2001",
     "title": "Cliff Floyd",
     "year": "2001",
-    "date": "July 21, 2001"
+    "date": "July 21, 2001",
+    "imageUrl": "/bobbleheads/marlins-photos/cliff-floyd-2001.jpg"
   },
   {
     "id": "vintage-marlin-boy-face-2000",

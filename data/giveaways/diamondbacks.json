@@ -466,21 +466,24 @@
     "title": "Justin Upton",
     "year": "2010",
     "date": "April 24, 2010",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/diamondbacks-photos/justin-upton-2010.jpg"
   },
   {
     "id": "dan-haren-2010",
     "title": "Dan Haren",
     "year": "2010",
     "date": "June 12, 2010",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/diamondbacks-photos/dan-haren-2010.jpg"
   },
   {
     "id": "greg-schulte-2010",
     "title": "Greg Schulte",
     "year": "2010",
     "date": "July 10, 2010",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/diamondbacks-photos/greg-schulte-2010.jpg"
   },
   {
     "id": "luis-gonzalez-gonzo-2010",
@@ -488,14 +491,16 @@
     "nickname": "Gonzo",
     "year": "2010",
     "date": "August 7, 2010",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/diamondbacks-photos/luis-gonzalez-gonzo-2010.jpg"
   },
   {
     "id": "miguel-montero-2010",
     "title": "Miguel Montero",
     "year": "2010",
     "date": "September 4, 2010",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/diamondbacks-photos/miguel-montero-2010.jpg"
   },
   {
     "id": "justin-upton-2009",
@@ -647,7 +652,8 @@
     "id": "luis-gonzalez-2006",
     "title": "Luis Gonzalez",
     "year": "2006",
-    "date": "June 10, 2006"
+    "date": "June 10, 2006",
+    "imageUrl": "/bobbleheads/diamondbacks-photos/luis-gonzalez-2006.jpg"
   },
   {
     "id": "brandon-webb-2006",
@@ -716,7 +722,8 @@
     "title": "Bob Brenly",
     "year": "2002",
     "date": "June 15, 2002",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/diamondbacks-photos/bob-brenly-2002.jpg"
   },
   {
     "id": "luis-gonzalez-hr-derby-2002",
@@ -731,7 +738,8 @@
     "title": "Steve Finley",
     "year": "2002",
     "date": "August 10, 2002",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/diamondbacks-photos/steve-finley-2002.jpg"
   },
   {
     "id": "randy-johnson-cy-young-2002",
@@ -739,14 +747,16 @@
     "nickname": "Cy Young",
     "year": "2002",
     "date": "August 24, 2002",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/diamondbacks-photos/randy-johnson-cy-young-2002.jpg"
   },
   {
     "id": "curt-schilling-2002",
     "title": "Curt Schilling",
     "year": "2002",
     "date": "August 30, 2002",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/diamondbacks-photos/curt-schilling-2002.jpg"
   },
   {
     "id": "luis-gonzalez-2001",

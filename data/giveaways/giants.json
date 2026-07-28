@@ -292,7 +292,8 @@
     "id": "spider-man-2019",
     "title": "Spider-Man",
     "year": "2019",
-    "date": "May 22, 2019"
+    "date": "May 22, 2019",
+    "imageUrl": "/bobbleheads/giants-photos/spider-man-2019.jpg"
   },
   {
     "id": "portuguese-rooster-2019",
@@ -378,7 +379,8 @@
     "id": "dia-de-los-gigantes-2019",
     "title": "Dia de los Gigantes",
     "year": "2019",
-    "date": "September 14, 2019"
+    "date": "September 14, 2019",
+    "imageUrl": "/bobbleheads/giants-photos/dia-de-los-gigantes-2019.jpg"
   },
   {
     "id": "brandon-crawford-star-wars-2019",
@@ -508,13 +510,15 @@
     "id": "rocket-raccoon-2017",
     "title": "Rocket Raccoon",
     "year": "2017",
-    "date": "April 24, 2017"
+    "date": "April 24, 2017",
+    "imageUrl": "/bobbleheads/giants-photos/rocket-raccoon-2017.jpg"
   },
   {
     "id": "year-of-the-rooster-2017",
     "title": "Year of The Rooster",
     "year": "2017",
-    "date": "May 30, 2017"
+    "date": "May 30, 2017",
+    "imageUrl": "/bobbleheads/giants-photos/year-of-the-rooster-2017.jpg"
   },
   {
     "id": "giants-retro-2017",
@@ -528,7 +532,8 @@
     "title": "\"House Of Pence\"",
     "nickname": "Hunter Pence",
     "year": "2017",
-    "date": "July 20, 2017"
+    "date": "July 20, 2017",
+    "imageUrl": "/bobbleheads/giants-photos/house-of-pence-hunter-pence-2017.jpg"
   },
   {
     "id": "dancing-bear-vip-2017",
@@ -609,7 +614,8 @@
     "id": "juli-inkster-2016",
     "title": "Juli Inkster",
     "year": "2016",
-    "date": "April 22, 2016"
+    "date": "April 22, 2016",
+    "imageUrl": "/bobbleheads/giants-photos/juli-inkster-2016.jpg"
   },
   {
     "id": "matt-duffy-2016",
@@ -738,7 +744,8 @@
     "nickname": "Stormtrooper",
     "year": "2016",
     "date": "October 1, 2016",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/giants-photos/madison-bumgarner-stormtrooper-2016.jpg"
   },
   {
     "id": "madison-bumgarner-postseason-mvp-2015",
@@ -746,7 +753,8 @@
     "nickname": "Postseason MVP",
     "year": "2015",
     "date": "April 18, 2015",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/giants-photos/madison-bumgarner-postseason-mvp-2015.jpg"
   },
   {
     "id": "tim-lincecum-filipino-heritage-2015",
@@ -848,13 +856,15 @@
     "title": "Duane Kuiper",
     "year": "2014",
     "date": "April 28, 2014",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/giants-photos/duane-kuiper-2014.jpg"
   },
   {
     "id": "korean-heritage-2014",
     "title": "Korean Heritage",
     "year": "2014",
-    "date": "April 28, 2014"
+    "date": "April 28, 2014",
+    "imageUrl": "/bobbleheads/giants-photos/korean-heritage-2014.jpg"
   },
   {
     "id": "filipino-heritage-2014",
@@ -950,7 +960,8 @@
     "id": "fiesta-gigantes-2013",
     "title": "Fiesta Gigantes",
     "year": "2013",
-    "date": "September 8, 2013"
+    "date": "September 8, 2013",
+    "imageUrl": "/bobbleheads/giants-photos/fiesta-gigantes-2013.jpg"
   },
   {
     "id": "buster-posey-stormtrooper-2013",
@@ -983,20 +994,23 @@
     "nickname": "Cinco de Mayo",
     "year": "2012",
     "date": "May 5, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/giants-photos/sergio-romo-cinco-de-mayo-2012.jpg"
   },
   {
     "id": "sergio-romo-2012",
     "title": "Sergio Romo",
     "year": "2012",
     "date": "May 5, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/giants-photos/sergio-romo-2012.jpg"
   },
   {
     "id": "will-clark-2012",
     "title": "Will Clark",
     "year": "2012",
-    "date": "May 30, 2012"
+    "date": "May 30, 2012",
+    "imageUrl": "/bobbleheads/giants-photos/will-clark-2012.jpg"
   },
   {
     "id": "rory-mcilroy-2012",
@@ -1010,40 +1024,46 @@
     "nickname": "2002 World Series Reunion",
     "year": "2012",
     "date": "June 30, 2012",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/giants-photos/jeff-kent-2002-world-series-reunion-2012.jpg"
   },
   {
     "id": "madison-bumgarner-2012",
     "title": "Madison Bumgarner",
     "year": "2012",
     "date": "July 15, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/giants-photos/madison-bumgarner-2012.jpg"
   },
   {
     "id": "jerry-garcia-2012",
     "title": "Jerry Garcia",
     "year": "2012",
-    "date": "August 1, 2012"
+    "date": "August 1, 2012",
+    "imageUrl": "/bobbleheads/giants-photos/jerry-garcia-2012.jpg"
   },
   {
     "id": "jeremy-affeldt-2012",
     "title": "Jeremy Affeldt",
     "year": "2012",
-    "date": "August 23, 2012"
+    "date": "August 23, 2012",
+    "imageUrl": "/bobbleheads/giants-photos/jeremy-affeldt-2012.jpg"
   },
   {
     "id": "pablo-sandoval-2012",
     "title": "Pablo Sandoval",
     "year": "2012",
     "date": "August 26, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/giants-photos/pablo-sandoval-2012.jpg"
   },
   {
     "id": "bruce-lee-year-of-the-dragon-2012",
     "title": "Bruce Lee",
     "nickname": "\"Year of the Dragon\"",
     "year": "2012",
-    "date": "September 4, 2012"
+    "date": "September 4, 2012",
+    "imageUrl": "/bobbleheads/giants-photos/bruce-lee-year-of-the-dragon-2012.jpg"
   },
   {
     "id": "andres-torres-2011",
@@ -1055,25 +1075,29 @@
     "id": "cody-ross-2011",
     "title": "Cody Ross",
     "year": "2011",
-    "date": "June 4, 2011"
+    "date": "June 4, 2011",
+    "imageUrl": "/bobbleheads/giants-photos/cody-ross-2011.jpg"
   },
   {
     "id": "freddy-sanchez-2011",
     "title": "Freddy Sanchez",
     "year": "2011",
-    "date": "June 22, 2011"
+    "date": "June 22, 2011",
+    "imageUrl": "/bobbleheads/giants-photos/freddy-sanchez-2011.jpg"
   },
   {
     "id": "aubrey-huff-2011",
     "title": "Aubrey Huff",
     "year": "2011",
-    "date": "June 25, 2011"
+    "date": "June 25, 2011",
+    "imageUrl": "/bobbleheads/giants-photos/aubrey-huff-2011.jpg"
   },
   {
     "id": "buster-posey-2011",
     "title": "Buster Posey",
     "year": "2011",
-    "date": "July 10, 2011"
+    "date": "July 10, 2011",
+    "imageUrl": "/bobbleheads/giants-photos/buster-posey-2011.jpg"
   },
   {
     "id": "bobby-thomson-2011",
@@ -1091,88 +1115,102 @@
     "id": "jerry-garcias-grateful-dead-dancing-bears-2011",
     "title": "Jerry Garcia's Grateful Dead Dancing Bears",
     "year": "2011",
-    "date": "August 9, 2011"
+    "date": "August 9, 2011",
+    "imageUrl": "/bobbleheads/giants-photos/jerry-garcias-grateful-dead-dancing-bears-2011.jpg"
   },
   {
     "id": "tim-lincecum-2011",
     "title": "Tim Lincecum",
     "year": "2011",
-    "date": "August 27, 2011"
+    "date": "August 27, 2011",
+    "imageUrl": "/bobbleheads/giants-photos/tim-lincecum-2011.jpg"
   },
   {
     "id": "tony-bennett-2011",
     "title": "Tony Bennett",
     "year": "2011",
-    "date": "September 27, 2011"
+    "date": "September 27, 2011",
+    "imageUrl": "/bobbleheads/giants-photos/tony-bennett-2011.jpg"
   },
   {
     "id": "pablo-sandoval-2010",
     "title": "Pablo Sandoval",
     "year": "2010",
-    "date": "April 24, 2010"
+    "date": "April 24, 2010",
+    "imageUrl": "/bobbleheads/giants-photos/pablo-sandoval-2010.jpg"
   },
   {
     "id": "lou-seal-luchador-2010",
     "title": "Lou Seal",
     "nickname": "\"Luchador\"",
     "year": "2010",
-    "date": "May 1, 2010"
+    "date": "May 1, 2010",
+    "imageUrl": "/bobbleheads/giants-photos/lou-seal-luchador-2010.jpg"
   },
   {
     "id": "willie-mays-2010",
     "title": "Willie Mays",
     "year": "2010",
-    "date": "May 16, 2010"
+    "date": "May 16, 2010",
+    "imageUrl": "/bobbleheads/giants-photos/willie-mays-2010.jpg"
   },
   {
     "id": "madison-bumgarner-2010",
     "title": "Madison Bumgarner",
     "year": "2010",
-    "date": "June 2, 2010"
+    "date": "June 2, 2010",
+    "imageUrl": "/bobbleheads/giants-photos/madison-bumgarner-2010.jpg"
   },
   {
     "id": "jennie-finch-2010",
     "title": "Jennie Finch",
     "year": "2010",
-    "date": "June 2, 2010"
+    "date": "June 2, 2010",
+    "imageUrl": "/bobbleheads/giants-photos/jennie-finch-2010.jpg"
   },
   {
     "id": "lucy-peanuts-2010",
     "title": "Lucy",
     "nickname": "Peanuts",
     "year": "2010",
-    "date": "June 13, 2010"
+    "date": "June 13, 2010",
+    "imageUrl": "/bobbleheads/giants-photos/lucy-peanuts-2010.jpg"
   },
   {
     "id": "pablo-sandoval-pandoval-2010",
     "title": "Pablo Sandoval",
     "nickname": "\"Pandoval\"",
     "year": "2010",
-    "date": "June 14, 2010"
+    "date": "June 14, 2010",
+    "imageUrl": "/bobbleheads/giants-photos/pablo-sandoval-pandoval-2010.jpg"
   },
   {
     "id": "tim-lincecum-2010",
     "title": "Tim Lincecum",
     "year": "2010",
-    "date": "July 17, 2010"
+    "date": "July 17, 2010",
+    "imageUrl": "/bobbleheads/giants-photos/tim-lincecum-2010.jpg"
   },
   {
     "id": "jerry-garcia-2010",
     "title": "Jerry Garcia",
     "year": "2010",
-    "date": "August 9, 2010"
+    "date": "August 9, 2010",
+    "imageUrl": "/bobbleheads/giants-photos/jerry-garcia-2010.jpg"
   },
   {
     "id": "bruce-bochy-2010",
     "title": "Bruce Bochy",
     "year": "2010",
-    "date": "August 14, 2010"
+    "date": "August 14, 2010",
+    "imageUrl": "/bobbleheads/giants-photos/bruce-bochy-2010.jpg"
   },
   {
     "id": "joe-dimaggio-2010",
     "title": "Joe DiMaggio",
     "year": "2010",
-    "date": "August 28, 2010"
+    "date": "August 28, 2010",
+    "imageUrl": "/bobbleheads/giants-photos/joe-dimaggio-2010.jpg"
   },
   {
     "id": "jonathan-sanchez-no-hitter-2010",
@@ -1185,179 +1223,207 @@
     "id": "rob-schneider-2010",
     "title": "Rob Schneider",
     "year": "2010",
-    "date": "October 3, 2010"
+    "date": "October 3, 2010",
+    "imageUrl": "/bobbleheads/giants-photos/rob-schneider-2010.jpg"
   },
   {
     "id": "manny-pacquiao-2009",
     "title": "Manny Pacquiao",
     "year": "2009",
-    "date": "April 21, 2009"
+    "date": "April 21, 2009",
+    "imageUrl": "/bobbleheads/giants-photos/manny-pacquiao-2009.jpg"
   },
   {
     "id": "lou-seal-chinese-heritage-2009",
     "title": "Lou Seal",
     "nickname": "Chinese Heritage",
     "year": "2009",
-    "date": "May 12, 2009"
+    "date": "May 12, 2009",
+    "imageUrl": "/bobbleheads/giants-photos/lou-seal-chinese-heritage-2009.jpg"
   },
   {
     "id": "tim-lincecum-2009",
     "title": "Tim Lincecum",
     "year": "2009",
-    "date": "May 17, 2009"
+    "date": "May 17, 2009",
+    "imageUrl": "/bobbleheads/giants-photos/tim-lincecum-2009.jpg"
   },
   {
     "id": "brian-wilson-2009",
     "title": "Brian Wilson",
     "year": "2009",
-    "date": "July 12, 2009"
+    "date": "July 12, 2009",
+    "imageUrl": "/bobbleheads/giants-photos/brian-wilson-2009.jpg"
   },
   {
     "id": "lou-seal-stitch-pitch-2009",
     "title": "Lou Seal",
     "nickname": "Stitch & Pitch",
     "year": "2009",
-    "date": "July 27, 2009"
+    "date": "July 27, 2009",
+    "imageUrl": "/bobbleheads/giants-photos/lou-seal-stitch-pitch-2009.jpg"
   },
   {
     "id": "lou-seal-policeman-jul-2009",
     "title": "Lou Seal",
     "nickname": "Policeman",
     "year": "2009",
-    "date": "July 30, 2009"
+    "date": "July 30, 2009",
+    "imageUrl": "/bobbleheads/giants-photos/lou-seal-policeman-jul-2009.jpg"
   },
   {
     "id": "jon-miller-2009",
     "title": "Jon Miller",
     "year": "2009",
-    "date": "August 7, 2009"
+    "date": "August 7, 2009",
+    "imageUrl": "/bobbleheads/giants-photos/jon-miller-2009.jpg"
   },
   {
     "id": "carlos-santana-2009",
     "title": "Carlos Santana",
     "year": "2009",
-    "date": "August 25, 2009"
+    "date": "August 25, 2009",
+    "imageUrl": "/bobbleheads/giants-photos/carlos-santana-2009.jpg"
   },
   {
     "id": "randy-johnson-2009",
     "title": "Randy Johnson",
     "year": "2009",
-    "date": "August 30, 2009"
+    "date": "August 30, 2009",
+    "imageUrl": "/bobbleheads/giants-photos/randy-johnson-2009.jpg"
   },
   {
     "id": "lou-seal-policeman-sep-2009",
     "title": "Lou Seal",
     "nickname": "Policeman",
     "year": "2009",
-    "date": "September 24, 2009"
+    "date": "September 24, 2009",
+    "imageUrl": "/bobbleheads/giants-photos/lou-seal-policeman-sep-2009.jpg"
   },
   {
     "id": "masanori-murakami-2008",
     "title": "Masanori Murakami",
     "year": "2008",
-    "date": "May 16, 2008"
+    "date": "May 16, 2008",
+    "imageUrl": "/bobbleheads/giants-photos/masanori-murakami-2008.jpg"
   },
   {
     "id": "crazy-crab-2008",
     "title": "Crazy Crab",
     "year": "2008",
-    "date": "July 18, 2008"
+    "date": "July 18, 2008",
+    "imageUrl": "/bobbleheads/giants-photos/crazy-crab-2008.jpg"
   },
   {
     "id": "matt-cain-2008",
     "title": "Matt Cain",
     "year": "2008",
     "date": "July 27, 2008",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/giants-photos/matt-cain-2008.jpg"
   },
   {
     "id": "renel-brooks-moon-2008",
     "title": "Renel Brooks-Moon",
     "year": "2008",
-    "date": "August 22, 2008"
+    "date": "August 22, 2008",
+    "imageUrl": "/bobbleheads/giants-photos/renel-brooks-moon-2008.jpg"
   },
   {
     "id": "bengie-molina-2008",
     "title": "Bengie Molina",
     "year": "2008",
     "date": "September 6, 2008",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/giants-photos/bengie-molina-2008.jpg"
   },
   {
     "id": "lefty-odoul-2008",
     "title": "Lefty O'Doul",
     "year": "2008",
-    "date": "September 8, 2008"
+    "date": "September 8, 2008",
+    "imageUrl": "/bobbleheads/giants-photos/lefty-odoul-2008.jpg"
   },
   {
     "id": "barry-zito-2007",
     "title": "Barry Zito",
     "year": "2007",
     "date": "June 30, 2007",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/giants-photos/barry-zito-2007.jpg"
   },
   {
     "id": "will-clark-2007",
     "title": "Will Clark",
     "year": "2007",
-    "date": "July 29, 2007"
+    "date": "July 29, 2007",
+    "imageUrl": "/bobbleheads/giants-photos/will-clark-2007.jpg"
   },
   {
     "id": "kevin-mitchell-2007",
     "title": "Kevin Mitchell",
     "year": "2007",
     "date": "July 29, 2007",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/giants-photos/kevin-mitchell-2007.jpg"
   },
   {
     "id": "robby-thompson-2007",
     "title": "Robby Thompson",
     "year": "2007",
-    "date": "July 29, 2007"
+    "date": "July 29, 2007",
+    "imageUrl": "/bobbleheads/giants-photos/robby-thompson-2007.jpg"
   },
   {
     "id": "matt-williams-2007",
     "title": "Matt Williams",
     "year": "2007",
-    "date": "July 29, 2007"
+    "date": "July 29, 2007",
+    "imageUrl": "/bobbleheads/giants-photos/matt-williams-2007.jpg"
   },
   {
     "id": "rally-rabbi-2007",
     "title": "\"Rally Rabbi\"",
     "year": "2007",
-    "date": "August 8, 2007"
+    "date": "August 8, 2007",
+    "imageUrl": "/bobbleheads/giants-photos/rally-rabbi-2007.jpg"
   },
   {
     "id": "joe-cool-snoopy-2007",
     "title": "\"Joe Cool\" Snoopy",
     "year": "2007",
     "date": "August 11, 2007",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/giants-photos/joe-cool-snoopy-2007.jpg"
   },
   {
     "id": "lou-seal-oktoberfest-2007",
     "title": "Lou Seal",
     "nickname": "Oktoberfest",
     "year": "2007",
-    "date": "August 24, 2007"
+    "date": "August 24, 2007",
+    "imageUrl": "/bobbleheads/giants-photos/lou-seal-oktoberfest-2007.jpg"
   },
   {
     "id": "omar-vizquel-2006",
     "title": "Omar Vizquel",
     "year": "2006",
-    "date": "May 28, 2006"
+    "date": "May 28, 2006",
+    "imageUrl": "/bobbleheads/giants-photos/omar-vizquel-2006.jpg"
   },
   {
     "id": "moises-alou-2006",
     "title": "Moises Alou",
     "year": "2006",
-    "date": "June 11, 2006"
+    "date": "June 11, 2006",
+    "imageUrl": "/bobbleheads/giants-photos/moises-alou-2006.jpg"
   },
   {
     "id": "randy-winn-2006",
     "title": "Randy Winn",
     "year": "2006",
-    "date": "September 8, 2006"
+    "date": "September 8, 2006",
+    "imageUrl": "/bobbleheads/giants-photos/randy-winn-2006.jpg"
   },
   {
     "id": "felipe-alou-2005",
@@ -1370,13 +1436,15 @@
     "title": "Charlie Brown",
     "year": "2005",
     "date": "May 28, 2005",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/giants-photos/charlie-brown-2005.jpg"
   },
   {
     "id": "gaylord-perry-2005",
     "title": "Gaylord Perry",
     "year": "2005",
-    "date": "July 23, 2005"
+    "date": "July 23, 2005",
+    "imageUrl": "/bobbleheads/giants-photos/gaylord-perry-2005.jpg"
   },
   {
     "id": "jt-snow-2004",
@@ -1388,57 +1456,66 @@
     "id": "jason-schmidt-2004",
     "title": "Jason Schmidt",
     "year": "2004",
-    "date": "July 10, 2004"
+    "date": "July 10, 2004",
+    "imageUrl": "/bobbleheads/giants-photos/jason-schmidt-2004.jpg"
   },
   {
     "id": "benito-santiago-2003",
     "title": "Benito Santiago",
     "year": "2003",
-    "date": "N/A"
+    "date": "N/A",
+    "imageUrl": "/bobbleheads/giants-photos/benito-santiago-2003.jpg"
   },
   {
     "id": "juan-marichal-2003",
     "title": "Juan Marichal",
     "year": "2003",
-    "date": "July 20, 2003"
+    "date": "July 20, 2003",
+    "imageUrl": "/bobbleheads/giants-photos/juan-marichal-2003.jpg"
   },
   {
     "id": "russ-ortiz-2002",
     "title": "Russ Ortiz",
     "year": "2002",
-    "date": "N/A"
+    "date": "N/A",
+    "imageUrl": "/bobbleheads/giants-photos/russ-ortiz-2002.jpg"
   },
   {
     "id": "orlando-cepeda-2002",
     "title": "Orlando Cepeda",
     "year": "2002",
-    "date": "June 23, 2002"
+    "date": "June 23, 2002",
+    "imageUrl": "/bobbleheads/giants-photos/orlando-cepeda-2002.jpg"
   },
   {
     "id": "rich-aurilia-2002",
     "title": "Rich Aurilia",
     "year": "2002",
-    "date": "July 14, 2002"
+    "date": "July 14, 2002",
+    "imageUrl": "/bobbleheads/giants-photos/rich-aurilia-2002.jpg"
   },
   {
     "id": "willie-mccovey-2001",
     "title": "Willie McCovey",
     "year": "2001",
     "date": "May 13, 2001",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/giants-photos/willie-mccovey-2001.jpg"
   },
   {
     "id": "barry-bonds-2000",
     "title": "Barry Bonds",
     "year": "2000",
     "date": "June 11, 2000",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/giants-photos/barry-bonds-2000.jpg"
   },
   {
     "id": "willie-mays-1999",
     "title": "Willie Mays",
     "year": "1999",
     "date": "May 9, 1999",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/giants-photos/willie-mays-1999.jpg"
   }
 ]

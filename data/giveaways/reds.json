@@ -17,7 +17,8 @@
     "id": "clone-trooper-2025",
     "title": "Clone Trooper",
     "year": "2025",
-    "date": "May 3, 2025"
+    "date": "May 3, 2025",
+    "imageUrl": "/bobbleheads/reds-photos/clone-trooper-2025.jpg"
   },
   {
     "id": "mr-red-race-car-2025",
@@ -128,7 +129,8 @@
     "id": "hippo-2023",
     "title": "Hippo",
     "year": "2023",
-    "date": "June 30, 2023"
+    "date": "June 30, 2023",
+    "imageUrl": "/bobbleheads/reds-photos/hippo-2023.jpg"
   },
   {
     "id": "bronson-arroyo-2023",
@@ -222,14 +224,16 @@
     "title": "Shogo Akiyama",
     "year": "2021",
     "date": "June 19, 2021",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/reds-photos/shogo-akiyama-2021.jpg"
   },
   {
     "id": "queen-city-sluggers-triple-2021",
     "title": "\"Queen City Sluggers\"",
     "nickname": "Triple",
     "year": "2021",
-    "date": "June 24, 2021"
+    "date": "June 24, 2021",
+    "imageUrl": "/bobbleheads/reds-photos/queen-city-sluggers-triple-2021.jpg"
   },
   {
     "id": "barry-larkin-dual-2021",
@@ -424,7 +428,8 @@
     "id": "captain-america-2018",
     "title": "Captain America",
     "year": "2018",
-    "date": "June 8, 2018"
+    "date": "June 8, 2018",
+    "imageUrl": "/bobbleheads/reds-photos/captain-america-2018.jpg"
   },
   {
     "id": "scooter-gennett-2018",
@@ -593,7 +598,8 @@
     "title": "Homer Bailey",
     "year": "2017",
     "date": "August 26, 2017",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/reds-photos/homer-bailey-2017.jpg"
   },
   {
     "id": "triple-bobblehead-2017",
@@ -647,7 +653,8 @@
     "nickname": "X-Wing Fighter",
     "year": "2016",
     "date": "May 7, 2016",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/reds-photos/mr-redlegs-x-wing-fighter-2016.jpg"
   },
   {
     "id": "ken-griffey-jr-dual-2016",
@@ -655,14 +662,16 @@
     "nickname": "Dual",
     "year": "2016",
     "date": "May 21, 2016",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/reds-photos/ken-griffey-jr-dual-2016.jpg"
   },
   {
     "id": "zack-cozart-2016",
     "title": "Zack Cozart",
     "year": "2016",
     "date": "July 16, 2016",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/reds-photos/zack-cozart-2016.jpg"
   },
   {
     "id": "eugenio-suarez-2016",
@@ -677,7 +686,8 @@
     "title": "Billy Hamilton",
     "year": "2015",
     "date": "March 14, 2015",
-    "quantity": "1,500"
+    "quantity": "1,500",
+    "imageUrl": "/bobbleheads/reds-photos/billy-hamilton-2015.jpg"
   },
   {
     "id": "todd-frazier-2015",
@@ -748,7 +758,8 @@
     "title": "2015 All-Star Player",
     "nickname": "Figurine",
     "year": "2015",
-    "date": "September 26, 2015"
+    "date": "September 26, 2015",
+    "imageUrl": "/bobbleheads/reds-photos/2015-all-star-player-figurine-2015.jpg"
   },
   {
     "id": "homer-bailey-dual-no-hitter-2014",
@@ -764,7 +775,8 @@
     "title": "Aroldis Chapman",
     "year": "2014",
     "date": "June 6, 2014",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/reds-photos/aroldis-chapman-2014.jpg"
   },
   {
     "id": "ken-griffey-jr-500th-home-run-2014",
@@ -772,7 +784,8 @@
     "nickname": "500th Home Run",
     "year": "2014",
     "date": "June 21, 2014",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/reds-photos/ken-griffey-jr-500th-home-run-2014.jpg"
   },
   {
     "id": "billy-hamilton-2014",
@@ -787,7 +800,8 @@
     "title": "Jay Bruce",
     "year": "2014",
     "date": "August 6, 2014",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/reds-photos/jay-bruce-2014.jpg"
   },
   {
     "id": "commemorative-2015-all-star-2014",
@@ -801,7 +815,8 @@
     "title": "Brandon Phillips",
     "year": "2013",
     "date": "April 20, 2013",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/brandon-phillips-2013.jpg"
   },
   {
     "id": "aroldis-chapman-2013",
@@ -840,28 +855,32 @@
     "title": "Joey Votto",
     "year": "2013",
     "date": "August 6, 2013",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/joey-votto-2013.jpg"
   },
   {
     "id": "cesar-geronimo-reds-hof-2012",
     "title": "Cesar Geronimo",
     "nickname": "Reds HOF",
     "year": "2012",
-    "date": "April 1, 2012"
+    "date": "April 1, 2012",
+    "imageUrl": "/bobbleheads/reds-photos/cesar-geronimo-reds-hof-2012.jpg"
   },
   {
     "id": "george-foster-reds-hof-2012",
     "title": "George Foster",
     "nickname": "Reds HOF",
     "year": "2012",
-    "date": "May 1, 2012"
+    "date": "May 1, 2012",
+    "imageUrl": "/bobbleheads/reds-photos/george-foster-reds-hof-2012.jpg"
   },
   {
     "id": "joey-votto-2012",
     "title": "Joey Votto",
     "year": "2012",
     "date": "May 12, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/reds-photos/joey-votto-2012.jpg"
   },
   {
     "id": "dan-driessen-reds-hof-2012",
@@ -869,14 +888,16 @@
     "nickname": "Reds HOF",
     "year": "2012",
     "date": "June 1, 2012",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/reds-photos/dan-driessen-reds-hof-2012.jpg"
   },
   {
     "id": "sean-casey-2012",
     "title": "Sean Casey",
     "year": "2012",
     "date": "June 23, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/reds-photos/sean-casey-2012.jpg"
   },
   {
     "id": "ken-griffey-sr-reds-hof-2012",
@@ -891,14 +912,16 @@
     "title": "Jay Bruce",
     "year": "2012",
     "date": "July 18, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/reds-photos/jay-bruce-2012.jpg"
   },
   {
     "id": "dave-concepcion-reds-hof-2012",
     "title": "Dave Concepcion",
     "nickname": "Reds HOF",
     "year": "2012",
-    "date": "August 1, 2012"
+    "date": "August 1, 2012",
+    "imageUrl": "/bobbleheads/reds-photos/dave-concepcion-reds-hof-2012.jpg"
   },
   {
     "id": "johnny-cueto-2012",
@@ -912,7 +935,8 @@
     "title": "Joe Morgan",
     "nickname": "Reds HOF",
     "year": "2012",
-    "date": "September 1, 2012"
+    "date": "September 1, 2012",
+    "imageUrl": "/bobbleheads/reds-photos/joe-morgan-reds-hof-2012.jpg"
   },
   {
     "id": "joey-votto-mvp-2011",
@@ -920,7 +944,8 @@
     "nickname": "MVP",
     "year": "2011",
     "date": "April 30, 2011",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/joey-votto-mvp-2011.jpg"
   },
   {
     "id": "johnny-bench-b-reds-hof-2011",
@@ -928,7 +953,8 @@
     "nickname": "Reds HOF",
     "year": "2011",
     "date": "May 1, 2011",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/reds-photos/johnny-bench-b-reds-hof-2011.jpg"
   },
   {
     "id": "johnny-bench-e-reds-hof-2011",
@@ -936,7 +962,8 @@
     "nickname": "Reds HOF",
     "year": "2011",
     "date": "June 1, 2011",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/reds-photos/johnny-bench-e-reds-hof-2011.jpg"
   },
   {
     "id": "johnny-bench-n-reds-hof-2011",
@@ -944,21 +971,24 @@
     "nickname": "Reds HOF",
     "year": "2011",
     "date": "July 1, 2011",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/reds-photos/johnny-bench-n-reds-hof-2011.jpg"
   },
   {
     "id": "dusty-baker-2011",
     "title": "Dusty Baker",
     "year": "2011",
     "date": "July 2, 2011",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/dusty-baker-2011.jpg"
   },
   {
     "id": "jonny-gomes-2011",
     "title": "Jonny Gomes",
     "year": "2011",
     "date": "July 23, 2011",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/jonny-gomes-2011.jpg"
   },
   {
     "id": "johnny-bench-c-reds-hof-2011",
@@ -966,7 +996,8 @@
     "nickname": "Reds HOF",
     "year": "2011",
     "date": "August 1, 2011",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/reds-photos/johnny-bench-c-reds-hof-2011.jpg"
   },
   {
     "id": "johnny-bench-h-reds-hof-2011",
@@ -974,21 +1005,24 @@
     "nickname": "Reds HOF",
     "year": "2011",
     "date": "September 1, 2011",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/reds-photos/johnny-bench-h-reds-hof-2011.jpg"
   },
   {
     "id": "scott-rolen-2010",
     "title": "Scott Rolen",
     "year": "2010",
     "date": "June 12, 2010",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/scott-rolen-2010.jpg"
   },
   {
     "id": "chris-sabo-2010",
     "title": "Chris Sabo",
     "year": "2010",
     "date": "July 17, 2010",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/chris-sabo-2010.jpg"
   },
   {
     "id": "homer-bailey-fans-choice-2010",
@@ -996,7 +1030,8 @@
     "nickname": "Fan's Choice",
     "year": "2010",
     "date": "July 31, 2010",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/homer-bailey-fans-choice-2010.jpg"
   },
   {
     "id": "marge-schott-reds-hof-2010",
@@ -1011,14 +1046,16 @@
     "title": "Joey Votto",
     "year": "2009",
     "date": "May 9, 2009",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/joey-votto-2009.jpg"
   },
   {
     "id": "jay-bruce-2009",
     "title": "Jay Bruce",
     "year": "2009",
     "date": "July 4, 2009",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/jay-bruce-2009.jpg"
   },
   {
     "id": "edinson-volquez-fans-choice-2009",
@@ -1026,14 +1063,16 @@
     "nickname": "Fan's Choice",
     "year": "2009",
     "date": "July 18, 2009",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/edinson-volquez-fans-choice-2009.jpg"
   },
   {
     "id": "brandon-phillips-2009",
     "title": "Brandon Phillips",
     "year": "2009",
     "date": "August 15, 2009",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/brandon-phillips-2009.jpg"
   },
   {
     "id": "adam-dunn-80s-theme-2008",
@@ -1041,7 +1080,8 @@
     "nickname": "'80s Theme",
     "year": "2008",
     "date": "N/A",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/adam-dunn-80s-theme-2008.jpg"
   },
   {
     "id": "brandon-phillips-dual-30-30-2008",
@@ -1049,7 +1089,8 @@
     "nickname": "Dual, 30/30",
     "year": "2008",
     "date": "N/A",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/brandon-phillips-dual-30-30-2008.jpg"
   },
   {
     "id": "joe-nuxhall-bronze-statue-2008",
@@ -1064,103 +1105,118 @@
     "nickname": "Perfect Game",
     "year": "2008",
     "date": "September 16, 2008",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/tom-browning-perfect-game-2008.jpg"
   },
   {
     "id": "bronson-arroyo-2007",
     "title": "Bronson Arroyo",
     "year": "2007",
     "date": "May 23, 2007",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/reds-photos/bronson-arroyo-2007.jpg"
   },
   {
     "id": "aaron-harang-2007",
     "title": "Aaron Harang",
     "year": "2007",
     "date": "June 13, 2007",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/reds-photos/aaron-harang-2007.jpg"
   },
   {
     "id": "frank-robinson-2007",
     "title": "Frank Robinson",
     "year": "2007",
     "date": "July 25, 2007",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/reds-photos/frank-robinson-2007.jpg"
   },
   {
     "id": "adam-dunn-2006",
     "title": "Adam Dunn",
     "year": "2006",
-    "date": "May 13, 2006"
+    "date": "May 13, 2006",
+    "imageUrl": "/bobbleheads/reds-photos/adam-dunn-2006.jpg"
   },
   {
     "id": "felipe-lopez-2006",
     "title": "Felipe Lopez",
     "year": "2006",
     "date": "May 24, 2006",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/reds-photos/felipe-lopez-2006.jpg"
   },
   {
     "id": "barry-larkin-2006",
     "title": "Barry Larkin",
     "year": "2006",
     "date": "June 28, 2006",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/reds-photos/barry-larkin-2006.jpg"
   },
   {
     "id": "dave-concepcion-2006",
     "title": "Dave Concepcion",
     "year": "2006",
     "date": "August 9, 2006",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/reds-photos/dave-concepcion-2006.jpg"
   },
   {
     "id": "ken-griffey-jr-2005",
     "title": "Ken Griffey Jr.",
     "year": "2005",
     "date": "May 24, 2005",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/reds-photos/ken-griffey-jr-2005.jpg"
   },
   {
     "id": "wily-mo-pena-2005",
     "title": "Wily Mo Pena",
     "year": "2005",
     "date": "June 8, 2005",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/reds-photos/wily-mo-pena-2005.jpg"
   },
   {
     "id": "sean-casey-2005",
     "title": "Sean Casey",
     "year": "2005",
-    "date": "July 23, 2005"
+    "date": "July 23, 2005",
+    "imageUrl": "/bobbleheads/reds-photos/sean-casey-2005.jpg"
   },
   {
     "id": "tony-perez-2005",
     "title": "Tony Perez",
     "year": "2005",
     "date": "August 3, 2005",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/reds-photos/tony-perez-2005.jpg"
   },
   {
     "id": "joe-nuxhall-2004",
     "title": "Joe Nuxhall",
     "year": "2004",
     "date": "April 21, 2004",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/reds-photos/joe-nuxhall-2004.jpg"
   },
   {
     "id": "sean-casey-2004",
     "title": "Sean Casey",
     "year": "2004",
     "date": "June 30, 2004",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/reds-photos/sean-casey-2004.jpg"
   },
   {
     "id": "joe-morgan-2004",
     "title": "Joe Morgan",
     "year": "2004",
     "date": "August 11, 2004",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/reds-photos/joe-morgan-2004.jpg"
   },
   {
     "id": "marty-brennaman-joe-nuxhall-dual-2003",
@@ -1168,14 +1224,16 @@
     "nickname": "Dual",
     "year": "2003",
     "date": "May 24, 2003",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/reds-photos/marty-brennaman-joe-nuxhall-dual-2003.jpg"
   },
   {
     "id": "austin-kearns-2003",
     "title": "Austin Kearns",
     "year": "2003",
     "date": "July 19, 2003",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/reds-photos/austin-kearns-2003.jpg"
   },
   {
     "id": "gapper-mascot-2003",
@@ -1183,55 +1241,63 @@
     "nickname": "Mascot",
     "year": "2003",
     "date": "August 1, 2003",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/reds-photos/gapper-mascot-2003.jpg"
   },
   {
     "id": "johnny-bench-2002",
     "title": "Johnny Bench",
     "year": "2002",
     "date": "May 31, 2002",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/reds-photos/johnny-bench-2002.jpg"
   },
   {
     "id": "chris-sabo-2002",
     "title": "Chris Sabo",
     "year": "2002",
     "date": "June 14, 2002",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/reds-photos/chris-sabo-2002.jpg"
   },
   {
     "id": "eric-davis-2002",
     "title": "Eric Davis",
     "year": "2002",
     "date": "July 20, 2002",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/reds-photos/eric-davis-2002.jpg"
   },
   {
     "id": "adam-dunn-2002",
     "title": "Adam Dunn",
     "year": "2002",
     "date": "August 10, 2002",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/reds-photos/adam-dunn-2002.jpg"
   },
   {
     "id": "barry-larkin-2001",
     "title": "Barry Larkin",
     "year": "2001",
     "date": "May 26, 2001",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/reds-photos/barry-larkin-2001.jpg"
   },
   {
     "id": "pete-harnisch-2001",
     "title": "Pete Harnisch",
     "year": "2001",
     "date": "June 15, 2001",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/reds-photos/pete-harnisch-2001.jpg"
   },
   {
     "id": "danny-graves-2001",
     "title": "Danny Graves",
     "year": "2001",
     "date": "August 17, 2001",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/reds-photos/danny-graves-2001.jpg"
   }
 ]

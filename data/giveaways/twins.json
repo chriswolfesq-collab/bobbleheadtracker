@@ -12,7 +12,8 @@
     "title": "Grogu",
     "nickname": "Star Wars, Theme Ticket",
     "year": "2026",
-    "date": "May 16, 2026"
+    "date": "May 16, 2026",
+    "imageUrl": "/bobbleheads/twins-photos/grogu-star-wars-theme-ticket-2026.jpg"
   },
   {
     "id": "byron-buxton-2025",
@@ -34,7 +35,8 @@
     "id": "carlos-correa-2025",
     "title": "Carlos Correa",
     "year": "2025",
-    "date": "May 23, 2025"
+    "date": "May 23, 2025",
+    "imageUrl": "/bobbleheads/twins-photos/carlos-correa-2025.jpg"
   },
   {
     "id": "sugar-skull-2024",
@@ -343,7 +345,8 @@
     "title": "Trevor Plouffe",
     "nickname": "\"Skywalker\", Star Wars",
     "year": "2016",
-    "date": "May 19, 2016"
+    "date": "May 19, 2016",
+    "imageUrl": "/bobbleheads/twins-photos/trevor-plouffe-skywalker-star-wars-2016.jpg"
   },
   {
     "id": "twins-1965-vintage-2015",
@@ -382,7 +385,8 @@
     "nickname": "Star Wars",
     "year": "2015",
     "date": "May 4, 2015",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/phil-hughes-star-wars-2015.jpg"
   },
   {
     "id": "glen-perkins-2014-all-star-game-2014",
@@ -449,7 +453,8 @@
     "title": "Ron Gant & Kent Hrbek",
     "nickname": "Dual",
     "year": "2011",
-    "date": "August 5, 2011"
+    "date": "August 5, 2011",
+    "imageUrl": "/bobbleheads/twins-photos/ron-gant-kent-hrbek-dual-2011.jpg"
   },
   {
     "id": "kent-hrbek-kirby-puckett-legends-set-of-2-2011",
@@ -482,7 +487,8 @@
     "title": "Kent Hrbek",
     "nickname": "\"Legends of the Dome\"",
     "year": "2009",
-    "date": "June 19, 2009"
+    "date": "June 19, 2009",
+    "imageUrl": "/bobbleheads/twins-photos/kent-hrbek-legends-of-the-dome-2009.jpg"
   },
   {
     "id": "kirby-puckett-legends-of-the-dome-2009",
@@ -495,14 +501,16 @@
     "id": "random-season-ticket-2009",
     "title": "Random Season Ticket",
     "year": "2009",
-    "date": "March 14, 2009"
+    "date": "March 14, 2009",
+    "imageUrl": "/bobbleheads/twins-photos/random-season-ticket-2009.jpg"
   },
   {
     "id": "rick-aguilera-2008",
     "title": "Rick Aguilera",
     "year": "2008",
     "date": "September 6, 2008",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/rick-aguilera-2008.jpg"
   },
   {
     "id": "jack-morris-2008",
@@ -515,7 +523,8 @@
     "title": "Delmon Young",
     "year": "2008",
     "date": "July 19, 2008",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/delmon-young-2008.jpg"
   },
   {
     "id": "paul-molitor-2008",
@@ -528,14 +537,16 @@
     "title": "Dan Gladden",
     "year": "2008",
     "date": "June 20, 2008",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/dan-gladden-2008.jpg"
   },
   {
     "id": "ron-gardenhire-2008",
     "title": "Ron Gardenhire",
     "year": "2008",
     "date": "May 4, 2008",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/ron-gardenhire-2008.jpg"
   },
   {
     "id": "random-season-2008",
@@ -548,7 +559,8 @@
     "title": "Michael Cuddyer",
     "year": "2007",
     "date": "September 15, 2007",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/michael-cuddyer-2007.jpg"
   },
   {
     "id": "kirby-puckett-2007",
@@ -561,7 +573,8 @@
     "title": "Gary Gaetti",
     "year": "2007",
     "date": "August 19, 2007",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/gary-gaetti-2007.jpg"
   },
   {
     "id": "justin-morneau-al-mvp-2007",
@@ -569,13 +582,15 @@
     "nickname": "AL MVP",
     "year": "2007",
     "date": "July 20, 2007",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/justin-morneau-al-mvp-2007.jpg"
   },
   {
     "id": "bert-blyleven-2007",
     "title": "Bert Blyleven",
     "year": "2007",
-    "date": "June 15, 2007"
+    "date": "June 15, 2007",
+    "imageUrl": "/bobbleheads/twins-photos/bert-blyleven-2007.jpg"
   },
   {
     "id": "joe-mauer-al-batting-champ-2007",
@@ -583,7 +598,8 @@
     "nickname": "AL Batting Champ",
     "year": "2007",
     "date": "June 9, 2007",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/joe-mauer-al-batting-champ-2007.jpg"
   },
   {
     "id": "earl-battey-season-ticket-2007",
@@ -604,27 +620,31 @@
     "title": "Jack Morris",
     "year": "2006",
     "date": "September 9, 2006",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/jack-morris-2006.jpg"
   },
   {
     "id": "tony-oliva-2006",
     "title": "Tony Oliva",
     "year": "2006",
-    "date": "August 12, 2006"
+    "date": "August 12, 2006",
+    "imageUrl": "/bobbleheads/twins-photos/tony-oliva-2006.jpg"
   },
   {
     "id": "billy-martin-2006",
     "title": "Billy Martin",
     "year": "2006",
     "date": "July 29, 2006",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/billy-martin-2006.jpg"
   },
   {
     "id": "brad-radke-2006",
     "title": "Brad Radke",
     "year": "2006",
     "date": "June 11, 2006",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/brad-radke-2006.jpg"
   },
   {
     "id": "kent-hrbek-2006",
@@ -638,7 +658,8 @@
     "nickname": "Gold Glove",
     "year": "2006",
     "date": "May 5, 2006",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/torii-hunter-gold-glove-2006.jpg"
   },
   {
     "id": "harmon-killebrew-sth-red-variant-2006",
@@ -685,21 +706,24 @@
     "title": "Joe Nathan",
     "year": "2005",
     "date": "July 1, 2005",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/joe-nathan-2005.jpg"
   },
   {
     "id": "harmon-killebrew-2005",
     "title": "Harmon Killebrew",
     "year": "2005",
     "date": "June 19, 2005",
-    "quantity": "1,000"
+    "quantity": "1,000",
+    "imageUrl": "/bobbleheads/twins-photos/harmon-killebrew-2005.jpg"
   },
   {
     "id": "jacque-jones-2005",
     "title": "Jacque Jones",
     "year": "2005",
     "date": "May 15, 2005",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/jacque-jones-2005.jpg"
   },
   {
     "id": "random-season-2005",
@@ -712,35 +736,40 @@
     "title": "Joe Mauer",
     "year": "2004",
     "date": "October 2, 2004",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/joe-mauer-2004.jpg"
   },
   {
     "id": "walter-johnson-2004",
     "title": "Walter Johnson",
     "year": "2004",
     "date": "September 19, 2004",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/walter-johnson-2004.jpg"
   },
   {
     "id": "paul-molitor-2004",
     "title": "Paul Molitor",
     "year": "2004",
     "date": "August 21, 2004",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/paul-molitor-2004.jpg"
   },
   {
     "id": "al-newman-2004",
     "title": "Al Newman",
     "year": "2004",
     "date": "July 9, 2004",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/al-newman-2004.jpg"
   },
   {
     "id": "shannon-stewart-2004",
     "title": "Shannon Stewart",
     "year": "2004",
     "date": "June 6, 2004",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/shannon-stewart-2004.jpg"
   },
   {
     "id": "random-season-2004-3-16",
@@ -765,7 +794,8 @@
     "id": "aj-pierzynski-2003",
     "title": "A.J. Pierzynski",
     "year": "2003",
-    "date": "September 6, 2003"
+    "date": "September 6, 2003",
+    "imageUrl": "/bobbleheads/twins-photos/aj-pierzynski-2003.jpg"
   },
   {
     "id": "corey-koskie-super-hero-2003",
@@ -773,28 +803,32 @@
     "nickname": "Super Hero",
     "year": "2003",
     "date": "August 22, 2003",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/corey-koskie-super-hero-2003.jpg"
   },
   {
     "id": "corey-koskie-2003",
     "title": "Corey Koskie",
     "year": "2003",
     "date": "August 3, 2003",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/corey-koskie-2003.jpg"
   },
   {
     "id": "torii-hunter-2003",
     "title": "Torii Hunter",
     "year": "2003",
     "date": "July 4, 2003",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/torii-hunter-2003.jpg"
   },
   {
     "id": "eddie-guardado-2003",
     "title": "Eddie Guardado",
     "year": "2003",
     "date": "June 27, 2003",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/eddie-guardado-2003.jpg"
   },
   {
     "id": "random-season-2003-3-13",
@@ -812,28 +846,32 @@
     "id": "christian-guzman-2002",
     "title": "Christian Guzman",
     "year": "2002",
-    "date": "September 7, 2002"
+    "date": "September 7, 2002",
+    "imageUrl": "/bobbleheads/twins-photos/christian-guzman-2002.jpg"
   },
   {
     "id": "tom-kelly-2002",
     "title": "Tom Kelly",
     "year": "2002",
     "date": "August 4, 2002",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/tom-kelly-2002.jpg"
   },
   {
     "id": "jim-kaat-2002",
     "title": "Jim Kaat",
     "year": "2002",
     "date": "July 12, 2002",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/jim-kaat-2002.jpg"
   },
   {
     "id": "doug-mientkiewicz-2002",
     "title": "Doug Mientkiewicz",
     "year": "2002",
     "date": "June 9, 2002",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/doug-mientkiewicz-2002.jpg"
   },
   {
     "id": "random-season-2002-3-16",
@@ -852,49 +890,56 @@
     "title": "Kirby Puckett",
     "year": "2001",
     "date": "August 19, 2001",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/twins-photos/kirby-puckett-2001.jpg"
   },
   {
     "id": "dave-winfield-2001",
     "title": "Dave Winfield",
     "year": "2001",
     "date": "July 22, 2001",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/dave-winfield-2001.jpg"
   },
   {
     "id": "rod-carew-2001",
     "title": "Rod Carew",
     "year": "2001",
     "date": "July 6, 2001",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/rod-carew-2001.jpg"
   },
   {
     "id": "bert-blyleven-2001",
     "title": "Bert Blyleven",
     "year": "2001",
     "date": "June 8, 2001",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/bert-blyleven-2001.jpg"
   },
   {
     "id": "kirby-puckett-2000",
     "title": "Kirby Puckett",
     "year": "2000",
     "date": "August 13, 2000",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/kirby-puckett-2000.jpg"
   },
   {
     "id": "tony-oliva-2000",
     "title": "Tony Oliva",
     "year": "2000",
     "date": "July 21, 2000",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/twins-photos/tony-oliva-2000.jpg"
   },
   {
     "id": "kent-hrbek-2000",
     "title": "Kent Hrbek",
     "year": "2000",
     "date": "June 17, 2000",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/twins-photos/kent-hrbek-2000.jpg"
   },
   {
     "id": "harmon-killebrew-2000",

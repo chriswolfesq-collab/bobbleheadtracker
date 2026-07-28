@@ -44,7 +44,8 @@
     "title": "Munetaka Murakami",
     "year": "2026",
     "date": "2026",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/munetaka-murakami-2026.jpg"
   },
   {
     "id": "ice-cube-2025",
@@ -357,7 +358,8 @@
     "title": "Santa",
     "year": "2018",
     "date": "July 29, 2018",
-    "quantity": "1,000"
+    "quantity": "1,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/santa-2018.jpg"
   },
   {
     "id": "white-sox-iron-man-2018",
@@ -453,7 +455,8 @@
     "nickname": "SoxFest",
     "year": "2016",
     "date": "January 29, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/chris-sale-soxfest-2016.jpg"
   },
   {
     "id": "adam-wan-kenobi-2015",
@@ -478,7 +481,8 @@
     "nickname": "World Series Moment",
     "year": "2015",
     "date": "August 1, 2015",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/scott-podsednik-world-series-moment-2015.jpg"
   },
   {
     "id": "bobby-jenks-world-series-moment-2015",
@@ -494,7 +498,8 @@
     "title": "Tony La Russa",
     "year": "2014",
     "date": "August 30, 2014",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/tony-la-russa-2014.jpg"
   },
   {
     "id": "frank-thomas-2014",
@@ -540,7 +545,8 @@
     "title": "Harold Baines",
     "year": "2013",
     "date": "April 27, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/harold-baines-2013.jpg"
   },
   {
     "id": "miller-beer-vendor-2012",
@@ -561,20 +567,23 @@
     "title": "Robin Ventura",
     "year": "2012",
     "date": "May 26, 2012",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/robin-ventura-2012.jpg"
   },
   {
     "id": "joe-crede-2012",
     "title": "Joe Crede",
     "year": "2012",
-    "date": "2012"
+    "date": "2012",
+    "imageUrl": "/bobbleheads/white-sox-photos/joe-crede-2012.jpg"
   },
   {
     "id": "roger-bossard-2011",
     "title": "Roger Bossard",
     "year": "2011",
     "date": "September 13, 2011",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/roger-bossard-2011.jpg"
   },
   {
     "id": "mark-buehrle-2011",
@@ -586,19 +595,22 @@
     "id": "miller-beer-vendor-2011",
     "title": "Miller Beer Vendor",
     "year": "2011",
-    "date": "August 4, 2011"
+    "date": "August 4, 2011",
+    "imageUrl": "/bobbleheads/white-sox-photos/miller-beer-vendor-2011.jpg"
   },
   {
     "id": "frank-thomas-2011-4-29",
     "title": "Frank Thomas",
     "year": "2011",
-    "date": "April 29, 2011"
+    "date": "April 29, 2011",
+    "imageUrl": "/bobbleheads/white-sox-photos/frank-thomas-2011-4-29.jpg"
   },
   {
     "id": "frank-thomas-2011-4-12",
     "title": "Frank Thomas",
     "year": "2011",
-    "date": "April 12, 2011"
+    "date": "April 12, 2011",
+    "imageUrl": "/bobbleheads/white-sox-photos/frank-thomas-2011-4-12.jpg"
   },
   {
     "id": "andruw-jones-2010",
@@ -617,32 +629,37 @@
     "id": "frank-thomas-2010",
     "title": "Frank Thomas",
     "year": "2010",
-    "date": "August 29, 2010"
+    "date": "August 29, 2010",
+    "imageUrl": "/bobbleheads/white-sox-photos/frank-thomas-2010.jpg"
   },
   {
     "id": "miller-lite-beer-vendor-2010",
     "title": "Miller Lite Beer Vendor",
     "year": "2010",
-    "date": "August 14, 2010"
+    "date": "August 14, 2010",
+    "imageUrl": "/bobbleheads/white-sox-photos/miller-lite-beer-vendor-2010.jpg"
   },
   {
     "id": "nick-swisher-2008",
     "title": "Nick Swisher",
     "year": "2008",
-    "date": "August 10, 2008"
+    "date": "August 10, 2008",
+    "imageUrl": "/bobbleheads/white-sox-photos/nick-swisher-2008.jpg"
   },
   {
     "id": "aj-pierzynski-2008",
     "title": "A.J. Pierzynski",
     "year": "2008",
-    "date": "April 1, 2008"
+    "date": "April 1, 2008",
+    "imageUrl": "/bobbleheads/white-sox-photos/aj-pierzynski-2008.jpg"
   },
   {
     "id": "jim-thome-2007",
     "title": "Jim Thome",
     "year": "2007",
     "date": "September 16, 2007",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/white-sox-photos/jim-thome-2007.jpg"
   },
   {
     "id": "ozzie-guillen-2007",
@@ -661,7 +678,8 @@
     "id": "paul-konerko-2003",
     "title": "Paul Konerko",
     "year": "2003",
-    "date": "July 18, 2003"
+    "date": "July 18, 2003",
+    "imageUrl": "/bobbleheads/white-sox-photos/paul-konerko-2003.jpg"
   },
   {
     "id": "ken-harrelson-darrin-jackson-2003",
@@ -673,7 +691,8 @@
     "id": "minnie-minoso-2002",
     "title": "Minnie Minoso",
     "year": "2002",
-    "date": "August 11, 2002"
+    "date": "August 11, 2002",
+    "imageUrl": "/bobbleheads/white-sox-photos/minnie-minoso-2002.jpg"
   },
   {
     "id": "carlton-fisk-2002",
@@ -685,18 +704,21 @@
     "id": "magglio-ordonez-2002",
     "title": "Magglio Ordonez",
     "year": "2002",
-    "date": "April 14, 2002"
+    "date": "April 14, 2002",
+    "imageUrl": "/bobbleheads/white-sox-photos/magglio-ordonez-2002.jpg"
   },
   {
     "id": "magglio-ordonez-2001",
     "title": "Magglio Ordonez",
     "year": "2001",
-    "date": "July 1, 2001"
+    "date": "July 1, 2001",
+    "imageUrl": "/bobbleheads/white-sox-photos/magglio-ordonez-2001.jpg"
   },
   {
     "id": "frank-thomas-2001",
     "title": "Frank Thomas",
     "year": "2001",
-    "date": "June 1, 2001"
+    "date": "June 1, 2001",
+    "imageUrl": "/bobbleheads/white-sox-photos/frank-thomas-2001.jpg"
   }
 ]

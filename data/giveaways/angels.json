@@ -82,7 +82,8 @@
     "id": "logan-ohoppe-2024",
     "title": "Logan O'Hoppe",
     "year": "2024",
-    "date": "April 30, 2024"
+    "date": "April 30, 2024",
+    "imageUrl": "/bobbleheads/angels-photos/logan-ohoppe-2024.jpg"
   },
   {
     "id": "mike-trout-silver-slugger-2023",
@@ -117,7 +118,8 @@
     "nickname": "13 Strikeout",
     "year": "2023",
     "date": "April 8, 2023",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/angels-photos/shohei-ohtani-13-strikeout-2023.jpg"
   },
   {
     "id": "mike-trout-city-connect-2022",
@@ -143,7 +145,8 @@
     "nickname": "MVP",
     "year": "2022",
     "date": "May 10, 2022",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/angels-photos/shohei-ohtani-mvp-2022.jpg"
   },
   {
     "id": "shohei-ohtani-historic-season-2022",
@@ -167,7 +170,8 @@
     "title": "Mike Trout",
     "nickname": "300 HR",
     "year": "2021",
-    "date": "May 21, 2021"
+    "date": "May 21, 2021",
+    "imageUrl": "/bobbleheads/angels-photos/mike-trout-300-hr-2021.jpg"
   },
   {
     "id": "shohei-ohtani-cycle-2021",
@@ -191,7 +195,8 @@
     "nickname": "Rookie of the Year",
     "year": "2019",
     "date": "July 16, 2019",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/angels-photos/shohei-ohtani-rookie-of-the-year-2019.jpg"
   },
   {
     "id": "mike-trout-silver-slugger-2019",
@@ -237,7 +242,8 @@
     "id": "mike-scioscia-2018",
     "title": "Mike Scioscia",
     "year": "2018",
-    "date": "September 29, 2018"
+    "date": "September 29, 2018",
+    "imageUrl": "/bobbleheads/angels-photos/mike-scioscia-2018.jpg"
   },
   {
     "id": "nolan-ryan-2017",
@@ -251,7 +257,8 @@
     "title": "Mike Trout",
     "nickname": "MVP, #3 of 3",
     "year": "2017",
-    "date": "August 22, 2017"
+    "date": "August 22, 2017",
+    "imageUrl": "/bobbleheads/angels-photos/mike-trout-mvp-3-of-3-2017.jpg"
   },
   {
     "id": "mike-trout-mvp-2-of-3-2017",
@@ -298,7 +305,8 @@
     "title": "Mike Trout",
     "nickname": "Season Ticket Holder",
     "year": "2016",
-    "date": "2016"
+    "date": "2016",
+    "imageUrl": "/bobbleheads/angels-photos/mike-trout-season-ticket-holder-2016.jpg"
   },
   {
     "id": "garrett-richards-2015",
@@ -377,118 +385,137 @@
     "title": "Peter Bourjos",
     "year": "2012",
     "date": "May 15, 2012",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/angels-photos/peter-bourjos-2012.jpg"
   },
   {
     "id": "albert-pujols-2012",
     "title": "Albert Pujols",
     "year": "2012",
-    "date": "April 17, 2012"
+    "date": "April 17, 2012",
+    "imageUrl": "/bobbleheads/angels-photos/albert-pujols-2012.jpg"
   },
   {
     "id": "angels-gnome-2011",
     "title": "Angels Gnome",
     "year": "2011",
-    "date": "August 18, 2011"
+    "date": "August 18, 2011",
+    "imageUrl": "/bobbleheads/angels-photos/angels-gnome-2011.jpg"
   },
   {
     "id": "dan-haren-2011",
     "title": "Dan Haren",
     "year": "2011",
-    "date": "June 28, 2011"
+    "date": "June 28, 2011",
+    "imageUrl": "/bobbleheads/angels-photos/dan-haren-2011.jpg"
   },
   {
     "id": "kendry-morales-2011",
     "title": "Kendry Morales",
     "year": "2011",
-    "date": "May 24, 2011"
+    "date": "May 24, 2011",
+    "imageUrl": "/bobbleheads/angels-photos/kendry-morales-2011.jpg"
   },
   {
     "id": "joe-saunders-2010",
     "title": "Joe Saunders",
     "year": "2010",
-    "date": "June 30, 2010"
+    "date": "June 30, 2010",
+    "imageUrl": "/bobbleheads/angels-photos/joe-saunders-2010.jpg"
   },
   {
     "id": "snoopy-2010",
     "title": "Snoopy",
     "year": "2010",
-    "date": "June 26, 2010"
+    "date": "June 26, 2010",
+    "imageUrl": "/bobbleheads/angels-photos/snoopy-2010.jpg"
   },
   {
     "id": "erick-aybar-2010",
     "title": "Erick Aybar",
     "year": "2010",
-    "date": "April 21, 2010"
+    "date": "April 21, 2010",
+    "imageUrl": "/bobbleheads/angels-photos/erick-aybar-2010.jpg"
   },
   {
     "id": "mike-napoli-2009",
     "title": "Mike Napoli",
     "year": "2009",
-    "date": "August 11, 2009"
+    "date": "August 11, 2009",
+    "imageUrl": "/bobbleheads/angels-photos/mike-napoli-2009.jpg"
   },
   {
     "id": "ervin-santana-2009",
     "title": "Ervin Santana",
     "year": "2009",
-    "date": "May 6, 2009"
+    "date": "May 6, 2009",
+    "imageUrl": "/bobbleheads/angels-photos/ervin-santana-2009.jpg"
   },
   {
     "id": "john-lackey-2008",
     "title": "John Lackey",
     "year": "2008",
-    "date": "June 9, 2008"
+    "date": "June 9, 2008",
+    "imageUrl": "/bobbleheads/angels-photos/john-lackey-2008.jpg"
   },
   {
     "id": "torii-hunter-2008",
     "title": "Torii Hunter",
     "year": "2008",
-    "date": "May 12, 2008"
+    "date": "May 12, 2008",
+    "imageUrl": "/bobbleheads/angels-photos/torii-hunter-2008.jpg"
   },
   {
     "id": "mike-scioscia-2008",
     "title": "Mike Scioscia",
     "year": "2008",
-    "date": "April 17, 2008"
+    "date": "April 17, 2008",
+    "imageUrl": "/bobbleheads/angels-photos/mike-scioscia-2008.jpg"
   },
   {
     "id": "jered-weaver-2007",
     "title": "Jered Weaver",
     "year": "2007",
-    "date": "June 5, 2007"
+    "date": "June 5, 2007",
+    "imageUrl": "/bobbleheads/angels-photos/jered-weaver-2007.jpg"
   },
   {
     "id": "tim-salmon-2007",
     "title": "Tim Salmon",
     "year": "2007",
-    "date": "April 3, 2007"
+    "date": "April 3, 2007",
+    "imageUrl": "/bobbleheads/angels-photos/tim-salmon-2007.jpg"
   },
   {
     "id": "chone-figgins-sliding-2006",
     "title": "Chone Figgins",
     "nickname": "Sliding",
     "year": "2006",
-    "date": "July 17, 2006"
+    "date": "July 17, 2006",
+    "imageUrl": "/bobbleheads/angels-photos/chone-figgins-sliding-2006.jpg"
   },
   {
     "id": "vladimir-guerrero-silver-slugger-2006",
     "title": "Vladimir Guerrero",
     "nickname": "Silver Slugger",
     "year": "2006",
-    "date": "May 15, 2006"
+    "date": "May 15, 2006",
+    "imageUrl": "/bobbleheads/angels-photos/vladimir-guerrero-silver-slugger-2006.jpg"
   },
   {
     "id": "garrett-anderson-2005",
     "title": "Garrett Anderson",
     "year": "2005",
-    "date": "June 14, 2005"
+    "date": "June 14, 2005",
+    "imageUrl": "/bobbleheads/angels-photos/garrett-anderson-2005.jpg"
   },
   {
     "id": "darin-erstad-gold-glove-2005",
     "title": "Darin Erstad",
     "nickname": "Gold Glove",
     "year": "2005",
-    "date": "May 23, 2005"
+    "date": "May 23, 2005",
+    "imageUrl": "/bobbleheads/angels-photos/darin-erstad-gold-glove-2005.jpg"
   },
   {
     "id": "vladimir-guerrero-2005",
@@ -512,31 +539,36 @@
     "id": "brian-downing-2002",
     "title": "Brian Downing",
     "year": "2002",
-    "date": "August 31, 2002"
+    "date": "August 31, 2002",
+    "imageUrl": "/bobbleheads/angels-photos/brian-downing-2002.jpg"
   },
   {
     "id": "rod-carew-2002",
     "title": "Rod Carew",
     "year": "2002",
-    "date": "July 6, 2002"
+    "date": "July 6, 2002",
+    "imageUrl": "/bobbleheads/angels-photos/rod-carew-2002.jpg"
   },
   {
     "id": "bobby-grich-2002",
     "title": "Bobby Grich",
     "year": "2002",
-    "date": "April 27, 2002"
+    "date": "April 27, 2002",
+    "imageUrl": "/bobbleheads/angels-photos/bobby-grich-2002.jpg"
   },
   {
     "id": "garrett-anderson-2001",
     "title": "Garrett Anderson",
     "year": "2001",
-    "date": "July 14, 2001"
+    "date": "July 14, 2001",
+    "imageUrl": "/bobbleheads/angels-photos/garrett-anderson-2001.jpg"
   },
   {
     "id": "tim-salmon-2001",
     "title": "Tim Salmon",
     "year": "2001",
     "date": "May 19, 2001",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/angels-photos/tim-salmon-2001.jpg"
   }
 ]

@@ -4,13 +4,15 @@
     "title": "Phillie Phanatic",
     "nickname": "Colonial",
     "year": "2026",
-    "date": "April 19, 2026"
+    "date": "April 19, 2026",
+    "imageUrl": "/bobbleheads/phillies-photos/phillie-phanatic-colonial-2026.jpg"
   },
   {
     "id": "trea-turner-2025",
     "title": "Trea Turner",
     "year": "2025",
-    "date": "August 28, 2025"
+    "date": "August 28, 2025",
+    "imageUrl": "/bobbleheads/phillies-photos/trea-turner-2025.jpg"
   },
   {
     "id": "jt-realmuto-2025",
@@ -66,7 +68,8 @@
     "id": "kyle-schwarber-2023",
     "title": "Kyle Schwarber",
     "year": "2023",
-    "date": "August 22, 2023"
+    "date": "August 22, 2023",
+    "imageUrl": "/bobbleheads/phillies-photos/kyle-schwarber-2023.jpg"
   },
   {
     "id": "schwarbie-wan-kenobi-2023",
@@ -248,7 +251,8 @@
     "id": "billy-joel-2017",
     "title": "Billy Joel",
     "year": "2017",
-    "date": "July 24, 2017"
+    "date": "July 24, 2017",
+    "imageUrl": "/bobbleheads/phillies-photos/billy-joel-2017.jpg"
   },
   {
     "id": "mike-schmidt-2017",
@@ -281,7 +285,8 @@
     "nickname": "Band Themed",
     "year": "2016",
     "date": "2016",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/phillies-photos/phanatic-band-themed-2016.jpg"
   },
   {
     "id": "phoebe-phanatic-stitch-n-pitch-2016",
@@ -382,120 +387,139 @@
     "id": "hunter-pence-2012",
     "title": "Hunter Pence",
     "year": "2012",
-    "date": "August 21, 2012"
+    "date": "August 21, 2012",
+    "imageUrl": "/bobbleheads/phillies-photos/hunter-pence-2012.jpg"
   },
   {
     "id": "cliff-lee-2012",
     "title": "Cliff Lee",
     "year": "2012",
-    "date": "June 4, 2012"
+    "date": "June 4, 2012",
+    "imageUrl": "/bobbleheads/phillies-photos/cliff-lee-2012.jpg"
   },
   {
     "id": "placido-polanco-2011",
     "title": "Placido Polanco",
     "year": "2011",
-    "date": "August 16, 2011"
+    "date": "August 16, 2011",
+    "imageUrl": "/bobbleheads/phillies-photos/placido-polanco-2011.jpg"
   },
   {
     "id": "roy-oswalt-2011",
     "title": "Roy Oswalt",
     "year": "2011",
-    "date": "May 24, 2011"
+    "date": "May 24, 2011",
+    "imageUrl": "/bobbleheads/phillies-photos/roy-oswalt-2011.jpg"
   },
   {
     "id": "carlos-ruiz-2010",
     "title": "Carlos Ruiz",
     "year": "2010",
-    "date": "August 24, 2010"
+    "date": "August 24, 2010",
+    "imageUrl": "/bobbleheads/phillies-photos/carlos-ruiz-2010.jpg"
   },
   {
     "id": "roy-halladay-2010",
     "title": "Roy Halladay",
     "year": "2010",
-    "date": "May 18, 2010"
+    "date": "May 18, 2010",
+    "imageUrl": "/bobbleheads/phillies-photos/roy-halladay-2010.jpg"
   },
   {
     "id": "brad-lidge-2009",
     "title": "Brad Lidge",
     "year": "2009",
-    "date": "August 19, 2009"
+    "date": "August 19, 2009",
+    "imageUrl": "/bobbleheads/phillies-photos/brad-lidge-2009.jpg"
   },
   {
     "id": "charlie-manuel-2009",
     "title": "Charlie Manuel",
     "year": "2009",
-    "date": "April 28, 2009"
+    "date": "April 28, 2009",
+    "imageUrl": "/bobbleheads/phillies-photos/charlie-manuel-2009.jpg"
   },
   {
     "id": "chase-utley-2008",
     "title": "Chase Utley",
     "year": "2008",
-    "date": "August 20, 2008"
+    "date": "August 20, 2008",
+    "imageUrl": "/bobbleheads/phillies-photos/chase-utley-2008.jpg"
   },
   {
     "id": "shane-victorino-flyin-hawaiian-figurine-2008",
     "title": "Shane Victorino",
     "nickname": "\"Flyin' Hawaiian\" Figurine",
     "year": "2008",
-    "date": "July 13, 2008"
+    "date": "July 13, 2008",
+    "imageUrl": "/bobbleheads/phillies-photos/shane-victorino-flyin-hawaiian-figurine-2008.jpg"
   },
   {
     "id": "jimmy-rollins-mvp-2008",
     "title": "Jimmy Rollins",
     "nickname": "MVP",
     "year": "2008",
-    "date": "June 4, 2008"
+    "date": "June 4, 2008",
+    "imageUrl": "/bobbleheads/phillies-photos/jimmy-rollins-mvp-2008.jpg"
   },
   {
     "id": "jamie-moyer-nl-east-champions-2008",
     "title": "Jamie Moyer",
     "nickname": "NL East Champions",
     "year": "2008",
-    "date": "April 30, 2008"
+    "date": "April 30, 2008",
+    "imageUrl": "/bobbleheads/phillies-photos/jamie-moyer-nl-east-champions-2008.jpg"
   },
   {
     "id": "cole-hamels-2007",
     "title": "Cole Hamels",
     "year": "2007",
-    "date": "July 25, 2007"
+    "date": "July 25, 2007",
+    "imageUrl": "/bobbleheads/phillies-photos/cole-hamels-2007.jpg"
   },
   {
     "id": "shane-victorino-hula-figurine-2007",
     "title": "Shane Victorino",
     "nickname": "Hula Figurine",
     "year": "2007",
-    "date": "June 3, 2007"
+    "date": "June 3, 2007",
+    "imageUrl": "/bobbleheads/phillies-photos/shane-victorino-hula-figurine-2007.jpg"
   },
   {
     "id": "ryan-howard-mvp-figurine-2007",
     "title": "Ryan Howard",
     "nickname": "MVP Figurine",
     "year": "2007",
-    "date": "May 16, 2007"
+    "date": "May 16, 2007",
+    "imageUrl": "/bobbleheads/phillies-photos/ryan-howard-mvp-figurine-2007.jpg"
   },
   {
     "id": "phillie-phanatic-2007",
     "title": "Phillie Phanatic",
     "year": "2007",
-    "date": "April 29, 2007"
+    "date": "April 29, 2007",
+    "imageUrl": "/bobbleheads/phillies-photos/phillie-phanatic-2007.jpg"
   },
   {
     "id": "ryan-howard-2006",
     "title": "Ryan Howard",
     "year": "2006",
-    "date": "July 26, 2006"
+    "date": "July 26, 2006",
+    "imageUrl": "/bobbleheads/phillies-photos/ryan-howard-2006.jpg"
   },
   {
     "id": "chase-utley-2006",
     "title": "Chase Utley",
     "year": "2006",
-    "date": "May 26, 2006"
+    "date": "May 26, 2006",
+    "imageUrl": "/bobbleheads/phillies-photos/chase-utley-2006.jpg"
   },
   {
     "id": "bobby-abreu-2005",
     "title": "Bobby Abreu",
     "year": "2005",
-    "date": "September 5, 2005"
+    "date": "September 5, 2005",
+    "imageUrl": "/bobbleheads/phillies-photos/bobby-abreu-2005.jpg"
   },
   {
     "id": "jimmy-rollins-2005",
@@ -507,69 +531,80 @@
     "id": "jim-thome-2005",
     "title": "Jim Thome",
     "year": "2005",
-    "date": "May 12, 2005"
+    "date": "May 12, 2005",
+    "imageUrl": "/bobbleheads/phillies-photos/jim-thome-2005.jpg"
   },
   {
     "id": "mike-lieberthal-2004",
     "title": "Mike Lieberthal",
     "year": "2004",
-    "date": "August 29, 2004"
+    "date": "August 29, 2004",
+    "imageUrl": "/bobbleheads/phillies-photos/mike-lieberthal-2004.jpg"
   },
   {
     "id": "randy-wolf-2004",
     "title": "Randy Wolf",
     "year": "2004",
-    "date": "August 17, 2004"
+    "date": "August 17, 2004",
+    "imageUrl": "/bobbleheads/phillies-photos/randy-wolf-2004.jpg"
   },
   {
     "id": "phil-phillis-original-mascots-2003",
     "title": "Phil & Phillis",
     "nickname": "Original Mascots",
     "year": "2003",
-    "date": "September 27, 2003"
+    "date": "September 27, 2003",
+    "imageUrl": "/bobbleheads/phillies-photos/phil-phillis-original-mascots-2003.jpg"
   },
   {
     "id": "steve-carlton-2003",
     "title": "Steve Carlton",
     "year": "2003",
-    "date": "June 22, 2003"
+    "date": "June 22, 2003",
+    "imageUrl": "/bobbleheads/phillies-photos/steve-carlton-2003.jpg"
   },
   {
     "id": "mike-schmidt-2003",
     "title": "Mike Schmidt",
     "year": "2003",
-    "date": "June 20, 2003"
+    "date": "June 20, 2003",
+    "imageUrl": "/bobbleheads/phillies-photos/mike-schmidt-2003.jpg"
   },
   {
     "id": "harry-kalas-richie-ashburn-dual-2002",
     "title": "Harry Kalas & Richie Ashburn",
     "nickname": "Dual",
     "year": "2002",
-    "date": "August 18, 2002"
+    "date": "August 18, 2002",
+    "imageUrl": "/bobbleheads/phillies-photos/harry-kalas-richie-ashburn-dual-2002.jpg"
   },
   {
     "id": "jimmy-rollins-2002",
     "title": "Jimmy Rollins",
     "year": "2002",
-    "date": "June 23, 2002"
+    "date": "June 23, 2002",
+    "imageUrl": "/bobbleheads/phillies-photos/jimmy-rollins-2002.jpg"
   },
   {
     "id": "phillie-phanatic-mascot-2002",
     "title": "Phillie Phanatic",
     "nickname": "Mascot",
     "year": "2002",
-    "date": "May 5, 2002"
+    "date": "May 5, 2002",
+    "imageUrl": "/bobbleheads/phillies-photos/phillie-phanatic-mascot-2002.jpg"
   },
   {
     "id": "larry-bowa-2001",
     "title": "Larry Bowa",
     "year": "2001",
-    "date": "September 27, 2001"
+    "date": "September 27, 2001",
+    "imageUrl": "/bobbleheads/phillies-photos/larry-bowa-2001.jpg"
   },
   {
     "id": "pat-burrell-2001",
     "title": "Pat Burrell",
     "year": "2001",
-    "date": "May 20, 2001"
+    "date": "May 20, 2001",
+    "imageUrl": "/bobbleheads/phillies-photos/pat-burrell-2001.jpg"
   }
 ]

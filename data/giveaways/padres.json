@@ -84,7 +84,8 @@
     "title": "Xander Bogaerts",
     "year": "2024",
     "date": "June 10, 2024",
-    "quantity": "40,000"
+    "quantity": "40,000",
+    "imageUrl": "/bobbleheads/padres-photos/xander-bogaerts-2024.jpg"
   },
   {
     "id": "ha-seong-kim-2024",
@@ -98,7 +99,8 @@
     "id": "luis-arraez-2024",
     "title": "Luis Arraez",
     "year": "2024",
-    "date": "September 16, 2024"
+    "date": "September 16, 2024",
+    "imageUrl": "/bobbleheads/padres-photos/luis-arraez-2024.jpg"
   },
   {
     "id": "fernando-tatis-jr-2024",
@@ -349,7 +351,8 @@
     "title": "\"Jedi Andy\"",
     "nickname": "Andy Green",
     "year": "2016",
-    "date": "September 8, 2016"
+    "date": "September 8, 2016",
+    "imageUrl": "/bobbleheads/padres-photos/jedi-andy-andy-green-2016.jpg"
   },
   {
     "id": "chase-headley-2013",
@@ -363,13 +366,15 @@
     "id": "bud-black-2011",
     "title": "Bud Black",
     "year": "2011",
-    "date": "May 7, 2011"
+    "date": "May 7, 2011",
+    "imageUrl": "/bobbleheads/padres-photos/bud-black-2011.jpg"
   },
   {
     "id": "tony-hawk-2011",
     "title": "Tony Hawk",
     "year": "2011",
-    "date": "August 10, 2011"
+    "date": "August 10, 2011",
+    "imageUrl": "/bobbleheads/padres-photos/tony-hawk-2011.jpg"
   },
   {
     "id": "trevor-hoffman-2011",
@@ -381,31 +386,36 @@
     "id": "david-eckstein-2010",
     "title": "David Eckstein",
     "year": "2010",
-    "date": "April 17, 2010"
+    "date": "April 17, 2010",
+    "imageUrl": "/bobbleheads/padres-photos/david-eckstein-2010.jpg"
   },
   {
     "id": "chase-headley-2010",
     "title": "Chase Headley",
     "year": "2010",
-    "date": "May 29, 2010"
+    "date": "May 29, 2010",
+    "imageUrl": "/bobbleheads/padres-photos/chase-headley-2010.jpg"
   },
   {
     "id": "kyle-blanks-2010",
     "title": "Kyle Blanks",
     "year": "2010",
-    "date": "June 19, 2010"
+    "date": "June 19, 2010",
+    "imageUrl": "/bobbleheads/padres-photos/kyle-blanks-2010.jpg"
   },
   {
     "id": "clayton-richard-2010",
     "title": "Clayton Richard",
     "year": "2010",
-    "date": "July 31, 2010"
+    "date": "July 31, 2010",
+    "imageUrl": "/bobbleheads/padres-photos/clayton-richard-2010.jpg"
   },
   {
     "id": "everth-cabrera-2010",
     "title": "Everth Cabrera",
     "year": "2010",
-    "date": "August 28, 2010"
+    "date": "August 28, 2010",
+    "imageUrl": "/bobbleheads/padres-photos/everth-cabrera-2010.jpg"
   },
   {
     "id": "adrian-gonzalez-action-figurine-2009",
@@ -431,7 +441,8 @@
     "id": "jake-peavy-2005",
     "title": "Jake Peavy",
     "year": "2005",
-    "date": "August 26, 2005"
+    "date": "August 26, 2005",
+    "imageUrl": "/bobbleheads/padres-photos/jake-peavy-2005.jpg"
   },
   {
     "id": "sean-burroughs-action-figure-2004",
@@ -450,36 +461,42 @@
     "id": "dave-winfield-2003",
     "title": "Dave Winfield",
     "year": "2003",
-    "date": "May 3, 2003"
+    "date": "May 3, 2003",
+    "imageUrl": "/bobbleheads/padres-photos/dave-winfield-2003.jpg"
   },
   {
     "id": "randy-jones-2003",
     "title": "Randy Jones",
     "year": "2003",
-    "date": "May 31, 2003"
+    "date": "May 31, 2003",
+    "imageUrl": "/bobbleheads/padres-photos/randy-jones-2003.jpg"
   },
   {
     "id": "trevor-hoffman-2002",
     "title": "Trevor Hoffman",
     "year": "2002",
-    "date": "August 4, 2002"
+    "date": "August 4, 2002",
+    "imageUrl": "/bobbleheads/padres-photos/trevor-hoffman-2002.jpg"
   },
   {
     "id": "ryan-klesko-2002",
     "title": "Ryan Klesko",
     "year": "2002",
-    "date": "August 4, 2002"
+    "date": "August 4, 2002",
+    "imageUrl": "/bobbleheads/padres-photos/ryan-klesko-2002.jpg"
   },
   {
     "id": "phil-nevin-2002",
     "title": "Phil Nevin",
     "year": "2002",
-    "date": "August 4, 2002"
+    "date": "August 4, 2002",
+    "imageUrl": "/bobbleheads/padres-photos/phil-nevin-2002.jpg"
   },
   {
     "id": "mark-kotsay-2002",
     "title": "Mark Kotsay",
     "year": "2002",
-    "date": "August 4, 2002"
+    "date": "August 4, 2002",
+    "imageUrl": "/bobbleheads/padres-photos/mark-kotsay-2002.jpg"
   }
 ]

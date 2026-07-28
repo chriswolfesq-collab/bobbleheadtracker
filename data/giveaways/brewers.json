@@ -4,7 +4,8 @@
     "title": "Jacob Misiorowski",
     "year": "2026",
     "date": "April 11, 2026",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/brewers-photos/jacob-misiorowski-2026.jpg"
   },
   {
     "id": "sal-frelick-star-wars-2024",
@@ -806,37 +807,43 @@
     "title": "Aramis Ramirez",
     "year": "2012",
     "date": "September 16, 2012",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/brewers-photos/aramis-ramirez-2012.jpg"
   },
   {
     "id": "bob-uecker-2012",
     "title": "Bob Uecker",
     "year": "2012",
-    "date": "July 29, 2012"
+    "date": "July 29, 2012",
+    "imageUrl": "/bobbleheads/brewers-photos/bob-uecker-2012.jpg"
   },
   {
     "id": "italian-racing-sausage-2012",
     "title": "Italian Racing Sausage",
     "year": "2012",
-    "date": "July 21, 2012"
+    "date": "July 21, 2012",
+    "imageUrl": "/bobbleheads/brewers-photos/italian-racing-sausage-2012.jpg"
   },
   {
     "id": "nyjer-morgan-2012",
     "title": "Nyjer Morgan",
     "year": "2012",
-    "date": "June 10, 2012"
+    "date": "June 10, 2012",
+    "imageUrl": "/bobbleheads/brewers-photos/nyjer-morgan-2012.jpg"
   },
   {
     "id": "yovani-gallardo-2012",
     "title": "Yovani Gallardo",
     "year": "2012",
-    "date": "May 13, 2012"
+    "date": "May 13, 2012",
+    "imageUrl": "/bobbleheads/brewers-photos/yovani-gallardo-2012.jpg"
   },
   {
     "id": "jonathan-lucroy-2012",
     "title": "Jonathan Lucroy",
     "year": "2012",
-    "date": "April 22, 2012"
+    "date": "April 22, 2012",
+    "imageUrl": "/bobbleheads/brewers-photos/jonathan-lucroy-2012.jpg"
   },
   {
     "id": "john-axford-2012",
@@ -848,37 +855,43 @@
     "id": "randy-wolf-2011",
     "title": "Randy Wolf",
     "year": "2011",
-    "date": "September 25, 2011"
+    "date": "September 25, 2011",
+    "imageUrl": "/bobbleheads/brewers-photos/randy-wolf-2011.jpg"
   },
   {
     "id": "craig-counsell-2011",
     "title": "Craig Counsell",
     "year": "2011",
-    "date": "August 14, 2011"
+    "date": "August 14, 2011",
+    "imageUrl": "/bobbleheads/brewers-photos/craig-counsell-2011.jpg"
   },
   {
     "id": "racing-hot-dog-2011",
     "title": "Racing Hot Dog",
     "year": "2011",
-    "date": "July 10, 2011"
+    "date": "July 10, 2011",
+    "imageUrl": "/bobbleheads/brewers-photos/racing-hot-dog-2011.jpg"
   },
   {
     "id": "zack-greinke-2011",
     "title": "Zack Greinke",
     "year": "2011",
-    "date": "June 12, 2011"
+    "date": "June 12, 2011",
+    "imageUrl": "/bobbleheads/brewers-photos/zack-greinke-2011.jpg"
   },
   {
     "id": "casey-mcgehee-2011",
     "title": "Casey McGehee",
     "year": "2011",
-    "date": "May 22, 2011"
+    "date": "May 22, 2011",
+    "imageUrl": "/bobbleheads/brewers-photos/casey-mcgehee-2011.jpg"
   },
   {
     "id": "john-axford-2011",
     "title": "John Axford",
     "year": "2011",
-    "date": "April 24, 2011"
+    "date": "April 24, 2011",
+    "imageUrl": "/bobbleheads/brewers-photos/john-axford-2011.jpg"
   },
   {
     "id": "italian-racing-sausage-2011",
@@ -908,45 +921,52 @@
     "id": "cc-sabathia-2010",
     "title": "C.C. Sabathia",
     "year": "2010",
-    "date": "August 29, 2010"
+    "date": "August 29, 2010",
+    "imageUrl": "/bobbleheads/brewers-photos/cc-sabathia-2010.jpg"
   },
   {
     "id": "miller-lite-beer-vendor-2010",
     "title": "Miller Lite Beer Vendor",
     "year": "2010",
     "date": "August 28, 2010",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/brewers-photos/miller-lite-beer-vendor-2010.jpg"
   },
   {
     "id": "italian-racing-sausage-2010",
     "title": "Italian Racing Sausage",
     "year": "2010",
-    "date": "August 8, 2010"
+    "date": "August 8, 2010",
+    "imageUrl": "/bobbleheads/brewers-photos/italian-racing-sausage-2010.jpg"
   },
   {
     "id": "robin-yount-2010",
     "title": "Robin Yount",
     "year": "2010",
-    "date": "July 25, 2010"
+    "date": "July 25, 2010",
+    "imageUrl": "/bobbleheads/brewers-photos/robin-yount-2010.jpg"
   },
   {
     "id": "cecil-cooper-2010",
     "title": "Cecil Cooper",
     "year": "2010",
-    "date": "June 27, 2010"
+    "date": "June 27, 2010",
+    "imageUrl": "/bobbleheads/brewers-photos/cecil-cooper-2010.jpg"
   },
   {
     "id": "hank-aaron-2010",
     "title": "Hank Aaron",
     "year": "2010",
-    "date": "May 16, 2010"
+    "date": "May 16, 2010",
+    "imageUrl": "/bobbleheads/brewers-photos/hank-aaron-2010.jpg"
   },
   {
     "id": "bernie-brewer-2010",
     "title": "Bernie Brewer",
     "year": "2010",
     "date": "April 11, 2010",
-    "quantity": "1,000"
+    "quantity": "1,000",
+    "imageUrl": "/bobbleheads/brewers-photos/bernie-brewer-2010.jpg"
   },
   {
     "id": "jeff-suppan-2010",
@@ -958,7 +978,8 @@
     "id": "doug-melvin-2010",
     "title": "Doug Melvin",
     "year": "2010",
-    "date": "March 20, 2010"
+    "date": "March 20, 2010",
+    "imageUrl": "/bobbleheads/brewers-photos/doug-melvin-2010.jpg"
   },
   {
     "id": "jason-kendall-2010",
@@ -970,32 +991,37 @@
     "id": "jeff-suppan-2009",
     "title": "Jeff Suppan",
     "year": "2009",
-    "date": "August 30, 2009"
+    "date": "August 30, 2009",
+    "imageUrl": "/bobbleheads/brewers-photos/jeff-suppan-2009.jpg"
   },
   {
     "id": "bratwurst-racing-sausage-2009",
     "title": "Bratwurst Racing Sausage",
     "year": "2009",
-    "date": "July 26, 2009"
+    "date": "July 26, 2009",
+    "imageUrl": "/bobbleheads/brewers-photos/bratwurst-racing-sausage-2009.jpg"
   },
   {
     "id": "jason-kendall-2009",
     "title": "Jason Kendall",
     "year": "2009",
-    "date": "June 28, 2009"
+    "date": "June 28, 2009",
+    "imageUrl": "/bobbleheads/brewers-photos/jason-kendall-2009.jpg"
   },
   {
     "id": "trevor-hoffman-2009",
     "title": "Trevor Hoffman",
     "year": "2009",
-    "date": "May 31, 2009"
+    "date": "May 31, 2009",
+    "imageUrl": "/bobbleheads/brewers-photos/trevor-hoffman-2009.jpg"
   },
   {
     "id": "ryan-braun-2009",
     "title": "Ryan Braun",
     "year": "2009",
     "date": "May 3, 2009",
-    "quantity": "1,000"
+    "quantity": "1,000",
+    "imageUrl": "/bobbleheads/brewers-photos/ryan-braun-2009.jpg"
   },
   {
     "id": "barrelman-mascot-2009",
@@ -1008,38 +1034,44 @@
     "id": "corey-hart-2008",
     "title": "Corey Hart",
     "year": "2008",
-    "date": "September 7, 2008"
+    "date": "September 7, 2008",
+    "imageUrl": "/bobbleheads/brewers-photos/corey-hart-2008.jpg"
   },
   {
     "id": "jj-hardy-2008",
     "title": "J.J. Hardy",
     "year": "2008",
-    "date": "August 24, 2008"
+    "date": "August 24, 2008",
+    "imageUrl": "/bobbleheads/brewers-photos/jj-hardy-2008.jpg"
   },
   {
     "id": "barrel-man-mascot-2008",
     "title": "Barrel Man",
     "nickname": "Mascot",
     "year": "2008",
-    "date": "July 6, 2008"
+    "date": "July 6, 2008",
+    "imageUrl": "/bobbleheads/brewers-photos/barrel-man-mascot-2008.jpg"
   },
   {
     "id": "polish-racing-sausage-2008",
     "title": "Polish Racing Sausage",
     "year": "2008",
-    "date": "June 22, 2008"
+    "date": "June 22, 2008",
+    "imageUrl": "/bobbleheads/brewers-photos/polish-racing-sausage-2008.jpg"
   },
   {
     "id": "ryan-braun-2008",
     "title": "Ryan Braun",
     "year": "2008",
-    "date": "June 1, 2008"
+    "date": "June 1, 2008",
+    "imageUrl": "/bobbleheads/brewers-photos/ryan-braun-2008.jpg"
   },
   {
     "id": "prince-fielder-2008",
     "title": "Prince Fielder",
     "year": "2008",
-    "date": "April 6, 2008"
+    "date": "April 6, 2008",
+    "imageUrl": "/bobbleheads/brewers-photos/prince-fielder-2008.jpg"
   },
   {
     "id": "chorizo-mascot-2008",
@@ -1052,90 +1084,104 @@
     "id": "rickie-weeks-2008",
     "title": "Rickie Weeks",
     "year": "2008",
-    "date": "March 8, 2008"
+    "date": "March 8, 2008",
+    "imageUrl": "/bobbleheads/brewers-photos/rickie-weeks-2008.jpg"
   },
   {
     "id": "rickie-weeks-2007",
     "title": "Rickie Weeks",
     "year": "2007",
     "date": "September 30, 2007",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/brewers-photos/rickie-weeks-2007.jpg"
   },
   {
     "id": "don-money-2007",
     "title": "Don Money",
     "year": "2007",
-    "date": "September 28, 2007"
+    "date": "September 28, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/don-money-2007.jpg"
   },
   {
     "id": "robin-yount-2007",
     "title": "Robin Yount",
     "year": "2007",
-    "date": "September 14, 2007"
+    "date": "September 14, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/robin-yount-2007.jpg"
   },
   {
     "id": "pete-vuckovich-2007",
     "title": "Pete Vuckovich",
     "year": "2007",
-    "date": "August 31, 2007"
+    "date": "August 31, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/pete-vuckovich-2007.jpg"
   },
   {
     "id": "harvey-kuenn-2007",
     "title": "Harvey Kuenn",
     "year": "2007",
-    "date": "August 17, 2007"
+    "date": "August 17, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/harvey-kuenn-2007.jpg"
   },
   {
     "id": "chris-capuano-2007",
     "title": "Chris Capuano",
     "year": "2007",
     "date": "August 5, 2007",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/brewers-photos/chris-capuano-2007.jpg"
   },
   {
     "id": "ben-oglivie-2007",
     "title": "Ben Oglivie",
     "year": "2007",
-    "date": "August 3, 2007"
+    "date": "August 3, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/ben-oglivie-2007.jpg"
   },
   {
     "id": "gorman-thomas-2007",
     "title": "Gorman Thomas",
     "year": "2007",
-    "date": "July 20, 2007"
+    "date": "July 20, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/gorman-thomas-2007.jpg"
   },
   {
     "id": "chorizo-mascot-2007",
     "title": "Chorizo",
     "nickname": "Mascot",
     "year": "2007",
-    "date": "July 15, 2007"
+    "date": "July 15, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/chorizo-mascot-2007.jpg"
   },
   {
     "id": "ted-simmons-2007",
     "title": "Ted Simmons",
     "year": "2007",
-    "date": "July 13, 2007"
+    "date": "July 13, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/ted-simmons-2007.jpg"
   },
   {
     "id": "bill-hall-2007",
     "title": "Bill Hall",
     "year": "2007",
     "date": "June 24, 2007",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/brewers-photos/bill-hall-2007.jpg"
   },
   {
     "id": "mike-caldwell-2007",
     "title": "Mike Caldwell",
     "year": "2007",
-    "date": "June 22, 2007"
+    "date": "June 22, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/mike-caldwell-2007.jpg"
   },
   {
     "id": "prince-fielder-2007",
     "title": "Prince Fielder",
     "year": "2007",
     "date": "June 3, 2007",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/brewers-photos/prince-fielder-2007.jpg"
   },
   {
     "id": "don-sutton-2007",
@@ -1147,31 +1193,36 @@
     "id": "paul-molitor-2007",
     "title": "Paul Molitor",
     "year": "2007",
-    "date": "May 18, 2007"
+    "date": "May 18, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/paul-molitor-2007.jpg"
   },
   {
     "id": "jim-gantner-2007",
     "title": "Jim Gantner",
     "year": "2007",
-    "date": "May 4, 2007"
+    "date": "May 4, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/jim-gantner-2007.jpg"
   },
   {
     "id": "cecil-cooper-2007",
     "title": "Cecil Cooper",
     "year": "2007",
-    "date": "April 20, 2007"
+    "date": "April 20, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/cecil-cooper-2007.jpg"
   },
   {
     "id": "charlie-moore-2007",
     "title": "Charlie Moore",
     "year": "2007",
-    "date": "April 6, 2007"
+    "date": "April 6, 2007",
+    "imageUrl": "/bobbleheads/brewers-photos/charlie-moore-2007.jpg"
   },
   {
     "id": "robin-yount-2006",
     "title": "Robin Yount",
     "year": "2006",
-    "date": "September 2, 2006"
+    "date": "September 2, 2006",
+    "imageUrl": "/bobbleheads/brewers-photos/robin-yount-2006.jpg"
   },
   {
     "id": "bill-hall-mini-2006",
@@ -1192,7 +1243,8 @@
     "id": "cecil-cooper-2006",
     "title": "Cecil Cooper",
     "year": "2006",
-    "date": "June 18, 2006"
+    "date": "June 18, 2006",
+    "imageUrl": "/bobbleheads/brewers-photos/cecil-cooper-2006.jpg"
   },
   {
     "id": "brady-clark-mini-2006",
@@ -1206,7 +1258,8 @@
     "id": "damian-miller-2006",
     "title": "Damian Miller",
     "year": "2006",
-    "date": "June 3, 2006"
+    "date": "June 3, 2006",
+    "imageUrl": "/bobbleheads/brewers-photos/damian-miller-2006.jpg"
   },
   {
     "id": "chris-capuano-mini-2006",
@@ -1214,19 +1267,22 @@
     "nickname": "Mini",
     "year": "2006",
     "date": "May 20, 2006",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/brewers-photos/chris-capuano-mini-2006.jpg"
   },
   {
     "id": "derrick-turnbow-2006",
     "title": "Derrick Turnbow",
     "year": "2006",
-    "date": "May 13, 2006"
+    "date": "May 13, 2006",
+    "imageUrl": "/bobbleheads/brewers-photos/derrick-turnbow-2006.jpg"
   },
   {
     "id": "carlos-lee-2005",
     "title": "Carlos Lee",
     "year": "2005",
-    "date": "September 3, 2005"
+    "date": "September 3, 2005",
+    "imageUrl": "/bobbleheads/brewers-photos/carlos-lee-2005.jpg"
   },
   {
     "id": "ned-yost-mini-2005",
@@ -1240,13 +1296,15 @@
     "id": "lyle-overbay-2005",
     "title": "Lyle Overbay",
     "year": "2005",
-    "date": "August 13, 2005"
+    "date": "August 13, 2005",
+    "imageUrl": "/bobbleheads/brewers-photos/lyle-overbay-2005.jpg"
   },
   {
     "id": "rollie-fingers-2005",
     "title": "Rollie Fingers",
     "year": "2005",
-    "date": "July 16, 2005"
+    "date": "July 16, 2005",
+    "imageUrl": "/bobbleheads/brewers-photos/rollie-fingers-2005.jpg"
   },
   {
     "id": "doug-davis-mini-2005",
@@ -1254,7 +1312,8 @@
     "nickname": "Mini",
     "year": "2005",
     "date": "July 3, 2005",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/brewers-photos/doug-davis-mini-2005.jpg"
   },
   {
     "id": "junior-spivey-mini-2005",
@@ -1268,7 +1327,8 @@
     "id": "ben-sheets-2005",
     "title": "Ben Sheets",
     "year": "2005",
-    "date": "May 7, 2005"
+    "date": "May 7, 2005",
+    "imageUrl": "/bobbleheads/brewers-photos/ben-sheets-2005.jpg"
   },
   {
     "id": "craig-counsell-mini-2004",
@@ -1276,19 +1336,22 @@
     "nickname": "Mini",
     "year": "2004",
     "date": "August 15, 2004",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/brewers-photos/craig-counsell-mini-2004.jpg"
   },
   {
     "id": "jim-gantner-2004",
     "title": "Jim Gantner",
     "year": "2004",
-    "date": "August 14, 2004"
+    "date": "August 14, 2004",
+    "imageUrl": "/bobbleheads/brewers-photos/jim-gantner-2004.jpg"
   },
   {
     "id": "gorman-thomas-2004",
     "title": "Gorman Thomas",
     "year": "2004",
-    "date": "July 10, 2004"
+    "date": "July 10, 2004",
+    "imageUrl": "/bobbleheads/brewers-photos/gorman-thomas-2004.jpg"
   },
   {
     "id": "wes-helms-mini-2004",
@@ -1296,14 +1359,16 @@
     "nickname": "Mini",
     "year": "2004",
     "date": "June 20, 2004",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/brewers-photos/wes-helms-mini-2004.jpg"
   },
   {
     "id": "scott-podsednik-2004",
     "title": "Scott Podsednik",
     "year": "2004",
     "date": "June 12, 2004",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/brewers-photos/scott-podsednik-2004.jpg"
   },
   {
     "id": "geoff-jenkins-mini-2004",
@@ -1325,20 +1390,23 @@
     "title": "Paul Molitor",
     "year": "2003",
     "date": "August 10, 2003",
-    "quantity": "4,000"
+    "quantity": "4,000",
+    "imageUrl": "/bobbleheads/brewers-photos/paul-molitor-2003.jpg"
   },
   {
     "id": "jeffrey-hammonds-2003",
     "title": "Jeffrey Hammonds",
     "year": "2003",
-    "date": "July 13, 2003"
+    "date": "July 13, 2003",
+    "imageUrl": "/bobbleheads/brewers-photos/jeffrey-hammonds-2003.jpg"
   },
   {
     "id": "polish-sausage-2003",
     "title": "Polish Sausage",
     "year": "2003",
     "date": "July 6, 2003",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/brewers-photos/polish-sausage-2003.jpg"
   },
   {
     "id": "brat-sausage-2003",
@@ -1351,7 +1419,8 @@
     "title": "Hank Aaron",
     "year": "2002",
     "date": "August 11, 2002",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/brewers-photos/hank-aaron-2002.jpg"
   },
   {
     "id": "ben-sheets-future-stars-2002",
@@ -1359,41 +1428,47 @@
     "nickname": "Future Stars",
     "year": "2002",
     "date": "June 16, 2002",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/brewers-photos/ben-sheets-future-stars-2002.jpg"
   },
   {
     "id": "ben-sheets-2002",
     "title": "Ben Sheets",
     "year": "2002",
     "date": "June 16, 2002",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/brewers-photos/ben-sheets-2002.jpg"
   },
   {
     "id": "richie-sexson-2002",
     "title": "Richie Sexson",
     "year": "2002",
     "date": "May 26, 2002",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/brewers-photos/richie-sexson-2002.jpg"
   },
   {
     "id": "robin-yount-2001",
     "title": "Robin Yount",
     "year": "2001",
     "date": "August 26, 2001",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/brewers-photos/robin-yount-2001.jpg"
   },
   {
     "id": "bob-uecker-2001",
     "title": "Bob Uecker",
     "year": "2001",
     "date": "July 29, 2001",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/brewers-photos/bob-uecker-2001.jpg"
   },
   {
     "id": "geoff-jenkins-2001",
     "title": "Geoff Jenkins",
     "year": "2001",
     "date": "June 17, 2001",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/brewers-photos/geoff-jenkins-2001.jpg"
   }
 ]

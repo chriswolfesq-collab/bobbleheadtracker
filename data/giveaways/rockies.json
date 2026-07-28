@@ -279,7 +279,8 @@
     "title": "The Dinger Bunny Bobblehead Gnome",
     "year": "2014",
     "date": "April 20, 2014",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/rockies-photos/dinger-bunny-gnome-2014.jpg"
   },
   {
     "id": "super-cargo-gnome-2014",
@@ -410,7 +411,8 @@
     "nickname": "20th Anniversary",
     "year": "2013",
     "date": "July 28, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rockies-photos/ellis-burks-20th-anniversary-2013.jpg"
   },
   {
     "id": "todd-helton-20th-anniversary-2013",
@@ -425,44 +427,51 @@
     "id": "ubaldo-jimenez-2011",
     "title": "Ubaldo Jimenez",
     "year": "2011",
-    "date": "April 17, 2011"
+    "date": "April 17, 2011",
+    "imageUrl": "/bobbleheads/rockies-photos/ubaldo-jimenez-2011.jpg"
   },
   {
     "id": "carlos-gonzalez-2011",
     "title": "Carlos Gonzalez",
     "year": "2011",
-    "date": "June 10, 2011"
+    "date": "June 10, 2011",
+    "imageUrl": "/bobbleheads/rockies-photos/carlos-gonzalez-2011.jpg"
   },
   {
     "id": "troy-tulowitzki-2011",
     "title": "Troy Tulowitzki",
     "year": "2011",
-    "date": "August 20, 2011"
+    "date": "August 20, 2011",
+    "imageUrl": "/bobbleheads/rockies-photos/troy-tulowitzki-2011.jpg"
   },
   {
     "id": "troy-tulowitzki-2008",
     "title": "Troy Tulowitzki",
     "year": "2008",
-    "date": "June 7, 2008"
+    "date": "June 7, 2008",
+    "imageUrl": "/bobbleheads/rockies-photos/troy-tulowitzki-2008.jpg"
   },
   {
     "id": "matt-holliday-2008",
     "title": "Matt Holliday",
     "year": "2008",
-    "date": "July 5, 2008"
+    "date": "July 5, 2008",
+    "imageUrl": "/bobbleheads/rockies-photos/matt-holliday-2008.jpg"
   },
   {
     "id": "todd-helton-2008",
     "title": "Todd Helton",
     "year": "2008",
     "date": "August 23, 2008",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rockies-photos/todd-helton-2008.jpg"
   },
   {
     "id": "todd-helton-2005",
     "title": "Todd Helton",
     "year": "2005",
-    "date": "June 3, 2005"
+    "date": "June 3, 2005",
+    "imageUrl": "/bobbleheads/rockies-photos/todd-helton-2005.jpg"
   },
   {
     "id": "radio-broadcasters-double-2004",
@@ -476,27 +485,31 @@
     "title": "Dinger",
     "nickname": "Mascot",
     "year": "2003",
-    "date": "March 10, 2003"
+    "date": "March 10, 2003",
+    "imageUrl": "/bobbleheads/rockies-photos/dinger-mascot-2003.jpg"
   },
   {
     "id": "larry-walker-2002",
     "title": "Larry Walker",
     "year": "2002",
     "date": "May 18, 2002",
-    "quantity": "11,000"
+    "quantity": "11,000",
+    "imageUrl": "/bobbleheads/rockies-photos/larry-walker-2002.jpg"
   },
   {
     "id": "dinger-mascot-2002",
     "title": "Dinger",
     "nickname": "Mascot",
     "year": "2002",
-    "date": "July 21, 2002"
+    "date": "July 21, 2002",
+    "imageUrl": "/bobbleheads/rockies-photos/dinger-mascot-2002.jpg"
   },
   {
     "id": "todd-helton-2002",
     "title": "Todd Helton",
     "year": "2002",
     "date": "September 14, 2002",
-    "quantity": "11,000"
+    "quantity": "11,000",
+    "imageUrl": "/bobbleheads/rockies-photos/todd-helton-2002.jpg"
   }
 ]

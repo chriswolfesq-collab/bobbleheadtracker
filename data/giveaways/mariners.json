@@ -45,14 +45,16 @@
     "title": "Ken Griffey Jr.",
     "year": "2024",
     "date": "April 15, 2024",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/mariners-photos/ken-griffey-jr-2024.jpg"
   },
   {
     "id": "julio-rodriguez-2024",
     "title": "Julio Rodriguez",
     "year": "2024",
     "date": "April 1, 2024",
-    "quantity": "30,000"
+    "quantity": "30,000",
+    "imageUrl": "/bobbleheads/mariners-photos/julio-rodriguez-2024.jpg"
   },
   {
     "id": "julio-rodriguez-dominican-republic-2023",
@@ -75,7 +77,8 @@
     "title": "Felix Hernandez",
     "year": "2023",
     "date": "August 13, 2023",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/felix-hernandez-2023.jpg"
   },
   {
     "id": "elmo-2023",
@@ -169,7 +172,8 @@
     "title": "Marco Gonzales",
     "year": "2021",
     "date": "May 27, 2021",
-    "quantity": "5,000"
+    "quantity": "5,000",
+    "imageUrl": "/bobbleheads/mariners-photos/marco-gonzales-2021.jpg"
   },
   {
     "id": "edgar-martinez-hall-of-fame-2019",
@@ -237,7 +241,8 @@
     "nickname": "\"Infield Grass\"",
     "year": "2018",
     "date": "May 19, 2018",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/felix-hernandez-infield-grass-2018.jpg"
   },
   {
     "id": "chewbacca-2018",
@@ -465,7 +470,8 @@
     "nickname": "Hall of Fame",
     "year": "2013",
     "date": "August 9, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/ken-griffey-jr-hall-of-fame-2013.jpg"
   },
   {
     "id": "felix-hernandez-perfect-game-2013",
@@ -482,41 +488,47 @@
     "nickname": "Dual",
     "year": "2012",
     "date": "July 28, 2012",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/randy-johnson-dan-wilson-dual-2012.jpg"
   },
   {
     "id": "felix-hernandez-2012",
     "title": "Felix Hernandez",
     "year": "2012",
     "date": "June 15, 2012",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/felix-hernandez-2012.jpg"
   },
   {
     "id": "dustin-ackley-2012",
     "title": "Dustin Ackley",
     "year": "2012",
     "date": "May 25, 2012",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/dustin-ackley-2012.jpg"
   },
   {
     "id": "ichiro-suzuki-2012",
     "title": "Ichiro Suzuki",
     "year": "2012",
     "date": "April 20, 2012",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/mariners-photos/ichiro-suzuki-2012.jpg"
   },
   {
     "id": "larry-bernandez-2011",
     "title": "\"Larry Bernandez\"",
     "year": "2011",
-    "date": "August 27, 2011"
+    "date": "August 27, 2011",
+    "imageUrl": "/bobbleheads/mariners-photos/larry-bernandez-2011.jpg"
   },
   {
     "id": "mike-cameron-mark-mclemore-dual-2011",
     "title": "Mike Cameron & Mark McLemore",
     "nickname": "Dual",
     "year": "2011",
-    "date": "July 15, 2011"
+    "date": "July 15, 2011",
+    "imageUrl": "/bobbleheads/mariners-photos/mike-cameron-mark-mclemore-dual-2011.jpg"
   },
   {
     "id": "ichiro-suzuki-2011",
@@ -534,98 +546,113 @@
     "id": "ichiro-suzuki-2010",
     "title": "Ichiro Suzuki",
     "year": "2010",
-    "date": "August 27, 2010"
+    "date": "August 27, 2010",
+    "imageUrl": "/bobbleheads/mariners-photos/ichiro-suzuki-2010.jpg"
   },
   {
     "id": "ken-griffey-jr-ichiro-suzuki-double-2010",
     "title": "Ken Griffey Jr. & Ichiro Suzuki",
     "nickname": "Double",
     "year": "2010",
-    "date": "June 18, 2010"
+    "date": "June 18, 2010",
+    "imageUrl": "/bobbleheads/mariners-photos/ken-griffey-jr-ichiro-suzuki-double-2010.jpg"
   },
   {
     "id": "ken-griffey-jr-95-slide-2010",
     "title": "Ken Griffey Jr.",
     "nickname": "\"The '95 Slide\"",
     "year": "2010",
-    "date": "May 7, 2010"
+    "date": "May 7, 2010",
+    "imageUrl": "/bobbleheads/mariners-photos/ken-griffey-jr-95-slide-2010.jpg"
   },
   {
     "id": "felix-hernandez-2010",
     "title": "Felix Hernandez",
     "year": "2010",
-    "date": "April 30, 2010"
+    "date": "April 30, 2010",
+    "imageUrl": "/bobbleheads/mariners-photos/felix-hernandez-2010.jpg"
   },
   {
     "id": "ken-griffey-jr-the-kid-2010",
     "title": "Ken Griffey Jr.",
     "nickname": "\"The Kid\"",
     "year": "2010",
-    "date": "April 16, 2010"
+    "date": "April 16, 2010",
+    "imageUrl": "/bobbleheads/mariners-photos/ken-griffey-jr-the-kid-2010.jpg"
   },
   {
     "id": "ken-griffey-jr-2009",
     "title": "Ken Griffey Jr.",
     "year": "2009",
-    "date": "August 7, 2009"
+    "date": "August 7, 2009",
+    "imageUrl": "/bobbleheads/mariners-photos/ken-griffey-jr-2009.jpg"
   },
   {
     "id": "franklin-gutierrez-2009",
     "title": "Franklin Gutierrez",
     "year": "2009",
-    "date": "July 24, 2009"
+    "date": "July 24, 2009",
+    "imageUrl": "/bobbleheads/mariners-photos/franklin-gutierrez-2009.jpg"
   },
   {
     "id": "brandon-morrow-2009",
     "title": "Brandon Morrow",
     "year": "2009",
-    "date": "June 19, 2009"
+    "date": "June 19, 2009",
+    "imageUrl": "/bobbleheads/mariners-photos/brandon-morrow-2009.jpg"
   },
   {
     "id": "felix-hernandez-2009",
     "title": "Felix Hernandez",
     "year": "2009",
-    "date": "May 22, 2009"
+    "date": "May 22, 2009",
+    "imageUrl": "/bobbleheads/mariners-photos/felix-hernandez-2009.jpg"
   },
   {
     "id": "ichiro-suzuki-2009",
     "title": "Ichiro Suzuki",
     "year": "2009",
-    "date": "April 17, 2009"
+    "date": "April 17, 2009",
+    "imageUrl": "/bobbleheads/mariners-photos/ichiro-suzuki-2009.jpg"
   },
   {
     "id": "yuniesky-betancourt-2008",
     "title": "Yuniesky Betancourt",
     "year": "2008",
     "date": "August 8, 2008",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mariners-photos/yuniesky-betancourt-2008.jpg"
   },
   {
     "id": "dave-niehaus-2008",
     "title": "Dave Niehaus",
     "year": "2008",
-    "date": "August 3, 2008"
+    "date": "August 3, 2008",
+    "imageUrl": "/bobbleheads/mariners-photos/dave-niehaus-2008.jpg"
   },
   {
     "id": "felix-hernandez-2008",
     "title": "Felix Hernandez",
     "year": "2008",
     "date": "July 18, 2008",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mariners-photos/felix-hernandez-2008.jpg"
   },
   {
     "id": "adrian-beltre-2008",
     "title": "Adrian Beltre",
     "year": "2008",
     "date": "June 13, 2008",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mariners-photos/adrian-beltre-2008.jpg"
   },
   {
     "id": "jj-putz-2008",
     "title": "J.J. Putz",
     "year": "2008",
     "date": "May 16, 2008",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mariners-photos/jj-putz-2008.jpg"
   },
   {
     "id": "ichiro-suzuki-2008",
@@ -640,28 +667,32 @@
     "title": "Raul Ibanez",
     "year": "2007",
     "date": "August 17, 2007",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mariners-photos/raul-ibanez-2007.jpg"
   },
   {
     "id": "kenji-johjima-2007",
     "title": "Kenji Johjima",
     "year": "2007",
     "date": "June 29, 2007",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mariners-photos/kenji-johjima-2007.jpg"
   },
   {
     "id": "felix-hernandez-2007",
     "title": "Felix Hernandez",
     "year": "2007",
     "date": "May 18, 2007",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mariners-photos/felix-hernandez-2007.jpg"
   },
   {
     "id": "ichiro-suzuki-2007",
     "title": "Ichiro Suzuki",
     "year": "2007",
     "date": "April 27, 2007",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/mariners-photos/ichiro-suzuki-2007.jpg"
   },
   {
     "id": "mariner-moose-2006",
@@ -673,55 +704,64 @@
     "id": "richie-sexson-2006",
     "title": "Richie Sexson",
     "year": "2006",
-    "date": "May 19, 2006"
+    "date": "May 19, 2006",
+    "imageUrl": "/bobbleheads/mariners-photos/richie-sexson-2006.jpg"
   },
   {
     "id": "ichiro-suzuki-2006",
     "title": "Ichiro Suzuki",
     "year": "2006",
-    "date": "April 21, 2006"
+    "date": "April 21, 2006",
+    "imageUrl": "/bobbleheads/mariners-photos/ichiro-suzuki-2006.jpg"
   },
   {
     "id": "jay-buhner-2005",
     "title": "Jay Buhner",
     "year": "2005",
-    "date": "May 31, 2005"
+    "date": "May 31, 2005",
+    "imageUrl": "/bobbleheads/mariners-photos/jay-buhner-2005.jpg"
   },
   {
     "id": "edgar-martinez-2005",
     "title": "Edgar Martinez",
     "year": "2005",
-    "date": "May 3, 2005"
+    "date": "May 3, 2005",
+    "imageUrl": "/bobbleheads/mariners-photos/edgar-martinez-2005.jpg"
   },
   {
     "id": "ichiro-suzuki-262-hits-2005",
     "title": "Ichiro Suzuki",
     "nickname": "262 Hits",
     "year": "2005",
-    "date": "April 22, 2005"
+    "date": "April 22, 2005",
+    "imageUrl": "/bobbleheads/mariners-photos/ichiro-suzuki-262-hits-2005.jpg"
   },
   {
     "id": "ichiro-suzuki-2003",
     "title": "Ichiro Suzuki",
     "year": "2003",
-    "date": "August 26, 2003"
+    "date": "August 26, 2003",
+    "imageUrl": "/bobbleheads/mariners-photos/ichiro-suzuki-2003.jpg"
   },
   {
     "id": "ichiro-suzuki-2002",
     "title": "Ichiro Suzuki",
     "year": "2002",
-    "date": "July 2, 2002"
+    "date": "July 2, 2002",
+    "imageUrl": "/bobbleheads/mariners-photos/ichiro-suzuki-2002.jpg"
   },
   {
     "id": "kazuhiro-sasaki-2001",
     "title": "Kazuhiro Sasaki",
     "year": "2001",
-    "date": "September 8, 2001"
+    "date": "September 8, 2001",
+    "imageUrl": "/bobbleheads/mariners-photos/kazuhiro-sasaki-2001.jpg"
   },
   {
     "id": "ichiro-suzuki-2001",
     "title": "Ichiro Suzuki",
     "year": "2001",
-    "date": "July 28, 2001"
+    "date": "July 28, 2001",
+    "imageUrl": "/bobbleheads/mariners-photos/ichiro-suzuki-2001.jpg"
   }
 ]

@@ -60,7 +60,8 @@
     "title": "CC Sabathia",
     "year": "2024",
     "date": "August 3, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/guardians-photos/cc-sabathia-2024.jpg"
   },
   {
     "id": "peanuts-lucy-2023",
@@ -90,7 +91,7 @@
     "title": "Manny Ramirez",
     "year": "2023",
     "date": "August 19, 2023",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/manny-ramirez-2023.jpg",
     "quantity": "12,500"
   },
   {
@@ -113,7 +114,8 @@
     "title": "Kid Cudi",
     "year": "2023",
     "date": "September 22, 2023",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/guardians-photos/kid-cudi-2023.jpg"
   },
   {
     "id": "aaron-civale-2022",
@@ -165,7 +167,7 @@
     "title": "Shane Bieber Cy Young Award",
     "year": "2021",
     "date": "August 21, 2021",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/shane-bieber-cy-young-award-2021.jpg",
     "quantity": "12,500"
   },
   {
@@ -369,7 +371,7 @@
     "title": "Brohio",
     "year": "2014",
     "date": "May 23, 2014",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/brohio-2014.jpg"
   },
   {
     "id": "michael-bourn-2014",
@@ -392,7 +394,7 @@
     "title": "Michael Brantley",
     "year": "2014",
     "date": "September 1, 2014",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/michael-brantley-2014.jpg",
     "quantity": "12,500"
   },
   {
@@ -416,7 +418,7 @@
     "title": "Joe Carter",
     "year": "2012",
     "date": "May 20, 2012",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/joe-carter-2012.jpg",
     "quantity": "15,000"
   },
   {
@@ -432,7 +434,7 @@
     "title": "Asdrubal Cabrera",
     "year": "2012",
     "date": "June 18, 2012",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/asdrubal-cabrera-2012.jpg",
     "quantity": "15,000"
   },
   {
@@ -448,7 +450,7 @@
     "title": "Gaylord Perry",
     "year": "2012",
     "date": "August 12, 2012",
-    "imageUrl": null,
+    "imageUrl": "/bobbleheads/guardians-photos/gaylord-perry-2012.jpg",
     "quantity": "15,000"
   },
   {
@@ -456,63 +458,63 @@
     "title": "Mike Hargrove",
     "year": "2011",
     "date": "August 13, 2011",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/mike-hargrove-2011.jpg"
   },
   {
     "id": "shin-soo-choo-2010",
     "title": "Shin-Soo Choo",
     "year": "2010",
     "date": "June 12, 2010",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/shin-soo-choo-2010.jpg"
   },
   {
     "id": "grady-sizemore-2010",
     "title": "Grady Sizemore",
     "year": "2010",
     "date": "July 24, 2010",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-2010.jpg"
   },
   {
     "id": "kenny-lofton-2010",
     "title": "Kenny Lofton",
     "year": "2010",
     "date": "August 7, 2010",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/kenny-lofton-2010.jpg"
   },
   {
     "id": "kerry-wood-2009",
     "title": "Kerry Wood",
     "year": "2009",
     "date": "April 25, 2009",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/kerry-wood-2009.jpg"
   },
   {
     "id": "cliff-lee-cy-young-2009",
     "title": "Cliff Lee Cy Young",
     "year": "2009",
     "date": "May 9, 2009",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/cliff-lee-cy-young-2009.jpg"
   },
   {
     "id": "shin-soo-choo-2009",
     "title": "Shin-Soo Choo",
     "year": "2009",
     "date": "June 13, 2009",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/shin-soo-choo-2009.jpg"
   },
   {
     "id": "rick-vaughn-wild-thing-2009",
     "title": "Rick Vaughn 'Wild Thing'",
     "year": "2009",
     "date": "June 15, 2009",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/rick-vaughn-wild-thing-2009.jpg"
   },
   {
     "id": "grady-sizemore-surfer-2009",
     "title": "Grady Sizemore Surfer",
     "year": "2009",
     "date": "July 18, 2009",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-surfer-2009.jpg"
   },
   {
     "id": "slider-lifeguard-mascot-2009",
@@ -520,84 +522,84 @@
     "nickname": "Mascot",
     "year": "2009",
     "date": "July 19, 2009",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/slider-lifeguard-mascot-2009.jpg"
   },
   {
     "id": "victor-martinez-2009",
     "title": "Victor Martinez",
     "year": "2009",
     "date": "August 1, 2009",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/victor-martinez-2009.jpg"
   },
   {
     "id": "grady-sizemore-diving-catch-2009",
     "title": "Grady Sizemore Diving Catch",
     "year": "2009",
     "date": "September 26, 2009",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-diving-catch-2009.jpg"
   },
   {
     "id": "c-c-sabathia-cy-young-2008",
     "title": "C.C. Sabathia Cy Young",
     "year": "2008",
     "date": "May 3, 2008",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/c-c-sabathia-cy-young-2008.jpg"
   },
   {
     "id": "grady-sizemore-gold-glove-2008",
     "title": "Grady Sizemore Gold Glove",
     "year": "2008",
     "date": "May 24, 2008",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-gold-glove-2008.jpg"
   },
   {
     "id": "travis-hafner-mini-2008",
     "title": "Travis Hafner Mini",
     "year": "2008",
     "date": "June 24, 2008",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/travis-hafner-mini-2008.jpg"
   },
   {
     "id": "jhonny-peralta-mini-2008",
     "title": "Jhonny Peralta Mini",
     "year": "2008",
     "date": "August 11, 2008",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/jhonny-peralta-mini-2008.jpg"
   },
   {
     "id": "asdrubal-cabrera-2008",
     "title": "Asdrubal Cabrera",
     "year": "2008",
     "date": "August 30, 2008",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/asdrubal-cabrera-2008.jpg"
   },
   {
     "id": "grady-sizemore-in-a-car-2008",
     "title": "Grady Sizemore In A Car",
     "year": "2008",
     "date": "September 13, 2008",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-in-a-car-2008.jpg"
   },
   {
     "id": "fausto-carmona-2008",
     "title": "Fausto Carmona",
     "year": "2008",
     "date": "September 14, 2008",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/fausto-carmona-2008.jpg"
   },
   {
     "id": "grady-sizemore-2007-3-9",
     "title": "Grady Sizemore",
     "year": "2007",
     "date": "March 9, 2007",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-2007-3-9.jpg"
   },
   {
     "id": "grady-sizemore-2007-4-28",
     "title": "Grady Sizemore",
     "year": "2007",
     "date": "April 28, 2007",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-2007-4-28.jpg"
   },
   {
     "id": "slider-gapper-double-mascots-2007",
@@ -612,28 +614,28 @@
     "title": "C.C. Sabathia",
     "year": "2007",
     "date": "June 2, 2007",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/c-c-sabathia-2007.jpg"
   },
   {
     "id": "grady-sizemore-2007-6-30",
     "title": "Grady Sizemore",
     "year": "2007",
     "date": "June 30, 2007",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-2007-6-30.jpg"
   },
   {
     "id": "tom-hamilton-2007",
     "title": "Tom Hamilton",
     "year": "2007",
     "date": "July 28, 2007",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/tom-hamilton-2007.jpg"
   },
   {
     "id": "travis-hafner-2007",
     "title": "Travis Hafner",
     "year": "2007",
     "date": "September 15, 2007",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/travis-hafner-2007.jpg"
   },
   {
     "id": "spongebob-squarepants-2007",
@@ -647,63 +649,63 @@
     "title": "Grady Sizemore",
     "year": "2006",
     "date": "April 29, 2006",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/grady-sizemore-2006.jpg"
   },
   {
     "id": "jhonny-peralta-2006",
     "title": "Jhonny Peralta",
     "year": "2006",
     "date": "July 8, 2006",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/jhonny-peralta-2006.jpg"
   },
   {
     "id": "john-adams-bobble-arm-2006",
     "title": "John Adams Bobble Arm",
     "year": "2006",
     "date": "July 9, 2006",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/john-adams-bobble-arm-2006.jpg"
   },
   {
     "id": "drew-carey-2006",
     "title": "Drew Carey",
     "year": "2006",
     "date": "August 12, 2006",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/drew-carey-2006.jpg"
   },
   {
     "id": "bob-feller-2005",
     "title": "Bob Feller",
     "year": "2005",
     "date": "March 7, 2005",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/bob-feller-2005.jpg"
   },
   {
     "id": "travis-hafner-2005",
     "title": "Travis Hafner",
     "year": "2005",
     "date": "May 28, 2005",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/travis-hafner-2005.jpg"
   },
   {
     "id": "victor-martinez-2005",
     "title": "Victor Martinez",
     "year": "2005",
     "date": "June 25, 2005",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/victor-martinez-2005.jpg"
   },
   {
     "id": "c-c-sabathia-2005",
     "title": "C.C. Sabathia",
     "year": "2005",
     "date": "July 16, 2005",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/c-c-sabathia-2005.jpg"
   },
   {
     "id": "coco-crisp-2005",
     "title": "Coco Crisp",
     "year": "2005",
     "date": "August 20, 2005",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/coco-crisp-2005.jpg"
   },
   {
     "id": "al-rosen-2004",
@@ -724,7 +726,7 @@
     "title": "Omar Vizquel, Dave Concepcion",
     "year": "2004",
     "date": "June 12, 2004",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/omar-vizquel-dave-concepcion-2004.jpg"
   },
   {
     "id": "slider-bobble-belly-mascot-2003",
@@ -738,125 +740,125 @@
     "title": "Omar Vizquel",
     "year": "2003",
     "date": "March 16, 2003",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/omar-vizquel-2003.jpg"
   },
   {
     "id": "ellis-burks-2003",
     "title": "Ellis Burks",
     "year": "2003",
     "date": "April 13, 2003",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/ellis-burks-2003.jpg"
   },
   {
     "id": "omar-vizquel-talking-2003",
     "title": "Omar Vizquel Talking",
     "year": "2003",
     "date": "May 18, 2003",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/omar-vizquel-talking-2003.jpg"
   },
   {
     "id": "c-c-sabathia-josh-bard-2003",
     "title": "C.C. Sabathia, Josh Bard",
     "year": "2003",
     "date": "June 1, 2003",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/c-c-sabathia-josh-bard-2003.jpg"
   },
   {
     "id": "al-rosen-2003",
     "title": "Al Rosen",
     "year": "2003",
     "date": "July 13, 2003",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/al-rosen-2003.jpg"
   },
   {
     "id": "bob-feller-2002",
     "title": "Bob Feller",
     "year": "2002",
     "date": "March 15, 2002",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/bob-feller-2002.jpg"
   },
   {
     "id": "c-c-sabathia-2002",
     "title": "C.C. Sabathia",
     "year": "2002",
     "date": "May 27, 2002",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/c-c-sabathia-2002.jpg"
   },
   {
     "id": "slider-mascot-2002",
     "title": "Slider - Mascot",
     "year": "2002",
     "date": "June 2, 2002",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/slider-mascot-2002.jpg"
   },
   {
     "id": "einar-diaz-2002",
     "title": "Einar Diaz",
     "year": "2002",
     "date": "June 12, 2002",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/einar-diaz-2002.jpg"
   },
   {
     "id": "bob-wickman-2002",
     "title": "Bob Wickman",
     "year": "2002",
     "date": "July 17, 2002",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/bob-wickman-2002.jpg"
   },
   {
     "id": "jim-thome-hr-king-2002",
     "title": "Jim Thome HR King",
     "year": "2002",
     "date": "August 7, 2002",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/jim-thome-hr-king-2002.jpg"
   },
   {
     "id": "omar-vizquel-2001",
     "title": "Omar Vizquel",
     "year": "2001",
     "date": "April 7, 2001",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/omar-vizquel-2001.jpg"
   },
   {
     "id": "jim-thome-2001",
     "title": "Jim Thome",
     "year": "2001",
     "date": "April 21, 2001",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/jim-thome-2001.jpg"
   },
   {
     "id": "dave-burba-2001",
     "title": "Dave Burba",
     "year": "2001",
     "date": "May 26, 2001",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/dave-burba-2001.jpg"
   },
   {
     "id": "travis-fryman-2001",
     "title": "Travis Fryman",
     "year": "2001",
     "date": "July 7, 2001",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/travis-fryman-2001.jpg"
   },
   {
     "id": "kenny-lofton-2001",
     "title": "Kenny Lofton",
     "year": "2001",
     "date": "August 18, 2001",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/kenny-lofton-2001.jpg"
   },
   {
     "id": "bartolo-colon-2001",
     "title": "Bartolo Colon",
     "year": "2001",
     "date": "September 8, 2001",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/bartolo-colon-2001.jpg"
   },
   {
     "id": "roberto-alomar-2001",
     "title": "Roberto Alomar",
     "year": "2001",
     "date": "September 29, 2001",
-    "imageUrl": null
+    "imageUrl": "/bobbleheads/guardians-photos/roberto-alomar-2001.jpg"
   }
 ]

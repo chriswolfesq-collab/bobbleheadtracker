@@ -20,7 +20,8 @@
     "title": "Rafael Devers",
     "year": "2025",
     "date": "May 23, 2025",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/red-sox-photos/rafael-devers-2025.jpg"
   },
   {
     "id": "ceddanne-rafaela-red-2025",
@@ -28,7 +29,8 @@
     "nickname": "Red",
     "year": "2025",
     "date": "May 6, 2025",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/red-sox-photos/ceddanne-rafaela-red-2025.jpg"
   },
   {
     "id": "ceddanne-rafaela-white-2025",
@@ -36,7 +38,8 @@
     "nickname": "White",
     "year": "2025",
     "date": "May 6, 2025",
-    "quantity": "7,500"
+    "quantity": "7,500",
+    "imageUrl": "/bobbleheads/red-sox-photos/ceddanne-rafaela-white-2025.jpg"
   },
   {
     "id": "jarren-duran-2025",
@@ -480,7 +483,8 @@
     "id": "dustin-pedroia-2014",
     "title": "Dustin Pedroia",
     "year": "2014",
-    "date": "April 30, 2014"
+    "date": "April 30, 2014",
+    "imageUrl": "/bobbleheads/red-sox-photos/dustin-pedroia-2014.jpg"
   },
   {
     "id": "david-ortiz-2014",
@@ -493,12 +497,14 @@
     "id": "nomar-garciaparra-2002",
     "title": "Nomar Garciaparra",
     "year": "2002",
-    "date": "August 26, 2002"
+    "date": "August 26, 2002",
+    "imageUrl": "/bobbleheads/red-sox-photos/nomar-garciaparra-2002.jpg"
   },
   {
     "id": "pedro-martinez-2002",
     "title": "Pedro Martinez",
     "year": "2002",
-    "date": "2002"
+    "date": "2002",
+    "imageUrl": "/bobbleheads/red-sox-photos/pedro-martinez-2002.jpg"
   }
 ]

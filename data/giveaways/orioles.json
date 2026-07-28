@@ -11,7 +11,8 @@
     "title": "Gunnar Henderson",
     "year": "2026",
     "date": "2026",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/orioles-photos/gunnar-henderson-2026.jpg"
   },
   {
     "id": "adley-rutschman-2026",
@@ -24,7 +25,8 @@
     "title": "Star Wars Weekend Bobblehead",
     "nickname": "Jedi-Themed",
     "year": "2026",
-    "date": "May 2, 2026"
+    "date": "May 2, 2026",
+    "imageUrl": "/bobbleheads/orioles-photos/star-wars-weekend-bobblehead-jedi-themed-2026.jpg"
   },
   {
     "id": "adley-rutschman-2025",
@@ -100,7 +102,8 @@
     "id": "corbin-burnes-2024",
     "title": "Corbin Burnes",
     "year": "2024",
-    "date": "August 16, 2024"
+    "date": "August 16, 2024",
+    "imageUrl": "/bobbleheads/orioles-photos/corbin-burnes-2024.jpg"
   },
   {
     "id": "adley-rutschman-2024",
@@ -181,7 +184,8 @@
     "nickname": "30/30 Club",
     "year": "2022",
     "date": "August 5, 2022",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/orioles-photos/cedric-mullins-30-30-club-2022.jpg"
   },
   {
     "id": "oriole-bird-hall-of-fame-spring-training-2022",
@@ -230,7 +234,8 @@
     "title": "Brooks Robinson",
     "year": "2019",
     "date": "July 16, 2019",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/brooks-robinson-2019.jpg"
   },
   {
     "id": "trey-mancini-bb-8-star-wars-2019",
@@ -292,14 +297,16 @@
     "id": "zach-britton-2016",
     "title": "Zach Britton",
     "year": "2016",
-    "date": "2016"
+    "date": "2016",
+    "imageUrl": "/bobbleheads/orioles-photos/zach-britton-2016.jpg"
   },
   {
     "id": "orioles-vintage-bobble-boy-girl-2016",
     "title": "Orioles Vintage",
     "nickname": "Bobble Boy/Girl",
     "year": "2016",
-    "date": "September 17, 2016"
+    "date": "September 17, 2016",
+    "imageUrl": "/bobbleheads/orioles-photos/orioles-vintage-bobble-boy-girl-2016.jpg"
   },
   {
     "id": "crush-davis-samson-2016",
@@ -314,7 +321,8 @@
     "nickname": "Fans' Choice",
     "year": "2015",
     "date": "October 3, 2015",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/steve-pearce-fans-choice-2015.jpg"
   },
   {
     "id": "oriole-bird-2015",
@@ -363,7 +371,8 @@
     "title": "J.J. Hardy",
     "year": "2012",
     "date": "September 30, 2012",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/orioles-photos/jj-hardy-2012.jpg"
   },
   {
     "id": "brooks-robinson-bronze-statue-2012",
@@ -411,13 +420,15 @@
     "id": "brian-matusz-2011",
     "title": "Brian Matusz",
     "year": "2011",
-    "date": "August 6, 2011"
+    "date": "August 6, 2011",
+    "imageUrl": "/bobbleheads/orioles-photos/brian-matusz-2011.jpg"
   },
   {
     "id": "buck-showalter-2011",
     "title": "Buck Showalter",
     "year": "2011",
-    "date": "June 25, 2011"
+    "date": "June 25, 2011",
+    "imageUrl": "/bobbleheads/orioles-photos/buck-showalter-2011.jpg"
   },
   {
     "id": "nick-markakis-mini-2010",
@@ -425,14 +436,16 @@
     "nickname": "Mini",
     "year": "2010",
     "date": "August 5, 2010",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/orioles-photos/nick-markakis-mini-2010.jpg"
   },
   {
     "id": "matt-wieters-2010",
     "title": "Matt Wieters",
     "year": "2010",
     "date": "June 30, 2010",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/matt-wieters-2010.jpg"
   },
   {
     "id": "adam-jones-mini-2010",
@@ -455,34 +468,39 @@
     "title": "Adam Jones",
     "year": "2009",
     "date": "June 17, 2009",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/adam-jones-2009.jpg"
   },
   {
     "id": "nick-markakis-2008",
     "title": "Nick Markakis",
     "year": "2008",
     "date": "June 19, 2008",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/nick-markakis-2008.jpg"
   },
   {
     "id": "boog-powell-2007",
     "title": "Boog Powell",
     "year": "2007",
-    "date": "August 25, 2007"
+    "date": "August 25, 2007",
+    "imageUrl": "/bobbleheads/orioles-photos/boog-powell-2007.jpg"
   },
   {
     "id": "cal-ripken-jr-2007",
     "title": "Cal Ripken Jr.",
     "year": "2007",
     "date": "July 25, 2007",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/cal-ripken-jr-2007.jpg"
   },
   {
     "id": "cal-ripken-jr-2007-2",
     "title": "Cal Ripken Jr.",
     "year": "2007",
     "date": "June 10, 2007",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/cal-ripken-jr-2007-2.jpg"
   },
   {
     "id": "cal-ripken-jr-season-ticket-2007",
@@ -490,14 +508,16 @@
     "nickname": "Season Ticket",
     "year": "2007",
     "date": "January 1, 2007",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/orioles-photos/cal-ripken-jr-season-ticket-2007.jpg"
   },
   {
     "id": "melvin-mora-2006",
     "title": "Melvin Mora",
     "year": "2006",
     "date": "August 24, 2006",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/orioles-photos/melvin-mora-2006.jpg"
   },
   {
     "id": "brooks-robinson-2006",
@@ -510,43 +530,50 @@
     "title": "Brian Roberts",
     "year": "2006",
     "date": "July 15, 2006",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/orioles-photos/brian-roberts-2006.jpg"
   },
   {
     "id": "sammy-sosa-2005",
     "title": "Sammy Sosa",
     "year": "2005",
-    "date": "July 27, 2005"
+    "date": "July 27, 2005",
+    "imageUrl": "/bobbleheads/orioles-photos/sammy-sosa-2005.jpg"
   },
   {
     "id": "miguel-tejada-2005",
     "title": "Miguel Tejada",
     "year": "2005",
-    "date": "July 2, 2005"
+    "date": "July 2, 2005",
+    "imageUrl": "/bobbleheads/orioles-photos/miguel-tejada-2005.jpg"
   },
   {
     "id": "earl-weaver-jim-palmer-2004",
     "title": "Earl Weaver & Jim Palmer",
     "year": "2004",
-    "date": "August 21, 2004"
+    "date": "August 21, 2004",
+    "imageUrl": "/bobbleheads/orioles-photos/earl-weaver-jim-palmer-2004.jpg"
   },
   {
     "id": "rafael-palmeiro-2004",
     "title": "Rafael Palmeiro",
     "year": "2004",
-    "date": "July 7, 2004"
+    "date": "July 7, 2004",
+    "imageUrl": "/bobbleheads/orioles-photos/rafael-palmeiro-2004.jpg"
   },
   {
     "id": "eddie-murray-2003",
     "title": "Eddie Murray",
     "year": "2003",
-    "date": "July 20, 2003"
+    "date": "July 20, 2003",
+    "imageUrl": "/bobbleheads/orioles-photos/eddie-murray-2003.jpg"
   },
   {
     "id": "rick-dempsey-2003",
     "title": "Rick Dempsey",
     "year": "2003",
-    "date": "June 18, 2003"
+    "date": "June 18, 2003",
+    "imageUrl": "/bobbleheads/orioles-photos/rick-dempsey-2003.jpg"
   },
   {
     "id": "jeff-conine-2003",
@@ -565,7 +592,8 @@
     "title": "Sidney Ponson",
     "year": "2002",
     "date": "July 23, 2002",
-    "quantity": "8,333"
+    "quantity": "8,333",
+    "imageUrl": "/bobbleheads/orioles-photos/sidney-ponson-2002.jpg"
   },
   {
     "id": "jerry-hairston-2002",
@@ -579,7 +607,8 @@
     "title": "Jay Gibbons",
     "year": "2002",
     "date": "July 23, 2002",
-    "quantity": "8,333"
+    "quantity": "8,333",
+    "imageUrl": "/bobbleheads/orioles-photos/jay-gibbons-2002.jpg"
   },
   {
     "id": "funbird-mascot-2002",
@@ -593,12 +622,14 @@
     "id": "brady-anderson-2001",
     "title": "Brady Anderson",
     "year": "2001",
-    "date": "July 31, 2001"
+    "date": "July 31, 2001",
+    "imageUrl": "/bobbleheads/orioles-photos/brady-anderson-2001.jpg"
   },
   {
     "id": "cal-ripken-jr-2000",
     "title": "Cal Ripken Jr.",
     "year": "2000",
-    "date": "July 17, 2000"
+    "date": "July 17, 2000",
+    "imageUrl": "/bobbleheads/orioles-photos/cal-ripken-jr-2000.jpg"
   }
 ]

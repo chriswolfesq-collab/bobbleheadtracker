@@ -21,7 +21,8 @@
     "title": "Brendan Donovan",
     "year": "2025",
     "date": "May 4, 2025",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/cardinals-photos/brendan-donovan-2025.jpg"
   },
   {
     "id": "masyn-winn-2025",
@@ -191,7 +192,8 @@
     "title": "Fredbird",
     "nickname": "Leg Lamp",
     "year": "2023",
-    "date": "July 17, 2023"
+    "date": "July 17, 2023",
+    "imageUrl": "/bobbleheads/cardinals-photos/fredbird-leg-lamp-2023.jpg"
   },
   {
     "id": "brad-thompson-2023",
@@ -287,7 +289,8 @@
     "id": "linus-2022",
     "title": "Linus",
     "year": "2022",
-    "date": "April 11, 2022"
+    "date": "April 11, 2022",
+    "imageUrl": "/bobbleheads/cardinals-photos/linus-2022.jpg"
   },
   {
     "id": "nolan-arenado-2022",
@@ -1066,7 +1069,8 @@
     "title": "Matt Carpenter",
     "year": "2015",
     "date": "July 28, 2015",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/cardinals-photos/matt-carpenter-2015.jpg"
   },
   {
     "id": "lou-brock-2015",
@@ -1215,51 +1219,59 @@
     "title": "David Freese",
     "year": "2012",
     "date": "May 13, 2012",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/cardinals-photos/david-freese-2012.jpg"
   },
   {
     "id": "bruce-sutter-2012",
     "title": "Bruce Sutter",
     "year": "2012",
-    "date": "August 3, 2012"
+    "date": "August 3, 2012",
+    "imageUrl": "/bobbleheads/cardinals-photos/bruce-sutter-2012.jpg"
   },
   {
     "id": "stan-musial-2011",
     "title": "Stan Musial",
     "year": "2011",
-    "date": "April 24, 2011"
+    "date": "April 24, 2011",
+    "imageUrl": "/bobbleheads/cardinals-photos/stan-musial-2011.jpg"
   },
   {
     "id": "willie-mcgee-2011",
     "title": "Willie McGee",
     "year": "2011",
     "date": "August 26, 2011",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/cardinals-photos/willie-mcgee-2011.jpg"
   },
   {
     "id": "matt-holliday-2011",
     "title": "Matt Holliday",
     "year": "2011",
     "date": "August 28, 2011",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/cardinals-photos/matt-holliday-2011.jpg"
   },
   {
     "id": "vince-coleman-2010",
     "title": "Vince Coleman",
     "year": "2010",
-    "date": "July 30, 2010"
+    "date": "July 30, 2010",
+    "imageUrl": "/bobbleheads/cardinals-photos/vince-coleman-2010.jpg"
   },
   {
     "id": "whitey-herzog-2010",
     "title": "Whitey Herzog",
     "year": "2010",
-    "date": "July 31, 2010"
+    "date": "July 31, 2010",
+    "imageUrl": "/bobbleheads/cardinals-photos/whitey-herzog-2010.jpg"
   },
   {
     "id": "chris-carpenter-2010",
     "title": "Chris Carpenter",
     "year": "2010",
-    "date": "August 22, 2010"
+    "date": "August 22, 2010",
+    "imageUrl": "/bobbleheads/cardinals-photos/chris-carpenter-2010.jpg"
   },
   {
     "id": "fredbird-bobble-frame-2009",
@@ -1272,13 +1284,15 @@
     "id": "adam-wainwright-2009",
     "title": "Adam Wainwright",
     "year": "2009",
-    "date": "August 30, 2009"
+    "date": "August 30, 2009",
+    "imageUrl": "/bobbleheads/cardinals-photos/adam-wainwright-2009.jpg"
   },
   {
     "id": "ozzie-smith-2009",
     "title": "Ozzie Smith",
     "year": "2009",
-    "date": "October 2, 2009"
+    "date": "October 2, 2009",
+    "imageUrl": "/bobbleheads/cardinals-photos/ozzie-smith-2009.jpg"
   },
   {
     "id": "stan-musial-2008",
@@ -1291,27 +1305,31 @@
     "title": "Fredbird",
     "nickname": "Bobble Belly",
     "year": "2008",
-    "date": "June 15, 2008"
+    "date": "June 15, 2008",
+    "imageUrl": "/bobbleheads/cardinals-photos/fredbird-bobble-belly-2008.jpg"
   },
   {
     "id": "albert-pujols-2008",
     "title": "Albert Pujols",
     "year": "2008",
     "date": "September 7, 2008",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/cardinals-photos/albert-pujols-2008.jpg"
   },
   {
     "id": "red-schoendienst-2008",
     "title": "Red Schoendienst",
     "year": "2008",
     "date": "September 26, 2008",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/cardinals-photos/red-schoendienst-2008.jpg"
   },
   {
     "id": "yadier-molina-2007",
     "title": "Yadier Molina",
     "year": "2007",
-    "date": "September 19, 2007"
+    "date": "September 19, 2007",
+    "imageUrl": "/bobbleheads/cardinals-photos/yadier-molina-2007.jpg"
   },
   {
     "id": "tony-la-russa-2007",
@@ -1324,7 +1342,8 @@
     "id": "chris-carpenter-2006",
     "title": "Chris Carpenter",
     "year": "2006",
-    "date": "September 17, 2006"
+    "date": "September 17, 2006",
+    "imageUrl": "/bobbleheads/cardinals-photos/chris-carpenter-2006.jpg"
   },
   {
     "id": "jim-edmonds-2005",
@@ -1336,31 +1355,36 @@
     "id": "whitey-herzog-2005",
     "title": "Whitey Herzog",
     "year": "2005",
-    "date": "July 19, 2005"
+    "date": "July 19, 2005",
+    "imageUrl": "/bobbleheads/cardinals-photos/whitey-herzog-2005.jpg"
   },
   {
     "id": "lou-brock-2004",
     "title": "Lou Brock",
     "year": "2004",
-    "date": "June 20, 2004"
+    "date": "June 20, 2004",
+    "imageUrl": "/bobbleheads/cardinals-photos/lou-brock-2004.jpg"
   },
   {
     "id": "bob-gibson-2004",
     "title": "Bob Gibson",
     "year": "2004",
-    "date": "July 5, 2004"
+    "date": "July 5, 2004",
+    "imageUrl": "/bobbleheads/cardinals-photos/bob-gibson-2004.jpg"
   },
   {
     "id": "scott-rolen-2003",
     "title": "Scott Rolen",
     "year": "2003",
-    "date": "June 1, 2003"
+    "date": "June 1, 2003",
+    "imageUrl": "/bobbleheads/cardinals-photos/scott-rolen-2003.jpg"
   },
   {
     "id": "edgar-renteria-2003",
     "title": "Edgar Renteria",
     "year": "2003",
-    "date": "July 13, 2003"
+    "date": "July 13, 2003",
+    "imageUrl": "/bobbleheads/cardinals-photos/edgar-renteria-2003.jpg"
   },
   {
     "id": "albert-pujols-2002",
@@ -1372,24 +1396,28 @@
     "id": "fernando-vina-2002",
     "title": "Fernando Vina",
     "year": "2002",
-    "date": "July 3, 2002"
+    "date": "July 3, 2002",
+    "imageUrl": "/bobbleheads/cardinals-photos/fernando-vina-2002.jpg"
   },
   {
     "id": "jim-edmonds-2001",
     "title": "Jim Edmonds",
     "year": "2001",
-    "date": "June 3, 2001"
+    "date": "June 3, 2001",
+    "imageUrl": "/bobbleheads/cardinals-photos/jim-edmonds-2001.jpg"
   },
   {
     "id": "mike-matheny-2001",
     "title": "Mike Matheny",
     "year": "2001",
-    "date": "June 24, 2001"
+    "date": "June 24, 2001",
+    "imageUrl": "/bobbleheads/cardinals-photos/mike-matheny-2001.jpg"
   },
   {
     "id": "mark-mcgwire-2001",
     "title": "Mark McGwire",
     "year": "2001",
-    "date": "September 18, 2001"
+    "date": "September 18, 2001",
+    "imageUrl": "/bobbleheads/cardinals-photos/mark-mcgwire-2001.jpg"
   }
 ]

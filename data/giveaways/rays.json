@@ -173,7 +173,8 @@
     "title": "Blake Snell",
     "nickname": "Season Ticket Holders",
     "year": "2019",
-    "date": "2019"
+    "date": "2019",
+    "imageUrl": "/bobbleheads/rays-photos/blake-snell-season-ticket-holders-2019.jpg"
   },
   {
     "id": "dan-johnson-2018",
@@ -215,7 +216,8 @@
     "title": "Evan Longoria",
     "nickname": "Fan Fest, Game 162",
     "year": "2018",
-    "date": "2018"
+    "date": "2018",
+    "imageUrl": "/bobbleheads/rays-photos/evan-longoria-fan-fest-game-162-2018.jpg"
   },
   {
     "id": "blake-snell-2017",
@@ -376,7 +378,8 @@
     "nickname": "Rookie of the Year",
     "year": "2014",
     "date": "April 4, 2014",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rays-photos/wil-myers-rookie-of-the-year-2014.jpg"
   },
   {
     "id": "raymond-bobble-belly-2013",
@@ -391,7 +394,8 @@
     "title": "Ben Zobrist",
     "nickname": "\"Jedi ZO\", Star Wars",
     "year": "2013",
-    "date": "September 21, 2013"
+    "date": "September 21, 2013",
+    "imageUrl": "/bobbleheads/rays-photos/ben-zobrist-jedi-zo-star-wars-2013.jpg"
   },
   {
     "id": "evan-longoria-retro-2013",
@@ -399,7 +403,8 @@
     "nickname": "Retro",
     "year": "2013",
     "date": "July 6, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/rays-photos/evan-longoria-retro-2013.jpg"
   },
   {
     "id": "astro-devil-rays-mascot-2013",
@@ -413,21 +418,24 @@
     "title": "Matt Joyce",
     "year": "2012",
     "date": "September 23, 2012",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rays-photos/matt-joyce-2012.jpg"
   },
   {
     "id": "dj-kitty-2012",
     "title": "DJ Kitty",
     "year": "2012",
     "date": "August 5, 2012",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rays-photos/dj-kitty-2012.jpg"
   },
   {
     "id": "matt-moore-2012",
     "title": "Matt Moore",
     "year": "2012",
     "date": "July 22, 2012",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rays-photos/matt-moore-2012.jpg"
   },
   {
     "id": "james-shields-2012",
@@ -441,14 +449,16 @@
     "title": "Joe Maddon",
     "year": "2012",
     "date": "June 15, 2012",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rays-photos/joe-maddon-2012.jpg"
   },
   {
     "id": "desmond-jennings-2012",
     "title": "Desmond Jennings",
     "year": "2012",
     "date": "June 3, 2012",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/rays-photos/desmond-jennings-2012.jpg"
   },
   {
     "id": "kyle-farnsworth-2012",
@@ -461,7 +471,8 @@
     "id": "johnny-damon-2011",
     "title": "Johnny Damon",
     "year": "2011",
-    "date": "July 17, 2011"
+    "date": "July 17, 2011",
+    "imageUrl": "/bobbleheads/rays-photos/johnny-damon-2011.jpg"
   },
   {
     "id": "bj-upton-2011",
@@ -480,7 +491,8 @@
     "id": "david-price-2010",
     "title": "David Price",
     "year": "2010",
-    "date": "July 11, 2010"
+    "date": "July 11, 2010",
+    "imageUrl": "/bobbleheads/rays-photos/david-price-2010.jpg"
   },
   {
     "id": "evan-longoria-2010",
@@ -492,7 +504,8 @@
     "id": "jason-bartlett-2010",
     "title": "Jason Bartlett",
     "year": "2010",
-    "date": "June 13, 2010"
+    "date": "June 13, 2010",
+    "imageUrl": "/bobbleheads/rays-photos/jason-bartlett-2010.jpg"
   },
   {
     "id": "scott-kazmir-2009",
@@ -504,7 +517,8 @@
     "id": "carl-crawford-2009",
     "title": "Carl Crawford",
     "year": "2009",
-    "date": "July 12, 2009"
+    "date": "July 12, 2009",
+    "imageUrl": "/bobbleheads/rays-photos/carl-crawford-2009.jpg"
   },
   {
     "id": "james-shields-2009",
@@ -523,21 +537,24 @@
     "title": "Troy Percival",
     "nickname": "Figurine",
     "year": "2008",
-    "date": "September 20, 2008"
+    "date": "September 20, 2008",
+    "imageUrl": "/bobbleheads/rays-photos/troy-percival-figurine-2008.jpg"
   },
   {
     "id": "james-shields-figurine-2008",
     "title": "James Shields",
     "nickname": "Figurine",
     "year": "2008",
-    "date": "August 30, 2008"
+    "date": "August 30, 2008",
+    "imageUrl": "/bobbleheads/rays-photos/james-shields-figurine-2008.jpg"
   },
   {
     "id": "bj-upton-figurine-2008",
     "title": "B.J. Upton",
     "nickname": "Figurine",
     "year": "2008",
-    "date": "August 2, 2008"
+    "date": "August 2, 2008",
+    "imageUrl": "/bobbleheads/rays-photos/bj-upton-figurine-2008.jpg"
   },
   {
     "id": "carlos-pena-figurine-2008",
@@ -552,7 +569,8 @@
     "nickname": "Mini, Disney",
     "year": "2008",
     "date": "April 24, 2008",
-    "quantity": "2,500"
+    "quantity": "2,500",
+    "imageUrl": "/bobbleheads/rays-photos/mickey-mouse-mini-disney-2008.jpg"
   },
   {
     "id": "goofy-mini-disney-2008",
@@ -630,7 +648,8 @@
     "id": "carl-crawford-2006",
     "title": "Carl Crawford",
     "year": "2006",
-    "date": "May 13, 2006"
+    "date": "May 13, 2006",
+    "imageUrl": "/bobbleheads/rays-photos/carl-crawford-2006.jpg"
   },
   {
     "id": "jonny-gomes-2006",
@@ -643,13 +662,15 @@
     "title": "Carl Crawford",
     "nickname": "Sliding",
     "year": "2005",
-    "date": "October 1, 2005"
+    "date": "October 1, 2005",
+    "imageUrl": "/bobbleheads/rays-photos/carl-crawford-sliding-2005.jpg"
   },
   {
     "id": "wade-boggs-2005",
     "title": "Wade Boggs",
     "year": "2005",
-    "date": "July 23, 2005"
+    "date": "July 23, 2005",
+    "imageUrl": "/bobbleheads/rays-photos/wade-boggs-2005.jpg"
   },
   {
     "id": "danys-baez-2004",
@@ -691,7 +712,8 @@
     "title": "Tino Martinez",
     "nickname": "Mini",
     "year": "2004",
-    "date": "May 30, 2004"
+    "date": "May 30, 2004",
+    "imageUrl": "/bobbleheads/rays-photos/tino-martinez-mini-2004.jpg"
   },
   {
     "id": "carl-crawford-mini-2004",
@@ -745,7 +767,8 @@
     "id": "steve-cox-2002",
     "title": "Steve Cox",
     "year": "2002",
-    "date": "September 8, 2002"
+    "date": "September 8, 2002",
+    "imageUrl": "/bobbleheads/rays-photos/steve-cox-2002.jpg"
   },
   {
     "id": "raymond-mascot-2001",
@@ -758,6 +781,7 @@
     "id": "fred-mcgriff-2001",
     "title": "Fred McGriff",
     "year": "2001",
-    "date": "June 22, 2001"
+    "date": "June 22, 2001",
+    "imageUrl": "/bobbleheads/rays-photos/fred-mcgriff-2001.jpg"
   }
 ]

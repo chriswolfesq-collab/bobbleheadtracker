@@ -135,7 +135,8 @@
     "title": "Ludacris",
     "year": "2024",
     "date": "September 4, 2024",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/braves-photos/ludacris-2024.jpg"
   },
   {
     "id": "brush-2023",
@@ -277,7 +278,8 @@
     "title": "Spencer Strider",
     "year": "2023",
     "date": "September 26, 2023",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/braves-photos/spencer-strider-2023.jpg"
   },
   {
     "id": "greg-maddux-cy-young-2022",
@@ -469,7 +471,8 @@
     "title": "Travis d'Arnaud",
     "year": "2021",
     "date": "August 12, 2021",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/braves-photos/travis-darnaud-2021.jpg"
   },
   {
     "id": "mike-soroka-2021",
@@ -541,7 +544,8 @@
     "title": "\"Swanberson\"",
     "nickname": "Swanson & Culberson",
     "year": "2019",
-    "date": "June 11, 2019"
+    "date": "June 11, 2019",
+    "imageUrl": "/bobbleheads/braves-photos/swanberson-swanson-culberson-2019.jpg"
   },
   {
     "id": "walter-banks-2019",
@@ -579,7 +583,8 @@
     "id": "hank-aaron-2019",
     "title": "Hank Aaron",
     "year": "2019",
-    "date": "September 17, 2019"
+    "date": "September 17, 2019",
+    "imageUrl": "/bobbleheads/braves-photos/hank-aaron-2019.jpg"
   },
   {
     "id": "two-bit-2019",
@@ -603,7 +608,8 @@
     "title": "BLOOPER",
     "year": "2018",
     "date": "April 22, 2018",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/braves-photos/blooper-2018.jpg"
   },
   {
     "id": "ozzie-calrissian-star-wars-2018",
@@ -749,7 +755,8 @@
     "nickname": "Spider-Man Catch",
     "year": "2016",
     "date": "August 16, 2016",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/braves-photos/andruw-jones-spider-man-catch-2016.jpg"
   },
   {
     "id": "chipper-jones-2000-all-star-game-2016",
@@ -790,7 +797,8 @@
     "title": "Jason Grilli",
     "nickname": "X-Wing Fighter",
     "year": "2015",
-    "date": "July 3, 2015"
+    "date": "July 3, 2015",
+    "imageUrl": "/bobbleheads/braves-photos/jason-grilli-x-wing-fighter-2015.jpg"
   },
   {
     "id": "freddie-freeman-jonny-gomes-hugging-2015",
@@ -878,77 +886,88 @@
     "title": "B.J. Upton",
     "year": "2013",
     "date": "June 20, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/braves-photos/bj-upton-2013.jpg"
   },
   {
     "id": "dale-murphy-2013",
     "title": "Dale Murphy",
     "year": "2013",
     "date": "July 11, 2013",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/braves-photos/dale-murphy-2013.jpg"
   },
   {
     "id": "sid-bream-2012",
     "title": "Sid Bream",
     "year": "2012",
     "date": "June 9, 2012",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/braves-photos/sid-bream-2012.jpg"
   },
   {
     "id": "craig-kimbrel-2012",
     "title": "Craig Kimbrel",
     "year": "2012",
     "date": "June 13, 2012",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/braves-photos/craig-kimbrel-2012.jpg"
   },
   {
     "id": "chipper-jones-2012",
     "title": "Chipper Jones",
     "year": "2012",
     "date": "August 16, 2012",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/braves-photos/chipper-jones-2012.jpg"
   },
   {
     "id": "jason-heyward-2011",
     "title": "Jason Heyward",
     "year": "2011",
     "date": "June 15, 2011",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/braves-photos/jason-heyward-2011.jpg"
   },
   {
     "id": "chipper-jones-2011",
     "title": "Chipper Jones",
     "year": "2011",
     "date": "July 28, 2011",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/braves-photos/chipper-jones-2011.jpg"
   },
   {
     "id": "dan-uggla-2011",
     "title": "Dan Uggla",
     "year": "2011",
     "date": "August 18, 2011",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/braves-photos/dan-uggla-2011.jpg"
   },
   {
     "id": "mark-teixeira-2008",
     "title": "Mark Teixeira",
     "year": "2008",
     "date": "May 21, 2008",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/braves-photos/mark-teixeira-2008.jpg"
   },
   {
     "id": "brian-mccann-2008",
     "title": "Brian McCann",
     "year": "2008",
     "date": "June 25, 2008",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/braves-photos/brian-mccann-2008.jpg"
   },
   {
     "id": "tim-hudson-2008",
     "title": "Tim Hudson",
     "year": "2008",
     "date": "August 27, 2008",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/braves-photos/tim-hudson-2008.jpg"
   },
   {
     "id": "bobby-cox-2008",
@@ -997,7 +1016,8 @@
     "title": "John Smoltz",
     "nickname": "Statue",
     "year": "2006",
-    "date": "July 6, 2006"
+    "date": "July 6, 2006",
+    "imageUrl": "/bobbleheads/braves-photos/john-smoltz-statue-2006.jpg"
   },
   {
     "id": "jeff-francoeur-statue-2006",
@@ -1018,91 +1038,104 @@
     "title": "Bobby Cox",
     "year": "2003",
     "date": "May 26, 2003",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/bobby-cox-2003.jpg"
   },
   {
     "id": "phil-niekro-2003",
     "title": "Phil Niekro",
     "year": "2003",
     "date": "June 20, 2003",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/phil-niekro-2003.jpg"
   },
   {
     "id": "dale-murphy-2003",
     "title": "Dale Murphy",
     "year": "2003",
     "date": "July 21, 2003",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/dale-murphy-2003.jpg"
   },
   {
     "id": "warren-spahn-2003",
     "title": "Warren Spahn",
     "year": "2003",
     "date": "August 12, 2003",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/warren-spahn-2003.jpg"
   },
   {
     "id": "eddie-mathews-2003",
     "title": "Eddie Mathews",
     "year": "2003",
     "date": "August 27, 2003",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/eddie-mathews-2003.jpg"
   },
   {
     "id": "hank-aaron-2003",
     "title": "Hank Aaron",
     "year": "2003",
     "date": "September 19, 2003",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/hank-aaron-2003.jpg"
   },
   {
     "id": "john-smoltz-2002",
     "title": "John Smoltz",
     "year": "2002",
     "date": "April 1, 2002",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/john-smoltz-2002.jpg"
   },
   {
     "id": "gary-sheffield-2002",
     "title": "Gary Sheffield",
     "year": "2002",
     "date": "May 27, 2002",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/gary-sheffield-2002.jpg"
   },
   {
     "id": "tom-glavine-2002",
     "title": "Tom Glavine",
     "year": "2002",
     "date": "June 14, 2002",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/tom-glavine-2002.jpg"
   },
   {
     "id": "javy-lopez-2002",
     "title": "Javy Lopez",
     "year": "2002",
     "date": "July 5, 2002",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/javy-lopez-2002.jpg"
   },
   {
     "id": "greg-maddux-2002",
     "title": "Greg Maddux",
     "year": "2002",
     "date": "August 14, 2002",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/greg-maddux-2002.jpg"
   },
   {
     "id": "rafael-furcal-2002",
     "title": "Rafael Furcal",
     "year": "2002",
     "date": "September 2, 2002",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/rafael-furcal-2002.jpg"
   },
   {
     "id": "andruw-jones-2001",
     "title": "Andruw Jones",
     "year": "2001",
     "date": "September 28, 2001",
-    "quantity": "12,000"
+    "quantity": "12,000",
+    "imageUrl": "/bobbleheads/braves-photos/andruw-jones-2001.jpg"
   },
   {
     "id": "chipper-jones-2001",

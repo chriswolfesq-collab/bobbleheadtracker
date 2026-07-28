@@ -54,7 +54,8 @@
     "id": "house-random-bobblehead-2026",
     "title": "\"House\" (Random) Bobblehead",
     "year": "2026",
-    "date": "2026"
+    "date": "2026",
+    "imageUrl": "/bobbleheads/yankees-photos/house-random-bobblehead-2026.jpg"
   },
   {
     "id": "bernie-williams-2025",
@@ -123,7 +124,8 @@
     "id": "frank-sinatra-2024",
     "title": "Frank Sinatra",
     "year": "2024",
-    "date": "September 15, 2024"
+    "date": "September 15, 2024",
+    "imageUrl": "/bobbleheads/yankees-photos/frank-sinatra-2024.jpg"
   },
   {
     "id": "elephant-piggy-2024",
@@ -144,13 +146,15 @@
     "title": "Eli Manning",
     "year": "2024",
     "date": "August 4, 2024",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/eli-manning-2024.jpg"
   },
   {
     "id": "the-pigeon-2024",
     "title": "The Pigeon",
     "year": "2024",
-    "date": "August 3, 2024"
+    "date": "August 3, 2024",
+    "imageUrl": "/bobbleheads/yankees-photos/the-pigeon-2024.jpg"
   },
   {
     "id": "gerrit-cole-2024-7-19",
@@ -301,7 +305,8 @@
     "title": "Andy Pettitte",
     "year": "2022",
     "date": "June 10, 2022",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/andy-pettitte-2022.jpg"
   },
   {
     "id": "aaron-judge-2022",
@@ -317,7 +322,8 @@
     "nickname": "Star Wars",
     "year": "2022",
     "date": "May 25, 2022",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/yoda-star-wars-2022.jpg"
   },
   {
     "id": "scooby-doo-2022",
@@ -421,7 +427,8 @@
     "title": "Didi Gregorius",
     "nickname": "Spring Training",
     "year": "2019",
-    "date": "2019"
+    "date": "2019",
+    "imageUrl": "/bobbleheads/yankees-photos/didi-gregorius-spring-training-2019.jpg"
   },
   {
     "id": "brett-gardner-2018",
@@ -516,7 +523,8 @@
     "title": "Peanuts",
     "nickname": "#5",
     "year": "2016",
-    "date": "September 8, 2016"
+    "date": "September 8, 2016",
+    "imageUrl": "/bobbleheads/yankees-photos/peanuts-5-2016.jpg"
   },
   {
     "id": "didi-gregorius-2016",
@@ -611,7 +619,8 @@
     "title": "Paul O'Neill",
     "year": "2014",
     "date": "July 27, 2014",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/paul-oneill-2014.jpg"
   },
   {
     "id": "lou-gehrig-2014",
@@ -642,7 +651,8 @@
     "title": "Mariano Rivera",
     "year": "2013",
     "date": "September 24, 2013",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/mariano-rivera-2013.jpg"
   },
   {
     "id": "yogi-berra-2013",
@@ -665,21 +675,24 @@
     "title": "Derek Jeter",
     "year": "2013",
     "date": "July 8, 2013",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/derek-jeter-2013.jpg"
   },
   {
     "id": "snoopy-2012",
     "title": "Snoopy",
     "year": "2012",
     "date": "September 19, 2012",
-    "quantity": "18,000"
+    "quantity": "18,000",
+    "imageUrl": "/bobbleheads/yankees-photos/snoopy-2012.jpg"
   },
   {
     "id": "mark-teixeira-figurine-2012",
     "title": "Mark Teixeira",
     "nickname": "Figurine",
     "year": "2012",
-    "date": "July 18, 2012"
+    "date": "July 18, 2012",
+    "imageUrl": "/bobbleheads/yankees-photos/mark-teixeira-figurine-2012.jpg"
   },
   {
     "id": "jorge-posada-figurine-2011",
@@ -706,7 +719,8 @@
     "id": "derek-jeter-2007",
     "title": "Derek Jeter",
     "year": "2007",
-    "date": "June 8, 2007"
+    "date": "June 8, 2007",
+    "imageUrl": "/bobbleheads/yankees-photos/derek-jeter-2007.jpg"
   },
   {
     "id": "mickey-mantle-2006",
@@ -754,37 +768,43 @@
     "id": "phil-rizzuto-2004",
     "title": "Phil Rizzuto",
     "year": "2004",
-    "date": "August 3, 2004"
+    "date": "August 3, 2004",
+    "imageUrl": "/bobbleheads/yankees-photos/phil-rizzuto-2004.jpg"
   },
   {
     "id": "lou-gehrig-2004",
     "title": "Lou Gehrig",
     "year": "2004",
-    "date": "July 5, 2004"
+    "date": "July 5, 2004",
+    "imageUrl": "/bobbleheads/yankees-photos/lou-gehrig-2004.jpg"
   },
   {
     "id": "babe-ruth-2004",
     "title": "Babe Ruth",
     "year": "2004",
-    "date": "April 30, 2004"
+    "date": "April 30, 2004",
+    "imageUrl": "/bobbleheads/yankees-photos/babe-ruth-2004.jpg"
   },
   {
     "id": "jason-giambi-2003",
     "title": "Jason Giambi",
     "year": "2003",
-    "date": "September 13, 2003"
+    "date": "September 13, 2003",
+    "imageUrl": "/bobbleheads/yankees-photos/jason-giambi-2003.jpg"
   },
   {
     "id": "hideki-matsui-2003",
     "title": "Hideki Matsui",
     "year": "2003",
-    "date": "September 8, 2003"
+    "date": "September 8, 2003",
+    "imageUrl": "/bobbleheads/yankees-photos/hideki-matsui-2003.jpg"
   },
   {
     "id": "mariano-rivera-2003",
     "title": "Mariano Rivera",
     "year": "2003",
-    "date": "August 27, 2003"
+    "date": "August 27, 2003",
+    "imageUrl": "/bobbleheads/yankees-photos/mariano-rivera-2003.jpg"
   },
   {
     "id": "paul-oneill-2003",
@@ -796,55 +816,64 @@
     "id": "joe-torre-2002",
     "title": "Joe Torre",
     "year": "2002",
-    "date": "September 12, 2002"
+    "date": "September 12, 2002",
+    "imageUrl": "/bobbleheads/yankees-photos/joe-torre-2002.jpg"
   },
   {
     "id": "paul-oneill-2002",
     "title": "Paul O'Neill",
     "year": "2002",
     "date": "September 10, 2002",
-    "quantity": "8,800"
+    "quantity": "8,800",
+    "imageUrl": "/bobbleheads/yankees-photos/paul-oneill-2002.jpg"
   },
   {
     "id": "jorge-posada-2002",
     "title": "Jorge Posada",
     "year": "2002",
-    "date": "August 8, 2002"
+    "date": "August 8, 2002",
+    "imageUrl": "/bobbleheads/yankees-photos/jorge-posada-2002.jpg"
   },
   {
     "id": "bernie-williams-2002",
     "title": "Bernie Williams",
     "year": "2002",
-    "date": "July 18, 2002"
+    "date": "July 18, 2002",
+    "imageUrl": "/bobbleheads/yankees-photos/bernie-williams-2002.jpg"
   },
   {
     "id": "roger-clemens-2002",
     "title": "Roger Clemens",
     "year": "2002",
-    "date": "May 22, 2002"
+    "date": "May 22, 2002",
+    "imageUrl": "/bobbleheads/yankees-photos/roger-clemens-2002.jpg"
   },
   {
     "id": "derek-jeter-2002",
     "title": "Derek Jeter",
     "year": "2002",
-    "date": "March 27, 2002"
+    "date": "March 27, 2002",
+    "imageUrl": "/bobbleheads/yankees-photos/derek-jeter-2002.jpg"
   },
   {
     "id": "tino-martinez-2001",
     "title": "Tino Martinez",
     "year": "2001",
-    "date": "August 16, 2001"
+    "date": "August 16, 2001",
+    "imageUrl": "/bobbleheads/yankees-photos/tino-martinez-2001.jpg"
   },
   {
     "id": "derek-jeter-2001",
     "title": "Derek Jeter",
     "year": "2001",
-    "date": "July 2, 2001"
+    "date": "July 2, 2001",
+    "imageUrl": "/bobbleheads/yankees-photos/derek-jeter-2001.jpg"
   },
   {
     "id": "andy-pettitte-2001",
     "title": "Andy Pettitte",
     "year": "2001",
-    "date": "May 24, 2001"
+    "date": "May 24, 2001",
+    "imageUrl": "/bobbleheads/yankees-photos/andy-pettitte-2001.jpg"
   }
 ]

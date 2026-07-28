@@ -50,7 +50,8 @@
     "id": "university-of-michigan-paws-2023",
     "title": "University of Michigan PAWS",
     "year": "2023",
-    "date": "September 29, 2023"
+    "date": "September 29, 2023",
+    "imageUrl": "/bobbleheads/tigers-photos/university-of-michigan-paws-2023.jpg"
   },
   {
     "id": "black-panther-2023",
@@ -214,7 +215,8 @@
     "title": "J.D. Martinez",
     "nickname": "\"Iron Thrones\"",
     "year": "2017",
-    "date": "July 28, 2017"
+    "date": "July 28, 2017",
+    "imageUrl": "/bobbleheads/tigers-photos/jd-martinez-iron-thrones-2017.jpg"
   },
   {
     "id": "michael-fulmer-2017",
@@ -237,7 +239,8 @@
     "title": "J.D. Martinez",
     "year": "2016",
     "date": "July 16, 2016",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/tigers-photos/jd-martinez-2016.jpg"
   },
   {
     "id": "ian-kinsler-2016",
@@ -308,7 +311,8 @@
     "title": "Miguel Cabrera",
     "year": "2013",
     "date": "September 13, 2013",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/tigers-photos/miguel-cabrera-2013.jpg"
   },
   {
     "id": "justin-verlander-2013",
@@ -374,20 +378,23 @@
     "title": "Paws",
     "nickname": "Mascot",
     "year": "2009",
-    "date": "September 13, 2009"
+    "date": "September 13, 2009",
+    "imageUrl": "/bobbleheads/tigers-photos/paws-mascot-2009.jpg"
   },
   {
     "id": "miguel-cabrera-2009",
     "title": "Miguel Cabrera",
     "year": "2009",
-    "date": "April 13, 2009"
+    "date": "April 13, 2009",
+    "imageUrl": "/bobbleheads/tigers-photos/miguel-cabrera-2009.jpg"
   },
   {
     "id": "curtis-granderson-2008",
     "title": "Curtis Granderson",
     "year": "2008",
     "date": "2008",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/tigers-photos/curtis-granderson-2008.jpg"
   },
   {
     "id": "carlos-guillen-2007",
@@ -401,13 +408,15 @@
     "title": "Magglio Ordonez",
     "year": "2007",
     "date": "July 1, 2007",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/tigers-photos/magglio-ordonez-2007.jpg"
   },
   {
     "id": "jeremy-bonderman-2006",
     "title": "Jeremy Bonderman",
     "year": "2006",
-    "date": "July 23, 2006"
+    "date": "July 23, 2006",
+    "imageUrl": "/bobbleheads/tigers-photos/jeremy-bonderman-2006.jpg"
   },
   {
     "id": "placido-polanco-2006",
@@ -419,13 +428,15 @@
     "id": "troy-percival-2005",
     "title": "Troy Percival",
     "year": "2005",
-    "date": "August 21, 2005"
+    "date": "August 21, 2005",
+    "imageUrl": "/bobbleheads/tigers-photos/troy-percival-2005.jpg"
   },
   {
     "id": "ivan-rodriguez-2004",
     "title": "Ivan Rodriguez",
     "year": "2004",
-    "date": "August 7, 2004"
+    "date": "August 7, 2004",
+    "imageUrl": "/bobbleheads/tigers-photos/ivan-rodriguez-2004.jpg"
   },
   {
     "id": "dmitri-young-2004",
@@ -437,7 +448,8 @@
     "id": "alan-trammell-2003",
     "title": "Alan Trammell",
     "year": "2003",
-    "date": "August 23, 2003"
+    "date": "August 23, 2003",
+    "imageUrl": "/bobbleheads/tigers-photos/alan-trammell-2003.jpg"
   },
   {
     "id": "lance-parrish-2003",
@@ -449,18 +461,21 @@
     "id": "matt-anderson-2002",
     "title": "Matt Anderson",
     "year": "2002",
-    "date": "May 19, 2002"
+    "date": "May 19, 2002",
+    "imageUrl": "/bobbleheads/tigers-photos/matt-anderson-2002.jpg"
   },
   {
     "id": "jeff-weaver-2001",
     "title": "Jeff Weaver",
     "year": "2001",
-    "date": "September 29, 2001"
+    "date": "September 29, 2001",
+    "imageUrl": "/bobbleheads/tigers-photos/jeff-weaver-2001.jpg"
   },
   {
     "id": "al-kaline-2001",
     "title": "Al Kaline",
     "year": "2001",
-    "date": "July 4, 2001"
+    "date": "July 4, 2001",
+    "imageUrl": "/bobbleheads/tigers-photos/al-kaline-2001.jpg"
   }
 ]

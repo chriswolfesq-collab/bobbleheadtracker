@@ -18,7 +18,8 @@
     "id": "yeet-2025",
     "title": "\"Yeet\"",
     "year": "2025",
-    "date": "May 10, 2025"
+    "date": "May 10, 2025",
+    "imageUrl": "/bobbleheads/pirates-photos/yeet-2025.jpg"
   },
   {
     "id": "mac-miller-2025",
@@ -57,14 +58,16 @@
     "title": "Andrew McCutchen",
     "year": "2024",
     "date": "June 22, 2024",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/andrew-mccutchen-2024.jpg"
   },
   {
     "id": "wiz-khalifa-2024",
     "title": "Wiz Khalifa",
     "year": "2024",
     "date": "July 20, 2024",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/wiz-khalifa-2024.jpg"
   },
   {
     "id": "bryan-reynolds-2022",
@@ -96,7 +99,8 @@
     "id": "wonder-woman-2021",
     "title": "Wonder Woman",
     "year": "2021",
-    "date": "May 1, 2021"
+    "date": "May 1, 2021",
+    "imageUrl": "/bobbleheads/pirates-photos/wonder-woman-2021.jpg"
   },
   {
     "id": "jameson-taillon-star-wars-2019",
@@ -104,7 +108,8 @@
     "nickname": "Star Wars",
     "year": "2019",
     "date": "April 5, 2019",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/pirates-photos/jameson-taillon-star-wars-2019.jpg"
   },
   {
     "id": "chris-archer-2019",
@@ -265,7 +270,8 @@
     "nickname": "Silver Slugger",
     "year": "2014",
     "date": "May 24, 2014",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/pirates-photos/pedro-alvarez-silver-slugger-2014.jpg"
   },
   {
     "id": "andrew-mccutchen-nl-mvp-2014",
@@ -290,7 +296,8 @@
     "nickname": "Awards",
     "year": "2013",
     "date": "April 23, 2013",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/pirates-photos/andrew-mccutchen-awards-2013.jpg"
   },
   {
     "id": "aj-burnett-camo-jersey-2013",
@@ -305,20 +312,23 @@
     "id": "joel-hanrahan-2012",
     "title": "Joel Hanrahan",
     "year": "2012",
-    "date": "May 12, 2012"
+    "date": "May 12, 2012",
+    "imageUrl": "/bobbleheads/pirates-photos/joel-hanrahan-2012.jpg"
   },
   {
     "id": "andrew-mccutchen-figurine-2011",
     "title": "Andrew McCutchen",
     "nickname": "Figurine",
     "year": "2011",
-    "date": "April 23, 2011"
+    "date": "April 23, 2011",
+    "imageUrl": "/bobbleheads/pirates-photos/andrew-mccutchen-figurine-2011.jpg"
   },
   {
     "id": "neil-walker-2011",
     "title": "Neil Walker",
     "year": "2011",
-    "date": "May 21, 2011"
+    "date": "May 21, 2011",
+    "imageUrl": "/bobbleheads/pirates-photos/neil-walker-2011.jpg"
   },
   {
     "id": "pirate-parrot-mascot-2011",
@@ -339,19 +349,22 @@
     "id": "andrew-mccutchen-2010",
     "title": "Andrew McCutchen",
     "year": "2010",
-    "date": "August 6, 2010"
+    "date": "August 6, 2010",
+    "imageUrl": "/bobbleheads/pirates-photos/andrew-mccutchen-2010.jpg"
   },
   {
     "id": "ryan-doumit-2009",
     "title": "Ryan Doumit",
     "year": "2009",
-    "date": "April 18, 2009"
+    "date": "April 18, 2009",
+    "imageUrl": "/bobbleheads/pirates-photos/ryan-doumit-2009.jpg"
   },
   {
     "id": "nate-mclouth-2009",
     "title": "Nate McLouth",
     "year": "2009",
-    "date": "May 16, 2009"
+    "date": "May 16, 2009",
+    "imageUrl": "/bobbleheads/pirates-photos/nate-mclouth-2009.jpg"
   },
   {
     "id": "honus-wagner-figurine-2009",
@@ -370,87 +383,101 @@
     "id": "paul-maholm-2009",
     "title": "Paul Maholm",
     "year": "2009",
-    "date": "September 25, 2009"
+    "date": "September 25, 2009",
+    "imageUrl": "/bobbleheads/pirates-photos/paul-maholm-2009.jpg"
   },
   {
     "id": "manny-sanguillen-2008",
     "title": "Manny Sanguillen",
     "year": "2008",
-    "date": "April 11, 2008"
+    "date": "April 11, 2008",
+    "imageUrl": "/bobbleheads/pirates-photos/manny-sanguillen-2008.jpg"
   },
   {
     "id": "tom-gorzelanny-2008",
     "title": "Tom Gorzelanny",
     "year": "2008",
-    "date": "April 26, 2008"
+    "date": "April 26, 2008",
+    "imageUrl": "/bobbleheads/pirates-photos/tom-gorzelanny-2008.jpg"
   },
   {
     "id": "willie-stargell-2008",
     "title": "Willie Stargell",
     "year": "2008",
-    "date": "May 9, 2008"
+    "date": "May 9, 2008",
+    "imageUrl": "/bobbleheads/pirates-photos/willie-stargell-2008.jpg"
   },
   {
     "id": "matt-capps-2008",
     "title": "Matt Capps",
     "year": "2008",
-    "date": "May 24, 2008"
+    "date": "May 24, 2008",
+    "imageUrl": "/bobbleheads/pirates-photos/matt-capps-2008.jpg"
   },
   {
     "id": "richie-hebner-2008",
     "title": "Richie Hebner",
     "year": "2008",
-    "date": "June 6, 2008"
+    "date": "June 6, 2008",
+    "imageUrl": "/bobbleheads/pirates-photos/richie-hebner-2008.jpg"
   },
   {
     "id": "dave-parker-2008",
     "title": "Dave Parker",
     "year": "2008",
-    "date": "June 27, 2008"
+    "date": "June 27, 2008",
+    "imageUrl": "/bobbleheads/pirates-photos/dave-parker-2008.jpg"
   },
   {
     "id": "al-oliver-2008",
     "title": "Al Oliver",
     "year": "2008",
-    "date": "July 25, 2008"
+    "date": "July 25, 2008",
+    "imageUrl": "/bobbleheads/pirates-photos/al-oliver-2008.jpg"
   },
   {
     "id": "richie-zisk-2008",
     "title": "Richie Zisk",
     "year": "2008",
-    "date": "August 29, 2008"
+    "date": "August 29, 2008",
+    "imageUrl": "/bobbleheads/pirates-photos/richie-zisk-2008.jpg"
   },
   {
     "id": "rennie-stennett-2008",
     "title": "Rennie Stennett",
     "year": "2008",
-    "date": "September 12, 2008"
+    "date": "September 12, 2008",
+    "imageUrl": "/bobbleheads/pirates-photos/rennie-stennett-2008.jpg"
   },
   {
     "id": "jason-bay-2006-all-star-2007",
     "title": "Jason Bay",
     "nickname": "2006 All-Star",
     "year": "2007",
-    "date": "April 13, 2007"
+    "date": "April 13, 2007",
+    "imageUrl": "/bobbleheads/pirates-photos/jason-bay-2006-all-star-2007.jpg"
   },
   {
     "id": "freddy-sanchez-2006-batting-champion-2007",
     "title": "Freddy Sanchez",
     "nickname": "2006 Batting Champion",
     "year": "2007",
-    "date": "April 28, 2007"
+    "date": "April 28, 2007",
+    "imageUrl": "/bobbleheads/pirates-photos/freddy-sanchez-2006-batting-champion-2007.jpg"
   },
   {
     "id": "ronny-paulino-2007",
     "title": "Ronny Paulino",
     "year": "2007",
-    "date": "May 12, 2007"
+    "date": "May 12, 2007",
+    "imageUrl": "/bobbleheads/pirates-photos/ronny-paulino-2007.jpg"
   },
   {
     "id": "50s-60s-logo-man-2007",
     "title": "\"50s-60s Logo Man\"",
     "year": "2007",
-    "date": "May 19, 2007"
+    "date": "May 19, 2007",
+    "imageUrl": "/bobbleheads/pirates-photos/50s-60s-logo-man-2007.jpg"
   },
   {
     "id": "60s-70s-80s-logo-man-2007",
@@ -462,13 +489,15 @@
     "id": "bob-walk-2007",
     "title": "Bob Walk",
     "year": "2007",
-    "date": "June 30, 2007"
+    "date": "June 30, 2007",
+    "imageUrl": "/bobbleheads/pirates-photos/bob-walk-2007.jpg"
   },
   {
     "id": "80s-90s-logo-man-2007",
     "title": "\"80s-90s Logo Man\"",
     "year": "2007",
-    "date": "July 21, 2007"
+    "date": "July 21, 2007",
+    "imageUrl": "/bobbleheads/pirates-photos/80s-90s-logo-man-2007.jpg"
   },
   {
     "id": "josh-gibson-2007",
@@ -486,27 +515,31 @@
     "id": "90s-00s-logo-man-2007",
     "title": "\"90s-00s Logo Man\"",
     "year": "2007",
-    "date": "September 26, 2007"
+    "date": "September 26, 2007",
+    "imageUrl": "/bobbleheads/pirates-photos/90s-00s-logo-man-2007.jpg"
   },
   {
     "id": "jason-bay-all-star-2006",
     "title": "Jason Bay",
     "nickname": "All-Star",
     "year": "2006",
-    "date": "April 15, 2006"
+    "date": "April 15, 2006",
+    "imageUrl": "/bobbleheads/pirates-photos/jason-bay-all-star-2006.jpg"
   },
   {
     "id": "zach-duke-2006",
     "title": "Zach Duke",
     "year": "2006",
-    "date": "May 12, 2006"
+    "date": "May 12, 2006",
+    "imageUrl": "/bobbleheads/pirates-photos/zach-duke-2006.jpg"
   },
   {
     "id": "jack-wilson-jose-castillo-double-2006",
     "title": "Jack Wilson & Jose Castillo",
     "nickname": "Double",
     "year": "2006",
-    "date": "May 13, 2006"
+    "date": "May 13, 2006",
+    "imageUrl": "/bobbleheads/pirates-photos/jack-wilson-jose-castillo-double-2006.jpg"
   },
   {
     "id": "fire-ice-gonzalez-perez-2006",
@@ -519,7 +552,8 @@
     "id": "bill-mazeroski-2006",
     "title": "Bill Mazeroski",
     "year": "2006",
-    "date": "June 17, 2006"
+    "date": "June 17, 2006",
+    "imageUrl": "/bobbleheads/pirates-photos/bill-mazeroski-2006.jpg"
   },
   {
     "id": "young-guns-duke-doumit-duffy-2006",
@@ -532,20 +566,23 @@
     "id": "sean-casey-2006",
     "title": "Sean Casey",
     "year": "2006",
-    "date": "July 29, 2006"
+    "date": "July 29, 2006",
+    "imageUrl": "/bobbleheads/pirates-photos/sean-casey-2006.jpg"
   },
   {
     "id": "jolly-roger-mascot-2006",
     "title": "Jolly Roger",
     "nickname": "Mascot",
     "year": "2006",
-    "date": "July 30, 2006"
+    "date": "July 30, 2006",
+    "imageUrl": "/bobbleheads/pirates-photos/jolly-roger-mascot-2006.jpg"
   },
   {
     "id": "satchel-paige-2006",
     "title": "Satchel Paige",
     "year": "2006",
-    "date": "August 11, 2006"
+    "date": "August 11, 2006",
+    "imageUrl": "/bobbleheads/pirates-photos/satchel-paige-2006.jpg"
   },
   {
     "id": "potato-pete-mascot-2006",
@@ -558,20 +595,23 @@
     "id": "jack-wilson-2006",
     "title": "Jack Wilson",
     "year": "2006",
-    "date": "September 16, 2006"
+    "date": "September 16, 2006",
+    "imageUrl": "/bobbleheads/pirates-photos/jack-wilson-2006.jpg"
   },
   {
     "id": "freddy-sanchez-2006",
     "title": "Freddy Sanchez",
     "year": "2006",
-    "date": "September 30, 2006"
+    "date": "September 30, 2006",
+    "imageUrl": "/bobbleheads/pirates-photos/freddy-sanchez-2006.jpg"
   },
   {
     "id": "jason-bay-nl-rookie-of-the-year-2005",
     "title": "Jason Bay",
     "nickname": "NL Rookie of the Year",
     "year": "2005",
-    "date": "April 15, 2005"
+    "date": "April 15, 2005",
+    "imageUrl": "/bobbleheads/pirates-photos/jason-bay-nl-rookie-of-the-year-2005.jpg"
   },
   {
     "id": "honus-wagner-2005",
@@ -583,19 +623,22 @@
     "id": "oliver-perez-2005",
     "title": "Oliver Perez",
     "year": "2005",
-    "date": "May 21, 2005"
+    "date": "May 21, 2005",
+    "imageUrl": "/bobbleheads/pirates-photos/oliver-perez-2005.jpg"
   },
   {
     "id": "oliver-onion-2005",
     "title": "\"Oliver Onion\"",
     "year": "2005",
-    "date": "May 22, 2005"
+    "date": "May 22, 2005",
+    "imageUrl": "/bobbleheads/pirates-photos/oliver-onion-2005.jpg"
   },
   {
     "id": "craig-wilson-2005",
     "title": "Craig Wilson",
     "year": "2005",
-    "date": "June 4, 2005"
+    "date": "June 4, 2005",
+    "imageUrl": "/bobbleheads/pirates-photos/craig-wilson-2005.jpg"
   },
   {
     "id": "bill-mazeroski-2005",
@@ -614,7 +657,8 @@
     "title": "\"Cheese Chester\"",
     "nickname": "Mascot",
     "year": "2005",
-    "date": "August 7, 2005"
+    "date": "August 7, 2005",
+    "imageUrl": "/bobbleheads/pirates-photos/cheese-chester-mascot-2005.jpg"
   },
   {
     "id": "roberto-clemente-2005",
@@ -638,7 +682,8 @@
     "id": "manny-sanguillen-2004",
     "title": "Manny Sanguillen",
     "year": "2004",
-    "date": "March 13, 2004"
+    "date": "March 13, 2004",
+    "imageUrl": "/bobbleheads/pirates-photos/manny-sanguillen-2004.jpg"
   },
   {
     "id": "chuck-tanner-2004",
@@ -676,19 +721,22 @@
     "id": "willie-stargell-2004",
     "title": "Willie Stargell",
     "year": "2004",
-    "date": "July 24, 2004"
+    "date": "July 24, 2004",
+    "imageUrl": "/bobbleheads/pirates-photos/willie-stargell-2004.jpg"
   },
   {
     "id": "dave-parker-2004",
     "title": "Dave Parker",
     "year": "2004",
-    "date": "August 27, 2004"
+    "date": "August 27, 2004",
+    "imageUrl": "/bobbleheads/pirates-photos/dave-parker-2004.jpg"
   },
   {
     "id": "snoopy-2004",
     "title": "Snoopy",
     "year": "2004",
-    "date": "September 19, 2004"
+    "date": "September 19, 2004",
+    "imageUrl": "/bobbleheads/pirates-photos/snoopy-2004.jpg"
   },
   {
     "id": "kent-tekulve-2004",
@@ -700,75 +748,87 @@
     "id": "brian-giles-2003",
     "title": "Brian Giles",
     "year": "2003",
-    "date": "March 12, 2003"
+    "date": "March 12, 2003",
+    "imageUrl": "/bobbleheads/pirates-photos/brian-giles-2003.jpg"
   },
   {
     "id": "manny-sanguillen-2003",
     "title": "Manny Sanguillen",
     "year": "2003",
-    "date": "April 9, 2003"
+    "date": "April 9, 2003",
+    "imageUrl": "/bobbleheads/pirates-photos/manny-sanguillen-2003.jpg"
   },
   {
     "id": "bob-prince-talking-2003",
     "title": "Bob Prince",
     "nickname": "Talking",
     "year": "2003",
-    "date": "May 21, 2003"
+    "date": "May 21, 2003",
+    "imageUrl": "/bobbleheads/pirates-photos/bob-prince-talking-2003.jpg"
   },
   {
     "id": "jack-wilson-2003",
     "title": "Jack Wilson",
     "year": "2003",
-    "date": "August 16, 2003"
+    "date": "August 16, 2003",
+    "imageUrl": "/bobbleheads/pirates-photos/jack-wilson-2003.jpg"
   },
   {
     "id": "charlie-brown-2003",
     "title": "Charlie Brown",
     "year": "2003",
-    "date": "August 17, 2003"
+    "date": "August 17, 2003",
+    "imageUrl": "/bobbleheads/pirates-photos/charlie-brown-2003.jpg"
   },
   {
     "id": "josh-gibson-2003",
     "title": "Josh Gibson",
     "year": "2003",
-    "date": "August 29, 2003"
+    "date": "August 29, 2003",
+    "imageUrl": "/bobbleheads/pirates-photos/josh-gibson-2003.jpg"
   },
   {
     "id": "kip-wells-2003",
     "title": "Kip Wells",
     "year": "2003",
-    "date": "September 20, 2003"
+    "date": "September 20, 2003",
+    "imageUrl": "/bobbleheads/pirates-photos/kip-wells-2003.jpg"
   },
   {
     "id": "willie-stargell-2002",
     "title": "Willie Stargell",
     "year": "2002",
-    "date": "April 10, 2002"
+    "date": "April 10, 2002",
+    "imageUrl": "/bobbleheads/pirates-photos/willie-stargell-2002.jpg"
   },
   {
     "id": "jason-kendall-2002",
     "title": "Jason Kendall",
     "year": "2002",
-    "date": "June 26, 2002"
+    "date": "June 26, 2002",
+    "imageUrl": "/bobbleheads/pirates-photos/jason-kendall-2002.jpg"
   },
   {
     "id": "brian-giles-2002",
     "title": "Brian Giles",
     "year": "2002",
-    "date": "September 6, 2002"
+    "date": "September 6, 2002",
+    "imageUrl": "/bobbleheads/pirates-photos/brian-giles-2002.jpg"
   },
   {
     "id": "pokey-reese-2002",
     "title": "Pokey Reese",
     "year": "2002",
-    "date": "September 21, 2002"
+    "date": "September 21, 2002",
+    "imageUrl": "/bobbleheads/pirates-photos/pokey-reese-2002.jpg"
   },
   {
     "id": "pirate-parrot-mascot-2002",
     "title": "Pirate Parrot",
     "nickname": "Mascot",
     "year": "2002",
-    "date": "September 22, 2002"
+    "date": "September 22, 2002",
+    "imageUrl": "/bobbleheads/pirates-photos/pirate-parrot-mascot-2002.jpg"
   },
   {
     "id": "roberto-clemente-2001",
@@ -781,6 +841,7 @@
     "id": "bill-mazeroski-2000",
     "title": "Bill Mazeroski",
     "year": "2000",
-    "date": "July 29, 2000"
+    "date": "July 29, 2000",
+    "imageUrl": "/bobbleheads/pirates-photos/bill-mazeroski-2000.jpg"
   }
 ]

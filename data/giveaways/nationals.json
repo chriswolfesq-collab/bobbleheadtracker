@@ -52,7 +52,8 @@
     "title": "Hello Kitty",
     "nickname": "City Connect",
     "year": "2025",
-    "date": "September 27, 2025"
+    "date": "September 27, 2025",
+    "imageUrl": "/bobbleheads/nationals-photos/hello-kitty-city-connect-2025.jpg"
   },
   {
     "id": "dylan-crews-2025",
@@ -111,14 +112,16 @@
     "title": "Hello Kitty",
     "nickname": "Red",
     "year": "2025",
-    "date": "April 8, 2025"
+    "date": "April 8, 2025",
+    "imageUrl": "/bobbleheads/nationals-photos/hello-kitty-red-2025.jpg"
   },
   {
     "id": "mackenzie-gore-sth-only-2025",
     "title": "MacKenzie Gore",
     "nickname": "STH Only",
     "year": "2025",
-    "date": "April 1, 2025"
+    "date": "April 1, 2025",
+    "imageUrl": "/bobbleheads/nationals-photos/mackenzie-gore-sth-only-2025.jpg"
   },
   {
     "id": "1924-championship-2024",
@@ -179,7 +182,8 @@
     "nickname": "STH Only",
     "year": "2024",
     "date": "April 1, 2024",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/nationals-photos/lane-thomas-sth-only-2024.jpg"
   },
   {
     "id": "keibert-ruiz-2023",
@@ -194,7 +198,8 @@
     "title": "HBCU Drum Major",
     "nickname": "Special Ticket",
     "year": "2023",
-    "date": "August 19, 2023"
+    "date": "August 19, 2023",
+    "imageUrl": "/bobbleheads/nationals-photos/hbcu-drum-major-2023.jpg"
   },
   {
     "id": "racing-presidents-george-tom-2023",
@@ -245,7 +250,8 @@
     "nickname": "STH Only",
     "year": "2023",
     "date": "April 1, 2023",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/nationals-photos/josiah-gray-sth-only-2023.jpg"
   },
   {
     "id": "wonder-woman-2022",
@@ -287,7 +293,8 @@
     "title": "Stephen Strasburg",
     "year": "2022",
     "date": "April 8, 2022",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/nationals-photos/stephen-strasburg-2022.jpg"
   },
   {
     "id": "victor-robles-spring-training-2022",
@@ -360,7 +367,8 @@
     "nickname": "World Series",
     "year": "2021",
     "date": "April 3, 2021",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/nationals-photos/davey-martinez-world-series-2021-4-3.jpg"
   },
   {
     "id": "anthony-rendon-2019",
@@ -416,7 +424,8 @@
     "title": "Trea Turner",
     "year": "2019",
     "date": "May 15, 2019",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/nationals-photos/trea-turner-2019.jpg"
   },
   {
     "id": "juan-soto-2019",
@@ -438,7 +447,8 @@
     "nickname": "Game of Thrones",
     "year": "2018",
     "date": "August 18, 2018",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/nationals-photos/michael-a-taylor-game-of-thrones-2018.jpg"
   },
   {
     "id": "anthony-rendon-2018",
@@ -454,7 +464,8 @@
     "nickname": "Garden Gnome, MLB Futures Game",
     "year": "2018",
     "date": "July 15, 2018",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/teddy-roosevelt-garden-gnome-2018.jpg"
   },
   {
     "id": "bryce-harper-patriotic-2018",
@@ -471,7 +482,8 @@
     "nickname": "\"Ryanaissance\"",
     "year": "2018",
     "date": "June 8, 2018",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/nationals-photos/ryan-zimmerman-ryanaissance-2018.jpg"
   },
   {
     "id": "max-scherzer-cy-young-2018",
@@ -619,7 +631,8 @@
     "title": "Jayson Werth",
     "year": "2015",
     "date": "August 30, 2015",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/nationals-photos/jayson-werth-2015.jpg"
   },
   {
     "id": "anthony-rendon-gnome-2015",
@@ -641,7 +654,8 @@
     "title": "Ryan Zimmerman",
     "year": "2015",
     "date": "June 4, 2015",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/nationals-photos/ryan-zimmerman-2015.jpg"
   },
   {
     "id": "livan-hernandez-2015",
@@ -681,7 +695,8 @@
     "title": "Jayson Werth Gnome",
     "year": "2014",
     "date": "August 5, 2014",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/nationals-photos/jayson-werth-gnome-2014.jpg"
   },
   {
     "id": "denard-span-2014",
@@ -704,7 +719,8 @@
     "title": "Wilson Ramos",
     "year": "2014",
     "date": "May 26, 2014",
-    "quantity": "25,000"
+    "quantity": "25,000",
+    "imageUrl": "/bobbleheads/nationals-photos/wilson-ramos-2014.jpg"
   },
   {
     "id": "jordan-zimmermann-2014",
@@ -735,20 +751,23 @@
     "title": "Gio Gonzalez",
     "year": "2013",
     "date": "April 13, 2013",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/gio-gonzalez-2013.jpg"
   },
   {
     "id": "ryan-zimmerman-2012",
     "title": "Ryan Zimmerman",
     "year": "2012",
     "date": "September 8, 2012",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/ryan-zimmerman-2012.jpg"
   },
   {
     "id": "michael-morse-2012",
     "title": "Michael Morse",
     "year": "2012",
-    "date": "August 5, 2012"
+    "date": "August 5, 2012",
+    "imageUrl": "/bobbleheads/nationals-photos/michael-morse-2012.jpg"
   },
   {
     "id": "stephen-strasburg-2012",
@@ -762,76 +781,87 @@
     "id": "stephen-strasburg-2012-4-14",
     "title": "Stephen Strasburg",
     "year": "2012",
-    "date": "April 14, 2012"
+    "date": "April 14, 2012",
+    "imageUrl": "/bobbleheads/nationals-photos/stephen-strasburg-2012-4-14.jpg"
   },
   {
     "id": "screech-kids-club-2012",
     "title": "Screech",
     "nickname": "Kids Club",
     "year": "2012",
-    "date": "2012"
+    "date": "2012",
+    "imageUrl": "/bobbleheads/nationals-photos/screech-kids-club-2012.jpg"
   },
   {
     "id": "danny-espinosa-2011",
     "title": "Danny Espinosa",
     "year": "2011",
     "date": "September 10, 2011",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/danny-espinosa-2011.jpg"
   },
   {
     "id": "ian-desmond-2011",
     "title": "Ian Desmond",
     "year": "2011",
     "date": "August 20, 2011",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/ian-desmond-2011.jpg"
   },
   {
     "id": "jayson-werth-2011",
     "title": "Jayson Werth",
     "year": "2011",
     "date": "July 30, 2011",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/jayson-werth-2011.jpg"
   },
   {
     "id": "ivan-rodriguez-2010",
     "title": "Ivan Rodriguez",
     "year": "2010",
     "date": "August 28, 2010",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/ivan-rodriguez-2010.jpg"
   },
   {
     "id": "nyjer-morgan-2010",
     "title": "Nyjer Morgan",
     "year": "2010",
     "date": "July 31, 2010",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/nyjer-morgan-2010.jpg"
   },
   {
     "id": "ryan-zimmerman-2010",
     "title": "Ryan Zimmerman",
     "year": "2010",
     "date": "June 19, 2010",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/ryan-zimmerman-2010.jpg"
   },
   {
     "id": "frank-howard-2009",
     "title": "Frank Howard",
     "year": "2009",
     "date": "August 22, 2009",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/frank-howard-2009.jpg"
   },
   {
     "id": "adam-dunn-2009",
     "title": "Adam Dunn",
     "year": "2009",
     "date": "August 8, 2009",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/adam-dunn-2009.jpg"
   },
   {
     "id": "ryan-zimmerman-2008",
     "title": "Ryan Zimmerman",
     "year": "2008",
-    "date": "June 5, 2008"
+    "date": "June 5, 2008",
+    "imageUrl": "/bobbleheads/nationals-photos/ryan-zimmerman-2008.jpg"
   },
   {
     "id": "dimitri-young-2008",
@@ -846,7 +876,8 @@
     "nickname": "Racing President",
     "year": "2007",
     "date": "September 1, 2007",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/teddy-roosevelt-racing-president-2007.jpg"
   },
   {
     "id": "abe-lincoln-racing-president-2007",
@@ -854,7 +885,8 @@
     "nickname": "Racing President",
     "year": "2007",
     "date": "August 18, 2007",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/abe-lincoln-racing-president-2007.jpg"
   },
   {
     "id": "thomas-jefferson-racing-president-2007",
@@ -862,7 +894,8 @@
     "nickname": "Racing President",
     "year": "2007",
     "date": "August 4, 2007",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/thomas-jefferson-racing-president-2007.jpg"
   },
   {
     "id": "george-washington-racing-president-2007",
@@ -870,28 +903,32 @@
     "nickname": "Racing President",
     "year": "2007",
     "date": "July 4, 2007",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/george-washington-racing-president-2007.jpg"
   },
   {
     "id": "screech-mascot-2006",
     "title": "Screech",
     "nickname": "Mascot",
     "year": "2006",
-    "date": "August 13, 2006"
+    "date": "August 13, 2006",
+    "imageUrl": "/bobbleheads/nationals-photos/screech-mascot-2006.jpg"
   },
   {
     "id": "jose-guillen-2006",
     "title": "Jose Guillen",
     "year": "2006",
     "date": "July 7, 2006",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/jose-guillen-2006.jpg"
   },
   {
     "id": "chad-cordero-2006",
     "title": "Chad Cordero",
     "year": "2006",
     "date": "June 10, 2006",
-    "quantity": "15,000"
+    "quantity": "15,000",
+    "imageUrl": "/bobbleheads/nationals-photos/chad-cordero-2006.jpg"
   },
   {
     "id": "brad-wilkerson-2005",

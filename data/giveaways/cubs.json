@@ -164,7 +164,8 @@
     "id": "cody-bellinger-2024",
     "title": "Cody Bellinger",
     "year": "2024",
-    "date": "September 21, 2024"
+    "date": "September 21, 2024",
+    "imageUrl": "/bobbleheads/cubs-photos/cody-bellinger-2024.jpg"
   },
   {
     "id": "grateful-dead-2023",
@@ -374,7 +375,8 @@
     "title": "Albert Almora",
     "year": "2018",
     "date": "August 16, 2018",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/albert-almora-2018.jpg"
   },
   {
     "id": "the-final-out-2017",
@@ -482,7 +484,8 @@
     "nickname": "Cubs Debut",
     "year": "2015",
     "date": "August 26, 2015",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/kris-bryant-cubs-debut-2015.jpg"
   },
   {
     "id": "joe-tinker-2014",
@@ -562,7 +565,8 @@
     "nickname": "3,000th Strikeout",
     "year": "2014",
     "date": "September 5, 2014",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/greg-maddux-3-000th-strikeout-2014.jpg"
   },
   {
     "id": "darwin-barney-2013",
@@ -600,137 +604,158 @@
     "title": "Ryan Dempster",
     "year": "2012",
     "date": "May 9, 2012",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/ryan-dempster-2012.jpg"
   },
   {
     "id": "jeff-samardzija-2012",
     "title": "Jeff Samardzija",
     "year": "2012",
     "date": "May 29, 2012",
-    "quantity": "20,000"
+    "quantity": "20,000",
+    "imageUrl": "/bobbleheads/cubs-photos/jeff-samardzija-2012.jpg"
   },
   {
     "id": "david-dejesus-2012",
     "title": "David DeJesus",
     "year": "2012",
     "date": "June 25, 2012",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/david-dejesus-2012.jpg"
   },
   {
     "id": "starlin-castro-2012",
     "title": "Starlin Castro",
     "year": "2012",
     "date": "August 13, 2012",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/starlin-castro-2012.jpg"
   },
   {
     "id": "starlin-castro-2011",
     "title": "Starlin Castro",
     "year": "2011",
-    "date": "April 5, 2011"
+    "date": "April 5, 2011",
+    "imageUrl": "/bobbleheads/cubs-photos/starlin-castro-2011.jpg"
   },
   {
     "id": "tyler-colvin-2011",
     "title": "Tyler Colvin",
     "year": "2011",
-    "date": "April 19, 2011"
+    "date": "April 19, 2011",
+    "imageUrl": "/bobbleheads/cubs-photos/tyler-colvin-2011.jpg"
   },
   {
     "id": "andrew-cashner-2011",
     "title": "Andrew Cashner",
     "year": "2011",
-    "date": "June 17, 2011"
+    "date": "June 17, 2011",
+    "imageUrl": "/bobbleheads/cubs-photos/andrew-cashner-2011.jpg"
   },
   {
     "id": "geovany-soto-2011",
     "title": "Geovany Soto",
     "year": "2011",
-    "date": "July 14, 2011"
+    "date": "July 14, 2011",
+    "imageUrl": "/bobbleheads/cubs-photos/geovany-soto-2011.jpg"
   },
   {
     "id": "ryan-theriot-2010",
     "title": "Ryan Theriot",
     "year": "2010",
-    "date": "June 17, 2010"
+    "date": "June 17, 2010",
+    "imageUrl": "/bobbleheads/cubs-photos/ryan-theriot-2010.jpg"
   },
   {
     "id": "carlos-zambrano-2010",
     "title": "Carlos Zambrano",
     "year": "2010",
-    "date": "September 3, 2010"
+    "date": "September 3, 2010",
+    "imageUrl": "/bobbleheads/cubs-photos/carlos-zambrano-2010.jpg"
   },
   {
     "id": "carlos-zambrano-no-hitter-statue-2009",
     "title": "Carlos Zambrano",
     "nickname": "No-Hitter Statue",
     "year": "2009",
-    "date": "April 21, 2009"
+    "date": "April 21, 2009",
+    "imageUrl": "/bobbleheads/cubs-photos/carlos-zambrano-no-hitter-statue-2009.jpg"
   },
   {
     "id": "ernie-banks-2009",
     "title": "Ernie Banks",
     "year": "2009",
-    "date": "May 12, 2009"
+    "date": "May 12, 2009",
+    "imageUrl": "/bobbleheads/cubs-photos/ernie-banks-2009.jpg"
   },
   {
     "id": "ryne-sandberg-2009",
     "title": "Ryne Sandberg",
     "year": "2009",
-    "date": "August 11, 2009"
+    "date": "August 11, 2009",
+    "imageUrl": "/bobbleheads/cubs-photos/ryne-sandberg-2009.jpg"
   },
   {
     "id": "billy-williams-2009",
     "title": "Billy Williams",
     "year": "2009",
-    "date": "August 31, 2009"
+    "date": "August 31, 2009",
+    "imageUrl": "/bobbleheads/cubs-photos/billy-williams-2009.jpg"
   },
   {
     "id": "ferguson-jenkins-2009",
     "title": "Ferguson Jenkins",
     "year": "2009",
-    "date": "September 29, 2009"
+    "date": "September 29, 2009",
+    "imageUrl": "/bobbleheads/cubs-photos/ferguson-jenkins-2009.jpg"
   },
   {
     "id": "derrek-lee-2008",
     "title": "Derrek Lee",
     "year": "2008",
     "date": "April 18, 2008",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/derrek-lee-2008.jpg"
   },
   {
     "id": "alfonso-soriano-2008",
     "title": "Alfonso Soriano",
     "year": "2008",
     "date": "May 13, 2008",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/alfonso-soriano-2008.jpg"
   },
   {
     "id": "kosuke-fukudome-2008",
     "title": "Kosuke Fukudome",
     "year": "2008",
     "date": "May 27, 2008",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/kosuke-fukudome-2008.jpg"
   },
   {
     "id": "carlos-zambrano-2008",
     "title": "Carlos Zambrano",
     "year": "2008",
     "date": "September 17, 2008",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/carlos-zambrano-2008.jpg"
   },
   {
     "id": "lou-piniella-2007",
     "title": "Lou Piniella",
     "year": "2007",
     "date": "April 15, 2007",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/lou-piniella-2007.jpg"
   },
   {
     "id": "alfonso-soriano-2007",
     "title": "Alfonso Soriano",
     "year": "2007",
     "date": "May 30, 2007",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/alfonso-soriano-2007.jpg"
   },
   {
     "id": "michael-barrett-2007",
@@ -751,7 +776,8 @@
     "title": "Aramis Ramirez",
     "year": "2007",
     "date": "August 15, 2007",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/aramis-ramirez-2007.jpg"
   },
   {
     "id": "empire-today-2007",
@@ -764,13 +790,15 @@
     "title": "Derrek Lee",
     "year": "2007",
     "date": "September 5, 2007",
-    "quantity": "10,000"
+    "quantity": "10,000",
+    "imageUrl": "/bobbleheads/cubs-photos/derrek-lee-2007.jpg"
   },
   {
     "id": "sammy-sosa-2002",
     "title": "Sammy Sosa",
     "year": "2002",
-    "date": "April 27, 2002"
+    "date": "April 27, 2002",
+    "imageUrl": "/bobbleheads/cubs-photos/sammy-sosa-2002.jpg"
   },
   {
     "id": "ryne-sandberg-2002",
@@ -782,12 +810,14 @@
     "id": "kyle-farnsworth-2002",
     "title": "Kyle Farnsworth",
     "year": "2002",
-    "date": "August 15, 2002"
+    "date": "August 15, 2002",
+    "imageUrl": "/bobbleheads/cubs-photos/kyle-farnsworth-2002.jpg"
   },
   {
     "id": "sammy-sosa-2001",
     "title": "Sammy Sosa",
     "year": "2001",
-    "date": "May 5, 2001"
+    "date": "May 5, 2001",
+    "imageUrl": "/bobbleheads/cubs-photos/sammy-sosa-2001.jpg"
   }
 ]
