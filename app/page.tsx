@@ -88,7 +88,7 @@ export default function Home() {
               alt="A lit wooden display case with a shelf of bobbleheads"
               width={1024}
               height={480}
-              priority
+              preload
               sizes="(max-width: 1152px) 100vw, 1152px"
               className="h-auto w-full"
             />
@@ -131,7 +131,10 @@ export default function Home() {
                   aria-hidden
                   width={135}
                   height={321}
-                  priority={index < 4}
+                  // Eager rather than preloaded: these are several images, any
+                  // of which could be the LCP element depending on viewport,
+                  // and preloading a set of them competes with the hero itself.
+                  loading={index < 4 ? "eager" : "lazy"}
                   className="h-full w-auto object-contain drop-shadow-[0_6px_6px_rgba(30,20,10,0.5)]"
                 />
               ))}

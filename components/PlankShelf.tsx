@@ -64,6 +64,10 @@ export function PlankShelf({
           alt=""
           width={996}
           height={74}
+          // Every shelf on the page shares this one URL, so this is a single
+          // request, and the top shelves are above the fold — left lazy, the
+          // wall paints bare and the planks pop in under the figures.
+          loading="eager"
           className={`w-full object-fill drop-shadow-[0_9px_9px_rgba(90,58,34,0.35)] ${plankClassName}`}
         />
         <div

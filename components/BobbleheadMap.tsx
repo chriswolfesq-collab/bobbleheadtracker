@@ -11,7 +11,7 @@ export default function BobbleheadMap() {
           src={publicAsset("/map/usamap.png")}
           alt="MLB Bobblehead Map"
           fill
-          priority
+          preload
           className="pointer-events-none select-none object-contain"
         />
 
