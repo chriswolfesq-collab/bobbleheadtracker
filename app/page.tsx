@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { FeatureStrip } from "@/components/FeatureStrip";
 import { HomeWelcomeModal } from "@/components/HomeWelcomeModal";
+import { JoinCommunityBand } from "@/components/JoinCommunityBand";
 import RecentlyAdded from "@/components/RecentlyAdded";
-import { TeamCard } from "@/components/TeamCard";
+import { ShelfItem, ShelfRow } from "@/components/ShelfRow";
 import { ButtonLink } from "@/components/ui/Button";
+import { NamePlate } from "@/components/ui/NamePlate";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { publicAsset } from "@/lib/paths";
 import { TEAMS } from "@/lib/teams";
@@ -36,12 +39,15 @@ const HERO_SHELF_SLUGS = [
   "mariners",
 ];
 
-// The hero artwork (public/hero-shelf.jpg, 2151x659) is a photographed display
-// case: a cream pin-board panel on the left and a lit shelf on the right.
-// These percentages locate those regions so the text overlay sits inside the
-// left panel and the figures stand exactly on the shelf ledge.
-const HERO_TEXT_BOX = { left: "4.5%", top: "12%", width: "28.5%", height: "78%" };
-const HERO_SHELF_BOX = { left: "39.5%", right: "4.5%", bottom: "49%", height: "33%" };
+// The hero artwork (public/hero-shelf.jpg, 1024x480) is a photographed display
+// case: a tall pin-board panel on the left and a lit shelf on the right with
+// an "EST. 1969" plaque and props below it. These percentages locate those
+// regions so the pitch sits inside the left panel and the figures stand
+// exactly on the lit shelf's ledge.
+const HERO_TEXT_BOX = { left: "6%", top: "8%", width: "27%", height: "84%" };
+const HERO_SHELF_BOX = { left: "40.5%", right: "3.5%", bottom: "46%", height: "40%" };
+
+const TEAM_CAPTION_HEIGHT = 44;
 
 export default function Home() {
   return (
@@ -53,7 +59,7 @@ export default function Home() {
 
       <div className="mx-auto w-full max-w-6xl px-4 pt-6 sm:px-6">
         {/* Hero display case: photographed shelf artwork with the pitch
-            overlaid on its left panel and figures standing on its shelf.
+            overlaid on its left panel and figures standing on its lit shelf.
             On small screens the panel is too small to hold text, so the same
             pitch renders above the artwork instead. */}
         <section aria-label="Celebrate the art of the bobble">
@@ -80,8 +86,8 @@ export default function Home() {
             <Image
               src={publicAsset("/hero-shelf.jpg")}
               alt="A lit wooden display case with a shelf of bobbleheads"
-              width={2151}
-              height={659}
+              width={1024}
+              height={480}
               priority
               sizes="(max-width: 1152px) 100vw, 1152px"
               className="h-auto w-full"
@@ -95,14 +101,14 @@ export default function Home() {
               <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-brass lg:text-xs">
                 Track. Collect. Share.
               </p>
-              <h1 className="mt-2 font-display text-2xl font-bold uppercase leading-[1.05] tracking-wide text-navy lg:text-4xl">
+              <h1 className="mt-2 font-display text-3xl font-bold uppercase leading-[1.05] tracking-wide text-navy lg:text-4xl">
                 Celebrate the art of the bobble.
               </h1>
-              <p className="mt-2 hidden max-w-sm text-sm leading-5 text-zinc-600 lg:block">
+              <p className="mt-3 text-sm leading-5 text-zinc-600">
                 The most comprehensive database of bobbleheads, built by
                 collectors, for collectors.
               </p>
-              <div className="mt-3 flex flex-wrap gap-2 lg:mt-5 lg:gap-3">
+              <div className="mt-4 flex flex-wrap gap-2 lg:mt-6 lg:gap-3">
                 <ButtonLink href="/teams" size="sm">
                   Browse Teams
                 </ButtonLink>
@@ -112,9 +118,9 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Figures standing on the shelf ledge */}
+            {/* Figures standing on the lit shelf's ledge */}
             <div
-              className="absolute flex items-end justify-center gap-[1.5%]"
+              className="absolute flex items-end justify-center gap-[2%]"
               style={HERO_SHELF_BOX}
             >
               {HERO_SHELF_SLUGS.map((slug, index) => (
@@ -135,29 +141,54 @@ export default function Home() {
 
         <FeatureStrip className="mt-6" />
 
-        {/* Browse by team */}
-        <section className="mt-10">
+        {/* Browse by team: all 30 figures on a shelf */}
+        <section className="mt-12">
           <SectionHeading
             title="Browse by Team"
             viewAllHref="/teams"
             viewAllLabel="View All Teams"
           />
-          <div className="mt-4 flex snap-x gap-3 overflow-x-auto pb-2">
+          <ShelfRow captionHeight={TEAM_CAPTION_HEIGHT} className="mt-6">
             {TEAMS.map((team, index) => (
-              <TeamCard
+              <ShelfItem
                 key={team.slug}
-                team={team}
-                eager={index < 8}
-                className="w-36 shrink-0"
+                captionHeight={TEAM_CAPTION_HEIGHT}
+                visual={
+                  <Link
+                    href={`/teams/${team.slug}`}
+                    className="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  >
+                    <Image
+                      src={publicAsset(`/bobbleheads/${team.slug}.png`)}
+                      alt={`${team.city} ${team.name} bobblehead`}
+                      width={135}
+                      height={321}
+                      loading={index < 10 ? "eager" : "lazy"}
+                      className="h-24 w-auto object-contain drop-shadow-[0_8px_8px_rgba(58,36,18,0.35)] transition group-hover:animate-bobble sm:h-28"
+                    />
+                  </Link>
+                }
+                caption={
+                  <Link
+                    href={`/teams/${team.slug}`}
+                    className="focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  >
+                    <NamePlate className="w-24 truncate sm:w-28">{team.name}</NamePlate>
+                  </Link>
+                }
               />
             ))}
-          </div>
+          </ShelfRow>
         </section>
 
-        {/* Recently added */}
-        <section className="mt-10 pb-16">
+        {/* Recently added: community items on a shelf */}
+        <section className="mt-12">
           <RecentlyAdded />
         </section>
+
+        <div className="mt-12 pb-16">
+          <JoinCommunityBand />
+        </div>
       </div>
     </div>
   );
