@@ -63,7 +63,7 @@ export default function Home() {
             On small screens the panel is too small to hold text, so the same
             pitch renders above the artwork instead. */}
         <section aria-label="Celebrate the art of the bobble">
-          <div className="flex flex-col items-start rounded-xl border border-border-soft bg-surface px-6 py-8 md:hidden">
+          <div className="flex flex-col items-start rounded-xl border border-border-soft bg-surface px-6 py-8 lg:hidden">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brass">
               Track. Collect. Share.
             </p>
@@ -82,7 +82,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative mt-4 overflow-hidden rounded-xl shadow-lg md:mt-0">
+          <div className="relative mt-4 overflow-hidden rounded-xl shadow-lg lg:mt-0">
             <Image
               src={publicAsset("/hero-shelf.jpg")}
               alt="A lit wooden display case with a shelf of bobbleheads"
@@ -93,9 +93,9 @@ export default function Home() {
               className="h-auto w-full"
             />
 
-            {/* Pitch inside the left pin-board panel (md+) */}
+            {/* Pitch inside the left pin-board panel (lg+) */}
             <div
-              className="absolute hidden flex-col items-start justify-center md:flex"
+              className="absolute hidden flex-col items-start justify-center lg:flex"
               style={HERO_TEXT_BOX}
             >
               <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-brass lg:text-xs">
@@ -124,19 +124,25 @@ export default function Home() {
               style={HERO_SHELF_BOX}
             >
               {HERO_SHELF_SLUGS.map((slug, index) => (
-                <Image
-                  key={slug}
-                  src={publicAsset(`/bobbleheads/${slug}.png`)}
-                  alt=""
-                  aria-hidden
-                  width={135}
-                  height={321}
-                  // Eager rather than preloaded: these are several images, any
-                  // of which could be the LCP element depending on viewport,
-                  // and preloading a set of them competes with the hero itself.
-                  loading={index < 4 ? "eager" : "lazy"}
-                  className="h-full w-auto object-contain drop-shadow-[0_6px_6px_rgba(30,20,10,0.5)]"
-                />
+                // At full shelf height the eight cutouts are wider than the
+                // shelf and the wrapper clips the end ones. min-w-0 lets them
+                // shrink; because shrinkage is proportional to each figure's
+                // natural width, they all scale by the same factor and keep a
+                // common height. object-bottom keeps feet on the ledge.
+                <div key={slug} className="h-full min-w-0 shrink">
+                  <Image
+                    src={publicAsset(`/bobbleheads/${slug}.png`)}
+                    alt=""
+                    aria-hidden
+                    width={135}
+                    height={321}
+                    // Eager rather than preloaded: these are several images, any
+                    // of which could be the LCP element depending on viewport,
+                    // and preloading a set of them competes with the hero itself.
+                    loading={index < 4 ? "eager" : "lazy"}
+                    className="h-full w-full object-contain object-bottom drop-shadow-[0_6px_6px_rgba(30,20,10,0.5)]"
+                  />
+                </div>
               ))}
             </div>
           </div>
