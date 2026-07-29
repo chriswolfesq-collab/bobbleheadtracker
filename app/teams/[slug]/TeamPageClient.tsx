@@ -310,18 +310,15 @@ export function TeamPageClient({
       <FavoritesProvider teamSlug={team.slug}>
         <WantedProvider teamSlug={team.slug}>
           <div className="flex min-h-full flex-1 flex-col" style={{ background: "var(--page-gradient)" }}>
-            {/* Hero: team-color gradient with a slot for a future skyline image */}
+            {/* Hero: the team's skyline banner on a team-color gradient. The
+                banner art carries the est. year, division, city and team name
+                as baked-in type, so the only text here is the screen-reader h1. */}
             <section
               className="relative overflow-hidden pb-20 pt-6"
               style={{
                 background: `radial-gradient(circle at 78% 10%, ${team.primary}55, transparent 42%), linear-gradient(160deg, ${team.primary} 0%, ${team.primary}cc 55%, var(--navy-deep) 100%)`,
               }}
             >
-              {/* Future skyline photo drops in here, behind the gradient text:
-                  <Image src={`/skylines/${team.slug}.jpg`} alt="" fill
-                    className="object-cover opacity-40 mix-blend-luminosity" /> */}
-              <div data-hero-image-slot className="absolute inset-0" />
-
               <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
                 <div className="flex items-center justify-between">
                   <Link
@@ -332,28 +329,29 @@ export function TeamPageClient({
                   </Link>
                 </div>
 
-                <div className="mt-4 flex items-start justify-between font-display text-lg font-bold uppercase tracking-[0.2em] text-brass-light sm:text-xl">
-                  <span>Est. {team.established}</span>
-                  <span>
-                    {team.league} {team.division}
-                  </span>
-                </div>
+                <h1 className="sr-only">
+                  {team.city} {team.name} bobbleheads
+                </h1>
 
-                <div className="mt-2 pb-2 text-center">
-                  <p className="font-script text-3xl text-white/90 sm:text-4xl">{team.city}</p>
-                  <div className="mt-1 flex items-center justify-center gap-5">
+                <div className="relative mt-4">
+                  <div className="overflow-hidden rounded-xl shadow-[0_18px_44px_rgba(0,0,0,0.45)] ring-1 ring-white/15">
                     <Image
-                      src={publicAsset(`/bobbleheads/${team.slug}.png`)}
-                      alt={`${team.city} ${team.name} bobblehead`}
-                      width={135}
-                      height={321}
+                      src={publicAsset(`/team-banners/${team.slug}.png`)}
+                      alt={`${team.city} ${team.name} — established ${team.established}, ${team.league} ${team.division}`}
+                      width={2400}
+                      height={1000}
                       priority
-                      className="hidden h-28 w-auto drop-shadow-[0_12px_16px_rgba(0,0,0,0.55)] sm:block"
+                      sizes="(min-width: 1152px) 1104px, 100vw"
+                      className="h-auto w-full"
                     />
-                    <h1 className="font-display text-6xl font-bold uppercase leading-none tracking-wide text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.45)] sm:text-8xl">
-                      {team.name}
-                    </h1>
                   </div>
+                  <Image
+                    src={publicAsset(`/bobbleheads/${team.slug}.png`)}
+                    alt=""
+                    width={135}
+                    height={321}
+                    className="pointer-events-none absolute -bottom-6 left-6 hidden h-36 w-auto drop-shadow-[0_12px_16px_rgba(0,0,0,0.55)] lg:block"
+                  />
                 </div>
               </div>
             </section>
