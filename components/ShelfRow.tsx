@@ -19,22 +19,27 @@ export function ShelfRow({
   className?: string;
 }) {
   return (
-    <div className={`relative ${className ?? ""}`}>
-      <div
-        aria-hidden
-        className="absolute inset-x-0"
-        style={{ bottom: captionHeight, height: PLANK_HEIGHT }}
-      >
-        <Image
-          src={publicAsset("/shelf-plank.jpg")}
-          alt=""
-          fill
-          sizes="100vw"
-          className="rounded-sm object-fill shadow-[0_5px_8px_rgba(58,36,18,0.25)]"
-        />
-      </div>
-      <div className="relative flex items-end gap-5 overflow-x-auto px-4 sm:gap-7 sm:px-8">
-        {children}
+    <div className={className}>
+      <div className="overflow-x-auto">
+        {/* The plank is anchored inside the scrolling content, not around it:
+            the scroller's own horizontal scrollbar eats layout height, so a
+            plank positioned against the outer box lands below the items' feet. */}
+        <div className="relative flex w-max min-w-full items-end gap-5 px-4 sm:gap-7 sm:px-8">
+          <div
+            aria-hidden
+            className="absolute inset-x-0"
+            style={{ bottom: captionHeight, height: PLANK_HEIGHT }}
+          >
+            <Image
+              src={publicAsset("/shelf-plank.jpg")}
+              alt=""
+              fill
+              sizes="100vw"
+              className="rounded-sm object-fill shadow-[0_5px_8px_rgba(58,36,18,0.25)]"
+            />
+          </div>
+          {children}
+        </div>
       </div>
     </div>
   );
