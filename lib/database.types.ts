@@ -616,6 +616,10 @@ export type Database = {
         Args: { p_id: string; p_handled?: boolean }
         Returns: undefined
       }
+      admin_delete_inbound_message: {
+        Args: { p_id: string }
+        Returns: undefined
+      }
       admin_list_users: {
         Args: never
         Returns: {
