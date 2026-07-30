@@ -137,10 +137,12 @@ function TagPicker({
       {suggestions.length > 0 ? (
         <>
           <p className="mt-3 text-xs font-black uppercase tracking-wide text-zinc-500">
-            Already in use
+            Pick one
           </p>
           {/* Clicking an existing tag is how the vocabulary stays shared —
-              retyping it is what produces a near-duplicate. */}
+              retyping it is what produces a near-duplicate. Some of these are
+              seeded rather than earned, so the heading can't say "already in
+              use" and the count is hidden until there's one to show. */}
           <ul className="mt-2 flex flex-wrap gap-2">
             {suggestions.map((tag) => (
               <li key={tag.slug}>
@@ -151,7 +153,9 @@ function TagPicker({
                   className="cursor-pointer rounded-full border border-border-soft px-3 py-1 text-xs font-bold uppercase tracking-wide text-zinc-600 transition hover:border-accent hover:text-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {tag.label}
-                  <span className="ml-1.5 font-semibold text-zinc-400">{tag.listingCount}</span>
+                  {tag.listingCount > 0 ? (
+                    <span className="ml-1.5 font-semibold text-zinc-400">{tag.listingCount}</span>
+                  ) : null}
                 </button>
               </li>
             ))}
