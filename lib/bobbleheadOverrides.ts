@@ -9,6 +9,8 @@ export type BobbleheadOverride = {
   quantity: string | null;
   year: string | null;
   date: string | null;
+  /** Athletics only: "Oakland" or "Sacramento". See lib/athleticsCity.ts. */
+  city: string | null;
   deleted: boolean;
   // Curated listings carry a seed photo in data/giveaways/*.json that isn't a
   // DB row, so removing it is recorded here rather than by deleting anything.
@@ -32,7 +34,7 @@ export function useBobbleheadOverride(
 
     supabase
       .from("bobblehead_overrides")
-      .select("title, nickname, quantity, year, date, deleted, photo_hidden")
+      .select("title, nickname, quantity, year, date, city, deleted, photo_hidden")
       .eq("team_slug", teamSlug)
       .eq("bobblehead_id", bobbleheadId)
       .maybeSingle()
@@ -51,6 +53,7 @@ export function useBobbleheadOverride(
                   quantity: data.quantity,
                   year: data.year,
                   date: data.date,
+                  city: data.city,
                   deleted: data.deleted,
                   photoHidden: data.photo_hidden,
                 }
@@ -91,7 +94,7 @@ const NONE: BobbleheadOverridesLookup = { isDeleted: () => false, getOverride: (
 export async function fetchBobbleheadOverrides(): Promise<BobbleheadOverridesLookup> {
   const { data, error } = await supabase
     .from("bobblehead_overrides")
-    .select("team_slug, bobblehead_id, title, nickname, quantity, year, date, deleted, photo_hidden");
+    .select("team_slug, bobblehead_id, title, nickname, quantity, year, date, city, deleted, photo_hidden");
 
   if (error) {
     console.error("Failed to load bobblehead overrides:", error.message);
@@ -107,6 +110,7 @@ export async function fetchBobbleheadOverrides(): Promise<BobbleheadOverridesLoo
         quantity: row.quantity,
         year: row.year,
         date: row.date,
+        city: row.city,
         deleted: row.deleted,
         photoHidden: row.photo_hidden,
       },

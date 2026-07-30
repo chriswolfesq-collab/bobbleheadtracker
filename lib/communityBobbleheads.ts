@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { supabase } from "@/lib/supabase";
 
-export type CommunityBobblehead = Giveaway & { community: true };
+// `city` is the Athletics-only Oakland/Sacramento pick (lib/athleticsCity.ts).
+// It has no place in the curated seed data, so it rides on this type rather
+// than on Giveaway itself, and is only read on the detail page.
+export type CommunityBobblehead = Giveaway & { community: true; city?: string | null };
 
 export function useCommunityBobbleheads(teamSlug: string) {
   const [communityBobbleheads, setCommunityBobbleheads] = useState<CommunityBobblehead[]>([]);
@@ -150,7 +153,7 @@ export function useCommunityBobblehead(teamSlug: string, bobbleheadId: string) {
 
     supabase
       .from("community_bobbleheads")
-      .select("id, title, nickname, quantity, year, date, image_url")
+      .select("id, title, nickname, quantity, year, date, image_url, city")
       .eq("team_slug", teamSlug)
       .eq("id", bobbleheadId)
       .maybeSingle()
@@ -170,6 +173,7 @@ export function useCommunityBobblehead(teamSlug: string, bobbleheadId: string) {
             year: data.year,
             date: data.date,
             imageUrl: data.image_url,
+            city: data.city,
             community: true,
           });
         }

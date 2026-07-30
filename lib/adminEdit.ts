@@ -76,6 +76,7 @@ export async function saveCuratedBobblehead({
   quantity,
   year,
   date,
+  city,
   file,
 }: {
   user: User;
@@ -86,6 +87,8 @@ export async function saveCuratedBobblehead({
   quantity: string;
   year: string;
   date: string;
+  /** Athletics only; null on every other team. See lib/athleticsCity.ts. */
+  city?: string | null;
   file?: File;
 }) {
   const imageUrl = file ? await savePhoto(user, teamSlug, bobbleheadId, file) : null;
@@ -100,6 +103,7 @@ export async function saveCuratedBobblehead({
       quantity: quantity.trim() || null,
       year,
       date,
+      city: city ?? null,
       updated_by: user.id,
       updated_at: new Date().toISOString(),
     })
@@ -383,6 +387,7 @@ export async function saveCommunityBobblehead({
   quantity,
   year,
   date,
+  city,
   file,
 }: {
   user: User;
@@ -393,13 +398,15 @@ export async function saveCommunityBobblehead({
   quantity: string;
   year: string;
   date: string;
+  /** Athletics only; null on every other team. See lib/athleticsCity.ts. */
+  city?: string | null;
   file?: File;
 }) {
   const imageUrl = file ? await savePhoto(user, teamSlug, bobbleheadId, file) : null;
 
   const { data, error } = await supabase
     .from("community_bobbleheads")
-    .update({ title, nickname: nickname.trim() || null, quantity: quantity.trim() || null, year, date })
+    .update({ title, nickname: nickname.trim() || null, quantity: quantity.trim() || null, year, date, city: city ?? null })
     .eq("id", bobbleheadId)
     .select();
 
