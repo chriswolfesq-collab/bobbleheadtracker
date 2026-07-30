@@ -14,7 +14,16 @@ export function SiteSearch({
   teamSlug,
   buttonLabel = "Search",
   variant = "centered",
-}: { teamSlug?: string; buttonLabel?: string; variant?: "centered" | "inline" } = {}) {
+  collapseLabel = false,
+}: {
+  teamSlug?: string;
+  buttonLabel?: string;
+  variant?: "centered" | "inline";
+  /** Drop the closed button's text label below `sm`, leaving just the icon.
+   *  For the site header, where the label's width pushes the account controls
+   *  off narrow screens. */
+  collapseLabel?: boolean;
+} = {}) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [isFocused, setIsFocused] = useState(false);
@@ -100,10 +109,13 @@ export function SiteSearch({
             });
             inputRef.current?.focus();
           }}
-          className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-5 py-2.5 text-sm font-semibold text-zinc-900 backdrop-blur transition hover:border-accent hover:text-accent-hover"
+          aria-label={buttonLabel}
+          className={`inline-flex shrink-0 items-center gap-2 rounded-full border border-black/10 bg-white/70 py-2.5 text-sm font-semibold text-zinc-900 backdrop-blur transition hover:border-accent hover:text-accent-hover ${
+            collapseLabel ? "px-3 sm:px-5" : "px-5"
+          }`}
         >
           <span aria-hidden>⌕</span>
-          {buttonLabel}
+          <span className={collapseLabel ? "hidden sm:inline" : undefined}>{buttonLabel}</span>
         </button>
       </div>
     );

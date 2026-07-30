@@ -42,12 +42,15 @@ export function SiteHeader() {
       >
         Skip to content
       </a>
-      <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+      <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between gap-2 px-4 sm:gap-3 sm:px-6">
         <Link href="/" aria-label="BobbleShelf home" className="shrink-0">
           <Wordmark />
         </Link>
-        <div className="flex items-center gap-3">
-          <SiteSearch variant="inline" />
+        {/* min-w-0 lets this cluster shrink instead of pushing past the
+            viewport; each control collapses to its icon on narrow screens so
+            all three still fit next to the wordmark at 320px. */}
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+          <SiteSearch variant="inline" collapseLabel />
           <AdminModeBadge />
           <AuthWidget />
         </div>
