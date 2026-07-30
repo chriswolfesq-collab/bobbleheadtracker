@@ -3,11 +3,10 @@
 -- dashboard's Database Webhooks UI, so it's just another script to run once
 -- in the SQL editor.
 --
--- Replace <WEBHOOK_SECRET> below with the actual value before running --
--- it must match what was set via `supabase secrets set WEBHOOK_SECRET=...`.
--- Do not commit the filled-in version of this file.
-
-create extension if not exists pg_net with schema extensions;
+-- The x-webhook-secret header reads from Vault via public.webhook_secret()
+-- rather than carrying a literal. Run vault_webhook_secret.sql once before this
+-- file; there is nothing to substitute here any more. See that file for why:
+-- the hand-substitution this replaces is what left every mailer silently broken.
 
 create or replace function public.notify_new_submission()
 returns trigger
@@ -27,7 +26,7 @@ begin
       url := 'https://mawwzvnlihhsagatmolq.supabase.co/functions/v1/notify-new-submission',
       headers := jsonb_build_object(
         'Content-Type', 'application/json',
-        'x-webhook-secret', '<WEBHOOK_SECRET>'
+        'x-webhook-secret', public.webhook_secret()
       ),
       body := jsonb_build_object('type', 'INSERT', 'table', 'submissions', 'record', row_to_json(new))
     );
@@ -57,7 +56,7 @@ begin
     url := 'https://mawwzvnlihhsagatmolq.supabase.co/functions/v1/notify-new-submission',
     headers := jsonb_build_object(
       'Content-Type', 'application/json',
-      'x-webhook-secret', '<WEBHOOK_SECRET>'
+      'x-webhook-secret', public.webhook_secret()
     ),
     body := jsonb_build_object('type', 'INSERT', 'table', 'listing_reports', 'record', row_to_json(new))
   );
@@ -103,7 +102,7 @@ begin
       url := 'https://mawwzvnlihhsagatmolq.supabase.co/functions/v1/notify-new-submission',
       headers := jsonb_build_object(
         'Content-Type', 'application/json',
-        'x-webhook-secret', '<WEBHOOK_SECRET>'
+        'x-webhook-secret', public.webhook_secret()
       ),
       body := jsonb_build_object(
         'type', 'UPDATE',
