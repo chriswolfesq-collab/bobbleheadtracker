@@ -14,7 +14,7 @@ import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { useToast } from "@/components/Toast";
 import { NamePlate } from "@/components/ui/NamePlate";
 import { useAdminAuth } from "@/lib/adminAuth";
-import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, saveCommunityBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
+import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, replaceGalleryPhoto, saveCommunityBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { useCommunityBobblehead } from "@/lib/communityBobbleheads";
@@ -65,12 +65,13 @@ export function CommunityBobbleheadPage({
   const { showError } = useToast();
   const { communityBobblehead, isLoading, notFound } = useCommunityBobblehead(team.slug, bobbleheadId);
   const { photoUrlById } = useApprovedPhotos(team.slug);
-  const { photos: galleryPhotos, removePhotoLocally, addPhotoLocally } = useBobbleheadGallery(team.slug, bobbleheadId);
+  const { photos: galleryPhotos, removePhotoLocally, addPhotoLocally, replacePhotoLocally } = useBobbleheadGallery(team.slug, bobbleheadId);
   const { ownedById, isLoggedIn, isLoading: isCollectionLoading, setOwned } = useUserCollection(team.slug);
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, setFavorited } = useUserFavorites(team.slug);
   const { wantedById, isLoggedIn: isLoggedInForWanted, setWanted } = useUserWanted(team.slug);
 
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isManagingPhotos, setIsManagingPhotos] = useState(false);
   const [localOverride, setLocalOverride] = useState<EditBobbleheadValues | null>(null);
   const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
   const [mainPhotoRemoved, setMainPhotoRemoved] = useState(false);
@@ -122,8 +123,12 @@ export function CommunityBobbleheadPage({
     ...(defaultPhotoUrl ? [defaultPhotoUrl] : []),
     ...galleryPhotos.map((photo) => photo.imageUrl).filter((url) => url !== defaultPhotoUrl),
   ];
-  // Don't show the photo twice when it's standing in as the profile image.
-  const galleryPhotosToShow = galleryPhotos.filter((photo) => photo.imageUrl !== defaultPhotoUrl);
+  // Don't show the photo twice when it's standing in as the profile image —
+  // except while managing, where hiding it was the reason a listing whose only
+  // photo is a gallery photo had no way to remove or swap that photo at all.
+  const galleryPhotosToShow = isManagingPhotos
+    ? galleryPhotos
+    : galleryPhotos.filter((photo) => photo.imageUrl !== defaultPhotoUrl);
   const isOwned = ownedById[giveaway.id] ?? false;
   // Until the collection loads client-side we can't tell owned from unowned;
   // keep the button neutral rather than flashing an owned item as unowned.
@@ -191,8 +196,30 @@ export function CommunityBobbleheadPage({
     try {
       await deleteGalleryPhoto(photo);
       removePhotoLocally(photo.id);
+      // Otherwise the big photo keeps pointing at the file we just deleted.
+      if (photo.imageUrl === selectedPhotoUrl) setSelectedPhotoUrl(null);
     } catch (deleteError) {
       showError(deleteError instanceof Error ? deleteError.message : "Could not remove the photo.");
+    }
+  };
+
+  const handleReplaceGalleryPhoto = async (photo: GalleryPhoto, file: File) => {
+    if (!adminUser) return;
+
+    try {
+      const replacement = await replaceGalleryPhoto({
+        user: adminUser,
+        teamSlug: team.slug,
+        bobbleheadId: giveaway.id,
+        photo,
+        file,
+      });
+      replacePhotoLocally(photo.id, replacement);
+      // Keep the big photo pointed at the swap rather than at a URL whose file
+      // has just been deleted.
+      if (photo.imageUrl === imageSrc) setSelectedPhotoUrl(replacement.imageUrl);
+    } catch (replaceError) {
+      showError(replaceError instanceof Error ? replaceError.message : "Could not replace the photo.");
     }
   };
 
@@ -424,21 +451,35 @@ export function CommunityBobbleheadPage({
                 <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
                   Community Photos{galleryPhotosToShow.length > 0 ? ` (${galleryPhotosToShow.length})` : ""}
                 </h2>
-                <SubmitPhotoButton
-                  bobbleheadId={giveaway.id}
-                  teamSlug={team.slug}
-                  label="Add photos"
-                  className="shrink-0 cursor-pointer text-xs font-black uppercase tracking-wide text-accent transition hover:text-accent-hover"
-                >
-                  + Add photos
-                </SubmitPhotoButton>
+                <div className="flex shrink-0 items-center gap-3">
+                  {canEdit && galleryPhotos.length > 0 ? (
+                    <button
+                      type="button"
+                      onClick={() => setIsManagingPhotos((current) => !current)}
+                      className="cursor-pointer text-xs font-black uppercase tracking-wide text-navy transition hover:text-accent"
+                    >
+                      {isManagingPhotos ? "Done" : "Manage"}
+                    </button>
+                  ) : null}
+                  <SubmitPhotoButton
+                    bobbleheadId={giveaway.id}
+                    teamSlug={team.slug}
+                    label="Add photos"
+                    className="cursor-pointer text-xs font-black uppercase tracking-wide text-accent transition hover:text-accent-hover"
+                  >
+                    + Add photos
+                  </SubmitPhotoButton>
+                </div>
               </div>
               {galleryPhotosToShow.length > 0 ? (
                 <div className="mt-3">
                   <PhotoGallery
                     photos={galleryPhotosToShow}
+                    isManaging={canEdit && isManagingPhotos}
+                    currentMainUrl={defaultPhotoUrl}
                     onDelete={canEdit ? handleDeleteGalleryPhoto : undefined}
                     onSetAsMain={canEdit ? handleSetGalleryPhotoAsMain : undefined}
+                    onReplace={canEdit ? handleReplaceGalleryPhoto : undefined}
                   />
                 </div>
               ) : (
