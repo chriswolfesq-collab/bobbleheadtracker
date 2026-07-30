@@ -8,7 +8,7 @@
 --
 -- (It used to be that inbound_messages.sql would also reinstall
 -- notify_inbound_message() with an unsubstituted <WEBHOOK_SECRET>, silently
--- killing the notification email. Since vault_webhook_secret.sql that hazard is
+-- killing the notification email. Since webhook_secret.sql that hazard is
 -- gone -- no file carries the literal any more.)
 --
 -- Idempotent — safe to run more than once. Paste into the Supabase SQL editor.
