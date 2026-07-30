@@ -13,6 +13,7 @@ import { useCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { findDuplicateBobblehead, type DuplicateCandidate } from "@/lib/duplicateCheck";
 import { publicAsset } from "@/lib/paths";
 import { submitNewBobblehead } from "@/lib/submissions";
+import { TEAM_BANNERS } from "@/lib/teamBanners";
 import type { Team } from "@/lib/teams";
 import { BobbleheadCollection } from "./BobbleheadCollection";
 import { FavoritesProvider, OwnershipProvider, WantedProvider, useOwnership, type ResolvedGiveaway } from "./GiveawayCard";
@@ -339,8 +340,8 @@ export function TeamPageClient({
                     <Image
                       src={publicAsset(`/team-banners/${team.slug}.png`)}
                       alt={`${team.city} ${team.name} — established ${team.established}, ${team.league} ${team.division}`}
-                      width={2400}
-                      height={1000}
+                      width={TEAM_BANNERS[team.slug].width}
+                      height={TEAM_BANNERS[team.slug].height}
                       priority
                       sizes="(min-width: 1152px) 1104px, 100vw"
                       className="h-auto w-full"
