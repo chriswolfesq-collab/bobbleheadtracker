@@ -340,7 +340,15 @@ export function TeamPageClient({
                 </h1>
 
                 <div className="relative mt-4">
-                  <div className="overflow-hidden rounded-xl shadow-[0_18px_44px_rgba(0,0,0,0.45)] ring-1 ring-white/15">
+                  {/* Every header is the same 2.4:1 box no matter what shape the
+                      source art is, so no team's banner towers over the rest. The
+                      handful of cards that come in taller than that are cropped to
+                      fit rather than shrunk — replacing those files with 2.4:1 art
+                      is what makes the crop a no-op. The crop is anchored to the top
+                      because the est./division badges and the team name are baked in
+                      up there; a centered one cuts straight through them, and what
+                      it takes off the bottom instead is skyline foreground. */}
+                  <div className="aspect-[1942/809] overflow-hidden rounded-xl shadow-[0_18px_44px_rgba(0,0,0,0.45)] ring-1 ring-white/15">
                     <Image
                       src={publicAsset(`/team-banners/${team.slug}.png`)}
                       alt={`${team.city} ${team.name} — established ${team.established}, ${team.league} ${team.division}`}
@@ -348,7 +356,7 @@ export function TeamPageClient({
                       height={TEAM_BANNERS[team.slug].height}
                       priority
                       sizes="(min-width: 1152px) 1104px, 100vw"
-                      className="h-auto w-full"
+                      className="h-full w-full object-cover object-top"
                     />
                   </div>
                   <Image
