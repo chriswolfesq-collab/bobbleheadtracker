@@ -77,7 +77,7 @@ export default function Home() {
             <div className="mt-6 flex flex-wrap gap-3">
               <ButtonLink href="/teams">Browse Teams</ButtonLink>
               <ButtonLink href="/search" variant="outline">
-                Browse All
+                Search All
               </ButtonLink>
             </div>
           </div>
@@ -113,7 +113,7 @@ export default function Home() {
                   Browse Teams
                 </ButtonLink>
                 <ButtonLink href="/search" variant="outline" size="sm">
-                  Browse All
+                  Search All
                 </ButtonLink>
               </div>
             </div>

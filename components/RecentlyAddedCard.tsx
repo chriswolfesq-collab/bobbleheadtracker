@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { WantedButton } from "@/components/WantedButton";
 import type { CommunityBobbleheadWithTeam } from "@/lib/communityBobbleheads";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
@@ -33,8 +33,10 @@ export function RecentlyAddedCard({
         href={`/teams/${bobblehead.teamSlug}/community/${encodeURIComponent(bobblehead.id)}`}
         className="flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
-        <div className="flex h-24 items-end justify-center px-2 pt-2 sm:h-28">
-          <Image
+        {/* `relative` so BobbleheadImage's skeleton has a box to fill —
+            without it these cards sit blank white until the photo arrives. */}
+        <div className="relative flex h-24 items-end justify-center px-2 pt-2 sm:h-28">
+          <BobbleheadImage
             src={imageSrc}
             alt={`${bobblehead.title} bobblehead`}
             width={268}

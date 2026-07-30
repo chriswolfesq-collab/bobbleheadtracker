@@ -91,7 +91,13 @@ export default function AdminPage() {
     return (
       <main className="min-h-full bg-slate-50 px-4 py-10 text-center text-zinc-900">
         <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Not authorized</p>
-        <p className="mt-2 text-sm text-zinc-600">{user.email} isn&apos;t an approved admin or team-rep account.</p>
+        {/* `{" "}` not a plain space: this Next version's JSX transform strips
+            the leading space off a text node containing an entity (&apos;),
+            which would run the address into the sentence. */}
+        <p className="mt-2 text-sm text-zinc-600">
+          {user.email}{" "}
+          isn&apos;t an approved admin or team-rep account.
+        </p>
         <button
           type="button"
           onClick={() => signOut()}

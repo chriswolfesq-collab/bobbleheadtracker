@@ -122,9 +122,25 @@ export function SearchPageClient() {
         </div>
 
         {query.trim().length === 0 ? (
-          <p className="text-center text-sm text-zinc-600">
-            Type above to search the whole catalog.
-          </p>
+          // Arriving here from the homepage's "Search All" with nothing typed
+          // is a dead end otherwise, so offer the two browse routes.
+          <div className="text-center">
+            <p className="text-sm text-zinc-600">Type above to search the whole catalog.</p>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
+              <Link
+                href="/teams"
+                className="font-semibold text-accent hover:text-accent-hover"
+              >
+                Browse by team
+              </Link>
+              <Link
+                href="/recently-added"
+                className="font-semibold text-accent hover:text-accent-hover"
+              >
+                Recently added
+              </Link>
+            </div>
+          </div>
         ) : results.length === 0 ? (
           <div className="rounded-lg border border-dashed border-black/10 bg-black/15 p-8 text-center">
             <p className="text-sm font-black uppercase tracking-wide text-zinc-900">

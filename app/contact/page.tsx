@@ -13,13 +13,17 @@ export default function ContactPage() {
       <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
         <h1 className="font-display text-4xl font-bold uppercase tracking-wide text-navy">Contact</h1>
         <div className="mt-6 space-y-4 rounded-xl border border-border-soft bg-surface p-6 text-sm leading-7 text-zinc-700">
+          {/* The `{" "}` after each </strong> is load-bearing: this Next
+              version's JSX transform strips the leading space from any text
+              node that contains an HTML entity (&apos; here), so a plain space
+              would vanish and render as "Updatebutton". */}
           <p>
-            The fastest way to fix a listing is the <strong>Submit an Update</strong> button on
-            that bobblehead&apos;s page — reports go straight to the admin queue.
+            The fastest way to fix a listing is the <strong>Submit an Update</strong>{" "}
+            button on that bobblehead&apos;s page — reports go straight to the admin queue.
           </p>
           <p>
-            Have a photo to share? Use <strong>Add photos</strong> on the bobblehead&apos;s page,
-            or submit a missing bobblehead from its team page.
+            Have a photo to share? Use <strong>Add photos</strong>{" "}
+            on the bobblehead&apos;s page, or submit a missing bobblehead from its team page.
           </p>
           <p>
             For anything else — account questions, photo takedown requests, or general feedback —
