@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { EnlargeablePhoto } from "@/components/EnlargeablePhoto";
 import { resolveTitleParts } from "@/components/BobbleheadTitle";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { CollectionDetails } from "@/components/CollectionDetails";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { PhotoGallery } from "@/components/PhotoGallery";
@@ -632,9 +633,12 @@ export function CuratedBobbleheadPage({
               ) : !ownershipKnown ? (
                 <p className="mt-2 text-sm text-zinc-500">Loading your collection…</p>
               ) : isOwned ? (
-                <p className="mt-2 text-sm font-semibold text-green-700">
-                  You own this bobblehead.
-                </p>
+                <>
+                  <p className="mt-2 text-sm font-semibold text-green-700">
+                    You own this bobblehead.
+                  </p>
+                  <CollectionDetails teamSlug={team.slug} bobbleheadId={giveaway.id} />
+                </>
               ) : (
                 <p className="mt-2 text-sm leading-6 text-zinc-600">
                   Not on your shelf yet{isWanted ? " — it's on your wanted list." : "."}

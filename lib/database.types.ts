@@ -493,22 +493,34 @@ export type Database = {
       }
       user_collections: {
         Row: {
+          acquired_on: string | null
           bobblehead_id: string
+          condition: string | null
+          notes: string | null
           owned: boolean
+          price_paid: number | null
           team_slug: string
           updated_at: string
           user_id: string
         }
         Insert: {
+          acquired_on?: string | null
           bobblehead_id: string
+          condition?: string | null
+          notes?: string | null
           owned?: boolean
+          price_paid?: number | null
           team_slug: string
           updated_at?: string
           user_id: string
         }
         Update: {
+          acquired_on?: string | null
           bobblehead_id?: string
+          condition?: string | null
+          notes?: string | null
           owned?: boolean
+          price_paid?: number | null
           team_slug?: string
           updated_at?: string
           user_id?: string

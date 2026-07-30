@@ -6,6 +6,7 @@ import { useState } from "react";
 import { EnlargeablePhoto } from "@/components/EnlargeablePhoto";
 import { resolveTitleParts } from "@/components/BobbleheadTitle";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { CollectionDetails } from "@/components/CollectionDetails";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { extractYear } from "@/lib/extractYear";
 import { FavoriteButton } from "@/components/FavoriteButton";
@@ -456,6 +457,19 @@ export function CommunityBobbleheadPage({
                 {isWanted ? "★ Wanted" : "☆ Want It"}
               </button>
             </div>
+
+            {/* No "Collection Status" card here the way the curated page has
+                one — the button above already says whether you own it. This is
+                only the per-copy record, so it appears once there's a copy to
+                describe. */}
+            {isOwned && ownershipKnown ? (
+              <div className="rounded-xl border border-border-soft bg-surface p-5">
+                <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
+                  Your Copy
+                </h2>
+                <CollectionDetails teamSlug={team.slug} bobbleheadId={giveaway.id} />
+              </div>
+            ) : null}
 
             {rarity ? (
               <div className="rounded-xl border border-border-soft bg-surface p-5">
