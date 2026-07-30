@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "FAQ — BobbleShelf",
@@ -36,7 +38,9 @@ const FAQS: { q: string; a: string }[] = [
 export default function FaqPage() {
   return (
     <div className="flex min-h-full flex-1 flex-col" style={{ background: "var(--page-gradient)" }}>
+      <BreadcrumbJsonLd trail={[{ name: "FAQ", path: "/faq" }]} />
       <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
+        <Breadcrumbs className="mb-6" items={[{ href: "/", label: "Home" }, { label: "FAQ" }]} />
         <h1 className="font-display text-4xl font-bold uppercase tracking-wide text-navy">FAQ</h1>
         <div className="mt-6 space-y-4">
           {FAQS.map((faq) => (

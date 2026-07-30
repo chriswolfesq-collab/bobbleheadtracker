@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Terms of Service — BobbleShelf",
@@ -10,7 +12,12 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="flex min-h-full flex-1 flex-col" style={{ background: "var(--page-gradient)" }}>
+      <BreadcrumbJsonLd trail={[{ name: "Terms of Service", path: "/terms" }]} />
       <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
+        <Breadcrumbs
+          className="mb-6"
+          items={[{ href: "/", label: "Home" }, { label: "Terms of Service" }]}
+        />
         <h1 className="font-display text-4xl font-bold uppercase tracking-wide text-navy">
           Terms of Service
         </h1>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAdminAuth } from "@/lib/adminAuth";
 import type { AdminCollectionItem } from "@/lib/adminCollections";
 import { getTeamBySlug } from "@/lib/teams";
@@ -66,12 +67,16 @@ export function AdminItemsBrowser({
     <main className="min-h-full bg-slate-50 px-4 py-8 text-zinc-900 sm:px-8">
       <div className="mx-auto flex max-w-5xl items-center justify-between">
         <div>
-          <Link
-            href="/admin/stats"
-            className="text-sm font-black uppercase tracking-wide text-zinc-900 hover:text-accent-hover"
-          >
-            ← Back to stats
-          </Link>
+          {/* These browsers are all reached from the stats page, so it stays in
+              the trail where the old "← Back to stats" link pointed. */}
+          <Breadcrumbs
+            items={[
+              { href: "/", label: "Home" },
+              { href: "/admin", label: "Admin" },
+              { href: "/admin/stats", label: "Site stats" },
+              { label: title },
+            ]}
+          />
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">{title}</h1>
           <p className="mt-1 text-sm text-zinc-600">{description}</p>
         </div>

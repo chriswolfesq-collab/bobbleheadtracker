@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CollectionTransfer } from "@/components/CollectionTransfer";
 import { EmailAlertsToggle } from "@/components/EmailAlertsToggle";
 import { GalleryToggle } from "@/components/GalleryToggle";
@@ -19,13 +19,10 @@ export function SettingsPageClient() {
       className="flex min-h-full flex-1 flex-col"
       style={{ background: "var(--page-gradient)" }}
     >
-      <div className="flex items-center justify-between px-4 pt-4 sm:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-700 transition hover:text-accent-hover"
-        >
-          <span aria-hidden>←</span> Back to home
-        </Link>
+      {/* Outside the signed-in branch: the trail is also the way back out of
+          the sign-in prompt. */}
+      <div className="mx-auto w-full max-w-2xl px-4 pt-4 sm:px-6">
+        <Breadcrumbs items={[{ href: "/", label: "Home" }, { label: "Settings" }]} />
       </div>
 
       {isAuthLoading ? null : !user ? (

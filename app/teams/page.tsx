@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { siteUrl } from "@/lib/siteUrl";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { TeamsPageClient } from "./TeamsPageClient";
 
 const title = "All Teams — BobbleShelf";
@@ -14,22 +14,9 @@ export const metadata: Metadata = {
 };
 
 export default function TeamsPage() {
-  const base = siteUrl();
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "BobbleShelf", item: base },
-      { "@type": "ListItem", position: 2, name: "Teams", item: `${base}/teams` },
-    ],
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <BreadcrumbJsonLd trail={[{ name: "Teams", path: "/teams" }]} />
       <TeamsPageClient />
     </>
   );

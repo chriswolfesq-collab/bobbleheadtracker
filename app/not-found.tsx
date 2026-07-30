@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 // Site-wide 404: rendered both for URLs that match no route (e.g. a mistyped
 // team slug) and for any `notFound()` call without a closer not-found boundary.
@@ -10,6 +11,12 @@ export default function NotFound() {
       className="flex min-h-full flex-1 flex-col items-center justify-center px-4 py-24 text-center"
       style={{ background: "var(--page-gradient)" }}
     >
+      {/* A dead URL has no place in the hierarchy, so the trail is just the way
+          back up — the rest of the page is centred, so this one is too. */}
+      <Breadcrumbs
+        className="mb-8"
+        items={[{ href: "/", label: "Home" }, { label: "Page not found" }]}
+      />
       <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-accent/80">
         MLB Bobblehead Shelf
       </p>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { RecentlyAddedPageClient } from "./RecentlyAddedPageClient";
 
 const title = "Recently Added Bobbleheads — BobbleShelf";
@@ -13,5 +14,10 @@ export const metadata: Metadata = {
 };
 
 export default function RecentlyAddedPage() {
-  return <RecentlyAddedPageClient />;
+  return (
+    <>
+      <BreadcrumbJsonLd trail={[{ name: "Recently Added", path: "/recently-added" }]} />
+      <RecentlyAddedPageClient />
+    </>
+  );
 }

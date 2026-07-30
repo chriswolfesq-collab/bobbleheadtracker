@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { GIVEAWAYS_BY_TEAM } from "@/lib/bobbleheads";
@@ -190,9 +191,13 @@ export default function AdminStatsPage() {
     <main className="min-h-full bg-slate-50 px-4 py-8 text-zinc-900 sm:px-8">
       <div className="mx-auto flex max-w-5xl items-center justify-between">
         <div>
-          <Link href="/admin" className="text-sm font-black uppercase tracking-wide text-zinc-900 hover:text-accent-hover">
-            ← Back to admin
-          </Link>
+          <Breadcrumbs
+            items={[
+              { href: "/", label: "Home" },
+              { href: "/admin", label: "Admin" },
+              { label: "Site stats" },
+            ]}
+          />
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">Site stats</h1>
         </div>
         <div className="flex items-center gap-3 text-sm">

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { InboundMessageForm } from "@/components/InboundMessageForm";
 import { TEAMS } from "@/lib/teams";
 
@@ -45,7 +47,12 @@ export default async function BecomeARepPage({
 
   return (
     <div className="flex min-h-full flex-1 flex-col" style={{ background: "var(--page-gradient)" }}>
+      <BreadcrumbJsonLd trail={[{ name: "Become a Team Rep", path: "/become-a-rep" }]} />
       <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
+        <Breadcrumbs
+          className="mb-6"
+          items={[{ href: "/", label: "Home" }, { label: "Become a Team Rep" }]}
+        />
         <h1 className="font-display text-4xl font-bold uppercase tracking-wide text-navy">
           Become a Team Rep
         </h1>

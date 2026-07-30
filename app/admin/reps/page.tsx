@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AdminEmailComposer, type EmailTarget } from "@/components/AdminEmailComposer";
 import { AdminLoginForm } from "@/components/AdminLoginForm";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { TEAMS } from "@/lib/teams";
@@ -139,12 +139,13 @@ export default function AdminRepsPage() {
   return (
     <main className="min-h-full bg-slate-50 px-4 py-10 text-zinc-900">
       <div className="mx-auto max-w-2xl">
-        <Link
-          href="/admin"
-          className="inline-block text-xs font-bold text-accent hover:text-accent-hover"
-        >
-          ← Back to Admin mode
-        </Link>
+        <Breadcrumbs
+          items={[
+            { href: "/", label: "Home" },
+            { href: "/admin", label: "Admin" },
+            { label: "Manage reps" },
+          ]}
+        />
         <h1 className="mt-3 text-2xl font-black uppercase tracking-wide">Manage reps</h1>
         <p className="mt-1 text-sm text-zinc-600">
           A rep can edit only the team you assign them — the same edit and review powers you have,

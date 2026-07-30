@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — BobbleShelf",
@@ -10,7 +12,12 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <div className="flex min-h-full flex-1 flex-col" style={{ background: "var(--page-gradient)" }}>
+      <BreadcrumbJsonLd trail={[{ name: "Privacy Policy", path: "/privacy" }]} />
       <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
+        <Breadcrumbs
+          className="mb-6"
+          items={[{ href: "/", label: "Home" }, { label: "Privacy Policy" }]}
+        />
         <h1 className="font-display text-4xl font-bold uppercase tracking-wide text-navy">
           Privacy Policy
         </h1>

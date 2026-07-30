@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { AdminEmailComposer, type EmailTarget } from "@/components/AdminEmailComposer";
 import { AdminFilterBar } from "@/components/AdminFilterBar";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { MAX_DISPLAY_NAME_LENGTH, validateDisplayName } from "@/lib/auth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
@@ -338,9 +339,13 @@ function AdminUsersPageInner() {
     <main className="min-h-full bg-slate-50 px-4 py-8 text-zinc-900 sm:px-8">
       <div className="mx-auto flex max-w-4xl items-center justify-between">
         <div>
-          <Link href="/admin" className="text-sm font-black uppercase tracking-wide text-zinc-900 hover:text-accent-hover">
-            ← Back to admin
-          </Link>
+          <Breadcrumbs
+            items={[
+              { href: "/", label: "Home" },
+              { href: "/admin", label: "Admin" },
+              { label: "Manage users" },
+            ]}
+          />
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">Manage users</h1>
         </div>
         <div className="flex items-center gap-3 text-sm">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { BobbleheadImage } from "@/components/BobbleheadImage";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAllApprovedPhotos } from "@/lib/approvedPhotos";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
 import { publicAsset } from "@/lib/paths";
@@ -75,16 +76,22 @@ export function SearchPageClient() {
 
   return (
     <div className="flex min-h-full flex-1 flex-col" style={{ background: "var(--page-gradient)" }}>
-      <div className="flex items-center justify-between px-4 pt-4 sm:px-6">
-        <Link
-          href={team ? `/teams/${team.slug}` : "/"}
-          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-700 transition hover:text-accent-hover"
-        >
-          <span aria-hidden>←</span> {team ? `Back to ${team.name}` : "Back to home"}
-        </Link>
-      </div>
-
       <div className="mx-auto w-full max-w-5xl px-4 pb-24 pt-6 sm:px-6">
+        {/* A team-scoped search keeps that team in the trail, so the crumb that
+            replaces the old "← Back to <team>" link still leads back to it. */}
+        <Breadcrumbs
+          className="mb-4"
+          items={[
+            { href: "/", label: "Home" },
+            ...(team
+              ? [
+                  { href: "/teams", label: "Teams" },
+                  { href: `/teams/${team.slug}`, label: team.name },
+                ]
+              : []),
+            { label: "Search" },
+          ]}
+        />
         <header className="mb-6 text-center">
           <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-accent/80 sm:text-xs">
             Search results

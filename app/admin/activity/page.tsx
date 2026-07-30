@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AdminLoginForm } from "@/components/AdminLoginForm";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { bobbleheadHref } from "@/lib/bobbleheadIdentity";
 import { getGiveawayById } from "@/lib/bobbleheads";
@@ -194,12 +195,13 @@ export default function AdminActivityPage() {
   return (
     <main className="min-h-full bg-slate-50 px-4 py-10 text-zinc-900">
       <div className="mx-auto max-w-3xl">
-        <Link
-          href="/admin"
-          className="inline-block text-xs font-bold text-accent hover:text-accent-hover"
-        >
-          ← Back to Admin mode
-        </Link>
+        <Breadcrumbs
+          items={[
+            { href: "/", label: "Home" },
+            { href: "/admin", label: "Admin" },
+            { label: "Activity" },
+          ]}
+        />
         <h1 className="mt-3 text-2xl font-black uppercase tracking-wide">Activity</h1>
         <p className="mt-1 text-sm text-zinc-600">
           Every change a rep or admin has made to a listing, photo, submission or report. The daily

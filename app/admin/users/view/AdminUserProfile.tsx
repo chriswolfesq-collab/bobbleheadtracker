@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProfileSections } from "@/components/ProfileSections";
 import { useAdminAuth } from "@/lib/adminAuth";
 import {
@@ -22,10 +23,12 @@ type ProfileUser = {
   last_sign_in_at: string | null;
 };
 
-const BACK_LINKS: Record<string, { href: string; label: string }> = {
-  users: { href: "/admin/users", label: "Back to users" },
-  review: { href: "/admin/review", label: "Back to review" },
-  reports: { href: "/admin/reports", label: "Back to reports" },
+// Where the profile was opened from, so the trail leads back to the queue the
+// admin was working through rather than always to the users list.
+const PARENT_CRUMBS: Record<string, { href: string; label: string }> = {
+  users: { href: "/admin/users", label: "Manage users" },
+  review: { href: "/admin/review", label: "Review submissions" },
+  reports: { href: "/admin/reports", label: "Listing reports" },
 };
 
 function formatDate(value: string | null) {
@@ -38,7 +41,7 @@ export function AdminUserProfile() {
   // Empty string when absent so the profile hooks below treat it as "no user"
   // and fetch nothing, rather than falling back to the admin's own session.
   const targetId = searchParams.get("id") ?? "";
-  const backTo = BACK_LINKS[searchParams.get("from") ?? ""] ?? BACK_LINKS.users;
+  const parentCrumb = PARENT_CRUMBS[searchParams.get("from") ?? ""] ?? PARENT_CRUMBS.users;
 
   const [profile, setProfile] = useState<ProfileUser | null>(null);
   const [profileError, setProfileError] = useState<string | null>(null);
@@ -97,12 +100,14 @@ export function AdminUserProfile() {
       style={{ background: "var(--page-gradient)" }}
     >
       <div className="flex items-center justify-between px-4 pt-4 sm:px-6">
-        <Link
-          href={backTo.href}
-          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-700 transition hover:text-accent-hover"
-        >
-          <span aria-hidden>←</span> {backTo.label}
-        </Link>
+        <Breadcrumbs
+          items={[
+            { href: "/", label: "Home" },
+            { href: "/admin", label: "Admin" },
+            { href: parentCrumb.href, label: parentCrumb.label },
+            { label: profile?.display_name ?? "User profile" },
+          ]}
+        />
         <div className="flex items-center gap-3 text-sm">
           <span className="font-semibold text-zinc-800">{user.email}</span>
           <button

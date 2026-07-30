@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { breadcrumbList } from "@/components/BreadcrumbJsonLd";
 import { GIVEAWAYS_BY_TEAM, getGiveawayById } from "@/lib/bobbleheads";
 import { getCuratedListingData, getDeletedListingKeys } from "@/lib/curatedListing";
 import { getRarity } from "@/lib/rarity";
@@ -114,20 +115,11 @@ export default async function BobbleheadPage({
           : {}),
         brand: { "@type": "SportsTeam", name: `${team.city} ${team.name}` },
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "BobbleShelf", item: base },
-          { "@type": "ListItem", position: 2, name: "Teams", item: `${base}/teams` },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: `${team.city} ${team.name}`,
-            item: `${base}/teams/${slug}`,
-          },
-          { "@type": "ListItem", position: 4, name, item: pageUrl },
-        ],
-      },
+      breadcrumbList([
+        { name: "Teams", path: "/teams" },
+        { name: `${team.city} ${team.name}`, path: `/teams/${slug}` },
+        { name, path: `/teams/${slug}/bobbleheads/${bobbleheadId}` },
+      ]),
     ],
   };
 
