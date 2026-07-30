@@ -19,10 +19,11 @@
 //     ~2MB each, which is a lot to carry in git for bytes the image optimizer
 //     re-encodes before they ever reach a browser.
 //
-// Heights are not normalized: the sources are a mix of 2.4:1 and 16:9, and
-// cropping the tall ones to match clipped the est./division badges and the
-// skyline. lib/teamBanners.ts carries each card's real size instead so the page
-// can reserve the right box for it.
+// Each card keeps the aspect ratio it arrived with — the trim above is fitted
+// back to it rather than allowed to reshape the art. Shapes are not otherwise
+// normalized here: the page heads every team with one fixed 2.4:1 box and
+// covers it, so a source that isn't that shape is cropped at render, and
+// lib/teamBanners.ts carries each card's real size to reserve the box with.
 import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import { dirname, join, parse } from 'node:path';
@@ -80,10 +81,30 @@ for (const slug of SLUGS) {
   const src = sources.get(key(slug));
   const meta = await sharp(src).metadata();
   const inset = await whiteInset(src);
-  const width = meta.width - 2 * inset;
-  const height = meta.height - 2 * inset;
+  let left = inset;
+  let top = inset;
+  let width = meta.width - 2 * inset;
+  let height = meta.height - 2 * inset;
+
+  // Cutting the white takes the same count of pixels off all four edges, which
+  // leaves a wide card wider than it started: 1942x809 comes back 1906x773,
+  // 2.47:1 rather than 2.4:1. The header is one fixed shape, so that drift is
+  // only something the page crops back off at render. Take it here instead,
+  // measured against the source's own ratio, and what lands on disk is already
+  // the shape the page asks for.
+  const ratio = meta.width / meta.height;
+  if (width / height > ratio) {
+    const fitted = Math.round(height * ratio);
+    left += Math.round((width - fitted) / 2);
+    width = fitted;
+  } else if (width / height < ratio) {
+    const fitted = Math.round(width / ratio);
+    top += Math.round((height - fitted) / 2);
+    height = fitted;
+  }
+
   await sharp(src)
-    .extract({ left: inset, top: inset, width, height })
+    .extract({ left, top, width, height })
     .png({ compressionLevel: 9, effort: 10 })
     .toFile(join(OUT, `${slug}.png`));
   dims.push({ slug, width, height });
