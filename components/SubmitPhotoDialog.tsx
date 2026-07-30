@@ -7,6 +7,16 @@ import { submitPhotoForExisting } from "@/lib/submissions";
 
 type Status = "idle" | "uploading" | "submitted" | "error";
 
+// The caller's className styles an interactive control. Once the submission is
+// done the element is just a label, so drop the classes that still advertise a
+// click — the pointer cursor and any hover state.
+function inertClassName(className: string) {
+  return className
+    .split(/\s+/)
+    .filter((token) => token !== "cursor-pointer" && !token.startsWith("hover:"))
+    .join(" ");
+}
+
 export function SubmitPhotoButton({
   bobbleheadId,
   teamSlug,
@@ -25,10 +35,14 @@ export function SubmitPhotoButton({
   const [autoApproved, setAutoApproved] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
+  // Status text never sets its own color: `className` comes from the caller and
+  // already pairs a background with a legible foreground (a solid accent button
+  // in one place, plain accent-on-surface in another). Hardcoding a color here
+  // painted navy on navy.
   if (status === "submitted") {
     return (
-      <div className={className}>
-        <span className="text-center text-xs font-black uppercase tracking-wide text-accent">
+      <div className={inertClassName(className)}>
+        <span className="text-center text-xs font-black uppercase tracking-wide">
           {autoApproved ? "Added — live now" : "Submitted — pending review"}
         </span>
       </div>
@@ -43,7 +57,7 @@ export function SubmitPhotoButton({
         onClick={() => setMessage("Log in to submit a photo for review.")}
       >
         {message ? (
-          <span className="text-center text-xs font-semibold text-accent">{message}</span>
+          <span className="text-center text-xs font-semibold">{message}</span>
         ) : (
           (children ?? label)
         )}
@@ -77,9 +91,9 @@ export function SubmitPhotoButton({
         }}
       />
       {status === "uploading" ? (
-        <span className="text-xs font-black uppercase tracking-wide text-zinc-600">Uploading…</span>
+        <span className="text-xs font-black uppercase tracking-wide">Uploading…</span>
       ) : message ? (
-        <span className="text-center text-xs font-semibold text-red-400">{message}</span>
+        <span className="text-center text-xs font-semibold">{message}</span>
       ) : (
         (children ?? label)
       )}
