@@ -219,7 +219,10 @@ from (
     ('community-white-sox-lucas-giolito-x-wing-pilot-2a851e56', 'white-sox'),           -- Lucas Giolito X-Wing Pilot
     ('community-white-sox-steve-stone-d7298cc3', 'white-sox')                           -- Steve Stone (Stormtrooper)
 ) as v (bobblehead_id, team_slug)
-on conflict (bobblehead_id, tag_slug) do nothing;
+-- Names all three key columns. Two teams sharing a bobblehead id is the whole
+-- reason the key was widened, so a conflict target of (bobblehead_id,
+-- tag_slug) no longer matches a constraint and the insert fails outright.
+on conflict (bobblehead_id, team_slug, tag_slug) do nothing;
 
 -- What landed. Expect 138 the first time and 138 every time after.
 select listing_count from public.tag_counts where slug = 'star-wars';
