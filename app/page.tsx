@@ -51,6 +51,14 @@ const HERO_SHELF_BOX = { left: "40.5%", right: "3.5%", bottom: "46%", height: "4
 
 const TEAM_CAPTION_HEIGHT = 44;
 
+// The homepage is otherwise prerendered once and served until a curated-data
+// change busts the tag, which was fine when nothing on it depended on the date.
+// The "coming up" strip does: without a ceiling, a giveaway that happened in
+// April would still be captioned "today" in July. An hour is plenty, since the
+// countdown is day-granular — it only decides how long after midnight a past
+// giveaway takes to drop off. Same value as the community detail pages.
+export const revalidate = 3600;
+
 // The strip is capped rather than showing the whole schedule — next season's
 // 122 dated entries are a list, not a glance. The team pages and the .ics feed
 // carry the rest.
