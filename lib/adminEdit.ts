@@ -166,14 +166,14 @@ export async function setGalleryPhotoAsMain({
         image_url: previousMainUrl,
         approved_by: user.id,
       })
-      .select("id, image_url")
+      .select("id, image_url, created_at")
       .single();
 
     if (demoteError) {
       throw new Error(demoteError.message);
     }
 
-    demotedPhoto = { id: data.id, imageUrl: data.image_url };
+    demotedPhoto = { id: data.id, imageUrl: data.image_url, createdAt: data.created_at };
   }
 
   const { error } = await supabase.from("approved_photos").upsert(
@@ -204,6 +204,61 @@ export async function setGalleryPhotoAsMain({
   assertPersisted(deletedGalleryRows, "The photo change");
 
   return { demotedPhoto };
+}
+
+// Swaps one gallery photo for a freshly uploaded file. Done as insert-then-
+// delete rather than an update because the gallery table grants admins and reps
+// insert and delete but no update — the update would be filtered to zero rows
+// and read as an expired session. The new row inherits the old one's created_at
+// so the replacement keeps its place in the strip.
+export async function replaceGalleryPhoto({
+  user,
+  teamSlug,
+  bobbleheadId,
+  photo,
+  file,
+}: {
+  user: User;
+  teamSlug: string;
+  bobbleheadId: string;
+  photo: GalleryPhoto;
+  file: File;
+}): Promise<GalleryPhoto> {
+  const imageUrl = await uploadPhotoDirect(file);
+
+  const { data, error } = await supabase
+    .from("bobblehead_gallery_photos")
+    .insert({
+      bobblehead_id: bobbleheadId,
+      team_slug: teamSlug,
+      image_url: imageUrl,
+      approved_by: user.id,
+      created_at: photo.createdAt,
+    })
+    .select("id, image_url, created_at")
+    .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  // The old row goes only once the new one is safely in, so a failure here
+  // leaves a duplicate rather than losing the photo outright.
+  const { data: deletedRows, error: deleteError } = await supabase
+    .from("bobblehead_gallery_photos")
+    .delete()
+    .eq("id", photo.id)
+    .select();
+
+  if (deleteError) {
+    throw new Error(deleteError.message);
+  }
+
+  assertPersisted(deletedRows, "The photo");
+
+  await removeApprovedFile(photo.imageUrl);
+
+  return { id: data.id, imageUrl: data.image_url, createdAt: data.created_at };
 }
 
 export async function deleteGalleryPhoto(photo: { id: string; imageUrl: string }) {
