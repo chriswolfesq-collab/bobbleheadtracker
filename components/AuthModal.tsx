@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useState } from "react";
 import { MAX_DISPLAY_NAME_LENGTH, useAuth, validateDisplayName } from "@/lib/auth";
+import { sendPasswordReset } from "@/lib/passwordReset";
 import { useDialog } from "@/lib/useDialog";
 
 export function AuthModal() {
@@ -25,6 +26,11 @@ export function AuthModal() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [oauthLoading, setOauthLoading] = useState(false);
   const [confirmationSent, setConfirmationSent] = useState(false);
+  // "I forgot my password" is a detour off the sign-in form rather than a third
+  // authModalMode: nothing outside this component ever needs to open straight
+  // into it, so it stays local like confirmationSent.
+  const [isForgotMode, setIsForgotMode] = useState(false);
+  const [resetSent, setResetSent] = useState(false);
 
   const resetAndClose = useCallback(() => {
     closeAuthModal();
@@ -34,6 +40,8 @@ export function AuthModal() {
     setAcceptedTerms(false);
     setError(null);
     setConfirmationSent(false);
+    setIsForgotMode(false);
+    setResetSent(false);
   }, [closeAuthModal]);
 
   // Escape/focus-trap/restore. Called before the early return so the hook order
@@ -60,6 +68,31 @@ export function AuthModal() {
     }
   };
 
+  const handleForgotPassword = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    setError(null);
+    clearOauthError();
+    setIsSubmitting(true);
+
+    const result = await sendPasswordReset(email.trim());
+
+    setIsSubmitting(false);
+
+    if (result.error) {
+      setError(result.error);
+      return;
+    }
+
+    setResetSent(true);
+  };
+
+  const leaveForgotMode = () => {
+    setError(null);
+    clearOauthError();
+    setIsForgotMode(false);
+  };
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-8"
@@ -69,7 +102,13 @@ export function AuthModal() {
         ref={panelRef}
         role="dialog"
         aria-modal="true"
-        aria-label={mode === "sign-in" ? "Sign in" : "Create your account"}
+        aria-label={
+          isForgotMode
+            ? "Reset your password"
+            : mode === "sign-in"
+              ? "Sign in"
+              : "Create your account"
+        }
         className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50"
         onClick={(event) => event.stopPropagation()}
       >
@@ -86,6 +125,72 @@ export function AuthModal() {
               Close
             </button>
           </div>
+        ) : resetSent ? (
+          <div className="grid gap-4 text-center">
+            <h2 className="text-lg font-black text-zinc-900">Check your email</h2>
+            {/* Deliberately conditional. Supabase reports success whether or not
+                the address has an account, and saying "we sent it" outright
+                would turn this form into a way to find out who's registered. */}
+            <p className="text-sm leading-6 text-zinc-800">
+              If there&rsquo;s an account for <strong>{email.trim()}</strong>, a link to choose a
+              new password is on its way. It works once, and expires.
+            </p>
+            <button
+              type="button"
+              onClick={resetAndClose}
+              className="mx-auto rounded border border-black/10 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-700"
+            >
+              Close
+            </button>
+          </div>
+        ) : isForgotMode ? (
+          <>
+            <div className="mb-5 text-center">
+              <h2 className="text-lg font-black text-zinc-900">Reset your password</h2>
+              <p className="mt-1 text-xs text-zinc-600">
+                Enter the email you signed up with and we&rsquo;ll send a link to set a new
+                password.
+              </p>
+            </div>
+
+            <form className="grid gap-3" onSubmit={handleForgotPassword}>
+              <div className="grid gap-1.5">
+                <label htmlFor="forgot-email" className="text-xs font-bold text-zinc-700">
+                  Email address
+                </label>
+                <input
+                  autoFocus
+                  required
+                  id="forgot-email"
+                  type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="Enter your email address"
+                  className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent"
+                />
+              </div>
+
+              {displayError ? (
+                <p className="text-xs font-semibold text-red-400">{displayError}</p>
+              ) : null}
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="mt-1 rounded-lg bg-accent px-3 py-2.5 text-sm font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover disabled:opacity-60"
+              >
+                {isSubmitting ? "Sending…" : "Send reset link"}
+              </button>
+            </form>
+
+            <button
+              type="button"
+              onClick={leaveForgotMode}
+              className="mt-5 w-full border-t border-black/10 pt-4 text-center text-xs font-bold text-accent hover:text-accent-hover"
+            >
+              Back to sign in
+            </button>
+          </>
         ) : (
           <>
             <div className="mb-5 flex flex-col items-center gap-3 text-center">
@@ -188,7 +293,24 @@ export function AuthModal() {
                 />
               </div>
               <div className="grid gap-1.5">
-                <label className="text-xs font-bold text-zinc-700">Password</label>
+                <div className="flex items-baseline justify-between gap-3">
+                  <label className="text-xs font-bold text-zinc-700">Password</label>
+                  {/* Sign-in only: on the sign-up form there's no password to
+                      have forgotten yet. */}
+                  {mode === "sign-in" ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setError(null);
+                        clearOauthError();
+                        setIsForgotMode(true);
+                      }}
+                      className="text-xs font-bold text-accent hover:text-accent-hover"
+                    >
+                      Forgot password?
+                    </button>
+                  ) : null}
+                </div>
                 <input
                   required
                   type="password"
