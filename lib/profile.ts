@@ -223,78 +223,121 @@ export function useMyShelf(): ShelfSharing {
   };
 }
 
-export type EmailAlerts = {
-  enabled: boolean;
+/**
+ * The email switches, keyed the same way as set_email_preference's p_kind (see
+ * supabase/email_preferences.sql). "all" is the master switch; the rest are
+ * per-type.
+ */
+export type EmailPreferenceKind = "all" | "wanted_alerts" | "submission_updates" | "rep_digest";
+
+export type EmailPreferences = {
+  values: Record<EmailPreferenceKind, boolean>;
   isLoading: boolean;
-  isSaving: boolean;
-  setEnabled: (enabled: boolean) => Promise<{ error: string | null }>;
+  /** Which switch is mid-save, so only that row disables. */
+  savingKind: EmailPreferenceKind | null;
+  /** The rep digest only goes to admins, so its switch is only shown to one. */
+  isAdmin: boolean;
+  setPreference: (
+    kind: EmailPreferenceKind,
+    enabled: boolean,
+  ) => Promise<{ error: string | null }>;
 };
 
-// The signed-in user's wishlist-alert preference: whether to be emailed when a
-// bobblehead on their wishlist gets a new owner (see supabase/wishlist_alerts.sql).
-// Reads profiles directly (allowed by "profiles: owner select") but writes
-// through set_wishlist_alerts, because profiles has no client update policy —
-// same split as useMyShelf above.
-export function useEmailAlerts(): EmailAlerts {
+// Optimistic defaults match the column defaults (all on) so the switches don't
+// flicker off before the row loads.
+const DEFAULT_PREFERENCES: Record<EmailPreferenceKind, boolean> = {
+  all: true,
+  wanted_alerts: true,
+  submission_updates: true,
+  rep_digest: true,
+};
+
+// The signed-in user's email preferences: the master switch plus one per kind of
+// automated mail the site sends (see supabase/email_preferences.sql). Reads
+// profiles directly (allowed by "profiles: owner select") but writes through
+// set_email_preference, because profiles has no client update policy — same
+// split as useMyShelf above.
+export function useEmailPreferences(): EmailPreferences {
   const { user } = useAuth();
   const userId = user?.id ?? null;
-  // Optimistic default matches the column default (on) so the toggle doesn't
-  // flicker off before the row loads.
-  const [enabled, setEnabledState] = useState(true);
+  const [values, setValues] = useState(DEFAULT_PREFERENCES);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState(false);
+  const [savingKind, setSavingKind] = useState<EmailPreferenceKind | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (!userId) return;
 
     let cancelled = false;
 
-    supabase
-      .from("profiles")
-      .select("email_wishlist_alerts")
-      .eq("id", userId)
-      .maybeSingle()
-      .then(({ data, error }) => {
-        if (cancelled) return;
+    Promise.all([
+      supabase
+        .from("profiles")
+        // Spelled out rather than derived from the kind list: a computed select
+        // string erases the row type supabase-js infers from it.
+        .select(
+          "email_enabled, email_wishlist_alerts, email_submission_updates, email_rep_digest",
+        )
+        .eq("id", userId)
+        .maybeSingle(),
+      // Only decides whether to render the digest switch; the digest itself is
+      // gated server-side, so a wrong answer here can't leak anything.
+      supabase.rpc("is_admin"),
+    ]).then(([{ data, error }, { data: adminData }]) => {
+      if (cancelled) return;
 
-        if (error) {
-          console.error("Failed to load your alert settings:", error.message);
-        } else {
-          setEnabledState(data?.email_wishlist_alerts ?? true);
-        }
+      if (error) {
+        console.error("Failed to load your email settings:", error.message);
+      } else if (data) {
+        const row = data as Record<string, boolean | null>;
+        setValues({
+          all: row.email_enabled ?? true,
+          wanted_alerts: row.email_wishlist_alerts ?? true,
+          submission_updates: row.email_submission_updates ?? true,
+          rep_digest: row.email_rep_digest ?? true,
+        });
+      }
 
-        setIsLoading(false);
-      });
+      setIsAdmin(adminData === true);
+      setIsLoading(false);
+    });
 
     return () => {
       cancelled = true;
     };
   }, [userId]);
 
-  async function setEnabled(next: boolean): Promise<{ error: string | null }> {
+  async function setPreference(
+    kind: EmailPreferenceKind,
+    enabled: boolean,
+  ): Promise<{ error: string | null }> {
     if (!userId) return { error: "Not signed in." };
 
     // Optimistic; reverted below if the save fails.
-    const previous = enabled;
-    setEnabledState(next);
-    setIsSaving(true);
-    const { error } = await supabase.rpc("set_wishlist_alerts", { p_enabled: next });
-    setIsSaving(false);
+    const previous = values;
+    setValues({ ...values, [kind]: enabled });
+    setSavingKind(kind);
+    const { error } = await supabase.rpc("set_email_preference", {
+      p_kind: kind,
+      p_enabled: enabled,
+    });
+    setSavingKind(null);
 
     if (error) {
-      console.error("Failed to update your alert settings:", error.message);
-      setEnabledState(previous);
-      return { error: "Couldn't update your alerts. Try again." };
+      console.error("Failed to update your email settings:", error.message);
+      setValues(previous);
+      return { error: "Couldn't update your email settings. Try again." };
     }
 
     return { error: null };
   }
 
   return {
-    enabled: userId ? enabled : true,
+    values: userId ? values : DEFAULT_PREFERENCES,
     isLoading: userId ? isLoading : false,
-    isSaving,
-    setEnabled,
+    savingKind,
+    isAdmin,
+    setPreference,
   };
 }
 

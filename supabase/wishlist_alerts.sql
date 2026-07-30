@@ -104,12 +104,14 @@ begin
     select w.user_id, au.email
     from public.user_wants w
     join auth.users au on au.id = w.user_id
-    left join public.profiles p on p.id = w.user_id
     where w.bobblehead_id = new.bobblehead_id
       and w.wanted = true
       and w.user_id <> new.user_id
       and au.email is not null
-      and coalesce(p.email_wishlist_alerts, true) = true
+      -- Checks the master switch and the wanted-alerts switch together, via the
+      -- single helper in supabase/email_preferences.sql. Replaced a direct read
+      -- of profiles.email_wishlist_alerts, which only saw the one column.
+      and public.wants_email(w.user_id, 'wanted_alerts')
       and not exists (
         select 1 from public.wishlist_alerts_sent s
         where s.user_id = w.user_id

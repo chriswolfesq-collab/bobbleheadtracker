@@ -5,13 +5,13 @@ import { EmailAlertsToggle } from "@/components/EmailAlertsToggle";
 import { GalleryToggle } from "@/components/GalleryToggle";
 import { ShelfSharingToggle } from "@/components/ShelfSharingToggle";
 import { useAuth } from "@/lib/auth";
-import { useEmailAlerts, useGallerySharing, useMyShelf } from "@/lib/profile";
+import { useEmailPreferences, useGallerySharing, useMyShelf } from "@/lib/profile";
 
 export function SettingsPageClient() {
   const { user, isLoading: isAuthLoading } = useAuth();
   const sharing = useMyShelf();
   const gallery = useGallerySharing();
-  const alerts = useEmailAlerts();
+  const alerts = useEmailPreferences();
 
   return (
     <div

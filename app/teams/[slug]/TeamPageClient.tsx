@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { ButtonLink } from "@/components/ui/Button";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { useAuth } from "@/lib/auth";
@@ -420,6 +421,28 @@ export function TeamPageClient({
                   </button>
                 </div>
               )}
+
+              {/* The pitch lands hardest on a team page, where someone is already
+                  looking at the checklist they'd be looking after. The team is
+                  passed along so the application form arrives preselected. */}
+              <div className="mt-10 rounded-2xl border border-border-soft bg-surface px-6 py-6 sm:flex sm:items-center sm:justify-between sm:gap-6">
+                <div className="min-w-0">
+                  <h2 className="font-display text-lg font-bold uppercase tracking-wide text-navy">
+                    Know this team inside out?
+                  </h2>
+                  <p className="mt-1.5 text-sm leading-6 text-zinc-600">
+                    Team reps keep one team&apos;s page accurate — fixing listings, approving photos
+                    and reviewing what other collectors send in.
+                  </p>
+                </div>
+                <ButtonLink
+                  href={`/become-a-rep?team=${team.slug}`}
+                  variant="outline"
+                  className="mt-4 w-full shrink-0 sm:mt-0 sm:w-auto"
+                >
+                  Become a Team Rep
+                </ButtonLink>
+              </div>
             </section>
           </div>
         </WantedProvider>

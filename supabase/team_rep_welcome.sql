@@ -27,6 +27,14 @@ security definer
 set search_path = public
 as $$
 begin
+  -- Honor a master opt-out (see supabase/email_preferences.sql). Checked by
+  -- address because team_reps is keyed by email and may name someone who hasn't
+  -- signed up yet — no account means no preference on record, so the welcome
+  -- still goes out, which is exactly when it's most useful.
+  if not public.wants_email_by_address(new.email, 'all') then
+    return new;
+  end if;
+
   -- The row already holds everything the mailer needs: the rep's email and the
   -- team they now oversee. Nothing sensitive to resolve, so this just forwards.
   perform net.http_post(

@@ -14,14 +14,45 @@ export function EnlargeablePhoto({
   width,
   height,
   className,
+  fitHeight,
 }: {
   src: string;
   alt: string;
   width: number;
   height: number;
   className?: string;
+  /**
+   * Opt in to shape-aware sizing, capped at this many px tall. The photo then
+   * fills the width its frame gives it, stopping when its height reaches the
+   * cap, always at its true aspect ratio — so the frame ends up the shape of
+   * the photo instead of boxing it.
+   *
+   * Why this can't be done in CSS alone: listing photos are every shape, and
+   * `width`/`height` above are a fixed guess (the real ones aren't known
+   * server-side — plenty of photos are remote URLs). Leaving both dimensions
+   * `auto` looks right but resolves against the *intrinsic* size of whichever
+   * srcset entry was picked, and next/image advertises widths the optimizer
+   * won't deliver for a small source — it never upscales — so the browser
+   * divides by a density that's too high and the photo lands at a fraction of
+   * its size. Measuring the ratio sidesteps all of that: the individual
+   * natural dimensions are unreliable, their ratio isn't.
+   */
+  fitHeight?: number;
 }) {
   const [isZoomed, setIsZoomed] = useState(false);
+  // Seeded from the caller's declared dimensions so the frame starts at a sane
+  // shape, then corrected to the photo's real ratio the moment it's known.
+  const [ratio, setRatio] = useState(width / height);
+
+  const fitStyle =
+    fitHeight === undefined
+      ? undefined
+      : {
+          aspectRatio: String(ratio),
+          width: "100%",
+          maxWidth: `${Math.round(ratio * fitHeight)}px`,
+          height: "auto" as const,
+        };
 
   return (
     <>
@@ -40,6 +71,12 @@ export function EnlargeablePhoto({
           eager
           unoptimized={isUnoptimizedImage(src)}
           className={className}
+          style={fitStyle}
+          onNaturalSize={
+            fitHeight === undefined
+              ? undefined
+              : (naturalWidth, naturalHeight) => setRatio(naturalWidth / naturalHeight)
+          }
         />
       </button>
 

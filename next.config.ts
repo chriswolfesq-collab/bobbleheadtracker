@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
   // are escaped: unescaped they'd read as a character class and never match.
   outputFileTracingIncludes: {
     "/shelf/\\[slug\\]/opengraph-image": ["./assets/**"],
+    // The per-listing card is force-dynamic, so unlike the team card it renders
+    // on the server at request time and needs the fonts in the deployed bundle
+    // for the same reason the shelf card does.
+    "/teams/\\[slug\\]/bobbleheads/\\[bobbleheadId\\]/opengraph-image": ["./assets/**"],
   },
   images: {
     // Every remote host a listing image can come from. These are enforced by the

@@ -198,7 +198,20 @@ export default function AdminPage() {
               <Link href="/admin/reps" className={cardClass}>
                 <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Manage reps</p>
                 <p className="mt-2 text-sm text-zinc-600">
-                  Give a person edit access to one team&apos;s page, or remove it.
+                  Give a person edit access to one team&apos;s page, remove it, or email your reps.
+                </p>
+              </Link>
+              <Link href="/admin/messages" className={cardClass}>
+                <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Messages</p>
+                <p className="mt-2 text-sm text-zinc-600">
+                  Contact-form messages and team-rep applications sent in from the site.
+                </p>
+              </Link>
+              <Link href="/admin/activity" className={cardClass}>
+                <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Activity</p>
+                <p className="mt-2 text-sm text-zinc-600">
+                  Every listing, photo, submission and report a rep has changed — the log behind the
+                  daily summary email.
                 </p>
               </Link>
               <Link href="/admin/users" className={cardClass}>
