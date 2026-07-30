@@ -10,6 +10,7 @@ import { isUnoptimizedImage } from "@/lib/imageOptimization";
 // positioning context) so the whole photo area is the hit target.
 export function EnlargeablePhoto({
   src,
+  fallbackSrc,
   alt,
   width,
   height,
@@ -17,6 +18,12 @@ export function EnlargeablePhoto({
   fitHeight,
 }: {
   src: string;
+  /**
+   * Stand-in for a photo that no longer loads — see BobbleheadImage. Resolved
+   * here rather than passed down so the lightbox opens on the same photo the
+   * hero is showing, instead of on the dead URL.
+   */
+  fallbackSrc?: string;
   alt: string;
   width: number;
   height: number;
@@ -44,6 +51,14 @@ export function EnlargeablePhoto({
   // shape, then corrected to the photo's real ratio the moment it's known.
   const [ratio, setRatio] = useState(width / height);
 
+  const [failed, setFailed] = useState(false);
+  const [prevSrc, setPrevSrc] = useState(src);
+  if (prevSrc !== src) {
+    setPrevSrc(src);
+    setFailed(false);
+  }
+  const resolvedSrc = failed && fallbackSrc ? fallbackSrc : src;
+
   const fitStyle =
     fitHeight === undefined
       ? undefined
@@ -64,14 +79,15 @@ export function EnlargeablePhoto({
         className="flex h-full w-full cursor-zoom-in items-end justify-center"
       >
         <BobbleheadImage
-          src={src}
+          src={resolvedSrc}
           alt={alt}
           width={width}
           height={height}
           eager
-          unoptimized={isUnoptimizedImage(src)}
+          unoptimized={isUnoptimizedImage(resolvedSrc)}
           className={className}
           style={fitStyle}
+          onError={() => setFailed(true)}
           onNaturalSize={
             fitHeight === undefined
               ? undefined
@@ -81,7 +97,7 @@ export function EnlargeablePhoto({
       </button>
 
       {isZoomed ? (
-        <PhotoLightbox photos={[{ url: src, alt }]} onClose={() => setIsZoomed(false)} />
+        <PhotoLightbox photos={[{ url: resolvedSrc, alt }]} onClose={() => setIsZoomed(false)} />
       ) : null}
     </>
   );

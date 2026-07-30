@@ -64,8 +64,8 @@ export default function RecentlyAdded({ className }: { className?: string }) {
       <ul className="mt-5 flex snap-x gap-3 overflow-x-auto pb-2">
         {communityBobbleheads.map((bobblehead) => {
           const team = getTeamBySlug(bobblehead.teamSlug);
-          const imageSrc =
-            bobblehead.imageUrl ?? publicAsset(`/bobbleheads/${bobblehead.teamSlug}.png`);
+          const placeholderSrc = publicAsset(`/bobbleheads/${bobblehead.teamSlug}.png`);
+          const imageSrc = bobblehead.imageUrl ?? placeholderSrc;
           const href = `/teams/${bobblehead.teamSlug}/community/${encodeURIComponent(bobblehead.id)}`;
 
           return (
@@ -80,6 +80,7 @@ export default function RecentlyAdded({ className }: { className?: string }) {
                 <div className={PANEL}>
                   <BobbleheadImage
                     src={imageSrc}
+                    fallbackSrc={placeholderSrc}
                     alt={`${bobblehead.title} bobblehead`}
                     width={268}
                     height={630}

@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RecentlyAddedCard } from "@/components/RecentlyAddedCard";
 import { ToggleChip } from "@/components/ToggleChip";
+import { useAllApprovedPhotos } from "@/lib/approvedPhotos";
 import { useRecentCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { extractYear, UNKNOWN_YEAR } from "@/lib/extractYear";
 import { getTeamBySlug } from "@/lib/teams";
@@ -20,8 +21,13 @@ const FIELD_CLASSES =
 
 export function RecentlyAddedPageClient() {
   const { communityBobbleheads, isLoading } = useRecentCommunityBobbleheads(RECENT_LIMIT);
+  // Same reason the search grid loads these: a listing's own image_url is only
+  // one of its photos, and not the one the listing page shows. An admin can
+  // approve a better photo — or replace one whose file has since gone — and
+  // until this map is consulted the cards here keep pointing at the old URL.
+  const photoUrlByListing = useAllApprovedPhotos();
   const { wantedByKey, isLoggedIn: isLoggedInForWanted, setWanted } = useMyWantedLookup();
-  const { ownedByKey, isLoggedIn: isLoggedInForOwned } = useMyOwnedLookup();
+  const { ownedByKey, isLoggedIn: isLoggedInForOwned, setOwned } = useMyOwnedLookup();
   const [query, setQuery] = useState("");
   const [teamFilter, setTeamFilter] = useState("");
   const [yearFilter, setYearFilter] = useState("");
@@ -72,12 +78,18 @@ export function RecentlyAddedPageClient() {
   }, [communityBobbleheads, query, teamFilter, yearFilter, wantedOnly, wantedByKey, ownedFilter, ownedByKey]);
 
   const sorted = useMemo(() => {
-    if (sortOrder === "newest") return filtered;
     const list = [...filtered];
     if (sortOrder === "name") {
       list.sort((a, b) => a.title.localeCompare(b.title));
     } else {
-      list.reverse();
+      // Sorted on the field explicitly rather than leaning on the fetch order
+      // (created_at desc) and reversing it — the dropdown says "added", the
+      // cards show the added date, and this now says the same thing. Compared
+      // as strings: Postgres hands these back as UTC ISO timestamps, so they
+      // order lexicographically, and it keeps the microseconds that separate
+      // rows from the same bulk import.
+      const direction = sortOrder === "newest" ? -1 : 1;
+      list.sort((a, b) => direction * a.createdAt.localeCompare(b.createdAt));
     }
     return list;
   }, [filtered, sortOrder]);
@@ -200,8 +212,11 @@ export function RecentlyAddedPageClient() {
                   aria-label="Sort"
                   className={FIELD_CLASSES}
                 >
-                  <option value="newest">Newest first</option>
-                  <option value="oldest">Oldest first</option>
+                  {/* "added", not just "newest" — the giveaway date on each
+                      card is a different date entirely, and unlabelled options
+                      read as if they sort by that one. */}
+                  <option value="newest">Newest added</option>
+                  <option value="oldest">Oldest added</option>
                   <option value="name">Name (A–Z)</option>
                 </select>
               </label>
@@ -254,13 +269,23 @@ export function RecentlyAddedPageClient() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
               {visible.map((bobblehead) => {
                 const key = `${bobblehead.teamSlug}:${bobblehead.id}`;
+                const isWanted = wantedByKey[key] ?? false;
                 return (
                   <RecentlyAddedCard
                     key={bobblehead.id}
                     bobblehead={bobblehead}
-                    isWanted={wantedByKey[key] ?? false}
+                    photoUrl={photoUrlByListing[`${bobblehead.teamSlug}/${bobblehead.id}`]}
+                    isWanted={isWanted}
                     isLoggedIn={isLoggedInForWanted}
-                    onToggleWanted={() => setWanted(bobblehead.teamSlug, bobblehead.id, !(wantedByKey[key] ?? false))}
+                    onToggleWanted={() => {
+                      // Owned and wanted are mutually exclusive everywhere else
+                      // (team cards, listing pages); this star has to keep the
+                      // same promise or it can put an item in both states.
+                      if (!isWanted && (ownedByKey[key] ?? false)) {
+                        setOwned(bobblehead.teamSlug, bobblehead.id, false);
+                      }
+                      setWanted(bobblehead.teamSlug, bobblehead.id, !isWanted);
+                    }}
                   />
                 );
               })}

@@ -180,7 +180,8 @@ function GiveawayCardInner({
       ? `/teams/${team.slug}/community/${encodeURIComponent(giveaway.id)}`
       : `/teams/${team.slug}/bobbleheads/${giveaway.id}`;
   const fullTitle = giveaway.title;
-  const imageSrc = giveaway.imageUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+  const placeholderSrc = publicAsset(`/bobbleheads/${team.slug}.png`);
+  const imageSrc = giveaway.imageUrl ?? placeholderSrc;
   const { primary, secondary } = resolveTitleParts(fullTitle, giveaway.nickname);
   // Player names stay on one line; longer names shrink instead of wrapping.
   const nameSizeClass =
@@ -190,11 +191,18 @@ function GiveawayCardInner({
         ? "text-[11px] sm:text-sm"
         : "text-xs sm:text-base";
 
-  // Marking something owned also removes it from the wanted list — you no
-  // longer "want" what's on your shelf (un-owning doesn't re-add it).
+  // Owned and wanted are mutually exclusive: you don't want what's already on
+  // your shelf, and something you're still hunting for isn't on it. Whichever
+  // you pick clears the other; clearing either one leaves the other alone
+  // (un-owning doesn't re-add to wanted, and vice versa).
   const handleToggleOwned = () => {
     if (!isOwned && isWanted) toggleWanted(giveaway.id);
     toggleOwned(giveaway.id);
+  };
+
+  const handleToggleWanted = () => {
+    if (!isWanted && isOwned) toggleOwned(giveaway.id);
+    toggleWanted(giveaway.id);
   };
 
   return (
@@ -225,7 +233,7 @@ function GiveawayCardInner({
         <WantedButton
           isWanted={isWanted}
           isLoggedIn={isLoggedInForWanted}
-          onToggle={() => toggleWanted(giveaway.id)}
+          onToggle={handleToggleWanted}
           itemLabel={fullTitle}
           className="h-6 w-6 text-sm"
         />
@@ -242,6 +250,7 @@ function GiveawayCardInner({
         <div className="relative flex h-32 items-end justify-center bg-[radial-gradient(circle_at_50%_18%,#ffffff,#f2ead9_78%)] px-3 pt-4 sm:h-52 sm:px-4 sm:pt-6">
           <BobbleheadImage
             src={imageSrc}
+            fallbackSrc={placeholderSrc}
             alt={`${fullTitle} bobblehead`}
             width={268}
             height={630}
