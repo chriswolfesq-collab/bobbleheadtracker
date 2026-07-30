@@ -8,8 +8,8 @@ export const TEAM_BANNERS: Record<string, { width: number; height: number }> = {
   "orioles": { width: 1942, height: 809 },
   "red-sox": { width: 1942, height: 809 },
   "yankees": { width: 1942, height: 809 },
-  "rays": { width: 1672, height: 941 },
-  "blue-jays": { width: 1610, height: 879 },
+  "rays": { width: 1908, height: 775 },
+  "blue-jays": { width: 1942, height: 809 },
   "white-sox": { width: 1942, height: 809 },
   "guardians": { width: 1942, height: 809 },
   "tigers": { width: 1942, height: 809 },
@@ -34,5 +34,5 @@ export const TEAM_BANNERS: Record<string, { width: number; height: number }> = {
   "rockies": { width: 1942, height: 809 },
   "dodgers": { width: 1942, height: 809 },
   "padres": { width: 1942, height: 809 },
-  "giants": { width: 1643, height: 879 },
+  "giants": { width: 1942, height: 809 },
 };
