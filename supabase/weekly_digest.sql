@@ -200,5 +200,5 @@ select cron.unschedule('weekly-digest')
 select cron.schedule(
   'weekly-digest',
   '0 15 * * 4',
-  $cron$ select public.send_weekly_digest(7); $cron$
+  $$select public.send_weekly_digest(7)$$
 );
