@@ -252,7 +252,7 @@ create trigger log_report_review
 create extension if not exists pg_net with schema extensions;
 
 -- The x-webhook-secret header reads from Vault via public.webhook_secret()
--- rather than carrying a literal. Run vault_webhook_secret.sql once before this
+-- rather than carrying a literal. Run webhook_secret.sql once before this
 -- file; there is nothing to substitute here any more. See that file for why:
 -- the hand-substitution this replaces is what left every mailer silently broken.
 

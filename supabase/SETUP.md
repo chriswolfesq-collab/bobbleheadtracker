@@ -22,44 +22,31 @@
 Read this before setting up any of the mailers below, because the way they fail
 gives you nothing to go on.
 
-Every trigger-driven sender embeds `WEBHOOK_SECRET` as a literal in its function
-body, substituted by hand before you run the file. The edge function on the
-other end rejects a mismatch with a 401 — and `net.http_post` is fire-and-forget,
-so the sender returns success either way. Nothing appears in the admin UI, no
-error reaches the app, and the only symptom is email that never arrives, which
-looks identical to email nobody triggered.
+Every trigger-driven sender POSTs to an edge function with an `x-webhook-secret`
+header, and the function rejects a mismatch with a 401. `net.http_post` is
+fire-and-forget, so the sender returns success either way. Nothing appears in the
+admin UI, no error reaches the app, and the only symptom is email that never
+arrives — which looks identical to email nobody triggered.
 
-Every sender in this project was once installed with `<WEBHOOK_SECRET>` still in
-it, and it went unnoticed for months.
+Every sender in this project was once installed with the literal
+`<WEBHOOK_SECRET>` still in it, because setup asked you to hand-substitute it in
+six separate files. No automated email the site sends had ever worked, and
+nothing said so.
 
-So after setting up any mailer, check what the database actually got back:
+The secret now lives in Vault and each sender calls `public.webhook_secret()` at
+send time, so no file carries a value and there is nothing to substitute. See
+`webhook_secret.sql` — it covers the health check, the migration, rotating, and
+recovery.
+
+The one honest test of whether email works is what the database got back:
 
 ```sql
 select status_code, count(*), max(created) as latest
 from net._http_response group by status_code order by 2 desc;
 ```
 
-Anything other than `200` means that sender is not working. To see which
-functions are carrying which secret:
-
-```sql
-select p.proname,
-       (regexp_match(p.prosrc, $re$'x-webhook-secret',\s*'([^']*)'$re$))[1] as current_value
-from pg_proc p join pg_namespace n on n.oid = p.pronamespace
-where n.nspname = 'public' and p.prosrc like '%x-webhook-secret%'
-order by p.proname;
-```
-
-A row reading `<WEBHOOK_SECRET>` was never substituted. `rotate_webhook_secret.sql`
-fixes every sender in one pass — see the header of that file.
-
-Better still, run `vault_webhook_secret.sql` once. It moves the secret into Vault
-and rewrites every sender to read it at call time, so no file carries the literal
-and there is nothing left to substitute or forget. After that, `current_value`
-below is null on every row — that's correct, not a fault.
-
-Note that `net._http_response` is pruned on a TTL of a few hours, so an empty
-result means "nothing sent recently", not "nothing ever failed".
+Anything other than `200` means that sender is dead. A sending function
+returning without error proves nothing.
 
 ## Email notifications (optional)
 
@@ -73,14 +60,14 @@ Skip this if the in-app queue at `/admin/review` is enough on its own.
    npx supabase functions deploy notify-new-submission --no-verify-jwt --use-api
    npx supabase secrets set RESEND_API_KEY=<your-resend-key> WEBHOOK_SECRET=<any-random-string>
    ```
-3. Run `webhook_trigger.sql`, substituting `<WEBHOOK_SECRET>` with the same
-   value. That installs the trigger that calls the function.
+3. Run `webhook_secret.sql` Part 2 to put the secret in Vault, then
+   `webhook_trigger.sql` to install the triggers. Nothing to substitute.
 
 There is no Database Webhook to create in the dashboard. An earlier version of
 this setup used one; `webhook_trigger.sql` replaced it with ordinary trigger
 functions calling `net.http_post`, which keeps the secret in one place
-(`pg_proc`) where `rotate_webhook_secret.sql` can reach it. If you go looking
-for a webhook to edit, you won't find one — and recent dashboards moved that
+(`pg_proc`) where `webhook_secret.sql` can reach them all at once. If you go
+looking for a webhook to edit, you won't find one — and recent dashboards moved that
 screen under Integrations anyway.
 
 ## Branded confirmation email (optional)
