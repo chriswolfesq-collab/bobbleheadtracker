@@ -287,10 +287,14 @@ export function useBobbleheadTags(teamSlug: string, bobbleheadId: string) {
       const previous = tags;
       setTags(tags.filter((tag) => tag.slug !== slug));
 
+      // Scoped to the team as well as the id, because the two together are
+      // what name a listing — 36 bobblehead ids are shared between teams, so
+      // an unscoped delete would take "Sesame Street" off all five Elmos.
       const { error } = await supabase
         .from("bobblehead_tags")
         .delete()
         .eq("bobblehead_id", bobbleheadId)
+        .eq("team_slug", teamSlug)
         .eq("tag_slug", slug);
 
       if (error) {
@@ -302,7 +306,7 @@ export function useBobbleheadTags(teamSlug: string, bobbleheadId: string) {
 
       return true;
     },
-    [user, tags, bobbleheadId, showError],
+    [user, tags, teamSlug, bobbleheadId, showError],
   );
 
   const slugs = useMemo(() => new Set(tags.map((tag) => tag.slug)), [tags]);

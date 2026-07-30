@@ -35,13 +35,21 @@ alter table public.tags
 --    the RLS policy can authorize a team rep without joining out to find which
 --    team the listing belongs to — and because a curated listing has no row of
 --    its own to join to in the first place.
+--
+--    It's in the key as well, because a bobblehead id is only unique within a
+--    team: 36 ids are shared between teams, and elmo-2023 belongs to five of
+--    them. It takes both columns to name one listing. Keyed on bobblehead_id
+--    alone, tagging Elmo "Sesame Street" would label one team's and silently
+--    drop the other four. See supabase/fix_bobblehead_tags_pk.sql — this file
+--    is `if not exists`, so editing it does nothing to a database that already
+--    has the table.
 create table if not exists public.bobblehead_tags (
   bobblehead_id text not null,
   team_slug text not null,
   tag_slug text not null references public.tags (slug) on delete cascade,
   created_at timestamptz not null default now(),
   created_by uuid references auth.users (id),
-  primary key (bobblehead_id, tag_slug)
+  primary key (bobblehead_id, team_slug, tag_slug)
 );
 
 -- Browsing a tag reads by tag_slug; a listing page reads by bobblehead_id,
