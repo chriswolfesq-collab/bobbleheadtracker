@@ -306,6 +306,16 @@ alter table public.community_bobbleheads
 alter table public.community_bobbleheads
   add column if not exists quantity text;
 
+-- Athletics only: which era the bobblehead belongs to, Oakland or Sacramento.
+-- Null means "go by the year". See supabase/athletics_city.sql.
+alter table public.community_bobbleheads
+  add column if not exists city text;
+
+alter table public.community_bobbleheads drop constraint if exists community_bobbleheads_city_check;
+alter table public.community_bobbleheads
+  add constraint community_bobbleheads_city_check
+  check (city is null or city in ('Oakland', 'Sacramento'));
+
 create table if not exists public.bobblehead_gallery_photos (
   id uuid primary key default gen_random_uuid(),
   bobblehead_id text not null,
@@ -350,6 +360,16 @@ alter table public.bobblehead_overrides
 -- no approved_photos row to delete. See supabase/hide_curated_photo.sql.
 alter table public.bobblehead_overrides
   add column if not exists photo_hidden boolean not null default false;
+
+-- Athletics only: which era the bobblehead belongs to, Oakland or Sacramento.
+-- Null means "go by the year". See supabase/athletics_city.sql.
+alter table public.bobblehead_overrides
+  add column if not exists city text;
+
+alter table public.bobblehead_overrides drop constraint if exists bobblehead_overrides_city_check;
+alter table public.bobblehead_overrides
+  add constraint bobblehead_overrides_city_check
+  check (city is null or city in ('Oakland', 'Sacramento'));
 
 create table if not exists public.submissions (
   id uuid primary key default gen_random_uuid(),

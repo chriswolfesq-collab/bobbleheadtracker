@@ -15,6 +15,7 @@ import { NamePlate } from "@/components/ui/NamePlate";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, hideCuratedSeedPhoto, replaceGalleryPhoto, saveCuratedBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
+import { ATHLETICS_CITIES, hasCityChoice, resolveAthleticsCity } from "@/lib/athleticsCity";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { useBobbleheadOverride, type BobbleheadOverride } from "@/lib/bobbleheadOverrides";
@@ -207,6 +208,11 @@ export function CuratedBobbleheadPage({
   // Year is no longer edited directly — it's derived from the date, keeping
   // the stored year when the date doesn't carry one ("N/A").
   const year = extractYear(date, override?.year ?? giveaway.year);
+  // Athletics only; null for every other team, which drops the row from the
+  // info grid and the field from the edit dialog.
+  // A just-saved edit wins outright rather than falling through on null, so
+  // clearing the pick isn't undone by the stale stored value.
+  const city = resolveAthleticsCity(team.slug, year, localOverride ? localOverride.city : override?.city);
   // Two layers can supply the profile photo. The approved_photos row (or one the
   // admin just uploaded) sits on top and is removed by deleting it; underneath
   // is the curated seed imageUrl, build-time data with no row of its own, which
@@ -248,6 +254,7 @@ export function CuratedBobbleheadPage({
 
   const details: [string, string][] = [
     ["Release Date", date],
+    ...(city ? [["City", city] as [string, string]] : []),
     ...(giveaway.distribution ? [["Distribution", giveaway.distribution] as [string, string]] : []),
     ...(quantity?.trim() ? [["Quantity Issued", quantity] as [string, string]] : []),
   ];
@@ -277,6 +284,7 @@ export function CuratedBobbleheadPage({
       quantity: values.quantity,
       year: extractYear(values.date, year),
       date: values.date,
+      city: values.city,
       file: file ?? undefined,
     });
 
@@ -721,10 +729,11 @@ export function CuratedBobbleheadPage({
       {isEditOpen ? (
         <EditBobbleheadDialog
           onClose={() => setIsEditOpen(false)}
-          initial={{ title, nickname: nickname ?? "", quantity: quantity ?? "", date }}
+          initial={{ title, nickname: nickname ?? "", quantity: quantity ?? "", date, city }}
           onSave={handleEditSave}
           onDelete={handleDelete}
           onRemovePhoto={mainPhotoUrl ? handleRemoveMainPhoto : undefined}
+          cityOptions={hasCityChoice(team.slug) ? ATHLETICS_CITIES : undefined}
         />
       ) : null}
     </div>

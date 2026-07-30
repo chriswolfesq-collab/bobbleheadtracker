@@ -83,6 +83,7 @@ export type Database = {
       bobblehead_overrides: {
         Row: {
           bobblehead_id: string
+          city: string | null
           date: string | null
           deleted: boolean
           nickname: string | null
@@ -96,6 +97,7 @@ export type Database = {
         }
         Insert: {
           bobblehead_id: string
+          city?: string | null
           date?: string | null
           deleted?: boolean
           nickname?: string | null
@@ -109,6 +111,7 @@ export type Database = {
         }
         Update: {
           bobblehead_id?: string
+          city?: string | null
           date?: string | null
           deleted?: boolean
           nickname?: string | null
@@ -125,6 +128,7 @@ export type Database = {
       community_bobbleheads: {
         Row: {
           approved_by: string | null
+          city: string | null
           created_at: string
           date: string
           id: string
@@ -137,6 +141,7 @@ export type Database = {
         }
         Insert: {
           approved_by?: string | null
+          city?: string | null
           created_at?: string
           date?: string
           id: string
@@ -149,6 +154,7 @@ export type Database = {
         }
         Update: {
           approved_by?: string | null
+          city?: string | null
           created_at?: string
           date?: string
           id?: string

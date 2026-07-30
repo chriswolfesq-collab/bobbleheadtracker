@@ -16,6 +16,7 @@ import { NamePlate } from "@/components/ui/NamePlate";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, replaceGalleryPhoto, saveCommunityBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
+import { ATHLETICS_CITIES, hasCityChoice, resolveAthleticsCity } from "@/lib/athleticsCity";
 import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { useCommunityBobblehead } from "@/lib/communityBobbleheads";
 import { publicAsset } from "@/lib/paths";
@@ -108,6 +109,10 @@ export function CommunityBobbleheadPage({
   // Year is no longer edited directly — it's derived from the date, keeping
   // the stored year when the date doesn't carry one ("N/A").
   const year = extractYear(date, giveaway.year);
+  // Athletics only; null for every other team, which drops the row from the
+  // info grid and the field from the edit dialog. A just-saved edit wins
+  // outright rather than falling through on null.
+  const city = resolveAthleticsCity(team.slug, year, localOverride ? localOverride.city : giveaway.city);
   // A community listing's photo is always admin-removable: either an
   // approved_photos row or the row's own image_url.
   const removableMainPhotoUrl = mainPhotoRemoved
@@ -139,6 +144,7 @@ export function CommunityBobbleheadPage({
   const { primary: primaryName, secondary: descriptor } = resolveTitleParts(title, nickname);
   const details: [string, string][] = [
     ["Release Date", date],
+    ...(city ? [["City", city] as [string, string]] : []),
     ...(quantity?.trim() ? [["Quantity Issued", quantity] as [string, string]] : []),
   ];
   const story = `This ${primaryName} bobblehead was added by the community for ${team.city} ${team.name} fans${
@@ -164,6 +170,7 @@ export function CommunityBobbleheadPage({
       quantity: values.quantity,
       year: extractYear(values.date, year),
       date: values.date,
+      city: values.city,
       file: file ?? undefined,
     });
 
@@ -520,10 +527,11 @@ export function CommunityBobbleheadPage({
       {isEditOpen ? (
         <EditBobbleheadDialog
           onClose={() => setIsEditOpen(false)}
-          initial={{ title, nickname: nickname ?? "", quantity: quantity ?? "", date }}
+          initial={{ title, nickname: nickname ?? "", quantity: quantity ?? "", date, city }}
           onSave={handleEditSave}
           onDelete={handleDelete}
           onRemovePhoto={removableMainPhotoUrl ? handleRemoveMainPhoto : undefined}
+          cityOptions={hasCityChoice(team.slug) ? ATHLETICS_CITIES : undefined}
         />
       ) : null}
     </div>

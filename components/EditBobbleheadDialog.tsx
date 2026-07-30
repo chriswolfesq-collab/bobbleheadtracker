@@ -4,7 +4,18 @@ import { useState } from "react";
 import { formatQuantity } from "@/lib/formatQuantity";
 import { useDialog } from "@/lib/useDialog";
 
-export type EditBobbleheadValues = { title: string; nickname: string; quantity: string; date: string };
+export type EditBobbleheadValues = {
+  title: string;
+  nickname: string;
+  quantity: string;
+  date: string;
+  /**
+   * Only the Athletics have a city to pick between (Oakland or Sacramento), so
+   * this is null everywhere else and the field isn't rendered at all — see
+   * lib/athleticsCity.ts and the `cityOptions` prop.
+   */
+  city: string | null;
+};
 
 const UNKNOWN_QUANTITY = "Unknown";
 
@@ -17,11 +28,15 @@ export function EditBobbleheadDialog({
   onSave,
   onDelete,
   onRemovePhoto,
+  cityOptions,
 }: {
   onClose: () => void;
   initial: EditBobbleheadValues;
   onSave: (values: EditBobbleheadValues, file: File | null) => Promise<void>;
   onDelete: () => Promise<void>;
+  // The cities this listing's team can be filed under. Only the Athletics pass
+  // any; for every other team the field is absent and `city` stays null.
+  cityOptions?: readonly string[];
   // Only passed when a photo is actually on screen to remove. For a curated
   // listing with both an approved photo and a seed photo it takes two removals:
   // the first reveals the seed, the second clears it.
@@ -32,6 +47,7 @@ export function EditBobbleheadDialog({
   const [quantity, setQuantity] = useState(initial.quantity === UNKNOWN_QUANTITY ? "" : initial.quantity);
   const [quantityUnknown, setQuantityUnknown] = useState(initial.quantity === UNKNOWN_QUANTITY);
   const [date, setDate] = useState(initial.date);
+  const [city, setCity] = useState(initial.city);
   const [file, setFile] = useState<File | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -40,6 +56,7 @@ export function EditBobbleheadDialog({
   const [error, setError] = useState<string | null>(null);
 
   const isBusy = isSaving || isDeleting || isRemovingPhoto;
+  const hasCityField = Boolean(cityOptions?.length);
 
   const close = () => {
     if (isBusy) return;
@@ -69,7 +86,13 @@ export function EditBobbleheadDialog({
 
             try {
               await onSave(
-                { title, nickname, quantity: quantityUnknown ? UNKNOWN_QUANTITY : formatQuantity(quantity), date },
+                {
+                  title,
+                  nickname,
+                  quantity: quantityUnknown ? UNKNOWN_QUANTITY : formatQuantity(quantity),
+                  date,
+                  city: hasCityField ? city : null,
+                },
                 file,
               );
               onClose();
@@ -105,6 +128,29 @@ export function EditBobbleheadDialog({
               Shown on a second line beneath the title.
             </p>
           </div>
+          {hasCityField ? (
+            <div className="grid gap-1.5">
+              <span className="text-xs font-bold text-zinc-700">City</span>
+              <div className="flex flex-wrap gap-4">
+                {cityOptions?.map((option) => (
+                  <label key={option} className="flex items-center gap-1.5">
+                    <input
+                      type="radio"
+                      name="edit-bobblehead-city"
+                      value={option}
+                      checked={city === option}
+                      onChange={() => setCity(option)}
+                      className="h-3.5 w-3.5 accent-accent"
+                    />
+                    <span className="text-xs font-semibold text-zinc-700">{option}</span>
+                  </label>
+                ))}
+              </div>
+              <p className="text-[11px] leading-4 text-zinc-500">
+                Where the franchise was when this one was handed out.
+              </p>
+            </div>
+          ) : null}
           <div className="grid gap-1.5">
             <label className="text-xs font-bold text-zinc-700">
               Number given away <span className="font-medium text-zinc-500">(optional)</span>
