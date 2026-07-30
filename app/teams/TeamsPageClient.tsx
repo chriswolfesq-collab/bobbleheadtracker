@@ -5,7 +5,14 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { CaseBanner } from "@/components/CaseBanner";
 import { FeatureStrip } from "@/components/FeatureStrip";
-import { PlankShelf } from "@/components/PlankShelf";
+import {
+  PlankShelf,
+  SHELF_FIGURE_CLASS,
+  SHELF_FIGURE_SIZES,
+  SHELF_PLAQUE_SIZE,
+  SHELF_PLATE_SIZE,
+  ShelfWall,
+} from "@/components/PlankShelf";
 import { NamePlate } from "@/components/ui/NamePlate";
 import { publicAsset } from "@/lib/paths";
 import { TEAMS, type Team } from "@/lib/teams";
@@ -31,13 +38,6 @@ function divisionOf(team: Team): DivisionKey {
   return `${team.league} ${team.division}`;
 }
 
-// Five plates share one plank, so both the figures and their plates step up
-// with the shelf's own width rather than the viewport's.
-const PLATE_SIZE =
-  "px-1 py-[2px] text-[8px] tracking-wide @min-[520px]:px-2 @min-[520px]:py-[3px] @min-[520px]:text-[10px] @min-[760px]:px-3 @min-[760px]:py-1 @min-[760px]:text-xs @min-[760px]:tracking-widest";
-const PLAQUE_SIZE =
-  "px-2.5 py-[2px] text-[10px] @min-[520px]:px-3 @min-[520px]:py-1 @min-[520px]:text-xs @min-[760px]:px-4 @min-[760px]:text-sm";
-
 function ShelfFigure({ team }: { team: Team }) {
   return (
     <Link
@@ -49,8 +49,8 @@ function ShelfFigure({ team }: { team: Team }) {
         alt={`${team.city} ${team.name} bobblehead`}
         width={135}
         height={321}
-        sizes="(max-width: 640px) 20vw, 140px"
-        className="h-16 w-auto object-contain drop-shadow-[0_8px_8px_rgba(58,36,18,0.4)] transition group-hover:scale-105 group-hover:animate-bobble @min-[520px]:h-24 @min-[760px]:h-32"
+        sizes={SHELF_FIGURE_SIZES}
+        className={`w-auto object-contain drop-shadow-[0_8px_8px_rgba(58,36,18,0.4)] transition group-hover:scale-105 group-hover:animate-bobble ${SHELF_FIGURE_CLASS}`}
       />
     </Link>
   );
@@ -62,7 +62,7 @@ function ShelfPlate({ team }: { team: Team }) {
       href={`/teams/${team.slug}`}
       className="min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
     >
-      <NamePlate size={PLATE_SIZE} className="max-w-full truncate">
+      <NamePlate size={SHELF_PLATE_SIZE} className="max-w-full truncate">
         {team.name}
       </NamePlate>
     </Link>
@@ -221,7 +221,7 @@ export function TeamsPageClient() {
             <p className="mt-2 text-sm text-zinc-600">Try clearing a filter or two.</p>
           </div>
         ) : view === "grid" ? (
-          <div className="shelf-wall @container mt-8 flex flex-col gap-10 px-2 pb-10 pt-12 sm:gap-14 sm:px-4">
+          <ShelfWall className="mt-8">
             {DIVISIONS.map((d) => {
               const teams = byDivision.get(d) ?? [];
               if (teams.length === 0) return null;
@@ -229,7 +229,6 @@ export function TeamsPageClient() {
                 <PlankShelf
                   key={d}
                   ariaLabel={d}
-                  plankClassName="h-8 @min-[520px]:h-11 @min-[760px]:h-14"
                   figures={teams.map((team) => (
                     <ShelfFigure key={team.slug} team={team} />
                   ))}
@@ -237,14 +236,14 @@ export function TeamsPageClient() {
                     <ShelfPlate key={team.slug} team={team} />
                   ))}
                   plaque={
-                    <NamePlate variant="brass" size={PLAQUE_SIZE}>
+                    <NamePlate variant="brass" size={SHELF_PLAQUE_SIZE}>
                       {d}
                     </NamePlate>
                   }
                 />
               );
             })}
-          </div>
+          </ShelfWall>
         ) : (
           <ul className="mt-8 divide-y divide-border-soft overflow-hidden rounded-xl border border-border-soft bg-surface">
             {filtered.map((team) => (

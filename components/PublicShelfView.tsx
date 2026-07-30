@@ -62,7 +62,9 @@ export default function PublicShelfView({
           </div>
         </header>
 
-        <div className="mt-8">
+        {/* Breaks out of the page's reading column, like the profile's shelf, so
+            every wall on the site hangs at the same width. */}
+        <div className="relative left-1/2 mt-8 w-[calc(100vw-1rem)] max-w-6xl -translate-x-1/2">
           <DisplayCase countByTeamSlug={countByTeamSlug} totalByTeamSlug={totalByTeamSlug} />
         </div>
 

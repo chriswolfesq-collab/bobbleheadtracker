@@ -108,10 +108,15 @@ export function ProfileSections({
       </nav>
 
       <section id="collection" className="mb-10 scroll-mt-6">
-        {/* The button overlays the shelf rather than living inside DisplayCase:
-            DisplayCase is also what the share card itself renders, so a button in
-            there would recurse and end up baked into the shared image. */}
-        <div className="relative mx-auto w-full max-w-2xl">
+        {/* The shelf breaks out of the profile's reading column so it hangs at
+            the same width as the teams-page wall — same figures, same spacing,
+            same furniture. 100vw minus a hair so a viewport scrollbar can't push
+            the wall into a horizontal scroll of its own.
+
+            The share button overlays the shelf rather than living inside
+            DisplayCase: DisplayCase is also what the share card itself renders,
+            so a button in there would recurse into the shared image. */}
+        <div className="relative left-1/2 w-[calc(100vw-1rem)] max-w-6xl -translate-x-1/2">
           <DisplayCase countByTeamSlug={countByTeamSlug} totalByTeamSlug={totalByTeamSlug} />
           {displayName && sharing ? (
             <div className="absolute right-4 top-0 z-30 text-right sm:right-6">

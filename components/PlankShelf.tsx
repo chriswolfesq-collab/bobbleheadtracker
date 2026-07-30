@@ -18,6 +18,38 @@ import { publicAsset } from "@/lib/paths";
 const FRONT_FACE_TOP = "38%"; // where the plank's top face ends in the artwork
 const SLOTS = 5;
 
+/* The shelf geometry, in one place. Every wall that renders planks — the teams
+   page, the profile display case, the public shelf, the share card — pulls these
+   so the shelves read as the same furniture instead of drifting apart. All steps
+   are container queries keyed to the wall's own width, not the viewport's, so
+   the fixed-width share card renders like a desktop shelf even when it is
+   captured from a phone. */
+export const SHELF_PLANK_CLASS = "h-8 @min-[520px]:h-11 @min-[760px]:h-14";
+export const SHELF_FIGURE_CLASS = "h-16 @min-[520px]:h-24 @min-[760px]:h-32";
+/** Matching `sizes` for the figure art, so the wide steps aren't upscaled. */
+export const SHELF_FIGURE_SIZES = "(max-width: 640px) 20vw, 140px";
+export const SHELF_PLATE_SIZE =
+  "px-1 py-[2px] text-[8px] tracking-wide @min-[520px]:px-2 @min-[520px]:py-[3px] @min-[520px]:text-[10px] @min-[760px]:px-3 @min-[760px]:py-1 @min-[760px]:text-xs @min-[760px]:tracking-widest";
+export const SHELF_PLAQUE_SIZE =
+  "px-2.5 py-[2px] text-[10px] @min-[520px]:px-3 @min-[520px]:py-1 @min-[520px]:text-xs @min-[760px]:px-4 @min-[760px]:text-sm";
+
+/**
+ * The parchment wall the planks hang on. Wraps its own `@container` around the
+ * wall so the wall's gap and padding can step with its width too: a `@min-[]`
+ * class sitting on the same element that declares `@container` queries the
+ * nearest ANCESTOR container, so without this outer div those steps silently
+ * never match.
+ */
+export function ShelfWall({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <div className={`@container ${className ?? ""}`}>
+      <div className="shelf-wall @container flex w-full flex-col gap-10 px-2 pb-10 pt-12 @min-[520px]:gap-14 @min-[520px]:px-4">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 // Filters can leave a division with fewer than five teams. The grid is fixed at
 // five columns so every shelf's slots line up, so a short row is centered by
 // padding it with empty columns on both sides rather than letting it hug the
@@ -37,7 +69,7 @@ export function PlankShelf({
   figures,
   plates,
   plaque,
-  plankClassName = "h-9 @min-[520px]:h-11",
+  plankClassName = SHELF_PLANK_CLASS,
   ariaLabel,
 }: {
   /** Up to five figure nodes, index-aligned with `plates`. */
