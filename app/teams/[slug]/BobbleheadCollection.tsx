@@ -5,6 +5,7 @@ import { SiteSearch } from "@/components/SiteSearch";
 import { ToggleChip } from "@/components/ToggleChip";
 import { Pagination } from "@/components/ui/Pagination";
 import { Tabs } from "@/components/ui/Tabs";
+import { ATHLETICS_CITIES, hasCityChoice } from "@/lib/athleticsCity";
 import type { Team } from "@/lib/teams";
 import { GiveawayCard, type ResolvedGiveaway, useFavorites, useOwnership, useWanted } from "./GiveawayCard";
 
@@ -69,6 +70,9 @@ function readUrlState() {
     tab: tab && TABS.some((t) => t.value === tab) ? tab : "all",
     sort: sort && SORT_OPTIONS.some((s) => s.value === sort) ? sort : DEFAULT_SORT_ORDER,
     year: params.get("year") ?? "",
+    // Athletics only. A stale ?city= from another team is harmless: the filter
+    // isn't rendered there and the predicate below ignores it.
+    city: params.get("city") ?? "",
     photo: params.get("photo") === "1",
     favorites: params.get("favorites") === "1",
     page: Math.max(1, Number(params.get("page")) || 1),
@@ -165,9 +169,13 @@ export function BobbleheadCollection({
   const [tab, setTab] = useState<TabKey>("all");
   const [sortOrder, setSortOrder] = useState<SortOrder>(DEFAULT_SORT_ORDER);
   const [yearFilter, setYearFilter] = useState("");
+  const [cityFilter, setCityFilter] = useState("");
   const [hasPhotoOnly, setHasPhotoOnly] = useState(false);
   const [favoritesOnly, setFavoritesOnly] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+  // The Athletics split between Oakland and Sacramento in 2025; no other team
+  // has an era to filter by. See lib/athleticsCity.ts.
+  const showEraFilter = hasCityChoice(team.slug);
   const [page, setPage] = useState(1);
   const gridTopRef = useRef<HTMLDivElement>(null);
 
@@ -181,12 +189,13 @@ export function BobbleheadCollection({
     setTab(url.tab);
     setSortOrder(url.sort);
     setYearFilter(url.year);
+    setCityFilter(showEraFilter ? url.city : "");
     setHasPhotoOnly(url.photo);
     setFavoritesOnly(url.favorites);
     setPage(url.page);
-    if (url.year || url.photo || url.favorites) setShowFilters(true);
+    if (url.year || (showEraFilter && url.city) || url.photo || url.favorites) setShowFilters(true);
     /* eslint-enable react-hooks/set-state-in-effect */
-  }, []);
+  }, [showEraFilter]);
 
   // Mirror every state change back into the URL.
   useEffect(() => {
@@ -198,12 +207,13 @@ export function BobbleheadCollection({
     setOrDelete("tab", tab, "all");
     setOrDelete("sort", sortOrder, DEFAULT_SORT_ORDER);
     setOrDelete("year", yearFilter, "");
+    setOrDelete("city", cityFilter, "");
     setOrDelete("photo", hasPhotoOnly ? "1" : "", "");
     setOrDelete("favorites", favoritesOnly ? "1" : "", "");
     setOrDelete("page", String(page), "1");
     const query = params.toString();
     window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}`);
-  }, [tab, sortOrder, yearFilter, hasPhotoOnly, favoritesOnly, page]);
+  }, [tab, sortOrder, yearFilter, cityFilter, hasPhotoOnly, favoritesOnly, page]);
 
   const yearOptions = useMemo(() => {
     const years = new Set(allGiveaways.map((giveaway) => giveaway.year || UNKNOWN_YEAR));
@@ -217,6 +227,7 @@ export function BobbleheadCollection({
   const filtered = useMemo(() => {
     return allGiveaways.filter((giveaway) => {
       if (yearFilter && (giveaway.year || UNKNOWN_YEAR) !== yearFilter) return false;
+      if (cityFilter && giveaway.city !== cityFilter) return false;
       if (tab === "owned" && !ownedById[giveaway.id]) return false;
       if (tab === "unowned" && ownedById[giveaway.id]) return false;
       if (tab === "wishlist" && !wantedById[giveaway.id]) return false;
@@ -224,7 +235,7 @@ export function BobbleheadCollection({
       if (favoritesOnly && !favoritedById[giveaway.id]) return false;
       return true;
     });
-  }, [allGiveaways, yearFilter, tab, hasPhotoOnly, favoritesOnly, ownedById, favoritedById, wantedById]);
+  }, [allGiveaways, yearFilter, cityFilter, tab, hasPhotoOnly, favoritesOnly, ownedById, favoritedById, wantedById]);
 
   const sorted = useMemo(() => {
     const list = [...filtered];
@@ -242,7 +253,7 @@ export function BobbleheadCollection({
   // Reset to page 1 when the result set changes shape (filter/tab/sort edits),
   // using the adjust-state-during-render pattern rather than an effect so the
   // stale page never paints.
-  const filterSignature = `${tab}|${sortOrder}|${yearFilter}|${hasPhotoOnly}|${favoritesOnly}`;
+  const filterSignature = `${tab}|${sortOrder}|${yearFilter}|${cityFilter}|${hasPhotoOnly}|${favoritesOnly}`;
   const [prevFilterSignature, setPrevFilterSignature] = useState(filterSignature);
   if (prevFilterSignature !== filterSignature) {
     setPrevFilterSignature(filterSignature);
@@ -258,10 +269,11 @@ export function BobbleheadCollection({
     gridTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const hasActiveFilters = yearFilter !== "" || hasPhotoOnly || favoritesOnly;
+  const hasActiveFilters = yearFilter !== "" || cityFilter !== "" || hasPhotoOnly || favoritesOnly;
 
   const clearFilters = () => {
     setYearFilter("");
+    setCityFilter("");
     setHasPhotoOnly(false);
     setFavoritesOnly(false);
   };
@@ -290,7 +302,13 @@ export function BobbleheadCollection({
         </div>
 
         {showFilters ? (
-          <div className="mt-3 grid gap-3 rounded-lg border border-border-soft bg-surface p-4 sm:grid-cols-[minmax(0,1fr)_auto_auto_minmax(0,1fr)]">
+          <div
+            className={`mt-3 grid gap-3 rounded-lg border border-border-soft bg-surface p-4 ${
+              showEraFilter
+                ? "sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto_auto_minmax(0,1fr)]"
+                : "sm:grid-cols-[minmax(0,1fr)_auto_auto_minmax(0,1fr)]"
+            }`}
+          >
             <label className="min-w-0">
               <span className="text-xs font-black uppercase tracking-wide text-accent">Year</span>
               <select
@@ -307,6 +325,24 @@ export function BobbleheadCollection({
                 ))}
               </select>
             </label>
+            {showEraFilter ? (
+              <label className="min-w-0">
+                <span className="text-xs font-black uppercase tracking-wide text-accent">Era</span>
+                <select
+                  value={cityFilter}
+                  onChange={(event) => setCityFilter(event.target.value)}
+                  aria-label="Filter by era"
+                  className={FIELD_CLASSES}
+                >
+                  <option value="">All eras</option>
+                  {ATHLETICS_CITIES.map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : null}
             <div className="flex items-end">
               <ToggleChip label="Has photo" active={hasPhotoOnly} onClick={() => setHasPhotoOnly((v) => !v)} />
             </div>
