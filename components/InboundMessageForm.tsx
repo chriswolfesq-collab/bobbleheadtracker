@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { useAuth } from "@/lib/auth";
 import { type InboundMessageKind, sendInboundMessage } from "@/lib/inboundMessages";
 import { TEAMS } from "@/lib/teams";
 
@@ -11,8 +10,11 @@ import { TEAMS } from "@/lib/teams";
 // don't drift in validation, error copy or the shape of what lands in
 // inbound_messages.
 //
-// Sign-in is deliberately not required. The email field is prefilled for a
-// signed-in visitor as a convenience, and stays editable.
+// Sign-in is deliberately not required, and the email field starts empty even
+// for a signed-in visitor. It used to prefill from the session, which meant a
+// shared or admin browser put a real personal address on screen — and into the
+// message — without anyone choosing to send it. Typing it is cheap; the
+// surprise wasn't.
 
 const INPUT_CLASS =
   "mt-1 w-full rounded border border-border-soft bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-accent";
@@ -39,14 +41,8 @@ export function InboundMessageForm({
   /** Called after a successful send, for a dialog that wants to close itself. */
   onSent?: () => void;
 }) {
-  const { user } = useAuth();
   const [name, setName] = useState("");
-  // Derived rather than synced from the session in an effect: null means
-  // "untouched", so the field shows the signed-in address as soon as it resolves
-  // and stops tracking it the moment the visitor types. Copying it into state
-  // from an effect would mean a setState during render-commit, which cascades.
-  const [typedEmail, setTypedEmail] = useState<string | null>(null);
-  const email = typedEmail ?? user?.email ?? "";
+  const [email, setEmail] = useState("");
   const [teamSlug, setTeamSlug] = useState(defaultTeamSlug ?? "");
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
@@ -109,7 +105,7 @@ export function InboundMessageForm({
             type="email"
             required
             value={email}
-            onChange={(event) => setTypedEmail(event.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
             autoComplete="email"
             className={INPUT_CLASS}
           />
