@@ -52,14 +52,33 @@ export default async function CommunityListingPage({
   if (!listing) notFound();
 
   const base = siteUrl();
+  const pageUrl = `${base}/teams/${slug}/community/${bobbleheadId}`;
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    name: `${listing.title} bobblehead`,
-    description: `${team.city} ${team.name} stadium giveaway bobblehead (community listing).`,
-    url: `${base}/teams/${slug}/community/${bobbleheadId}`,
-    ...(listing.imageUrl ? { image: new URL(listing.imageUrl, base).toString() } : {}),
-    brand: { "@type": "SportsTeam", name: `${team.city} ${team.name}` },
+    "@graph": [
+      {
+        "@type": "Product",
+        name: `${listing.title} bobblehead`,
+        description: `${team.city} ${team.name} stadium giveaway bobblehead (community listing).`,
+        url: pageUrl,
+        ...(listing.imageUrl ? { image: new URL(listing.imageUrl, base).toString() } : {}),
+        brand: { "@type": "SportsTeam", name: `${team.city} ${team.name}` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "BobbleShelf", item: base },
+          { "@type": "ListItem", position: 2, name: "Teams", item: `${base}/teams` },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: `${team.city} ${team.name}`,
+            item: `${base}/teams/${slug}`,
+          },
+          { "@type": "ListItem", position: 4, name: listing.title, item: pageUrl },
+        ],
+      },
+    ],
   };
 
   return (

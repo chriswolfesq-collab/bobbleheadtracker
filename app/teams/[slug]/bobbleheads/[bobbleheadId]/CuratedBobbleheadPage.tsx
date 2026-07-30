@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { EnlargeablePhoto } from "@/components/EnlargeablePhoto";
 import { resolveTitleParts } from "@/components/BobbleheadTitle";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { PhotoGallery } from "@/components/PhotoGallery";
@@ -394,10 +395,12 @@ export function CuratedBobbleheadPage({
 
   return (
     <div className="flex min-h-full flex-1 flex-col" style={{ background: "var(--page-gradient)" }}>
-      {/* Persistent nav bar: true back first, team link second, position counter */}
+      {/* Persistent nav bar: true back first, breadcrumb trail second, position
+          counter. `back()` retraces however you got here; the trail is the fixed
+          route down from the homepage. */}
       <div className="sticky top-14 z-30 border-b border-border-soft bg-background/95 backdrop-blur">
         <div className="mx-auto flex h-11 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
-          <div className="flex min-w-0 items-center gap-4">
+          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
             <button
               type="button"
               onClick={() => router.back()}
@@ -405,12 +408,14 @@ export function CuratedBobbleheadPage({
             >
               <span aria-hidden>←</span> Back
             </button>
-            <Link
-              href={`/teams/${team.slug}`}
-              className="truncate text-sm font-semibold text-zinc-600 transition hover:text-accent-hover"
-            >
-              {team.name} team page
-            </Link>
+            <Breadcrumbs
+              items={[
+                { href: "/", label: "Home" },
+                { href: "/teams", label: "Teams" },
+                { href: `/teams/${team.slug}`, label: team.name },
+                { label: title },
+              ]}
+            />
           </div>
           <p className="shrink-0 text-xs font-semibold uppercase tracking-wide text-zinc-500">
             {nav.position} of {nav.total}

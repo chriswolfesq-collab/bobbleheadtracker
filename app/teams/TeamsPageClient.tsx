@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CaseBanner } from "@/components/CaseBanner";
 import { FeatureStrip } from "@/components/FeatureStrip";
 import {
@@ -104,6 +105,8 @@ export function TeamsPageClient() {
       style={{ background: "var(--page-gradient)" }}
     >
       <div className="mx-auto w-full max-w-6xl px-4 pb-16 pt-6 sm:px-6">
+        <Breadcrumbs className="mb-4" items={[{ href: "/", label: "Home" }, { label: "Teams" }]} />
+
         {/* Display-case banner */}
         <CaseBanner
           preload

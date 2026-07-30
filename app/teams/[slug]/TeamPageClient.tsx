@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useMemo, useState } from "react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ButtonLink } from "@/components/ui/Button";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
@@ -327,12 +327,14 @@ export function TeamPageClient({
             >
               <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6">
                 <div className="flex items-center justify-between">
-                  <Link
-                    href="/teams"
-                    className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-white/85 transition hover:text-white"
-                  >
-                    <span aria-hidden>←</span> All teams
-                  </Link>
+                  <Breadcrumbs
+                    tone="light"
+                    items={[
+                      { href: "/", label: "Home" },
+                      { href: "/teams", label: "Teams" },
+                      { label: `${team.city} ${team.name}` },
+                    ]}
+                  />
                 </div>
 
                 <h1 className="sr-only">

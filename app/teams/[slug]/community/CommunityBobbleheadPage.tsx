@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { EnlargeablePhoto } from "@/components/EnlargeablePhoto";
 import { resolveTitleParts } from "@/components/BobbleheadTitle";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { extractYear } from "@/lib/extractYear";
 import { FavoriteButton } from "@/components/FavoriteButton";
@@ -258,7 +259,7 @@ export function CommunityBobbleheadPage({
     <div className="flex min-h-full flex-1 flex-col" style={{ background: "var(--page-gradient)" }}>
       <div className="sticky top-14 z-30 border-b border-border-soft bg-background/95 backdrop-blur">
         <div className="mx-auto flex h-11 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
-          <div className="flex min-w-0 items-center gap-4">
+          <div className="flex min-w-0 items-center gap-3 sm:gap-4">
             <button
               type="button"
               onClick={() => router.back()}
@@ -266,12 +267,14 @@ export function CommunityBobbleheadPage({
             >
               <span aria-hidden>←</span> Back
             </button>
-            <Link
-              href={`/teams/${team.slug}`}
-              className="truncate text-sm font-semibold text-zinc-600 transition hover:text-accent-hover"
-            >
-              {team.name} team page
-            </Link>
+            <Breadcrumbs
+              items={[
+                { href: "/", label: "Home" },
+                { href: "/teams", label: "Teams" },
+                { href: `/teams/${team.slug}`, label: team.name },
+                { label: title },
+              ]}
+            />
           </div>
           <span className="shrink-0 rounded bg-accent/10 px-2 py-1 text-[10px] font-black uppercase tracking-wider text-accent">
             Community submission

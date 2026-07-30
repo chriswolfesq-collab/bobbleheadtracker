@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { AdminModeBadge } from "@/components/AdminModeBadge";
 import { AuthWidget } from "@/components/AuthWidget";
 import { SiteSearch } from "@/components/SiteSearch";
@@ -28,24 +29,130 @@ export function Wordmark({ className }: { className?: string }) {
   );
 }
 
+// The top-level destinations. /profile is the signed-in user's own collection;
+// signed out it renders its own sign-in prompt, so the link is safe to show to
+// everyone and doubles as the pitch for making an account.
+const PRIMARY_NAV = [
+  { href: "/teams", label: "Teams" },
+  { href: "/recently-added", label: "Recently Added" },
+  { href: "/profile", label: "My Shelf" },
+];
+
+function isNavActive(pathname: string, href: string): boolean {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function SiteHeader() {
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Navigating away closes the panel — including navigations that don't start
+  // in it, like a search result or the wordmark. Adjusting state during render
+  // rather than in an effect keeps it to one render pass; the panel's own links
+  // also close it directly, since tapping the link for the page you're already
+  // on leaves the pathname unchanged.
+  const [lastPathname, setLastPathname] = useState(pathname);
+  if (lastPathname !== pathname) {
+    setLastPathname(pathname);
+    setIsMenuOpen(false);
+  }
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+    function handlePointerDown(event: MouseEvent) {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMenuOpen]);
+
   if (isChromeless(pathname)) {
     return null;
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border-soft bg-background/95 backdrop-blur">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-40 border-b border-border-soft bg-background/95 backdrop-blur"
+    >
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-accent focus:px-3 focus:py-1.5 focus:text-sm focus:text-accent-fg"
       >
         Skip to content
       </a>
+      {/* h-14 is load-bearing: the bobblehead detail pages pin their own sub-nav
+          bar at top-14. The row keeps that height at every breakpoint — below
+          lg the nav collapses into a menu that opens as an overlay panel rather
+          than a second row. */}
       <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between gap-2 px-4 sm:gap-3 sm:px-6">
-        <Link href="/" aria-label="BobbleShelf home" className="shrink-0">
-          <Wordmark />
-        </Link>
+        <div className="flex min-w-0 items-center gap-2 lg:gap-6">
+          <button
+            type="button"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="site-menu"
+            onClick={() => setIsMenuOpen((current) => !current)}
+            className="-ml-1 grid h-9 w-9 shrink-0 place-items-center rounded text-navy transition hover:text-accent-hover lg:hidden"
+          >
+            <svg
+              aria-hidden
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              className="h-5 w-5"
+            >
+              {isMenuOpen ? (
+                <>
+                  <path d="M6 6l12 12" />
+                  <path d="M18 6L6 18" />
+                </>
+              ) : (
+                <>
+                  <path d="M4 7h16" />
+                  <path d="M4 12h16" />
+                  <path d="M4 17h16" />
+                </>
+              )}
+            </svg>
+          </button>
+          <Link href="/" aria-label="BobbleShelf home" className="shrink-0">
+            <Wordmark />
+          </Link>
+          <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex">
+            {PRIMARY_NAV.map((link) => {
+              const active = isNavActive(pathname, link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`whitespace-nowrap text-xs font-black uppercase tracking-wide transition ${
+                    active ? "text-accent" : "text-zinc-600 hover:text-accent-hover"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
         {/* min-w-0 lets this cluster shrink instead of pushing past the
             viewport; each control collapses to its icon on narrow screens so
             all three still fit next to the wordmark at 320px. */}
@@ -55,6 +162,33 @@ export function SiteHeader() {
           <AuthWidget />
         </div>
       </div>
+
+      {isMenuOpen ? (
+        <nav
+          id="site-menu"
+          aria-label="Menu"
+          className="absolute inset-x-0 top-full border-b border-border-soft bg-surface shadow-lg lg:hidden"
+        >
+          <div className="mx-auto w-full max-w-6xl px-2 py-1.5 sm:px-4">
+            {PRIMARY_NAV.map((link) => {
+              const active = isNavActive(pathname, link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  aria-current={active ? "page" : undefined}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block rounded px-2 py-3 text-sm font-black uppercase tracking-wide transition hover:bg-black/[0.06] ${
+                    active ? "text-accent" : "text-foreground"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
+        </nav>
+      ) : null}
     </header>
   );
 }
