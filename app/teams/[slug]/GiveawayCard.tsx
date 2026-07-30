@@ -14,7 +14,13 @@ import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
 import { useUserWanted } from "@/lib/userWanted";
 
-export type ResolvedGiveaway = Giveaway & { source: "curated" | "community" };
+// `city` is the Athletics-only Oakland/Sacramento era, already resolved
+// against the year by TeamPageClient (lib/athleticsCity.ts). Null on every
+// other team, and on an A's listing whose year is unknown and unset.
+export type ResolvedGiveaway = Giveaway & {
+  source: "curated" | "community";
+  city?: string | null;
+};
 
 type OwnershipContextValue = {
   ownedCount: number;

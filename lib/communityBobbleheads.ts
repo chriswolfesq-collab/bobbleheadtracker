@@ -18,7 +18,7 @@ export function useCommunityBobbleheads(teamSlug: string) {
 
     supabase
       .from("community_bobbleheads")
-      .select("id, title, nickname, quantity, year, date, image_url")
+      .select("id, title, nickname, quantity, year, date, image_url, city")
       .eq("team_slug", teamSlug)
       .order("created_at", { ascending: false })
       .then(({ data, error }) => {
@@ -37,6 +37,7 @@ export function useCommunityBobbleheads(teamSlug: string) {
               year: row.year,
               date: row.date,
               imageUrl: row.image_url,
+              city: row.city,
               community: true as const,
             })),
           );

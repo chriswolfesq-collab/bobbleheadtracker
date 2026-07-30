@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { ButtonLink } from "@/components/ui/Button";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
+import { resolveAthleticsCity } from "@/lib/athleticsCity";
 import { useAuth } from "@/lib/auth";
 import type { Giveaway } from "@/lib/bobbleheads";
 import { useBobbleheadOverrides, type BobbleheadOverridesLookup } from "@/lib/bobbleheadOverrides";
@@ -286,12 +287,14 @@ export function TeamPageClient({
       .filter((giveaway) => !isDeleted(team.slug, giveaway.id))
       .map((giveaway) => {
         const override = getOverride(team.slug, giveaway.id);
+        const year = override?.year ?? giveaway.year;
         return {
           ...giveaway,
           title: override?.title ?? giveaway.title,
           nickname: override?.nickname ?? giveaway.nickname ?? null,
-          year: override?.year ?? giveaway.year,
+          year,
           date: override?.date ?? giveaway.date,
+          city: resolveAthleticsCity(team.slug, year, override?.city),
           // A removed seed photo leaves nothing behind, so the card falls back
           // to the team placeholder — same as a listing that never had one.
           imageUrl: photoUrlById[giveaway.id] ?? (override?.photoHidden ? undefined : giveaway.imageUrl),
@@ -301,6 +304,7 @@ export function TeamPageClient({
     const community: ResolvedGiveaway[] = communityBobbleheads.map((giveaway) => ({
       ...giveaway,
       imageUrl: photoUrlById[giveaway.id] ?? giveaway.imageUrl,
+      city: resolveAthleticsCity(team.slug, giveaway.year, giveaway.city),
       source: "community",
     }));
 
