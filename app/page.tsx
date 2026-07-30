@@ -167,13 +167,6 @@ export default async function Home() {
 
         <FeatureStrip className="mt-6" />
 
-        <UpcomingGiveaways
-          items={upcoming}
-          now={now}
-          calendarHref="/giveaways.ics"
-          className="mt-12"
-        />
-
         {/* Browse by team: all 30 figures on a shelf */}
         <section className="mt-12">
           <SectionHeading
@@ -214,10 +207,15 @@ export default async function Home() {
           </ShelfRow>
         </section>
 
-        {/* Recently added: community items on a shelf */}
-        <section className="mt-12">
-          <RecentlyAdded />
-        </section>
+        {/* Recently added: the community's newest additions */}
+        <RecentlyAdded className="mt-12" />
+
+        <UpcomingGiveaways
+          items={upcoming}
+          now={now}
+          calendarHref="/giveaways.ics"
+          className="mt-12"
+        />
 
         <div className="mt-12 pb-16">
           <JoinCommunityBand />
