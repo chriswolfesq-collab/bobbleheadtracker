@@ -180,3 +180,18 @@ supabase functions deploy admin-send-email
 ```
 
 The BCC is on by default for the rep path, so every email to a rep copies you in.
+
+## Per-item collection details (recommended)
+
+Adds condition (in box / out of box), acquisition date, price paid and notes to
+each bobblehead you own, recorded from the bobblehead's own page under
+Collection Status.
+
+1. In the SQL Editor, run `collection_details.sql`.
+
+Nothing to deploy. These are four nullable columns on `user_collections` rather
+than a table of their own, so the existing row-level security carries over
+unchanged — a detail can't outlive the ownership row it hangs off, or be read by
+anyone but its owner (and an admin, who could already read the row). Run it
+*before* deploying the app code: until the columns exist, the details panel on
+an owned bobblehead will fail to load and fail to save.

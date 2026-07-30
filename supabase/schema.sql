@@ -216,9 +216,41 @@ create table if not exists public.user_collections (
   bobblehead_id text not null,
   team_slug text not null,
   owned boolean not null default true,
+  -- What's actually on the shelf, as opposed to the fact that something is.
+  -- All optional; null means "not recorded". See supabase/collection_details.sql
+  -- for the constraints and why these are columns here rather than a table of
+  -- their own.
+  condition text,
+  acquired_on date,
+  price_paid numeric(10, 2),
+  notes text,
   updated_at timestamptz not null default now(),
   primary key (user_id, bobblehead_id)
 );
+
+alter table public.user_collections
+  add column if not exists condition text,
+  add column if not exists acquired_on date,
+  add column if not exists price_paid numeric(10, 2),
+  add column if not exists notes text;
+
+alter table public.user_collections
+  drop constraint if exists user_collections_condition_check;
+alter table public.user_collections
+  add constraint user_collections_condition_check
+  check (condition is null or condition in ('in_box', 'out_of_box'));
+
+alter table public.user_collections
+  drop constraint if exists user_collections_price_paid_check;
+alter table public.user_collections
+  add constraint user_collections_price_paid_check
+  check (price_paid is null or price_paid >= 0);
+
+alter table public.user_collections
+  drop constraint if exists user_collections_notes_check;
+alter table public.user_collections
+  add constraint user_collections_notes_check
+  check (notes is null or char_length(notes) <= 2000);
 
 create table if not exists public.user_favorites (
   user_id uuid not null references auth.users (id) on delete cascade,
