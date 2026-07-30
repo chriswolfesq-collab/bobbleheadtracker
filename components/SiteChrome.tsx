@@ -36,6 +36,7 @@ const PRIMARY_NAV = [
   { href: "/teams", label: "Teams" },
   { href: "/tags", label: "Tags" },
   { href: "/recently-added", label: "Recently Added" },
+  { href: "/upcoming", label: "Upcoming" },
   { href: "/profile", label: "My Shelf" },
 ];
 
