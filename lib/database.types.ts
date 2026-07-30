@@ -263,6 +263,7 @@ export type Database = {
           display_name: string
           email_enabled: boolean
           email_rep_digest: boolean
+          email_weekly_digest: boolean
           email_submission_updates: boolean
           email_wishlist_alerts: boolean
           gallery_public: boolean
@@ -276,6 +277,7 @@ export type Database = {
           display_name?: string
           email_enabled?: boolean
           email_rep_digest?: boolean
+          email_weekly_digest?: boolean
           email_submission_updates?: boolean
           email_wishlist_alerts?: boolean
           gallery_public?: boolean
@@ -289,6 +291,7 @@ export type Database = {
           display_name?: string
           email_enabled?: boolean
           email_rep_digest?: boolean
+          email_weekly_digest?: boolean
           email_submission_updates?: boolean
           email_wishlist_alerts?: boolean
           gallery_public?: boolean
