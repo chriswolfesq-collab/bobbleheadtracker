@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { CollectionTransfer } from "@/components/CollectionTransfer";
 import { EmailAlertsToggle } from "@/components/EmailAlertsToggle";
 import { GalleryToggle } from "@/components/GalleryToggle";
 import { ShelfSharingToggle } from "@/components/ShelfSharingToggle";
@@ -47,6 +48,7 @@ export function SettingsPageClient() {
               sub-option: shown right under sharing, and only once sharing is on. */}
           {sharing.shelf.isPublic ? <GalleryToggle gallery={gallery} /> : null}
           <EmailAlertsToggle alerts={alerts} />
+          <CollectionTransfer />
         </div>
       )}
     </div>
