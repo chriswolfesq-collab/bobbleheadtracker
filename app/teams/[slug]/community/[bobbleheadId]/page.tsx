@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { breadcrumbList } from "@/components/BreadcrumbJsonLd";
 import { getCommunityListing } from "@/lib/communityServer";
 import { siteUrl } from "@/lib/siteUrl";
 import { getTeamBySlug } from "@/lib/teams";
@@ -64,20 +65,11 @@ export default async function CommunityListingPage({
         ...(listing.imageUrl ? { image: new URL(listing.imageUrl, base).toString() } : {}),
         brand: { "@type": "SportsTeam", name: `${team.city} ${team.name}` },
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "BobbleShelf", item: base },
-          { "@type": "ListItem", position: 2, name: "Teams", item: `${base}/teams` },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: `${team.city} ${team.name}`,
-            item: `${base}/teams/${slug}`,
-          },
-          { "@type": "ListItem", position: 4, name: listing.title, item: pageUrl },
-        ],
-      },
+      breadcrumbList([
+        { name: "Teams", path: "/teams" },
+        { name: `${team.city} ${team.name}`, path: `/teams/${slug}` },
+        { name: listing.title, path: `/teams/${slug}/community/${bobbleheadId}` },
+      ]),
     ],
   };
 

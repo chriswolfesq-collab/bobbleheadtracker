@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CaseBanner } from "@/components/CaseBanner";
 import { ProfileSections } from "@/components/ProfileSections";
 import { ProfileWelcomeModal } from "@/components/ProfileWelcomeModal";
@@ -36,13 +36,11 @@ export function ProfilePageClient() {
       className="flex min-h-full flex-1 flex-col"
       style={{ background: "var(--page-gradient)" }}
     >
-      <div className="flex items-center justify-between px-4 pt-4 sm:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-700 transition hover:text-accent-hover"
-        >
-          <span aria-hidden>←</span> Back to home
-        </Link>
+      {/* Outside the signed-in branch on purpose: the trail is how you get back
+          out of the sign-in prompt too. Its column matches the signed-in
+          content below. */}
+      <div className="mx-auto w-full max-w-6xl px-4 pt-4 sm:px-6">
+        <Breadcrumbs items={[{ href: "/", label: "Home" }, { label: "My Shelf" }]} />
       </div>
 
       {isAuthLoading ? null : !user ? (

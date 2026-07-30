@@ -39,13 +39,17 @@ function Shell({ team, children }: { team: Team; children: React.ReactNode }) {
   return (
     <div className="flex min-h-full flex-1 flex-col px-4 py-10" style={{ background: "var(--page-gradient)" }}>
       <div className="mx-auto w-full max-w-3xl rounded-xl border border-border-soft bg-surface p-6">
-        <Link
-          href={`/teams/${team.slug}`}
-          className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-wide text-navy hover:text-accent-hover"
-        >
-          <span aria-hidden>←</span>
-          Back to team
-        </Link>
+        {/* The loading and not-found states get the same trail as the loaded
+            page, minus the listing title nobody has yet. The team crumb goes
+            where the old "← Back to team" link went. */}
+        <Breadcrumbs
+          items={[
+            { href: "/", label: "Home" },
+            { href: "/teams", label: "Teams" },
+            { href: `/teams/${team.slug}`, label: team.name },
+            { label: "Community listing" },
+          ]}
+        />
         {children}
       </div>
     </div>

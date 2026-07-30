@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RecentlyAddedCard } from "@/components/RecentlyAddedCard";
 import { ToggleChip } from "@/components/ToggleChip";
 import { useRecentCommunityBobbleheads } from "@/lib/communityBobbleheads";
@@ -104,16 +104,13 @@ export function RecentlyAddedPageClient() {
       className="flex min-h-full flex-1 flex-col"
       style={{ background: "var(--page-gradient)" }}
     >
-      <div className="flex items-center justify-between px-4 pt-4 sm:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-1.5 text-sm font-semibold text-zinc-700 transition hover:text-accent-hover"
-        >
-          <span aria-hidden>←</span> Back to home
-        </Link>
-      </div>
-
       <div className="mx-auto w-full max-w-5xl px-4 pb-24 pt-6 sm:px-6">
+        {/* The trail replaces the old "← Back to home" link: it goes to the same
+            place and also says where you are. */}
+        <Breadcrumbs
+          className="mb-4"
+          items={[{ href: "/", label: "Home" }, { label: "Recently Added" }]}
+        />
         <header className="mb-6 text-center">
           <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-accent/80 sm:text-xs">
             Recently added by the community

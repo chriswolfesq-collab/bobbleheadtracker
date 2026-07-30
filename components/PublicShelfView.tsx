@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import DisplayCase from "@/components/DisplayCase";
 import PublicGallery from "@/components/PublicGallery";
 import type { PublicGalleryItem } from "@/lib/publicShelf";
@@ -17,6 +18,12 @@ export type PublicShelfViewProps = {
   totalByTeamSlug: Record<string, number>;
   stats: ShelfStats;
   galleryItems: PublicGalleryItem[];
+  /**
+   * Off by default because the preview is captured with html-to-image for the
+   * share card — a nav trail has no business in the exported picture. The live
+   * page turns it on.
+   */
+  showBreadcrumbs?: boolean;
 };
 
 export default function PublicShelfView({
@@ -25,6 +32,7 @@ export default function PublicShelfView({
   totalByTeamSlug,
   stats,
   galleryItems,
+  showBreadcrumbs = false,
 }: PublicShelfViewProps) {
   return (
     <div
@@ -32,6 +40,12 @@ export default function PublicShelfView({
       style={{ background: "var(--page-gradient)" }}
     >
       <div className="mx-auto w-full max-w-2xl px-4 pb-16 pt-6 sm:px-6">
+        {showBreadcrumbs ? (
+          <Breadcrumbs
+            className="mb-4"
+            items={[{ href: "/", label: "Home" }, { label: `${displayName}'s Shelf` }]}
+          />
+        ) : null}
         <header className="text-center">
           <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-accent/80 sm:text-xs">
             MLB Bobblehead Shelf

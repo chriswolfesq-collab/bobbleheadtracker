@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AdminLoginForm } from "@/components/AdminLoginForm";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { TEAMS } from "@/lib/teams";
@@ -117,6 +118,10 @@ export default function AdminPage() {
       <div className="mx-auto max-w-2xl">
         <div className="flex items-center justify-between">
           <div>
+            <Breadcrumbs
+              className="mb-2"
+              items={[{ href: "/", label: "Home" }, { label: "Admin" }]}
+            />
             <h1 className="text-2xl font-black uppercase tracking-wide">
               {isAdmin ? "Admin mode" : "Team rep mode"}
             </h1>
@@ -130,12 +135,6 @@ export default function AdminPage() {
                 .
               </p>
             ) : null}
-            <Link
-              href="/"
-              className="mt-2 inline-block text-xs font-bold text-accent hover:text-accent-hover"
-            >
-              ← Back to Bobble Shelf
-            </Link>
           </div>
           <button
             type="button"

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { useAdminPublicShelves } from "@/lib/adminCollections";
 
@@ -31,12 +32,14 @@ export default function AdminPublicShelvesPage() {
     <main className="min-h-full bg-slate-50 px-4 py-8 text-zinc-900 sm:px-8">
       <div className="mx-auto flex max-w-3xl items-center justify-between">
         <div>
-          <Link
-            href="/admin/stats"
-            className="text-sm font-black uppercase tracking-wide text-zinc-900 hover:text-accent-hover"
-          >
-            ← Back to stats
-          </Link>
+          <Breadcrumbs
+            items={[
+              { href: "/", label: "Home" },
+              { href: "/admin", label: "Admin" },
+              { href: "/admin/stats", label: "Site stats" },
+              { label: "Public shelves" },
+            ]}
+          />
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">Public shelves</h1>
           <p className="mt-1 text-sm text-zinc-600">
             Collectors who have made their shelf public. Each opens their shared /shelf page.

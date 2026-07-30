@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import PublicShelfView from "@/components/PublicShelfView";
 import { getPublicGallery, getPublicShelf } from "@/lib/publicShelf";
 
@@ -43,12 +44,16 @@ export default async function ShelfPage({ params }: ShelfPageProps) {
   const { displayName, countByTeamSlug, totalByTeamSlug, stats } = shelf;
 
   return (
-    <PublicShelfView
-      displayName={displayName}
-      countByTeamSlug={countByTeamSlug}
-      totalByTeamSlug={totalByTeamSlug}
-      stats={stats}
-      galleryItems={galleryItems}
-    />
+    <>
+      <BreadcrumbJsonLd trail={[{ name: `${displayName}'s Shelf`, path: `/shelf/${slug}` }]} />
+      <PublicShelfView
+        showBreadcrumbs
+        displayName={displayName}
+        countByTeamSlug={countByTeamSlug}
+        totalByTeamSlug={totalByTeamSlug}
+        stats={stats}
+        galleryItems={galleryItems}
+      />
+    </>
   );
 }

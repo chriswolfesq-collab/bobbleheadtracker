@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { breadcrumbList } from "@/components/BreadcrumbJsonLd";
 import { getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
 import { getTeamListingCount } from "@/lib/curatedListing";
 import { siteUrl } from "@/lib/siteUrl";
@@ -58,19 +59,10 @@ export default async function TeamPage({
         url: `${base}/teams/${team.slug}`,
         about: { "@type": "SportsTeam", name: `${team.city} ${team.name}` },
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "BobbleShelf", item: base },
-          { "@type": "ListItem", position: 2, name: "Teams", item: `${base}/teams` },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: `${team.city} ${team.name}`,
-            item: `${base}/teams/${team.slug}`,
-          },
-        ],
-      },
+      breadcrumbList([
+        { name: "Teams", path: "/teams" },
+        { name: `${team.city} ${team.name}`, path: `/teams/${team.slug}` },
+      ]),
     ],
   };
 

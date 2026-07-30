@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Community Guidelines — BobbleShelf",
@@ -9,7 +11,14 @@ export const metadata: Metadata = {
 export default function CommunityGuidelinesPage() {
   return (
     <div className="flex min-h-full flex-1 flex-col" style={{ background: "var(--page-gradient)" }}>
+      <BreadcrumbJsonLd
+        trail={[{ name: "Community Guidelines", path: "/community-guidelines" }]}
+      />
       <div className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6">
+        <Breadcrumbs
+          className="mb-6"
+          items={[{ href: "/", label: "Home" }, { label: "Community Guidelines" }]}
+        />
         <h1 className="font-display text-4xl font-bold uppercase tracking-wide text-navy">
           Community Guidelines
         </h1>
