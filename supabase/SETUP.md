@@ -63,15 +63,20 @@ Skip this if the in-app queue at `/admin/review` is enough on its own.
 1. Create a free account at resend.com, get an API key.
 2. Install the Supabase CLI, then from the repo root:
    ```
-   supabase login
-   supabase link --project-ref <your-project-ref>
-   supabase functions deploy notify-new-submission --no-verify-jwt
-   supabase secrets set RESEND_API_KEY=<your-resend-key> WEBHOOK_SECRET=<any-random-string>
+   npx supabase login
+   npx supabase link --project-ref <your-project-ref>
+   npx supabase functions deploy notify-new-submission --no-verify-jwt --use-api
+   npx supabase secrets set RESEND_API_KEY=<your-resend-key> WEBHOOK_SECRET=<any-random-string>
    ```
-3. In the Supabase dashboard: Database > Webhooks > Create a new webhook.
-   - Table: `submissions`, Event: `Insert`, Type: `HTTP Request`
-   - URL: the function URL printed by `supabase functions deploy`
-   - Header: `x-webhook-secret: <the same random string from step 2>`
+3. Run `webhook_trigger.sql`, substituting `<WEBHOOK_SECRET>` with the same
+   value. That installs the trigger that calls the function.
+
+There is no Database Webhook to create in the dashboard. An earlier version of
+this setup used one; `webhook_trigger.sql` replaced it with ordinary trigger
+functions calling `net.http_post`, which keeps the secret in one place
+(`pg_proc`) where `rotate_webhook_secret.sql` can reach it. If you go looking
+for a webhook to edit, you won't find one — and recent dashboards moved that
+screen under Integrations anyway.
 
 ## Branded confirmation email (optional)
 
@@ -143,11 +148,11 @@ Reuses the same Resend key as above.
 1. Deploy the function (JWT verification stays ON — it re-checks the caller
    is an admin before sending anything):
    ```
-   supabase functions deploy admin-send-email
+   npx supabase functions deploy admin-send-email --use-api
    ```
 2. If you skipped the section above, set the Resend key once:
    ```
-   supabase secrets set RESEND_API_KEY=<your-resend-key>
+   npx supabase secrets set RESEND_API_KEY=<your-resend-key>
    ```
 
 No webhook is needed — the admin UI calls this function directly. `SUPABASE_URL`,
@@ -163,7 +168,7 @@ Adds the master "email me nothing" switch and the per-type opt-outs on
 2. Re-run these three, so their trigger functions pick up the new check:
    `wishlist_alerts.sql`, `webhook_trigger.sql`, `team_rep_welcome.sql`.
    (Remember to substitute `<WEBHOOK_SECRET>` in each before running — same
-   value as `supabase secrets set WEBHOOK_SECRET=...`.)
+   value as `npx supabase secrets set WEBHOOK_SECRET=...`.)
 
 Nothing to deploy. Note that admin-composed one-off emails deliberately ignore
 these switches: they're direct correspondence, not notifications.
@@ -177,7 +182,7 @@ the site — `/contact` used to publish it as a `mailto:` link.
    first — the notifier calls `wants_email`). Substitute `<WEBHOOK_SECRET>`.
 2. Deploy the mailer:
    ```
-   supabase functions deploy notify-inbound-message --no-verify-jwt
+   npx supabase functions deploy notify-inbound-message --no-verify-jwt --use-api
    ```
 
 Messages land in `/admin/messages`. The notification email's reply-to is the
@@ -194,7 +199,7 @@ day. Nothing recorded the actor before this — `submissions` and
    Substitute `<WEBHOOK_SECRET>`. This also schedules the pg_cron job.
 2. Deploy the mailer:
    ```
-   supabase functions deploy rep-activity-digest --no-verify-jwt
+   npx supabase functions deploy rep-activity-digest --no-verify-jwt --use-api
    ```
 
 The log is at `/admin/activity`, and only covers changes made after step 1 — it
@@ -215,7 +220,7 @@ additions it needs — addressing by raw email (a rep can be assigned before the
 ever sign up, so there may be no user id) and BCC'ing the sending admin:
 
 ```
-supabase functions deploy admin-send-email
+npx supabase functions deploy admin-send-email --use-api
 ```
 
 The BCC is on by default for the rep path, so every email to a rep copies you in.
@@ -267,7 +272,7 @@ sends nothing at all.
    Substitute `<WEBHOOK_SECRET>`. This also schedules the pg_cron job.
 2. Deploy the mailer:
    ```
-   supabase functions deploy weekly-digest --no-verify-jwt
+   npx supabase functions deploy weekly-digest --no-verify-jwt --use-api
    ```
 
 Only community additions count as new. A curated data import can land thousands
