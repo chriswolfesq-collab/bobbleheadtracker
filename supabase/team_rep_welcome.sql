@@ -17,9 +17,11 @@
 -- pg_net is enabled by default on Supabase; kept here so this file stands alone.
 create extension if not exists pg_net with schema extensions;
 
--- Replace <WEBHOOK_SECRET> below with the real value before running -- it must
--- match `supabase secrets set WEBHOOK_SECRET=...` (shared with the other
--- functions). Do not commit the filled-in version of this file.
+-- The x-webhook-secret header reads from Vault via public.webhook_secret()
+-- rather than carrying a literal. Run vault_webhook_secret.sql once before this
+-- file; there is nothing to substitute here any more. See that file for why:
+-- the hand-substitution this replaces is what left every mailer silently broken.
+
 create or replace function public.notify_new_team_rep()
 returns trigger
 language plpgsql
@@ -41,7 +43,7 @@ begin
     url := 'https://mawwzvnlihhsagatmolq.supabase.co/functions/v1/notify-team-rep',
     headers := jsonb_build_object(
       'Content-Type', 'application/json',
-      'x-webhook-secret', '<WEBHOOK_SECRET>'
+      'x-webhook-secret', public.webhook_secret()
     ),
     body := jsonb_build_object(
       'email', new.email,

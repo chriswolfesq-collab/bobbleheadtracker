@@ -3,9 +3,13 @@
 -- queue forever, and "handled" only greys a row out.
 --
 -- Standalone on purpose: this same function is in inbound_messages.sql for a
--- fresh setup, but that file also rewrites notify_inbound_message() with a
--- <WEBHOOK_SECRET> placeholder, so re-running the whole thing would break the
--- notification email. Run this file instead.
+-- fresh setup, but re-running a whole setup file to pick up one function is a
+-- wide blast radius for a narrow change. Run this file instead.
+--
+-- (It used to be that inbound_messages.sql would also reinstall
+-- notify_inbound_message() with an unsubstituted <WEBHOOK_SECRET>, silently
+-- killing the notification email. Since vault_webhook_secret.sql that hazard is
+-- gone -- no file carries the literal any more.)
 --
 -- Idempotent — safe to run more than once. Paste into the Supabase SQL editor.
 

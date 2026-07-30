@@ -113,3 +113,11 @@ $do$;
 -- The `submissions` webhook under Database > Webhooks carries x-webhook-secret
 -- in its own header config, which lives outside pg_proc. Update it in the
 -- dashboard by hand or new-submission notifications keep 401ing on their own.
+
+-- ---------------------------------------------------------------------------
+-- Superseded by vault_webhook_secret.sql
+-- ---------------------------------------------------------------------------
+-- This file exists for senders that still carry the secret as a literal. Once
+-- vault_webhook_secret.sql has run there are none, and step 1's dry run returns
+-- nothing to rewrite. Rotating then means two commands and no file edits -- see
+-- the bottom of that file.

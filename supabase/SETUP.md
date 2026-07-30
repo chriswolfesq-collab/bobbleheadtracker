@@ -53,6 +53,11 @@ order by p.proname;
 A row reading `<WEBHOOK_SECRET>` was never substituted. `rotate_webhook_secret.sql`
 fixes every sender in one pass — see the header of that file.
 
+Better still, run `vault_webhook_secret.sql` once. It moves the secret into Vault
+and rewrites every sender to read it at call time, so no file carries the literal
+and there is nothing left to substitute or forget. After that, `current_value`
+below is null on every row — that's correct, not a fault.
+
 Note that `net._http_response` is pruned on a TTL of a few hours, so an empty
 result means "nothing sent recently", not "nothing ever failed".
 
@@ -98,6 +103,40 @@ shelf hero image, welcome copy, and a blue "Confirm email address" button.
    <alerts@bobbleshelf.com>` instead of the Supabase address), set up custom
    SMTP under Authentication > Emails > SMTP settings — the same Resend account
    the edge functions already use will work.
+
+## Password resets
+
+An admin can unstick a locked-out account from `/admin/users`: **Reset password**
+on their row emails them a one-time link that lands on `/reset-password`, where
+they choose their own password. No password is ever typed into, or read from,
+the admin console — so there's nothing to relay back over email or chat.
+
+Step 1 is not optional. Without it the link still sends, but Supabase silently
+ignores the redirect and drops people on the site's front page with no way to
+set a password — which looks exactly like the feature is broken.
+
+1. In the Supabase dashboard: Authentication > URL Configuration > **Redirect
+   URLs**. Add both:
+   - `https://bobbleshelf.com/reset-password`
+   - `http://localhost:3000/reset-password` (so it can be tested in dev)
+
+   Vercel preview deployments each get their own hostname, so add
+   `https://*-<your-vercel-scope>.vercel.app/reset-password` too if you want
+   resets to work on previews.
+2. Optional, same as the signup email above: Authentication > Emails > **Reset
+   Password**, paste in `email-templates/reset-password.html` and set the
+   **Subject** to something like `Reset your Bobble Shelf password`. The
+   default template is plain and unbranded; this one matches the confirmation
+   email. Its only variable is `{{ .ConfirmationURL }}` — leave it as-is.
+
+Notes:
+
+- Supabase reports success whether or not the address has an account, so a
+  "sent" confirmation in the admin console is not proof the person exists.
+- It works for Google sign-ups too. They have no password today; following the
+  link gives them one, and Google sign-in keeps working alongside it.
+- Auth emails are rate-limited per project (Supabase's default is low — see
+  Authentication > Rate Limits). Sending a handful in a row can start bouncing.
 
 ## Dead-image sweep (optional)
 
