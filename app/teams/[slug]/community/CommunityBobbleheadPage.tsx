@@ -270,13 +270,6 @@ export function CommunityBobbleheadPage({
       <div className="sticky top-14 z-30 border-b border-border-soft bg-background/95 backdrop-blur">
         <div className="mx-auto flex h-11 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
           <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-            <button
-              type="button"
-              onClick={() => router.back()}
-              className="inline-flex shrink-0 items-center gap-1.5 text-sm font-black uppercase tracking-wide text-navy transition hover:text-accent-hover"
-            >
-              <span aria-hidden>←</span> Back
-            </button>
             <Breadcrumbs
               items={[
                 { href: "/", label: "Home" },
