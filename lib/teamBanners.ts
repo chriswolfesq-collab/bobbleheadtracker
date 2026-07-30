@@ -17,7 +17,7 @@ export const TEAM_BANNERS: Record<string, { width: number; height: number }> = {
   "twins": { width: 1942, height: 809 },
   "astros": { width: 1942, height: 809 },
   "angels": { width: 1942, height: 809 },
-  "athletics": { width: 1674, height: 844 },
+  "athletics": { width: 1942, height: 809 },
   "mariners": { width: 1906, height: 773 },
   "rangers": { width: 1942, height: 809 },
   "braves": { width: 1920, height: 819 },
