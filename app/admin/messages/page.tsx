@@ -49,6 +49,7 @@ export default function AdminMessagesPage() {
   const [isLoadingMessages, setIsLoadingMessages] = useState(true);
   const [filter, setFilter] = useState<Filter>("all");
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [confirmingDeleteId, setConfirmingDeleteId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const load = useCallback(() => {
@@ -82,6 +83,24 @@ export default function AdminMessagesPage() {
       setError(rpcError.message);
       return;
     }
+    load();
+  }
+
+  // Spam and test submissions have no reason to sit in the queue forever, and
+  // "handled" only greys them out. Gone for good, hence the second click.
+  async function deleteMessage(message: InboundMessage) {
+    setBusyId(message.id);
+    const { error: rpcError } = await supabase.rpc("admin_delete_inbound_message", {
+      p_id: message.id,
+    });
+    setBusyId(null);
+    setConfirmingDeleteId(null);
+
+    if (rpcError) {
+      setError(rpcError.message);
+      return;
+    }
+    setError(null);
     load();
   }
 
@@ -124,7 +143,7 @@ export default function AdminMessagesPage() {
         <p className="mt-1 text-sm text-zinc-600">
           Contact-form messages and team-rep applications. Reply straight from the notification
           email — its reply-to is the sender&apos;s address. Mark one handled to move it out of the
-          way.
+          way, or delete it outright if it&apos;s spam.
         </p>
 
         <div className="mt-6 flex gap-2">
@@ -185,18 +204,54 @@ export default function AdminMessagesPage() {
                         {formatWhen(message.created_at)}
                       </p>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => toggleHandled(message)}
-                      disabled={busyId === message.id}
-                      className="shrink-0 rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover disabled:opacity-50"
-                    >
-                      {isHandled ? "Reopen" : "Mark handled"}
-                    </button>
+                    <div className="flex shrink-0 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => toggleHandled(message)}
+                        disabled={busyId === message.id}
+                        className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover disabled:opacity-50"
+                      >
+                        {isHandled ? "Reopen" : "Mark handled"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setConfirmingDeleteId(message.id)}
+                        disabled={busyId === message.id}
+                        className="rounded border border-red-500/30 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-red-600 transition hover:border-red-500 hover:text-red-700 disabled:opacity-50"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                   <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-zinc-700">
                     {message.message}
                   </p>
+                  {confirmingDeleteId === message.id ? (
+                    <div className="mt-3 rounded border border-red-500/40 bg-red-50 p-3">
+                      <p className="text-xs font-bold text-red-700">
+                        Delete this message for good? It won&apos;t be in the queue any more — the
+                        notification email is the only copy left.
+                      </p>
+                      <div className="mt-3 flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => deleteMessage(message)}
+                          disabled={busyId === message.id}
+                          className="rounded bg-red-600 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-white transition hover:bg-red-500 disabled:opacity-50"
+                        >
+                          {busyId === message.id ? "Deleting…" : "Yes, delete it"}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setConfirmingDeleteId(null)}
+                          disabled={busyId === message.id}
+                          className="rounded border border-black/15 px-3 py-1.5 text-xs font-bold text-zinc-700 transition hover:border-accent disabled:opacity-50"
+                        >
+                          Keep it
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
                 </li>
               );
             })}

@@ -176,6 +176,35 @@ $$;
 revoke all on function public.admin_mark_message_handled(uuid, boolean) from public, anon;
 grant execute on function public.admin_mark_message_handled(uuid, boolean) to authenticated;
 
+-- Marking handled keeps the record; this throws it away. Both exist because the
+-- queue collects two different things: a real message that's been answered is
+-- worth keeping, and spam or a test submission is only noise. There is no delete
+-- policy on the table to match -- like the two functions above, this is the only
+-- way in, so an admin can't delete by selecting the table directly.
+create or replace function public.admin_delete_inbound_message(p_id uuid)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if not public.is_admin() then
+    raise exception 'not authorized';
+  end if;
+
+  delete from public.inbound_messages where id = p_id;
+
+  -- The caller just clicked a row it had on screen, so a miss means someone
+  -- else deleted it first. Say so rather than reporting a silent success.
+  if not found then
+    raise exception 'message not found';
+  end if;
+end;
+$$;
+
+revoke all on function public.admin_delete_inbound_message(uuid) from public, anon;
+grant execute on function public.admin_delete_inbound_message(uuid) to authenticated;
+
 -- ---------------------------------------------------------------------------
 -- Notify the admin
 -- ---------------------------------------------------------------------------
