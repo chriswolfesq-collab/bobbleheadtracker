@@ -50,7 +50,7 @@ export function SiteHeader() {
             viewport; each control collapses to its icon on narrow screens so
             all three still fit next to the wordmark at 320px. */}
         <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-          <SiteSearch variant="inline" collapseLabel />
+          <SiteSearch variant="inline" compact />
           <AdminModeBadge />
           <AuthWidget />
         </div>

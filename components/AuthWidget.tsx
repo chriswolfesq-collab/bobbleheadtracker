@@ -59,7 +59,7 @@ export function AuthWidget({
           aria-haspopup="menu"
           aria-expanded={isOpen}
           onClick={() => setIsOpen((current) => !current)}
-          className="flex items-center gap-2 rounded-full border border-black/15 py-1 pl-1 pr-2.5 text-sm font-semibold text-foreground transition hover:border-accent sm:pr-3"
+          className="flex shrink-0 items-center gap-2 rounded-full border border-black/15 py-1 pl-1 pr-2.5 text-sm font-semibold text-foreground transition hover:border-accent sm:pr-3"
         >
           <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-accent text-xs font-black text-accent-fg">
             {initial}

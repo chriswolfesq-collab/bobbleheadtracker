@@ -14,15 +14,15 @@ export function SiteSearch({
   teamSlug,
   buttonLabel = "Search",
   variant = "centered",
-  collapseLabel = false,
+  compact = false,
 }: {
   teamSlug?: string;
   buttonLabel?: string;
   variant?: "centered" | "inline";
-  /** Drop the closed button's text label below `sm`, leaving just the icon.
-   *  For the site header, where the label's width pushes the account controls
-   *  off narrow screens. */
-  collapseLabel?: boolean;
+  /** For a space-constrained host like the site header: the closed button
+   *  drops its text label below `sm` (icon only) and never stretches, so it
+   *  can't crowd the controls beside it. */
+  compact?: boolean;
 } = {}) {
   const router = useRouter();
   const [query, setQuery] = useState("");
@@ -87,12 +87,24 @@ export function SiteSearch({
     if (isOpen) inputRef.current?.focus();
   }, [isOpen]);
 
+  // Closed, the inline wrapper holds nothing but the button. Letting it stretch
+  // (`flex-1` + `min-w-0`) also lets it shrink *under* that button, so in a
+  // crowded header the button spills over the controls beside it.
+  const closedInlineClass = compact ? "shrink-0" : "min-w-0 max-w-xs flex-1";
+
+  // Open, a compact host has no room to spare: below `sm` the field lifts out
+  // of the row and spans it instead of being squeezed into ~80px beside the
+  // sibling controls. From `sm` up it goes back to sitting inline.
+  const openInlineClass = compact
+    ? "absolute inset-x-4 top-1/2 z-50 -translate-y-1/2 sm:relative sm:inset-x-auto sm:top-auto sm:min-w-0 sm:max-w-xs sm:flex-1 sm:translate-y-0"
+    : "relative min-w-0 max-w-xs flex-1";
+
   if (!isOpen) {
     return (
       <div
         className={
           variant === "inline"
-            ? "min-w-0 max-w-xs flex-1"
+            ? closedInlineClass
             : "mx-auto w-full max-w-md px-4 text-center sm:px-0"
         }
       >
@@ -111,11 +123,11 @@ export function SiteSearch({
           }}
           aria-label={buttonLabel}
           className={`inline-flex shrink-0 items-center gap-2 rounded-full border border-black/10 bg-white/70 py-2.5 text-sm font-semibold text-zinc-900 backdrop-blur transition hover:border-accent hover:text-accent-hover ${
-            collapseLabel ? "px-3 sm:px-5" : "px-5"
+            compact ? "px-3 sm:px-5" : "px-5"
           }`}
         >
           <span aria-hidden>⌕</span>
-          <span className={collapseLabel ? "hidden sm:inline" : undefined}>{buttonLabel}</span>
+          <span className={compact ? "hidden sm:inline" : undefined}>{buttonLabel}</span>
         </button>
       </div>
     );
@@ -125,9 +137,7 @@ export function SiteSearch({
     <div
       ref={containerRef}
       className={
-        variant === "inline"
-          ? "relative min-w-0 max-w-xs flex-1"
-          : "relative mx-auto w-full max-w-md px-4 sm:px-0"
+        variant === "inline" ? openInlineClass : "relative mx-auto w-full max-w-md px-4 sm:px-0"
       }
     >
       <div className="relative">
@@ -166,7 +176,13 @@ export function SiteSearch({
       </div>
 
       {showResults ? (
-        <div className="absolute left-4 right-4 top-full z-40 mt-2 flex flex-col overflow-hidden rounded-lg border border-black/10 bg-white shadow-2xl sm:left-0 sm:right-0">
+        <div
+          className={`absolute top-full z-40 mt-2 flex flex-col overflow-hidden rounded-lg border border-black/10 bg-white shadow-2xl sm:left-0 sm:right-0 ${
+            // A compact wrapper is already inset to the field's own edges, so
+            // insetting the panel again would leave it narrower than the input.
+            compact ? "left-0 right-0" : "left-4 right-4"
+          }`}
+        >
           {results.length > 0 ? (
             // The list scrolls on its own so the "See all results" button below
             // stays pinned in view instead of sitting past 20 rows of results.

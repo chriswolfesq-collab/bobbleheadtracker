@@ -63,7 +63,11 @@ export function RepWelcomeBanner() {
       >
         <div className="flex items-start justify-between gap-3">
           <p className="text-sm font-black uppercase tracking-wide text-accent">
-            <span aria-hidden>⚙</span> You&apos;re a team rep
+            {/* `{" "}` not a plain space: this Next version's JSX transform
+                strips the leading space off a text node containing an entity
+                (&apos;), which would jam the gear against the text. */}
+            <span aria-hidden>⚙</span>{" "}
+            You&apos;re a team rep
           </p>
           <button
             type="button"

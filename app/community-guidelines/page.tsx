@@ -23,9 +23,13 @@ export default function CommunityGuidelinesPage() {
               <strong>Stay on topic.</strong> MLB stadium giveaway bobbleheads only — no
               figurines, replicas, gnomes, or other promos.
             </li>
+            {/* The `{" "}` after </strong> is load-bearing — see the note in
+                app/contact/page.tsx: this Next version's JSX transform drops
+                the leading space of any text node holding an HTML entity. */}
             <li>
-              <strong>Submit accurate info.</strong> Double-check names, dates, and quantities
-              before submitting. If you&apos;re unsure, mark it unknown.
+              <strong>Submit accurate info.</strong>{" "}
+              Double-check names, dates, and quantities before submitting. If
+              you&apos;re unsure, mark it unknown.
             </li>
             <li>
               <strong>Only share photos you took or have the right to share.</strong> Photos you
@@ -36,8 +40,9 @@ export default function CommunityGuidelinesPage() {
               variants belong in the descriptor field, not as new listings.
             </li>
             <li>
-              <strong>Be constructive with reports.</strong> Reports go to a real person; tell us
-              specifically what&apos;s wrong so it can be fixed.
+              <strong>Be constructive with reports.</strong>{" "}
+              Reports go to a real person; tell us specifically what&apos;s wrong
+              so it can be fixed.
             </li>
           </ul>
           <p>
