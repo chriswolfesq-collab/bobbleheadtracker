@@ -213,7 +213,8 @@ export default async function Home() {
         <UpcomingGiveaways
           items={upcoming}
           now={now}
-          calendarHref="/giveaways.ics"
+          viewAllHref="/upcoming"
+          viewAllLabel="See All Upcoming"
           className="mt-12"
         />
 
