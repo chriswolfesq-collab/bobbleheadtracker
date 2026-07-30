@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DisplayCase from "@/components/DisplayCase";
 import { ShareCollectionButton } from "@/components/ShareCollectionButton";
+import { type BobbleheadIdentity } from "@/lib/bobbleheadIdentity";
 import { publicAsset } from "@/lib/paths";
 import {
   type MyFavorite,
@@ -31,6 +32,60 @@ function submissionLabel(submission: MySubmission): string {
 // a distinct message so "couldn't load" doesn't read as "nothing here".
 function SectionError({ message }: { message: string }) {
   return <p className="text-sm font-semibold text-red-500">{message}</p>;
+}
+
+/**
+ * Favorites and Wanted: the same card either way — art, title, team, and the
+ * glyph that says which list it is.
+ *
+ * Cards rather than one full-width stack because the profile column is now as
+ * wide as the shelf above it, and a single column of rows left every marker
+ * stranded most of a page-width from its own title. Two or three to a row keeps
+ * each card near reading width and puts the space to work.
+ */
+function SavedGrid({
+  items,
+  marker,
+  markerClassName,
+}: {
+  items: BobbleheadIdentity[];
+  /** The list's glyph — ♥ for favorites, ★ for wanted. Decorative: the section
+   *  heading is what actually names the list. */
+  marker: string;
+  markerClassName: string;
+}) {
+  return (
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((item) => {
+        const team = TEAMS.find((t) => t.slug === item.teamSlug);
+        const imageSrc = item.imageUrl ?? publicAsset(`/bobbleheads/${item.teamSlug}.png`);
+
+        return (
+          <Link
+            key={`${item.teamSlug}:${item.bobbleheadId}`}
+            href={item.href}
+            className="flex items-center gap-3 rounded-2xl border border-black/10 bg-black/[0.04] px-4 py-3 text-sm transition hover:bg-black/[0.07]"
+          >
+            <Image
+              src={imageSrc}
+              alt=""
+              width={677}
+              height={1607}
+              sizes="120px"
+              className="h-20 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
+            />
+            <span className="min-w-0">
+              <span className="block truncate font-bold text-zinc-900">{item.title}</span>
+              <span className="text-xs text-zinc-500">{team?.name ?? item.teamSlug}</span>
+            </span>
+            <span aria-hidden className={`ml-auto flex-shrink-0 text-lg ${markerClassName}`}>
+              {marker}
+            </span>
+          </Link>
+        );
+      })}
+    </div>
+  );
 }
 
 // The Collection / Favorites / Submissions body shared by the user's own
@@ -179,38 +234,7 @@ export function ProfileSections({
         ) : favorites.length === 0 ? (
           <p className="text-sm text-zinc-600">No favorites yet.</p>
         ) : (
-          <div className="overflow-hidden rounded-2xl border border-black/10 bg-black/[0.04]">
-            {favorites.map((favorite, index) => {
-              const team = TEAMS.find((t) => t.slug === favorite.teamSlug);
-              const imageSrc = favorite.imageUrl ?? publicAsset(`/bobbleheads/${favorite.teamSlug}.png`);
-
-              return (
-                <Link
-                  key={`${favorite.teamSlug}:${favorite.bobbleheadId}`}
-                  href={favorite.href}
-                  className={`flex items-center gap-3 px-4 py-3 text-sm transition hover:bg-black/[0.04] ${
-                    index !== favorites.length - 1 ? "border-b border-black/10" : ""
-                  }`}
-                >
-                  <Image
-                    src={imageSrc}
-                    alt=""
-                    width={677}
-                    height={1607}
-                    sizes="120px"
-                    className="h-20 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
-                  />
-                  <span className="min-w-0">
-                    <span className="block truncate font-bold text-zinc-900">{favorite.title}</span>
-                    <span className="text-xs text-zinc-500">{team?.name ?? favorite.teamSlug}</span>
-                  </span>
-                  <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-red-400">
-                    ♥
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
+          <SavedGrid items={favorites} marker="♥" markerClassName="text-red-400" />
         )}
       </section>
 
@@ -229,38 +253,7 @@ export function ProfileSections({
               : "Nothing on your wanted list yet."}
           </p>
         ) : (
-          <div className="overflow-hidden rounded-2xl border border-black/10 bg-black/[0.04]">
-            {wanted.map((item, index) => {
-              const team = TEAMS.find((t) => t.slug === item.teamSlug);
-              const imageSrc = item.imageUrl ?? publicAsset(`/bobbleheads/${item.teamSlug}.png`);
-
-              return (
-                <Link
-                  key={`${item.teamSlug}:${item.bobbleheadId}`}
-                  href={item.href}
-                  className={`flex items-center gap-3 px-4 py-3 text-sm transition hover:bg-black/[0.04] ${
-                    index !== wanted.length - 1 ? "border-b border-black/10" : ""
-                  }`}
-                >
-                  <Image
-                    src={imageSrc}
-                    alt=""
-                    width={677}
-                    height={1607}
-                    sizes="120px"
-                    className="h-20 w-auto flex-shrink-0 rounded object-cover drop-shadow-[0_2px_3px_rgba(0,0,0,0.5)] sm:h-24"
-                  />
-                  <span className="min-w-0">
-                    <span className="block truncate font-bold text-zinc-900">{item.title}</span>
-                    <span className="text-xs text-zinc-500">{team?.name ?? item.teamSlug}</span>
-                  </span>
-                  <span aria-hidden className="ml-auto flex-shrink-0 text-lg text-accent">
-                    ★
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
+          <SavedGrid items={wanted} marker="★" markerClassName="text-accent" />
         )}
       </section>
 
