@@ -25,7 +25,7 @@ const SLOTS = 5;
    the fixed-width share card renders like a desktop shelf even when it is
    captured from a phone. */
 export const SHELF_PLANK_CLASS = "h-8 @min-[520px]:h-11 @min-[760px]:h-14";
-export const SHELF_FIGURE_CLASS = "h-16 @min-[520px]:h-24 @min-[760px]:h-32";
+export const SHELF_FIGURE_CLASS = "h-18 @min-[520px]:h-28 @min-[760px]:h-36";
 /** Matching `sizes` for the figure art, so the wide steps aren't upscaled. */
 export const SHELF_FIGURE_SIZES = "(max-width: 640px) 20vw, 140px";
 export const SHELF_PLATE_SIZE =
@@ -100,7 +100,12 @@ export function PlankShelf({
           // request, and the top shelves are above the fold — left lazy, the
           // wall paints bare and the planks pop in under the figures.
           loading="eager"
-          className={`w-full object-fill drop-shadow-[0_9px_9px_rgba(90,58,34,0.35)] ${plankClassName}`}
+          // box-shadow, not drop-shadow: the plank art is an opaque JPEG
+          // rectangle, so a drop-shadow blurs a *rectangle* and its faint edges
+          // stick out past both ends of the plank, reading as a square outline
+          // on the parchment. The negative spread pulls the shadow inside the
+          // plank's own box so only the soft edge under the bottom lip escapes.
+          className={`w-full object-fill shadow-[0_9px_10px_-6px_rgba(90,58,34,0.45)] ${plankClassName}`}
         />
         <div
           className="absolute inset-x-0 bottom-[8%] grid grid-cols-5 items-center gap-x-[2%] px-[4%]"

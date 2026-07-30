@@ -265,13 +265,16 @@ export function CommunityBobbleheadPage({
                 />
               </div>
               {hasRealPhoto ? (
-                <div className="flex min-h-80 items-center justify-center bg-[radial-gradient(circle_at_50%_30%,#ffffff,#f2ead9_85%)] p-6 sm:min-h-[28rem]">
+                // No min-height: the frame takes the shape of the photo. See the
+                // matching block in CuratedBobbleheadPage.
+                <div className="flex items-center justify-center bg-[radial-gradient(circle_at_50%_30%,#ffffff,#f2ead9_85%)] p-6">
                   <EnlargeablePhoto
                     src={imageSrc}
                     alt={`${team.city} ${team.name} ${title} bobblehead`}
                     width={800}
                     height={800}
-                    className="max-h-[26rem] w-auto max-w-full object-contain mix-blend-multiply drop-shadow-[0_16px_20px_rgba(58,36,18,0.3)]"
+                    fitHeight={480}
+                    className="object-contain mix-blend-multiply drop-shadow-[0_16px_20px_rgba(58,36,18,0.3)]"
                   />
                 </div>
               ) : (

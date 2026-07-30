@@ -114,3 +114,69 @@ Reuses the same Resend key as above.
 No webhook is needed — the admin UI calls this function directly. `SUPABASE_URL`,
 `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` are injected into every
 function automatically.
+
+## Email preferences (recommended)
+
+Adds the master "email me nothing" switch and the per-type opt-outs on
+`/settings`, and makes every automated sender check them.
+
+1. In the SQL Editor, run `email_preferences.sql`.
+2. Re-run these three, so their trigger functions pick up the new check:
+   `wishlist_alerts.sql`, `webhook_trigger.sql`, `team_rep_welcome.sql`.
+   (Remember to substitute `<WEBHOOK_SECRET>` in each before running — same
+   value as `supabase secrets set WEBHOOK_SECRET=...`.)
+
+Nothing to deploy. Note that admin-composed one-off emails deliberately ignore
+these switches: they're direct correspondence, not notifications.
+
+## Contact form and team-rep applications (recommended)
+
+Backs `/contact` and `/become-a-rep`, and takes the owner's personal address off
+the site — `/contact` used to publish it as a `mailto:` link.
+
+1. In the SQL Editor, run `inbound_messages.sql` (needs `email_preferences.sql`
+   first — the notifier calls `wants_email`). Substitute `<WEBHOOK_SECRET>`.
+2. Deploy the mailer:
+   ```
+   supabase functions deploy notify-inbound-message --no-verify-jwt
+   ```
+
+Messages land in `/admin/messages`. The notification email's reply-to is the
+sender's own address, so answering one is just Reply. The table is
+write-for-anyone / read-for-admins, throttled to 3 per hour per address.
+
+## Team rep activity log and daily digest (recommended)
+
+Records who changed what, and emails the admins one summary at the end of each
+day. Nothing recorded the actor before this — `submissions` and
+`listing_reports` only had a `reviewed_at`.
+
+1. In the SQL Editor, run `rep_activity.sql` (needs `email_preferences.sql`).
+   Substitute `<WEBHOOK_SECRET>`. This also schedules the pg_cron job.
+2. Deploy the mailer:
+   ```
+   supabase functions deploy rep-activity-digest --no-verify-jwt
+   ```
+
+The log is at `/admin/activity`, and only covers changes made after step 1 — it
+can't backfill. The digest runs at 04:00 UTC (midnight US Eastern) and sends
+nothing on a day with no rep activity. To change the hour, edit the
+`cron.schedule` call at the bottom of `rep_activity.sql` and re-run it. To test
+without waiting, run `select public.send_rep_activity_digest(24);`.
+
+Only activity by *team reps* is summarized, not by full admins — the point is to
+report what other people changed. Drop the `team_reps` filter in
+`send_rep_activity_digest` to include everyone.
+
+## Emailing team reps
+
+The Email / Email all reps buttons on `/admin/reps` reuse the `admin-send-email`
+function, so if you've already deployed it, redeploy to pick up the two
+additions it needs — addressing by raw email (a rep can be assigned before they
+ever sign up, so there may be no user id) and BCC'ing the sending admin:
+
+```
+supabase functions deploy admin-send-email
+```
+
+The BCC is on by default for the rep path, so every email to a rep copies you in.

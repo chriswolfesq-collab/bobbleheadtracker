@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { AdminEmailComposer, type EmailTarget } from "@/components/AdminEmailComposer";
 import { AdminLoginForm } from "@/components/AdminLoginForm";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
@@ -20,6 +21,14 @@ export default function AdminRepsPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const [emailTarget, setEmailTarget] = useState<EmailTarget | null>(null);
+
+  // Every distinct rep address, for the "Email all reps" button. A person who
+  // reps two teams appears once in the list and gets one email.
+  const allRepEmails = useMemo(
+    () => [...new Set(reps.map((rep) => rep.email))],
+    [reps],
+  );
 
   // Which teams already have a rep, so the assign form can flag a reassignment
   // rather than silently stacking a second rep onto one team.
@@ -189,9 +198,26 @@ export default function AdminRepsPage() {
         {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
         {notice ? <p className="mt-4 text-sm text-emerald-600">{notice}</p> : null}
 
-        <h2 className="mt-8 text-sm font-black uppercase tracking-wide text-zinc-900">
-          Current reps
-        </h2>
+        <div className="mt-8 flex items-center justify-between gap-3">
+          <h2 className="text-sm font-black uppercase tracking-wide text-zinc-900">
+            Current reps
+          </h2>
+          {allRepEmails.length > 0 ? (
+            <button
+              type="button"
+              onClick={() =>
+                setEmailTarget({
+                  kind: "addresses",
+                  emails: allRepEmails,
+                  label: `all ${allRepEmails.length} ${allRepEmails.length === 1 ? "rep" : "reps"}`,
+                })
+              }
+              className="shrink-0 rounded border border-accent/60 bg-accent/10 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg"
+            >
+              Email all reps
+            </button>
+          ) : null}
+        </div>
         {isLoadingReps ? (
           <p className="mt-3 text-sm text-zinc-600">Loading…</p>
         ) : reps.length === 0 ? (
@@ -204,19 +230,46 @@ export default function AdminRepsPage() {
                   <p className="truncate text-sm font-semibold text-zinc-900">{rep.email}</p>
                   <p className="text-xs text-zinc-500">{teamName(rep.team_slug)}</p>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => handleRemove(rep)}
-                  disabled={busy}
-                  className="shrink-0 rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-red-500 hover:text-red-500 disabled:opacity-50"
-                >
-                  Remove
-                </button>
+                <div className="flex shrink-0 items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setEmailTarget({
+                        kind: "addresses",
+                        emails: [rep.email],
+                        label: `${rep.email} (${teamName(rep.team_slug)} rep)`,
+                      })
+                    }
+                    className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover"
+                  >
+                    Email
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleRemove(rep)}
+                    disabled={busy}
+                    className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-red-500 hover:text-red-500 disabled:opacity-50"
+                  >
+                    Remove
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
         )}
       </div>
+
+      {emailTarget ? (
+        <AdminEmailComposer
+          target={emailTarget}
+          onClose={() => setEmailTarget(null)}
+          onSent={(count) => {
+            setEmailTarget(null);
+            setError(null);
+            setNotice(`Sent to ${count} ${count === 1 ? "rep" : "reps"} — you're BCC'd.`);
+          }}
+        />
+      ) : null}
     </main>
   );
 }

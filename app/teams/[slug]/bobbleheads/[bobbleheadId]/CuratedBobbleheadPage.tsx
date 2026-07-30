@@ -423,13 +423,20 @@ export function CuratedBobbleheadPage({
                 />
               </div>
               {hasRealPhoto ? (
-                <div className="flex min-h-80 items-center justify-center bg-[radial-gradient(circle_at_50%_30%,#ffffff,#f2ead9_85%)] p-6 sm:min-h-[28rem]">
+                // No min-height: the frame hugs whatever shape the photo is.
+                // Listing photos are a real mix — roughly two thirds portrait,
+                // a quarter square, the rest landscape — so a fixed box left a
+                // band of dead space above and below most of them.
+                <div className="flex items-center justify-center bg-[radial-gradient(circle_at_50%_30%,#ffffff,#f2ead9_85%)] p-6">
                   <EnlargeablePhoto
                     src={imageSrc}
                     alt={`${team.city} ${team.name} ${title} bobblehead`}
                     width={800}
                     height={800}
-                    className="max-h-[26rem] w-auto max-w-full object-contain mix-blend-multiply drop-shadow-[0_16px_20px_rgba(58,36,18,0.3)]"
+                    // Sizing is owned by fitHeight, not by classes here: the
+                    // 800x800 above is only a placeholder ratio to start from.
+                    fitHeight={480}
+                    className="object-contain mix-blend-multiply drop-shadow-[0_16px_20px_rgba(58,36,18,0.3)]"
                   />
                 </div>
               ) : (

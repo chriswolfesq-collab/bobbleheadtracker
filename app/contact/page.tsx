@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { InboundMessageForm } from "@/components/InboundMessageForm";
 
 export const metadata: Metadata = {
   title: "Contact — BobbleShelf",
@@ -27,16 +28,32 @@ export default function ContactPage() {
           </p>
           <p>
             For anything else — account questions, photo takedown requests, or general feedback —
-            email{" "}
-            <a href="mailto:chriswolfesq@gmail.com" className="font-semibold text-accent hover:text-accent-hover">
-              chriswolfesq@gmail.com
-            </a>
-            .
+            send a message below and we&apos;ll reply by email.
           </p>
           <p>
             See also the <Link href="/terms" className="font-semibold text-accent hover:text-accent-hover">Terms of Service</Link>{" "}
             and <Link href="/privacy" className="font-semibold text-accent hover:text-accent-hover">Privacy Policy</Link>.
           </p>
+        </div>
+
+        {/* A form rather than a mailto: link. The address it used to publish was
+            a personal one, and putting it in the markup meant handing it to
+            every scraper that walked the site. This posts to inbound_messages,
+            which emails the admins with reply-to set to the sender — so replying
+            is still just Reply, without the address being public. */}
+        <div className="mt-8 rounded-xl border border-border-soft bg-surface p-6">
+          <h2 className="font-display text-lg font-bold uppercase tracking-wide text-navy">
+            Send a message
+          </h2>
+          <p className="mb-5 mt-1 text-sm text-zinc-600">
+            We read everything that comes in and reply to the address you give us.
+          </p>
+          <InboundMessageForm
+            kind="contact"
+            messageLabel="How can we help?"
+            messagePlaceholder="Tell us what's going on…"
+            submitLabel="Send message"
+          />
         </div>
       </div>
     </div>

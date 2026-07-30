@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="BobbleShelf">
+  <!-- The BobbleShelf mark: a capped bobblehead standing on a brass shelf.
+       Deliberately only five shapes — a favicon is read at 16px, where any
+       more detail collapses into a smudge. Geometry matches the raster
+       favicon.ico / apple-icon.png (generated from the same numbers), so the
+       vector and bitmap marks stay identical.
+       Colors are the brand tokens from app/globals.css: --navy, --surface
+       (brightened for contrast on navy) and --brass (lifted likewise). -->
+  <rect width="512" height="512" rx="110" fill="#1e3a5f"/>
+  <!-- shoulders -->
+  <path d="M166 400 H346 L318 300 H194 Z" fill="#f4ecdd"/>
+  <!-- neck -->
+  <rect x="236" y="268" width="40" height="38" fill="#f4ecdd"/>
+  <!-- the oversized head, which is the whole idea of a bobblehead -->
+  <circle cx="256" cy="182" r="104" fill="#f4ecdd"/>
+  <!-- cap crown: the top half of the head -->
+  <path d="M152 182 A104 104 0 0 1 360 182 Z" fill="#c9a24a"/>
+  <!-- cap brim -->
+  <rect x="300" y="168" width="96" height="26" rx="13" fill="#c9a24a"/>
+  <!-- the shelf -->
+  <rect x="56" y="400" width="400" height="42" rx="18" fill="#c9a24a"/>
+</svg>

@@ -255,6 +255,9 @@ export type Database = {
         Row: {
           created_at: string
           display_name: string
+          email_enabled: boolean
+          email_rep_digest: boolean
+          email_submission_updates: boolean
           email_wishlist_alerts: boolean
           gallery_public: boolean
           id: string
@@ -265,6 +268,9 @@ export type Database = {
         Insert: {
           created_at?: string
           display_name?: string
+          email_enabled?: boolean
+          email_rep_digest?: boolean
+          email_submission_updates?: boolean
           email_wishlist_alerts?: boolean
           gallery_public?: boolean
           id: string
@@ -275,12 +281,90 @@ export type Database = {
         Update: {
           created_at?: string
           display_name?: string
+          email_enabled?: boolean
+          email_rep_digest?: boolean
+          email_submission_updates?: boolean
           email_wishlist_alerts?: boolean
           gallery_public?: boolean
           id?: string
           is_public?: boolean
           slug?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      rep_activity: {
+        Row: {
+          action: string
+          actor_email: string | null
+          actor_id: string | null
+          bobblehead_id: string | null
+          created_at: string
+          detail: string | null
+          id: number
+          team_slug: string | null
+        }
+        Insert: {
+          action: string
+          actor_email?: string | null
+          actor_id?: string | null
+          bobblehead_id?: string | null
+          created_at?: string
+          detail?: string | null
+          id?: never
+          team_slug?: string | null
+        }
+        Update: {
+          action?: string
+          actor_email?: string | null
+          actor_id?: string | null
+          bobblehead_id?: string | null
+          created_at?: string
+          detail?: string | null
+          id?: never
+          team_slug?: string | null
+        }
+        Relationships: []
+      }
+      inbound_messages: {
+        Row: {
+          created_at: string
+          email: string
+          handled_at: string | null
+          handled_by: string | null
+          id: string
+          kind: string
+          message: string
+          name: string | null
+          status: string
+          submitted_by: string | null
+          team_slug: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          kind: string
+          message: string
+          name?: string | null
+          status?: string
+          submitted_by?: string | null
+          team_slug?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          kind?: string
+          message?: string
+          name?: string | null
+          status?: string
+          submitted_by?: string | null
+          team_slug?: string | null
         }
         Relationships: []
       }
@@ -516,6 +600,10 @@ export type Database = {
           last_sign_in_at: string
         }[]
       }
+      admin_list_inbound_messages: {
+        Args: { p_kind?: string | null }
+        Returns: Database["public"]["Tables"]["inbound_messages"]["Row"][]
+      }
       admin_list_team_reps: {
         Args: never
         Returns: {
@@ -523,6 +611,10 @@ export type Database = {
           email: string
           team_slug: string
         }[]
+      }
+      admin_mark_message_handled: {
+        Args: { p_id: string; p_handled?: boolean }
+        Returns: undefined
       }
       admin_list_users: {
         Args: never
@@ -583,7 +675,17 @@ export type Database = {
         Returns: undefined
       }
       set_gallery_public: { Args: { p_enabled: boolean }; Returns: undefined }
+      send_rep_activity_digest: { Args: { p_hours?: number }; Returns: number }
+      set_email_preference: {
+        Args: { p_kind: string; p_enabled: boolean }
+        Returns: undefined
+      }
       set_wishlist_alerts: { Args: { p_enabled: boolean }; Returns: undefined }
+      wants_email: { Args: { p_user_id: string; p_kind: string }; Returns: boolean }
+      wants_email_by_address: {
+        Args: { p_email: string; p_kind: string }
+        Returns: boolean
+      }
       slugify: { Args: { p_text: string }; Returns: string }
     }
     Enums: {

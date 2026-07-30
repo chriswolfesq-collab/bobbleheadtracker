@@ -35,7 +35,10 @@ export function ShelfRow({
               alt=""
               fill
               sizes="100vw"
-              className="rounded-sm object-fill shadow-[0_5px_8px_rgba(58,36,18,0.25)]"
+              // Negative spread for the same reason as PlankShelf: the plank is
+              // an opaque rectangle, and an unspread shadow bleeds out past the
+              // ends of the row as a faint square edge.
+              className="rounded-sm object-fill shadow-[0_5px_8px_-3px_rgba(58,36,18,0.35)]"
             />
           </div>
           {children}

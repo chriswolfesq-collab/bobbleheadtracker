@@ -12,11 +12,17 @@ export type EmailRecipient = {
 
 export type EmailTarget =
   | { kind: "all"; count: number }
-  | { kind: "selected"; recipients: EmailRecipient[] };
+  | { kind: "selected"; recipients: EmailRecipient[] }
+  // Addressed by email rather than by user id. Team reps are stored by email and
+  // may not have an account yet, so there's no id to select them by.
+  | { kind: "addresses"; emails: string[]; label: string };
 
 function recipientLabel(target: EmailTarget) {
   if (target.kind === "all") {
     return `all ${target.count} ${target.count === 1 ? "user" : "users"}`;
+  }
+  if (target.kind === "addresses") {
+    return target.label;
   }
   const { recipients } = target;
   if (recipients.length === 1) {
@@ -52,14 +58,15 @@ export function AdminEmailComposer({
     setError(null);
 
     try {
+      const base = { subject: subject.trim(), body: message.trim() };
       const args =
         target.kind === "all"
-          ? { subject: subject.trim(), body: message.trim(), all: true as const }
-          : {
-              subject: subject.trim(),
-              body: message.trim(),
-              recipientIds: target.recipients.map((r) => r.id),
-            };
+          ? { ...base, all: true as const }
+          : target.kind === "addresses"
+            ? // bccSelf defaults on for this path in the Edge Function, so the
+              // sending admin always keeps a copy of what went to a rep.
+              { ...base, recipientEmails: target.emails }
+            : { ...base, recipientIds: target.recipients.map((r) => r.id) };
 
       const { sent } = await sendAdminEmail(args);
       onSent(sent);
@@ -89,6 +96,11 @@ export function AdminEmailComposer({
             <p className="mt-1 text-sm text-zinc-600">
               To <span className="font-semibold text-accent">{recipientLabel(target)}</span>
             </p>
+            {target.kind === "addresses" ? (
+              <p className="mt-1 text-xs text-zinc-500">
+                You&apos;ll be BCC&apos;d on this, and replies come back to you.
+              </p>
+            ) : null}
           </div>
           <button
             type="button"

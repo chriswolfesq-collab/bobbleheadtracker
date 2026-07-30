@@ -92,7 +92,13 @@ begin
   -- submitter — no point emailing them "your submission was approved." A manual
   -- review on the review page runs as a different reviewer, so is distinct from
   -- keeps that notification (and treats an unknown/null reviewer as "still send").
-  if v_email is not null and new.submitted_by is distinct from auth.uid() then
+  --
+  -- wants_email also honors the submitter's opt-out (see
+  -- supabase/email_preferences.sql): the master switch, or submission updates
+  -- specifically.
+  if v_email is not null
+     and new.submitted_by is distinct from auth.uid()
+     and public.wants_email(new.submitted_by, 'submission_updates') then
     perform net.http_post(
       url := 'https://mawwzvnlihhsagatmolq.supabase.co/functions/v1/notify-new-submission',
       headers := jsonb_build_object(

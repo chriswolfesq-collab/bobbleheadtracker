@@ -7,7 +7,18 @@ import { supabaseAdmin } from "@/lib/supabaseAdmin";
 type SendArgs = {
   subject: string;
   body: string;
-} & ({ all: true } | { recipientIds: string[] });
+  /**
+   * Also BCC the sending admin. The function defaults this on for the
+   * recipientEmails path, so the rep console gets its copy without asking.
+   */
+  bccSelf?: boolean;
+} & (
+  | { all: true }
+  | { recipientIds: string[] }
+  // Team reps are addressed directly: team_reps is keyed by email and a rep can
+  // be assigned before they've signed up, so there's often no user id to pass.
+  | { recipientEmails: string[] }
+);
 
 export async function sendAdminEmail(args: SendArgs): Promise<{ sent: number }> {
   const { data, error } = await supabaseAdmin.functions.invoke<{ sent: number; error?: string }>(
