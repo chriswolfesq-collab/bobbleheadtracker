@@ -16,7 +16,8 @@ import { useSearchIndex } from "@/lib/useSearchIndex";
 const PAGE_RESULT_LIMIT = 1000;
 
 function ResultCard({ result, photoUrl }: { result: SearchResult; photoUrl?: string }) {
-  const imageSrc = photoUrl || result.imageUrl || publicAsset(`/bobbleheads/${result.teamSlug}.png`);
+  const placeholderSrc = publicAsset(`/bobbleheads/${result.teamSlug}.png`);
+  const imageSrc = photoUrl || result.imageUrl || placeholderSrc;
 
   return (
     <Link
@@ -26,6 +27,7 @@ function ResultCard({ result, photoUrl }: { result: SearchResult; photoUrl?: str
       <div className="flex h-28 items-end justify-center px-2 pt-2 sm:h-32">
         <BobbleheadImage
           src={imageSrc}
+          fallbackSrc={placeholderSrc}
           alt={`${result.title} bobblehead`}
           width={268}
           height={630}

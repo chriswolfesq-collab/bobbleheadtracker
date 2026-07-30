@@ -237,7 +237,8 @@ export function CuratedBobbleheadPage({
   // The community-photo tag applies when the showing photo came from the
   // community pipeline (approved/gallery), not the curated seed data.
   const isCommunityPhoto = hasRealPhoto && !seedPhotoUrl;
-  const imageSrc = selectedPhotoUrl ?? defaultPhotoUrl ?? publicAsset(`/bobbleheads/${team.slug}.png`);
+  const placeholderSrc = publicAsset(`/bobbleheads/${team.slug}.png`);
+  const imageSrc = selectedPhotoUrl ?? defaultPhotoUrl ?? placeholderSrc;
   // Thumbnails: the profile photo plus every distinct gallery photo.
   const thumbnails = [
     ...(defaultPhotoUrl ? [defaultPhotoUrl] : []),
@@ -274,11 +275,18 @@ export function CuratedBobbleheadPage({
       date && date !== "N/A" ? ` on ${date}` : year !== "Unknown" ? ` in ${year}` : ""
     }${quantity?.trim() ? `, with ${quantity} issued` : ""}.`;
 
-  // Marking something owned also removes it from the wanted list — you no
-  // longer "want" what's on your shelf (un-owning doesn't re-add it).
+  // Owned and wanted are mutually exclusive: you don't want what's already on
+  // your shelf, and something you're still hunting for isn't on it. Whichever
+  // you pick clears the other; clearing either one leaves the other alone
+  // (un-owning doesn't re-add to wanted, and vice versa).
   const handleToggleOwned = () => {
     if (!isOwned && isWanted) setWanted(giveaway.id, false);
     setOwned(giveaway.id, !isOwned);
+  };
+
+  const handleToggleWanted = () => {
+    if (!isWanted && isOwned) setOwned(giveaway.id, false);
+    setWanted(giveaway.id, !isWanted);
   };
 
   const handleEditSave = async (values: EditBobbleheadValues, file: File | null) => {
@@ -462,7 +470,7 @@ export function CuratedBobbleheadPage({
                 <WantedButton
                   isWanted={isWanted}
                   isLoggedIn={isLoggedInForWanted}
-                  onToggle={() => setWanted(giveaway.id, !isWanted)}
+                  onToggle={handleToggleWanted}
                   itemLabel={title}
                   className="h-9 w-9 text-lg"
                 />
@@ -482,6 +490,7 @@ export function CuratedBobbleheadPage({
                 <div className="flex items-center justify-center bg-[radial-gradient(circle_at_50%_30%,#ffffff,#f2ead9_85%)] p-6">
                   <EnlargeablePhoto
                     src={imageSrc}
+                    fallbackSrc={placeholderSrc}
                     alt={`${team.city} ${team.name} ${title} bobblehead`}
                     width={800}
                     height={800}
@@ -602,7 +611,7 @@ export function CuratedBobbleheadPage({
                 aria-pressed={isWanted}
                 onClick={() => {
                   if (!isLoggedInForWanted) return;
-                  setWanted(giveaway.id, !isWanted);
+                  handleToggleWanted();
                 }}
                 disabled={!isLoggedInForWanted}
                 className={`w-full rounded-lg border px-5 py-3.5 font-display text-base font-bold uppercase tracking-wider transition disabled:cursor-not-allowed disabled:opacity-50 ${

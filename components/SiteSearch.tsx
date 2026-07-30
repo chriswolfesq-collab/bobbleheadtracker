@@ -210,6 +210,7 @@ export function SiteSearch({
                     <span className="relative flex h-9 w-6 shrink-0 items-center justify-center">
                       <BobbleheadImage
                         src={result.imageUrl || publicAsset(`/bobbleheads/${result.teamSlug}.png`)}
+                        fallbackSrc={publicAsset(`/bobbleheads/${result.teamSlug}.png`)}
                         alt=""
                         width={30}
                         height={70}

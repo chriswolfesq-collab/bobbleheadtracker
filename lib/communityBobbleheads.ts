@@ -54,7 +54,13 @@ export function useCommunityBobbleheads(teamSlug: string) {
   return { communityBobbleheads, isLoading };
 }
 
-export type CommunityBobbleheadWithTeam = CommunityBobblehead & { teamSlug: string };
+// `createdAt` is when the listing landed in the catalog, which is a different
+// thing from `date` (when the bobblehead was handed out at the park). The
+// cross-team pages order by it, so they carry it and can show it.
+export type CommunityBobbleheadWithTeam = CommunityBobblehead & {
+  teamSlug: string;
+  createdAt: string;
+};
 
 export function useAllCommunityBobbleheads() {
   const [communityBobbleheads, setCommunityBobbleheads] = useState<CommunityBobbleheadWithTeam[]>([]);
@@ -65,7 +71,7 @@ export function useAllCommunityBobbleheads() {
 
     supabase
       .from("community_bobbleheads")
-      .select("id, team_slug, title, nickname, quantity, year, date, image_url")
+      .select("id, team_slug, title, nickname, quantity, year, date, image_url, created_at")
       .then(({ data, error }) => {
         if (cancelled) return;
 
@@ -83,6 +89,7 @@ export function useAllCommunityBobbleheads() {
               year: row.year,
               date: row.date,
               imageUrl: row.image_url,
+              createdAt: row.created_at,
               community: true as const,
             })),
           );
@@ -108,7 +115,7 @@ export function useRecentCommunityBobbleheads(limit: number) {
 
     supabase
       .from("community_bobbleheads")
-      .select("id, team_slug, title, nickname, quantity, year, date, image_url")
+      .select("id, team_slug, title, nickname, quantity, year, date, image_url, created_at")
       .order("created_at", { ascending: false })
       .limit(limit)
       .then(({ data, error }) => {
@@ -128,6 +135,7 @@ export function useRecentCommunityBobbleheads(limit: number) {
               year: row.year,
               date: row.date,
               imageUrl: row.image_url,
+              createdAt: row.created_at,
               community: true as const,
             })),
           );
