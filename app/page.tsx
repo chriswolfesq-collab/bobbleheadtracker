@@ -6,9 +6,11 @@ import { HomeWelcomeModal } from "@/components/HomeWelcomeModal";
 import { JoinCommunityBand } from "@/components/JoinCommunityBand";
 import RecentlyAdded from "@/components/RecentlyAdded";
 import { ShelfItem, ShelfRow } from "@/components/ShelfRow";
+import { UpcomingGiveaways } from "@/components/UpcomingGiveaways";
 import { ButtonLink } from "@/components/ui/Button";
 import { NamePlate } from "@/components/ui/NamePlate";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { upcomingGiveaways } from "@/lib/giveawayFeed";
 import { publicAsset } from "@/lib/paths";
 import { TEAMS } from "@/lib/teams";
 
@@ -49,7 +51,14 @@ const HERO_SHELF_BOX = { left: "40.5%", right: "3.5%", bottom: "46%", height: "4
 
 const TEAM_CAPTION_HEIGHT = 44;
 
-export default function Home() {
+// The strip is capped rather than showing the whole schedule — next season's
+// 122 dated entries are a list, not a glance. The team pages and the .ics feed
+// carry the rest.
+const UPCOMING_ON_HOME = 12;
+
+export default async function Home() {
+  const { items: upcoming, now } = await upcomingGiveaways({ limit: UPCOMING_ON_HOME });
+
   return (
     <div
       className="flex min-h-full flex-1 flex-col"
@@ -149,6 +158,13 @@ export default function Home() {
         </section>
 
         <FeatureStrip className="mt-6" />
+
+        <UpcomingGiveaways
+          items={upcoming}
+          now={now}
+          calendarHref="/giveaways.ics"
+          className="mt-12"
+        />
 
         {/* Browse by team: all 30 figures on a shelf */}
         <section className="mt-12">

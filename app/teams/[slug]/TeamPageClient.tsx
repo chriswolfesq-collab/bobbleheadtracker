@@ -379,19 +379,30 @@ export function TeamPageClient({
                 <h2 className="font-display text-2xl font-bold uppercase tracking-wide text-navy">
                   SGA Bobbleheads
                 </h2>
-                <button
-                  type="button"
-                  className="inline-flex items-center justify-center gap-2 self-start rounded border border-accent px-4 py-2 text-sm font-black uppercase tracking-wide text-accent transition hover:bg-accent hover:text-accent-fg"
-                  onClick={() => {
-                    setJustSubmitted(false);
-                    setJustApproved(false);
-                    setAutoApproveError(null);
-                    setIsAdding((current) => !current);
-                  }}
-                >
-                  <span>{isAdding ? "-" : "+"}</span>
-                  Submit a bobblehead
-                </button>
+                <div className="flex flex-wrap items-center gap-3">
+                  {/* A plain anchor, not a Link: the target is a calendar feed
+                      rather than a page, so the client router has nothing to
+                      route to and would only get in the way of the handoff. */}
+                  <a
+                    href={`/teams/${team.slug}/giveaways.ics`}
+                    className="text-sm font-semibold text-accent transition hover:text-accent-hover"
+                  >
+                    Add upcoming to calendar <span aria-hidden>→</span>
+                  </a>
+                  <button
+                    type="button"
+                    className="inline-flex items-center justify-center gap-2 self-start rounded border border-accent px-4 py-2 text-sm font-black uppercase tracking-wide text-accent transition hover:bg-accent hover:text-accent-fg"
+                    onClick={() => {
+                      setJustSubmitted(false);
+                      setJustApproved(false);
+                      setAutoApproveError(null);
+                      setIsAdding((current) => !current);
+                    }}
+                  >
+                    <span>{isAdding ? "-" : "+"}</span>
+                    Submit a bobblehead
+                  </button>
+                </div>
               </div>
 
               {isAdding ? (
