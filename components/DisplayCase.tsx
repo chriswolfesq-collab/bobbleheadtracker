@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PlankShelf } from "@/components/PlankShelf";
+import {
+  PlankShelf,
+  SHELF_FIGURE_CLASS,
+  SHELF_FIGURE_SIZES,
+  SHELF_PLAQUE_SIZE,
+  SHELF_PLATE_SIZE,
+  ShelfWall,
+} from "@/components/PlankShelf";
 import { NamePlate } from "@/components/ui/NamePlate";
 import { publicAsset } from "@/lib/paths";
 import { TEAMS, type Team } from "@/lib/teams";
@@ -13,14 +20,6 @@ const SHELVES: { league: Team["league"]; division: Team["division"] }[] = [
   { league: "NL", division: "Central" },
   { league: "NL", division: "West" },
 ];
-
-// Five plates share one plank, so the plates step up with the case's own width
-// rather than the viewport's — the fixed-width share card then renders the same
-// as a desktop profile even when captured from a phone.
-const PLATE_SIZE =
-  "px-1 py-[2px] text-[8px] tracking-wide @min-[520px]:px-2 @min-[520px]:py-[3px] @min-[520px]:text-[10px]";
-const PLAQUE_SIZE =
-  "px-2.5 py-[2px] text-[10px] @min-[520px]:px-4 @min-[520px]:py-1 @min-[520px]:text-sm";
 
 /** Owned/total for one team, shown as a label on the shelf in collection mode. */
 type TeamProgress = { count: number; total: number; pct: number };
@@ -45,7 +44,10 @@ function ShelfLabel({ team, progress }: { team: Team; progress: TeamProgress }) 
         className="absolute inset-y-0 left-0 bg-amber-400/30"
         style={{ width: `${progress.pct}%` }}
       />
-      <div className="relative flex items-center gap-1 whitespace-nowrap px-1 py-[3px] text-[8px] font-black uppercase leading-none tracking-wide @min-[520px]:gap-1.5 @min-[520px]:px-1.5">
+      {/* Steps with the shelf on the same breakpoints as the bare name plates
+          (SHELF_PLATE_SIZE), so the collection view and the teams wall carry the
+          same weight of label under the same size of figure. */}
+      <div className="relative flex items-center gap-1 whitespace-nowrap px-1 py-[3px] text-[8px] font-black uppercase leading-none tracking-wide @min-[520px]:gap-1.5 @min-[520px]:px-1.5 @min-[760px]:gap-2 @min-[760px]:px-2.5 @min-[760px]:py-1.5 @min-[760px]:text-[11px]">
         {/* Abbreviation, not the full name: five labels share one plank, and
             "WHITE SOX 0/101 0%" overruns its neighbour. Full name and city stay
             available in the hover tooltip. */}
@@ -96,13 +98,13 @@ function CaseFigure({ team, progress }: { team: Team; progress?: TeamProgress })
             alt=""
             width={677}
             height={1607}
-            sizes="(max-width: 640px) 12vw, 90px"
+            sizes={SHELF_FIGURE_SIZES}
             // The whole case is above the fold, so the default lazy deferral
             // just means the empty shelves paint first and the figures pop in
             // afterwards. Each one optimizes down to ~10KB, so load them with
             // the rest of the page instead.
             loading="eager"
-            className={`h-14 w-auto drop-shadow-[0_5px_6px_rgba(0,0,0,0.5)] @min-[520px]:h-24 ${
+            className={`w-auto drop-shadow-[0_5px_6px_rgba(0,0,0,0.5)] ${SHELF_FIGURE_CLASS} ${
               isMuted ? "opacity-25 grayscale" : ""
             }`}
           />
@@ -130,54 +132,60 @@ export default function DisplayCase({
   const isCollectionMode = Boolean(countByTeamSlug);
 
   return (
-    <div className="relative mx-auto w-full max-w-2xl px-4 sm:px-6">
-      <div className="shelf-wall @container flex w-full flex-col gap-8 px-2 pb-7 pt-10 @min-[520px]:gap-10 @min-[520px]:px-3 @min-[520px]:pt-12">
-        {SHELVES.map(({ league, division }) => {
-          const teams = TEAMS.filter((t) => t.league === league && t.division === division);
+    // The gutter steps with the space the case is given, not the viewport: the
+    // share card renders this at a fixed 800px, so a viewport-keyed `sm:` here
+    // would make a card captured on a phone lay out differently from one
+    // captured on a desktop.
+    <div className="@container">
+      <div className="relative mx-auto w-full max-w-6xl px-4 @min-[520px]:px-6">
+        <ShelfWall>
+          {SHELVES.map(({ league, division }) => {
+            const teams = TEAMS.filter((t) => t.league === league && t.division === division);
 
-          return (
-            <PlankShelf
-              key={`${league}-${division}`}
-              ariaLabel={`${league} ${division}`}
-              figures={teams.map((team) => {
-                const count = countByTeamSlug?.[team.slug] ?? 0;
-                const total = totalByTeamSlug?.[team.slug] ?? 0;
-                return (
-                  <CaseFigure
-                    key={team.slug}
-                    team={team}
-                    progress={
-                      isCollectionMode ? { count, total, pct: toPct(count, total) } : undefined
-                    }
-                  />
-                );
-              })}
-              plates={teams.map((team) => {
-                if (!isCollectionMode) {
+            return (
+              <PlankShelf
+                key={`${league}-${division}`}
+                ariaLabel={`${league} ${division}`}
+                figures={teams.map((team) => {
+                  const count = countByTeamSlug?.[team.slug] ?? 0;
+                  const total = totalByTeamSlug?.[team.slug] ?? 0;
                   return (
-                    <NamePlate key={team.slug} size={PLATE_SIZE}>
-                      {team.abbr}
-                    </NamePlate>
+                    <CaseFigure
+                      key={team.slug}
+                      team={team}
+                      progress={
+                        isCollectionMode ? { count, total, pct: toPct(count, total) } : undefined
+                      }
+                    />
                   );
+                })}
+                plates={teams.map((team) => {
+                  if (!isCollectionMode) {
+                    return (
+                      <NamePlate key={team.slug} size={SHELF_PLATE_SIZE}>
+                        {team.abbr}
+                      </NamePlate>
+                    );
+                  }
+                  const count = countByTeamSlug?.[team.slug] ?? 0;
+                  const total = totalByTeamSlug?.[team.slug] ?? 0;
+                  return (
+                    <ShelfLabel
+                      key={team.slug}
+                      team={team}
+                      progress={{ count, total, pct: toPct(count, total) }}
+                    />
+                  );
+                })}
+                plaque={
+                  <NamePlate variant="brass" size={SHELF_PLAQUE_SIZE}>
+                    {`${league} ${division}`}
+                  </NamePlate>
                 }
-                const count = countByTeamSlug?.[team.slug] ?? 0;
-                const total = totalByTeamSlug?.[team.slug] ?? 0;
-                return (
-                  <ShelfLabel
-                    key={team.slug}
-                    team={team}
-                    progress={{ count, total, pct: toPct(count, total) }}
-                  />
-                );
-              })}
-              plaque={
-                <NamePlate variant="brass" size={PLAQUE_SIZE}>
-                  {`${league} ${division}`}
-                </NamePlate>
-              }
-            />
-          );
-        })}
+              />
+            );
+          })}
+        </ShelfWall>
       </div>
     </div>
   );
