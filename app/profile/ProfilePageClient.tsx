@@ -53,7 +53,10 @@ export function ProfilePageClient() {
           </p>
         </div>
       ) : (
-        <div className="mx-auto w-full max-w-2xl px-4 pb-24 pt-2 sm:px-6">
+        // Same column as the teams page: the display case is the centrepiece of
+        // this page and it hangs at the teams wall's width, so the rest of the
+        // profile lines up with it rather than sitting in a narrower stripe.
+        <div className="mx-auto w-full max-w-6xl px-4 pb-24 pt-2 sm:px-6">
           <ProfileWelcomeModal userId={user.id} />
 
           {/* The display case carries the profile header: name inside the lit

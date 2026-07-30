@@ -121,7 +121,9 @@ export function AdminUserProfile() {
           <p className="text-sm text-zinc-600">Pick a user from the users list to view their profile.</p>
         </div>
       ) : (
-        <div className="mx-auto w-full max-w-2xl px-4 pb-24 pt-2 sm:px-6">
+        // Same column as app/profile: this page renders the same
+        // ProfileSections, so it needs the same room for the display case.
+        <div className="mx-auto w-full max-w-6xl px-4 pb-24 pt-2 sm:px-6">
           <header className="mb-8 text-center">
             <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-accent/80 sm:text-xs">
               Viewing profile
