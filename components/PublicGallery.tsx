@@ -12,7 +12,7 @@ import { TEAMS } from "@/lib/teams";
 // cards linking through to the bobblehead.
 function GalleryGrid({ items }: { items: PublicGalleryItem[] }) {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
       {items.map((item) => {
         const team = TEAMS.find((t) => t.slug === item.teamSlug);
         const imageSrc = item.imageUrl ?? publicAsset(`/bobbleheads/${item.teamSlug}.png`);

@@ -69,9 +69,13 @@ export default function PublicShelfView({
         </div>
 
         {/* Opt-in only: the gallery is empty unless the owner turned it on, so
-            most shelves stay counts-only and render nothing here. */}
+            most shelves stay counts-only and render nothing here. Breaks out of
+            the reading column to the shelf's width above it — the grid is the
+            page's other main event, and looked starved at 2xl under a 6xl wall. */}
         {galleryItems.length > 0 ? (
-          <PublicGallery displayName={displayName} items={galleryItems} />
+          <div className="relative left-1/2 w-[calc(100vw-1rem)] max-w-6xl -translate-x-1/2 px-2 sm:px-4">
+            <PublicGallery displayName={displayName} items={galleryItems} />
+          </div>
         ) : null}
 
         {/* The whole reason the page is public. Whoever is reading this arrived
