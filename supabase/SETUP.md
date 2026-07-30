@@ -17,6 +17,45 @@
    it after `dead_images.sql` and `scraped_giveaways.sql` (below), since it
    reads those tables — or re-run it once they exist.
 
+## Checking that email actually sends
+
+Read this before setting up any of the mailers below, because the way they fail
+gives you nothing to go on.
+
+Every trigger-driven sender embeds `WEBHOOK_SECRET` as a literal in its function
+body, substituted by hand before you run the file. The edge function on the
+other end rejects a mismatch with a 401 — and `net.http_post` is fire-and-forget,
+so the sender returns success either way. Nothing appears in the admin UI, no
+error reaches the app, and the only symptom is email that never arrives, which
+looks identical to email nobody triggered.
+
+Every sender in this project was once installed with `<WEBHOOK_SECRET>` still in
+it, and it went unnoticed for months.
+
+So after setting up any mailer, check what the database actually got back:
+
+```sql
+select status_code, count(*), max(created) as latest
+from net._http_response group by status_code order by 2 desc;
+```
+
+Anything other than `200` means that sender is not working. To see which
+functions are carrying which secret:
+
+```sql
+select p.proname,
+       (regexp_match(p.prosrc, $re$'x-webhook-secret',\s*'([^']*)'$re$))[1] as current_value
+from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+where n.nspname = 'public' and p.prosrc like '%x-webhook-secret%'
+order by p.proname;
+```
+
+A row reading `<WEBHOOK_SECRET>` was never substituted. `rotate_webhook_secret.sql`
+fixes every sender in one pass — see the header of that file.
+
+Note that `net._http_response` is pruned on a TTL of a few hours, so an empty
+result means "nothing sent recently", not "nothing ever failed".
+
 ## Email notifications (optional)
 
 Skip this if the in-app queue at `/admin/review` is enough on its own.
