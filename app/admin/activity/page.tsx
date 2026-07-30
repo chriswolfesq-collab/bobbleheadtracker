@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AdminLoginForm } from "@/components/AdminLoginForm";
 import { useAdminAuth } from "@/lib/adminAuth";
+import { bobbleheadHref } from "@/lib/bobbleheadIdentity";
+import { getGiveawayById } from "@/lib/bobbleheads";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { TEAMS } from "@/lib/teams";
 
@@ -41,6 +43,10 @@ const ACTION_LABELS: Record<string, string> = {
 
 const DESTRUCTIVE = new Set(["listing_deleted", "photo_removed", "submission_rejected"]);
 
+// A deleted listing's detail page 404s (see the bobblehead route), so the one
+// entry that names a target you can't visit doesn't become a link.
+const NO_TARGET = new Set(["listing_deleted"]);
+
 const teamName = (slug: string) => TEAMS.find((t) => t.slug === slug)?.name ?? slug;
 
 function formatWhen(iso: string): string {
@@ -58,30 +64,95 @@ export default function AdminActivityPage() {
   const [isLoadingRows, setIsLoadingRows] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [days, setDays] = useState(7);
+  // "team_slug:bobblehead_id" for every logged target that turned out to be a
+  // community listing. See the lookup below for why it takes a second query.
+  const [communityKeys, setCommunityKeys] = useState<Set<string>>(new Set());
 
   const load = useCallback(() => {
     const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
-    supabase
-      .from("rep_activity")
-      .select("id, actor_email, action, team_slug, bobblehead_id, detail, created_at")
-      .gte("created_at", since)
-      .order("created_at", { ascending: false })
-      .limit(PAGE_SIZE)
-      .then(({ data, error: queryError }) => {
-        if (queryError) {
-          setError(queryError.message);
-        } else {
-          setError(null);
-          setRows((data ?? []) as Activity[]);
-        }
+    let cancelled = false;
+
+    (async () => {
+      const { data, error: queryError } = await supabase
+        .from("rep_activity")
+        .select("id, actor_email, action, team_slug, bobblehead_id, detail, created_at")
+        .gte("created_at", since)
+        .order("created_at", { ascending: false })
+        .limit(PAGE_SIZE);
+
+      if (cancelled) return;
+
+      if (queryError) {
+        setError(queryError.message);
         setIsLoadingRows(false);
-      });
+        return;
+      }
+
+      const loaded = (data ?? []) as Activity[];
+      setError(null);
+      setRows(loaded);
+      setIsLoadingRows(false);
+
+      // bobblehead_id isn't always an id: the submission triggers fall back to
+      // the submission's free-text title when there's no target listing yet.
+      // The curated catalog is bundled, so it answers for itself; whatever it
+      // doesn't recognize needs one lookup to tell a real community listing
+      // from one of those titles, which keeps titles from becoming links to
+      // pages that don't exist.
+      const unknownIds = [
+        ...new Set(
+          loaded
+            .filter(
+              (row) =>
+                row.team_slug &&
+                row.bobblehead_id &&
+                !getGiveawayById(row.bobblehead_id, row.team_slug),
+            )
+            .map((row) => row.bobblehead_id as string),
+        ),
+      ];
+
+      if (unknownIds.length === 0) {
+        setCommunityKeys(new Set());
+        return;
+      }
+
+      const { data: communityRows } = await supabase
+        .from("community_bobbleheads")
+        .select("id, team_slug")
+        .in("id", unknownIds);
+
+      if (cancelled) return;
+      setCommunityKeys(
+        new Set((communityRows ?? []).map((row) => `${row.team_slug}:${row.id}`)),
+      );
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [days]);
 
   useEffect(() => {
     if (!isAdmin) return;
-    load();
+    return load();
   }, [isAdmin, load]);
+
+  // Where an entry points, or null when there's nothing to open.
+  const targetHref = useCallback(
+    (row: Activity): string | null => {
+      if (!row.team_slug || !row.bobblehead_id) return null;
+      if (NO_TARGET.has(row.action)) return null;
+      if (getGiveawayById(row.bobblehead_id, row.team_slug)) {
+        return bobbleheadHref(row.team_slug, row.bobblehead_id, true);
+      }
+      if (communityKeys.has(`${row.team_slug}:${row.bobblehead_id}`)) {
+        return bobbleheadHref(row.team_slug, row.bobblehead_id, false);
+      }
+      return null;
+    },
+    [communityKeys],
+  );
 
   // Who was active in the window, so the page opens with the same summary the
   // digest email leads with.
@@ -188,29 +259,50 @@ export default function AdminActivityPage() {
             </div>
 
             <ul className="mt-4 divide-y divide-black/10 rounded-lg border border-black/10 bg-white">
-              {rows.map((row) => (
-                <li key={row.id} className="px-4 py-3">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <p className="text-sm font-semibold text-zinc-900">
-                      <span
-                        className={
-                          DESTRUCTIVE.has(row.action) ? "text-red-600" : "text-zinc-900"
-                        }
-                      >
-                        {ACTION_LABELS[row.action] ?? row.action}
-                      </span>
-                      {row.team_slug ? (
-                        <span className="ml-2 text-xs font-bold uppercase tracking-wide text-zinc-500">
-                          {teamName(row.team_slug)}
+              {rows.map((row) => {
+                const href = targetHref(row);
+                const body = (
+                  <>
+                    <div className="flex flex-wrap items-baseline justify-between gap-2">
+                      <p className="text-sm font-semibold text-zinc-900">
+                        <span
+                          className={
+                            DESTRUCTIVE.has(row.action) ? "text-red-600" : "text-zinc-900"
+                          }
+                        >
+                          {ACTION_LABELS[row.action] ?? row.action}
                         </span>
-                      ) : null}
-                    </p>
-                    <p className="text-xs text-zinc-500">{formatWhen(row.created_at)}</p>
-                  </div>
-                  <p className="mt-0.5 text-sm text-zinc-600">{row.detail}</p>
-                  <p className="mt-0.5 text-xs text-zinc-500">{row.actor_email ?? "unknown"}</p>
-                </li>
-              ))}
+                        {row.team_slug ? (
+                          <span className="ml-2 text-xs font-bold uppercase tracking-wide text-zinc-500">
+                            {teamName(row.team_slug)}
+                          </span>
+                        ) : null}
+                      </p>
+                      <p className="text-xs text-zinc-500">{formatWhen(row.created_at)}</p>
+                    </div>
+                    <p className="mt-0.5 text-sm text-zinc-600">{row.detail}</p>
+                    <p className="mt-0.5 text-xs text-zinc-500">{row.actor_email ?? "unknown"}</p>
+                  </>
+                );
+
+                // The whole entry is the target — reading "Edited <listing>"
+                // and then hunting for that listing by hand was the missing
+                // half of the log.
+                return (
+                  <li key={row.id}>
+                    {href ? (
+                      <Link
+                        href={href}
+                        className="block px-4 py-3 transition hover:bg-accent/[0.06] focus:outline-none focus-visible:bg-accent/[0.06]"
+                      >
+                        {body}
+                      </Link>
+                    ) : (
+                      <div className="px-4 py-3">{body}</div>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
             {rows.length === PAGE_SIZE ? (
               <p className="mt-3 text-xs text-zinc-500">

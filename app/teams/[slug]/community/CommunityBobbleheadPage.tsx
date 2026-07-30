@@ -13,6 +13,7 @@ import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { useToast } from "@/components/Toast";
+import { WantedButton } from "@/components/WantedButton";
 import { NamePlate } from "@/components/ui/NamePlate";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, replaceGalleryPhoto, saveCommunityBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
@@ -114,6 +115,9 @@ export function CommunityBobbleheadPage({
   // info grid and the field from the edit dialog. A just-saved edit wins
   // outright rather than falling through on null.
   const city = resolveAthleticsCity(team.slug, year, localOverride ? localOverride.city : giveaway.city);
+  // The era-aware team name — see the curated page for why TEAMS' single city
+  // isn't enough on the Athletics.
+  const cityName = city ?? team.city;
   // A community listing's photo is always admin-removable: either an
   // approved_photos row or the row's own image_url.
   const removableMainPhotoUrl = mainPhotoRemoved
@@ -148,7 +152,7 @@ export function CommunityBobbleheadPage({
     ...(city ? [["City", city] as [string, string]] : []),
     ...(quantity?.trim() ? [["Quantity Issued", quantity] as [string, string]] : []),
   ];
-  const story = `This ${primaryName} bobblehead was added by the community for ${team.city} ${team.name} fans${
+  const story = `This ${primaryName} bobblehead was added by the community for ${cityName} ${team.name} fans${
     date && date !== "N/A" ? ` and given away on ${date}` : year !== "Unknown" ? ` in ${year}` : ""
   }${quantity?.trim() ? `, with ${quantity} issued` : ""}.`;
 
@@ -292,7 +296,16 @@ export function CommunityBobbleheadPage({
                   Community photo
                 </span>
               ) : null}
+              {/* Star then heart, matching the corner of a card on the team
+                  page. See the curated page for why. */}
               <div className="absolute right-3 top-3 z-10 flex items-center gap-2">
+                <WantedButton
+                  isWanted={isWanted}
+                  isLoggedIn={isLoggedInForWanted}
+                  onToggle={() => setWanted(giveaway.id, !isWanted)}
+                  itemLabel={title}
+                  className="h-9 w-9 text-lg"
+                />
                 <FavoriteButton
                   isFavorited={isFavorited}
                   isLoggedIn={isLoggedInForFavorites}
@@ -387,7 +400,7 @@ export function CommunityBobbleheadPage({
           <div className="flex flex-col gap-5">
             <div>
               <Link href={`/teams/${team.slug}`} className="inline-block">
-                <NamePlate variant="brass">{team.city} {team.name}</NamePlate>
+                <NamePlate variant="brass">{cityName} {team.name}</NamePlate>
               </Link>
               <h1 className="mt-3 font-display text-4xl font-bold uppercase leading-none tracking-wide text-navy sm:text-5xl">
                 {primaryName}

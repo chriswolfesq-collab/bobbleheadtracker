@@ -12,6 +12,7 @@ import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { useToast } from "@/components/Toast";
+import { WantedButton } from "@/components/WantedButton";
 import { NamePlate } from "@/components/ui/NamePlate";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, hideCuratedSeedPhoto, replaceGalleryPhoto, saveCuratedBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
@@ -214,6 +215,11 @@ export function CuratedBobbleheadPage({
   // A just-saved edit wins outright rather than falling through on null, so
   // clearing the pick isn't undone by the stale stored value.
   const city = resolveAthleticsCity(team.slug, year, localOverride ? localOverride.city : override?.city);
+  // What a fan actually calls the team on this listing: "Oakland Athletics" for
+  // a Coliseum-era giveaway, "Sacramento Athletics" for a Sutter Health Park
+  // one. TEAMS carries only the current city, which reads as wrong on the back
+  // catalog; every other team has one city and falls straight through.
+  const cityName = city ?? team.city;
   // Two layers can supply the profile photo. The approved_photos row (or one the
   // admin just uploaded) sits on top and is removed by deleting it; underneath
   // is the curated seed imageUrl, build-time data with no row of its own, which
@@ -262,7 +268,7 @@ export function CuratedBobbleheadPage({
 
   const story =
     giveaway.story ??
-    `This ${primaryName} bobblehead was given away to ${team.city} ${team.name} fans${
+    `This ${primaryName} bobblehead was given away to ${cityName} ${team.name} fans${
       date && date !== "N/A" ? ` on ${date}` : year !== "Unknown" ? ` in ${year}` : ""
     }${quantity?.trim() ? `, with ${quantity} issued` : ""}.`;
 
@@ -455,7 +461,17 @@ export function CuratedBobbleheadPage({
                   Community photo
                 </span>
               ) : null}
+              {/* Star then heart, in the same order as the corner of a card on
+                  the team page — the two icons should mean the same thing and
+                  sit in the same place wherever you meet a bobblehead. */}
               <div className="absolute right-3 top-3 z-10 flex items-center gap-2">
+                <WantedButton
+                  isWanted={isWanted}
+                  isLoggedIn={isLoggedInForWanted}
+                  onToggle={() => setWanted(giveaway.id, !isWanted)}
+                  itemLabel={title}
+                  className="h-9 w-9 text-lg"
+                />
                 <FavoriteButton
                   isFavorited={isFavorited}
                   isLoggedIn={isLoggedInForFavorites}
@@ -554,7 +570,7 @@ export function CuratedBobbleheadPage({
           <div className="flex flex-col gap-5">
             <div>
               <Link href={`/teams/${team.slug}`} className="inline-block">
-                <NamePlate variant="brass">{team.city} {team.name}</NamePlate>
+                <NamePlate variant="brass">{cityName} {team.name}</NamePlate>
               </Link>
               <h1 className="mt-3 font-display text-4xl font-bold uppercase leading-none tracking-wide text-navy sm:text-5xl">
                 {primaryName}
