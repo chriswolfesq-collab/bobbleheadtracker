@@ -8,6 +8,7 @@ import { AdminFilterBar } from "@/components/AdminFilterBar";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { MAX_DISPLAY_NAME_LENGTH, validateDisplayName } from "@/lib/auth";
+import { sendPasswordReset } from "@/lib/passwordReset";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { TEAMS } from "@/lib/teams";
 import { type AdminFilter, useAdminFilters } from "@/lib/useAdminFilters";
@@ -80,6 +81,7 @@ function AdminUsersPageInner() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [nameDraft, setNameDraft] = useState("");
   const [confirmingId, setConfirmingId] = useState<string | null>(null);
+  const [resetConfirmId, setResetConfirmId] = useState<string | null>(null);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [emailTarget, setEmailTarget] = useState<EmailTarget | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -241,6 +243,30 @@ function AdminUsersPageInner() {
     } finally {
       setBusyId(null);
     }
+  };
+
+  // Unsticks an account whose owner can't get in. Deliberately an emailed link
+  // rather than a password typed here: the new one is theirs to choose, so it
+  // never has to be relayed back to them over whatever channel they used to
+  // report the problem.
+  const resetPassword = async (row: AdminUser) => {
+    if (!row.email) return;
+
+    setBusyId(row.id);
+    setError(null);
+    setNotice(null);
+
+    const { error: resetError } = await sendPasswordReset(row.email);
+
+    setBusyId(null);
+
+    if (resetError) {
+      setError(resetError);
+      return;
+    }
+
+    setResetConfirmId(null);
+    setNotice(`Password reset link sent to ${row.email}. It works once, and expires.`);
   };
 
   const removeUser = async (row: AdminUser) => {
@@ -535,6 +561,47 @@ function AdminUsersPageInner() {
                     >
                       Team rep
                     </button>
+                    {/* Two-step like Remove: a stray click here puts a
+                        "reset your password" email in someone's inbox, which
+                        reads as a break-in attempt if they didn't ask. */}
+                    {resetConfirmId === row.id ? (
+                      <>
+                        <button
+                          type="button"
+                          disabled={busyId === row.id}
+                          onClick={() => resetPassword(row)}
+                          className="rounded border border-accent bg-accent/10 px-4 py-2 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg disabled:opacity-60"
+                        >
+                          {busyId === row.id ? "Sending…" : "Send reset email"}
+                        </button>
+                        <button
+                          type="button"
+                          disabled={busyId === row.id}
+                          onClick={() => setResetConfirmId(null)}
+                          className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 disabled:opacity-60"
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        type="button"
+                        disabled={!row.email || busyId === row.id}
+                        onClick={() => {
+                          setNotice(null);
+                          setConfirmingId(null);
+                          setResetConfirmId(row.id);
+                        }}
+                        title={
+                          row.email
+                            ? "Emails them a one-time link to choose a new password"
+                            : "A reset link needs an email address; this account has none"
+                        }
+                        className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-accent hover:text-accent-hover disabled:opacity-40"
+                      >
+                        Reset password
+                      </button>
+                    )}
                   </>
                 ) : null}
                 {confirmingId === row.id ? (
@@ -560,7 +627,10 @@ function AdminUsersPageInner() {
                   <button
                     type="button"
                     disabled={busyId === row.id}
-                    onClick={() => setConfirmingId(row.id)}
+                    onClick={() => {
+                      setResetConfirmId(null);
+                      setConfirmingId(row.id);
+                    }}
                     className="rounded border border-black/15 px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-800 transition hover:border-red-400 hover:text-red-300 disabled:opacity-60"
                   >
                     Remove
