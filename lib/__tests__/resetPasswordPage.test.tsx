@@ -22,6 +22,12 @@ vi.mock("@/lib/supabase", () => ({
   },
 }));
 
+// The breadcrumb trail at the top of the page carries a back button that reads
+// the router, and a bare render() has no app router mounted under it.
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ back: vi.fn(), push: vi.fn(), replace: vi.fn() }),
+}));
+
 const withRecoverySession = () => getSession.mockResolvedValue({ data: { session: { user: {} } } });
 const withoutSession = () => getSession.mockResolvedValue({ data: { session: null } });
 
