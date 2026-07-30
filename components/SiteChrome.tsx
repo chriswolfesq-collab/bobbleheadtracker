@@ -34,6 +34,7 @@ export function Wordmark({ className }: { className?: string }) {
 // everyone and doubles as the pitch for making an account.
 const PRIMARY_NAV = [
   { href: "/teams", label: "Teams" },
+  { href: "/tags", label: "Tags" },
   { href: "/recently-added", label: "Recently Added" },
   { href: "/profile", label: "My Shelf" },
 ];

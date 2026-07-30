@@ -12,6 +12,7 @@ import { FavoriteButton } from "@/components/FavoriteButton";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
+import { TagList } from "@/components/TagList";
 import { useToast } from "@/components/Toast";
 import { WantedButton } from "@/components/WantedButton";
 import { NamePlate } from "@/components/ui/NamePlate";
@@ -645,6 +646,8 @@ export function CuratedBobbleheadPage({
                 </p>
               )}
             </div>
+
+            <TagList teamSlug={team.slug} bobbleheadId={giveaway.id} />
 
             {rarity ? (
               <div className="rounded-xl border border-border-soft bg-surface p-5">

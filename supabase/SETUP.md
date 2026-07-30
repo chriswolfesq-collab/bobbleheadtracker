@@ -195,3 +195,23 @@ unchanged — a detail can't outlive the ownership row it hangs off, or be read 
 anyone but its owner (and an admin, who could already read the row). Run it
 *before* deploying the app code: until the columns exist, the details panel on
 an owned bobblehead will fail to load and fail to save.
+
+## Tags (recommended)
+
+Adds cross-cutting labels — Star Wars, Sugar Skull, Peanuts, Game of Thrones —
+that the team-and-year catalog has no other way to express. A tagged
+bobblehead's page shows chips linking to `/tags/<slug>`; the tag directory is at
+`/tags`; and site search matches tags, ranked just under the listing's own name.
+
+1. In the SQL Editor, run `tags.sql` (needs `team_reps.sql` first — the write
+   policies call `can_edit_team` and `is_team_rep`).
+
+Nothing to deploy. Reads are public so a tag page renders for a crawler. Writes
+are not: an admin or team rep can apply and mint tags, but renaming or deleting
+one is admin-only, since `on delete cascade` takes every assignment with it. The
+vocabulary is a table rather than a text column per listing — a free-text field
+gives you "Star Wars", "star wars" and "StarWars" inside a week with no way to
+merge them.
+
+Tags start empty; there's no seed. Add them from any bobblehead's page while
+signed in as an admin or that team's rep.

@@ -13,6 +13,12 @@ export type SearchResult = {
   teamCity: string;
   href: string;
   source: "curated" | "community";
+  /**
+   * Tag labels on this listing. Absent on the build-time index — tags live in
+   * the database — and filled in by useSearchIndex, which is why every read
+   * treats it as optional rather than assuming an array.
+   */
+  tags?: string[];
 };
 
 function buildCuratedIndex(): SearchResult[] {
@@ -62,10 +68,16 @@ export function searchGiveaways(
   // team-then-date, so e.g. "2025" would only ever surface the first team):
   // name matches beat descriptor matches beat team/date matches, and
   // starts-with beats contains.
+  //
+  // Tags sit just under the name. "Star Wars" is not in any of these
+  // bobbleheads' titles — that's the whole reason tags exist — so a tag match
+  // has to outrank the team and date text it would otherwise lose to, or
+  // searching a theme returns whichever listing happens to mention the word.
   const scored: { result: SearchResult; score: number }[] = [];
   for (const result of results) {
     const title = fold(result.title);
     const nickname = fold(result.nickname ?? "");
+    const tagText = fold((result.tags ?? []).join(" "));
     const teamText = fold(`${result.teamName} ${result.teamCity} ${result.teamSlug}`);
     const dateText = fold(`${result.date} ${result.year}`);
 
@@ -74,6 +86,7 @@ export function searchGiveaways(
     for (const term of terms) {
       if (title.startsWith(term)) score += 8;
       else if (title.includes(term)) score += 6;
+      else if (tagText.includes(term)) score += 5;
       else if (nickname.includes(term)) score += 4;
       else if (teamText.includes(term)) score += 2;
       else if (dateText.includes(term)) score += 1;
