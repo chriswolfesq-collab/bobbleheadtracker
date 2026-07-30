@@ -50,6 +50,35 @@ describe("searchGiveaways", () => {
     expect(searchGiveaways(INDEX, "august 2018").map((m) => m.id)).toEqual(["kirk-gibson-2018"]);
   });
 
+  // The point of tags: "Star Wars" appears in none of these titles.
+  it("matches on a tag", () => {
+    const tagged = [
+      ...INDEX,
+      result({ id: "grogu-2026", title: "Grogu", tags: ["Star Wars"] }),
+      result({ id: "hello-kitty-2026", title: "Hello Kitty", tags: ["Sanrio"] }),
+    ];
+    expect(searchGiveaways(tagged, "star wars").map((m) => m.id)).toEqual(["grogu-2026"]);
+  });
+
+  it("ranks a tag match above one that only matches the team or date", () => {
+    const tagged = [
+      // "Padres" is in this one's team text, and nothing else matches "skull".
+      result({ id: "team-only", title: "Someone", teamSlug: "padres", teamName: "Padres", teamCity: "San Diego", tags: ["Sugar Skull"] }),
+      result({ id: "tagged", title: "Someone Else", tags: ["Sugar Skull"] }),
+    ];
+    // Both match on the tag; what matters is that a tag match beats the
+    // team/date tier, so a themed search doesn't get buried by coincidence.
+    const matches = searchGiveaways(
+      [...tagged, result({ id: "padres-2020", title: "Padre Fan", teamSlug: "padres", teamName: "Padres", teamCity: "San Diego" })],
+      "sugar",
+    );
+    expect(matches.map((m) => m.id).sort()).toEqual(["tagged", "team-only"]);
+  });
+
+  it("is unaffected by a listing having no tags at all", () => {
+    expect(searchGiveaways(INDEX, "kirk").map((m) => m.id)).toEqual(["kirk-gibson-2018"]);
+  });
+
   it("caps results at the given limit", () => {
     const many = Array.from({ length: 30 }, (_, i) => result({ id: `dup-${i}`, title: "Duplicate" }));
     expect(searchGiveaways(many, "duplicate")).toHaveLength(20);

@@ -228,7 +228,12 @@ export function useMyShelf(): ShelfSharing {
  * supabase/email_preferences.sql). "all" is the master switch; the rest are
  * per-type.
  */
-export type EmailPreferenceKind = "all" | "wanted_alerts" | "submission_updates" | "rep_digest";
+export type EmailPreferenceKind =
+  | "all"
+  | "wanted_alerts"
+  | "submission_updates"
+  | "rep_digest"
+  | "weekly_digest";
 
 export type EmailPreferences = {
   values: Record<EmailPreferenceKind, boolean>;
@@ -250,6 +255,7 @@ const DEFAULT_PREFERENCES: Record<EmailPreferenceKind, boolean> = {
   wanted_alerts: true,
   submission_updates: true,
   rep_digest: true,
+  weekly_digest: true,
 };
 
 // The signed-in user's email preferences: the master switch plus one per kind of
@@ -276,7 +282,7 @@ export function useEmailPreferences(): EmailPreferences {
         // Spelled out rather than derived from the kind list: a computed select
         // string erases the row type supabase-js infers from it.
         .select(
-          "email_enabled, email_wishlist_alerts, email_submission_updates, email_rep_digest",
+          "email_enabled, email_wishlist_alerts, email_submission_updates, email_rep_digest, email_weekly_digest",
         )
         .eq("id", userId)
         .maybeSingle(),
@@ -295,6 +301,7 @@ export function useEmailPreferences(): EmailPreferences {
           wanted_alerts: row.email_wishlist_alerts ?? true,
           submission_updates: row.email_submission_updates ?? true,
           rep_digest: row.email_rep_digest ?? true,
+          weekly_digest: row.email_weekly_digest ?? true,
         });
       }
 

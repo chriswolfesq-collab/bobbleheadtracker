@@ -263,6 +263,7 @@ export type Database = {
           display_name: string
           email_enabled: boolean
           email_rep_digest: boolean
+          email_weekly_digest: boolean
           email_submission_updates: boolean
           email_wishlist_alerts: boolean
           gallery_public: boolean
@@ -276,6 +277,7 @@ export type Database = {
           display_name?: string
           email_enabled?: boolean
           email_rep_digest?: boolean
+          email_weekly_digest?: boolean
           email_submission_updates?: boolean
           email_wishlist_alerts?: boolean
           gallery_public?: boolean
@@ -289,6 +291,7 @@ export type Database = {
           display_name?: string
           email_enabled?: boolean
           email_rep_digest?: boolean
+          email_weekly_digest?: boolean
           email_submission_updates?: boolean
           email_wishlist_alerts?: boolean
           gallery_public?: boolean
@@ -575,6 +578,59 @@ export type Database = {
         }
         Relationships: []
       }
+      tags: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          label: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          label: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          label?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      bobblehead_tags: {
+        Row: {
+          bobblehead_id: string
+          created_at: string
+          created_by: string | null
+          tag_slug: string
+          team_slug: string
+        }
+        Insert: {
+          bobblehead_id: string
+          created_at?: string
+          created_by?: string | null
+          tag_slug: string
+          team_slug: string
+        }
+        Update: {
+          bobblehead_id?: string
+          created_at?: string
+          created_by?: string | null
+          tag_slug?: string
+          team_slug?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bobblehead_tags_tag_slug_fkey"
+            columns: ["tag_slug"]
+            isOneToOne: false
+            referencedRelation: "tags"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
       wishlist_alerts_sent: {
         Row: {
           bobblehead_id: string
@@ -595,7 +651,14 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      tag_counts: {
+        Row: {
+          label: string | null
+          listing_count: number | null
+          slug: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       admin_assign_team_rep: {

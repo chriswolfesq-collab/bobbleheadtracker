@@ -36,6 +36,12 @@ const ROWS: Row[] = [
     off: "Turn this on to hear back when a photo or bobblehead you submitted is reviewed.",
   },
   {
+    kind: "weekly_digest",
+    label: "Weekly roundup",
+    on: "Once a week you'll get an email listing the bobbleheads added for the teams you collect. Quiet weeks send nothing.",
+    off: "Turn this on to hear once a week about new bobbleheads for the teams you collect.",
+  },
+  {
     kind: "rep_digest",
     label: "Daily rep summary",
     on: "You'll get one email at the end of each day listing what the team reps changed.",

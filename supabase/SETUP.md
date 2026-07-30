@@ -195,3 +195,52 @@ unchanged — a detail can't outlive the ownership row it hangs off, or be read 
 anyone but its owner (and an admin, who could already read the row). Run it
 *before* deploying the app code: until the columns exist, the details panel on
 an owned bobblehead will fail to load and fail to save.
+
+## Tags (recommended)
+
+Adds cross-cutting labels — Star Wars, Sugar Skull, Peanuts, Game of Thrones —
+that the team-and-year catalog has no other way to express. A tagged
+bobblehead's page shows chips linking to `/tags/<slug>`; the tag directory is at
+`/tags`; and site search matches tags, ranked just under the listing's own name.
+
+1. In the SQL Editor, run `tags.sql` (needs `team_reps.sql` first — the write
+   policies call `can_edit_team` and `is_team_rep`).
+
+Nothing to deploy. Reads are public so a tag page renders for a crawler. Writes
+are not: an admin or team rep can apply and mint tags, but renaming or deleting
+one is admin-only, since `on delete cascade` takes every assignment with it. The
+vocabulary is a table rather than a text column per listing — a free-text field
+gives you "Star Wars", "star wars" and "StarWars" inside a week with no way to
+merge them.
+
+Tags start empty; there's no seed. Add them from any bobblehead's page while
+signed in as an admin or that team's rep.
+
+## Weekly roundup email (optional)
+
+Once a week, tells each collector what was added for the teams they collect —
+"3 new bobbleheads for the Dodgers and Mets". The only scheduled email that goes
+to ordinary collectors rather than to admins, which is why it is scoped to teams
+they've marked something owned or wanted on, and why a week with no additions
+sends nothing at all.
+
+1. In the SQL Editor, run `weekly_digest.sql` (needs `email_preferences.sql`).
+   Substitute `<WEBHOOK_SECRET>`. This also schedules the pg_cron job.
+2. Deploy the mailer:
+   ```
+   supabase functions deploy weekly-digest --no-verify-jwt
+   ```
+
+Only community additions count as new. A curated data import can land thousands
+of rows at once, and an email announcing "1,400 new bobbleheads" the week of a
+backfill is noise rather than news.
+
+Runs Thursdays at 15:00 UTC — mid-morning US Eastern on a weekday, rather than
+into a weekend backlog. To change it, edit the `cron.schedule` call at the bottom
+of `weekly_digest.sql` and re-run the file. To test without waiting a week, run
+`select public.send_weekly_digest(7);` — it returns how many recipients it built
+a message for, and 0 means nobody qualified.
+
+Note that `weekly_digest.sql` recreates `wants_email` and `set_email_preference`
+in full. Both enumerate the known preference kinds and fail closed on an unknown
+one, so the new switch has to be added inside them rather than alongside.

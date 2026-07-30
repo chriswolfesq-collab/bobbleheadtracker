@@ -1,0 +1,86 @@
+// The shared vocabulary behind tag browsing and tag search. Shape and naming
+// rules only — the queries live in lib/useTags.ts, the schema in
+// supabase/tags.sql.
+//
+// A tag has two halves that are deliberately not the same string: the slug is
+// the identity and the URL, the label is what people read. That split is what
+// lets "star wars" become "Star Wars" without breaking a link.
+
+export type Tag = {
+  slug: string;
+  label: string;
+};
+
+export type TagWithCount = Tag & { listingCount: number };
+
+export const MAX_TAG_LABEL = 40;
+export const MIN_TAG_LABEL = 2;
+
+// Diacritics are folded rather than dropped, so "Peña" slugs to "pena" and
+// searching either way finds it — the same fold lib/search.ts uses.
+export function slugifyTag(label: string): string {
+  return label
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+// Collapses the runs of whitespace that come from pasting, without touching
+// the casing someone chose — "Game of Thrones" should keep its lowercase "of".
+export function normalizeTagLabel(label: string): string {
+  return label.trim().replace(/\s+/g, " ");
+}
+
+export function validateTagLabel(label: string): { label: string; slug: string } | { error: string } {
+  const normalized = normalizeTagLabel(label);
+
+  if (normalized.length < MIN_TAG_LABEL) {
+    return { error: `A tag needs at least ${MIN_TAG_LABEL} characters.` };
+  }
+  if (normalized.length > MAX_TAG_LABEL) {
+    return { error: `A tag can be at most ${MAX_TAG_LABEL} characters.` };
+  }
+
+  const slug = slugifyTag(normalized);
+  // Reachable with input that is all punctuation or all diacritics — "…" or
+  // "•••" normalize to a non-empty label but slug to nothing at all.
+  if (slug.length < MIN_TAG_LABEL) {
+    return { error: "That tag needs some letters or numbers in it." };
+  }
+
+  return { label: normalized, slug };
+}
+
+export function tagHref(slug: string): string {
+  return `/tags/${encodeURIComponent(slug)}`;
+}
+
+// Alphabetical by what's on screen, not by slug — "The Simpsons" sorts under T
+// where a reader expects it, rather than wherever its slug happens to land.
+export function sortTags<T extends Tag>(tags: T[]): T[] {
+  return [...tags].sort((a, b) => a.label.localeCompare(b.label));
+}
+
+// Ranks the vocabulary against what's been typed so far, for the picker's
+// suggestions. Prefix beats substring beats a match on the slug alone, so
+// typing "star" puts "Star Wars" above "Rock Star" and both above a tag that
+// only matches through its hyphenated slug.
+export function matchTags<T extends Tag>(tags: T[], query: string, limit = 8): T[] {
+  const term = slugifyTag(query);
+  if (!term) return sortTags(tags).slice(0, limit);
+
+  const scored: { tag: T; score: number }[] = [];
+  for (const tag of tags) {
+    const label = slugifyTag(tag.label);
+    if (label.startsWith(term)) scored.push({ tag, score: 3 });
+    else if (label.includes(term)) scored.push({ tag, score: 2 });
+    else if (tag.slug.includes(term)) scored.push({ tag, score: 1 });
+  }
+
+  return scored
+    .sort((a, b) => b.score - a.score || a.tag.label.localeCompare(b.tag.label))
+    .slice(0, limit)
+    .map((entry) => entry.tag);
+}
