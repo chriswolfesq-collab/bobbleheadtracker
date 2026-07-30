@@ -27,6 +27,12 @@
 -- every one of these is low-volume and about the recipient's own activity, so
 -- on-by-default is the right call and Settings carries the switches.
 
+-- Repeated from wishlist_alerts.sql so this file stands alone: wants_email()
+-- below is `language sql`, so its body is parsed when it's created, and a
+-- missing column would fail the CREATE rather than the first call.
+alter table public.profiles
+  add column if not exists email_wishlist_alerts boolean not null default true;
+
 -- The master switch. False means send this account nothing automated at all.
 alter table public.profiles
   add column if not exists email_enabled boolean not null default true;
