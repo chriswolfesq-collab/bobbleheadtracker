@@ -7,6 +7,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { TEAMS } from "@/lib/teams";
+import { useTagDuplicates } from "@/lib/useTagDuplicates";
 
 function NotificationBadge({ count }: { count: number }) {
   if (count <= 0) return null;
@@ -27,6 +28,10 @@ export default function AdminPage() {
   const [pendingReports, setPendingReports] = useState(0);
   const [openDeadImages, setOpenDeadImages] = useState(0);
   const [pendingScraped, setPendingScraped] = useState(0);
+  // Derived from the vocabulary rather than counted in the database, so this
+  // one comes from a hook instead of a head query. Off for reps: they can't
+  // see the rulings or act on a pair.
+  const { open: duplicateTags } = useTagDuplicates({ enabled: isAdmin });
 
   useEffect(() => {
     if (!canAccess) return;
@@ -205,6 +210,15 @@ export default function AdminPage() {
                 <p className="mt-2 text-sm text-zinc-600">
                   Rename a tag, merge two that mean the same thing, or delete one from the
                   vocabulary.
+                </p>
+              </Link>
+              <Link href="/admin/duplicate-tags" className={cardClass}>
+                <NotificationBadge count={duplicateTags.length} />
+                <p className="text-sm font-black uppercase tracking-wide text-zinc-900">
+                  Duplicate tags
+                </p>
+                <p className="mt-2 text-sm text-zinc-600">
+                  Review tags that look like one idea under two names, and merge the ones that are.
                 </p>
               </Link>
               <Link href="/admin/messages" className={cardClass}>
