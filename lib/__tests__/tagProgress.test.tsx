@@ -2,7 +2,9 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { TagPageClient } from "@/app/tags/[slug]/TagPageClient";
+import { TagsPageClient } from "@/app/tags/TagsPageClient";
 import type { BobbleheadIdentity } from "@/lib/bobbleheadIdentity";
+import type { TagDirectoryEntry } from "@/lib/useTags";
 
 // A tag as a checklist: how many of it you own, and checking one off from the
 // tag page rather than going team by team. The signed-in half of the page can't
@@ -34,11 +36,31 @@ const LISTINGS = [
 // context this render has no use for.
 vi.mock("@/components/Breadcrumbs", () => ({ Breadcrumbs: () => null }));
 
+const directoryEntry = (
+  label: string,
+  ownedCount: number,
+  listingCount: number,
+): TagDirectoryEntry => ({
+  slug: label.toLowerCase().replace(/\s+/g, "-"),
+  label,
+  listingCount,
+  ownedCount,
+  example: null,
+});
+
+let directory: TagDirectoryEntry[] = [];
+
 vi.mock("@/lib/useTags", () => ({
   useTaggedListings: () => ({ listings: LISTINGS, isLoading: false }),
   useTagVocabulary: () => ({
     tags: [{ slug: "star-wars", label: "Star Wars", listingCount: LISTINGS.length }],
     isLoading: false,
+  }),
+  useTagDirectory: () => ({
+    entries: directory,
+    isLoading: false,
+    isProgressKnown: isLoggedIn && !isLoadingOwned,
+    isLoggedIn,
   }),
 }));
 
@@ -56,6 +78,13 @@ beforeEach(() => {
   ownedKeys = new Set(["dodgers:grogu-2023"]);
   isLoggedIn = true;
   isLoadingOwned = false;
+  // Deliberately neither alphabetical nor already in progress order.
+  directory = [
+    directoryEntry("Peanuts", 1, 10),
+    directoryEntry("Star Wars", 9, 10),
+    directoryEntry("Sugar Skull", 0, 4),
+    directoryEntry("Bobblehead Night", 5, 10),
+  ];
 });
 
 afterEach(cleanup);
@@ -118,5 +147,44 @@ describe("the tag page as a checklist", () => {
 
     expect(screen.getByText("4 in this tag")).toBeDefined();
     expect(screen.getByText(/Log in to track your progress/)).toBeDefined();
+  });
+});
+
+describe("the tag directory", () => {
+  // The label is the first paragraph in the row; the count and the example
+  // follow it, and textContent runs them all together.
+  const labels = () =>
+    screen.getAllByRole("listitem").map((item) => item.querySelector("p")?.textContent ?? "");
+
+  it("leads with the tags you're furthest along in", () => {
+    render(<TagsPageClient />);
+
+    expect(labels()).toEqual(["Star Wars", "Bobblehead Night", "Peanuts", "Sugar Skull"]);
+    expect(screen.getByText(/Sorted by how far along you are/)).toBeDefined();
+  });
+
+  it("shows each tag's share of the collection", () => {
+    render(<TagsPageClient />);
+
+    expect(screen.getByText("9 of 10")).toBeDefined();
+    expect(screen.getByText("0 of 4")).toBeDefined();
+  });
+
+  // Nothing to sort on yet, and rows that reshuffle under a reader mid-load are
+  // worse than rows that arrive in the order the vocabulary came in.
+  it("leaves the order alone until the collection lands", () => {
+    isLoadingOwned = true;
+    render(<TagsPageClient />);
+
+    expect(labels()).toEqual(["Peanuts", "Star Wars", "Sugar Skull", "Bobblehead Night"]);
+    expect(screen.queryByText(/Sorted by how far along/)).toBeNull();
+  });
+
+  it("keeps the vocabulary's own order for a signed-out reader", () => {
+    isLoggedIn = false;
+    render(<TagsPageClient />);
+
+    expect(labels()).toEqual(["Peanuts", "Star Wars", "Sugar Skull", "Bobblehead Night"]);
+    expect(screen.getByText(/Log in to track how many of each tag/)).toBeDefined();
   });
 });

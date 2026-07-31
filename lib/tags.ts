@@ -97,6 +97,25 @@ export function tagCompletionPercent(ownedCount: number, total: number): number 
   return Math.max(1, Math.round((ownedCount / total) * 100));
 }
 
+export type TagProgress = Tag & { listingCount: number; ownedCount: number };
+
+// Furthest along first, so the directory opens on the tags you're close to
+// finishing rather than on whatever starts with A.
+//
+// The share owned leads, not the count: 8 of 10 is nearer done than 30 of 200,
+// and a directory sorted on the raw number would just rank the big tags. The
+// count breaks a tie between two equal shares — 40 of 100 outranks 4 of 10 —
+// and the label breaks that, so the order is stable rather than left to sort.
+export function sortTagsByProgress<T extends TagProgress>(tags: T[]): T[] {
+  return [...tags].sort(
+    (a, b) =>
+      tagCompletionPercent(b.ownedCount, b.listingCount) -
+        tagCompletionPercent(a.ownedCount, a.listingCount) ||
+      b.ownedCount - a.ownedCount ||
+      a.label.localeCompare(b.label),
+  );
+}
+
 // Alphabetical by what's on screen, not by slug — "The Simpsons" sorts under T
 // where a reader expects it, rather than wherever its slug happens to land.
 export function sortTags<T extends Tag>(tags: T[]): T[] {
