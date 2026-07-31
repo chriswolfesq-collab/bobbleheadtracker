@@ -28,6 +28,7 @@ import type { ListingNav } from "@/lib/listingNav";
 import { publicAsset } from "@/lib/paths";
 import { getRarity } from "@/lib/rarity";
 import type { Team } from "@/lib/teams";
+import { teamHrefFromView, teamViewQuery } from "@/lib/teamView";
 import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
 import { useUserWanted } from "@/lib/userWanted";
@@ -38,7 +39,16 @@ const RARITY_BADGE_CLASSES: Record<string, string> = {
   limited: "brass-plate text-navy-deep",
 };
 
-function Shell({ team, children }: { team: Team; children: React.ReactNode }) {
+function Shell({
+  team,
+  teamView,
+  children,
+}: {
+  team: Team;
+  /** the team-page view to return to, when the reader came from there */
+  teamView: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex min-h-full flex-1 flex-col px-4 py-10" style={{ background: "var(--page-gradient)" }}>
       <div className="mx-auto w-full max-w-3xl rounded-xl border border-border-soft bg-surface p-6">
@@ -49,7 +59,7 @@ function Shell({ team, children }: { team: Team; children: React.ReactNode }) {
           items={[
             { href: "/", label: "Home" },
             { href: "/teams", label: "Teams" },
-            { href: `/teams/${team.slug}`, label: team.name },
+            { href: teamHrefFromView(team.slug, teamView), label: team.name },
             { label: "Community listing" },
           ]}
         />
@@ -75,6 +85,11 @@ export function CommunityBobbleheadPage({
   const router = useRouter();
   const searchParams = useSearchParams();
   const bobbleheadId = bobbleheadIdProp ?? searchParams.get("id") ?? "";
+  // The team page's tab/filter/page state, if the reader arrived from a card
+  // there (lib/teamView.ts). Read straight off the search params rather than
+  // through useTeamView: this page already reads them for the legacy ?id=
+  // entry point, so there's no prerendering left to protect.
+  const teamView = teamViewQuery(searchParams.get("from") ?? "");
   const { canEditTeam, user: adminUser } = useAdminAuth();
   const canEdit = canEditTeam(team.slug);
   const { showError } = useToast();
@@ -94,7 +109,7 @@ export function CommunityBobbleheadPage({
 
   if (isLoading) {
     return (
-      <Shell team={team}>
+      <Shell team={team} teamView={teamView}>
         <div className="mt-8 rounded-lg border border-border-soft bg-surface-muted p-8 text-center">
           <p className="text-sm font-black uppercase tracking-wide text-navy">Loading bobblehead</p>
         </div>
@@ -104,7 +119,7 @@ export function CommunityBobbleheadPage({
 
   if (notFound || !communityBobblehead) {
     return (
-      <Shell team={team}>
+      <Shell team={team} teamView={teamView}>
         <div className="mt-8 rounded-lg border border-dashed border-border-soft bg-surface-muted p-8 text-center">
           <p className="text-sm font-black uppercase tracking-wide text-navy">Bobblehead not found</p>
           <p className="mt-2 text-sm leading-6 text-zinc-600">
@@ -288,7 +303,7 @@ export function CommunityBobbleheadPage({
               items={[
                 { href: "/", label: "Home" },
                 { href: "/teams", label: "Teams" },
-                { href: `/teams/${team.slug}`, label: team.name },
+                { href: teamHrefFromView(team.slug, teamView), label: team.name },
                 { label: title },
               ]}
             />
@@ -303,7 +318,7 @@ export function CommunityBobbleheadPage({
       </div>
 
       {/* Prev/next edge arrows */}
-      {nav ? <ListingNavControls nav={nav} /> : null}
+      {nav ? <ListingNavControls nav={nav} teamView={teamView} /> : null}
 
       <div className="mx-auto w-full max-w-6xl px-4 pb-16 pt-6 sm:px-6">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
