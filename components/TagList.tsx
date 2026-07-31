@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useAdminAuth } from "@/lib/adminAuth";
-import { matchTags, tagHref } from "@/lib/tags";
+import { matchTags, type TagWithCount, tagHref } from "@/lib/tags";
+import { describeSimilarity, findSimilarTags, type SimilarTag } from "@/lib/tagSimilarity";
 import { useBobbleheadTags, useTagVocabulary } from "@/lib/useTags";
 
 // The tags on one bobblehead, plus the picker an admin or team rep uses to
@@ -90,6 +91,14 @@ function TagPicker({
   const { tags: vocabulary, reload } = useTagVocabulary();
   const [query, setQuery] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  // Set when what was typed would mint a tag the vocabulary looks like it
+  // already covers: the label, and what it looks like. Nothing is written while
+  // this is open — the question is asked before the tag exists, because after
+  // it exists someone has to go and merge it.
+  const [maybeDuplicate, setMaybeDuplicate] = useState<{
+    label: string;
+    matches: SimilarTag<TagWithCount>[];
+  } | null>(null);
 
   const taken = new Set(existing);
   const suggestions = matchTags(vocabulary, query).filter((tag) => !taken.has(tag.slug));
@@ -101,10 +110,23 @@ function TagPicker({
     setIsSaving(false);
     if (added) {
       setQuery("");
+      setMaybeDuplicate(null);
       // A brand new tag has to appear in the vocabulary, or typing it again on
       // the next listing offers no suggestion and mints it a second time.
       reload();
     }
+  };
+
+  // Suggestions are already on screen, but a suggestion is easy to type past —
+  // this is the same information as a question that has to be answered, and
+  // only when the answer matters (the label would mint something new).
+  const attempt = (label: string) => {
+    const matches = findSimilarTags(label, vocabulary);
+    if (matches.length === 0) {
+      submit(label);
+      return;
+    }
+    setMaybeDuplicate({ label, matches });
   };
 
   return (
@@ -113,13 +135,18 @@ function TagPicker({
         className="flex gap-2"
         onSubmit={(event) => {
           event.preventDefault();
-          submit(query);
+          attempt(query);
         }}
       >
         <input
           type="text"
           value={query}
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={(event) => {
+            setQuery(event.target.value);
+            // The question was about the old text; keeping it up while someone
+            // edits would invite answering it about the new text.
+            setMaybeDuplicate(null);
+          }}
           placeholder="Star Wars, Sugar Skull…"
           aria-label="Add a tag"
           maxLength={40}
@@ -133,6 +160,54 @@ function TagPicker({
           Add
         </button>
       </form>
+
+      {maybeDuplicate ? (
+        <div className="mt-3 rounded-lg border border-amber-400/60 bg-amber-50 p-3">
+          <p className="text-sm text-amber-900">
+            <span className="font-bold">{maybeDuplicate.label}</span> looks like it&apos;s already
+            covered
+            {maybeDuplicate.matches.length === 1 ? "" : " by tags"}:
+          </p>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {maybeDuplicate.matches.map((match) => (
+              <li key={match.tag.slug}>
+                <button
+                  type="button"
+                  disabled={isSaving}
+                  onClick={() => submit(match.tag.label)}
+                  className="cursor-pointer rounded-full border border-amber-500/60 bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-amber-900 transition hover:border-accent hover:text-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  Use {match.tag.label}
+                  <span className="ml-1.5 font-semibold text-amber-700/70">
+                    {match.tag.listingCount} · {describeSimilarity(match.reason)}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            {/* Deliberately still possible: two tags that look alike sometimes
+                are two tags, and whoever is holding the bobblehead knows that
+                better than the matcher does. It lands in the admin review queue
+                either way. */}
+            <button
+              type="button"
+              disabled={isSaving}
+              onClick={() => submit(maybeDuplicate.label)}
+              className="cursor-pointer text-xs font-black uppercase tracking-wide text-amber-900 underline transition hover:text-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Create {maybeDuplicate.label} anyway
+            </button>
+            <button
+              type="button"
+              onClick={() => setMaybeDuplicate(null)}
+              className="cursor-pointer text-xs font-black uppercase tracking-wide text-zinc-500 transition hover:text-accent-hover"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ) : null}
 
       {suggestions.length > 0 ? (
         <>
