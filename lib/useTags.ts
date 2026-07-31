@@ -3,9 +3,22 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useToast } from "@/components/Toast";
 import { useAuth } from "@/lib/auth";
-import { type BobbleheadIdentity, buildBobbleheadResolver } from "@/lib/bobbleheadIdentity";
-import { supabase } from "@/lib/supabase";
-import { sortTags, type Tag, type TagWithCount, validateTagLabel } from "@/lib/tags";
+import {
+  type BobbleheadIdentity,
+  buildBobbleheadResolver,
+  listingKey,
+} from "@/lib/bobbleheadIdentity";
+import { getGiveawayById } from "@/lib/bobbleheads";
+import { useOwnedKeys } from "@/lib/profile";
+import { fetchAllPages, supabase } from "@/lib/supabase";
+import {
+  chooseTagExamples,
+  sortTags,
+  type Tag,
+  type TagAssignment,
+  type TagWithCount,
+  validateTagLabel,
+} from "@/lib/tags";
 
 // Reads and writes for tags. The vocabulary and the assignments are two
 // separate reads because they're wanted in different places — the picker needs
@@ -22,13 +35,33 @@ type AssignmentRow = {
   tags: { label: string } | null;
 };
 
-// Every assignment in one query, joined to its label. Feeds the search index,
-// which has to be able to match a tag on any listing without knowing in advance
-// which listings the user will type towards.
+// Every row of bobblehead_tags, in pages.
 //
 // The whole table, deliberately: it's one row per (listing, tag), it's public,
-// and paging it would mean search silently not matching whatever fell off the
-// end. If it ever outgrows that, the fix is a server-side search, not a limit.
+// and a limit here means search silently not matching whatever fell off the end
+// — which is exactly what the single unpaged read this replaced was doing once
+// the table passed 1,000 assignments. Ordered by the primary key so no page
+// boundary repeats or skips a row. If it ever outgrows paging, the fix is a
+// server-side search, not a limit.
+function fetchAllAssignmentRows<T>(columns: string): Promise<T[] | null> {
+  return fetchAllPages<T>((from, to) =>
+    supabase
+      .from("bobblehead_tags")
+      // Widened to `string` so supabase-js doesn't try to parse the caller's
+      // column list as a literal select expression, which is also what costs
+      // this the row type — hence the cast on the way out.
+      .select(columns as string)
+      .order("bobblehead_id")
+      .order("team_slug")
+      .order("tag_slug")
+      .range(from, to)
+      .then(({ data, error }) => ({ data: (data ?? null) as T[] | null, error })),
+  );
+}
+
+// Every assignment, joined to its label. Feeds the search index, which has to
+// be able to match a tag on any listing without knowing in advance which
+// listings the user will type towards.
 export function useAllBobbleheadTags(): { tagsByKey: TagsByKey; isLoading: boolean } {
   const [tagsByKey, setTagsByKey] = useState<TagsByKey>({});
   const [isLoading, setIsLoading] = useState(true);
@@ -36,22 +69,19 @@ export function useAllBobbleheadTags(): { tagsByKey: TagsByKey; isLoading: boole
   useEffect(() => {
     let cancelled = false;
 
-    supabase
-      .from("bobblehead_tags")
-      .select("bobblehead_id, team_slug, tag_slug, tags(label)")
-      .then(({ data, error }) => {
+    fetchAllAssignmentRows<AssignmentRow>("bobblehead_id, team_slug, tag_slug, tags(label)").then(
+      (rows) => {
         if (cancelled) return;
 
-        if (error) {
+        if (!rows) {
           // Search and the listing pages both degrade to "no tags" rather than
           // breaking, which is why this doesn't toast: nobody asked for tags,
           // they asked for a search box.
-          console.error("Failed to load tags:", error.message);
           setTagsByKey({});
         } else {
           const map: TagsByKey = {};
-          for (const row of (data ?? []) as unknown as AssignmentRow[]) {
-            const key = `${row.team_slug}:${row.bobblehead_id}`;
+          for (const row of rows) {
+            const key = listingKey(row.team_slug, row.bobblehead_id);
             (map[key] ??= []).push({
               slug: row.tag_slug,
               // A missing join row would mean a tag deleted mid-read; the slug
@@ -64,7 +94,8 @@ export function useAllBobbleheadTags(): { tagsByKey: TagsByKey; isLoading: boole
         }
 
         setIsLoading(false);
-      });
+      },
+    );
 
     return () => {
       cancelled = true;
@@ -126,6 +157,125 @@ export function useTagVocabulary(): {
   return { tags, isLoading, reload };
 }
 
+// Every assignment as a plain pair, without the label join useAllBobbleheadTags
+// needs — this is the set the directory counts progress against and picks its
+// example photos from, and both only care about which listings carry what.
+function useTagAssignments(): { assignments: TagAssignment[] | null } {
+  const [assignments, setAssignments] = useState<TagAssignment[] | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetchAllAssignmentRows<Omit<AssignmentRow, "tags">>(
+      "bobblehead_id, team_slug, tag_slug",
+    ).then((rows) => {
+      if (cancelled) return;
+
+      setAssignments(
+        (rows ?? []).map((row) => ({
+          teamSlug: row.team_slug,
+          bobbleheadId: row.bobblehead_id,
+          tagSlug: row.tag_slug,
+        })),
+      );
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return { assignments };
+}
+
+// A curated listing with a seed photo makes the best example: it's certain to
+// have a picture, and it's the picture the rest of the site already shows for
+// it. A community listing is the next best guess — it usually carries the photo
+// whoever submitted it took, which the resolver picks up. A curated listing with
+// no photo comes last, since it renders as the team silhouette and illustrates
+// nothing at all.
+function rankAsExample(assignment: TagAssignment): number {
+  const curated = getGiveawayById(assignment.bobbleheadId, assignment.teamSlug);
+  if (!curated) return 1;
+  return curated.imageUrl ? 2 : 0;
+}
+
+export type TagDirectoryEntry = TagWithCount & {
+  /** One bobblehead carrying the tag, shown beside it as an example. */
+  example: BobbleheadIdentity | null;
+  /** How many of the tag's listings the signed-in user owns. */
+  ownedCount: number;
+};
+
+// The tag directory: the vocabulary, an example photo for each tag, and the
+// signed-in reader's progress against it.
+export function useTagDirectory(): {
+  entries: TagDirectoryEntry[];
+  isLoading: boolean;
+  /** False while ownership is unknown, so an owned tag never renders as 0. */
+  isProgressKnown: boolean;
+  isLoggedIn: boolean;
+} {
+  const { tags, isLoading: isLoadingTags } = useTagVocabulary();
+  const { assignments } = useTagAssignments();
+  const { ownedKeys, isLoading: isLoadingOwned, isLoggedIn } = useOwnedKeys();
+  const [exampleByTag, setExampleByTag] = useState<Record<string, BobbleheadIdentity>>({});
+
+  useEffect(() => {
+    if (!assignments || assignments.length === 0) return;
+
+    let cancelled = false;
+
+    (async () => {
+      const examples = Object.entries(chooseTagExamples(assignments, rankAsExample));
+      const resolve = await buildBobbleheadResolver(supabase, [
+        ...new Set(examples.map(([, assignment]) => assignment.teamSlug)),
+      ]);
+
+      if (cancelled) return;
+
+      setExampleByTag(
+        Object.fromEntries(
+          examples.map(([tagSlug, assignment]) => [
+            tagSlug,
+            resolve(assignment.teamSlug, assignment.bobbleheadId),
+          ]),
+        ),
+      );
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [assignments]);
+
+  const ownedCountByTag = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const assignment of assignments ?? []) {
+      if (!ownedKeys.has(listingKey(assignment.teamSlug, assignment.bobbleheadId))) continue;
+      counts[assignment.tagSlug] = (counts[assignment.tagSlug] ?? 0) + 1;
+    }
+    return counts;
+  }, [assignments, ownedKeys]);
+
+  const entries = useMemo(
+    () =>
+      tags.map((tag) => ({
+        ...tag,
+        example: exampleByTag[tag.slug] ?? null,
+        ownedCount: ownedCountByTag[tag.slug] ?? 0,
+      })),
+    [tags, exampleByTag, ownedCountByTag],
+  );
+
+  return {
+    entries,
+    isLoading: isLoadingTags || assignments === null,
+    isProgressKnown: isLoggedIn && !isLoadingOwned && assignments !== null,
+    isLoggedIn,
+  };
+}
+
 // Everything carrying one tag, resolved to something renderable. Reuses the
 // same resolver the profile and admin collection pages use, so a tagged
 // listing shows the title and photo it shows everywhere else — including the
@@ -141,21 +291,28 @@ export function useTaggedListings(tagSlug: string): {
     let cancelled = false;
 
     (async () => {
-      const { data, error } = await supabase
-        .from("bobblehead_tags")
-        .select("bobblehead_id, team_slug")
-        .eq("tag_slug", tagSlug);
+      // Paged like the directory's read, so the checklist a tag page shows is
+      // the whole tag and not the first thousand of it.
+      const data = await fetchAllPages((from, to) =>
+        supabase
+          .from("bobblehead_tags")
+          .select("bobblehead_id, team_slug")
+          .eq("tag_slug", tagSlug)
+          .order("bobblehead_id")
+          .order("team_slug")
+          .range(from, to),
+      );
 
       if (cancelled) return;
 
-      if (error) {
-        console.error("Failed to load the tagged bobbleheads:", error.message);
+      if (!data) {
+        console.error("Failed to load the tagged bobbleheads.");
         setListings([]);
         setIsLoading(false);
         return;
       }
 
-      const rows = data ?? [];
+      const rows = data;
       if (rows.length === 0) {
         setListings([]);
         setIsLoading(false);

@@ -57,6 +57,46 @@ export function tagHref(slug: string): string {
   return `/tags/${encodeURIComponent(slug)}`;
 }
 
+/** One row of the join table: a listing, and a tag it carries. */
+export type TagAssignment = { teamSlug: string; bobbleheadId: string; tagSlug: string };
+
+// One listing per tag, to stand as the picture of what the tag means. A label
+// only reads as obvious to whoever wrote it — "Sugar Skull" and "Turn Ahead the
+// Clock" both need a photo before they mean anything — so the directory shows
+// an example beside each name.
+//
+// The caller ranks the candidates (a listing with a photo of its own beats one
+// falling back to the team silhouette); ties break on the listing key, so the
+// same bobblehead illustrates the tag on every load rather than shuffling with
+// whatever order the rows happen to arrive in.
+export function chooseTagExamples(
+  assignments: TagAssignment[],
+  rank: (assignment: TagAssignment) => number,
+): Record<string, TagAssignment> {
+  const best: Record<string, { assignment: TagAssignment; score: number; key: string }> = {};
+
+  for (const assignment of assignments) {
+    const key = `${assignment.teamSlug}:${assignment.bobbleheadId}`;
+    const score = rank(assignment);
+    const current = best[assignment.tagSlug];
+
+    if (!current || score > current.score || (score === current.score && key < current.key)) {
+      best[assignment.tagSlug] = { assignment, score, key };
+    }
+  }
+
+  return Object.fromEntries(
+    Object.entries(best).map(([tagSlug, entry]) => [tagSlug, entry.assignment]),
+  );
+}
+
+// Owning a handful of a 200-listing tag rounds to 0% and reads as untouched, so
+// anything owned shows at least 1% — the same floor the team shelves use.
+export function tagCompletionPercent(ownedCount: number, total: number): number {
+  if (total <= 0 || ownedCount <= 0) return 0;
+  return Math.max(1, Math.round((ownedCount / total) * 100));
+}
+
 // Alphabetical by what's on screen, not by slug — "The Simpsons" sorts under T
 // where a reader expects it, rather than wherever its slug happens to land.
 export function sortTags<T extends Tag>(tags: T[]): T[] {

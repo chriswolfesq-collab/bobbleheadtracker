@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
+  chooseTagExamples,
   matchTags,
   normalizeTagLabel,
   slugifyTag,
   sortTags,
+  type TagAssignment,
+  tagCompletionPercent,
   tagHref,
   validateTagLabel,
 } from "@/lib/tags";
@@ -114,5 +117,80 @@ describe("matchTags", () => {
 
   it("honours the limit", () => {
     expect(matchTags(vocabulary, "", 2)).toHaveLength(2);
+  });
+});
+
+describe("chooseTagExamples", () => {
+  const assignment = (teamSlug: string, bobbleheadId: string, tagSlug: string): TagAssignment => ({
+    teamSlug,
+    bobbleheadId,
+    tagSlug,
+  });
+
+  const withPhotos = (ids: string[]) => (a: TagAssignment) =>
+    ids.includes(a.bobbleheadId) ? 2 : 0;
+
+  it("picks one example per tag", () => {
+    const chosen = chooseTagExamples(
+      [
+        assignment("dodgers", "grogu-2023", "star-wars"),
+        assignment("nationals", "vader-2019", "star-wars"),
+        assignment("dodgers", "snoopy-2022", "peanuts"),
+      ],
+      () => 0,
+    );
+
+    expect(Object.keys(chosen).sort()).toEqual(["peanuts", "star-wars"]);
+    expect(chosen["peanuts"].bobbleheadId).toBe("snoopy-2022");
+  });
+
+  it("prefers the higher-ranked candidate however late it arrives", () => {
+    const chosen = chooseTagExamples(
+      [
+        assignment("dodgers", "aaa-photoless", "star-wars"),
+        assignment("nationals", "zzz-with-photo", "star-wars"),
+      ],
+      withPhotos(["zzz-with-photo"]),
+    );
+
+    expect(chosen["star-wars"].bobbleheadId).toBe("zzz-with-photo");
+  });
+
+  // The rows come back in whatever order Postgres feels like, so the tie-break
+  // is what stops the same tag being illustrated by a different bobblehead on
+  // every load.
+  it("breaks a tie the same way whatever order the rows arrive in", () => {
+    const rows = [
+      assignment("nationals", "vader-2019", "star-wars"),
+      assignment("dodgers", "grogu-2023", "star-wars"),
+    ];
+
+    const forwards = chooseTagExamples(rows, () => 1);
+    const backwards = chooseTagExamples([...rows].reverse(), () => 1);
+
+    expect(forwards["star-wars"]).toEqual(backwards["star-wars"]);
+    expect(forwards["star-wars"].teamSlug).toBe("dodgers");
+  });
+
+  it("has nothing to show for a tag nothing carries", () => {
+    expect(chooseTagExamples([], () => 0)).toEqual({});
+  });
+});
+
+describe("tagCompletionPercent", () => {
+  it("reports the share owned", () => {
+    expect(tagCompletionPercent(3, 12)).toBe(25);
+    expect(tagCompletionPercent(12, 12)).toBe(100);
+  });
+
+  // Two of 240 rounds to 0% and reads as untouched, which is a lie about a
+  // collection that has started.
+  it("never rounds a started tag down to nothing", () => {
+    expect(tagCompletionPercent(2, 240)).toBe(1);
+  });
+
+  it("is 0 for an empty or untouched tag", () => {
+    expect(tagCompletionPercent(0, 12)).toBe(0);
+    expect(tagCompletionPercent(0, 0)).toBe(0);
   });
 });
