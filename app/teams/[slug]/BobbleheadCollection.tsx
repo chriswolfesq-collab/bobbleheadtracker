@@ -7,6 +7,7 @@ import { Pagination } from "@/components/ui/Pagination";
 import { Tabs } from "@/components/ui/Tabs";
 import { ATHLETICS_CITIES, hasCityChoice } from "@/lib/athleticsCity";
 import type { Team } from "@/lib/teams";
+import { mergeTeamViewQuery } from "@/lib/teamView";
 import { GiveawayCard, type ResolvedGiveaway, useFavorites, useOwnership, useWanted } from "./GiveawayCard";
 
 const UNKNOWN_YEAR = "Unknown";
@@ -177,6 +178,7 @@ export function BobbleheadCollection({
   // has an era to filter by. See lib/athleticsCity.ts.
   const showEraFilter = hasCityChoice(team.slug);
   const [page, setPage] = useState(1);
+  const [hasRestored, setHasRestored] = useState(false);
   const gridTopRef = useRef<HTMLDivElement>(null);
 
   // Restore state from the URL after mount (state initializers can't read
@@ -194,26 +196,37 @@ export function BobbleheadCollection({
     setFavoritesOnly(url.favorites);
     setPage(url.page);
     if (url.year || (showEraFilter && url.city) || url.photo || url.favorites) setShowFilters(true);
+    setHasRestored(true);
     /* eslint-enable react-hooks/set-state-in-effect */
   }, [showEraFilter]);
 
-  // Mirror every state change back into the URL.
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const setOrDelete = (key: string, value: string, defaultValue: string) => {
-      if (value === defaultValue) params.delete(key);
-      else params.set(key, value);
+  // The current view as a query string: what gets mirrored into the URL below,
+  // and what each card link carries so the detail page's team crumb can lead
+  // back to this exact tab/filter/page rather than to the top of the list.
+  const view = useMemo(() => {
+    const params = new URLSearchParams();
+    const setUnlessDefault = (key: string, value: string, defaultValue: string) => {
+      if (value !== defaultValue) params.set(key, value);
     };
-    setOrDelete("tab", tab, "all");
-    setOrDelete("sort", sortOrder, DEFAULT_SORT_ORDER);
-    setOrDelete("year", yearFilter, "");
-    setOrDelete("city", cityFilter, "");
-    setOrDelete("photo", hasPhotoOnly ? "1" : "", "");
-    setOrDelete("favorites", favoritesOnly ? "1" : "", "");
-    setOrDelete("page", String(page), "1");
-    const query = params.toString();
-    window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}`);
+    setUnlessDefault("tab", tab, "all");
+    setUnlessDefault("sort", sortOrder, DEFAULT_SORT_ORDER);
+    setUnlessDefault("year", yearFilter, "");
+    setUnlessDefault("city", cityFilter, "");
+    setUnlessDefault("photo", hasPhotoOnly ? "1" : "", "");
+    setUnlessDefault("favorites", favoritesOnly ? "1" : "", "");
+    setUnlessDefault("page", String(page), "1");
+    return params.toString();
   }, [tab, sortOrder, yearFilter, cityFilter, hasPhotoOnly, favoritesOnly, page]);
+
+  // Mirror every state change back into the URL — but not before the restore
+  // above has read it. Writing the default view first would erase the very
+  // params being restored, which is how arriving at `?page=2` from a listing's
+  // team crumb ended up back on page 1.
+  useEffect(() => {
+    if (!hasRestored) return;
+    const query = mergeTeamViewQuery(window.location.search, view);
+    window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}`);
+  }, [view, hasRestored]);
 
   const yearOptions = useMemo(() => {
     const years = new Set(allGiveaways.map((giveaway) => giveaway.year || UNKNOWN_YEAR));
@@ -382,6 +395,7 @@ export function BobbleheadCollection({
                 key={giveaway.id}
                 giveaway={giveaway}
                 team={team}
+                view={view}
                 eager={currentPage === 1 && index < EAGER_CARD_COUNT}
               />
             ))}

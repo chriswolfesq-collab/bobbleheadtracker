@@ -10,6 +10,7 @@ import type { Giveaway } from "@/lib/bobbleheads";
 import { publicAsset } from "@/lib/paths";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
 import type { Team } from "@/lib/teams";
+import { withTeamView } from "@/lib/teamView";
 import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
 import { useUserWanted } from "@/lib/userWanted";
@@ -163,10 +164,14 @@ export function WantedProvider({
 function GiveawayCardInner({
   giveaway,
   team,
+  view = "",
   eager = false,
 }: {
   giveaway: ResolvedGiveaway;
   team: Team;
+  /** the team page's tab/filter/page state, carried into the listing so its
+      team crumb leads back to the view this card was clicked from */
+  view?: string;
   eager?: boolean;
 }) {
   const { ownedById, ownershipKnown, isLoggedIn, toggleOwned } = useOwnership();
@@ -175,10 +180,12 @@ function GiveawayCardInner({
   const isOwned = ownedById[giveaway.id] ?? false;
   const isFavorited = favoritedById[giveaway.id] ?? false;
   const isWanted = wantedById[giveaway.id] ?? false;
-  const href =
+  const href = withTeamView(
     giveaway.source === "community"
       ? `/teams/${team.slug}/community/${encodeURIComponent(giveaway.id)}`
-      : `/teams/${team.slug}/bobbleheads/${giveaway.id}`;
+      : `/teams/${team.slug}/bobbleheads/${giveaway.id}`,
+    view,
+  );
   const fullTitle = giveaway.title;
   const placeholderSrc = publicAsset(`/bobbleheads/${team.slug}.png`);
   const imageSrc = giveaway.imageUrl ?? placeholderSrc;

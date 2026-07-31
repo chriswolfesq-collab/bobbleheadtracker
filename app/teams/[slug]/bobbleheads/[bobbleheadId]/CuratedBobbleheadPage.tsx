@@ -31,6 +31,7 @@ import { publicAsset } from "@/lib/paths";
 import { getRarity } from "@/lib/rarity";
 import { siteUrl } from "@/lib/siteUrl";
 import type { Team } from "@/lib/teams";
+import { teamHrefFromView, useTeamView } from "@/lib/teamView";
 import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
 import { useUserWanted } from "@/lib/userWanted";
@@ -120,6 +121,7 @@ export function CuratedBobbleheadPage({
   nav: ListingNav;
 }) {
   const router = useRouter();
+  const teamView = useTeamView();
   const { canEditTeam, user: adminUser } = useAdminAuth();
   const canEdit = canEditTeam(team.slug);
   const { showError } = useToast();
@@ -383,7 +385,9 @@ export function CuratedBobbleheadPage({
               items={[
                 { href: "/", label: "Home" },
                 { href: "/teams", label: "Teams" },
-                { href: `/teams/${team.slug}`, label: team.name },
+                // Back to the tab/filter/page the reader left, when they came
+                // from the team page (lib/teamView.ts).
+                { href: teamHrefFromView(team.slug, teamView), label: team.name },
                 { label: title },
               ]}
             />
@@ -393,7 +397,7 @@ export function CuratedBobbleheadPage({
       </div>
 
       {/* Prev/next edge arrows */}
-      <ListingNavControls nav={nav} />
+      <ListingNavControls nav={nav} teamView={teamView} />
 
       <div className="mx-auto w-full max-w-6xl px-4 pb-16 pt-6 sm:px-6">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
