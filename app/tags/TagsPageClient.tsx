@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
 import { publicAsset } from "@/lib/paths";
-import { tagCompletionPercent, tagHref } from "@/lib/tags";
+import { sortTagsByProgress, tagCompletionPercent, tagHref } from "@/lib/tags";
 import { type TagDirectoryEntry, useTagDirectory } from "@/lib/useTags";
 
 // The tag directory. Reads client-side rather than on the server because the
@@ -58,6 +58,11 @@ function TagProgress({ entry, isKnown }: { entry: TagDirectoryEntry; isKnown: bo
 export function TagsPageClient() {
   const { entries, isLoading, isProgressKnown, isLoggedIn } = useTagDirectory();
   const used = entries.filter((entry) => entry.listingCount > 0);
+  // Furthest along first, so the list opens on what you're close to finishing.
+  // Until the collection lands there's no progress to sort on, and alphabetical
+  // is the order the vocabulary already arrives in — so the rows settle into
+  // place once rather than reshuffling per row as counts appear.
+  const ordered = isProgressKnown ? sortTagsByProgress(used) : used;
 
   return (
     <div className="flex min-h-full flex-1 flex-col" style={{ background: "var(--page-gradient)" }}>
@@ -71,6 +76,11 @@ export function TagsPageClient() {
           The themes that cut across teams and seasons — a Star Wars bobblehead is a Star Wars
           bobblehead whoever gave it away. Each one shows an example of what it collects.
         </p>
+        {isProgressKnown ? (
+          <p className="mt-2 text-xs font-bold uppercase tracking-wide text-zinc-500">
+            Sorted by how far along you are
+          </p>
+        ) : null}
 
         {isLoading ? (
           <p className="mt-8 text-sm text-zinc-600">Loading…</p>
@@ -87,7 +97,7 @@ export function TagsPageClient() {
             )}
 
             <ul className="mt-8 space-y-3">
-              {used.map((entry) => (
+              {ordered.map((entry) => (
                 <li key={entry.slug}>
                   <Link
                     href={tagHref(entry.slug)}

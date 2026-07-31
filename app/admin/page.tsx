@@ -200,6 +200,13 @@ export default function AdminPage() {
                   Give a person edit access to one team&apos;s page, remove it, or email your reps.
                 </p>
               </Link>
+              <Link href="/admin/tags" className={cardClass}>
+                <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Manage tags</p>
+                <p className="mt-2 text-sm text-zinc-600">
+                  Rename a tag, merge two that mean the same thing, or delete one from the
+                  vocabulary.
+                </p>
+              </Link>
               <Link href="/admin/messages" className={cardClass}>
                 <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Messages</p>
                 <p className="mt-2 text-sm text-zinc-600">

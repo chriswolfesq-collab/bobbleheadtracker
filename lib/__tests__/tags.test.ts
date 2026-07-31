@@ -5,6 +5,7 @@ import {
   normalizeTagLabel,
   slugifyTag,
   sortTags,
+  sortTagsByProgress,
   type TagAssignment,
   tagCompletionPercent,
   tagHref,
@@ -192,5 +193,57 @@ describe("tagCompletionPercent", () => {
   it("is 0 for an empty or untouched tag", () => {
     expect(tagCompletionPercent(0, 12)).toBe(0);
     expect(tagCompletionPercent(0, 0)).toBe(0);
+  });
+});
+
+describe("sortTagsByProgress", () => {
+  const entry = (label: string, ownedCount: number, listingCount: number) => ({
+    slug: slugifyTag(label),
+    label,
+    ownedCount,
+    listingCount,
+  });
+
+  it("puts the tag you're furthest along in first", () => {
+    const sorted = sortTagsByProgress([
+      entry("Peanuts", 1, 10),
+      entry("Star Wars", 9, 10),
+      entry("Sugar Skull", 5, 10),
+    ]);
+
+    expect(sorted.map((tag) => tag.label)).toEqual(["Star Wars", "Sugar Skull", "Peanuts"]);
+  });
+
+  // The share owned, not the raw count — otherwise the biggest tags always win
+  // and "two away from done" is buried under them.
+  it("ranks by how much of the tag is left, not by how many you own", () => {
+    const sorted = sortTagsByProgress([
+      entry("Bobblehead Night", 30, 200),
+      entry("Perfect Game", 8, 10),
+    ]);
+
+    expect(sorted[0].label).toBe("Perfect Game");
+  });
+
+  it("puts the bigger tag first when two are equally far along", () => {
+    const sorted = sortTagsByProgress([entry("Peanuts", 4, 10), entry("Star Wars", 40, 100)]);
+
+    expect(sorted[0].label).toBe("Star Wars");
+  });
+
+  it("falls back to alphabetical among the untouched", () => {
+    const sorted = sortTagsByProgress([
+      entry("Zed", 0, 10),
+      entry("Abe", 0, 4),
+      entry("Star Wars", 1, 10),
+    ]);
+
+    expect(sorted.map((tag) => tag.label)).toEqual(["Star Wars", "Abe", "Zed"]);
+  });
+
+  it("doesn't mutate what it was given", () => {
+    const input = [entry("Abe", 0, 10), entry("Zed", 9, 10)];
+    sortTagsByProgress(input);
+    expect(input.map((tag) => tag.label)).toEqual(["Abe", "Zed"]);
   });
 });
