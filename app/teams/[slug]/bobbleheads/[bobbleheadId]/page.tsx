@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { breadcrumbList } from "@/components/BreadcrumbJsonLd";
 import { GIVEAWAYS_BY_TEAM, getGiveawayById } from "@/lib/bobbleheads";
-import { getCuratedListingData, getDeletedListingKeys } from "@/lib/curatedListing";
+import { getCuratedListingData } from "@/lib/curatedListing";
+import { buildListingNav } from "@/lib/listingNav";
 import { getRarity } from "@/lib/rarity";
-import { sortNewestFirst } from "@/lib/releaseOrder";
 import { siteUrl } from "@/lib/siteUrl";
 import { getTeamBySlug } from "@/lib/teams";
-import { CuratedBobbleheadPage, type ListingNav } from "./CuratedBobbleheadPage";
+import { CuratedBobbleheadPage } from "./CuratedBobbleheadPage";
 
 export function generateStaticParams() {
   return Object.entries(GIVEAWAYS_BY_TEAM).flatMap(([slug, giveaways]) =>
@@ -64,36 +64,17 @@ export default async function BobbleheadPage({
 
   if (!team || !giveaway) notFound();
 
-  const [{ override, imageUrl }, deletedKeys] = await Promise.all([
+  const [{ override, imageUrl }, nav] = await Promise.all([
     getCuratedListingData(slug, bobbleheadId),
-    getDeletedListingKeys(),
+    // Prev/next follow the team page's default order (newest first) across both
+    // curated and community listings, so paging through a team matches the
+    // shelf order and reaches everything the team header counts.
+    buildListingNav(slug, bobbleheadId),
   ]);
 
   // Admin-deleted listings are gone, not "removed after hydration": the URL
   // 404s and (via sitemap.ts) drops out of the crawl surface.
   if (override?.deleted) notFound();
-
-  // Prev/next follow the team page's default order (newest first), skipping
-  // deleted listings, so paging through a team matches the shelf order.
-  const ordered = sortNewestFirst(GIVEAWAYS_BY_TEAM[slug] ?? []).filter(
-    (entry) => !deletedKeys.has(`${slug}/${entry.id}`),
-  );
-  const index = ordered.findIndex((entry) => entry.id === bobbleheadId);
-  const prev = index > 0 ? ordered[index - 1] : null;
-  const next = index >= 0 && index < ordered.length - 1 ? ordered[index + 1] : null;
-  // A handful of neighbors double as "related bobbleheads" links so detail
-  // pages aren't crawl dead-ends.
-  const related = ordered
-    .slice(Math.max(0, index - 3), index + 4)
-    .filter((entry) => entry.id !== bobbleheadId)
-    .map((entry) => ({ id: entry.id, title: entry.title }));
-  const nav: ListingNav = {
-    position: index >= 0 ? index + 1 : 1,
-    total: ordered.length,
-    prev: prev ? { id: prev.id, title: prev.title } : null,
-    next: next ? { id: next.id, title: next.title } : null,
-    related,
-  };
 
   const name = override?.title ?? giveaway.title;
   const quantity = override?.quantity ?? giveaway.quantity ?? null;

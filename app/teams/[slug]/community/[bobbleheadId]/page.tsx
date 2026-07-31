@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { breadcrumbList } from "@/components/BreadcrumbJsonLd";
 import { getCommunityListing } from "@/lib/communityServer";
+import { buildListingNav } from "@/lib/listingNav";
 import { siteUrl } from "@/lib/siteUrl";
 import { getTeamBySlug } from "@/lib/teams";
 import { CommunityBobbleheadPage } from "../CommunityBobbleheadPage";
@@ -52,6 +53,10 @@ export default async function CommunityListingPage({
   const listing = await getCommunityListing(slug, bobbleheadId);
   if (!listing) notFound();
 
+  // Same chain the curated pages use, so the arrows carry straight through a
+  // community listing instead of dead-ending on it.
+  const nav = await buildListingNav(slug, bobbleheadId);
+
   const base = siteUrl();
   const pageUrl = `${base}/teams/${slug}/community/${bobbleheadId}`;
   const jsonLd = {
@@ -80,7 +85,7 @@ export default async function CommunityListingPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Suspense fallback={null}>
-        <CommunityBobbleheadPage team={team} bobbleheadId={bobbleheadId} />
+        <CommunityBobbleheadPage team={team} bobbleheadId={bobbleheadId} nav={nav} />
       </Suspense>
     </>
   );

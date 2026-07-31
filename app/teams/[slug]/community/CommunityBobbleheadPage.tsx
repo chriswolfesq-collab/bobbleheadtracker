@@ -10,6 +10,7 @@ import { CollectionDetails } from "@/components/CollectionDetails";
 import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/EditBobbleheadDialog";
 import { extractYear } from "@/lib/extractYear";
 import { FavoriteButton } from "@/components/FavoriteButton";
+import { ListingNavControls, ListingNavCounter } from "@/components/ListingNavControls";
 import { PhotoGallery } from "@/components/PhotoGallery";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
@@ -23,6 +24,7 @@ import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { ATHLETICS_CITIES, hasCityChoice, resolveAthleticsCity } from "@/lib/athleticsCity";
 import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { useCommunityBobblehead } from "@/lib/communityBobbleheads";
+import type { ListingNav } from "@/lib/listingNav";
 import { publicAsset } from "@/lib/paths";
 import { getRarity } from "@/lib/rarity";
 import type { Team } from "@/lib/teams";
@@ -60,11 +62,15 @@ function Shell({ team, children }: { team: Team; children: React.ReactNode }) {
 export function CommunityBobbleheadPage({
   team,
   bobbleheadId: bobbleheadIdProp,
+  nav,
 }: {
   team: Team;
   /** provided by the /community/[bobbleheadId] route; the legacy ?id= URL
       falls back to the query param */
   bobbleheadId?: string;
+  /** the team's prev/next chain, server-built by the per-listing route. Absent
+      on the legacy ?id= entry point, which renders without arrows. */
+  nav?: ListingNav;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -287,11 +293,17 @@ export function CommunityBobbleheadPage({
               ]}
             />
           </div>
-          <span className="shrink-0 rounded bg-accent/10 px-2 py-1 text-[10px] font-black uppercase tracking-wider text-accent">
-            Community submission
-          </span>
+          <div className="flex shrink-0 items-center gap-3">
+            <span className="rounded bg-accent/10 px-2 py-1 text-[10px] font-black uppercase tracking-wider text-accent">
+              Community submission
+            </span>
+            {nav ? <ListingNavCounter nav={nav} /> : null}
+          </div>
         </div>
       </div>
+
+      {/* Prev/next edge arrows */}
+      {nav ? <ListingNavControls nav={nav} /> : null}
 
       <div className="mx-auto w-full max-w-6xl px-4 pb-16 pt-6 sm:px-6">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
@@ -547,6 +559,25 @@ export function CommunityBobbleheadPage({
             ) : null}
           </div>
         </div>
+
+        {nav && nav.related.length > 0 ? (
+          <div className="mt-8">
+            <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
+              More {team.name} bobbleheads
+            </h2>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {nav.related.map((entry) => (
+                <Link
+                  key={entry.id}
+                  href={entry.href}
+                  className="rounded-full border border-border-soft bg-surface px-3.5 py-1.5 text-sm font-semibold text-navy transition hover:border-accent hover:text-accent"
+                >
+                  {entry.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : null}
 
         <div className="mt-8 flex flex-col items-center justify-between gap-3 rounded-xl border border-border-soft bg-surface px-6 py-5 sm:flex-row">
           <p className="text-sm text-zinc-700">
