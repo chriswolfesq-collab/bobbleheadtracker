@@ -1,11 +1,17 @@
 "use client";
 
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useToast } from "@/components/Toast";
 import { useAuth } from "@/lib/auth";
-import { type BobbleheadIdentity, bobbleheadHref, buildBobbleheadResolver } from "@/lib/bobbleheadIdentity";
+import {
+  type BobbleheadIdentity,
+  bobbleheadHref,
+  buildBobbleheadResolver,
+  listingKey,
+} from "@/lib/bobbleheadIdentity";
 import { getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
-import { supabase } from "@/lib/supabase";
+import { fetchAllPages, supabase } from "@/lib/supabase";
 import { TEAMS } from "@/lib/teams";
 
 export type TeamCount = { teamSlug: string; count: number };
@@ -122,6 +128,108 @@ export function useCollectionSummary(source?: ProfileSource) {
   const totalOwned = Object.values(resolvedCounts).reduce((sum, count) => sum + count, 0);
 
   return { countByTeamSlug: resolvedCounts, totalOwned, isLoading: userId ? isLoading : false };
+}
+
+// A signed-out reader gets the same empty set every render, so the memos
+// downstream of it don't recompute on every pass.
+const NO_OWNED_KEYS: ReadonlySet<string> = new Set();
+
+/**
+ * Which listings the signed-in user owns, across every team, keyed by
+ * `listingKey`. useUserCollection answers the same question one team at a time,
+ * which is all a team page ever needs; a tag cuts across teams, so tracking
+ * progress against one means holding the whole collection at once.
+ *
+ * The setter writes the same user_collections row the team pages do, so
+ * checking something off from a tag page and from its team page are the same
+ * act — optimistic, reverted and toasted if the save fails.
+ */
+export function useOwnedKeys(): {
+  ownedKeys: ReadonlySet<string>;
+  isLoading: boolean;
+  isLoggedIn: boolean;
+  setOwned: (teamSlug: string, bobbleheadId: string, owned: boolean) => Promise<void>;
+} {
+  const { user } = useAuth();
+  const { showError } = useToast();
+  const userId = user?.id ?? null;
+  const [ownedKeys, setOwnedKeys] = useState<ReadonlySet<string>>(NO_OWNED_KEYS);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    let cancelled = false;
+
+    // Paged, because a checklist built from a collection trimmed at PostgREST's
+    // row cap would report a long-time collector as owning less than they do.
+    fetchAllPages((from, to) =>
+      supabase
+        .from("user_collections")
+        .select("bobblehead_id, team_slug")
+        .eq("user_id", userId)
+        .eq("owned", true)
+        .order("bobblehead_id")
+        .range(from, to),
+    ).then((rows) => {
+      if (cancelled) return;
+
+      if (!rows) {
+        console.error("Failed to load your collection.");
+        setOwnedKeys(NO_OWNED_KEYS);
+      } else {
+        setOwnedKeys(new Set(rows.map((row) => listingKey(row.team_slug, row.bobblehead_id))));
+      }
+
+      setIsLoading(false);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
+
+  const setOwned = useCallback(
+    async (teamSlug: string, bobbleheadId: string, owned: boolean) => {
+      if (!userId) return;
+
+      const key = listingKey(teamSlug, bobbleheadId);
+      // Optimistic; reverted below if the save fails.
+      setOwnedKeys((current) => {
+        const next = new Set(current);
+        if (owned) next.add(key);
+        else next.delete(key);
+        return next;
+      });
+
+      const { error } = await supabase.from("user_collections").upsert({
+        user_id: userId,
+        bobblehead_id: bobbleheadId,
+        team_slug: teamSlug,
+        owned,
+        updated_at: new Date().toISOString(),
+      });
+
+      if (error) {
+        console.error("Failed to save owned:", error.message);
+        setOwnedKeys((current) => {
+          const next = new Set(current);
+          if (owned) next.delete(key);
+          else next.add(key);
+          return next;
+        });
+        showError("Couldn't save that. Please try again.");
+      }
+    },
+    [userId, showError],
+  );
+
+  return {
+    ownedKeys: userId ? ownedKeys : NO_OWNED_KEYS,
+    isLoading: userId ? isLoading : false,
+    isLoggedIn: Boolean(userId),
+    setOwned,
+  };
 }
 
 export type MyShelf = {

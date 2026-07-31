@@ -15,6 +15,13 @@ export type BobbleheadIdentity = {
   href: string;
 };
 
+// It takes both halves to name a listing — 36 bobblehead ids are shared between
+// teams — so the cross-team lookups all key on the pair. This is the one spelling
+// of that key, so a set built from one table can be probed with rows from another.
+export function listingKey(teamSlug: string, bobbleheadId: string): string {
+  return `${teamSlug}:${bobbleheadId}`;
+}
+
 // Curated listings have a dedicated detail page; community-only ones open
 // through the community view with the id as a query param.
 export function bobbleheadHref(teamSlug: string, bobbleheadId: string, isCurated: boolean): string {
