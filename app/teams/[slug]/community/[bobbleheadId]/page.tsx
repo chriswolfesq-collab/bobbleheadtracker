@@ -54,8 +54,10 @@ export default async function CommunityListingPage({
   if (!listing) notFound();
 
   // Same chain the curated pages use, so the arrows carry straight through a
-  // community listing instead of dead-ending on it.
-  const nav = await buildListingNav(slug, bobbleheadId);
+  // community listing instead of dead-ending on it. The row we just read is
+  // handed over so a listing the cached snapshot hasn't caught up with still
+  // places itself in the chain, without paying for a second read.
+  const nav = await buildListingNav(slug, bobbleheadId, listing);
 
   const base = siteUrl();
   const pageUrl = `${base}/teams/${slug}/community/${bobbleheadId}`;

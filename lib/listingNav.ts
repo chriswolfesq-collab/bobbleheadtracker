@@ -1,5 +1,9 @@
 import { GIVEAWAYS_BY_TEAM } from "@/lib/bobbleheads";
-import { getCommunityListings } from "@/lib/communityServer";
+import {
+  getCommunityListing,
+  getCommunityListings,
+  type CommunityListingRow,
+} from "@/lib/communityServer";
 import { getDeletedListingKeys } from "@/lib/curatedListing";
 import { sortNewestFirst } from "@/lib/releaseOrder";
 
@@ -33,6 +37,7 @@ type OrderedListing = ListingNavEntry & { date: string; year: string };
 export async function buildListingNav(
   teamSlug: string,
   bobbleheadId: string,
+  knownListing?: CommunityListingRow | null,
 ): Promise<ListingNav> {
   const [communityListings, deletedKeys] = await Promise.all([
     getCommunityListings(),
@@ -53,16 +58,25 @@ export async function buildListingNav(
   // the row outright, so there's no tombstone to skip (matching the team page).
   const community: OrderedListing[] = communityListings
     .filter((row) => row.teamSlug === teamSlug)
-    .map((row) => ({
-      id: row.id,
-      title: row.title,
-      href: `/teams/${teamSlug}/community/${row.id}`,
-      date: row.date,
-      year: row.year,
-    }));
+    .map((row) => toOrdered(teamSlug, row));
 
-  const ordered = sortNewestFirst([...curated, ...community]);
-  const index = ordered.findIndex((entry) => entry.id === bobbleheadId);
+  let ordered = sortNewestFirst([...curated, ...community]);
+  let index = ordered.findIndex((entry) => entry.id === bobbleheadId);
+
+  // A just-approved listing is live on its own page (getCommunityListing reads
+  // straight from the DB on a miss) while the cached snapshot above still
+  // predates it. Without this, that listing rebuilds the exact bug this module
+  // exists to fix — index -1, so no arrows at all and a total one short — and
+  // then ISR pins that HTML for the rest of the revalidate window. Splice the
+  // listing in rather than letting the miss degrade the whole chain.
+  if (index < 0 && !isCuratedId(teamSlug, bobbleheadId)) {
+    const listing = knownListing ?? (await getCommunityListing(teamSlug, bobbleheadId));
+    if (listing) {
+      ordered = sortNewestFirst([...ordered, toOrdered(teamSlug, listing)]);
+      index = ordered.findIndex((entry) => entry.id === bobbleheadId);
+    }
+  }
+
   const prev = index > 0 ? ordered[index - 1] : null;
   const next = index >= 0 && index < ordered.length - 1 ? ordered[index + 1] : null;
   // A handful of neighbors double as "related bobbleheads" links so detail
@@ -83,4 +97,21 @@ export async function buildListingNav(
 
 function toEntry({ id, title, href }: OrderedListing): ListingNavEntry {
   return { id, title, href };
+}
+
+function toOrdered(teamSlug: string, row: CommunityListingRow): OrderedListing {
+  return {
+    id: row.id,
+    title: row.title,
+    href: `/teams/${teamSlug}/community/${row.id}`,
+    date: row.date,
+    year: row.year,
+  };
+}
+
+// A curated id that isn't in the chain was deleted by an admin, and its page is
+// about to 404 — no point spending a query looking for it among the community
+// listings.
+function isCuratedId(teamSlug: string, bobbleheadId: string): boolean {
+  return (GIVEAWAYS_BY_TEAM[teamSlug] ?? []).some((entry) => entry.id === bobbleheadId);
 }
