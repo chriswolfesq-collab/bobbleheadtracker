@@ -20,7 +20,9 @@ export type TagWriteResult = { error: string | null };
 // RLS filters a forbidden write to zero rows and reports success — no error, a
 // 200, and nothing changed. Every write here asks for its rows back so that
 // silence becomes a visible failure instead of a dialog that closes as if it
-// worked. Same guard, and same wording, as lib/adminEdit.ts.
+// worked. Same guard as lib/adminEdit.ts; the wording differs because these
+// writes are admin-only (a rep can't reach them at all), so an admin seeing this
+// really has gone stale, while over there it may be missing team access.
 function notPersisted(subject: string): string {
   return `${subject} wasn't saved — your admin access may have expired. Sign out and back in, then try again.`;
 }

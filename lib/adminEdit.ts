@@ -6,17 +6,23 @@ import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { storageKeyForFile } from "@/lib/storageKey";
 
 // A write that returns no error but touches zero rows was silently filtered by
-// row-level security — the classic symptom of a stale/expired session that no
-// longer satisfies can_edit_team — or it targeted a row that no longer exists.
-// Either way the change did NOT persist. Supabase reports success (error: null,
-// HTTP 200) for this, so without an explicit row-count check the UI closes the
-// dialog as if the edit took. We turn it into a visible, actionable error
-// instead. Relies on every target table having a public SELECT policy, so the
-// returned rows reflect exactly what was written.
+// row-level security, or it targeted a row that no longer exists. Either way
+// the change did NOT persist. Supabase reports success (error: null, HTTP 200)
+// for this, so without an explicit row-count check the UI closes the dialog as
+// if the edit took. We turn it into a visible, actionable error instead. Relies
+// on every target table having a public SELECT policy, so the returned rows
+// reflect exactly what was written.
+//
+// The message names both ways can_edit_team() can come back false, because they
+// need opposite fixes and the caller can't tell them apart from here: an expired
+// session (sign back in) or an account that never had rights to this row's team
+// (an admin has to grant them). Naming only the session sent a team rep who hit
+// the second case round and round a re-login that could never work.
 function assertPersisted<T>(rows: T[] | null, subject: string): void {
   if (!rows || rows.length === 0) {
     throw new Error(
-      `${subject} wasn't saved — your edit access may have expired. Sign out and back in, then try again.`,
+      `${subject} wasn't saved — you may not have edit access for this team, or your session expired. ` +
+        `Sign out and back in; if that doesn't help, ask an admin to check your team access.`,
     );
   }
 }
