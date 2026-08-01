@@ -305,9 +305,9 @@ export function CuratedBobbleheadPage({
     setMainPhotoRemoved(true);
   };
 
+  // Confirmed in the gallery's own controls, not by window.confirm — see the
+  // note on ManageControls in components/PhotoGallery.tsx.
   const handleDeleteGalleryPhoto = async (photo: GalleryPhoto) => {
-    if (!window.confirm("Remove this photo for everyone?")) return;
-
     try {
       await deleteGalleryPhoto(photo);
       removePhotoLocally(photo.id);
