@@ -5,13 +5,12 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RecentlyAddedCard } from "@/components/RecentlyAddedCard";
 import { ToggleChip } from "@/components/ToggleChip";
 import { useAllApprovedPhotos } from "@/lib/approvedPhotos";
-import { useRecentCommunityBobbleheads } from "@/lib/communityBobbleheads";
+import { useAllCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { extractYear, UNKNOWN_YEAR } from "@/lib/extractYear";
 import { getTeamBySlug } from "@/lib/teams";
 import { useMyOwnedLookup } from "@/lib/userCollections";
 import { useMyWantedLookup } from "@/lib/userWanted";
 
-const RECENT_LIMIT = 200;
 // How many cards to render at once. The full filtered list can be hundreds of
 // items; rendering a page at a time and growing on demand keeps the initial
 // DOM (and its images) small without a server round-trip per filter change.
@@ -20,7 +19,12 @@ const FIELD_CLASSES =
   "mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent";
 
 export function RecentlyAddedPageClient() {
-  const { communityBobbleheads, isLoading } = useRecentCommunityBobbleheads(RECENT_LIMIT);
+  // Every community listing, not the newest N. This page filters, searches and
+  // sorts across the whole set — including oldest-first — so a fetch capped at
+  // 200 left the oldest listings unreachable by any of it, and reported the cap
+  // as the total ("of 200") while there were 226. The homepage strip next door
+  // genuinely does want the newest ten; this is the page that holds all of them.
+  const { communityBobbleheads, isLoading } = useAllCommunityBobbleheads();
   // Same reason the search grid loads these: a listing's own image_url is only
   // one of its photos, and not the one the listing page shows. An admin can
   // approve a better photo — or replace one whose file has since gone — and
