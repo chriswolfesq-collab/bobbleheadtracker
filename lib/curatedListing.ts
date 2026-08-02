@@ -100,6 +100,18 @@ export async function getDeletedListingKeys(): Promise<Set<string>> {
   );
 }
 
+// Every admin edit, and every approved main photo, as "teamSlug/bobbleheadId"
+// maps. Server-rendered lists built from the curated catalog have to apply
+// these themselves — the catalog is baked into the bundle at build time and
+// knows nothing about them.
+export function getListingOverrides(): Promise<Record<string, BobbleheadOverride>> {
+  return getOverridesMap();
+}
+
+export function getApprovedPhotos(): Promise<Record<string, string>> {
+  return getApprovedPhotosMap();
+}
+
 // Approved community listings per team, for server-rendered counts (team page
 // <title>). Cached like the other maps; busted by the same revalidate tag.
 const getCommunityCountsMap = unstable_cache(

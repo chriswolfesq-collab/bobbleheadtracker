@@ -8,12 +8,13 @@ import {
   startOfDay,
 } from "@/lib/upcomingGiveaways";
 
-const entry = (over: Partial<Giveaway> & { teamSlug?: string } = {}) => ({
+const entry = (over: Partial<Giveaway> & { teamSlug?: string; isCurated?: boolean } = {}) => ({
   id: "x",
   title: "Someone",
   year: "2026",
   date: "April 11, 2026",
   teamSlug: "brewers",
+  isCurated: true,
   ...over,
 });
 
