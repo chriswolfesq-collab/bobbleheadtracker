@@ -12,8 +12,12 @@ import { searchGiveaways, type SearchResult } from "@/lib/search";
 import { getTeamBySlug } from "@/lib/teams";
 import { useSearchIndex } from "@/lib/useSearchIndex";
 
-// Effectively "no limit": the dropdown caps at 20, this page shows everything.
-const PAGE_RESULT_LIMIT = 1000;
+// How many cards to render at once, matching /recently-added. A broad query
+// ("s", "20") matches thousands of listings, and this page used to hand every
+// one of them to the DOM at once — which is why it capped the search itself at
+// 1000 and then reported that cap as the result count. Paging the render is
+// what lets the search stay uncapped.
+const PAGE_SIZE = 48;
 
 function ResultCard({ result, photoUrl }: { result: SearchResult; photoUrl?: string }) {
   const placeholderSrc = publicAsset(`/bobbleheads/${result.teamSlug}.png`);
@@ -63,7 +67,22 @@ export function SearchPageClient() {
 
   const index = useSearchIndex(team ? team.slug : undefined);
   const photoUrlByListing = useAllApprovedPhotos();
-  const results = useMemo(() => searchGiveaways(index, query, PAGE_RESULT_LIMIT), [index, query]);
+  // The index itself is the only ceiling — a search can't match more listings
+  // than exist, so this is "everything that matched" with a finite number.
+  const results = useMemo(() => searchGiveaways(index, query, index.length), [index, query]);
+
+  // Reset the window when the query changes, so refining a search starts at the
+  // top rather than deep in the previous one's "show more" state. Compared
+  // during render (React's "adjust state during render" pattern) rather than in
+  // an effect, same as /recently-added.
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [prevQuery, setPrevQuery] = useState(query);
+  if (prevQuery !== query) {
+    setPrevQuery(query);
+    setVisibleCount(PAGE_SIZE);
+  }
+
+  const visible = results.slice(0, visibleCount);
 
   // Keep the URL shareable/bookmarkable as the user refines the query. The
   // native History API integrates with the Next router, so this doesn't
@@ -162,10 +181,15 @@ export function SearchPageClient() {
         ) : (
           <>
             <p className="mb-3 text-xs text-zinc-600">
-              {results.length === 1 ? "1 result" : `${results.length} results`} for “{query.trim()}”
+              {visible.length < results.length
+                ? `Showing ${visible.length} of ${results.length} results`
+                : results.length === 1
+                  ? "1 result"
+                  : `${results.length} results`}{" "}
+              for “{query.trim()}”
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-              {results.map((result) => (
+              {visible.map((result) => (
                 <ResultCard
                   key={`${result.source}-${result.teamSlug}-${result.id}`}
                   result={result}
@@ -173,6 +197,17 @@ export function SearchPageClient() {
                 />
               ))}
             </div>
+            {visible.length < results.length ? (
+              <div className="mt-6 text-center">
+                <button
+                  type="button"
+                  onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+                  className="rounded-full border border-black/10 bg-black/[0.04] px-5 py-2 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover"
+                >
+                  Show more ({results.length - visible.length} more)
+                </button>
+              </div>
+            ) : null}
           </>
         )}
       </div>
