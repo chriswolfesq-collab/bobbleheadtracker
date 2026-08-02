@@ -1,12 +1,15 @@
 import type { Giveaway } from "@/lib/bobbleheads";
 
-// Which giveaways haven't happened yet. The catalog already carries next
-// season's schedule — 122 entries dated 2026 at the time of writing — and until
-// now the only way to see them was to sort a team page by oldest-last and
+// Which giveaways haven't happened yet, out of every listing the site holds —
+// the curated catalog, admin edits to it, and community-submitted listings.
+// Until now the only way to see them was to sort a team page by oldest-last and
 // scroll. Nothing new is stored; this is a read of data that was already there.
+// lib/giveawayFeed.ts assembles the sources; this decides what's still ahead.
 
 export type UpcomingGiveaway = Giveaway & {
   teamSlug: string;
+  /** Curated listings have a detail page; community ones live elsewhere. */
+  isCurated: boolean;
   /** Local midnight on the giveaway's date, for sorting and grouping. */
   time: number;
 };
@@ -29,7 +32,7 @@ export function giveawayDayTime(date: string): number | null {
 }
 
 export function selectUpcoming(
-  giveaways: UpcomingGiveaway[] | Array<Giveaway & { teamSlug: string }>,
+  giveaways: UpcomingGiveaway[] | Array<Giveaway & { teamSlug: string; isCurated: boolean }>,
   now: number,
   limit?: number,
 ): UpcomingGiveaway[] {

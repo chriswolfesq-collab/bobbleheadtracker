@@ -14,10 +14,10 @@ export function UpcomingCard({ item, now }: { item: UpcomingGiveaway; now: numbe
   const imageSrc = item.imageUrl ?? publicAsset(`/bobbleheads/${item.teamSlug}.png`);
 
   return (
-    // Curated listings only: the schedule this reads is the curated catalog,
-    // so there's never a community id to route here.
+    // A community-submitted giveaway has no curated detail page, so its card
+    // opens the community view instead.
     <Link
-      href={bobbleheadHref(item.teamSlug, item.id, true)}
+      href={bobbleheadHref(item.teamSlug, item.id, item.isCurated)}
       className="group flex h-full flex-col overflow-hidden rounded-xl border border-border-soft bg-surface transition hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
     >
       <div className="flex h-28 items-end justify-center bg-[radial-gradient(circle_at_50%_18%,#ffffff,#f2ead9_78%)] pt-3">
