@@ -1336,7 +1336,18 @@ as $$
         from (
           select c.team_slug, count(*)::int as cnt
           from public.user_collections c
-          where c.user_id = p.id and c.owned
+          where c.user_id = p.id
+            and c.owned
+            -- Deleting a listing leaves the collection rows pointing at it, and
+            -- counting them put bobbleheads on a shelf that 404 when opened.
+            -- See supabase/public_shelf_excludes_deleted.sql.
+            and not exists (
+              select 1
+              from public.bobblehead_overrides o
+              where o.team_slug = c.team_slug
+                and o.bobblehead_id = c.bobblehead_id
+                and o.deleted
+            )
           group by c.team_slug
         ) t
       ),

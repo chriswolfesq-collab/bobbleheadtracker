@@ -1,7 +1,7 @@
 "use client";
 
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useToast } from "@/components/Toast";
 import { useAuth } from "@/lib/auth";
 import {
@@ -10,6 +10,7 @@ import {
   buildBobbleheadResolver,
   listingKey,
 } from "@/lib/bobbleheadIdentity";
+import { useBobbleheadOverrides } from "@/lib/bobbleheadOverrides";
 import { getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
 import { fetchAllPages, supabase } from "@/lib/supabase";
 import { TEAMS } from "@/lib/teams";
@@ -89,8 +90,12 @@ export function useCollectionSummary(source?: ProfileSource) {
   const { user } = useAuth();
   const client = source?.client ?? supabase;
   const userId = source?.userId ?? user?.id ?? null;
-  const [countByTeamSlug, setCountByTeamSlug] = useState<Record<string, number>>({});
-  const [isLoading, setIsLoading] = useState(true);
+  // The rows rather than the tally, because which listing each one points at
+  // decides whether it counts — see below.
+  const [ownedRows, setOwnedRows] = useState<{ teamSlug: string; bobbleheadId: string }[] | null>(
+    null,
+  );
+  const { isDeleted, isLoaded: overridesLoaded } = useBobbleheadOverrides();
 
   useEffect(() => {
     if (!userId) return;
@@ -99,24 +104,21 @@ export function useCollectionSummary(source?: ProfileSource) {
 
     client
       .from("user_collections")
-      .select("team_slug, owned")
+      .select("team_slug, bobblehead_id, owned")
       .eq("user_id", userId)
       .then(({ data, error }) => {
         if (cancelled) return;
 
         if (error) {
           console.error("Failed to load your collection summary:", error.message);
-          setCountByTeamSlug({});
+          setOwnedRows([]);
         } else {
-          const counts: Record<string, number> = {};
-          for (const row of data ?? []) {
-            if (!row.owned) continue;
-            counts[row.team_slug] = (counts[row.team_slug] ?? 0) + 1;
-          }
-          setCountByTeamSlug(counts);
+          setOwnedRows(
+            (data ?? [])
+              .filter((row) => row.owned)
+              .map((row) => ({ teamSlug: row.team_slug, bobbleheadId: row.bobblehead_id })),
+          );
         }
-
-        setIsLoading(false);
       });
 
     return () => {
@@ -124,8 +126,24 @@ export function useCollectionSummary(source?: ProfileSource) {
     };
   }, [userId, client]);
 
+  // Deleting a listing leaves everyone's collection row behind, and this used
+  // to count them: the total said you owned bobbleheads that no longer exist,
+  // over a denominator that already subtracts them — so a team could read 13
+  // of 12, and the owned list underneath disagreed with the number above it.
+  const countByTeamSlug = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const row of ownedRows ?? []) {
+      if (isDeleted(row.teamSlug, row.bobbleheadId)) continue;
+      counts[row.teamSlug] = (counts[row.teamSlug] ?? 0) + 1;
+    }
+    return counts;
+  }, [ownedRows, isDeleted]);
+
   const resolvedCounts = userId ? countByTeamSlug : {};
   const totalOwned = Object.values(resolvedCounts).reduce((sum, count) => sum + count, 0);
+  // Still loading until the overrides are in too: a count that lands high and
+  // then drops reads as though something was lost.
+  const isLoading = ownedRows === null || !overridesLoaded;
 
   return { countByTeamSlug: resolvedCounts, totalOwned, isLoading: userId ? isLoading : false };
 }
