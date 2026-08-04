@@ -116,8 +116,12 @@ export const getPublicGallery = cache(async (slug: string): Promise<PublicGaller
   const teamSlugs = Array.from(new Set(rows.map((row) => row.team_slug)));
   const resolve = await buildBobbleheadResolver(client, teamSlugs);
 
-  return rows.map((row) => ({
-    kind: row.kind === "favorite" ? ("favorite" as const) : ("owned" as const),
-    ...resolve(row.team_slug, row.bobblehead_id),
-  }));
+  return rows
+    .map((row) => ({
+      kind: row.kind === "favorite" ? ("favorite" as const) : ("owned" as const),
+      ...resolve(row.team_slug, row.bobblehead_id),
+    }))
+    // A shelf someone shares shouldn't hand its visitors a 404: deleting a
+    // listing leaves the owner's row behind, pointing at a page that's gone.
+    .filter((item) => !item.deleted);
 });

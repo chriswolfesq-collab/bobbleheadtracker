@@ -8,6 +8,7 @@ import {
   buildBobbleheadResolver,
   listingKey,
 } from "@/lib/bobbleheadIdentity";
+import { useBobbleheadOverrides } from "@/lib/bobbleheadOverrides";
 import { getGiveawayById } from "@/lib/bobbleheads";
 import { useOwnedKeys } from "@/lib/profile";
 import { fetchAllPages, supabase } from "@/lib/supabase";
@@ -219,6 +220,7 @@ export function useTagDirectory(): {
   const { tags, isLoading: isLoadingTags } = useTagVocabulary();
   const { assignments } = useTagAssignments();
   const { ownedKeys, isLoading: isLoadingOwned, isLoggedIn } = useOwnedKeys();
+  const { isDeleted, isLoaded: overridesLoaded } = useBobbleheadOverrides();
   const [exampleByTag, setExampleByTag] = useState<Record<string, BobbleheadIdentity>>({});
 
   useEffect(() => {
@@ -252,20 +254,39 @@ export function useTagDirectory(): {
   const ownedCountByTag = useMemo(() => {
     const counts: Record<string, number> = {};
     for (const assignment of assignments ?? []) {
+      if (isDeleted(assignment.teamSlug, assignment.bobbleheadId)) continue;
       if (!ownedKeys.has(listingKey(assignment.teamSlug, assignment.bobbleheadId))) continue;
       counts[assignment.tagSlug] = (counts[assignment.tagSlug] ?? 0) + 1;
     }
     return counts;
-  }, [assignments, ownedKeys]);
+  }, [assignments, ownedKeys, isDeleted]);
+
+  // The tag_counts view counts assignment rows, and deleting a listing doesn't
+  // clear its tags — so the directory advertised totals the tag page itself
+  // can't show. Recounted here off the assignments, which are loaded anyway,
+  // rather than in SQL: the view is shared with the admin tools, and this is
+  // the number a reader is promised on the way in. Falls back to the view's
+  // count until the overrides land, so no tag flashes a wrong total on the way.
+  const listingCountByTag = useMemo(() => {
+    if (!assignments || !overridesLoaded) return null;
+
+    const counts: Record<string, number> = {};
+    for (const assignment of assignments) {
+      if (isDeleted(assignment.teamSlug, assignment.bobbleheadId)) continue;
+      counts[assignment.tagSlug] = (counts[assignment.tagSlug] ?? 0) + 1;
+    }
+    return counts;
+  }, [assignments, overridesLoaded, isDeleted]);
 
   const entries = useMemo(
     () =>
       tags.map((tag) => ({
         ...tag,
+        listingCount: listingCountByTag ? (listingCountByTag[tag.slug] ?? 0) : tag.listingCount,
         example: exampleByTag[tag.slug] ?? null,
         ownedCount: ownedCountByTag[tag.slug] ?? 0,
       })),
-    [tags, exampleByTag, ownedCountByTag],
+    [tags, exampleByTag, ownedCountByTag, listingCountByTag],
   );
 
   return {
@@ -328,6 +349,10 @@ export function useTaggedListings(tagSlug: string): {
       setListings(
         rows
           .map((row) => resolve(row.team_slug, row.bobblehead_id))
+          // A tag row outlives the listing it points at: deleting a listing
+          // doesn't clear its tags, so without this the checklist counts
+          // bobbleheads whose page 404s towards a total you can't reach.
+          .filter((listing) => !listing.deleted)
           .sort((a, b) => a.title.localeCompare(b.title)),
       );
       setIsLoading(false);
