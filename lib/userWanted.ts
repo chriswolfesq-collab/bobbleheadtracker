@@ -72,13 +72,16 @@ export function useMyWantedLookup() {
       const previousWanted = wantedByKeyRaw[key] ?? false;
       setWantedByKeyRaw((current) => ({ ...current, [key]: wanted }));
 
-      const { error } = await supabase.from("user_wants").upsert({
-        user_id: user.id,
-        bobblehead_id: bobbleheadId,
-        team_slug: teamSlug,
-        wanted,
-        updated_at: new Date().toISOString(),
-      });
+      const { error } = await supabase.from("user_wants").upsert(
+        {
+          user_id: user.id,
+          bobblehead_id: bobbleheadId,
+          team_slug: teamSlug,
+          wanted,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "user_id,team_slug,bobblehead_id" },
+      );
 
       if (error) {
         console.error("Failed to save wanted status:", error.message);

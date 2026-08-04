@@ -214,6 +214,10 @@ export function CollectionTransfer() {
             notes: row.notes,
             updated_at: now,
           })),
+          // Team-scoped, like every other write to these tables — an import
+          // holding the same curated id for two teams is two rows, not one
+          // overwriting the other. See supabase/fix_collection_team_collisions.sql.
+          { onConflict: "user_id,team_slug,bobblehead_id" },
         );
         if (error) throw new Error(error.message);
 
@@ -225,6 +229,7 @@ export function CollectionTransfer() {
             wanted: row.wanted,
             updated_at: now,
           })),
+          { onConflict: "user_id,team_slug,bobblehead_id" },
         );
         if (wantsError) throw new Error(wantsError.message);
 
@@ -236,6 +241,7 @@ export function CollectionTransfer() {
             favorited: row.favorite,
             updated_at: now,
           })),
+          { onConflict: "user_id,team_slug,bobblehead_id" },
         );
         if (favoritesError) throw new Error(favoritesError.message);
       }

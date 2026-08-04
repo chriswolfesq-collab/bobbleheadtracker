@@ -75,13 +75,20 @@ export function useUserFlagMap(
       const previous = mapRaw[bobbleheadId] ?? false;
       setMapRaw((current) => ({ ...current, [bobbleheadId]: value }));
 
-      const { error } = await untyped.from(table).upsert({
-        user_id: user.id,
-        bobblehead_id: bobbleheadId,
-        team_slug: teamSlug,
-        [flag]: value,
-        updated_at: new Date().toISOString(),
-      });
+      // The conflict target carries the team: curated ids repeat across teams,
+      // and keyed on (user_id, bobblehead_id) alone this upsert hijacked the
+      // other team's row instead of writing its own. See
+      // supabase/fix_collection_team_collisions.sql.
+      const { error } = await untyped.from(table).upsert(
+        {
+          user_id: user.id,
+          bobblehead_id: bobbleheadId,
+          team_slug: teamSlug,
+          [flag]: value,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "user_id,team_slug,bobblehead_id" },
+      );
 
       if (error) {
         console.error(`Failed to save ${flag}:`, error.message);
