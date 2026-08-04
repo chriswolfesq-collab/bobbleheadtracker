@@ -23,6 +23,13 @@
 --   Part 3  Verify -- prove a call now returns 200.
 --   Part 4  Rotating.
 --
+-- Safe to paste whole: Parts 1-3 run in order on a database that has never seen
+-- this file. The one thing that cannot be batched is Part 3's second query --
+-- net.http_post is asynchronous, so the response row does not exist yet when the
+-- rest of the script finishes. Run that last select on its own, a few seconds
+-- later. (The SQL editor aborts everything after the first error, so a statement
+-- that fails takes the remainder of the file with it.)
+--
 -- Which value to paste: whatever Vercel has in REVALIDATE_SECRET (Project ->
 -- Settings -> Environment Variables). That is the source of truth, and the copy
 -- in the local .env.local is NOT it -- a hand POST with the local value 401'd on
@@ -52,18 +59,47 @@ where n.nspname = 'public' and p.prosrc like '%x-revalidate-secret%';
 
 -- 1b. Can the accessor resolve the secret at all? False after Part 2 means the
 --     Vault row is missing or empty, and every call is 401ing regardless of 1a.
+--
+--     Wrapped in a DO block, and calling the accessor dynamically, so that a
+--     whole-file paste survives the first run: before Part 2 the function does
+--     not exist, and a bare `select public.revalidate_secret()` would fail to
+--     even parse -- taking the rest of the script down with it, since the SQL
+--     editor aborts everything after the first error. Read the result in the
+--     Messages/Notices pane, not the results grid.
 
-select public.revalidate_secret() is not null as vault_readable;
+do $do$
+declare
+  v_readable boolean;
+begin
+  if to_regproc('public.revalidate_secret') is null then
+    raise notice 'vault_readable: n/a -- revalidate_secret() does not exist yet; Part 2 has not been run.';
+  else
+    execute 'select public.revalidate_secret() is not null' into v_readable;
+    raise notice 'vault_readable: %', v_readable;
+  end if;
+end
+$do$;
 
 -- 1c. What the database actually got back -- the only honest answer. Anything
---     other than 200 for the revalidate URL means the site is not refreshing.
---     net._http_response is pruned after a few hours, so an empty result means
---     "nothing sent recently", not "nothing ever failed".
+--     other than 200 means the site is not refreshing.
+--
+--     net._http_response does NOT record the URL (its columns are id,
+--     status_code, content_type, headers, content, timed_out, error_msg,
+--     created), so this cannot be filtered to the revalidate calls: the mailer
+--     webhooks land in the same table. The response body tells them apart --
+--     this route answers {"revalidated":true} or the bare word Unauthorized.
+--
+--     Pruned after a few hours, so an empty result means "nothing sent
+--     recently", not "nothing ever failed".
 
-select status_code, count(*) as calls, min(created) as first, max(created) as latest
+select
+  status_code,
+  left(content, 40) as body,
+  count(*) as calls,
+  min(created) as first,
+  max(created) as latest
 from net._http_response
-where url = 'https://bobbleshelf.com/api/revalidate'
-group by status_code
+group by status_code, left(content, 40)
 order by calls desc;
 
 -- ===========================================================================
@@ -174,14 +210,19 @@ select net.http_post(
   body := '{}'::jsonb
 ) as request_id;
 
--- Wait a few seconds, then read the result. 200 with {"revalidated":true} is the
--- fix landing; 401 means the value in Vault still isn't what Vercel holds.
+-- RUN THIS ONE ON ITS OWN, a few seconds after the rest. net.http_post queues
+-- the request and returns immediately, so in a single batch this select runs
+-- before the response lands. The row whose id matches the request_id above is
+-- the one to read -- the table holds the mailer webhooks too and has no URL
+-- column to filter by, so identify this call by its id or its body.
+--
+-- 200 with {"revalidated":true} is the fix landing; 401 (body: Unauthorized)
+-- means the value in Vault still isn't what Vercel holds.
 
-select status_code, content, created
+select id, status_code, left(content, 60) as body, error_msg, created
 from net._http_response
-where url = 'https://bobbleshelf.com/api/revalidate'
 order by created desc
-limit 1;
+limit 5;
 
 -- ===========================================================================
 -- Part 4 - Rotating
