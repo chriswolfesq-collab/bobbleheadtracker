@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RecentlyAddedCard } from "@/components/RecentlyAddedCard";
 import { ToggleChip } from "@/components/ToggleChip";
@@ -17,6 +17,51 @@ import { useMyWantedLookup } from "@/lib/userWanted";
 const PAGE_SIZE = 48;
 const FIELD_CLASSES =
   "mt-1 w-full rounded border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent";
+
+type SortOrder = "newest" | "oldest" | "name";
+type OwnedFilter = "all" | "owned" | "unowned";
+
+const SORT_ORDERS: SortOrder[] = ["newest", "oldest", "name"];
+const OWNED_FILTERS: OwnedFilter[] = ["all", "owned", "unowned"];
+
+// Search, filters, sort and how far "show more" has grown all live in the URL
+// (via replaceState, so no navigation per keystroke). That makes a filtered view
+// shareable and — the reason it's here — means opening a listing and pressing
+// Back restores what you were looking at instead of resetting to the newest 48.
+// Same approach as the team collection; see
+// app/teams/[slug]/BobbleheadCollection.tsx.
+function readUrlState() {
+  const params = new URLSearchParams(window.location.search);
+  const sort = params.get("sort") as SortOrder | null;
+  const owned = params.get("owned") as OwnedFilter | null;
+  return {
+    query: params.get("q") ?? "",
+    team: params.get("team") ?? "",
+    year: params.get("year") ?? "",
+    wanted: params.get("wanted") === "1",
+    owned: owned && OWNED_FILTERS.includes(owned) ? owned : "all",
+    sort: sort && SORT_ORDERS.includes(sort) ? sort : "newest",
+    // Rounded to whole pages and floored at one, so a hand-edited or truncated
+    // ?shown= can't leave the grid showing a partial page or nothing at all.
+    shown:
+      Math.max(1, Math.round((Number(params.get("shown")) || PAGE_SIZE) / PAGE_SIZE)) * PAGE_SIZE,
+  };
+}
+
+// The search/filter/sort state flattened into one comparable string. Used during
+// render to notice an edit and shrink the window — and by the URL restore, which
+// has to claim the signature it just restored, or the restore itself reads as an
+// edit and throws away the `?shown=` beside it.
+function filterSignatureOf(state: {
+  query: string;
+  team: string;
+  year: string;
+  wanted: boolean;
+  owned: OwnedFilter;
+  sort: SortOrder;
+}): string {
+  return `${state.query}|${state.team}|${state.year}|${state.wanted}|${state.owned}|${state.sort}`;
+}
 
 export function RecentlyAddedPageClient() {
   // Every community listing, not the newest N. This page filters, searches and
@@ -36,8 +81,68 @@ export function RecentlyAddedPageClient() {
   const [teamFilter, setTeamFilter] = useState("");
   const [yearFilter, setYearFilter] = useState("");
   const [wantedOnly, setWantedOnly] = useState(false);
-  const [ownedFilter, setOwnedFilter] = useState<"all" | "owned" | "unowned">("all");
-  const [sortOrder, setSortOrder] = useState<"newest" | "oldest" | "name">("newest");
+  const [ownedFilter, setOwnedFilter] = useState<OwnedFilter>("all");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [hasRestored, setHasRestored] = useState(false);
+  // The view this window size belongs to. Compared against the live signature
+  // further down, to shrink back to one page when the filters change.
+  const [prevFilterSignature, setPrevFilterSignature] = useState(() =>
+    filterSignatureOf({ query: "", team: "", year: "", wanted: false, owned: "all", sort: "newest" }),
+  );
+
+  // Restore from the URL after mount rather than in the state initializers:
+  // those also run on the server, where there is no window, and a value that
+  // differs from the server-rendered default is a hydration mismatch.
+  useEffect(() => {
+    const url = readUrlState();
+    /* eslint-disable react-hooks/set-state-in-effect */
+    setQuery(url.query);
+    setTeamFilter(url.team);
+    setYearFilter(url.year);
+    setWantedOnly(url.wanted);
+    setOwnedFilter(url.owned);
+    setSortOrder(url.sort);
+    setVisibleCount(url.shown);
+    // Adopt the restored view as the baseline the reset below compares against,
+    // so it can tell a restore from a user edit.
+    setPrevFilterSignature(
+      filterSignatureOf({
+        query: url.query,
+        team: url.team,
+        year: url.year,
+        wanted: url.wanted,
+        owned: url.owned,
+        sort: url.sort,
+      }),
+    );
+    setHasRestored(true);
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
+
+  // The current view as a query string.
+  const view = useMemo(() => {
+    const params = new URLSearchParams();
+    const setUnlessDefault = (key: string, value: string, defaultValue: string) => {
+      if (value !== defaultValue) params.set(key, value);
+    };
+    setUnlessDefault("q", query, "");
+    setUnlessDefault("team", teamFilter, "");
+    setUnlessDefault("year", yearFilter, "");
+    setUnlessDefault("wanted", wantedOnly ? "1" : "", "");
+    setUnlessDefault("owned", ownedFilter, "all");
+    setUnlessDefault("sort", sortOrder, "newest");
+    setUnlessDefault("shown", String(visibleCount), String(PAGE_SIZE));
+    return params.toString();
+  }, [query, teamFilter, yearFilter, wantedOnly, ownedFilter, sortOrder, visibleCount]);
+
+  // Mirror every change back into the URL — but not before the restore above has
+  // read it, since writing the default view first would erase the very params
+  // being restored.
+  useEffect(() => {
+    if (!hasRestored) return;
+    window.history.replaceState(null, "", `${window.location.pathname}${view ? `?${view}` : ""}`);
+  }, [view, hasRestored]);
 
   const teamOptions = useMemo(() => {
     const seen = new Map<string, string>();
@@ -105,9 +210,14 @@ export function RecentlyAddedPageClient() {
   // the top rather than deep in a previous result's "show more" state. Done by
   // comparing against the previous filter signature during render (React's
   // "adjust state during render" pattern) rather than in an effect.
-  const filterSignature = `${query}|${teamFilter}|${yearFilter}|${wantedOnly}|${ownedFilter}|${sortOrder}`;
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
-  const [prevFilterSignature, setPrevFilterSignature] = useState(filterSignature);
+  const filterSignature = filterSignatureOf({
+    query,
+    team: teamFilter,
+    year: yearFilter,
+    wanted: wantedOnly,
+    owned: ownedFilter,
+    sort: sortOrder,
+  });
   if (prevFilterSignature !== filterSignature) {
     setPrevFilterSignature(filterSignature);
     setVisibleCount(PAGE_SIZE);
