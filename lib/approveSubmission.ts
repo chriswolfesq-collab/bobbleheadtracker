@@ -12,6 +12,19 @@ export type ApprovableSubmission = {
   storage_path: string | null;
 };
 
+// An approval that dies after the copy is made leaves the file in the approved
+// bucket, so a retry finds the path already taken. The upload used to pass
+// upsert:true for that case, but an upsert is an UPDATE on storage.objects and
+// the approved bucket has only insert/select/delete policies — so every retry
+// failed with "new row violates row-level security policy" and the submission
+// was stuck in the queue permanently. The path is derived from the submission
+// id, so an object already sitting there is this same submission's photo from
+// the earlier attempt: reuse it instead. Structurally typed rather than
+// importing StorageError, which lives in a transitive dependency.
+function isAlreadyUploaded(error: { message: string; statusCode?: string }): boolean {
+  return error.statusCode === "409" || /already exists|duplicate/i.test(error.message);
+}
+
 async function moveToApproved(storagePath: string, submissionId: string) {
   const { data: file, error: downloadError } = await supabase.storage
     .from("bobblehead-pending")
@@ -26,9 +39,9 @@ async function moveToApproved(storagePath: string, submissionId: string) {
 
   const { error: uploadError } = await supabase.storage
     .from("bobblehead-approved")
-    .upload(approvedPath, file, { upsert: true });
+    .upload(approvedPath, file, { upsert: false });
 
-  if (uploadError) {
+  if (uploadError && !isAlreadyUploaded(uploadError)) {
     throw new Error(uploadError.message);
   }
 
@@ -70,12 +83,18 @@ export async function approveSubmission(submission: ApprovableSubmission) {
 
   if (rpcError) {
     // The copy made by moveToApproved is orphaned if the approval didn't go
-    // through — best-effort cleanup, keeping the original error.
+    // through — best-effort cleanup, keeping the original error. remove()
+    // resolves with an error rather than throwing, so log what it says: a
+    // cleanup that quietly fails is what leaves the stale copies a retry has to
+    // step over.
     if (moved) {
-      await supabase.storage
+      const { error: cleanupError } = await supabase.storage
         .from("bobblehead-approved")
-        .remove([moved.approvedPath])
-        .catch(() => undefined);
+        .remove([moved.approvedPath]);
+
+      if (cleanupError) {
+        console.warn("Could not remove the orphaned approved copy:", cleanupError.message);
+      }
     }
     throw new Error(rpcError.message);
   }
