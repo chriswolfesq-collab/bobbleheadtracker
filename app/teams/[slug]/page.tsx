@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { breadcrumbList } from "@/components/BreadcrumbJsonLd";
 import { getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
-import { getTeamListingCount } from "@/lib/curatedListing";
 import { siteUrl } from "@/lib/siteUrl";
 import { TEAMS, getTeamBySlug } from "@/lib/teams";
+import { getTeamListingCount, getTeamListings, getTeamPhotoSeed } from "@/lib/teamListings";
 import { TeamPageClient } from "./TeamPageClient";
 
 export function generateStaticParams() {
@@ -21,7 +21,7 @@ export async function generateMetadata({
 
   if (!team) return { title: "Team not found" };
 
-  const count = await getTeamListingCount(slug, getGiveawaysByTeamSlug(slug).length);
+  const count = await getTeamListingCount(slug, getGiveawaysByTeamSlug(slug));
   const name = `${team.city} ${team.name}`;
   const title = `${name} bobbleheads — ${count} stadium giveaways`;
   const description = `Every ${name} SGA bobblehead giveaway, tracked. ${count} in the database. Track the ones you own.`;
@@ -49,6 +49,15 @@ export default async function TeamPage({
 
   const giveaways = getGiveawaysByTeamSlug(team.slug);
 
+  // The list the page ships as HTML: catalog + admin edits + community
+  // listings, already merged. The client rebuilds it from its own live reads
+  // once they land, but a crawler, a link preview, or a first paint no longer
+  // sees the raw catalog — community listings missing, deleted ones present.
+  const [listings, photoSeed] = await Promise.all([
+    getTeamListings(team.slug, giveaways),
+    getTeamPhotoSeed(team.slug),
+  ]);
+
   const base = siteUrl();
   const jsonLd = {
     "@context": "https://schema.org",
@@ -72,7 +81,12 @@ export default async function TeamPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <TeamPageClient giveaways={giveaways} team={team} />
+      <TeamPageClient
+        giveaways={giveaways}
+        listings={listings}
+        photoSeed={photoSeed}
+        team={team}
+      />
     </>
   );
 }

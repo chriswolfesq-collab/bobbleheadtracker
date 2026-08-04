@@ -112,38 +112,5 @@ export function getApprovedPhotos(): Promise<Record<string, string>> {
   return getApprovedPhotosMap();
 }
 
-// Approved community listings per team, for server-rendered counts (team page
-// <title>). Cached like the other maps; busted by the same revalidate tag.
-const getCommunityCountsMap = unstable_cache(
-  async (): Promise<Record<string, number>> => {
-    const client = createServerSupabase();
-    const { data, error } = await client.from("community_bobbleheads").select("team_slug");
-
-    if (error) {
-      console.error("Failed to load community counts (server):", error.message);
-      return {};
-    }
-
-    const map: Record<string, number> = {};
-    for (const row of data ?? []) {
-      map[row.team_slug] = (map[row.team_slug] ?? 0) + 1;
-    }
-    return map;
-  },
-  ["curated-community-counts"],
-  { tags: [CURATED_DATA_TAG], revalidate: false },
-);
-
-// The listing count a team page actually displays: curated minus deleted plus
-// community additions. Keeps <title> in agreement with the page body.
-export async function getTeamListingCount(teamSlug: string, curatedCount: number): Promise<number> {
-  const [deletedKeys, communityCounts] = await Promise.all([
-    getDeletedListingKeys(),
-    getCommunityCountsMap(),
-  ]);
-  let deleted = 0;
-  for (const key of deletedKeys) {
-    if (key.startsWith(`${teamSlug}/`)) deleted += 1;
-  }
-  return Math.max(0, curatedCount - deleted + (communityCounts[teamSlug] ?? 0));
-}
+// The team page's listing count lives in lib/teamListings.ts, counted off the
+// merged list the page renders rather than from a second read of its own.

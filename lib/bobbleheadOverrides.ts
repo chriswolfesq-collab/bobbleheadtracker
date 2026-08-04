@@ -75,6 +75,12 @@ export function useBobbleheadOverride(
 export type BobbleheadOverridesLookup = {
   isDeleted: (teamSlug: string, bobbleheadId: string) => boolean;
   getOverride: (teamSlug: string, bobbleheadId: string) => BobbleheadOverride | null;
+  /**
+   * False until the fetch has landed — and after one that failed. A caller
+   * holding a server-rendered list (the team page) keeps showing it rather than
+   * rebuilding one from a lookup that would report nothing as edited or deleted.
+   */
+  isLoaded: boolean;
 };
 
 function overrideKey(teamSlug: string, bobbleheadId: string) {
@@ -83,7 +89,11 @@ function overrideKey(teamSlug: string, bobbleheadId: string) {
 
 // Erring towards showing a listing as-is: if the lookup hasn't loaded (or
 // failed), nothing is treated as deleted or overridden.
-const NONE: BobbleheadOverridesLookup = { isDeleted: () => false, getOverride: () => null };
+const NONE: BobbleheadOverridesLookup = {
+  isDeleted: () => false,
+  getOverride: () => null,
+  isLoaded: false,
+};
 
 // Curated bobbleheads are baked into the site at build time (see
 // lib/bobbleheads.ts), so an admin edit or delete is recorded in
@@ -121,6 +131,7 @@ export async function fetchBobbleheadOverrides(): Promise<BobbleheadOverridesLoo
     isDeleted: (teamSlug, bobbleheadId) =>
       byKey.get(overrideKey(teamSlug, bobbleheadId))?.deleted ?? false,
     getOverride: (teamSlug, bobbleheadId) => byKey.get(overrideKey(teamSlug, bobbleheadId)) ?? null,
+    isLoaded: true,
   };
 }
 

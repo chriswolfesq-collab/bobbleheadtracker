@@ -11,6 +11,8 @@ export type CommunityListingRow = {
   year: string;
   date: string;
   imageUrl: string | null;
+  /** Athletics only: the Oakland/Sacramento era. See lib/athleticsCity.ts. */
+  city?: string | null;
 };
 
 // All approved community listings, fetched server-side so their pages can be
@@ -22,7 +24,7 @@ export const getCommunityListings = unstable_cache(
     const client = createServerSupabase();
     const { data, error } = await client
       .from("community_bobbleheads")
-      .select("id, team_slug, title, nickname, quantity, year, date, image_url");
+      .select("id, team_slug, title, nickname, quantity, year, date, image_url, city");
 
     if (error) {
       console.error("Failed to load community listings (server):", error.message);
@@ -38,6 +40,7 @@ export const getCommunityListings = unstable_cache(
       year: row.year,
       date: row.date,
       imageUrl: row.image_url,
+      city: row.city,
     }));
   },
   ["community-listings"],
@@ -53,7 +56,7 @@ async function fetchCommunityListing(
   const client = createServerSupabase();
   const { data, error } = await client
     .from("community_bobbleheads")
-    .select("id, team_slug, title, nickname, quantity, year, date, image_url")
+    .select("id, team_slug, title, nickname, quantity, year, date, image_url, city")
     .eq("team_slug", teamSlug)
     .eq("id", bobbleheadId)
     .maybeSingle();
@@ -73,6 +76,7 @@ async function fetchCommunityListing(
     year: data.year,
     date: data.date,
     imageUrl: data.image_url,
+    city: data.city,
   };
 }
 

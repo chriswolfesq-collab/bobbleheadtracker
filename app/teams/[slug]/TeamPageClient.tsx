@@ -269,20 +269,31 @@ function StatsBar({ total }: { total: number }) {
 
 export function TeamPageClient({
   giveaways,
+  listings,
+  photoSeed,
   team,
 }: {
   giveaways: Giveaway[];
+  /** The same list, merged on the server — see lib/teamListings.ts. */
+  listings: ResolvedGiveaway[];
+  photoSeed: Record<string, string>;
   team: Team;
 }) {
   const [isAdding, setIsAdding] = useState(false);
   const [justSubmitted, setJustSubmitted] = useState(false);
   const [justApproved, setJustApproved] = useState(false);
   const [autoApproveError, setAutoApproveError] = useState<string | null>(null);
-  const { communityBobbleheads } = useCommunityBobbleheads(team.slug);
-  const { photoUrlById } = useApprovedPhotos(team.slug);
-  const { isDeleted, getOverride } = useBobbleheadOverrides();
+  const { communityBobbleheads, isLoading: isLoadingCommunity } = useCommunityBobbleheads(team.slug);
+  const { photoUrlById } = useApprovedPhotos(team.slug, photoSeed);
+  const { isDeleted, getOverride, isLoaded: overridesLoaded } = useBobbleheadOverrides();
 
   const allGiveaways = useMemo<ResolvedGiveaway[]>(() => {
+    // Until both live reads land, the server's list is the better answer: an
+    // empty community fetch and an empty override lookup would rebuild the page
+    // as the bare catalog — community listings gone, deleted ones back — which
+    // is both a visible flash and a hydration mismatch against the HTML.
+    if (isLoadingCommunity || !overridesLoaded) return listings;
+
     const curated: ResolvedGiveaway[] = giveaways
       .filter((giveaway) => !isDeleted(team.slug, giveaway.id))
       .map((giveaway) => {
@@ -297,7 +308,7 @@ export function TeamPageClient({
           city: resolveAthleticsCity(team.slug, year, override?.city),
           // A removed seed photo leaves nothing behind, so the card falls back
           // to the team placeholder — same as a listing that never had one.
-          imageUrl: photoUrlById[giveaway.id] ?? (override?.photoHidden ? undefined : giveaway.imageUrl),
+          imageUrl: photoUrlById[giveaway.id] ?? (override?.photoHidden ? null : giveaway.imageUrl),
           source: "curated",
         };
       });
@@ -309,7 +320,17 @@ export function TeamPageClient({
     }));
 
     return [...curated, ...community];
-  }, [giveaways, communityBobbleheads, photoUrlById, isDeleted, getOverride, team.slug]);
+  }, [
+    giveaways,
+    listings,
+    isLoadingCommunity,
+    overridesLoaded,
+    communityBobbleheads,
+    photoUrlById,
+    isDeleted,
+    getOverride,
+    team.slug,
+  ]);
 
   return (
     <OwnershipProvider teamSlug={team.slug}>
