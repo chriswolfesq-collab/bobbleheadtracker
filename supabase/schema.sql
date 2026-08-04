@@ -211,6 +211,10 @@ grant execute on function public.admin_remove_team_rep(text, text) to authentica
 -- Tables
 -- ---------------------------------------------------------------------------
 
+-- Keyed by (user_id, team_slug, bobblehead_id): curated ids repeat across teams,
+-- so without the team in the key one fan's two Jeff Conines are one row — see
+-- supabase/fix_collection_team_collisions.sql. Same for user_favorites and
+-- user_wants below.
 create table if not exists public.user_collections (
   user_id uuid not null references auth.users (id) on delete cascade,
   bobblehead_id text not null,
@@ -225,7 +229,7 @@ create table if not exists public.user_collections (
   price_paid numeric(10, 2),
   notes text,
   updated_at timestamptz not null default now(),
-  primary key (user_id, bobblehead_id)
+  primary key (user_id, team_slug, bobblehead_id)
 );
 
 alter table public.user_collections
@@ -258,7 +262,7 @@ create table if not exists public.user_favorites (
   team_slug text not null,
   favorited boolean not null default true,
   updated_at timestamptz not null default now(),
-  primary key (user_id, bobblehead_id)
+  primary key (user_id, team_slug, bobblehead_id)
 );
 
 create table if not exists public.user_wants (
@@ -267,8 +271,27 @@ create table if not exists public.user_wants (
   team_slug text not null,
   wanted boolean not null default true,
   updated_at timestamptz not null default now(),
-  primary key (user_id, bobblehead_id)
+  primary key (user_id, team_slug, bobblehead_id)
 );
+
+-- Databases created before the composite key still have the old two-column
+-- primary key; swap it in place. (See supabase/fix_collection_team_collisions.sql.)
+do $$
+declare
+  t text;
+begin
+  foreach t in array array['user_collections', 'user_favorites', 'user_wants'] loop
+    if exists (
+      select 1 from pg_constraint
+      where conrelid = ('public.' || t)::regclass
+        and contype = 'p'
+        and array_length(conkey, 1) = 2
+    ) then
+      execute format('alter table public.%I drop constraint %I', t, t || '_pkey');
+      execute format('alter table public.%I add primary key (user_id, team_slug, bobblehead_id)', t);
+    end if;
+  end loop;
+end $$;
 
 -- The public face of an account, and the only user data a stranger can reach.
 -- It exists because auth.users is unreachable by anon: a public shelf page has

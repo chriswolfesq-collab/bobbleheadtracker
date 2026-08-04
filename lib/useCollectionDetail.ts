@@ -45,10 +45,15 @@ export function useCollectionDetail(teamSlug: string, bobbleheadId: string) {
 
     let cancelled = false;
 
+    // Scoped to the team as well as the id: a fan can own the same curated id on
+    // two teams (see supabase/fix_collection_team_collisions.sql), and without
+    // the team this reads whichever row comes back first — or, on a listing
+    // owned twice, fails maybeSingle outright.
     supabase
       .from("user_collections")
       .select("condition, acquired_on, price_paid, notes")
       .eq("user_id", user.id)
+      .eq("team_slug", teamSlug)
       .eq("bobblehead_id", bobbleheadId)
       .maybeSingle()
       .then(({ data, error }) => {
@@ -67,7 +72,7 @@ export function useCollectionDetail(teamSlug: string, bobbleheadId: string) {
     return () => {
       cancelled = true;
     };
-  }, [user, bobbleheadId]);
+  }, [user, teamSlug, bobbleheadId]);
 
   // Upsert rather than update: the details form is only reachable once you own
   // the bobblehead, so the row is there in practice — but a row that somehow
@@ -83,17 +88,20 @@ export function useCollectionDetail(teamSlug: string, bobbleheadId: string) {
       const previous = detail;
       setDetail(next);
 
-      const { error } = await supabase.from("user_collections").upsert({
-        user_id: user.id,
-        bobblehead_id: bobbleheadId,
-        team_slug: teamSlug,
-        owned: true,
-        condition: next.condition,
-        acquired_on: next.acquiredOn,
-        price_paid: next.pricePaid,
-        notes: next.notes,
-        updated_at: new Date().toISOString(),
-      });
+      const { error } = await supabase.from("user_collections").upsert(
+        {
+          user_id: user.id,
+          bobblehead_id: bobbleheadId,
+          team_slug: teamSlug,
+          owned: true,
+          condition: next.condition,
+          acquired_on: next.acquiredOn,
+          price_paid: next.pricePaid,
+          notes: next.notes,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "user_id,team_slug,bobblehead_id" },
+      );
 
       if (error) {
         console.error("Failed to save collection details:", error.message);

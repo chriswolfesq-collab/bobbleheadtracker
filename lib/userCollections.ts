@@ -71,13 +71,16 @@ export function useMyOwnedLookup() {
       const previousOwned = ownedByKeyRaw[key] ?? false;
       setOwnedByKeyRaw((current) => ({ ...current, [key]: owned }));
 
-      const { error } = await supabase.from("user_collections").upsert({
-        user_id: user.id,
-        bobblehead_id: bobbleheadId,
-        team_slug: teamSlug,
-        owned,
-        updated_at: new Date().toISOString(),
-      });
+      const { error } = await supabase.from("user_collections").upsert(
+        {
+          user_id: user.id,
+          bobblehead_id: bobbleheadId,
+          team_slug: teamSlug,
+          owned,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "user_id,team_slug,bobblehead_id" },
+      );
 
       if (error) {
         console.error("Failed to save ownership status:", error.message);
