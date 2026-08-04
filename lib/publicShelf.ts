@@ -46,9 +46,10 @@ function createServerClient() {
 export const getPublicShelf = cache(async (slug: string): Promise<PublicShelf | null> => {
   const client = createServerClient();
 
-  const [shelfResult, communityResult] = await Promise.all([
+  const [shelfResult, communityResult, deletedResult] = await Promise.all([
     client.rpc("get_public_shelf", { p_slug: slug }),
     client.from("community_bobbleheads").select("team_slug"),
+    client.from("bobblehead_overrides").select("team_slug").eq("deleted", true),
   ]);
 
   if (shelfResult.error) {
@@ -64,19 +65,31 @@ export const getPublicShelf = cache(async (slug: string): Promise<PublicShelf | 
   if (communityResult.error) {
     console.error("Failed to load community bobblehead counts:", communityResult.error.message);
   }
-
-  // Site total per team is the curated giveaway list (static) plus approved
-  // community submissions, matching useSiteBobbleheadCounts in lib/profile.ts.
-  const communityCountByTeamSlug: Record<string, number> = {};
-  for (const community of communityResult.data ?? []) {
-    communityCountByTeamSlug[community.team_slug] =
-      (communityCountByTeamSlug[community.team_slug] ?? 0) + 1;
+  if (deletedResult.error) {
+    console.error("Failed to load deleted listing counts:", deletedResult.error.message);
   }
+
+  // Site total per team is the curated giveaway list (static), minus what an
+  // admin has deleted, plus approved community submissions — the same sum as
+  // useSiteBobbleheadCounts in lib/profile.ts. The subtraction was missing
+  // here, so a shelf measured its owner against a bigger catalog than their
+  // own profile did, and the two pages disagreed about the same collection.
+  const perTeam = (rows: { team_slug: string }[] | null): Record<string, number> => {
+    const counts: Record<string, number> = {};
+    for (const row of rows ?? []) counts[row.team_slug] = (counts[row.team_slug] ?? 0) + 1;
+    return counts;
+  };
+  const communityCountByTeamSlug = perTeam(communityResult.data);
+  const deletedCountByTeamSlug = perTeam(deletedResult.data);
 
   const totalByTeamSlug: Record<string, number> = {};
   for (const team of TEAMS) {
-    totalByTeamSlug[team.slug] =
-      getGiveawaysByTeamSlug(team.slug).length + (communityCountByTeamSlug[team.slug] ?? 0);
+    totalByTeamSlug[team.slug] = Math.max(
+      0,
+      getGiveawaysByTeamSlug(team.slug).length -
+        (deletedCountByTeamSlug[team.slug] ?? 0) +
+        (communityCountByTeamSlug[team.slug] ?? 0),
+    );
   }
 
   const countByTeamSlug = row.counts ?? {};
