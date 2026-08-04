@@ -23,6 +23,7 @@ const listing = (teamSlug: string, bobbleheadId: string, title: string): Bobbleh
   title,
   imageUrl: null,
   href: `/teams/${teamSlug}/bobbleheads/${bobbleheadId}`,
+  deleted: false,
 });
 
 const LISTINGS = [

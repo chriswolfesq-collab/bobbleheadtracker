@@ -202,13 +202,16 @@ export function useOwnedKeys(): {
         return next;
       });
 
-      const { error } = await supabase.from("user_collections").upsert({
-        user_id: userId,
-        bobblehead_id: bobbleheadId,
-        team_slug: teamSlug,
-        owned,
-        updated_at: new Date().toISOString(),
-      });
+      const { error } = await supabase.from("user_collections").upsert(
+        {
+          user_id: userId,
+          bobblehead_id: bobbleheadId,
+          team_slug: teamSlug,
+          owned,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "user_id,team_slug,bobblehead_id" },
+      );
 
       if (error) {
         console.error("Failed to save owned:", error.message);
@@ -771,7 +774,13 @@ function useMyBobbleheadList(
 
         if (cancelled) return;
 
-        setItems(rows.map((row) => resolve(row.team_slug, row.bobblehead_id)));
+        // Deleting a listing doesn't clear anyone's collection rows, so drop
+        // the ones that now point at a page that 404s.
+        setItems(
+          rows
+            .map((row) => resolve(row.team_slug, row.bobblehead_id))
+            .filter((item) => !item.deleted),
+        );
         setError(null);
         setIsLoading(false);
       });
