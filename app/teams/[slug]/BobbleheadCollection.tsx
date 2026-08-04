@@ -80,6 +80,21 @@ function readUrlState() {
   };
 }
 
+// The tab/filter/sort state flattened into one comparable string. Used during
+// render to notice an edit and reset to page 1 — and by the URL restore, which
+// has to claim the signature it just restored, or restoring `?sort=date-asc`
+// would read as a fresh sort edit and throw away the `?page=` beside it.
+function filterSignatureOf(state: {
+  tab: TabKey;
+  sort: SortOrder;
+  year: string;
+  city: string;
+  photo: boolean;
+  favorites: boolean;
+}): string {
+  return `${state.tab}|${state.sort}|${state.year}|${state.city}|${state.photo}|${state.favorites}`;
+}
+
 function SortMenu({
   value,
   onChange,
@@ -179,6 +194,18 @@ export function BobbleheadCollection({
   const showEraFilter = hasCityChoice(team.slug);
   const [page, setPage] = useState(1);
   const [hasRestored, setHasRestored] = useState(false);
+  // The view this page number belongs to. Compared against the live signature
+  // during render, further down, to reset to page 1 on a filter/sort edit.
+  const [prevFilterSignature, setPrevFilterSignature] = useState(() =>
+    filterSignatureOf({
+      tab: "all",
+      sort: DEFAULT_SORT_ORDER,
+      year: "",
+      city: "",
+      photo: false,
+      favorites: false,
+    }),
+  );
   const gridTopRef = useRef<HTMLDivElement>(null);
 
   // Restore state from the URL after mount (state initializers can't read
@@ -187,14 +214,27 @@ export function BobbleheadCollection({
   // one extra render immediately after mount, before paint.
   useEffect(() => {
     const url = readUrlState();
+    const city = showEraFilter ? url.city : "";
     /* eslint-disable react-hooks/set-state-in-effect */
     setTab(url.tab);
     setSortOrder(url.sort);
     setYearFilter(url.year);
-    setCityFilter(showEraFilter ? url.city : "");
+    setCityFilter(city);
     setHasPhotoOnly(url.photo);
     setFavoritesOnly(url.favorites);
     setPage(url.page);
+    // Adopt the restored view as the baseline the reset-to-page-1 check below
+    // compares against, so it doesn't mistake the restore for a user edit.
+    setPrevFilterSignature(
+      filterSignatureOf({
+        tab: url.tab,
+        sort: url.sort,
+        year: url.year,
+        city,
+        photo: url.photo,
+        favorites: url.favorites,
+      }),
+    );
     if (url.year || (showEraFilter && url.city) || url.photo || url.favorites) setShowFilters(true);
     setHasRestored(true);
     /* eslint-enable react-hooks/set-state-in-effect */
@@ -266,8 +306,14 @@ export function BobbleheadCollection({
   // Reset to page 1 when the result set changes shape (filter/tab/sort edits),
   // using the adjust-state-during-render pattern rather than an effect so the
   // stale page never paints.
-  const filterSignature = `${tab}|${sortOrder}|${yearFilter}|${cityFilter}|${hasPhotoOnly}|${favoritesOnly}`;
-  const [prevFilterSignature, setPrevFilterSignature] = useState(filterSignature);
+  const filterSignature = filterSignatureOf({
+    tab,
+    sort: sortOrder,
+    year: yearFilter,
+    city: cityFilter,
+    photo: hasPhotoOnly,
+    favorites: favoritesOnly,
+  });
   if (prevFilterSignature !== filterSignature) {
     setPrevFilterSignature(filterSignature);
     setPage(1);
