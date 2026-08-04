@@ -19,6 +19,13 @@ import { useSearchIndex } from "@/lib/useSearchIndex";
 // what lets the search stay uncapped.
 const PAGE_SIZE = 48;
 
+// How far "show more" has grown, read back off the URL. Rounded to whole pages
+// and floored at one, so a hand-edited or truncated ?shown= can't leave the grid
+// showing a partial page or nothing at all.
+function readShown(raw: string | null): number {
+  return Math.max(1, Math.round((Number(raw) || PAGE_SIZE) / PAGE_SIZE)) * PAGE_SIZE;
+}
+
 function ResultCard({ result, photoUrl }: { result: SearchResult; photoUrl?: string }) {
   const placeholderSrc = publicAsset(`/bobbleheads/${result.teamSlug}.png`);
   const imageSrc = photoUrl || result.imageUrl || placeholderSrc;
@@ -75,7 +82,7 @@ export function SearchPageClient() {
   // top rather than deep in the previous one's "show more" state. Compared
   // during render (React's "adjust state during render" pattern) rather than in
   // an effect, same as /recently-added.
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [visibleCount, setVisibleCount] = useState(() => readShown(searchParams.get("shown")));
   const [prevQuery, setPrevQuery] = useState(query);
   if (prevQuery !== query) {
     setPrevQuery(query);
@@ -84,15 +91,30 @@ export function SearchPageClient() {
 
   const visible = results.slice(0, visibleCount);
 
-  // Keep the URL shareable/bookmarkable as the user refines the query. The
+  // Keep the URL shareable/bookmarkable as the user refines the query — and
+  // carry the window in it too, so opening a result and pressing Back comes back
+  // to the same depth in the list rather than to the first page of it. The
   // native History API integrates with the Next router, so this doesn't
   // trigger a navigation on every keystroke.
-  const updateQuery = (value: string) => {
-    setQuery(value);
+  const writeUrl = (value: string, shown: number) => {
     const params = new URLSearchParams();
     if (value.trim()) params.set("q", value.trim());
     if (team) params.set("team", team.slug);
+    if (shown !== PAGE_SIZE) params.set("shown", String(shown));
     window.history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
+  };
+
+  const updateQuery = (value: string) => {
+    setQuery(value);
+    // A new query shrinks the window back to one page above, so the URL has to
+    // say the same rather than keep the previous search's depth.
+    writeUrl(value, PAGE_SIZE);
+  };
+
+  const showMore = () => {
+    const next = visibleCount + PAGE_SIZE;
+    setVisibleCount(next);
+    writeUrl(query, next);
   };
 
   return (
@@ -201,7 +223,7 @@ export function SearchPageClient() {
               <div className="mt-6 text-center">
                 <button
                   type="button"
-                  onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+                  onClick={showMore}
                   className="rounded-full border border-black/10 bg-black/[0.04] px-5 py-2 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover"
                 >
                   Show more ({results.length - visible.length} more)
