@@ -2,7 +2,7 @@ import { resolveAthleticsCity } from "@/lib/athleticsCity";
 import type { Giveaway } from "@/lib/bobbleheads";
 import type { BobbleheadOverride } from "@/lib/bobbleheadOverrides";
 import { getCommunityListings, type CommunityListingRow } from "@/lib/communityServer";
-import { getApprovedPhotos, getListingOverrides } from "@/lib/curatedListing";
+import { getApprovedPhotos, getGalleryPhotos, getListingOverrides } from "@/lib/curatedListing";
 
 // One team's listings as the team page shows them: the curated catalog with
 // admin edits applied and deletions removed, plus the approved community
@@ -27,12 +27,15 @@ export function mergeTeamListings({
   curated,
   overrides,
   photos,
+  galleryPhotos,
   community,
 }: {
   teamSlug: string;
   curated: Giveaway[];
   overrides: Record<string, BobbleheadOverride>;
   photos: Record<string, string>;
+  /** First gallery photo per listing — see getGalleryPhotos. */
+  galleryPhotos: Record<string, string>;
   community: CommunityListingRow[];
 }): TeamListing[] {
   const listings: TeamListing[] = [];
@@ -51,9 +54,16 @@ export function mergeTeamListings({
       year,
       date: override?.date ?? giveaway.date,
       city: resolveAthleticsCity(teamSlug, year, override?.city),
-      // A removed seed photo leaves nothing behind, so the card falls back to
-      // the team placeholder — same as a listing that never had one.
-      imageUrl: photos[key] ?? (override?.photoHidden ? null : (giveaway.imageUrl ?? null)),
+      // Main photo, then the curated seed, then the listing's first gallery
+      // photo — the same ladder the detail page climbs, so a listing can't show
+      // a real photo when you open it and a placeholder in the grid. A removed
+      // seed photo drops through to the gallery rather than ending the search:
+      // hiding the seed says "not this one", not "no photo at all".
+      imageUrl:
+        photos[key] ??
+        (override?.photoHidden ? null : (giveaway.imageUrl ?? null)) ??
+        galleryPhotos[key] ??
+        null,
       source: "curated",
     });
   }
@@ -69,7 +79,11 @@ export function mergeTeamListings({
       year: listing.year,
       date: listing.date,
       city: resolveAthleticsCity(teamSlug, listing.year, listing.city),
-      imageUrl: photos[listingKey(teamSlug, listing.id)] ?? listing.imageUrl,
+      imageUrl:
+        photos[listingKey(teamSlug, listing.id)] ??
+        listing.imageUrl ??
+        galleryPhotos[listingKey(teamSlug, listing.id)] ??
+        null,
       source: "community",
     });
   }
@@ -81,13 +95,14 @@ export async function getTeamListings(
   teamSlug: string,
   curated: Giveaway[],
 ): Promise<TeamListing[]> {
-  const [overrides, photos, community] = await Promise.all([
+  const [overrides, photos, galleryPhotos, community] = await Promise.all([
     getListingOverrides(),
     getApprovedPhotos(),
+    getGalleryPhotos(),
     getCommunityListings(),
   ]);
 
-  return mergeTeamListings({ teamSlug, curated, overrides, photos, community });
+  return mergeTeamListings({ teamSlug, curated, overrides, photos, galleryPhotos, community });
 }
 
 // The number the team page's <title> and description quote. Counted off the
@@ -106,11 +121,23 @@ export async function getTeamListingCount(
 // photos the server already resolved instead of dropping to placeholders while
 // the client's own fetch is in flight.
 export async function getTeamPhotoSeed(teamSlug: string): Promise<Record<string, string>> {
-  const photos = await getApprovedPhotos();
+  return teamSlice(await getApprovedPhotos(), teamSlug);
+}
+
+// The same, for the gallery fallback the cards drop to when a listing has no
+// main photo — seeded for the same reason, so the client's rebuild doesn't
+// flash those cards back to the placeholder before its own fetch lands.
+export async function getTeamGallerySeed(teamSlug: string): Promise<Record<string, string>> {
+  return teamSlice(await getGalleryPhotos(), teamSlug);
+}
+
+// "teamSlug/bobbleheadId" keys down to the bare ids of one team — the shape the
+// client hooks key by, since they only ever hold one team at a time.
+function teamSlice(byKey: Record<string, string>, teamSlug: string): Record<string, string> {
   const prefix = `${teamSlug}/`;
-  const seed: Record<string, string> = {};
-  for (const [key, url] of Object.entries(photos)) {
-    if (key.startsWith(prefix)) seed[key.slice(prefix.length)] = url;
+  const slice: Record<string, string> = {};
+  for (const [key, url] of Object.entries(byKey)) {
+    if (key.startsWith(prefix)) slice[key.slice(prefix.length)] = url;
   }
-  return seed;
+  return slice;
 }

@@ -8,6 +8,45 @@ import { supabase } from "@/lib/supabase";
 // jump to the end of the strip on the next load.
 export type GalleryPhoto = { id: string; imageUrl: string; createdAt: string };
 
+// One team's gallery reduced to the first photo per listing — what a card falls
+// back to when the listing has no main photo of its own, matching what the
+// detail page shows. `seed` carries the server's copy (lib/teamListings.ts) so
+// the first client paint keeps those photos instead of dropping to placeholders
+// while this fetch is in flight.
+export function useTeamGalleryPhotos(teamSlug: string, seed?: Record<string, string>) {
+  const [photoUrlById, setPhotoUrlById] = useState<Record<string, string>>(seed ?? {});
+
+  useEffect(() => {
+    let cancelled = false;
+
+    supabase
+      .from("bobblehead_gallery_photos")
+      .select("bobblehead_id, image_url")
+      .eq("team_slug", teamSlug)
+      .order("created_at", { ascending: true })
+      .then(({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load team gallery photos:", error.message);
+          return;
+        }
+
+        const byId: Record<string, string> = {};
+        for (const row of data ?? []) {
+          if (!(row.bobblehead_id in byId)) byId[row.bobblehead_id] = row.image_url;
+        }
+        setPhotoUrlById(byId);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [teamSlug]);
+
+  return photoUrlById;
+}
+
 export function useBobbleheadGallery(teamSlug: string, bobbleheadId: string) {
   const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
   const [isLoading, setIsLoading] = useState(true);

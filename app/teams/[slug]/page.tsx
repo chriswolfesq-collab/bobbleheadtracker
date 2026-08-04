@@ -4,7 +4,12 @@ import { breadcrumbList } from "@/components/BreadcrumbJsonLd";
 import { getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
 import { siteUrl } from "@/lib/siteUrl";
 import { TEAMS, getTeamBySlug } from "@/lib/teams";
-import { getTeamListingCount, getTeamListings, getTeamPhotoSeed } from "@/lib/teamListings";
+import {
+  getTeamGallerySeed,
+  getTeamListingCount,
+  getTeamListings,
+  getTeamPhotoSeed,
+} from "@/lib/teamListings";
 import { TeamPageClient } from "./TeamPageClient";
 
 export function generateStaticParams() {
@@ -53,9 +58,10 @@ export default async function TeamPage({
   // listings, already merged. The client rebuilds it from its own live reads
   // once they land, but a crawler, a link preview, or a first paint no longer
   // sees the raw catalog — community listings missing, deleted ones present.
-  const [listings, photoSeed] = await Promise.all([
+  const [listings, photoSeed, gallerySeed] = await Promise.all([
     getTeamListings(team.slug, giveaways),
     getTeamPhotoSeed(team.slug),
+    getTeamGallerySeed(team.slug),
   ]);
 
   const base = siteUrl();
@@ -82,6 +88,7 @@ export default async function TeamPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <TeamPageClient
+        gallerySeed={gallerySeed}
         giveaways={giveaways}
         listings={listings}
         photoSeed={photoSeed}

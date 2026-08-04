@@ -76,6 +76,43 @@ const getApprovedPhotosMap = unstable_cache(
   { tags: [CURATED_DATA_TAG], revalidate: false },
 );
 
+// A listing with no main photo of its own still shows a real photo on its
+// detail page: it borrows the first photo from its gallery. This is that same
+// fallback, resolved for every listing at once so the grids can use it too —
+// without it a listing whose only photo came in through the community pipeline
+// is a real photo when you open it and a team placeholder in the list.
+//
+// Earliest photo per listing, matching the detail page's `galleryPhotos[0]`
+// (lib/bobbleheadGallery.ts orders by created_at ascending).
+//
+// Time-based rather than tag-only: bobblehead_gallery_photos has no
+// revalidate trigger of its own (supabase/revalidate_trigger.sql covers
+// overrides, approved_photos and community_bobbleheads), so nothing busts
+// CURATED_DATA_TAG when a gallery photo lands.
+const getGalleryPhotosMap = unstable_cache(
+  async (): Promise<Record<string, string>> => {
+    const client = createServerSupabase();
+    const { data, error } = await client
+      .from("bobblehead_gallery_photos")
+      .select("team_slug, bobblehead_id, image_url")
+      .order("created_at", { ascending: true });
+
+    if (error) {
+      console.error("Failed to load gallery photos (server):", error.message);
+      return {};
+    }
+
+    const map: Record<string, string> = {};
+    for (const row of data ?? []) {
+      const key = listingKey(row.team_slug, row.bobblehead_id);
+      if (!(key in map)) map[key] = row.image_url;
+    }
+    return map;
+  },
+  ["curated-gallery-photos"],
+  { tags: [CURATED_DATA_TAG], revalidate: 3600 },
+);
+
 // The admin edit / main photo for a single curated listing, resolved on the
 // server so the prerendered HTML (what Google and a link preview see) already
 // reflects it, rather than the client patching it in after first paint.
@@ -110,6 +147,10 @@ export function getListingOverrides(): Promise<Record<string, BobbleheadOverride
 
 export function getApprovedPhotos(): Promise<Record<string, string>> {
   return getApprovedPhotosMap();
+}
+
+export function getGalleryPhotos(): Promise<Record<string, string>> {
+  return getGalleryPhotosMap();
 }
 
 // The team page's listing count lives in lib/teamListings.ts, counted off the

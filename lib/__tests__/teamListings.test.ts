@@ -46,6 +46,7 @@ const merge = (over: Partial<Parameters<typeof mergeTeamListings>[0]> = {}) =>
     curated: [curated()],
     overrides: {},
     photos: {},
+    galleryPhotos: {},
     community: [],
     ...over,
   });
@@ -91,6 +92,49 @@ describe("mergeTeamListings", () => {
     expect(hidden.imageUrl).toBeNull();
   });
 
+  // The bug the Cubs rep hit on 2026-08-02: 25 of his listings had a photo on
+  // their detail page (borrowed from the gallery) and a placeholder in the grid,
+  // because only the grid stopped looking after the main photo.
+  it("falls back to the first gallery photo when a listing has no photo of its own", () => {
+    const gallery = { "rockies/helton-2019": "https://gallery", "rockies/community-1": "https://community-gallery" };
+
+    const [curatedListing] = merge({
+      curated: [curated({ imageUrl: null })],
+      galleryPhotos: gallery,
+    });
+    const [, communityListing] = merge({
+      community: [community()],
+      galleryPhotos: gallery,
+    });
+
+    expect(curatedListing.imageUrl).toBe("https://gallery");
+    expect(communityListing.imageUrl).toBe("https://community-gallery");
+  });
+
+  it("keeps the gallery below the main photo and the seed", () => {
+    const galleryPhotos = { "rockies/helton-2019": "https://gallery" };
+
+    const [seeded] = merge({ galleryPhotos });
+    const [approved] = merge({
+      photos: { "rockies/helton-2019": "https://approved" },
+      galleryPhotos,
+    });
+
+    expect(seeded.imageUrl).toBe("https://seed-photo");
+    expect(approved.imageUrl).toBe("https://approved");
+  });
+
+  // Hiding the seed photo says "not this one", not "no photo at all" — the same
+  // reading the detail page takes.
+  it("drops through to the gallery when an admin hides the seed photo", () => {
+    const [listing] = merge({
+      overrides: { "rockies/helton-2019": override({ photoHidden: true }) },
+      galleryPhotos: { "rockies/helton-2019": "https://gallery" },
+    });
+
+    expect(listing.imageUrl).toBe("https://gallery");
+  });
+
   // The Athletics are the only team with a city, and it comes from the year
   // unless someone has picked one. Community rows carry their own pick.
   it("resolves the Athletics city, and leaves every other team without one", () => {
@@ -99,6 +143,7 @@ describe("mergeTeamListings", () => {
       curated: [curated({ year: "2019" })],
       overrides: {},
       photos: {},
+      galleryPhotos: {},
       community: [],
     });
     const [, sacramento] = mergeTeamListings({
@@ -106,6 +151,7 @@ describe("mergeTeamListings", () => {
       curated: [curated({ year: "2019" })],
       overrides: {},
       photos: {},
+      galleryPhotos: {},
       community: [community({ teamSlug: "athletics", year: "2026" })],
     });
 

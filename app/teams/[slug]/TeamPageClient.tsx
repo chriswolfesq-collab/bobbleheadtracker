@@ -9,6 +9,7 @@ import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { resolveAthleticsCity } from "@/lib/athleticsCity";
 import { useAuth } from "@/lib/auth";
 import type { Giveaway } from "@/lib/bobbleheads";
+import { useTeamGalleryPhotos } from "@/lib/bobbleheadGallery";
 import { useBobbleheadOverrides, type BobbleheadOverridesLookup } from "@/lib/bobbleheadOverrides";
 import { useCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { findDuplicateBobblehead, type DuplicateCandidate } from "@/lib/duplicateCheck";
@@ -268,11 +269,14 @@ function StatsBar({ total }: { total: number }) {
 }
 
 export function TeamPageClient({
+  gallerySeed,
   giveaways,
   listings,
   photoSeed,
   team,
 }: {
+  /** First gallery photo per listing, for cards with no main photo. */
+  gallerySeed: Record<string, string>;
   giveaways: Giveaway[];
   /** The same list, merged on the server — see lib/teamListings.ts. */
   listings: ResolvedGiveaway[];
@@ -285,6 +289,7 @@ export function TeamPageClient({
   const [autoApproveError, setAutoApproveError] = useState<string | null>(null);
   const { communityBobbleheads, isLoading: isLoadingCommunity } = useCommunityBobbleheads(team.slug);
   const { photoUrlById } = useApprovedPhotos(team.slug, photoSeed);
+  const galleryUrlById = useTeamGalleryPhotos(team.slug, gallerySeed);
   const { isDeleted, getOverride, isLoaded: overridesLoaded } = useBobbleheadOverrides();
 
   const allGiveaways = useMemo<ResolvedGiveaway[]>(() => {
@@ -306,15 +311,21 @@ export function TeamPageClient({
           year,
           date: override?.date ?? giveaway.date,
           city: resolveAthleticsCity(team.slug, year, override?.city),
-          // A removed seed photo leaves nothing behind, so the card falls back
-          // to the team placeholder — same as a listing that never had one.
-          imageUrl: photoUrlById[giveaway.id] ?? (override?.photoHidden ? null : giveaway.imageUrl),
+          // Main photo, then the curated seed, then the first gallery photo —
+          // the same ladder the server merge and the detail page climb. See
+          // lib/teamListings.ts.
+          imageUrl:
+            photoUrlById[giveaway.id] ??
+            (override?.photoHidden ? null : giveaway.imageUrl) ??
+            galleryUrlById[giveaway.id] ??
+            null,
           source: "curated",
         };
       });
     const community: ResolvedGiveaway[] = communityBobbleheads.map((giveaway) => ({
       ...giveaway,
-      imageUrl: photoUrlById[giveaway.id] ?? giveaway.imageUrl,
+      imageUrl:
+        photoUrlById[giveaway.id] ?? giveaway.imageUrl ?? galleryUrlById[giveaway.id] ?? null,
       city: resolveAthleticsCity(team.slug, giveaway.year, giveaway.city),
       source: "community",
     }));
@@ -327,6 +338,7 @@ export function TeamPageClient({
     overridesLoaded,
     communityBobbleheads,
     photoUrlById,
+    galleryUrlById,
     isDeleted,
     getOverride,
     team.slug,
