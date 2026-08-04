@@ -6,22 +6,20 @@ import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { resolveTitleParts } from "@/components/BobbleheadTitle";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { WantedButton } from "@/components/WantedButton";
-import type { Giveaway } from "@/lib/bobbleheads";
 import { publicAsset } from "@/lib/paths";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
 import type { Team } from "@/lib/teams";
+import type { TeamListing } from "@/lib/teamListings";
 import { withTeamView } from "@/lib/teamView";
 import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
 import { useUserWanted } from "@/lib/userWanted";
 
-// `city` is the Athletics-only Oakland/Sacramento era, already resolved
-// against the year by TeamPageClient (lib/athleticsCity.ts). Null on every
-// other team, and on an A's listing whose year is unknown and unset.
-export type ResolvedGiveaway = Giveaway & {
-  source: "curated" | "community";
-  city?: string | null;
-};
+// A listing with everything already applied — admin edits, approved photo, and
+// (Athletics only) the Oakland/Sacramento era resolved against the year. One
+// definition, in lib/teamListings.ts, because the server and the client each
+// assemble this same list and the cards have to take either one.
+export type ResolvedGiveaway = TeamListing;
 
 type OwnershipContextValue = {
   ownedCount: number;
