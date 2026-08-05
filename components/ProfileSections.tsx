@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import DisplayCase from "@/components/DisplayCase";
 import { ShareCollectionButton } from "@/components/ShareCollectionButton";
 import { type BobbleheadIdentity } from "@/lib/bobbleheadIdentity";
@@ -14,6 +15,87 @@ import {
 } from "@/lib/profile";
 import { computeShelfStats } from "@/lib/shelfStats";
 import { TEAMS } from "@/lib/teams";
+
+// The four blocks the page is made of, in the order they appear. Drives both
+// the jump nav and the scroll spy that keeps it in sync.
+const SECTIONS = [
+  { id: "collection", label: "Collection" },
+  { id: "favorites", label: "Favorites" },
+  { id: "wanted", label: "Wanted" },
+  { id: "submissions", label: "Submissions" },
+] as const;
+
+/**
+ * Jump links to the four sections below.
+ *
+ * These used to be buttons that picked up a pressed look on click, which read
+ * as a tab row: press one and you'd expect the other three views to go away.
+ * They never did — everything stays on the page and the click only scrolls. So
+ * they're anchors now, and the highlight tracks what you're actually looking at
+ * rather than what you last clicked. `aria-current="location"` is the same
+ * statement for a screen reader: you are here, not this is selected.
+ */
+function SectionNav() {
+  const [activeId, setActiveId] = useState<string>(SECTIONS[0].id);
+  const visibleIds = useRef(new Set<string>());
+
+  useEffect(() => {
+    const elements = SECTIONS.map(({ id }) => document.getElementById(id)).filter(
+      (element): element is HTMLElement => element !== null,
+    );
+    if (elements.length === 0) return;
+
+    // Watch only the top 30% of the viewport: the section you're reading is the
+    // first one whose body has reached the top of the screen, not whichever
+    // happens to be largest on it. Several can qualify at once (a short
+    // Favorites list sitting above Wanted), so document order breaks the tie.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visibleIds.current.add(entry.target.id);
+          else visibleIds.current.delete(entry.target.id);
+        }
+        const current = SECTIONS.find(({ id }) => visibleIds.current.has(id));
+        // No match means the band is between sections mid-scroll; keeping the
+        // last one is better than blanking the nav for a frame.
+        if (current) setActiveId(current.id);
+      },
+      { rootMargin: "0px 0px -70% 0px" },
+    );
+
+    for (const element of elements) observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <nav aria-label="Jump to a section" className="mb-8 flex flex-wrap justify-center gap-2">
+      {SECTIONS.map(({ id, label }) => {
+        const isCurrent = id === activeId;
+        return (
+          <a
+            key={id}
+            href={`#${id}`}
+            aria-current={isCurrent ? "location" : undefined}
+            onClick={(event) => {
+              // Let a modified click open the anchor the way the browser wants
+              // to; only a plain one is ours to turn into a smooth scroll.
+              if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+              event.preventDefault();
+              document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+            className={`rounded-full border px-4 py-2 text-xs font-black uppercase tracking-wide transition ${
+              isCurrent
+                ? "border-accent bg-accent/10 text-accent"
+                : "border-black/10 bg-black/[0.04] text-zinc-700 hover:border-accent hover:text-accent-hover"
+            }`}
+          >
+            {label}
+          </a>
+        );
+      })}
+    </nav>
+  );
+}
 
 const STATUS_STYLES: Record<MySubmission["status"], string> = {
   pending: "border-accent/40 bg-accent/10 text-accent",
@@ -142,25 +224,7 @@ export function ProfileSections({
 
   return (
     <>
-      <nav className="mb-8 flex flex-wrap justify-center gap-2">
-        {[
-          { id: "collection", label: "Collection" },
-          { id: "favorites", label: "Favorites" },
-          { id: "wanted", label: "Wanted" },
-          { id: "submissions", label: "Submissions" },
-        ].map(({ id, label }) => (
-          <button
-            key={id}
-            type="button"
-            onClick={() =>
-              document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" })
-            }
-            className="rounded-full border border-black/10 bg-black/[0.04] px-4 py-2 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover"
-          >
-            {label}
-          </button>
-        ))}
-      </nav>
+      <SectionNav />
 
       <section id="collection" className="mb-10 scroll-mt-6">
         {/* The shelf breaks out of the profile's reading column so it hangs at

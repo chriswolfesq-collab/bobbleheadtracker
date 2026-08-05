@@ -23,7 +23,7 @@ export default function AboutPage() {
           </p>
           <p>
             It&apos;s built by collectors, for collectors. Browse all 30 teams, mark off the
-            bobbleheads you own, keep a wishlist, share your shelf, and help the community by
+            bobbleheads you own, keep a wanted list, share your shelf, and help the community by
             submitting photos and listings we&apos;re missing.
           </p>
           <p>

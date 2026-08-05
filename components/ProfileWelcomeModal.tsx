@@ -25,7 +25,7 @@ const FEATURES: { icon: string; title: string; body: string }[] = [
   {
     icon: "★",
     title: "Wanted list",
-    body: "Build a wishlist of the bobbleheads you're still hunting for.",
+    body: "Star the bobbleheads you're still hunting for.",
   },
   {
     icon: "📷",

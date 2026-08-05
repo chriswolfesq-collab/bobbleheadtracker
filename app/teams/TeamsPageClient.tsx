@@ -92,6 +92,15 @@ export function TeamsPageClient() {
     });
   }, [division, league, query, sort]);
 
+  // The banner used to insist on "30 teams" while the wall below it showed five.
+  // When a filter is narrowing the list, the header counts what's actually on
+  // screen and says what it's a slice of.
+  const isFiltered = filtered.length !== TEAMS.length;
+  const headerCount = isFiltered ? `${filtered.length} of ${TEAMS.length} Teams` : `${TEAMS.length} Teams`;
+  const headerBlurb = isFiltered
+    ? `Showing ${filtered.length} of ${TEAMS.length} MLB teams`
+    : `Browse all ${TEAMS.length} MLB teams`;
+
   const byDivision = useMemo(() => {
     const groups = new Map<DivisionKey, Team[]>();
     for (const d of DIVISIONS) groups.set(d, []);
@@ -115,18 +124,24 @@ export function TeamsPageClient() {
               <h1 className="font-display text-3xl font-bold uppercase tracking-wide text-navy lg:text-5xl">
                 All Teams
               </h1>
-              <p className="mt-1 text-sm text-zinc-600 lg:text-base">Browse all 30 MLB teams</p>
+              <p className="mt-1 text-sm text-zinc-600 lg:text-base">{headerBlurb}</p>
             </>
           }
           card={
             <div className="w-full rounded-lg border border-border-soft bg-surface/90 px-3 py-2.5 text-center shadow-sm lg:px-4 lg:py-4">
               <p className="font-display text-lg font-bold uppercase tracking-wide text-navy lg:text-2xl">
-                {TEAMS.length} Teams
+                {headerCount}
               </p>
               <p className="mt-0.5 text-[11px] leading-snug text-zinc-600 lg:text-sm">
-                One collection.
-                <br />
-                Every team.
+                {isFiltered ? (
+                  "Matching your filters."
+                ) : (
+                  <>
+                    One collection.
+                    <br />
+                    Every team.
+                  </>
+                )}
               </p>
             </div>
           }
@@ -136,7 +151,9 @@ export function TeamsPageClient() {
                 All Teams
               </p>
               <p className="mt-2 text-base text-zinc-600">
-                Browse all {TEAMS.length} MLB teams. One collection. Every team.
+                {isFiltered
+                  ? `${headerBlurb}.`
+                  : `Browse all ${TEAMS.length} MLB teams. One collection. Every team.`}
               </p>
             </>
           }

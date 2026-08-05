@@ -13,6 +13,7 @@ import { useTeamGalleryPhotos } from "@/lib/bobbleheadGallery";
 import { useBobbleheadOverrides, type BobbleheadOverridesLookup } from "@/lib/bobbleheadOverrides";
 import { useCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { findDuplicateBobblehead, type DuplicateCandidate } from "@/lib/duplicateCheck";
+import { formatQuantity } from "@/lib/formatQuantity";
 import { publicAsset } from "@/lib/paths";
 import { submitNewBobblehead } from "@/lib/submissions";
 import { TEAM_BANNERS } from "@/lib/teamBanners";
@@ -51,6 +52,17 @@ function formatSubmissionDate(iso: string): string {
 // giveaways date to the late 1990s; allow a little future for announced promos.
 const MIN_RELEASE_DATE = "1960-01-01";
 const MAX_RELEASE_DATE = `${new Date().getFullYear() + 2}-12-31`;
+
+// Free-text bounds. Long enough for the wordiest real listing ("Mike Trout &
+// Shohei Ohtani Dual Bobblehead"), short enough that a pasted essay doesn't
+// reach the review queue.
+const MAX_TITLE_LENGTH = 80;
+const MAX_NICKNAME_LENGTH = 80;
+
+// A giveaway is a printed run: whole units, at least one. The largest MLB
+// giveaways run to the low hundreds of thousands, so a million is well clear of
+// anything real and still rejects a mistyped credit-card-length number.
+const MAX_QUANTITY = 1_000_000;
 
 function SubmitBobbleheadForm({
   teamSlug,
@@ -106,7 +118,7 @@ function SubmitBobbleheadForm({
             teamSlug,
             title,
             nickname,
-            quantity: quantityUnknown ? "Unknown" : quantity,
+            quantity: quantityUnknown ? "Unknown" : formatQuantity(quantity),
             date: dateUnknown ? "N/A" : formatSubmissionDate(date),
             file,
           });
@@ -126,6 +138,7 @@ function SubmitBobbleheadForm({
         <span className="text-xs font-black uppercase tracking-wide text-accent">Player Name</span>
         <input
           required
+          maxLength={MAX_TITLE_LENGTH}
           value={title}
           onChange={(event) => {
             setTitle(event.target.value);
@@ -138,6 +151,7 @@ function SubmitBobbleheadForm({
       <label className="min-w-0">
         <span className="text-xs font-black uppercase tracking-wide text-accent">Edition / Variant</span>
         <input
+          maxLength={MAX_NICKNAME_LENGTH}
           value={nickname}
           onChange={(event) => setNickname(event.target.value)}
           placeholder="“El Toro”, City Connect… (optional)"
@@ -149,11 +163,21 @@ function SubmitBobbleheadForm({
       </label>
       <label className="min-w-0">
         <span className="text-xs font-black uppercase tracking-wide text-accent">Quantity Issued</span>
+        {/* A count, so the field is a count: text accepted "-500" and shipped it
+            to the review queue as the run size. min/max/step let the browser
+            reject that before the form submits. Commas can't be typed into a
+            number field, so the value is grouped on the way out instead — see
+            formatQuantity in the submit handler. */}
         <input
+          type="number"
+          inputMode="numeric"
+          min={1}
+          max={MAX_QUANTITY}
+          step={1}
           value={quantity}
           disabled={quantityUnknown}
           onChange={(event) => setQuantity(event.target.value)}
-          placeholder="25,000 (optional)"
+          placeholder="25000 (optional)"
           className="mt-1 w-full rounded border border-border-soft bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent disabled:opacity-50"
         />
         <span className="mt-1.5 flex items-center gap-1.5">

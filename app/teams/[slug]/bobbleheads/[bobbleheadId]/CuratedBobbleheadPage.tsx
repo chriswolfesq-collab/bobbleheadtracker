@@ -566,7 +566,10 @@ export function CuratedBobbleheadPage({
                     : "border-accent text-accent hover:bg-accent hover:text-accent-fg"
                 }`}
               >
-                {isWanted ? "★ Wanted" : "☆ Want It"}
+                {/* "Add to Wanted", not "Want It": the list this fills is called
+                    Wanted on the team page and the profile, and the button
+                    should name it rather than invent a third word for it. */}
+                {isWanted ? "★ Wanted" : "☆ Add to Wanted"}
               </button>
             </div>
 

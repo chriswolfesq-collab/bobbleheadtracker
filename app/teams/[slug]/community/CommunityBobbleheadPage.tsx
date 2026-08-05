@@ -488,7 +488,9 @@ export function CommunityBobbleheadPage({
                     : "border-accent text-accent hover:bg-accent hover:text-accent-fg"
                 }`}
               >
-                {isWanted ? "★ Wanted" : "☆ Want It"}
+                {/* Same wording as the curated page: the list is "Wanted"
+                    everywhere it's named. */}
+                {isWanted ? "★ Wanted" : "☆ Add to Wanted"}
               </button>
             </div>
 

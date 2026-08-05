@@ -135,4 +135,11 @@ describe("formatCountdown", () => {
     expect(from(4, 4)).toBe("in 3 weeks");
     expect(from(8, 5)).toBe("in 5 months");
   });
+
+  // A prerendered card can outlive the clock it was rendered against. Saying
+  // nothing is right; calling yesterday "today" is what a stale homepage did.
+  it("says nothing about a date that has passed", () => {
+    expect(from(3, 10)).toBe("");
+    expect(from(2, 1)).toBe("");
+  });
 });
