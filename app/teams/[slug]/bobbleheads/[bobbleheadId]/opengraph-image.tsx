@@ -27,6 +27,14 @@ export function generateStaticParams() {
   return [];
 }
 
+// Pinned, not left to the default. With no params baked, every card is a
+// first-time on-demand render, and without an explicit lifetime those entries
+// went stale in about half a minute — the card was serving from cache but
+// revalidating behind almost every crawler pass, which is most of the render
+// cost back. Nothing here expires on a clock; CURATED_DATA_TAG is what makes it
+// change.
+export const revalidate = false;
+
 // Fits on two lines at 58px Geist Black inside the card's text column.
 const MAX_TITLE_CHARS = 44;
 // How long to wait on a remote listing photo before giving up and falling back
