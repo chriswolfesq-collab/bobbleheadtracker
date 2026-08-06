@@ -85,10 +85,12 @@ const getApprovedPhotosMap = unstable_cache(
 // Earliest photo per listing, matching the detail page's `galleryPhotos[0]`
 // (lib/bobbleheadGallery.ts orders by created_at ascending).
 //
-// Time-based rather than tag-only: bobblehead_gallery_photos has no
-// revalidate trigger of its own (supabase/revalidate_trigger.sql covers
-// overrides, approved_photos and community_bobbleheads), so nothing busts
-// CURATED_DATA_TAG when a gallery photo lands.
+// Tag-only, like the two reads above: bobblehead_gallery_photos now has a
+// revalidate trigger of its own (supabase/revalidate_trigger.sql), so a gallery
+// photo landing busts CURATED_DATA_TAG directly. It used to be time-based for
+// want of that trigger, and the 1h window leaked out of here onto every page
+// that reads it — all ~3,650 prerendered pages — so each hour a crawler could
+// force the entire site to re-render.
 const getGalleryPhotosMap = unstable_cache(
   async (): Promise<Record<string, string>> => {
     const client = createServerSupabase();
@@ -110,7 +112,7 @@ const getGalleryPhotosMap = unstable_cache(
     return map;
   },
   ["curated-gallery-photos"],
-  { tags: [CURATED_DATA_TAG], revalidate: 3600 },
+  { tags: [CURATED_DATA_TAG], revalidate: false },
 );
 
 // The admin edit / main photo for a single curated listing, resolved on the

@@ -12,12 +12,20 @@ export const alt = "A stadium giveaway bobblehead on Bobble Shelf";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Deliberately dynamic. There are ~3,600 of these listings, and the file
-// convention would otherwise have Next bake one card per listing at build time
-// off generateStaticParams in the sibling page — thousands of Satori renders
-// added to every deploy. The card also reads admin overrides and the approved
-// photo at request time, so it can't be fully known at build anyway.
-export const dynamic = "force-dynamic";
+// Rendered on demand, then cached — not baked at build and not re-rendered per
+// request. There are ~3,600 of these listings, so inheriting the sibling page's
+// generateStaticParams would add thousands of Satori renders to every deploy;
+// returning no params opts out of that while leaving dynamicParams on, so an
+// unknown card renders the first time it's asked for and is served from the
+// cache after. It was force-dynamic before, which meant every crawler and every
+// link unfurl paid for a fresh Satori render plus a remote photo fetch.
+//
+// Safe to cache indefinitely because the overrides and approved photo it reads
+// go through CURATED_DATA_TAG, which the revalidate route busts on an admin
+// edit (app/api/revalidate).
+export function generateStaticParams() {
+  return [];
+}
 
 // Fits on two lines at 58px Geist Black inside the card's text column.
 const MAX_TITLE_CHARS = 44;
