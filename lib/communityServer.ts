@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { CURATED_DATA_TAG } from "@/lib/curatedListing";
+import { type RarityTier, parseRarityTier } from "@/lib/rarity";
 import { createServerSupabase } from "@/lib/supabaseServer";
 
 export type CommunityListingRow = {
@@ -13,6 +14,9 @@ export type CommunityListingRow = {
   imageUrl: string | null;
   /** Athletics only: the Oakland/Sacramento era. See lib/athleticsCity.ts. */
   city?: string | null;
+  /** Set by hand or not at all — never derived from quantity. See lib/rarity.ts. */
+  rarity?: RarityTier | null;
+  rarityNote?: string | null;
 };
 
 // All approved community listings, fetched server-side so their pages can be
@@ -24,7 +28,7 @@ export const getCommunityListings = unstable_cache(
     const client = createServerSupabase();
     const { data, error } = await client
       .from("community_bobbleheads")
-      .select("id, team_slug, title, nickname, quantity, year, date, image_url, city");
+      .select("id, team_slug, title, nickname, quantity, year, date, image_url, city, rarity, rarity_note");
 
     if (error) {
       console.error("Failed to load community listings (server):", error.message);
@@ -41,6 +45,8 @@ export const getCommunityListings = unstable_cache(
       date: row.date,
       imageUrl: row.image_url,
       city: row.city,
+      rarity: parseRarityTier(row.rarity),
+      rarityNote: row.rarity_note,
     }));
   },
   ["community-listings"],
@@ -61,7 +67,7 @@ async function fetchCommunityListing(
   const client = createServerSupabase();
   const { data, error } = await client
     .from("community_bobbleheads")
-    .select("id, team_slug, title, nickname, quantity, year, date, image_url, city")
+    .select("id, team_slug, title, nickname, quantity, year, date, image_url, city, rarity, rarity_note")
     .eq("team_slug", teamSlug)
     .eq("id", bobbleheadId)
     .maybeSingle();
@@ -82,6 +88,8 @@ async function fetchCommunityListing(
     date: data.date,
     imageUrl: data.image_url,
     city: data.city,
+    rarity: parseRarityTier(data.rarity),
+    rarityNote: data.rarity_note,
   };
 }
 

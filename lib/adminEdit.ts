@@ -2,6 +2,7 @@
 
 import type { User } from "@supabase/supabase-js";
 import type { GalleryPhoto } from "@/lib/bobbleheadGallery";
+import type { RarityTier } from "@/lib/rarity";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { storageKeyForFile } from "@/lib/storageKey";
 
@@ -83,6 +84,8 @@ export async function saveCuratedBobblehead({
   year,
   date,
   city,
+  rarity,
+  rarityNote,
   file,
 }: {
   user: User;
@@ -95,6 +98,9 @@ export async function saveCuratedBobblehead({
   date: string;
   /** Athletics only; null on every other team. See lib/athleticsCity.ts. */
   city?: string | null;
+  /** Hand-set badge; null clears it. Nothing derives it. See lib/rarity.ts. */
+  rarity?: RarityTier | null;
+  rarityNote?: string;
   file?: File;
 }) {
   const imageUrl = file ? await savePhoto(user, teamSlug, bobbleheadId, file) : null;
@@ -110,6 +116,8 @@ export async function saveCuratedBobblehead({
       year,
       date,
       city: city ?? null,
+      rarity: rarity ?? null,
+      rarity_note: rarityNote?.trim() || null,
       updated_by: user.id,
       updated_at: new Date().toISOString(),
     })
@@ -394,6 +402,8 @@ export async function saveCommunityBobblehead({
   year,
   date,
   city,
+  rarity,
+  rarityNote,
   file,
 }: {
   user: User;
@@ -406,13 +416,25 @@ export async function saveCommunityBobblehead({
   date: string;
   /** Athletics only; null on every other team. See lib/athleticsCity.ts. */
   city?: string | null;
+  /** Hand-set badge; null clears it. Nothing derives it. See lib/rarity.ts. */
+  rarity?: RarityTier | null;
+  rarityNote?: string;
   file?: File;
 }) {
   const imageUrl = file ? await savePhoto(user, teamSlug, bobbleheadId, file) : null;
 
   const { data, error } = await supabase
     .from("community_bobbleheads")
-    .update({ title, nickname: nickname.trim() || null, quantity: quantity.trim() || null, year, date, city: city ?? null })
+    .update({
+      title,
+      nickname: nickname.trim() || null,
+      quantity: quantity.trim() || null,
+      year,
+      date,
+      city: city ?? null,
+      rarity: rarity ?? null,
+      rarity_note: rarityNote?.trim() || null,
+    })
     .eq("id", bobbleheadId)
     .select();
 

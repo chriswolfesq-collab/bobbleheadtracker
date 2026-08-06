@@ -173,7 +173,11 @@ export function CommunityBobbleheadPage({
   const ownershipKnown = !isCollectionLoading;
   const isFavorited = favoritedById[giveaway.id] ?? false;
   const isWanted = wantedById[giveaway.id] ?? false;
-  const rarity = getRarity(quantity);
+  // Hand-set, never derived — see lib/rarity.ts. A just-saved edit wins
+  // outright so clearing the badge isn't undone by the stored value.
+  const rarity = localOverride
+    ? getRarity(localOverride.rarity, localOverride.rarityNote)
+    : getRarity(giveaway.rarity, giveaway.rarityNote);
   const { primary: primaryName, secondary: descriptor } = resolveTitleParts(title, nickname);
   const details: [string, string][] = [
     ["Release Date", date],
@@ -211,6 +215,8 @@ export function CommunityBobbleheadPage({
       year: extractYear(values.date, year),
       date: values.date,
       city: values.city,
+      rarity: values.rarity,
+      rarityNote: values.rarityNote,
       file: file ?? undefined,
     });
 
@@ -517,7 +523,9 @@ export function CommunityBobbleheadPage({
                 <p className={`mt-2 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-black uppercase tracking-wider ${RARITY_BADGE_CLASSES[rarity.tier]}`}>
                   <span aria-hidden>◆</span> {rarity.label}
                 </p>
-                <p className="mt-2 text-sm text-zinc-600">{rarity.reason}.</p>
+                <p className="mt-2 text-sm text-zinc-600">
+                  {rarity.note ?? "Marked by the BobbleShelf team."}
+                </p>
               </div>
             ) : null}
 
@@ -614,7 +622,15 @@ export function CommunityBobbleheadPage({
       {isEditOpen ? (
         <EditBobbleheadDialog
           onClose={() => setIsEditOpen(false)}
-          initial={{ title, nickname: nickname ?? "", quantity: quantity ?? "", date, city }}
+          initial={{
+            title,
+            nickname: nickname ?? "",
+            quantity: quantity ?? "",
+            date,
+            city,
+            rarity: rarity?.tier ?? null,
+            rarityNote: rarity?.note ?? "",
+          }}
           onSave={handleEditSave}
           onDelete={handleDelete}
           onRemovePhoto={removableMainPhotoUrl ? handleRemoveMainPhoto : undefined}

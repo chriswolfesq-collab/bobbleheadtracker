@@ -1,48 +1,57 @@
-import { formatQuantity } from "@/lib/formatQuantity";
-
 /**
- * Rarity derived from the "Quantity Issued" figure, so a badge is always
- * grounded in a stated reason rather than vibes. Thresholds come from the
- * actual catalog distribution (n≈1,900; median 15,000; modes at 10k/15k/20k/
- * 25k/40k):
+ * Rarity is set by hand, per listing, by an admin or team rep — it is not
+ * derived from anything.
  *
- *   < 10,000        → Ultra Rare  (bottom decile)
- *   10,000–14,999   → Rare        (below the median run)
- *   15,000–24,999   → Limited     (the middle of the pack)
- *   ≥ 25,000        → null        (a common run — no badge; most giveaways
- *                                  print 25–40k, so a badge would be noise)
+ * It used to be computed from the "Quantity Issued" figure (under 10,000 →
+ * Ultra Rare, and so on). That was wrong in both directions. Rarity is a
+ * function of demand and resale-market availability as much as print run, so a
+ * short run of a player nobody chases isn't rare, and a 25,000-run fan favorite
+ * can be. And a genuinely scarce piece with no quantity on record could never
+ * be flagged at all, because there was no number to threshold.
  *
- * Listings without a parseable quantity get no badge.
+ * So: no tier unless someone states one. Listings with no rarity set — which is
+ * all of them until marked — get no badge, and the quantity issued is still
+ * shown on the page as the plain fact it is.
+ *
+ * Stored in `bobblehead_overrides.rarity` for curated listings and
+ * `community_bobbleheads.rarity` for community ones; see
+ * supabase/manual_rarity.sql.
  */
 export type RarityTier = "ultra-rare" | "rare" | "limited";
+
+/** Ordered scarcest-first, which is the order the edit dialog offers them in. */
+export const RARITY_TIERS: readonly RarityTier[] = ["ultra-rare", "rare", "limited"];
+
+export const RARITY_LABELS: Record<RarityTier, string> = {
+  "ultra-rare": "Ultra Rare",
+  rare: "Rare",
+  limited: "Limited",
+};
 
 export interface Rarity {
   tier: RarityTier;
   label: string;
-  /** the stated reason the badge exists, e.g. "Only 7,500 were issued" */
-  reason: string;
+  /**
+   * Why this one is rare, in the admin's own words ("Fewer than 200 known to
+   * exist"). Null when none was given, in which case the page states that the
+   * badge was set by hand rather than inventing a reason.
+   */
+  note: string | null;
 }
 
 /**
- * Pulls a comparable number out of the free-text quantity field. Commas are
- * ignored; a range ("10,000-15,000") uses its lower bound; a "~" prefix is
- * fine; text without digits ("Unknown") returns null.
+ * Narrows a stored string to a tier we can render. A check constraint keeps the
+ * column to these three values, but the column is plain text and the row can
+ * predate — or outlive — that constraint, so an unrecognized value drops the
+ * badge rather than rendering an unstyled one.
  */
-export function parseQuantity(quantity?: string | null): number | null {
-  if (!quantity) return null;
-  const match = quantity.replace(/,/g, "").match(/\d+/);
-  if (!match) return null;
-  const value = Number(match[0]);
-  return Number.isFinite(value) && value > 0 ? value : null;
+export function parseRarityTier(value?: string | null): RarityTier | null {
+  return RARITY_TIERS.includes(value as RarityTier) ? (value as RarityTier) : null;
 }
 
-export function getRarity(quantity?: string | null): Rarity | null {
-  const count = parseQuantity(quantity);
-  if (count == null) return null;
+export function getRarity(tier?: string | null, note?: string | null): Rarity | null {
+  const parsed = parseRarityTier(tier);
+  if (!parsed) return null;
 
-  const reason = `Only ${formatQuantity(String(count))} were issued`;
-  if (count < 10_000) return { tier: "ultra-rare", label: "Ultra Rare", reason };
-  if (count < 15_000) return { tier: "rare", label: "Rare", reason };
-  if (count < 25_000) return { tier: "limited", label: "Limited", reason };
-  return null;
+  return { tier: parsed, label: RARITY_LABELS[parsed], note: note?.trim() || null };
 }

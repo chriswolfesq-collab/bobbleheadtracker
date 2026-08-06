@@ -23,6 +23,8 @@ const override = (over: Partial<BobbleheadOverride> = {}): BobbleheadOverride =>
   year: null,
   date: null,
   city: null,
+  rarity: null,
+  rarityNote: null,
   deleted: false,
   photoHidden: false,
   ...over,

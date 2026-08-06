@@ -371,6 +371,20 @@ alter table public.community_bobbleheads
   add constraint community_bobbleheads_city_check
   check (city is null or city in ('Oakland', 'Sacramento'));
 
+-- Hand-set rarity badge, with the admin's stated reason. Null means no badge,
+-- which is where every listing starts — nothing derives a tier from `quantity`.
+-- See supabase/manual_rarity.sql and lib/rarity.ts.
+alter table public.community_bobbleheads
+  add column if not exists rarity text;
+
+alter table public.community_bobbleheads
+  add column if not exists rarity_note text;
+
+alter table public.community_bobbleheads drop constraint if exists community_bobbleheads_rarity_check;
+alter table public.community_bobbleheads
+  add constraint community_bobbleheads_rarity_check
+  check (rarity is null or rarity in ('ultra-rare', 'rare', 'limited'));
+
 create table if not exists public.bobblehead_gallery_photos (
   id uuid primary key default gen_random_uuid(),
   bobblehead_id text not null,
@@ -425,6 +439,19 @@ alter table public.bobblehead_overrides drop constraint if exists bobblehead_ove
 alter table public.bobblehead_overrides
   add constraint bobblehead_overrides_city_check
   check (city is null or city in ('Oakland', 'Sacramento'));
+
+-- Hand-set rarity badge, with the admin's stated reason. Null means no badge.
+-- See supabase/manual_rarity.sql and lib/rarity.ts.
+alter table public.bobblehead_overrides
+  add column if not exists rarity text;
+
+alter table public.bobblehead_overrides
+  add column if not exists rarity_note text;
+
+alter table public.bobblehead_overrides drop constraint if exists bobblehead_overrides_rarity_check;
+alter table public.bobblehead_overrides
+  add constraint bobblehead_overrides_rarity_check
+  check (rarity is null or rarity in ('ultra-rare', 'rare', 'limited'));
 
 create table if not exists public.submissions (
   id uuid primary key default gen_random_uuid(),

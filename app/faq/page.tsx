@@ -31,7 +31,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Where does the \"rarity\" badge come from?",
-    a: "It's derived from the quantity issued: under 10,000 is Ultra Rare, under 15,000 is Rare, and under 25,000 is Limited. Common runs (25,000+) get no badge.",
+    a: "We set it by hand, listing by listing. It used to be calculated from the quantity issued, but that got it wrong both ways: rarity is about demand and how often one turns up for resale, not just the size of the print run — and plenty of genuinely scarce bobbleheads have no quantity on record at all. Most listings carry no badge.",
   },
 ];
 

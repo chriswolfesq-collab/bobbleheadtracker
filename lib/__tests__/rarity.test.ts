@@ -1,50 +1,53 @@
 import { describe, expect, it } from "vitest";
-import { getRarity, parseQuantity } from "@/lib/rarity";
+import { getRarity, parseRarityTier } from "@/lib/rarity";
 
-describe("parseQuantity", () => {
-  it("parses plain and comma-grouped numbers", () => {
-    expect(parseQuantity("40,000")).toBe(40000);
-    expect(parseQuantity("7500")).toBe(7500);
+describe("parseRarityTier", () => {
+  it("accepts the three known tiers", () => {
+    expect(parseRarityTier("ultra-rare")).toBe("ultra-rare");
+    expect(parseRarityTier("rare")).toBe("rare");
+    expect(parseRarityTier("limited")).toBe("limited");
   });
 
-  it("uses the lower bound of a range", () => {
-    expect(parseQuantity("10,000-15,000")).toBe(10000);
-  });
-
-  it("handles approximate prefixes", () => {
-    expect(parseQuantity("~15,000")).toBe(15000);
-    expect(parseQuantity("First 20,000 fans")).toBe(20000);
-  });
-
-  it("returns null for missing or non-numeric values", () => {
-    expect(parseQuantity(undefined)).toBeNull();
-    expect(parseQuantity(null)).toBeNull();
-    expect(parseQuantity("")).toBeNull();
-    expect(parseQuantity("Unknown")).toBeNull();
+  it("rejects anything else", () => {
+    expect(parseRarityTier(undefined)).toBeNull();
+    expect(parseRarityTier(null)).toBeNull();
+    expect(parseRarityTier("")).toBeNull();
+    expect(parseRarityTier("Ultra Rare")).toBeNull();
+    expect(parseRarityTier("legendary")).toBeNull();
   });
 });
 
 describe("getRarity", () => {
-  it("maps quantities to tiers", () => {
-    expect(getRarity("5,000")?.tier).toBe("ultra-rare");
-    expect(getRarity("9,999")?.tier).toBe("ultra-rare");
-    expect(getRarity("10,000")?.tier).toBe("rare");
-    expect(getRarity("14,999")?.tier).toBe("rare");
-    expect(getRarity("15,000")?.tier).toBe("limited");
-    expect(getRarity("24,999")?.tier).toBe("limited");
+  it("labels a set tier", () => {
+    expect(getRarity("ultra-rare")).toEqual({
+      tier: "ultra-rare",
+      label: "Ultra Rare",
+      note: null,
+    });
   });
 
-  it("gives common runs no badge", () => {
-    expect(getRarity("25,000")).toBeNull();
-    expect(getRarity("40,000")).toBeNull();
+  it("carries the stated reason", () => {
+    expect(getRarity("rare", "Fewer than 200 known to exist")?.note).toBe(
+      "Fewer than 200 known to exist",
+    );
   });
 
-  it("gives unknown quantities no badge", () => {
-    expect(getRarity("Unknown")).toBeNull();
+  it("treats a blank note as no note", () => {
+    expect(getRarity("limited", "   ")?.note).toBeNull();
+  });
+
+  it("gives an unset listing no badge", () => {
     expect(getRarity(null)).toBeNull();
+    expect(getRarity(undefined, "a note without a tier")).toBeNull();
   });
 
-  it("states the reason", () => {
-    expect(getRarity("7500")?.reason).toBe("Only 7,500 were issued");
+  // The whole point of the change: quantity no longer decides anything, so a
+  // listing with a tiny print run and no stated tier stays unbadged, and one
+  // with no quantity at all can still be marked ultra rare.
+  it("ignores quantity entirely", () => {
+    expect(getRarity("5,000")).toBeNull();
+    expect(getRarity("ultra-rare", "Quantity unknown, maybe a dozen survive")?.tier).toBe(
+      "ultra-rare",
+    );
   });
 });

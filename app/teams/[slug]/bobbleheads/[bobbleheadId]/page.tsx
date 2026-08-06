@@ -78,7 +78,9 @@ export default async function BobbleheadPage({
 
   const name = override?.title ?? giveaway.title;
   const quantity = override?.quantity ?? giveaway.quantity ?? null;
-  const rarity = getRarity(quantity);
+  // Only what an admin actually marked — the curated seed data carries no
+  // rarity, and nothing infers one from the quantity above.
+  const rarity = getRarity(override?.rarity, override?.rarityNote);
   const base = siteUrl();
   const pageUrl = `${base}/teams/${slug}/bobbleheads/${bobbleheadId}`;
   const jsonLd = {

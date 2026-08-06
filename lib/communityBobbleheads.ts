@@ -2,12 +2,20 @@
 
 import { useEffect, useState } from "react";
 import type { Giveaway } from "@/lib/bobbleheads";
+import { type RarityTier, parseRarityTier } from "@/lib/rarity";
 import { supabase } from "@/lib/supabase";
 
-// `city` is the Athletics-only Oakland/Sacramento pick (lib/athleticsCity.ts).
-// It has no place in the curated seed data, so it rides on this type rather
-// than on Giveaway itself, and is only read on the detail page.
-export type CommunityBobblehead = Giveaway & { community: true; city?: string | null };
+// `city` is the Athletics-only Oakland/Sacramento pick (lib/athleticsCity.ts),
+// and `rarity` is the hand-set badge (lib/rarity.ts). Neither has a place in the
+// curated seed data, so they ride on this type rather than on Giveaway itself,
+// and both are only read on the detail page — the grid hooks below don't select
+// them.
+export type CommunityBobblehead = Giveaway & {
+  community: true;
+  city?: string | null;
+  rarity?: RarityTier | null;
+  rarityNote?: string | null;
+};
 
 export function useCommunityBobbleheads(teamSlug: string) {
   const [communityBobbleheads, setCommunityBobbleheads] = useState<CommunityBobblehead[]>([]);
@@ -162,7 +170,7 @@ export function useCommunityBobblehead(teamSlug: string, bobbleheadId: string) {
 
     supabase
       .from("community_bobbleheads")
-      .select("id, title, nickname, quantity, year, date, image_url, city")
+      .select("id, title, nickname, quantity, year, date, image_url, city, rarity, rarity_note")
       .eq("team_slug", teamSlug)
       .eq("id", bobbleheadId)
       .maybeSingle()
@@ -183,6 +191,8 @@ export function useCommunityBobblehead(teamSlug: string, bobbleheadId: string) {
             date: data.date,
             imageUrl: data.image_url,
             city: data.city,
+            rarity: parseRarityTier(data.rarity),
+            rarityNote: data.rarity_note,
             community: true,
           });
         }

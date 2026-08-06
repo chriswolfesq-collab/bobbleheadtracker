@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import type { BobbleheadOverride } from "@/lib/bobbleheadOverrides";
+import { parseRarityTier } from "@/lib/rarity";
 import { createServerSupabase } from "@/lib/supabaseServer";
 
 // One cache tag shared by every curated listing's server-rendered data. The
@@ -28,7 +29,7 @@ const getOverridesMap = unstable_cache(
     const client = createServerSupabase();
     const { data, error } = await client
       .from("bobblehead_overrides")
-      .select("team_slug, bobblehead_id, title, nickname, quantity, year, date, city, deleted, photo_hidden");
+      .select("team_slug, bobblehead_id, title, nickname, quantity, year, date, city, rarity, rarity_note, deleted, photo_hidden");
 
     if (error) {
       console.error("Failed to load bobblehead overrides (server):", error.message);
@@ -44,6 +45,8 @@ const getOverridesMap = unstable_cache(
         year: row.year,
         date: row.date,
         city: row.city,
+        rarity: parseRarityTier(row.rarity),
+        rarityNote: row.rarity_note,
         deleted: row.deleted,
         photoHidden: row.photo_hidden,
       };

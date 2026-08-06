@@ -124,7 +124,8 @@ export default async function Image({
   const year = override?.year ?? giveaway.year;
   const date = override?.date ?? giveaway.date;
   const quantity = override?.quantity ?? giveaway.quantity ?? null;
-  const rarity = getRarity(quantity);
+  // Only what an admin actually marked — see lib/rarity.ts.
+  const rarity = getRarity(override?.rarity, override?.rarityNote);
 
   // Same two layers the page resolves, in the same order: the approved photo
   // sits on top of the curated seed image, which photo_hidden suppresses.

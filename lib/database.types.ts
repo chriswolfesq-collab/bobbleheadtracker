@@ -89,6 +89,8 @@ export type Database = {
           nickname: string | null
           photo_hidden: boolean
           quantity: string | null
+          rarity: string | null
+          rarity_note: string | null
           team_slug: string
           title: string | null
           updated_at: string
@@ -103,6 +105,8 @@ export type Database = {
           nickname?: string | null
           photo_hidden?: boolean
           quantity?: string | null
+          rarity?: string | null
+          rarity_note?: string | null
           team_slug: string
           title?: string | null
           updated_at?: string
@@ -117,6 +121,8 @@ export type Database = {
           nickname?: string | null
           photo_hidden?: boolean
           quantity?: string | null
+          rarity?: string | null
+          rarity_note?: string | null
           team_slug?: string
           title?: string | null
           updated_at?: string
@@ -135,6 +141,8 @@ export type Database = {
           image_url: string | null
           nickname: string | null
           quantity: string | null
+          rarity: string | null
+          rarity_note: string | null
           team_slug: string
           title: string
           year: string
@@ -148,6 +156,8 @@ export type Database = {
           image_url?: string | null
           nickname?: string | null
           quantity?: string | null
+          rarity?: string | null
+          rarity_note?: string | null
           team_slug: string
           title: string
           year?: string
@@ -161,6 +171,8 @@ export type Database = {
           image_url?: string | null
           nickname?: string | null
           quantity?: string | null
+          rarity?: string | null
+          rarity_note?: string | null
           team_slug?: string
           title?: string
           year?: string

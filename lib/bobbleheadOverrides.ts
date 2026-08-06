@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { type RarityTier, parseRarityTier } from "@/lib/rarity";
 import { supabase } from "@/lib/supabase";
 
 export type BobbleheadOverride = {
@@ -11,6 +12,10 @@ export type BobbleheadOverride = {
   date: string | null;
   /** Athletics only: "Oakland" or "Sacramento". See lib/athleticsCity.ts. */
   city: string | null;
+  // Set by hand or not at all — nothing derives a tier from the quantity. See
+  // lib/rarity.ts.
+  rarity: RarityTier | null;
+  rarityNote: string | null;
   deleted: boolean;
   // Curated listings carry a seed photo in data/giveaways/*.json that isn't a
   // DB row, so removing it is recorded here rather than by deleting anything.
@@ -34,7 +39,7 @@ export function useBobbleheadOverride(
 
     supabase
       .from("bobblehead_overrides")
-      .select("title, nickname, quantity, year, date, city, deleted, photo_hidden")
+      .select("title, nickname, quantity, year, date, city, rarity, rarity_note, deleted, photo_hidden")
       .eq("team_slug", teamSlug)
       .eq("bobblehead_id", bobbleheadId)
       .maybeSingle()
@@ -54,6 +59,8 @@ export function useBobbleheadOverride(
                   year: data.year,
                   date: data.date,
                   city: data.city,
+                  rarity: parseRarityTier(data.rarity),
+                  rarityNote: data.rarity_note,
                   deleted: data.deleted,
                   photoHidden: data.photo_hidden,
                 }
@@ -104,7 +111,7 @@ const NONE: BobbleheadOverridesLookup = {
 export async function fetchBobbleheadOverrides(): Promise<BobbleheadOverridesLookup> {
   const { data, error } = await supabase
     .from("bobblehead_overrides")
-    .select("team_slug, bobblehead_id, title, nickname, quantity, year, date, city, deleted, photo_hidden");
+    .select("team_slug, bobblehead_id, title, nickname, quantity, year, date, city, rarity, rarity_note, deleted, photo_hidden");
 
   if (error) {
     console.error("Failed to load bobblehead overrides:", error.message);
@@ -121,6 +128,8 @@ export async function fetchBobbleheadOverrides(): Promise<BobbleheadOverridesLoo
         year: row.year,
         date: row.date,
         city: row.city,
+        rarity: parseRarityTier(row.rarity),
+        rarityNote: row.rarity_note,
         deleted: row.deleted,
         photoHidden: row.photo_hidden,
       },

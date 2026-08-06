@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { formatQuantity } from "@/lib/formatQuantity";
+import { RARITY_LABELS, RARITY_TIERS, type RarityTier, parseRarityTier } from "@/lib/rarity";
 import { useDialog } from "@/lib/useDialog";
 
 export type EditBobbleheadValues = {
@@ -15,6 +16,9 @@ export type EditBobbleheadValues = {
    * lib/athleticsCity.ts and the `cityOptions` prop.
    */
   city: string | null;
+  /** Null is "no badge", and is where every listing starts. See lib/rarity.ts. */
+  rarity: RarityTier | null;
+  rarityNote: string;
 };
 
 const UNKNOWN_QUANTITY = "Unknown";
@@ -48,6 +52,8 @@ export function EditBobbleheadDialog({
   const [quantityUnknown, setQuantityUnknown] = useState(initial.quantity === UNKNOWN_QUANTITY);
   const [date, setDate] = useState(initial.date);
   const [city, setCity] = useState(initial.city);
+  const [rarity, setRarity] = useState<RarityTier | null>(initial.rarity);
+  const [rarityNote, setRarityNote] = useState(initial.rarityNote);
   const [file, setFile] = useState<File | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -92,6 +98,10 @@ export function EditBobbleheadDialog({
                   quantity: quantityUnknown ? UNKNOWN_QUANTITY : formatQuantity(quantity),
                   date,
                   city: hasCityField ? city : null,
+                  rarity,
+                  // A note without a tier has nothing to hang off, so it goes
+                  // with the badge rather than lingering on the row.
+                  rarityNote: rarity ? rarityNote.trim() : "",
                 },
                 file,
               );
@@ -174,7 +184,38 @@ export function EditBobbleheadDialog({
               <span className="text-xs font-semibold text-zinc-700">Quantity unknown</span>
             </label>
             <p className="text-[11px] leading-4 text-zinc-500">
-              How many were handed out — a hint at how rare it is.
+              How many were handed out. On its own it doesn&apos;t decide rarity — set that below.
+            </p>
+          </div>
+          <div className="grid gap-1.5">
+            <label className="text-xs font-bold text-zinc-700">
+              Rarity <span className="font-medium text-zinc-500">(optional)</span>
+            </label>
+            <select
+              value={rarity ?? ""}
+              onChange={(event) => setRarity(parseRarityTier(event.target.value))}
+              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent"
+            >
+              <option value="">No badge</option>
+              {RARITY_TIERS.map((tier) => (
+                <option key={tier} value={tier}>
+                  {RARITY_LABELS[tier]}
+                </option>
+              ))}
+            </select>
+            {rarity ? (
+              <input
+                type="text"
+                value={rarityNote}
+                onChange={(event) => setRarityNote(event.target.value)}
+                placeholder="e.g. “Fewer than 200 known to exist”"
+                className="w-full rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-zinc-900 outline-none transition focus:border-accent"
+              />
+            ) : null}
+            <p className="text-[11px] leading-4 text-zinc-500">
+              {rarity
+                ? "Why it's rare, in your words — shown under the badge. Optional."
+                : "Your call, not the quantity's. Demand and how often it turns up for resale matter as much as the print run."}
             </p>
           </div>
           <div className="grid gap-1.5">
