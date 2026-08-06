@@ -14,7 +14,7 @@ const UNKNOWN_YEAR = "Unknown";
 const FIELD_CLASSES =
   "mt-1 w-full rounded border border-border-soft bg-white px-3 py-2 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent";
 
-type TabKey = "all" | "owned" | "unowned" | "wishlist";
+type TabKey = "all" | "owned" | "unowned" | "wanted";
 
 export type SortOrder = "date-desc" | "date-asc" | "title-asc";
 
@@ -30,7 +30,9 @@ const TABS: { value: TabKey; label: string }[] = [
   { value: "all", label: "All Bobbleheads" },
   { value: "owned", label: "I Own" },
   { value: "unowned", label: "I Need" },
-  { value: "wishlist", label: "Wishlist" },
+  // "Wanted", not "Wishlist": the same list is called Wanted on the profile and
+  // is what the ☆ button fills, so it gets one name everywhere.
+  { value: "wanted", label: "Wanted" },
 ];
 
 // 24 divides evenly into the 2/3/4/6-column grid steps, so every full page
@@ -65,7 +67,10 @@ function titleSortKey(title: string): string {
 // list.
 function readUrlState() {
   const params = new URLSearchParams(window.location.search);
-  const tab = params.get("tab") as TabKey | null;
+  // `wishlist` was this tab's name before it was renamed to match the profile;
+  // links handed out under the old name still land on the right tab.
+  const rawTab = params.get("tab");
+  const tab = (rawTab === "wishlist" ? "wanted" : rawTab) as TabKey | null;
   const sort = params.get("sort") as SortOrder | null;
   return {
     tab: tab && TABS.some((t) => t.value === tab) ? tab : "all",
@@ -283,7 +288,7 @@ export function BobbleheadCollection({
       if (cityFilter && giveaway.city !== cityFilter) return false;
       if (tab === "owned" && !ownedById[giveaway.id]) return false;
       if (tab === "unowned" && ownedById[giveaway.id]) return false;
-      if (tab === "wishlist" && !wantedById[giveaway.id]) return false;
+      if (tab === "wanted" && !wantedById[giveaway.id]) return false;
       if (hasPhotoOnly && !giveaway.imageUrl) return false;
       if (favoritesOnly && !favoritedById[giveaway.id]) return false;
       return true;

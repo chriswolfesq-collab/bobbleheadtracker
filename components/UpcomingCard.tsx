@@ -3,7 +3,8 @@ import Link from "next/link";
 import { bobbleheadHref } from "@/lib/bobbleheadIdentity";
 import { publicAsset } from "@/lib/paths";
 import { getTeamBySlug } from "@/lib/teams";
-import { formatCountdown, formatUpcomingDate, type UpcomingGiveaway } from "@/lib/upcomingGiveaways";
+import { UpcomingCountdown } from "@/components/UpcomingCountdown";
+import { formatUpcomingDate, type UpcomingGiveaway } from "@/lib/upcomingGiveaways";
 
 // One scheduled giveaway as a card. Shared by the homepage strip and the full
 // /upcoming list so the two can't drift apart — they're the same list, one
@@ -37,9 +38,11 @@ export function UpcomingCard({ item, now }: { item: UpcomingGiveaway; now: numbe
       <div className="flex flex-1 flex-col gap-1 p-3">
         <p className="text-[11px] font-black uppercase tracking-wide text-accent">
           {formatUpcomingDate(item.time)}
-          <span className="ml-1.5 font-semibold text-zinc-500">
-            {formatCountdown(item.time, now)}
-          </span>
+          <UpcomingCountdown
+            time={item.time}
+            now={now}
+            className="ml-1.5 font-semibold text-zinc-500"
+          />
         </p>
         <p className="font-display text-sm font-bold uppercase leading-tight tracking-wide text-navy">
           {item.title}

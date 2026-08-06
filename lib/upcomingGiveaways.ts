@@ -63,9 +63,14 @@ export function formatUpcomingDate(time: number): string {
 }
 
 // "in 3 days" / "today" / "tomorrow" — the part people actually scan for.
+// Empty for a date that has already passed: selectUpcoming keeps those off the
+// list, but a prerendered page outlives the clock it was rendered against, and
+// a card that has gone stale should say nothing rather than call yesterday
+// "today".
 export function formatCountdown(time: number, now: number): string {
   const days = Math.round((startOfDay(time) - startOfDay(now)) / 86_400_000);
-  if (days <= 0) return "today";
+  if (days < 0) return "";
+  if (days === 0) return "today";
   if (days === 1) return "tomorrow";
   if (days < 7) return `in ${days} days`;
   if (days < 14) return "next week";

@@ -1,6 +1,6 @@
 "use client";
 
-/* Underline tab row (ALL BOBBLEHEADS / I OWN / I NEED / WISHLIST). Purely
+/* Underline tab row (ALL BOBBLEHEADS / I OWN / I NEED / WANTED). Purely
    presentational — selection state lives with the caller. */
 export function Tabs<T extends string>({
   tabs,

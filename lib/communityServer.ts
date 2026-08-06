@@ -44,7 +44,12 @@ export const getCommunityListings = unstable_cache(
     }));
   },
   ["community-listings"],
-  { tags: [CURATED_DATA_TAG], revalidate: 3600 },
+  // Tag-only, no timer. community_bobbleheads has a revalidate trigger
+  // (supabase/revalidate_trigger.sql), so an hourly clock adds nothing but
+  // cost: a `revalidate` here propagates to every page that reads this, which
+  // put all ~3,650 prerendered pages on a 1h ISR window and made a crawler
+  // sweep re-render the whole site every hour.
+  { tags: [CURATED_DATA_TAG], revalidate: false },
 );
 
 // One listing, read straight from the DB with no cache in front of it. Only

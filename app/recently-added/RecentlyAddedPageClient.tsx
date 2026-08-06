@@ -251,13 +251,17 @@ export function RecentlyAddedPageClient() {
                   Search
                 </span>
                 <div className="relative mt-1">
+                  {/* WebKit draws its own ✕ inside a search input, which landed
+                      on top of the one below and gave the field two clear
+                      buttons. `appearance-none` drops the native one; ours stays
+                      because it's styled and carries a label. */}
                   <input
                     type="search"
                     value={query}
                     onChange={(event) => setQuery(event.target.value)}
                     placeholder="Search by player, team…"
                     aria-label="Search recently added bobbleheads"
-                    className="w-full rounded border border-black/10 bg-white px-3 py-2 pr-9 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent"
+                    className="w-full rounded border border-black/10 bg-white px-3 py-2 pr-9 text-sm font-semibold text-zinc-900 outline-none transition placeholder:text-zinc-500 focus:border-accent [&::-webkit-search-cancel-button]:appearance-none"
                   />
                   {query ? (
                     <button

@@ -218,14 +218,19 @@ export function SiteSearch({
                         className="relative h-9 w-auto object-contain"
                       />
                     </span>
+                    {/* Wrapped, not truncated. In a panel this narrow a single
+                        clipped line turned "Mike Trout & Shohei Ohtani" into
+                        "Mike Trout & Shohei Oht…", which reads as a near-miss
+                        rather than the exact match it is. Two lines apiece is
+                        enough for every real title and team name. */}
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-semibold text-zinc-900">
+                      <p className="line-clamp-2 text-sm font-semibold text-zinc-900">
                         {result.title}
                         {result.nickname ? (
                           <span className="font-normal text-zinc-600"> “{result.nickname}”</span>
                         ) : null}
                       </p>
-                      <p className="truncate text-xs text-zinc-600">
+                      <p className="line-clamp-2 text-xs text-zinc-600">
                         {teamSlug ? result.date : `${result.teamCity} ${result.teamName} · ${result.date}`}
                       </p>
                     </div>
