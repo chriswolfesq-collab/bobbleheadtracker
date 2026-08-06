@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { getGiveawayById } from "@/lib/bobbleheads";
-import { getCuratedListingData } from "@/lib/curatedListing";
+import { CURATED_DATA_TAG, getCuratedListingData } from "@/lib/curatedListing";
 import { fitWithin, imageDimensions } from "@/lib/imageDimensions";
 import { legibleAccent } from "@/lib/ogAccent";
 import { getRarity } from "@/lib/rarity";
@@ -54,7 +54,16 @@ async function loadPhoto(url: string): Promise<LoadedPhoto | null> {
     let type: string;
 
     if (/^https?:\/\//.test(url)) {
+      // force-cache, or this card never settles. fetch defaults to no-store in
+      // Next 16, and one uncached read is enough to keep the whole route
+      // revalidating instead of staying prerendered -- the card was serving
+      // STALE and re-rendering in the background on a steady trickle of crawler
+      // traffic, which is the Satori render plus this fetch all over again.
+      // A listing photo is immutable (a new photo is a new URL), and the tag
+      // means an admin swapping one still drops these bytes.
       const response = await fetch(url, {
+        cache: "force-cache",
+        next: { tags: [CURATED_DATA_TAG] },
         signal: AbortSignal.timeout(REMOTE_PHOTO_TIMEOUT_MS),
       });
       if (!response.ok) return null;

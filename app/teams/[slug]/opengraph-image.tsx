@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
 import { legibleAccent } from "@/lib/ogAccent";
-import { getTeamBySlug } from "@/lib/teams";
+import { getTeamBySlug, TEAMS } from "@/lib/teams";
 
 export const alt = "An MLB team's stadium giveaway bobbleheads on Bobble Shelf";
 export const size = { width: 1200, height: 630 };
@@ -13,6 +13,14 @@ export const contentType = "image/png";
 // data, so this card is fully known at build time — one image per team is baked
 // once. No force-dynamic: unlike the shelf card (a live per-account count) there
 // is nothing request-time to read here.
+//
+// The params have to be declared here rather than inherited from the sibling
+// page: without them Next left this route dynamic despite having nothing
+// dynamic in it, so all 30 cards paid for a Satori render on every crawler hit
+// and every link unfurl. Thirty renders at build time instead.
+export function generateStaticParams() {
+  return TEAMS.map((team) => ({ slug: team.slug }));
+}
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
