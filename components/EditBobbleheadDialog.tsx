@@ -78,7 +78,7 @@ export function EditBobbleheadDialog({
         role="dialog"
         aria-modal="true"
         aria-labelledby="edit-bobblehead-title"
-        className="w-full max-w-sm rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50"
+        className="max-h-full w-full max-w-sm overflow-y-auto rounded-2xl border border-black/10 bg-white p-6 shadow-2xl shadow-black/50"
         onClick={(event) => event.stopPropagation()}
       >
         <h2 id="edit-bobblehead-title" className="text-lg font-black text-zinc-900">Edit bobblehead</h2>
@@ -255,14 +255,14 @@ export function EditBobbleheadDialog({
                     setIsRemovingPhoto(false);
                   }
                 }}
-                className="justify-self-start text-xs font-black uppercase tracking-wide text-red-400 transition hover:text-red-300 disabled:opacity-60"
+                className="justify-self-start text-xs font-black uppercase tracking-wide text-red-600 transition hover:text-red-700 disabled:opacity-60"
               >
                 {isRemovingPhoto ? "Removing photo…" : "Remove current photo"}
               </button>
             ) : null}
           </div>
 
-          {error ? <p className="text-xs font-semibold text-red-400">{error}</p> : null}
+          {error ? <p className="text-xs font-semibold text-red-600">{error}</p> : null}
 
           <div className="mt-1 flex gap-2">
             <button
@@ -286,7 +286,7 @@ export function EditBobbleheadDialog({
         <div className="mt-5 border-t border-black/10 pt-4">
           {isConfirmingDelete ? (
             <div className="rounded-lg border border-red-500/40 bg-red-500/10 p-3">
-              <p className="text-xs font-bold text-red-200">
+              <p className="text-xs font-bold text-red-700">
                 Delete this listing for everyone? Its photos, and every user&apos;s ownership and favorite marks for
                 it, go too. This can&apos;t be undone.
               </p>
@@ -325,7 +325,7 @@ export function EditBobbleheadDialog({
               type="button"
               disabled={isBusy}
               onClick={() => setIsConfirmingDelete(true)}
-              className="text-xs font-black uppercase tracking-wide text-red-400 transition hover:text-red-300 disabled:opacity-60"
+              className="text-xs font-black uppercase tracking-wide text-red-600 transition hover:text-red-700 disabled:opacity-60"
             >
               Delete listing
             </button>
