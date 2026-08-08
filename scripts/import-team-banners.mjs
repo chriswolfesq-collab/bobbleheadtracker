@@ -3,7 +3,7 @@
 // and regenerates lib/teamBanners.ts with the pixel size of each one.
 //
 // Run:  node scripts/import-team-banners.mjs [source-dir]
-//       (defaults to ~/Documents/headerimages)
+//       (defaults to images/headerimages in the repo)
 //
 // A source file is matched to a team by name with the dashes dropped, so
 // redsox.png, red-sox.png and RedSox.png all land on the red-sox slug.
@@ -25,13 +25,12 @@
 // covers it, so a source that isn't that shape is cropped at render, and
 // lib/teamBanners.ts carries each card's real size to reserve the box with.
 import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
-import { homedir } from 'node:os';
 import { dirname, join, parse } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
-const SRC = process.argv[2] ?? join(homedir(), 'Documents', 'headerimages');
+const SRC = process.argv[2] ?? join(root, 'images', 'headerimages');
 const OUT = join(root, 'public', 'team-banners');
 
 // Read the slugs from the same file the page reads them from, so a team added

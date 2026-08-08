@@ -44,6 +44,9 @@ next-env.d.ts
 # throwaway one-off debugging scripts
 scratchpad_*
 
+# local source art (imported into public/ by scripts/import-team-banners.mjs)
+/images/
+
 # claude code local settings
 .claude/settings.local.json
 supabase/.temp
