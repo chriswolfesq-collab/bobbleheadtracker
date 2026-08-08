@@ -513,7 +513,7 @@ export function CommunityBobbleheadPage({
               </div>
             ) : null}
 
-            <TagList teamSlug={team.slug} bobbleheadId={giveaway.id} />
+            <TagList teamSlug={team.slug} bobbleheadId={giveaway.id} source="community" />
 
             {rarity ? (
               <div className="rounded-xl border border-border-soft bg-surface p-5">

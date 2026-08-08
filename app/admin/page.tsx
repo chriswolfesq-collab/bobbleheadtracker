@@ -28,6 +28,7 @@ export default function AdminPage() {
   const [pendingReports, setPendingReports] = useState(0);
   const [openDeadImages, setOpenDeadImages] = useState(0);
   const [pendingScraped, setPendingScraped] = useState(0);
+  const [pendingTagRequests, setPendingTagRequests] = useState(0);
   // Derived from the vocabulary rather than counted in the database, so this
   // one comes from a hook instead of a head query. Off for reps: they can't
   // see the rulings or act on a pair.
@@ -73,6 +74,14 @@ export default function AdminPage() {
         .eq("status", "pending")
         .then(({ count }) => {
           if (!cancelled) setPendingScraped(count ?? 0);
+        });
+
+      supabase
+        .from("tag_requests")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "pending")
+        .then(({ count }) => {
+          if (!cancelled) setPendingTagRequests(count ?? 0);
         });
     }
 
@@ -210,6 +219,15 @@ export default function AdminPage() {
                 <p className="mt-2 text-sm text-zinc-600">
                   Rename a tag, merge two that mean the same thing, or delete one from the
                   vocabulary.
+                </p>
+              </Link>
+              <Link href="/admin/tag-requests" className={cardClass}>
+                <NotificationBadge count={pendingTagRequests} />
+                <p className="text-sm font-black uppercase tracking-wide text-zinc-900">
+                  Tag requests
+                </p>
+                <p className="mt-2 text-sm text-zinc-600">
+                  Approve or reject the tags team reps have asked to put on a listing.
                 </p>
               </Link>
               <Link href="/admin/duplicate-tags" className={cardClass}>

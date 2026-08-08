@@ -6,6 +6,9 @@ import { TagList } from "@/components/TagList";
 // The question the picker asks before it mints a near-duplicate. Everything
 // behind it is stubbed — what's covered is whether the warning appears when it
 // should, what each answer does, and that nothing is written while it's up.
+//
+// Signed in as the admin, who is the only one who can mint now; the rep's side
+// of the same picker is tagRequestPicker.test.tsx.
 
 const addTag = vi.fn<(label: string) => Promise<boolean>>();
 const reload = vi.fn();
@@ -16,7 +19,7 @@ const VOCABULARY = [
 ];
 
 vi.mock("@/lib/adminAuth", () => ({
-  useAdminAuth: () => ({ canEditTeam: () => true }),
+  useAdminAuth: () => ({ isAdmin: true, canEditTeam: () => true }),
 }));
 
 vi.mock("@/lib/useTags", () => ({
@@ -27,6 +30,7 @@ vi.mock("@/lib/useTags", () => ({
     removeTag: vi.fn(),
   }),
   useTagVocabulary: () => ({ tags: VOCABULARY, isLoading: false, reload }),
+  useMyTagRequests: () => ({ pending: [], requestTag: vi.fn() }),
 }));
 
 beforeEach(() => {

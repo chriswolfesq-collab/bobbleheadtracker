@@ -74,14 +74,16 @@ create policy "tags: public read"
   to anon, authenticated
   using (true);
 
--- Anyone trusted to edit a listing can mint a tag, because you can't apply one
--- that doesn't exist yet. That's admins and team reps — not the public, since
--- an open vocabulary is exactly the mess the two-table shape exists to avoid.
+-- Minting is admin-only. Reps used to be able to insert here too; now they go
+-- through tag_requests.sql, which replaced the editor policies on both tables —
+-- an open-ish vocabulary is exactly the mess the two-table shape exists to
+-- avoid, and it turned out rep-minted near-duplicates were still mess enough.
 drop policy if exists "tags: editor insert" on public.tags;
-create policy "tags: editor insert"
+drop policy if exists "tags: admin insert" on public.tags;
+create policy "tags: admin insert"
   on public.tags for insert
   to authenticated
-  with check (public.is_admin() or public.is_team_rep());
+  with check (public.is_admin());
 
 -- Renaming and deleting are admin-only. A rep needs to label their own team's
 -- bobbleheads; retiring a label that thirty teams are using is a different
@@ -105,19 +107,21 @@ create policy "bobblehead_tags: public read"
   to anon, authenticated
   using (true);
 
--- can_edit_team is true for an admin on every team and for a rep on their own,
--- so this is the same rule the listing edit dialog already runs on.
+-- Applying and removing tags is admin-only too (a rep who could strip an
+-- approved tag could undo the review). A rep's route is a tag_requests row.
 drop policy if exists "bobblehead_tags: editor insert" on public.bobblehead_tags;
-create policy "bobblehead_tags: editor insert"
+drop policy if exists "bobblehead_tags: admin insert" on public.bobblehead_tags;
+create policy "bobblehead_tags: admin insert"
   on public.bobblehead_tags for insert
   to authenticated
-  with check (public.can_edit_team(team_slug));
+  with check (public.is_admin());
 
 drop policy if exists "bobblehead_tags: editor delete" on public.bobblehead_tags;
-create policy "bobblehead_tags: editor delete"
+drop policy if exists "bobblehead_tags: admin delete" on public.bobblehead_tags;
+create policy "bobblehead_tags: admin delete"
   on public.bobblehead_tags for delete
   to authenticated
-  using (public.can_edit_team(team_slug));
+  using (public.is_admin());
 
 -- ---------------------------------------------------------------------------
 -- Counts

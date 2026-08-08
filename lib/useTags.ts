@@ -12,6 +12,7 @@ import { useBobbleheadOverrides } from "@/lib/bobbleheadOverrides";
 import { getGiveawayById } from "@/lib/bobbleheads";
 import { useOwnedKeys } from "@/lib/profile";
 import { fetchAllPages, supabase } from "@/lib/supabase";
+import { submitTagRequest, type TagRequestSource } from "@/lib/tagRequests";
 import {
   chooseTagExamples,
   sortTags,
@@ -366,9 +367,10 @@ export function useTaggedListings(tagSlug: string): {
   return { listings, isLoading };
 }
 
-// One listing's tags, with the add/remove an admin or team rep needs. Writes
-// are authorized by RLS (can_edit_team), so a failure here surfaces as a toast
-// rather than being second-guessed in the client.
+// One listing's tags, with the add/remove the admin needs. Writes are
+// authorized by RLS (is_admin — see supabase/tag_requests.sql, which took this
+// away from reps), so a failure here surfaces as a toast rather than being
+// second-guessed in the client. A rep's path is useMyTagRequests below.
 export function useBobbleheadTags(teamSlug: string, bobbleheadId: string) {
   const { user } = useAuth();
   const { showError } = useToast();
@@ -494,4 +496,79 @@ export function useBobbleheadTags(teamSlug: string, bobbleheadId: string) {
   const slugs = useMemo(() => new Set(tags.map((tag) => tag.slug)), [tags]);
 
   return { tags, slugs, isLoading, addTag, removeTag };
+}
+
+// A rep's side of the admin-curated vocabulary: the requests they have pending
+// on this listing, and the way to file another. Reads only this user's rows —
+// RLS would enforce that anyway, but asking precisely keeps a busy queue from
+// leaking into every listing page's payload.
+export function useMyTagRequests(
+  teamSlug: string,
+  bobbleheadId: string,
+  source: TagRequestSource,
+) {
+  const { user } = useAuth();
+  const { showError } = useToast();
+  // Stale rows after a sign-out are handled at the return, not by a reset
+  // effect: a signed-out visitor has no pending requests by definition.
+  const [pending, setPending] = useState<Tag[]>([]);
+
+  useEffect(() => {
+    if (!user) return;
+
+    let cancelled = false;
+
+    supabase
+      .from("tag_requests")
+      .select("slug, label")
+      .eq("bobblehead_id", bobbleheadId)
+      .eq("team_slug", teamSlug)
+      .eq("requested_by", user.id)
+      .eq("status", "pending")
+      .then(({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          // The chips are a courtesy; the listing page shouldn't break over
+          // them. A rep who can't see their pending asks can still file one.
+          console.error("Failed to load your tag requests:", error.message);
+          setPending([]);
+        } else {
+          setPending(sortTags((data ?? []).map((row) => ({ slug: row.slug, label: row.label }))));
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user, teamSlug, bobbleheadId]);
+
+  const requestTag = useCallback(
+    async (label: string): Promise<boolean> => {
+      if (!user) return false;
+
+      const result = await submitTagRequest(supabase, {
+        label,
+        bobbleheadId,
+        teamSlug,
+        source,
+        requestedBy: user.id,
+      });
+
+      if (result.error) {
+        showError(result.error);
+        return false;
+      }
+
+      setPending((current) =>
+        current.some((tag) => tag.slug === result.slug)
+          ? current
+          : sortTags([...current, { slug: result.slug!, label: result.label! }]),
+      );
+      return true;
+    },
+    [user, teamSlug, bobbleheadId, source, showError],
+  );
+
+  return { pending: user ? pending : [], requestTag };
 }

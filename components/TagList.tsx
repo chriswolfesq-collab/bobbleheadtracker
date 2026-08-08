@@ -3,12 +3,16 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useAdminAuth } from "@/lib/adminAuth";
+import type { TagRequestSource } from "@/lib/tagRequests";
 import { matchTags, type TagWithCount, tagHref } from "@/lib/tags";
 import { describeSimilarity, findSimilarTags, type SimilarTag } from "@/lib/tagSimilarity";
-import { useBobbleheadTags, useTagVocabulary } from "@/lib/useTags";
+import { useBobbleheadTags, useMyTagRequests, useTagVocabulary } from "@/lib/useTags";
 
-// The tags on one bobblehead, plus the picker an admin or team rep uses to
-// change them. Everyone sees the chips; only an editor sees the controls.
+// The tags on one bobblehead. Everyone sees the chips; what the controls do
+// depends on who's looking. The admin edits directly — the vocabulary is
+// theirs. A team rep requests: their picker files a tag_requests row for the
+// admin to rule on at /admin/tag-requests, and their asks sit here as muted
+// "pending" chips until then.
 //
 // Chips link to the tag page rather than running a search, so "Star Wars" is a
 // place you can link someone to rather than a query they have to retype.
@@ -16,20 +20,28 @@ import { useBobbleheadTags, useTagVocabulary } from "@/lib/useTags";
 const CHIP_CLASS =
   "inline-flex items-center gap-1 rounded-full border border-brass/40 bg-brass/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-navy transition";
 
+const PENDING_CHIP_CLASS =
+  "inline-flex items-center gap-1 rounded-full border border-dashed border-border-soft bg-transparent px-3 py-1 text-xs font-bold uppercase tracking-wide text-zinc-500";
+
 export function TagList({
   teamSlug,
   bobbleheadId,
+  source = "curated",
 }: {
   teamSlug: string;
   bobbleheadId: string;
+  source?: TagRequestSource;
 }) {
   const { tags, isLoading, addTag, removeTag } = useBobbleheadTags(teamSlug, bobbleheadId);
-  const { canEditTeam } = useAdminAuth();
-  const canEdit = canEditTeam(teamSlug);
+  const { pending, requestTag } = useMyTagRequests(teamSlug, bobbleheadId, source);
+  const { isAdmin, canEditTeam } = useAdminAuth();
+  // A rep's controls request rather than write; the admin's write directly.
+  const canRequest = !isAdmin && canEditTeam(teamSlug);
+  const canEdit = isAdmin || canRequest;
   const [isEditing, setIsEditing] = useState(false);
 
   // Nothing to show and no way to add: the section would be an empty heading.
-  if (isLoading || (tags.length === 0 && !canEdit)) return null;
+  if (isLoading || (tags.length === 0 && pending.length === 0 && !canEdit)) return null;
 
   return (
     <div className="rounded-xl border border-border-soft bg-surface p-5">
@@ -43,16 +55,16 @@ export function TagList({
             onClick={() => setIsEditing((current) => !current)}
             className="cursor-pointer text-xs font-black uppercase tracking-wide text-accent transition hover:text-accent-hover"
           >
-            {isEditing ? "Done" : "Edit"}
+            {isEditing ? "Done" : isAdmin ? "Edit" : "Request a tag"}
           </button>
         ) : null}
       </div>
 
-      {tags.length > 0 ? (
+      {tags.length > 0 || pending.length > 0 ? (
         <ul className="mt-3 flex flex-wrap gap-2">
           {tags.map((tag) => (
             <li key={tag.slug}>
-              {isEditing ? (
+              {isEditing && isAdmin ? (
                 <span className={CHIP_CLASS}>
                   {tag.label}
                   <button
@@ -71,12 +83,32 @@ export function TagList({
               )}
             </li>
           ))}
+          {/* Only the requester sees these (the read is scoped to their own
+              rows), so a listing never advertises unreviewed labels. */}
+          {pending
+            .filter((tag) => !tags.some((existing) => existing.slug === tag.slug))
+            .map((tag) => (
+              <li key={`pending-${tag.slug}`}>
+                <span className={PENDING_CHIP_CLASS} title="Waiting for admin review">
+                  {tag.label}
+                  <span className="font-semibold normal-case tracking-normal text-zinc-400">
+                    · pending
+                  </span>
+                </span>
+              </li>
+            ))}
         </ul>
       ) : (
         <p className="mt-3 text-sm text-zinc-600">No tags yet.</p>
       )}
 
-      {isEditing ? <TagPicker onAdd={addTag} existing={tags.map((tag) => tag.slug)} /> : null}
+      {isEditing ? (
+        <TagPicker
+          onAdd={isAdmin ? addTag : requestTag}
+          existing={[...tags.map((tag) => tag.slug), ...pending.map((tag) => tag.slug)]}
+          isRequest={!isAdmin}
+        />
+      ) : null}
     </div>
   );
 }
@@ -84,9 +116,13 @@ export function TagList({
 function TagPicker({
   onAdd,
   existing,
+  isRequest,
 }: {
   onAdd: (label: string) => Promise<boolean>;
   existing: string[];
+  // A rep's submit files a request instead of writing the tag, so the wording
+  // has to promise review rather than an add that already happened.
+  isRequest: boolean;
 }) {
   const { tags: vocabulary, reload } = useTagVocabulary();
   const [query, setQuery] = useState("");
@@ -131,6 +167,11 @@ function TagPicker({
 
   return (
     <div className="mt-4 border-t border-border-soft pt-4">
+      {isRequest ? (
+        <p className="mb-3 text-xs text-zinc-500">
+          Tag requests go to the site admin for review — they&apos;ll appear here once approved.
+        </p>
+      ) : null}
       <form
         className="flex gap-2"
         onSubmit={(event) => {
@@ -148,7 +189,7 @@ function TagPicker({
             setMaybeDuplicate(null);
           }}
           placeholder="Star Wars, Sugar Skull…"
-          aria-label="Add a tag"
+          aria-label={isRequest ? "Request a tag" : "Add a tag"}
           maxLength={40}
           className="w-full rounded-lg border border-border-soft bg-white px-3 py-2 text-sm text-zinc-900 outline-none transition focus:border-accent"
         />
@@ -157,7 +198,7 @@ function TagPicker({
           disabled={isSaving || !query.trim()}
           className="cursor-pointer rounded-lg bg-accent px-4 py-2 font-display text-sm font-bold uppercase tracking-wider text-accent-fg transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Add
+          {isRequest ? "Request" : "Add"}
         </button>
       </form>
 
@@ -196,7 +237,7 @@ function TagPicker({
               onClick={() => submit(maybeDuplicate.label)}
               className="cursor-pointer text-xs font-black uppercase tracking-wide text-amber-900 underline transition hover:text-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
             >
-              Create {maybeDuplicate.label} anyway
+              {isRequest ? "Request" : "Create"} {maybeDuplicate.label} anyway
             </button>
             <button
               type="button"

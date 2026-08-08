@@ -29,6 +29,7 @@ const PARENT_CRUMBS: Record<string, { href: string; label: string }> = {
   users: { href: "/admin/users", label: "Manage users" },
   review: { href: "/admin/review", label: "Review submissions" },
   reports: { href: "/admin/reports", label: "Listing reports" },
+  "tag-requests": { href: "/admin/tag-requests", label: "Tag requests" },
 };
 
 function formatDate(value: string | null) {

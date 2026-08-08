@@ -643,6 +643,45 @@ export type Database = {
           },
         ]
       }
+      tag_requests: {
+        Row: {
+          bobblehead_id: string
+          created_at: string
+          id: string
+          label: string
+          requested_by: string
+          reviewed_at: string | null
+          slug: string
+          source: string
+          status: string
+          team_slug: string
+        }
+        Insert: {
+          bobblehead_id: string
+          created_at?: string
+          id?: string
+          label: string
+          requested_by: string
+          reviewed_at?: string | null
+          slug: string
+          source?: string
+          status?: string
+          team_slug: string
+        }
+        Update: {
+          bobblehead_id?: string
+          created_at?: string
+          id?: string
+          label?: string
+          requested_by?: string
+          reviewed_at?: string | null
+          slug?: string
+          source?: string
+          status?: string
+          team_slug?: string
+        }
+        Relationships: []
+      }
       wishlist_alerts_sent: {
         Row: {
           bobblehead_id: string
