@@ -22,6 +22,10 @@ vi.mock("@/lib/adminAuth", () => ({
   useAdminAuth: () => ({ isAdmin: true, canEditTeam: () => true }),
 }));
 
+vi.mock("@/lib/auth", () => ({
+  useAuth: () => ({ user: { id: "admin-1" } }),
+}));
+
 vi.mock("@/lib/useTags", () => ({
   useBobbleheadTags: () => ({
     tags: [],

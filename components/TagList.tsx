@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useAdminAuth } from "@/lib/adminAuth";
+import { useAuth } from "@/lib/auth";
 import type { TagRequestSource } from "@/lib/tagRequests";
 import { matchTags, type TagWithCount, tagHref } from "@/lib/tags";
 import { describeSimilarity, findSimilarTags, type SimilarTag } from "@/lib/tagSimilarity";
@@ -10,9 +11,10 @@ import { useBobbleheadTags, useMyTagRequests, useTagVocabulary } from "@/lib/use
 
 // The tags on one bobblehead. Everyone sees the chips; what the controls do
 // depends on who's looking. The admin edits directly — the vocabulary is
-// theirs. A team rep requests: their picker files a tag_requests row for the
-// admin to rule on at /admin/tag-requests, and their asks sit here as muted
-// "pending" chips until then.
+// theirs. Everyone else signed in requests: their picker files a tag_requests
+// row for the admin to rule on at /admin/tag-requests, and their asks sit here
+// as muted "pending" chips until then. Knowing a bobblehead is a Star Wars
+// bobblehead doesn't take a rep, so this isn't gated on the team.
 //
 // Chips link to the tag page rather than running a search, so "Star Wars" is a
 // place you can link someone to rather than a query they have to retype.
@@ -34,9 +36,10 @@ export function TagList({
 }) {
   const { tags, isLoading, addTag, removeTag } = useBobbleheadTags(teamSlug, bobbleheadId);
   const { pending, requestTag } = useMyTagRequests(teamSlug, bobbleheadId, source);
-  const { isAdmin, canEditTeam } = useAdminAuth();
-  // A rep's controls request rather than write; the admin's write directly.
-  const canRequest = !isAdmin && canEditTeam(teamSlug);
+  const { isAdmin } = useAdminAuth();
+  const { user } = useAuth();
+  // Everyone else signed in requests rather than writes; the admin writes.
+  const canRequest = !isAdmin && Boolean(user);
   const canEdit = isAdmin || canRequest;
   const [isEditing, setIsEditing] = useState(false);
 

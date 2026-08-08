@@ -227,7 +227,7 @@ export default function AdminPage() {
                   Tag requests
                 </p>
                 <p className="mt-2 text-sm text-zinc-600">
-                  Approve or reject the tags team reps have asked to put on a listing.
+                  Approve or reject the tags people have asked to put on a listing.
                 </p>
               </Link>
               <Link href="/admin/duplicate-tags" className={cardClass}>

@@ -1,8 +1,10 @@
 -- Tag requests: the vocabulary is admin-curated now. Reps used to mint and
 -- apply tags themselves ("tags: editor insert" in tags.sql), which is how the
 -- duplicate-tags queue filled up — this replaces that direct write with a
--- request the admin approves or rejects from /admin/tag-requests. Idempotent —
--- safe to run more than once. Paste into the Supabase SQL editor.
+-- request the admin approves or rejects from /admin/tag-requests. Asking is
+-- open to any signed-in user, not just reps; the admin is the only writer
+-- either way. Idempotent — safe to run more than once. Paste into the Supabase
+-- SQL editor.
 
 -- 1. The queue. One row per (listing, proposed tag, requester). label/slug are
 --    validated to the same shape as tags itself so an approval can't fail the
@@ -49,14 +51,63 @@ create index if not exists tag_requests_requested_by_idx on public.tag_requests 
 
 alter table public.tag_requests enable row level security;
 
--- Requesting is for the people who could previously tag directly: a rep, on
--- their own team's listings. can_edit_team is true for admins too, which is
--- harmless — an admin's picker writes to tags directly and never comes here.
+-- Any signed-in user can ask, on any listing — knowing that a bobblehead is a
+-- Star Wars bobblehead doesn't require being that team's rep, and the whole
+-- point of a review queue is that asking is cheap and safe. Not anon: a request
+-- has to be attributable to somebody, both to rate-limit it and to tell them
+-- what happened. The old policy name is dropped explicitly because renaming a
+-- policy doesn't replace the old one.
 drop policy if exists "tag_requests: editor insert own" on public.tag_requests;
-create policy "tag_requests: editor insert own"
+drop policy if exists "tag_requests: insert own" on public.tag_requests;
+create policy "tag_requests: insert own"
   on public.tag_requests for insert
   to authenticated
-  with check (requested_by = (select auth.uid()) and public.can_edit_team(team_slug));
+  with check (requested_by = (select auth.uid()));
+
+-- Now that anyone signed in can ask, the queue is a public write path like
+-- submissions and listing_reports, so it gets the same throttle: a BEFORE
+-- INSERT trigger counting the user's own recent rows, SECURITY DEFINER so the
+-- count sees every row regardless of the select policy above, and SQLSTATE
+-- BB429 so lib/rateLimit.ts can swap in friendly copy. Same shape and
+-- thresholds as enforce_report_rate_limit in supabase/rate_limit.sql — a tag
+-- request is about as cheap and about as spammable as a report.
+--
+-- The partial unique index above already stops the same ask repeating; this is
+-- what stops a hundred different ones.
+create or replace function public.enforce_tag_request_rate_limit()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_last_hour int;
+  v_last_day int;
+begin
+  select count(*) into v_last_hour
+  from public.tag_requests
+  where requested_by = new.requested_by
+    and created_at > now() - interval '1 hour';
+
+  select count(*) into v_last_day
+  from public.tag_requests
+  where requested_by = new.requested_by
+    and created_at > now() - interval '24 hours';
+
+  if v_last_hour >= 10 or v_last_day >= 50 then
+    raise exception 'You''re requesting tags too quickly. Please wait a bit and try again.'
+      using errcode = 'BB429';
+  end if;
+
+  return new;
+end;
+$$;
+
+drop trigger if exists rate_limit_tag_requests on public.tag_requests;
+create trigger rate_limit_tag_requests
+  before insert on public.tag_requests
+  for each row
+  execute function public.enforce_tag_request_rate_limit();
 
 -- A requester sees their own (the listing page shows "pending review"); the
 -- admin sees the whole queue.

@@ -111,6 +111,27 @@ describe("submitTagRequest", () => {
     expect(calls).toHaveLength(0);
   });
 
+  // The trigger's message is already user-ready, but the raw SQL text is not
+  // what the other public write paths show, so this goes through the same
+  // rewrite they use.
+  it("turns a rate-limit rejection into friendly copy", async () => {
+    const { client } = stubClient({
+      insert: { error: { message: "You're requesting tags too quickly...", code: "BB429" } },
+    });
+
+    const result = await submitTagRequest(client, {
+      label: "Star Wars",
+      bobbleheadId: "grogu-2023",
+      teamSlug: "dodgers",
+      source: "curated",
+      requestedBy: "user-1",
+    });
+
+    expect(result.error).toBe(
+      "You're doing that too often. Please wait a little while and try again.",
+    );
+  });
+
   // The partial unique index turns a double-ask into a 23505; from the
   // requester's side the tag is in the queue either way.
   it("treats asking twice as success", async () => {

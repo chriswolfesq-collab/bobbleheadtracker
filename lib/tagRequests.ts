@@ -1,12 +1,13 @@
 "use client";
 
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { submissionError } from "@/lib/rateLimit";
 import { validateTagLabel } from "@/lib/tags";
 
-// The request half of the admin-curated vocabulary. A rep can no longer write
-// to tags or bobblehead_tags (see supabase/tag_requests.sql); what they can do
-// is file a request, which the admin approves or rejects from
-// /admin/tag-requests. Approving does what the rep's picker used to do —
+// The request half of the admin-curated vocabulary. Nobody but the admin can
+// write to tags or bobblehead_tags (see supabase/tag_requests.sql); what any
+// signed-in user can do is file a request, which the admin approves or rejects
+// from /admin/tag-requests. Approving does what the rep's picker used to do —
 // mint-if-new, then apply — under the admin's own credentials.
 
 export type TagRequestSource = "curated" | "community";
@@ -60,7 +61,9 @@ export async function submitTagRequest(
     if (error.code === "23505") {
       return { error: null, slug: validated.slug, label: validated.label, alreadyRequested: true };
     }
-    return { error: error.message };
+    // Anything else, including the BB429 the rate-limit trigger raises, gets
+    // the same friendly rewrite the other public write paths use.
+    return { error: submissionError(error).message };
   }
 
   return { error: null, slug: validated.slug, label: validated.label };

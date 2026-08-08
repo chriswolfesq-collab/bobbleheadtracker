@@ -9,11 +9,11 @@ import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { approveTagRequest, rejectTagRequest, type TagRequest } from "@/lib/tagRequests";
 import { useTagVocabulary } from "@/lib/useTags";
 
-// The queue behind the admin-curated tag vocabulary: every tag a rep has asked
-// for, waiting on a ruling. Approve mints the tag if it's new and applies it
-// to the listing; reject leaves the vocabulary alone. Either way the request
-// row keeps its outcome, so a rep's pending chip resolves rather than
-// vanishing without a trace.
+// The queue behind the admin-curated tag vocabulary: every tag anyone signed
+// in has asked for, waiting on a ruling. Approve mints the tag if it's new and
+// applies it to the listing; reject leaves the vocabulary alone. Either way the
+// request row keeps its outcome, so the requester's pending chip resolves
+// rather than vanishing without a trace.
 
 type PendingRequest = TagRequest & { listing: BobbleheadIdentity | null };
 
@@ -126,7 +126,7 @@ export default function AdminTagRequestsPage() {
           />
           <h1 className="mt-2 text-2xl font-black uppercase tracking-wide">Tag requests</h1>
           <p className="mt-1 text-sm text-zinc-600">
-            Tags a team rep wants added to a listing. Approving creates the tag if it doesn&apos;t
+            Tags someone wants added to a listing. Approving creates the tag if it doesn&apos;t
             exist yet.
           </p>
         </div>
