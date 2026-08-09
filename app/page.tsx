@@ -43,9 +43,8 @@ const HERO_SHELF_SLUGS = [
 
 // The hero artwork (public/hero-shelf.jpg, 1024x480) is a photographed display
 // case: a tall pin-board panel on the left and a lit shelf on the right with
-// an "EST. 1969" plaque and props below it. These percentages locate those
-// regions so the pitch sits inside the left panel and the figures stand
-// exactly on the lit shelf's ledge.
+// props below it. These percentages locate those regions so the pitch sits
+// inside the left panel and the figures stand exactly on the lit shelf's ledge.
 const HERO_TEXT_BOX = { left: "6%", top: "8%", width: "27%", height: "84%" };
 const HERO_SHELF_BOX = { left: "40.5%", right: "3.5%", bottom: "46%", height: "40%" };
 
