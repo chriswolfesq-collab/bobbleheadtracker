@@ -7,7 +7,13 @@ import type { ListingNav } from "@/lib/listingNav";
 import { withTeamView } from "@/lib/teamView";
 
 const ARROW_CLASS =
-  "fixed top-1/2 z-30 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-border-soft bg-surface text-xl text-navy shadow-lg transition hover:border-accent hover:text-accent md:grid";
+  "fixed top-1/2 z-30 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-full border border-border-soft bg-surface text-xl text-navy shadow-lg transition md:grid";
+const ARROW_LIVE = "hover:border-accent hover:text-accent";
+// Dimmed stand-in for the end of the chain. Dropping the arrow entirely read as
+// a missing control rather than an edge — most obvious arriving from Recently
+// Added, which lands you on the newest listing (position 1) often enough that
+// the right arrow alone looked like a bug.
+const ARROW_SPENT = "cursor-default opacity-30";
 
 /**
  * The prev/next edge arrows and the swipe gesture behind them, shared by the
@@ -64,21 +70,29 @@ export function ListingNavControls({
           href={prevHref}
           aria-label={`Previous: ${nav.prev?.title}`}
           title={nav.prev?.title}
-          className={`left-2 ${ARROW_CLASS}`}
+          className={`left-2 ${ARROW_CLASS} ${ARROW_LIVE}`}
         >
           <span aria-hidden>‹</span>
         </Link>
-      ) : null}
+      ) : (
+        <span aria-hidden title="Newest for this team" className={`left-2 ${ARROW_CLASS} ${ARROW_SPENT}`}>
+          ‹
+        </span>
+      )}
       {nextHref ? (
         <Link
           href={nextHref}
           aria-label={`Next: ${nav.next?.title}`}
           title={nav.next?.title}
-          className={`right-2 ${ARROW_CLASS}`}
+          className={`right-2 ${ARROW_CLASS} ${ARROW_LIVE}`}
         >
           <span aria-hidden>›</span>
         </Link>
-      ) : null}
+      ) : (
+        <span aria-hidden title="Oldest for this team" className={`right-2 ${ARROW_CLASS} ${ARROW_SPENT}`}>
+          ›
+        </span>
+      )}
     </>
   );
 }
