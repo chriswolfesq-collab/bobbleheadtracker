@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import DisplayCase from "@/components/DisplayCase";
 import { ShareCollectionButton } from "@/components/ShareCollectionButton";
+import { ShelfVisibilityPill } from "@/components/ShelfVisibilityPill";
 import { type BobbleheadIdentity } from "@/lib/bobbleheadIdentity";
 import { publicAsset } from "@/lib/paths";
 import {
@@ -35,7 +36,7 @@ const SECTIONS = [
  * rather than what you last clicked. `aria-current="location"` is the same
  * statement for a screen reader: you are here, not this is selected.
  */
-function SectionNav() {
+function SectionNav({ hasRowBelow = false }: { hasRowBelow?: boolean }) {
   const [activeId, setActiveId] = useState<string>(SECTIONS[0].id);
   const visibleIds = useRef(new Set<string>());
 
@@ -68,7 +69,13 @@ function SectionNav() {
   }, []);
 
   return (
-    <nav aria-label="Jump to a section" className="mb-8 flex flex-wrap justify-center gap-2">
+    <nav
+      aria-label="Jump to a section"
+      // The gap to the collection below belongs to whichever row is last: the
+      // visibility pill when it's there, this nav when it isn't (the admin
+      // read-only view).
+      className={`flex flex-wrap justify-center gap-2 ${hasRowBelow ? "mb-3" : "mb-8"}`}
+    >
       {SECTIONS.map(({ id, label }) => {
         const isCurrent = id === activeId;
         return (
@@ -224,7 +231,17 @@ export function ProfileSections({
 
   return (
     <>
-      <SectionNav />
+      <SectionNav hasRowBelow={Boolean(sharing)} />
+
+      {/* Its own row under the jump nav rather than a fifth pill in it: those
+          links move you around the page, this one changes who can see it. Only
+          on the owner's profile — sharing is omitted in the admin read-only
+          view, so an admin can't flip someone else's shelf public. */}
+      {sharing ? (
+        <div className="mb-8 flex justify-center">
+          <ShelfVisibilityPill sharing={sharing} />
+        </div>
+      ) : null}
 
       <section id="collection" className="mb-10 scroll-mt-6">
         {/* The shelf breaks out of the profile's reading column so it hangs at

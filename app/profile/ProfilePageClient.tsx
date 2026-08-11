@@ -22,9 +22,10 @@ export function ProfilePageClient() {
   const { submissions, isLoading: isSubmissionsLoading, error: submissionsError } = useMySubmissions();
   const { favorites, isLoading: isFavoritesLoading, error: favoritesError } = useMyFavorites();
   const { wanted, isLoading: isWantedLoading, error: wantedError } = useMyWanted();
-  // Called once here and passed down: both share buttons need it, and each
-  // calling the hook would refetch the same row. (The public-shelf privacy
-  // toggle now lives on the settings page.)
+  // Called once here and passed down: both share buttons and the visibility
+  // pill under the jump nav need it, and each calling the hook would refetch
+  // the same row — and, worse, hold its own copy of isPublic to disagree over.
+  // (The fuller sharing card, with the link and the preview, is on /settings.)
   const sharing = useMyShelf();
   const [isEditingName, setIsEditingName] = useState(false);
   const [nameDraft, setNameDraft] = useState("");
