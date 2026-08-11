@@ -281,6 +281,7 @@ export type Database = {
           gallery_public: boolean
           id: string
           is_public: boolean
+          referral_code: string | null
           slug: string | null
           updated_at: string
         }
@@ -295,6 +296,7 @@ export type Database = {
           gallery_public?: boolean
           id: string
           is_public?: boolean
+          referral_code?: string | null
           slug?: string | null
           updated_at?: string
         }
@@ -309,8 +311,30 @@ export type Database = {
           gallery_public?: boolean
           id?: string
           is_public?: boolean
+          referral_code?: string | null
           slug?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      referrals: {
+        Row: {
+          created_at: string
+          referral_code: string
+          referred_user_id: string
+          referrer_user_id: string
+        }
+        Insert: {
+          created_at?: string
+          referral_code: string
+          referred_user_id: string
+          referrer_user_id: string
+        }
+        Update: {
+          created_at?: string
+          referral_code?: string
+          referred_user_id?: string
+          referrer_user_id?: string
         }
         Relationships: []
       }
@@ -803,9 +827,29 @@ export type Database = {
           display_name: string
         }[]
       }
+      admin_referral_leaderboard: {
+        Args: never
+        Returns: {
+          display_name: string
+          joined: number
+          qualified: number
+          referral_code: string
+          user_id: string
+        }[]
+      }
+      claim_referral: { Args: { p_code: string }; Returns: string }
       is_admin: { Args: never; Returns: boolean }
       is_team_rep: { Args: never; Returns: boolean }
       my_editable_teams: { Args: never; Returns: string[] }
+      my_referral: {
+        Args: never
+        Returns: {
+          code: string
+          joined: number
+          qualified: number
+        }[]
+      }
+      referral_qualifying_owned: { Args: never; Returns: number }
       reject_submission: {
         Args: { p_submission_id: string }
         Returns: undefined

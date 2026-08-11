@@ -198,6 +198,7 @@ export function SiteHeader() {
 const FOOTER_LINKS = [
   { href: "/about", label: "About" },
   { href: "/become-a-rep", label: "Become a Team Rep" },
+  { href: "/refer", label: "Refer a Friend" },
   { href: "/contact", label: "Contact" },
   { href: "/faq", label: "FAQ" },
   { href: "/community-guidelines", label: "Community Guidelines" },

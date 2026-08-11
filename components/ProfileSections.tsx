@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import DisplayCase from "@/components/DisplayCase";
+import { ReferAFriend } from "@/components/ReferAFriend";
 import { ShareCollectionButton } from "@/components/ShareCollectionButton";
 import { ShelfVisibilityPill } from "@/components/ShelfVisibilityPill";
 import { type BobbleheadIdentity } from "@/lib/bobbleheadIdentity";
@@ -17,33 +18,49 @@ import {
 import { computeShelfStats } from "@/lib/shelfStats";
 import { TEAMS } from "@/lib/teams";
 
-// The four blocks the page is made of, in the order they appear. Drives both
-// the jump nav and the scroll spy that keeps it in sync.
+// The blocks the page is made of, in the order they appear. Drives both the
+// jump nav and the scroll spy that keeps it in sync. "refer" is owner-only —
+// see showRefer below.
 const SECTIONS = [
   { id: "collection", label: "Collection" },
   { id: "favorites", label: "Favorites" },
   { id: "wanted", label: "Wanted" },
   { id: "submissions", label: "Submissions" },
+  { id: "refer", label: "Refer" },
 ] as const;
 
 /**
- * Jump links to the four sections below.
+ * Jump links to the sections below.
  *
  * These used to be buttons that picked up a pressed look on click, which read
- * as a tab row: press one and you'd expect the other three views to go away.
- * They never did — everything stays on the page and the click only scrolls. So
+ * as a tab row: press one and you'd expect the other views to go away. They
+ * never did — everything stays on the page and the click only scrolls. So
  * they're anchors now, and the highlight tracks what you're actually looking at
  * rather than what you last clicked. `aria-current="location"` is the same
  * statement for a screen reader: you are here, not this is selected.
  */
-function SectionNav({ hasRowBelow = false }: { hasRowBelow?: boolean }) {
+function SectionNav({
+  hasRowBelow = false,
+  showRefer = true,
+}: {
+  hasRowBelow?: boolean;
+  /** False in the admin read-only view, which has no Refer section — the pill
+   *  would otherwise be a jump link to nothing. */
+  showRefer?: boolean;
+}) {
+  // Memoised because the observer effect below depends on it; a fresh array
+  // each render would tear down and rebuild the scroll spy every time.
+  const sections = useMemo(
+    () => (showRefer ? SECTIONS : SECTIONS.filter(({ id }) => id !== "refer")),
+    [showRefer],
+  );
   const [activeId, setActiveId] = useState<string>(SECTIONS[0].id);
   const visibleIds = useRef(new Set<string>());
 
   useEffect(() => {
-    const elements = SECTIONS.map(({ id }) => document.getElementById(id)).filter(
-      (element): element is HTMLElement => element !== null,
-    );
+    const elements = sections
+      .map(({ id }) => document.getElementById(id))
+      .filter((element): element is HTMLElement => element !== null);
     if (elements.length === 0) return;
 
     // Watch only the top 30% of the viewport: the section you're reading is the
@@ -56,7 +73,7 @@ function SectionNav({ hasRowBelow = false }: { hasRowBelow?: boolean }) {
           if (entry.isIntersecting) visibleIds.current.add(entry.target.id);
           else visibleIds.current.delete(entry.target.id);
         }
-        const current = SECTIONS.find(({ id }) => visibleIds.current.has(id));
+        const current = sections.find(({ id }) => visibleIds.current.has(id));
         // No match means the band is between sections mid-scroll; keeping the
         // last one is better than blanking the nav for a frame.
         if (current) setActiveId(current.id);
@@ -66,7 +83,7 @@ function SectionNav({ hasRowBelow = false }: { hasRowBelow?: boolean }) {
 
     for (const element of elements) observer.observe(element);
     return () => observer.disconnect();
-  }, []);
+  }, [sections]);
 
   return (
     <nav
@@ -76,7 +93,7 @@ function SectionNav({ hasRowBelow = false }: { hasRowBelow?: boolean }) {
       // read-only view).
       className={`flex flex-wrap justify-center gap-2 ${hasRowBelow ? "mb-3" : "mb-8"}`}
     >
-      {SECTIONS.map(({ id, label }) => {
+      {sections.map(({ id, label }) => {
         const isCurrent = id === activeId;
         return (
           <a
@@ -231,7 +248,7 @@ export function ProfileSections({
 
   return (
     <>
-      <SectionNav hasRowBelow={Boolean(sharing)} />
+      <SectionNav hasRowBelow={Boolean(sharing)} showRefer={!isOtherUser} />
 
       {/* Its own row under the jump nav rather than a fifth pill in it: those
           links move you around the page, this one changes who can see it. Only
@@ -338,7 +355,7 @@ export function ProfileSections({
         )}
       </section>
 
-      <section id="submissions" className="scroll-mt-6">
+      <section id="submissions" className="mb-10 scroll-mt-6">
         <h2 className="mb-3 text-xs font-black uppercase tracking-[0.25em] text-zinc-600">
           Submissions
         </h2>
@@ -399,6 +416,15 @@ export function ProfileSections({
           </div>
         )}
       </section>
+
+      {/* Owner-only. ReferAFriend reads the signed-in session for its own code,
+          so in the admin read-only view it would show the admin their link
+          under someone else's name. */}
+      {isOtherUser ? null : (
+        <section id="refer" className="scroll-mt-6">
+          <ReferAFriend variant="section" />
+        </section>
+      )}
     </>
   );
 }

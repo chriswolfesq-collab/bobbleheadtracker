@@ -5,6 +5,7 @@ import { FeatureStrip } from "@/components/FeatureStrip";
 import { HomeWelcomeModal } from "@/components/HomeWelcomeModal";
 import { JoinCommunityBand } from "@/components/JoinCommunityBand";
 import RecentlyAdded from "@/components/RecentlyAdded";
+import { ReferAFriendBand } from "@/components/ReferAFriendBand";
 import { ShelfItem, ShelfRow } from "@/components/ShelfRow";
 import { UpcomingGiveaways } from "@/components/UpcomingGiveaways";
 import { ButtonLink } from "@/components/ui/Button";
@@ -217,8 +218,11 @@ export default async function Home() {
           className="mt-12"
         />
 
+        {/* Exactly one of these ever renders: JoinCommunityBand hides once you
+            have an account, ReferAFriendBand appears at that same moment. */}
         <div className="mt-12 pb-16">
           <JoinCommunityBand />
+          <ReferAFriendBand />
         </div>
       </div>
     </div>

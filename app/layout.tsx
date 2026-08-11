@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { AuthModal } from "@/components/AuthModal";
 import { BackToTopButton } from "@/components/BackToTopButton";
+import { ReferralCapture } from "@/components/ReferralCapture";
 import { RepWelcomeBanner } from "@/components/RepWelcomeBanner";
 import { RequireDisplayNameGate } from "@/components/RequireDisplayNameGate";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
@@ -48,6 +49,9 @@ export default function RootLayout({
             </ToastProvider>
           </AdminAuthProvider>
           <AuthModal />
+          {/* Renders nothing. Here rather than on a page because an invite link
+              can point at any route — see components/ReferralCapture.tsx. */}
+          <ReferralCapture />
         </AuthProvider>
         <BackToTopButton />
         <Analytics />
