@@ -14,7 +14,7 @@ import {
 // that changed nothing), and the guard against a ruling RLS filtered to
 // nothing.
 
-type Call = { table: string; op: string; payload?: unknown };
+type Call = { table: string; op: string; payload?: unknown; options?: unknown };
 
 function stubClient(responses: {
   insert?: { error: { message: string; code?: string } | null };
@@ -34,7 +34,7 @@ function stubClient(responses: {
           result = { data: null, error: responses.insert?.error ?? null };
         }
         if (name === "upsert") {
-          calls.push({ table, op: "upsert", payload: args[0] });
+          calls.push({ table, op: "upsert", payload: args[0], options: args[1] });
           result = { data: null, error: responses.upsert?.[table]?.error ?? null };
         }
         if (name === "update") {
@@ -174,6 +174,19 @@ describe("approveTagRequest", () => {
       created_by: "admin-1",
     });
     expect(calls[2].payload).toMatchObject({ status: "approved" });
+  });
+
+  // Naming a conflict target that isn't a key is a Postgres error, not a
+  // no-op, so it fails the whole approval. bobblehead_tags' key covers
+  // team_slug (60272ea); tags is keyed by slug alone.
+  it("names conflict targets that match the actual keys", async () => {
+    const { client, calls } = stubClient();
+
+    await approveTagRequest(client, request, "admin-1");
+    expect(calls[0].options).toMatchObject({ onConflict: "slug" });
+    expect(calls[1].options).toMatchObject({
+      onConflict: "bobblehead_id,team_slug,tag_slug",
+    });
   });
 
   it("stops before applying when the mint fails", async () => {

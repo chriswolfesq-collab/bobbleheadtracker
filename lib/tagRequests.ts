@@ -100,7 +100,10 @@ export async function approveTagRequest(
       tag_slug: validated.slug,
       created_by: adminId,
     },
-    { onConflict: "bobblehead_id,tag_slug", ignoreDuplicates: true },
+    // The key is (bobblehead_id, team_slug, tag_slug) — widened in 60272ea so
+    // two teams can carry the same tag on the same bobblehead id. Naming the
+    // old two-column key here made Postgres reject the whole approval.
+    { onConflict: "bobblehead_id,team_slug,tag_slug", ignoreDuplicates: true },
   );
   if (applyError) return { error: applyError.message };
 
