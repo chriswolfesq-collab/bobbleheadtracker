@@ -314,3 +314,35 @@ a message for, and 0 means nobody qualified.
 Note that `weekly_digest.sql` recreates `wants_email` and `set_email_preference`
 in full. Both enumerate the known preference kinds and fail closed on an unknown
 one, so the new switch has to be added inside them rather than alongside.
+
+## Moderators' forum
+
+A private threaded board for admins and team reps, at `/admin/forum`. Reps are
+spread across thirty teams and are rarely on the site at the same moment, so
+this is a forum and not a chatroom: threads wait for the person they're
+addressed to and stay searchable afterwards. One shared space — every moderator
+sees every thread, and a topic's team label is a filter, not a wall.
+
+1. In the SQL Editor, run `mod_forum.sql` (needs `team_reps.sql`,
+   `email_preferences.sql` and `webhook_secret.sql`). Nothing to substitute —
+   the digest reads the webhook secret from Vault. This also schedules the
+   pg_cron job.
+2. Deploy the mailer:
+   ```
+   npx supabase functions deploy forum-digest --no-verify-jwt --use-api
+   ```
+
+Writes go through SECURITY DEFINER RPCs rather than INSERT/UPDATE policies: RLS
+can gate a row but not a column, and `pinned`, `locked` and `reply_count` must
+not be author-writable. The tables carry SELECT policies only.
+
+The digest runs daily at 13:00 UTC — 9am US Eastern, a morning nudge about what
+came in overnight rather than another end-of-day email next to the rep summary.
+Each recipient gets a different body, because "unread" is a different set for
+each person; nobody with an empty list is mailed at all. To test without waiting,
+run `select public.send_forum_digest(24);` — it returns the number of
+person-threads it built messages for, and 0 means everyone is caught up.
+
+Like `weekly_digest.sql`, this file recreates `wants_email` and
+`set_email_preference` in full to add the `forum_digest` kind. Both fail closed
+on an unknown kind, so a new switch has to go inside them rather than alongside.

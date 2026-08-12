@@ -20,6 +20,9 @@ type Row = {
   off: string;
   /** Only rendered for admins — the rep digest is only ever sent to them. */
   adminOnly?: boolean;
+  /** Only rendered for admins and team reps — nobody else can read the board
+   *  the forum digest summarizes. */
+  moderatorOnly?: boolean;
 };
 
 const ROWS: Row[] = [
@@ -47,6 +50,13 @@ const ROWS: Row[] = [
     on: "You'll get one email at the end of each day listing what the team reps changed.",
     off: "Turn this on to get a daily email listing what the team reps changed.",
     adminOnly: true,
+  },
+  {
+    kind: "forum_digest",
+    label: "Forum summary",
+    on: "Each morning you'll get an email listing the moderator forum threads you haven't read. Nothing unread, nothing sent.",
+    off: "Turn this on for a morning email about moderator forum threads you haven't read.",
+    moderatorOnly: true,
   },
 ];
 
@@ -83,7 +93,7 @@ function Switch({
 }
 
 export function EmailAlertsToggle({ alerts }: { alerts: EmailPreferences }) {
-  const { values, isLoading, savingKind, isAdmin, setPreference } = alerts;
+  const { values, isLoading, savingKind, isAdmin, isModerator, setPreference } = alerts;
   const { showError } = useToast();
 
   async function toggle(kind: EmailPreferenceKind, next: boolean) {
@@ -94,7 +104,9 @@ export function EmailAlertsToggle({ alerts }: { alerts: EmailPreferences }) {
   if (isLoading) return null;
 
   const allOff = !values.all;
-  const rows = ROWS.filter((row) => !row.adminOnly || isAdmin);
+  const rows = ROWS.filter(
+    (row) => (!row.adminOnly || isAdmin) && (!row.moderatorOnly || isModerator),
+  );
 
   return (
     <div className="mb-8 rounded-2xl border border-black/10 bg-black/[0.04] p-4">

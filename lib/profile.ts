@@ -362,7 +362,8 @@ export type EmailPreferenceKind =
   | "wanted_alerts"
   | "submission_updates"
   | "rep_digest"
-  | "weekly_digest";
+  | "weekly_digest"
+  | "forum_digest";
 
 export type EmailPreferences = {
   values: Record<EmailPreferenceKind, boolean>;
@@ -371,6 +372,9 @@ export type EmailPreferences = {
   savingKind: EmailPreferenceKind | null;
   /** The rep digest only goes to admins, so its switch is only shown to one. */
   isAdmin: boolean;
+  /** The forum digest goes to admins *and* team reps — everyone who can read
+   *  the board. A wider audience than isAdmin, hence its own flag. */
+  isModerator: boolean;
   setPreference: (
     kind: EmailPreferenceKind,
     enabled: boolean,
@@ -385,6 +389,7 @@ const DEFAULT_PREFERENCES: Record<EmailPreferenceKind, boolean> = {
   submission_updates: true,
   rep_digest: true,
   weekly_digest: true,
+  forum_digest: true,
 };
 
 // The signed-in user's email preferences: the master switch plus one per kind of
@@ -399,6 +404,7 @@ export function useEmailPreferences(): EmailPreferences {
   const [isLoading, setIsLoading] = useState(true);
   const [savingKind, setSavingKind] = useState<EmailPreferenceKind | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isModerator, setIsModerator] = useState(false);
 
   useEffect(() => {
     if (!userId) return;
@@ -411,14 +417,15 @@ export function useEmailPreferences(): EmailPreferences {
         // Spelled out rather than derived from the kind list: a computed select
         // string erases the row type supabase-js infers from it.
         .select(
-          "email_enabled, email_wishlist_alerts, email_submission_updates, email_rep_digest, email_weekly_digest",
+          "email_enabled, email_wishlist_alerts, email_submission_updates, email_rep_digest, email_weekly_digest, email_forum_digest",
         )
         .eq("id", userId)
         .maybeSingle(),
-      // Only decides whether to render the digest switch; the digest itself is
+      // These two only decide which digest switches to render; both digests are
       // gated server-side, so a wrong answer here can't leak anything.
       supabase.rpc("is_admin"),
-    ]).then(([{ data, error }, { data: adminData }]) => {
+      supabase.rpc("is_moderator"),
+    ]).then(([{ data, error }, { data: adminData }, { data: moderatorData }]) => {
       if (cancelled) return;
 
       if (error) {
@@ -431,10 +438,12 @@ export function useEmailPreferences(): EmailPreferences {
           submission_updates: row.email_submission_updates ?? true,
           rep_digest: row.email_rep_digest ?? true,
           weekly_digest: row.email_weekly_digest ?? true,
+          forum_digest: row.email_forum_digest ?? true,
         });
       }
 
       setIsAdmin(adminData === true);
+      setIsModerator(moderatorData === true);
       setIsLoading(false);
     });
 
@@ -473,6 +482,7 @@ export function useEmailPreferences(): EmailPreferences {
     isLoading: userId ? isLoading : false,
     savingKind,
     isAdmin,
+    isModerator,
     setPreference,
   };
 }

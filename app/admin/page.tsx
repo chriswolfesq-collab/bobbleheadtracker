@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AdminLoginForm } from "@/components/AdminLoginForm";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAdminAuth } from "@/lib/adminAuth";
+import { useForumUnreadCount } from "@/lib/forum";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { TEAMS } from "@/lib/teams";
 import { useTagDuplicates } from "@/lib/useTagDuplicates";
@@ -33,6 +34,9 @@ export default function AdminPage() {
   // one comes from a hook instead of a head query. Off for reps: they can't
   // see the rulings or act on a pair.
   const { open: duplicateTags } = useTagDuplicates({ enabled: isAdmin });
+  // Threads with activity this account hasn't read. Its own RPC rather than a
+  // head count, because "unread" is a join against this reader's own marks.
+  const { count: unreadTopics } = useForumUnreadCount();
 
   useEffect(() => {
     if (!canAccess) return;
@@ -187,6 +191,19 @@ export default function AdminPage() {
             <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Listing reports</p>
             <p className="mt-2 text-sm text-zinc-600">
               Resolve or dismiss reports that a listing has wrong info{isRep ? " for your team" : ""}.
+            </p>
+          </Link>
+
+          {/* Outside the isAdmin block on purpose: the board is the one place
+              reps and admins talk to each other, so it has to be reachable
+              from a rep's dashboard too. */}
+          <Link href="/admin/forum" className={cardClass}>
+            <NotificationBadge count={unreadTopics} />
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900">
+              Moderators&apos; forum
+            </p>
+            <p className="mt-2 text-sm text-zinc-600">
+              Ask the other reps and admins something, or see what they&apos;ve been discussing.
             </p>
           </Link>
 

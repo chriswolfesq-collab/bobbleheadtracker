@@ -227,6 +227,121 @@ export type Database = {
         }
         Relationships: []
       }
+      forum_reads: {
+        Row: {
+          read_at: string
+          topic_id: string
+          user_id: string
+        }
+        Insert: {
+          read_at?: string
+          topic_id: string
+          user_id: string
+        }
+        Update: {
+          read_at?: string
+          topic_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "forum_reads_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "forum_topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      forum_replies: {
+        Row: {
+          author_email: string | null
+          author_id: string | null
+          author_name: string | null
+          body: string
+          created_at: string
+          edited_at: string | null
+          id: string
+          topic_id: string
+        }
+        Insert: {
+          author_email?: string | null
+          author_id?: string | null
+          author_name?: string | null
+          body: string
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          topic_id: string
+        }
+        Update: {
+          author_email?: string | null
+          author_id?: string | null
+          author_name?: string | null
+          body?: string
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          topic_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "forum_replies_topic_id_fkey"
+            columns: ["topic_id"]
+            isOneToOne: false
+            referencedRelation: "forum_topics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      forum_topics: {
+        Row: {
+          author_email: string | null
+          author_id: string | null
+          author_name: string | null
+          body: string
+          created_at: string
+          edited_at: string | null
+          id: string
+          last_activity_at: string
+          locked: boolean
+          pinned: boolean
+          reply_count: number
+          team_slug: string | null
+          title: string
+        }
+        Insert: {
+          author_email?: string | null
+          author_id?: string | null
+          author_name?: string | null
+          body: string
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          last_activity_at?: string
+          locked?: boolean
+          pinned?: boolean
+          reply_count?: number
+          team_slug?: string | null
+          title: string
+        }
+        Update: {
+          author_email?: string | null
+          author_id?: string | null
+          author_name?: string | null
+          body?: string
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          last_activity_at?: string
+          locked?: boolean
+          pinned?: boolean
+          reply_count?: number
+          team_slug?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
       listing_reports: {
         Row: {
           bobblehead_id: string
@@ -274,6 +389,7 @@ export type Database = {
           created_at: string
           display_name: string
           email_enabled: boolean
+          email_forum_digest: boolean
           email_rep_digest: boolean
           email_weekly_digest: boolean
           email_submission_updates: boolean
@@ -289,6 +405,7 @@ export type Database = {
           created_at?: string
           display_name?: string
           email_enabled?: boolean
+          email_forum_digest?: boolean
           email_rep_digest?: boolean
           email_weekly_digest?: boolean
           email_submission_updates?: boolean
@@ -304,6 +421,7 @@ export type Database = {
           created_at?: string
           display_name?: string
           email_enabled?: boolean
+          email_forum_digest?: boolean
           email_rep_digest?: boolean
           email_weekly_digest?: boolean
           email_submission_updates?: boolean
@@ -812,6 +930,89 @@ export type Database = {
       disable_public_shelf: { Args: never; Returns: undefined }
       display_name_of: { Args: { p_meta: Json }; Returns: string }
       enable_public_shelf: { Args: never; Returns: string }
+      forum_author: {
+        Args: never
+        Returns: {
+          email: string
+          name: string
+          user_id: string
+        }[]
+      }
+      forum_create_topic: {
+        Args: { p_body: string; p_team_slug?: string; p_title: string }
+        Returns: string
+      }
+      forum_delete_reply: { Args: { p_id: string }; Returns: undefined }
+      forum_delete_topic: { Args: { p_id: string }; Returns: undefined }
+      forum_edit_reply: {
+        Args: { p_body: string; p_id: string }
+        Returns: undefined
+      }
+      forum_edit_topic: {
+        Args: { p_body: string; p_id: string; p_title: string }
+        Returns: undefined
+      }
+      forum_get_topic: {
+        Args: { p_id: string }
+        Returns: {
+          author_id: string
+          author_name: string
+          body: string
+          created_at: string
+          edited_at: string
+          id: string
+          last_activity_at: string
+          locked: boolean
+          pinned: boolean
+          reply_count: number
+          team_slug: string
+          title: string
+        }[]
+      }
+      forum_list_replies: {
+        Args: { p_topic_id: string }
+        Returns: {
+          author_id: string
+          author_name: string
+          body: string
+          created_at: string
+          edited_at: string
+          id: string
+          topic_id: string
+        }[]
+      }
+      forum_list_topics: {
+        Args: never
+        Returns: {
+          author_id: string
+          author_name: string
+          body: string
+          created_at: string
+          edited_at: string
+          id: string
+          last_activity_at: string
+          locked: boolean
+          pinned: boolean
+          reply_count: number
+          team_slug: string
+          title: string
+          unread: boolean
+        }[]
+      }
+      forum_mark_read: { Args: { p_topic_id: string }; Returns: undefined }
+      forum_reply: {
+        Args: { p_body: string; p_topic_id: string }
+        Returns: string
+      }
+      forum_set_locked: {
+        Args: { p_id: string; p_locked: boolean }
+        Returns: undefined
+      }
+      forum_set_pinned: {
+        Args: { p_id: string; p_pinned: boolean }
+        Returns: undefined
+      }
+      forum_unread_count: { Args: never; Returns: number }
       get_public_gallery: {
         Args: { p_slug: string }
         Returns: {
@@ -839,6 +1040,7 @@ export type Database = {
       }
       claim_referral: { Args: { p_code: string }; Returns: string }
       is_admin: { Args: never; Returns: boolean }
+      is_moderator: { Args: never; Returns: boolean }
       is_team_rep: { Args: never; Returns: boolean }
       my_editable_teams: { Args: never; Returns: string[] }
       my_referral: {
@@ -854,6 +1056,7 @@ export type Database = {
         Args: { p_submission_id: string }
         Returns: undefined
       }
+      send_forum_digest: { Args: { p_hours?: number }; Returns: number }
       set_gallery_public: { Args: { p_enabled: boolean }; Returns: undefined }
       send_rep_activity_digest: { Args: { p_hours?: number }; Returns: number }
       set_email_preference: {
