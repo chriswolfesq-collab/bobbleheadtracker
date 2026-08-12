@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { type BobbleheadIdentity, listingKey } from "@/lib/bobbleheadIdentity";
+import { saveListingTrail } from "@/lib/listingTrail";
 import { publicAsset } from "@/lib/paths";
 import { useOwnedKeys } from "@/lib/profile";
 import { tagCompletionPercent } from "@/lib/tags";
@@ -59,12 +61,15 @@ function TaggedCard({
   canToggle,
   isLoggedIn,
   onToggle,
+  onNavigate,
 }: {
   listing: BobbleheadIdentity;
   isOwned: boolean;
   canToggle: boolean;
   isLoggedIn: boolean;
   onToggle: () => void;
+  /** records the list being left, so the listing's arrows walk it */
+  onNavigate?: () => void;
 }) {
   return (
     <div className="relative h-full">
@@ -95,6 +100,7 @@ function TaggedCard({
 
       <Link
         href={listing.href}
+        onClick={onNavigate}
         className={`group flex h-full flex-col overflow-hidden rounded-xl border bg-white transition hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
           isOwned ? "border-green-600/50" : "border-border-soft"
         }`}
@@ -138,6 +144,18 @@ export function TagPageClient({ slug }: { slug: string }) {
     ownedKeys.has(listingKey(listing.teamSlug, listing.bobbleheadId)),
   ).length;
 
+  // The chain a clicked card's prev/next arrows will follow: this tag's
+  // checklist, in the order it reads on screen.
+  const trailEntries = useMemo(
+    () =>
+      listings.map((listing) => ({
+        id: listing.bobbleheadId,
+        title: listing.title,
+        href: listing.href,
+      })),
+    [listings],
+  );
+
   return (
     <div className="flex min-h-full flex-1 flex-col" style={{ background: "var(--page-gradient)" }}>
       <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
@@ -171,7 +189,7 @@ export function TagPageClient({ slug }: { slug: string }) {
             />
 
             <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-              {listings.map((listing) => {
+              {listings.map((listing, index) => {
                 const key = listingKey(listing.teamSlug, listing.bobbleheadId);
                 const isOwned = ownedKeys.has(key);
 
@@ -179,6 +197,7 @@ export function TagPageClient({ slug }: { slug: string }) {
                   <li key={key}>
                     <TaggedCard
                       listing={listing}
+                      onNavigate={() => saveListingTrail(label, trailEntries, index)}
                       isOwned={isOwned}
                       canToggle={isProgressKnown}
                       isLoggedIn={isLoggedIn}

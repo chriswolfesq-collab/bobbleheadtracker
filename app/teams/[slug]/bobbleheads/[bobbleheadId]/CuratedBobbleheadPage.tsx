@@ -31,6 +31,7 @@ import { publicAsset } from "@/lib/paths";
 import { getRarity } from "@/lib/rarity";
 import { siteUrl } from "@/lib/siteUrl";
 import type { Team } from "@/lib/teams";
+import { useListingNav } from "@/lib/listingTrail";
 import { teamHrefFromView, useTeamView } from "@/lib/teamView";
 import { useUserCollection } from "@/lib/userCollections";
 import { useUserFavorites } from "@/lib/userFavorites";
@@ -112,7 +113,7 @@ export function CuratedBobbleheadPage({
   team,
   initialOverride,
   initialImageUrl,
-  nav,
+  nav: serverNav,
 }: {
   giveaway: Giveaway;
   team: Team;
@@ -122,6 +123,10 @@ export function CuratedBobbleheadPage({
 }) {
   const router = useRouter();
   const teamView = useTeamView();
+  // The team chain ships in the prerendered HTML; if the reader arrived from a
+  // list (Recently Added, search, a tag, a filtered team view) the arrows and
+  // the counter switch to that list after hydration. See lib/listingTrail.ts.
+  const nav = useListingNav(serverNav) ?? serverNav;
   const { canEditTeam, user: adminUser } = useAdminAuth();
   const canEdit = canEditTeam(team.slug);
   const { showError } = useToast();

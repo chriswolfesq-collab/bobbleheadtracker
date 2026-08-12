@@ -5,8 +5,10 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RecentlyAddedCard } from "@/components/RecentlyAddedCard";
 import { ToggleChip } from "@/components/ToggleChip";
 import { useAllApprovedPhotos } from "@/lib/approvedPhotos";
+import { bobbleheadHref } from "@/lib/bobbleheadIdentity";
 import { useAllCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { extractYear, UNKNOWN_YEAR } from "@/lib/extractYear";
+import { saveListingTrail } from "@/lib/listingTrail";
 import { getTeamBySlug } from "@/lib/teams";
 import { useMyOwnedLookup } from "@/lib/userCollections";
 import { useMyWantedLookup } from "@/lib/userWanted";
@@ -203,6 +205,19 @@ export function RecentlyAddedPageClient() {
     return list;
   }, [filtered, sortOrder]);
 
+  // The chain a clicked listing's prev/next arrows will follow. Built from the
+  // whole filtered list rather than the rendered window, so arrowing keeps
+  // going past wherever "show more" happened to stop.
+  const trailEntries = useMemo(
+    () =>
+      sorted.map((bobblehead) => ({
+        id: bobblehead.id,
+        title: bobblehead.title,
+        href: bobbleheadHref(bobblehead.teamSlug, bobblehead.id, false),
+      })),
+    [sorted],
+  );
+
   const hasActiveFilters =
     query.trim().length > 0 || teamFilter !== "" || yearFilter !== "" || wantedOnly || ownedFilter !== "all";
 
@@ -385,13 +400,15 @@ export function RecentlyAddedPageClient() {
         ) : (
           <>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-              {visible.map((bobblehead) => {
+              {visible.map((bobblehead, index) => {
                 const key = `${bobblehead.teamSlug}:${bobblehead.id}`;
                 const isWanted = wantedByKey[key] ?? false;
                 return (
                   <RecentlyAddedCard
                     key={bobblehead.id}
                     bobblehead={bobblehead}
+                    // `visible` is a prefix of `sorted`, so the index lines up.
+                    onNavigate={() => saveListingTrail("Recently Added", trailEntries, index)}
                     photoUrl={photoUrlByListing[`${bobblehead.teamSlug}/${bobblehead.id}`]}
                     isWanted={isWanted}
                     isLoggedIn={isLoggedInForWanted}

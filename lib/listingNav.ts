@@ -22,6 +22,10 @@ export type ListingNav = {
   next: ListingNavEntry | null;
   /** nearby listings rendered as "related bobbleheads" links */
   related: ListingNavEntry[];
+  /** Set only when the arrows are following a list the reader came from rather
+      than this team's chain, so the counter can say which — see
+      lib/listingTrail.ts. */
+  source?: string;
 };
 
 type OrderedListing = ListingNavEntry & { date: string; year: string };

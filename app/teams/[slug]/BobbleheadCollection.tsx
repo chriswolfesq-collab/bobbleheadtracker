@@ -6,6 +6,7 @@ import { ToggleChip } from "@/components/ToggleChip";
 import { Pagination } from "@/components/ui/Pagination";
 import { Tabs } from "@/components/ui/Tabs";
 import { ATHLETICS_CITIES, hasCityChoice } from "@/lib/athleticsCity";
+import { bobbleheadHref } from "@/lib/bobbleheadIdentity";
 import type { Team } from "@/lib/teams";
 import { mergeTeamViewQuery } from "@/lib/teamView";
 import { GiveawayCard, type ResolvedGiveaway, useFavorites, useOwnership, useWanted } from "./GiveawayCard";
@@ -328,6 +329,20 @@ export function BobbleheadCollection({
   const currentPage = Math.min(page, pageCount);
   const pageItems = sorted.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
+  // The chain a clicked card's prev/next arrows will follow. Built from the
+  // whole filtered result set rather than this page of it, so the arrows carry
+  // on across the page boundary — and, unlike the server chain, they respect
+  // the tab/filter/sort the reader actually set.
+  const trailEntries = useMemo(
+    () =>
+      sorted.map((giveaway) => ({
+        id: giveaway.id,
+        title: giveaway.title,
+        href: bobbleheadHref(team.slug, giveaway.id, giveaway.source !== "community"),
+      })),
+    [sorted, team.slug],
+  );
+
   const goToPage = (nextPage: number) => {
     setPage(nextPage);
     gridTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -448,6 +463,9 @@ export function BobbleheadCollection({
                 team={team}
                 view={view}
                 eager={currentPage === 1 && index < EAGER_CARD_COUNT}
+                trailLabel={team.name}
+                trailEntries={trailEntries}
+                trailIndex={(currentPage - 1) * PAGE_SIZE + index}
               />
             ))}
           </div>

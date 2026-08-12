@@ -7,6 +7,7 @@ import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAllApprovedPhotos } from "@/lib/approvedPhotos";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
+import { saveListingTrail } from "@/lib/listingTrail";
 import { publicAsset } from "@/lib/paths";
 import { searchGiveaways, type SearchResult } from "@/lib/search";
 import { getTeamBySlug } from "@/lib/teams";
@@ -26,13 +27,23 @@ function readShown(raw: string | null): number {
   return Math.max(1, Math.round((Number(raw) || PAGE_SIZE) / PAGE_SIZE)) * PAGE_SIZE;
 }
 
-function ResultCard({ result, photoUrl }: { result: SearchResult; photoUrl?: string }) {
+function ResultCard({
+  result,
+  photoUrl,
+  onNavigate,
+}: {
+  result: SearchResult;
+  photoUrl?: string;
+  /** records the list being left, so the listing's arrows walk it */
+  onNavigate?: () => void;
+}) {
   const placeholderSrc = publicAsset(`/bobbleheads/${result.teamSlug}.png`);
   const imageSrc = photoUrl || result.imageUrl || placeholderSrc;
 
   return (
     <Link
       href={result.href}
+      onClick={onNavigate}
       className="group relative flex flex-col overflow-hidden rounded-lg border border-black/10 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] transition hover:border-accent/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
     >
       <div className="flex h-28 items-end justify-center px-2 pt-2 sm:h-32">
@@ -90,6 +101,14 @@ export function SearchPageClient() {
   }
 
   const visible = results.slice(0, visibleCount);
+
+  // The chain a clicked result's prev/next arrows will follow. Every match, not
+  // just the rendered window, so arrowing keeps going past "show more".
+  const trailEntries = useMemo(
+    () => results.map((result) => ({ id: result.id, title: result.title, href: result.href })),
+    [results],
+  );
+  const trailLabel = query.trim() ? `results for “${query.trim()}”` : "search results";
 
   // Keep the URL shareable/bookmarkable as the user refines the query — and
   // carry the window in it too, so opening a result and pressing Back comes back
@@ -211,11 +230,13 @@ export function SearchPageClient() {
               for “{query.trim()}”
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-              {visible.map((result) => (
+              {/* `visible` is a prefix of `results`, so the index lines up. */}
+              {visible.map((result, index) => (
                 <ResultCard
                   key={`${result.source}-${result.teamSlug}-${result.id}`}
                   result={result}
                   photoUrl={photoUrlByListing[`${result.teamSlug}/${result.id}`]}
+                  onNavigate={() => saveListingTrail(trailLabel, trailEntries, index)}
                 />
               ))}
             </div>

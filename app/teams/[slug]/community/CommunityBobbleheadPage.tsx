@@ -25,6 +25,7 @@ import { ATHLETICS_CITIES, hasCityChoice, resolveAthleticsCity } from "@/lib/ath
 import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { useCommunityBobblehead } from "@/lib/communityBobbleheads";
 import type { ListingNav } from "@/lib/listingNav";
+import { useListingNav } from "@/lib/listingTrail";
 import { publicAsset } from "@/lib/paths";
 import { getRarity } from "@/lib/rarity";
 import type { Team } from "@/lib/teams";
@@ -72,7 +73,7 @@ function Shell({
 export function CommunityBobbleheadPage({
   team,
   bobbleheadId: bobbleheadIdProp,
-  nav,
+  nav: serverNav,
 }: {
   team: Team;
   /** provided by the /community/[bobbleheadId] route; the legacy ?id= URL
@@ -90,6 +91,10 @@ export function CommunityBobbleheadPage({
   // through useTeamView: this page already reads them for the legacy ?id=
   // entry point, so there's no prerendering left to protect.
   const teamView = teamViewQuery(searchParams.get("from") ?? "");
+  // The list the reader arrived from wins over this team's chain when there is
+  // one — including on the legacy ?id= entry point, which has no server chain
+  // of its own. See lib/listingTrail.ts.
+  const nav = useListingNav(serverNav ?? null);
   const { canEditTeam, user: adminUser } = useAdminAuth();
   const canEdit = canEditTeam(team.slug);
   const { showError } = useToast();

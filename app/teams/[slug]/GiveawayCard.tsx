@@ -8,6 +8,8 @@ import { FavoriteButton } from "@/components/FavoriteButton";
 import { WantedButton } from "@/components/WantedButton";
 import { publicAsset } from "@/lib/paths";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
+import type { ListingNavEntry } from "@/lib/listingNav";
+import { saveListingTrail } from "@/lib/listingTrail";
 import type { Team } from "@/lib/teams";
 import type { TeamListing } from "@/lib/teamListings";
 import { withTeamView } from "@/lib/teamView";
@@ -164,6 +166,9 @@ function GiveawayCardInner({
   team,
   view = "",
   eager = false,
+  trailLabel,
+  trailEntries,
+  trailIndex = 0,
 }: {
   giveaway: ResolvedGiveaway;
   team: Team;
@@ -171,6 +176,13 @@ function GiveawayCardInner({
       team crumb leads back to the view this card was clicked from */
   view?: string;
   eager?: boolean;
+  /** The filtered/sorted collection this card sits in, recorded on click so the
+      listing's prev/next arrows walk it instead of the team's release order.
+      Passed as three stable props rather than a ready-made click handler: this
+      component is memoized, and a fresh closure per render would defeat that. */
+  trailLabel?: string;
+  trailEntries?: ListingNavEntry[];
+  trailIndex?: number;
 }) {
   const { ownedById, ownershipKnown, isLoggedIn, toggleOwned } = useOwnership();
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, toggleFavorited } = useFavorites();
@@ -251,7 +263,15 @@ function GiveawayCardInner({
         />
       </div>
 
-      <Link href={href} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+      <Link
+        href={href}
+        onClick={
+          trailEntries
+            ? () => saveListingTrail(trailLabel ?? "", trailEntries, trailIndex)
+            : undefined
+        }
+        className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      >
         <div className="relative flex h-32 items-end justify-center bg-[radial-gradient(circle_at_50%_18%,#ffffff,#f2ead9_78%)] px-3 pt-4 sm:h-52 sm:px-4 sm:pt-6">
           <BobbleheadImage
             src={imageSrc}

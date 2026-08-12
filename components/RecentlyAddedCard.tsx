@@ -26,6 +26,7 @@ export function RecentlyAddedCard({
   isWanted,
   isLoggedIn,
   onToggleWanted,
+  onNavigate,
 }: {
   bobblehead: CommunityBobbleheadWithTeam;
   /** admin-approved photo for this listing, which outranks the row's own */
@@ -33,6 +34,8 @@ export function RecentlyAddedCard({
   isWanted: boolean;
   isLoggedIn: boolean;
   onToggleWanted: () => void;
+  /** records the list being left, so the listing's arrows walk it */
+  onNavigate?: () => void;
 }) {
   const team = getTeamBySlug(bobblehead.teamSlug);
   const placeholderSrc = publicAsset(`/bobbleheads/${bobblehead.teamSlug}.png`);
@@ -52,6 +55,7 @@ export function RecentlyAddedCard({
 
       <Link
         href={`/teams/${bobblehead.teamSlug}/community/${encodeURIComponent(bobblehead.id)}`}
+        onClick={onNavigate}
         className="flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
         {/* `relative` so BobbleheadImage's skeleton has a box to fill —

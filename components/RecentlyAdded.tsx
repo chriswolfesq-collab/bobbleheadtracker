@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useMemo } from "react";
 import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { bobbleheadHref } from "@/lib/bobbleheadIdentity";
 import { useRecentCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
+import { saveListingTrail } from "@/lib/listingTrail";
 import { publicAsset } from "@/lib/paths";
 import { getTeamBySlug } from "@/lib/teams";
 
@@ -21,6 +24,18 @@ const PANEL =
 
 export default function RecentlyAdded({ className }: { className?: string }) {
   const { communityBobbleheads, isLoading } = useRecentCommunityBobbleheads(RECENT_LIMIT);
+
+  // The chain a clicked card's prev/next arrows will follow — this strip, in
+  // the order it's shown.
+  const trailEntries = useMemo(
+    () =>
+      communityBobbleheads.map((bobblehead) => ({
+        id: bobblehead.id,
+        title: bobblehead.title,
+        href: bobbleheadHref(bobblehead.teamSlug, bobblehead.id, false),
+      })),
+    [communityBobbleheads],
+  );
 
   // Rendering nothing while the fetch is in flight pulled the heading and the
   // whole row out of the page, so everything below sat higher and then jumped
@@ -62,7 +77,7 @@ export default function RecentlyAdded({ className }: { className?: string }) {
           is ordered newest-first and a wrapping grid would put last month's
           addition above one from this morning. */}
       <ul className="mt-5 flex snap-x gap-3 overflow-x-auto pb-2">
-        {communityBobbleheads.map((bobblehead) => {
+        {communityBobbleheads.map((bobblehead, index) => {
           const team = getTeamBySlug(bobblehead.teamSlug);
           const placeholderSrc = publicAsset(`/bobbleheads/${bobblehead.teamSlug}.png`);
           const imageSrc = bobblehead.imageUrl ?? placeholderSrc;
@@ -75,6 +90,7 @@ export default function RecentlyAdded({ className }: { className?: string }) {
             >
               <Link
                 href={href}
+                onClick={() => saveListingTrail("Recently Added", trailEntries, index)}
                 className={`group ${CARD} transition hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent`}
               >
                 <div className={PANEL}>

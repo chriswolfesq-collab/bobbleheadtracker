@@ -75,7 +75,11 @@ export function ListingNavControls({
           <span aria-hidden>‹</span>
         </Link>
       ) : (
-        <span aria-hidden title="Newest for this team" className={`left-2 ${ARROW_CLASS} ${ARROW_SPENT}`}>
+        <span
+          aria-hidden
+          title={nav.source ? `Start of ${nav.source}` : "Newest for this team"}
+          className={`left-2 ${ARROW_CLASS} ${ARROW_SPENT}`}
+        >
           ‹
         </span>
       )}
@@ -89,7 +93,11 @@ export function ListingNavControls({
           <span aria-hidden>›</span>
         </Link>
       ) : (
-        <span aria-hidden title="Oldest for this team" className={`right-2 ${ARROW_CLASS} ${ARROW_SPENT}`}>
+        <span
+          aria-hidden
+          title={nav.source ? `End of ${nav.source}` : "Oldest for this team"}
+          className={`right-2 ${ARROW_CLASS} ${ARROW_SPENT}`}
+        >
           ›
         </span>
       )}
@@ -101,6 +109,11 @@ export function ListingNavCounter({ nav }: { nav: ListingNav }) {
   return (
     <p className="shrink-0 text-xs font-semibold uppercase tracking-wide text-zinc-500">
       {nav.position} of {nav.total}
+      {/* Naming the list matters once the arrows stop being the team chain: the
+          counter and the arrows have to describe the same thing, or "1 of 104"
+          beside a back arrow that works reads as a bug. Hidden on narrow
+          screens, where the header bar has no room for it. */}
+      {nav.source ? <span className="hidden sm:inline"> in {nav.source}</span> : null}
     </p>
   );
 }
