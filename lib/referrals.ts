@@ -2,14 +2,21 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth";
+import {
+  clearStashedReferralCode,
+  readStashedReferralCode,
+} from "@/lib/referralStorage";
 import { supabase } from "@/lib/supabase";
 
-// The query parameter an invite link carries, and the localStorage key it's
-// parked in until a session exists to attribute it to. Exported because two
-// unrelated places need to agree on them: ReferralCapture, which writes, and
-// the invite links the Refer a Friend panel builds.
-export const REFERRAL_PARAM = "ref";
-const STORAGE_KEY = "bobbleshelf.referral";
+// Re-exported so callers have a single referral entry point; the definitions
+// live in referralStorage.ts to keep lib/auth.tsx out of an import cycle.
+export {
+  clearStashedReferralCode,
+  readStashedReferralCode,
+  referralUrl,
+  REFERRAL_PARAM,
+  stashReferralCode,
+} from "@/lib/referralStorage";
 
 export type MyReferral = {
   /** null until the first successful load — the code is minted server-side on
@@ -39,6 +46,27 @@ export function useMyReferral(): MyReferral & { isLoading: boolean; error: strin
   const [referral, setReferral] = useState<MyReferral>(EMPTY);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [reloadKey, setReloadKey] = useState(0);
+
+  // Refetch when the tab comes back to the front.
+  //
+  // Every other number on the profile changes because *you* did something, so
+  // a one-shot fetch is fine for them. This one changes because someone else
+  // did — a friend signing up, hours later. Without this, a tab left open
+  // since before that happened shows a stale 0 indefinitely, and the collector
+  // concludes their referral wasn't counted.
+  useEffect(() => {
+    function refetch() {
+      if (document.visibilityState === "visible") setReloadKey((key) => key + 1);
+    }
+
+    document.addEventListener("visibilitychange", refetch);
+    window.addEventListener("focus", refetch);
+    return () => {
+      document.removeEventListener("visibilitychange", refetch);
+      window.removeEventListener("focus", refetch);
+    };
+  }, []);
 
   useEffect(() => {
     if (!userId) return;
@@ -55,6 +83,9 @@ export function useMyReferral(): MyReferral & { isLoading: boolean; error: strin
           console.error("Failed to load your referral link:", rpcError.message);
           setError("Couldn't load your invite link. Refresh to try again.");
         } else if (data) {
+          // Cleared on success so a transient failure doesn't leave the error
+          // showing next to numbers that have since loaded fine.
+          setError(null);
           setReferral({
             code: data.code,
             joined: data.joined ?? 0,
@@ -68,62 +99,16 @@ export function useMyReferral(): MyReferral & { isLoading: boolean; error: strin
     return () => {
       cancelled = true;
     };
-  }, [userId]);
+    // isLoading is deliberately never set back to true on a refetch: the
+    // numbers already on screen are better than blanking them every time the
+    // tab regains focus.
+  }, [userId, reloadKey]);
 
   return userId
     ? { ...referral, isLoading, error }
     : { ...EMPTY, isLoading: false, error: null };
 }
 
-/** The full invite URL for a code. Origin-relative so previews and localhost
- *  produce a link that actually works where it was generated. */
-export function referralUrl(code: string, origin: string): string {
-  return `${origin}/?${REFERRAL_PARAM}=${encodeURIComponent(code)}`;
-}
-
-/**
- * Parks an invite code for later. Called on landing, not on signup — the two
- * are separated by an email confirmation link (a fresh tab) or an OAuth
- * redirect, either of which loses the query string.
- *
- * Storage failures are swallowed: Safari private mode throws on setItem, and a
- * referral quietly not being recorded is far better than a crash on the
- * homepage.
- */
-export function stashReferralCode(code: string): void {
-  try {
-    window.localStorage.setItem(STORAGE_KEY, code);
-  } catch (error) {
-    console.error("Couldn't stash the referral code:", error);
-  }
-}
-
-export function readStashedReferralCode(): string | null {
-  try {
-    return window.localStorage.getItem(STORAGE_KEY);
-  } catch (error) {
-    console.error("Couldn't read the stashed referral code:", error);
-    return null;
-  }
-}
-
-export function clearStashedReferralCode(): void {
-  try {
-    window.localStorage.removeItem(STORAGE_KEY);
-  } catch (error) {
-    console.error("Couldn't clear the stashed referral code:", error);
-  }
-}
-
-/**
- * Attributes the current session to a stashed invite code, if there is one.
- *
- * Every outcome except a transport failure clears the stash. The rejections
- * (your own link, an account that's already attributed, one too old to count)
- * are all permanent — retrying on the next page load would never change the
- * answer, and a code that sticks around forever would eventually attach itself
- * to the wrong account on a shared computer.
- */
 export async function claimStashedReferral(): Promise<void> {
   const code = readStashedReferralCode();
   if (!code) return;

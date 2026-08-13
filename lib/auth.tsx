@@ -2,6 +2,7 @@
 
 import type { Session, User } from "@supabase/supabase-js";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { readStashedReferralCode, REFERRAL_PARAM } from "@/lib/referralStorage";
 import { supabase } from "@/lib/supabase";
 
 export type AuthModalMode = "sign-in" | "sign-up";
@@ -60,6 +61,22 @@ export function getDisplayName(user: User | null): string {
 // until they pick one, rather than silently keeping the provider's name.
 export function hasDisplayName(user: User | null): boolean {
   return Boolean(user?.user_metadata?.display_name);
+}
+
+/**
+ * Where an OAuth sign-in lands, carrying any invite code back with it.
+ *
+ * signInWithOAuth takes no user_metadata, so the email path's trick isn't
+ * available here. Putting the code in the return URL means it survives the
+ * round trip through Google even when the provider opens its own browser and
+ * the stashed copy is left behind — ReferralCapture picks it back up on
+ * landing and claims it against the session that now exists.
+ */
+function oauthRedirectTo(): string {
+  const code = readStashedReferralCode();
+  const url = new URL(window.location.origin);
+  if (code) url.searchParams.set(REFERRAL_PARAM, code);
+  return url.toString();
 }
 
 // Regular site session only — collection tracking, submitting photos. Admin
@@ -167,24 +184,38 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const invalid = validateDisplayName(displayName);
         if (invalid) return { error: invalid };
 
+        // The invite code rides along in user_metadata rather than being
+        // claimed from localStorage after the fact. An email signup has no
+        // session until the confirmation link is clicked, so the claim RPC
+        // (which needs auth.uid()) cannot run at signup — and the link often
+        // opens in a mail app's own browser, where the stashed code isn't
+        // there to find. Carried here, the attribution is done by a trigger
+        // the moment the auth.users row exists, session or not.
+        const referralCode = readStashedReferralCode();
+
         const { error } = await supabase.auth.signUp({
           email,
           password,
-          options: { data: { display_name: displayName.trim() } },
+          options: {
+            data: {
+              display_name: displayName.trim(),
+              ...(referralCode ? { referral_code: referralCode } : {}),
+            },
+          },
         });
         return { error: error?.message ?? null };
       },
       signInWithGoogle: async () => {
         const { error } = await supabase.auth.signInWithOAuth({
           provider: "google",
-          options: { redirectTo: window.location.origin },
+          options: { redirectTo: oauthRedirectTo() },
         });
         return { error: error?.message ?? null };
       },
       signInWithGithub: async () => {
         const { error } = await supabase.auth.signInWithOAuth({
           provider: "github",
-          options: { redirectTo: window.location.origin },
+          options: { redirectTo: oauthRedirectTo() },
         });
         return { error: error?.message ?? null };
       },

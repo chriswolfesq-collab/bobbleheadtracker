@@ -5,7 +5,8 @@ import { useToast } from "@/components/Toast";
 import { Button } from "@/components/ui/Button";
 import { useAuth } from "@/lib/auth";
 import { copyText } from "@/lib/clipboard";
-import { referralUrl, useMyReferral } from "@/lib/referrals";
+import { referralUrl } from "@/lib/referralStorage";
+import { useMyReferral } from "@/lib/referrals";
 
 /**
  * Whether the referral raffle is actually running.
@@ -30,10 +31,24 @@ const RULES_HREF = "/refer/rules";
 const SHARE_TEXT =
   "I'm tracking my MLB bobblehead collection on BobbleShelf — every stadium giveaway, all 30 teams. Join me:";
 
-function CountTile({ value, label, hint }: { value: number; label: string; hint?: string }) {
+function CountTile({
+  value,
+  label,
+  hint,
+}: {
+  /** null when the count isn't known yet — still loading, or the load failed.
+   *  Rendering 0 there is worse than rendering nothing: a collector who has
+   *  actually referred someone reads it as "my referral didn't count", which
+   *  is exactly the bug report this replaced. */
+  value: number | null;
+  label: string;
+  hint?: string;
+}) {
   return (
     <div className="rounded-xl border border-border-soft bg-surface px-4 py-3 text-center">
-      <p className="font-display text-2xl font-bold tabular-nums text-navy">{value}</p>
+      <p className="font-display text-2xl font-bold tabular-nums text-navy">
+        {value === null ? <span className="text-zinc-400">—</span> : value}
+      </p>
       <p className="mt-0.5 text-[11px] font-black uppercase tracking-wide text-zinc-600">{label}</p>
       {hint ? <p className="mt-1 text-[11px] leading-snug text-zinc-500">{hint}</p> : null}
     </div>
@@ -177,14 +192,26 @@ export function ReferAFriend({ variant = "page" }: { variant?: "page" | "section
             )}
           </div>
 
+          {/* A null code means the RPC has never come back, so the counts are
+              unknown rather than zero — see CountTile. `joined` and `qualified`
+              sit at 0 until it lands, so passing them straight through made the
+              panel state "0 friends joined" while it was still asking.
+              Keyed off the code rather than isLoading/error on purpose: once we
+              have real numbers, a failed *refetch* should leave them on screen
+              and just show the error underneath. */}
           <div className="mt-4 grid grid-cols-2 gap-3">
-            <CountTile value={joined} label="Friends joined" />
+            <CountTile value={code === null ? null : joined} label="Friends joined" />
             <CountTile
-              value={qualified}
+              value={code === null ? null : qualified}
               label={IS_RAFFLE_LIVE ? "Raffle entries" : "Active collectors"}
               hint="Confirmed their email and put at least 3 bobbleheads on their shelf."
             />
           </div>
+
+          {/* The counts have their own copy of the error. It used to appear
+              only inside the link box above, so a failed load left two
+              confident zeroes sitting here with nothing to explain them. */}
+          {error ? <p className="mt-2 text-xs font-semibold text-red-500">{error}</p> : null}
 
           {IS_RAFFLE_LIVE ? (
             <p className="mt-3 text-xs leading-6 text-zinc-600">

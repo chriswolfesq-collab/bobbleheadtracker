@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { useAuth } from "@/lib/auth";
-import { claimStashedReferral, REFERRAL_PARAM, stashReferralCode } from "@/lib/referrals";
+import { claimStashedReferral } from "@/lib/referrals";
+import { REFERRAL_PARAM, stashReferralCode } from "@/lib/referralStorage";
 
 /**
  * Records who sent the invite that brought someone here.
