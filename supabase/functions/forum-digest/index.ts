@@ -1,5 +1,5 @@
-// Supabase Edge Function: the morning summary of unread threads on the
-// moderators' forum. Fired once a day by the pg_cron job in
+// Supabase Edge Function: the morning summary of unread threads in the Team Rep
+// Forum. Fired once a day by the pg_cron job in
 // supabase/mod_forum.sql, which calls send_forum_digest() — that function works
 // out who hasn't read what and hands the finished per-person lists here. NOT
 // called from the app, so like the other trigger-driven mailers it's deployed
@@ -99,8 +99,8 @@ Deno.serve(async (req) => {
     const hidden = topics.length - shown.length;
     const subject =
       topics.length === 1
-        ? `Bobble Shelf mods: 1 unread thread — ${oneLine(str(shown[0].title, "a topic"))}`
-        : `Bobble Shelf mods: ${topics.length} unread threads`;
+        ? `Team Rep Forum: 1 unread thread — ${oneLine(str(shown[0].title, "a topic"))}`
+        : `Team Rep Forum: ${topics.length} unread threads`;
 
     const lines = shown.map((topic) => {
       const title = oneLine(str(topic.title, "Untitled"));
@@ -112,7 +112,7 @@ Deno.serve(async (req) => {
 
     const text =
       `${topics.length === 1 ? "One thread has" : `${topics.length} threads have`} activity you ` +
-      `haven't read on the moderators' forum.\n\n` +
+      `haven't read in the Team Rep Forum.\n\n` +
       lines
         .map(
           (line) =>
@@ -130,7 +130,7 @@ Deno.serve(async (req) => {
       `<p style="font-size:17px;">` +
       `<strong>${
         topics.length === 1 ? "One thread has" : `${topics.length} threads have`
-      }</strong> activity you haven't read on the moderators' forum.</p>` +
+      }</strong> activity you haven't read in the Team Rep Forum.</p>` +
       lines
         .map(
           (line) =>
@@ -147,7 +147,7 @@ Deno.serve(async (req) => {
         .join("") +
       (hidden ? `<p style="color:#888;">…and ${hidden} more.</p>` : "") +
       `<p><a href="${SITE}/admin/forum">Open the board</a></p>` +
-      `<p style="color:#888;font-size:13px;">You're getting this because you moderate Bobble Shelf. ` +
+      `<p style="color:#888;font-size:13px;">You're getting this because you're a Bobble Shelf team rep or admin. ` +
       `Turn the daily summary off in <a href="${SITE}/settings">Settings</a>.</p>` +
       `</div>`;
 

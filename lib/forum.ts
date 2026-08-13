@@ -5,7 +5,7 @@ import { useAdminAuth } from "@/lib/adminAuth";
 import { submissionError } from "@/lib/rateLimit";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 
-// The moderators' forum — see supabase/mod_forum.sql for the schema and the
+// The Team Rep Forum — see supabase/mod_forum.sql for the schema and the
 // reasoning. Every call here is an RPC rather than a table read or write: the
 // tables have SELECT policies only, and the unread flag each list carries is a
 // join against the caller's own read marks that has to happen server-side.

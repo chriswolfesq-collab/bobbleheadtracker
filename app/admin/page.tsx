@@ -200,7 +200,7 @@ export default function AdminPage() {
           <Link href="/admin/forum" className={cardClass}>
             <NotificationBadge count={unreadTopics} />
             <p className="text-sm font-black uppercase tracking-wide text-zinc-900">
-              Moderators&apos; forum
+              Team Rep Forum
             </p>
             <p className="mt-2 text-sm text-zinc-600">
               Ask the other reps and admins something, or see what they&apos;ve been discussing.

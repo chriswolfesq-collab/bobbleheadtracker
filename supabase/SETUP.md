@@ -315,9 +315,10 @@ Note that `weekly_digest.sql` recreates `wants_email` and `set_email_preference`
 in full. Both enumerate the known preference kinds and fail closed on an unknown
 one, so the new switch has to be added inside them rather than alongside.
 
-## Moderators' forum
+## Team Rep Forum
 
-A private threaded board for admins and team reps, at `/admin/forum`. Reps are
+A private threaded board for admins and team reps, at `/admin/forum`. Named
+for its main audience; admins are in it too. Reps are
 spread across thirty teams and are rarely on the site at the same moment, so
 this is a forum and not a chatroom: threads wait for the person they're
 addressed to and stay searchable afterwards. One shared space — every moderator

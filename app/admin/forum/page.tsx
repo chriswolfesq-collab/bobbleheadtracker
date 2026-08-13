@@ -171,10 +171,10 @@ function Board() {
           items={[
             { href: "/", label: "Home" },
             { href: "/admin", label: "Admin" },
-            { label: "Forum" },
+            { label: "Team Rep Forum" },
           ]}
         />
-        <h1 className="mt-3 text-2xl font-black uppercase tracking-wide">Moderators&apos; forum</h1>
+        <h1 className="mt-3 text-2xl font-black uppercase tracking-wide">Team Rep Forum</h1>
         <p className="mt-1 text-sm text-zinc-600">
           A private board for admins and team reps — questions about the queue, how we&apos;re
           tagging things, a promo that ran in two cities. Everyone who moderates sees every thread.

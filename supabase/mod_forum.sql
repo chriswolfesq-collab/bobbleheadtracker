@@ -1,5 +1,5 @@
--- The moderators' forum: a private, threaded discussion board for admins and
--- team reps. Run once in the Supabase SQL editor after rep_activity.sql and
+-- The Team Rep Forum: a private, threaded discussion board for admins and team
+-- reps. Named for its main audience; admins are in it too. Run once in the Supabase SQL editor after rep_activity.sql and
 -- weekly_digest.sql; safe to re-run.
 --
 -- Why a forum and not a chatroom: reps are scattered across thirty teams and

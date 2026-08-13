@@ -53,9 +53,9 @@ const ROWS: Row[] = [
   },
   {
     kind: "forum_digest",
-    label: "Forum summary",
-    on: "Each morning you'll get an email listing the moderator forum threads you haven't read. Nothing unread, nothing sent.",
-    off: "Turn this on for a morning email about moderator forum threads you haven't read.",
+    label: "Team Rep Forum",
+    on: "Each morning you'll get an email listing the Team Rep Forum threads you haven't read. Nothing unread, nothing sent.",
+    off: "Turn this on for a morning email about Team Rep Forum threads you haven't read.",
     moderatorOnly: true,
   },
 ];

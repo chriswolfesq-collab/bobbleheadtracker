@@ -166,7 +166,7 @@ function Thread({ topicId }: { topicId: string }) {
           items={[
             { href: "/", label: "Home" },
             { href: "/admin", label: "Admin" },
-            { href: "/admin/forum", label: "Forum" },
+            { href: "/admin/forum", label: "Team Rep Forum" },
             { label: topic.title },
           ]}
         />

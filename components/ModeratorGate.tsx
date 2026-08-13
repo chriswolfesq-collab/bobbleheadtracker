@@ -30,7 +30,7 @@ export function ModeratorGate({ children }: { children: React.ReactNode }) {
       <main className="min-h-full bg-slate-50 px-4 py-10 text-center text-zinc-900">
         <p className="text-sm font-black uppercase tracking-wide">Not authorized</p>
         <p className="mt-2 text-sm text-zinc-600">
-          The moderators&apos; forum is for admins and team reps.
+          The Team Rep Forum is for admins and team reps.
         </p>
         <button
           type="button"
