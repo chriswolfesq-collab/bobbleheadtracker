@@ -8,6 +8,15 @@ import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { GIVEAWAYS_BY_TEAM } from "@/lib/bobbleheads";
 import { useAllCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { useBobbleheadOverrides } from "@/lib/bobbleheadOverrides";
+import {
+  REFERRAL_COLUMNS,
+  referralCount,
+  sortByWindow,
+  WINDOW_LABELS,
+  type ReferralMember,
+  type ReferralMetric,
+  type WindowKey,
+} from "@/lib/referralLeaderboard";
 import { TEAMS, getTeamBySlug } from "@/lib/teams";
 
 type TopTeam = { slug: string; count: number };
@@ -82,6 +91,137 @@ function StatCard({
   );
 }
 
+/**
+ * Who referred how many, per window — the list a drawing is built from.
+ *
+ * Sortable by any window because that is the actual question: not "who has the
+ * most ever", but "who has the most in the period this giveaway covers". The
+ * metric toggle matters just as much — entries are what a drawing draws on,
+ * signups are what shows a member sending links to people who join and then
+ * never fill a shelf.
+ */
+function ReferralLeaderboard({
+  members,
+  metric,
+  onMetricChange,
+  sortWindow,
+  onSortWindowChange,
+}: {
+  members: ReferralMember[] | null;
+  metric: ReferralMetric;
+  onMetricChange: (metric: ReferralMetric) => void;
+  sortWindow: WindowKey;
+  onSortWindowChange: (window: WindowKey) => void;
+}) {
+  const columns = REFERRAL_COLUMNS;
+
+  const sorted = useMemo(
+    () => (members ? sortByWindow(members, metric, sortWindow) : null),
+    [members, metric, sortWindow],
+  );
+
+  if (sorted === null) {
+    return <p className="mt-4 text-sm text-zinc-600">Loading…</p>;
+  }
+  if (sorted.length === 0) {
+    return <p className="mt-4 text-sm text-zinc-600">Nobody has an invite link yet.</p>;
+  }
+
+  return (
+    <>
+      <div className="mt-6 flex flex-wrap items-center gap-2">
+        {(["qualified", "joined"] as const).map((option) => (
+          <button
+            key={option}
+            type="button"
+            onClick={() => onMetricChange(option)}
+            aria-pressed={metric === option}
+            className={`rounded-full border px-3 py-1.5 text-xs font-black uppercase tracking-wide transition ${
+              metric === option
+                ? "border-accent bg-accent/10 text-accent"
+                : "border-black/10 bg-white text-zinc-700 hover:border-accent hover:text-accent-hover"
+            }`}
+          >
+            {option === "qualified" ? "Raffle entries" : "All signups"}
+          </button>
+        ))}
+        <span className="text-xs text-zinc-500">Sorted by {WINDOW_LABELS[sortWindow]}</span>
+      </div>
+
+      {/* Its own scroller so eight columns don't push the dashboard into a
+          horizontal scroll on a narrow screen. */}
+      <div className="mt-3 overflow-x-auto rounded-lg border border-black/10 bg-white">
+        <table className="w-full min-w-[38rem] text-sm">
+          <thead>
+            <tr className="border-b border-black/10 text-left">
+              <th scope="col" className="px-4 py-3 text-xs font-black uppercase tracking-wide text-zinc-600">
+                Member
+              </th>
+              {columns.map((window) => (
+                <th key={window} scope="col" className="px-2 py-3 text-right">
+                  <button
+                    type="button"
+                    onClick={() => onSortWindowChange(window)}
+                    aria-pressed={sortWindow === window}
+                    className={`text-xs font-black uppercase tracking-wide transition ${
+                      sortWindow === window
+                        ? "text-accent"
+                        : "text-zinc-600 hover:text-accent-hover"
+                    }`}
+                  >
+                    {WINDOW_LABELS[window]}
+                    {sortWindow === window ? <span aria-hidden> ↓</span> : null}
+                  </button>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map((member) => {
+              const lifetime = referralCount(member, metric, "total");
+              return (
+                <tr
+                  key={member.id}
+                  className={`border-b border-black/5 last:border-0 ${
+                    lifetime === 0 ? "text-zinc-400" : ""
+                  }`}
+                >
+                  <td className="px-4 py-2.5">
+                    <span className="font-semibold text-zinc-900">{member.display_name}</span>
+                    <span className="ml-2 font-mono text-[11px] text-zinc-400">
+                      {member.referral_code}
+                    </span>
+                  </td>
+                  {columns.map((window) => {
+                    const count = referralCount(member, metric, window);
+                    return (
+                      <td
+                        key={window}
+                        className={`px-2 py-2.5 text-right tabular-nums ${
+                          count > 0 ? "font-bold text-zinc-900" : "text-zinc-300"
+                        }`}
+                      >
+                        {count}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <p className="mt-3 text-xs leading-5 text-zinc-500">
+        A window counts referrals that arrived in it. A <strong>raffle entry</strong> is a friend
+        who confirmed their email and put at least three bobbleheads on a shelf — judged as of
+        now, so a past window can rise as those collectors fill theirs in. Members with a link
+        and no referrals are listed too, greyed out.
+      </p>
+    </>
+  );
+}
+
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2 className="mt-10 text-sm font-black uppercase tracking-wide text-zinc-700">{children}</h2>
@@ -92,6 +232,11 @@ export default function AdminStatsPage() {
   const { user, isAdmin, isLoading, signOut } = useAdminAuth();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [referrals, setReferrals] = useState<ReferralStats | null>(null);
+  const [members, setMembers] = useState<ReferralMember[] | null>(null);
+  // Which window the table is sorted by, and whether it counts raffle entries
+  // or raw signups. Entries first: that's what a drawing is built from.
+  const [sortWindow, setSortWindow] = useState<WindowKey>("total");
+  const [metric, setMetric] = useState<ReferralMetric>("qualified");
   const [isLoadingStats, setIsLoadingStats] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -143,6 +288,16 @@ export default function AdminStatsPage() {
         console.error("Failed to load referral stats:", rpcError.message);
       } else {
         setReferrals(data as unknown as ReferralStats);
+      }
+    });
+
+    supabase.rpc("admin_referral_leaderboard").then(({ data, error: rpcError }) => {
+      if (cancelled) return;
+
+      if (rpcError) {
+        console.error("Failed to load the referral leaderboard:", rpcError.message);
+      } else {
+        setMembers((data as unknown as ReferralMember[]) ?? []);
       }
     });
 
@@ -444,26 +599,14 @@ export default function AdminStatsPage() {
               <p className="mt-4 text-sm text-zinc-600">Loading…</p>
             ) : (
               <>
-                <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {referrals.windows.map((window) => (
-                    <StatCard
-                      key={window.days}
-                      label={window.label}
-                      value={fmt(window.joined)}
-                      // The raffle counts entries, not signups, so the number
-                      // that matters for a drawing rides along with each window
-                      // rather than living in a second grid of its own.
-                      hint={`${fmt(window.qualified)} active ${
-                        window.qualified === 1 ? "collector" : "collectors"
-                      }`}
-                    />
-                  ))}
-                </div>
+                {/* Site-wide totals only. The per-window breakdown lives in the
+                    table below, per member — the same six windows summed here
+                    would just be the table's bottom row twice over. */}
                 <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   <StatCard
-                    label="All time"
+                    label="Referrals all time"
                     value={fmt(referrals.joined_total)}
-                    hint={`${fmt(referrals.qualified_total)} active`}
+                    hint={`${fmt(referrals.qualified_total)} count as entries`}
                   />
                   {/* The gap between these two is the health of the programme:
                       links handed out versus links that actually brought
@@ -474,12 +617,13 @@ export default function AdminStatsPage() {
                     hint={`of ${fmt(referrals.codes_minted)} with a link`}
                   />
                 </div>
-                <p className="mt-3 text-xs leading-5 text-zinc-500">
-                  A window counts referrals that arrived in it. &ldquo;Active&rdquo; means the
-                  friend has confirmed their email and put at least three bobbleheads on a
-                  shelf — judged as of now, so past windows can rise as those collectors fill
-                  theirs in.
-                </p>
+                <ReferralLeaderboard
+                  members={members}
+                  metric={metric}
+                  onMetricChange={setMetric}
+                  sortWindow={sortWindow}
+                  onSortWindowChange={setSortWindow}
+                />
               </>
             )}
 

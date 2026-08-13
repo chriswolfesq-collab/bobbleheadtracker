@@ -1028,16 +1028,7 @@ export type Database = {
           display_name: string
         }[]
       }
-      admin_referral_leaderboard: {
-        Args: never
-        Returns: {
-          display_name: string
-          joined: number
-          qualified: number
-          referral_code: string
-          user_id: string
-        }[]
-      }
+      admin_referral_leaderboard: { Args: never; Returns: Json }
       admin_referral_stats: { Args: never; Returns: Json }
       claim_referral: { Args: { p_code: string }; Returns: string }
       is_admin: { Args: never; Returns: boolean }
