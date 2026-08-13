@@ -10,6 +10,7 @@ import { ToastProvider } from "@/components/Toast";
 import { AdminAuthProvider } from "@/lib/adminAuth";
 import { AuthProvider } from "@/lib/auth";
 import { siteUrl } from "@/lib/siteUrl";
+import { AdminQueueCountsProvider } from "@/lib/useAdminQueueCounts";
 import { inter, oswald, pacifico } from "./fonts";
 import "./globals.css";
 
@@ -37,16 +38,21 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <AuthProvider>
           <AdminAuthProvider>
-            <ToastProvider>
-              <SiteHeader />
-              <RequireDisplayNameGate>
-                <main id="main-content" className="flex min-h-full flex-1 flex-col">
-                  {children}
-                </main>
-              </RequireDisplayNameGate>
-              <SiteFooter />
-              <RepWelcomeBanner />
-            </ToastProvider>
+            {/* Above the header and the pages both: the header's Admin button
+                and the dashboard's tiles badge the same counts, so they share
+                one fetch. Renders nothing for everyone else. */}
+            <AdminQueueCountsProvider>
+              <ToastProvider>
+                <SiteHeader />
+                <RequireDisplayNameGate>
+                  <main id="main-content" className="flex min-h-full flex-1 flex-col">
+                    {children}
+                  </main>
+                </RequireDisplayNameGate>
+                <SiteFooter />
+                <RepWelcomeBanner />
+              </ToastProvider>
+            </AdminQueueCountsProvider>
           </AdminAuthProvider>
           <AuthModal />
           {/* Renders nothing. Here rather than on a page because an invite link

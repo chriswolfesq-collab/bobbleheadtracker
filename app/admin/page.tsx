@@ -1,98 +1,26 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { AdminLoginForm } from "@/components/AdminLoginForm";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { NotificationBadge } from "@/components/NotificationBadge";
 import { useAdminAuth } from "@/lib/adminAuth";
-import { useForumUnreadCount } from "@/lib/forum";
-import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { TEAMS } from "@/lib/teams";
+import { useAdminQueueCounts } from "@/lib/useAdminQueueCounts";
 import { useTagDuplicates } from "@/lib/useTagDuplicates";
-
-function NotificationBadge({ count }: { count: number }) {
-  if (count <= 0) return null;
-
-  return (
-    <span className="absolute -right-2 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1 text-[11px] font-black text-white ring-2 ring-slate-50">
-      {count > 99 ? "99+" : count}
-    </span>
-  );
-}
 
 const teamName = (slug: string) => TEAMS.find((t) => t.slug === slug)?.name ?? slug;
 
 export default function AdminPage() {
   const { user, isAdmin, isRep, editableTeams, isLoading, signOut } = useAdminAuth();
   const canAccess = isAdmin || isRep;
-  const [pendingSubmissions, setPendingSubmissions] = useState(0);
-  const [pendingReports, setPendingReports] = useState(0);
-  const [openDeadImages, setOpenDeadImages] = useState(0);
-  const [pendingScraped, setPendingScraped] = useState(0);
-  const [pendingTagRequests, setPendingTagRequests] = useState(0);
+  // The same numbers the header's Admin button badges — see
+  // lib/useAdminQueueCounts.tsx. Already scoped to what this account can act on.
+  const counts = useAdminQueueCounts();
   // Derived from the vocabulary rather than counted in the database, so this
-  // one comes from a hook instead of a head query. Off for reps: they can't
-  // see the rulings or act on a pair.
+  // one comes from its own hook rather than the shared queue counts. Off for
+  // reps: they can't see the rulings or act on a pair.
   const { open: duplicateTags } = useTagDuplicates({ enabled: isAdmin });
-  // Threads with activity this account hasn't read. Its own RPC rather than a
-  // head count, because "unread" is a join against this reader's own marks.
-  const { count: unreadTopics } = useForumUnreadCount();
-
-  useEffect(() => {
-    if (!canAccess) return;
-
-    let cancelled = false;
-
-    // These two are team-scoped by RLS, so a rep sees the count for their team
-    // only; a full admin sees the site-wide count. Same query either way.
-    supabase
-      .from("submissions")
-      .select("id", { count: "exact", head: true })
-      .eq("status", "pending")
-      .then(({ count }) => {
-        if (!cancelled) setPendingSubmissions(count ?? 0);
-      });
-
-    supabase
-      .from("listing_reports")
-      .select("id", { count: "exact", head: true })
-      .eq("status", "pending")
-      .then(({ count }) => {
-        if (!cancelled) setPendingReports(count ?? 0);
-      });
-
-    // Dead images and scraped giveaways are site-wide tools, admin-only, so
-    // only fetch their counts when the tiles will actually be shown.
-    if (isAdmin) {
-      supabase
-        .from("dead_images")
-        .select("id", { count: "exact", head: true })
-        .eq("status", "open")
-        .then(({ count }) => {
-          if (!cancelled) setOpenDeadImages(count ?? 0);
-        });
-
-      supabase
-        .from("scraped_giveaways")
-        .select("id", { count: "exact", head: true })
-        .eq("status", "pending")
-        .then(({ count }) => {
-          if (!cancelled) setPendingScraped(count ?? 0);
-        });
-
-      supabase
-        .from("tag_requests")
-        .select("id", { count: "exact", head: true })
-        .eq("status", "pending")
-        .then(({ count }) => {
-          if (!cancelled) setPendingTagRequests(count ?? 0);
-        });
-    }
-
-    return () => {
-      cancelled = true;
-    };
-  }, [canAccess, isAdmin]);
 
   if (isLoading) {
     return null;
@@ -180,14 +108,14 @@ export default function AdminPage() {
             : null}
 
           <Link href="/admin/review" className={cardClass}>
-            <NotificationBadge count={pendingSubmissions} />
+            <NotificationBadge count={counts.submissions} />
             <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Review submissions</p>
             <p className="mt-2 text-sm text-zinc-600">
               Approve or deny pending photo and bobblehead submissions{isRep ? " for your team" : ""}.
             </p>
           </Link>
           <Link href="/admin/reports" className={cardClass}>
-            <NotificationBadge count={pendingReports} />
+            <NotificationBadge count={counts.reports} />
             <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Listing reports</p>
             <p className="mt-2 text-sm text-zinc-600">
               Resolve or dismiss reports that a listing has wrong info{isRep ? " for your team" : ""}.
@@ -198,7 +126,7 @@ export default function AdminPage() {
               reps and admins talk to each other, so it has to be reachable
               from a rep's dashboard too. */}
           <Link href="/admin/forum" className={cardClass}>
-            <NotificationBadge count={unreadTopics} />
+            <NotificationBadge count={counts.forumUnread} />
             <p className="text-sm font-black uppercase tracking-wide text-zinc-900">
               Team Rep Forum
             </p>
@@ -210,12 +138,12 @@ export default function AdminPage() {
           {isAdmin ? (
             <>
               <Link href="/admin/dead-images" className={cardClass}>
-                <NotificationBadge count={openDeadImages} />
+                <NotificationBadge count={counts.deadImages} />
                 <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Dead images</p>
                 <p className="mt-2 text-sm text-zinc-600">Fix listing photos the nightly sweep couldn&apos;t load.</p>
               </Link>
               <Link href="/admin/scraped-giveaways" className={cardClass}>
-                <NotificationBadge count={pendingScraped} />
+                <NotificationBadge count={counts.scrapedGiveaways} />
                 <p className="text-sm font-black uppercase tracking-wide text-zinc-900">New giveaways</p>
                 <p className="mt-2 text-sm text-zinc-600">Review bobblehead promos the scraper found on team schedule pages.</p>
               </Link>
@@ -239,7 +167,7 @@ export default function AdminPage() {
                 </p>
               </Link>
               <Link href="/admin/tag-requests" className={cardClass}>
-                <NotificationBadge count={pendingTagRequests} />
+                <NotificationBadge count={counts.tagRequests} />
                 <p className="text-sm font-black uppercase tracking-wide text-zinc-900">
                   Tag requests
                 </p>
@@ -257,6 +185,7 @@ export default function AdminPage() {
                 </p>
               </Link>
               <Link href="/admin/messages" className={cardClass}>
+                <NotificationBadge count={counts.messages} />
                 <p className="text-sm font-black uppercase tracking-wide text-zinc-900">Messages</p>
                 <p className="mt-2 text-sm text-zinc-600">
                   Contact-form messages and team-rep applications sent in from the site.
