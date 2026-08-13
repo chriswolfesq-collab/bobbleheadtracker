@@ -1038,6 +1038,7 @@ export type Database = {
           user_id: string
         }[]
       }
+      admin_referral_stats: { Args: never; Returns: Json }
       claim_referral: { Args: { p_code: string }; Returns: string }
       is_admin: { Args: never; Returns: boolean }
       is_moderator: { Args: never; Returns: boolean }

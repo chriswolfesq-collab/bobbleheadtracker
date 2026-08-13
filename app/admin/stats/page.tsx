@@ -42,6 +42,24 @@ type DashboardStats = {
   most_reported: ReportedListing[];
 };
 
+type ReferralWindow = {
+  days: number;
+  label: string;
+  joined: number;
+  /** Of those, the ones clearing the raffle bar as of now — see
+   *  supabase/referral_stats.sql on why this is judged against current state
+   *  rather than frozen at signup. */
+  qualified: number;
+};
+
+type ReferralStats = {
+  windows: ReferralWindow[];
+  joined_total: number;
+  qualified_total: number;
+  referrers_active: number;
+  codes_minted: number;
+};
+
 const nf = new Intl.NumberFormat();
 const fmt = (value: number) => nf.format(value);
 const teamName = (slug: string) => getTeamBySlug(slug)?.name ?? slug;
@@ -73,6 +91,7 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 export default function AdminStatsPage() {
   const { user, isAdmin, isLoading, signOut } = useAdminAuth();
   const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [referrals, setReferrals] = useState<ReferralStats | null>(null);
   const [isLoadingStats, setIsLoadingStats] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -101,6 +120,30 @@ export default function AdminStatsPage() {
         setStats(data as DashboardStats);
       }
       setIsLoadingStats(false);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isAdmin]);
+
+  // Its own RPC rather than more keys on admin_dashboard_stats — see
+  // supabase/referral_stats.sql. A failure here is reported in the section
+  // itself rather than through `error`, so a referral hiccup doesn't blank the
+  // whole dashboard.
+  useEffect(() => {
+    if (!isAdmin) return;
+
+    let cancelled = false;
+
+    supabase.rpc("admin_referral_stats").then(({ data, error: rpcError }) => {
+      if (cancelled) return;
+
+      if (rpcError) {
+        console.error("Failed to load referral stats:", rpcError.message);
+      } else {
+        setReferrals(data as unknown as ReferralStats);
+      }
     });
 
     return () => {
@@ -395,6 +438,50 @@ export default function AdminStatsPage() {
                 <StatCard label="Reports filed" value={fmt(stats.reports_7d)} />
               </Link>
             </div>
+
+            <SectionHeading>Referrals</SectionHeading>
+            {referrals === null ? (
+              <p className="mt-4 text-sm text-zinc-600">Loading…</p>
+            ) : (
+              <>
+                <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {referrals.windows.map((window) => (
+                    <StatCard
+                      key={window.days}
+                      label={window.label}
+                      value={fmt(window.joined)}
+                      // The raffle counts entries, not signups, so the number
+                      // that matters for a drawing rides along with each window
+                      // rather than living in a second grid of its own.
+                      hint={`${fmt(window.qualified)} active ${
+                        window.qualified === 1 ? "collector" : "collectors"
+                      }`}
+                    />
+                  ))}
+                </div>
+                <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  <StatCard
+                    label="All time"
+                    value={fmt(referrals.joined_total)}
+                    hint={`${fmt(referrals.qualified_total)} active`}
+                  />
+                  {/* The gap between these two is the health of the programme:
+                      links handed out versus links that actually brought
+                      someone in. */}
+                  <StatCard
+                    label="Collectors referring"
+                    value={fmt(referrals.referrers_active)}
+                    hint={`of ${fmt(referrals.codes_minted)} with a link`}
+                  />
+                </div>
+                <p className="mt-3 text-xs leading-5 text-zinc-500">
+                  A window counts referrals that arrived in it. &ldquo;Active&rdquo; means the
+                  friend has confirmed their email and put at least three bobbleheads on a
+                  shelf — judged as of now, so past windows can rise as those collectors fill
+                  theirs in.
+                </p>
+              </>
+            )}
 
             <SectionHeading>Most-reported listings</SectionHeading>
             <div className="mt-4 rounded-lg border border-black/10 bg-white p-2">
