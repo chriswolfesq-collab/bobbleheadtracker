@@ -2,6 +2,7 @@
 
 import type { Session, User } from "@supabase/supabase-js";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { authErrorMessage, authErrorMessageForCode } from "@/lib/authErrors";
 import { readStashedReferralCode, REFERRAL_PARAM } from "@/lib/referralStorage";
 import { supabase } from "@/lib/supabase";
 
@@ -117,10 +118,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const extract = (raw: string): string | null => {
       const params = new URLSearchParams(raw.replace(/^[#?]/, ""));
       if (!errorKeys.some((key) => params.has(key))) return null;
-      return (
+      // error_code uses the same vocabulary as AuthError.code, so this path gets
+      // the same copy as an error thrown in-process. Supabase's own
+      // error_description is the fallback, as it was before.
+      return authErrorMessageForCode(
+        params.get("error_code"),
         params.get("error_description") ||
-        params.get("error") ||
-        "Sign-in failed. Please try again."
+          params.get("error") ||
+          "Sign-in failed. Please try again.",
       );
     };
 
@@ -175,7 +180,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       clearOauthError,
       signIn: async (email, password) => {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        return { error: error?.message ?? null };
+        return { error: authErrorMessage(error) };
       },
       signUp: async (email, password, displayName) => {
         // Enforced here rather than only at the input, so every caller is bound
@@ -203,21 +208,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             },
           },
         });
-        return { error: error?.message ?? null };
+        return { error: authErrorMessage(error) };
       },
       signInWithGoogle: async () => {
         const { error } = await supabase.auth.signInWithOAuth({
           provider: "google",
           options: { redirectTo: oauthRedirectTo() },
         });
-        return { error: error?.message ?? null };
+        return { error: authErrorMessage(error) };
       },
       signInWithGithub: async () => {
         const { error } = await supabase.auth.signInWithOAuth({
           provider: "github",
           options: { redirectTo: oauthRedirectTo() },
         });
-        return { error: error?.message ?? null };
+        return { error: authErrorMessage(error) };
       },
       signOut: async () => {
         await supabase.auth.signOut();
@@ -229,7 +234,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const { error } = await supabase.auth.updateUser({
           data: { display_name: displayName.trim() },
         });
-        return { error: error?.message ?? null };
+        return { error: authErrorMessage(error) };
       },
     };
   }, [session, isLoading, isAuthModalOpen, authModalMode, oauthError, openAuthModal, closeAuthModal, clearOauthError]);

@@ -1,3 +1,4 @@
+import { authErrorMessage } from "@/lib/authErrors";
 import { supabase } from "@/lib/supabase";
 
 // Where a recovery link lands. Supabase redirects here with the one-time token
@@ -45,5 +46,5 @@ export async function sendPasswordReset(email: string): Promise<{ error: string 
     redirectTo: `${window.location.origin}${RESET_PASSWORD_PATH}`,
   });
 
-  return { error: error?.message ?? null };
+  return { error: authErrorMessage(error) };
 }

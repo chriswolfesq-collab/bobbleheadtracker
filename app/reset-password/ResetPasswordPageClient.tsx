@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { authErrorMessage } from "@/lib/authErrors";
 import { MIN_PASSWORD_LENGTH, validateNewPassword } from "@/lib/passwordReset";
 import { supabase } from "@/lib/supabase";
 
@@ -57,7 +58,7 @@ export function ResetPasswordPageClient() {
     setIsSubmitting(false);
 
     if (updateError) {
-      setError(updateError.message);
+      setError(authErrorMessage(updateError));
       return;
     }
 
