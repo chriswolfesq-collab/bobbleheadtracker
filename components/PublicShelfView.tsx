@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AwardsShelf from "@/components/AwardsShelf";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import DisplayCase from "@/components/DisplayCase";
 import PublicGallery from "@/components/PublicGallery";
@@ -18,6 +19,10 @@ export type PublicShelfViewProps = {
   totalByTeamSlug: Record<string, number>;
   stats: ShelfStats;
   galleryItems: PublicGalleryItem[];
+  /** Signup rank, for the founding-member award. Null hides it. */
+  memberNumber: number | null;
+  /** Team slugs this collector reps, for the team-rep award. */
+  repTeams: string[];
   /**
    * Off by default because the preview is captured with html-to-image for the
    * share card — a nav trail has no business in the exported picture. The live
@@ -32,6 +37,8 @@ export default function PublicShelfView({
   totalByTeamSlug,
   stats,
   galleryItems,
+  memberNumber,
+  repTeams,
   showBreadcrumbs = false,
 }: PublicShelfViewProps) {
   return (
@@ -80,6 +87,22 @@ export default function PublicShelfView({
             every wall on the site hangs at the same width. */}
         <div className="relative left-1/2 mt-8 w-[calc(100vw-1rem)] max-w-6xl -translate-x-1/2">
           <DisplayCase countByTeamSlug={countByTeamSlug} totalByTeamSlug={totalByTeamSlug} />
+        </div>
+
+        {/* The awards are half the reason to hand this link out — the count is
+            the number, these are the story of it. Breaks out of the reading
+            column to hang at the same width as the display case above. */}
+        <div className="relative left-1/2 mt-10 w-[calc(100vw-1rem)] max-w-6xl -translate-x-1/2">
+          <AwardsShelf
+            facts={{
+              totalOwned: stats.totalOwned,
+              teamsStarted: stats.teamsStarted,
+              teamsCompleted: stats.teamsCompleted,
+              memberNumber,
+              repTeams,
+            }}
+            isOtherUser
+          />
         </div>
 
         {/* Opt-in only: the gallery is empty unless the owner turned it on, so

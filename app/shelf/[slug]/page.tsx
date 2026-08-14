@@ -41,7 +41,7 @@ export default async function ShelfPage({ params }: ShelfPageProps) {
   // indistinguishable from outside.
   if (!shelf) notFound();
 
-  const { displayName, countByTeamSlug, totalByTeamSlug, stats } = shelf;
+  const { displayName, countByTeamSlug, totalByTeamSlug, stats, memberNumber, repTeams } = shelf;
 
   return (
     <>
@@ -53,6 +53,8 @@ export default async function ShelfPage({ params }: ShelfPageProps) {
         totalByTeamSlug={totalByTeamSlug}
         stats={stats}
         galleryItems={galleryItems}
+        memberNumber={memberNumber}
+        repTeams={repTeams}
       />
     </>
   );

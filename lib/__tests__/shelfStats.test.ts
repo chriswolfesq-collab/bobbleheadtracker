@@ -13,6 +13,7 @@ describe("computeShelfStats", () => {
       siteTotal: 0,
       pctComplete: 0,
       teamsStarted: 0,
+      teamsCompleted: 0,
       teamCount: TEAMS.length,
       slotsEmpty: 0,
     });
@@ -47,5 +48,19 @@ describe("computeShelfStats", () => {
   it("rounds pctComplete to the nearest whole percent", () => {
     const stats = computeShelfStats({ [firstTeam]: 1 }, { [firstTeam]: 3 });
     expect(stats.pctComplete).toBe(33);
+  });
+
+  it("counts a team as complete only when its whole checklist is owned", () => {
+    expect(computeShelfStats({ [firstTeam]: 4 }, { [firstTeam]: 5 }).teamsCompleted).toBe(0);
+    expect(computeShelfStats({ [firstTeam]: 5 }, { [firstTeam]: 5 }).teamsCompleted).toBe(1);
+    // A stale count above the current total still counts as finished.
+    expect(computeShelfStats({ [firstTeam]: 7 }, { [firstTeam]: 5 }).teamsCompleted).toBe(1);
+  });
+
+  it("never counts an empty checklist as a completed team", () => {
+    // A team whose listings have all been deleted is 0 of 0. Awarding that as
+    // complete would hand out the completion awards for free.
+    const stats = computeShelfStats({}, { [firstTeam]: 0, [secondTeam]: 0 });
+    expect(stats.teamsCompleted).toBe(0);
   });
 });

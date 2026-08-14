@@ -11,6 +11,11 @@ export type PublicShelf = {
   countByTeamSlug: Record<string, number>;
   totalByTeamSlug: Record<string, number>;
   stats: ShelfStats;
+  /** Signup rank, for the founding-member award. Null on accounts that predate
+   *  supabase/awards.sql and were never backfilled. */
+  memberNumber: number | null;
+  /** Team slugs this collector reps, for the team-rep award. */
+  repTeams: string[];
 };
 
 export type PublicGalleryItem = {
@@ -59,7 +64,16 @@ export const getPublicShelf = cache(async (slug: string): Promise<PublicShelf | 
 
   // get_public_shelf returns at most one row, and no rows for an unknown slug
   // or a private shelf.
-  const row = (shelfResult.data as { display_name: string; counts: Record<string, number> }[] | null)?.[0];
+  const row = (
+    shelfResult.data as
+      | {
+          display_name: string;
+          counts: Record<string, number>;
+          member_number: number | null;
+          rep_teams: string[] | null;
+        }[]
+      | null
+  )?.[0];
   if (!row) return null;
 
   if (communityResult.error) {
@@ -99,6 +113,8 @@ export const getPublicShelf = cache(async (slug: string): Promise<PublicShelf | 
     countByTeamSlug,
     totalByTeamSlug,
     stats: computeShelfStats(countByTeamSlug, totalByTeamSlug),
+    memberNumber: row.member_number ?? null,
+    repTeams: row.rep_teams ?? [],
   };
 });
 

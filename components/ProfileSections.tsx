@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import AwardsShelf from "@/components/AwardsShelf";
 import DisplayCase from "@/components/DisplayCase";
 import { ReferAFriend } from "@/components/ReferAFriend";
 import { ShareCollectionButton } from "@/components/ShareCollectionButton";
@@ -23,6 +24,7 @@ import { TEAMS } from "@/lib/teams";
 // see showRefer below.
 const SECTIONS = [
   { id: "collection", label: "Collection" },
+  { id: "awards", label: "Awards" },
   { id: "favorites", label: "Favorites" },
   { id: "wanted", label: "Wanted" },
   { id: "submissions", label: "Submissions" },
@@ -214,6 +216,7 @@ export function ProfileSections({
   submissions,
   isSubmissionsLoading,
   submissionsError = null,
+  awardFacts,
   isOtherUser = false,
 }: {
   countByTeamSlug: Record<string, number>;
@@ -240,11 +243,15 @@ export function ProfileSections({
   submissions: MySubmission[];
   isSubmissionsLoading: boolean;
   submissionsError?: string | null;
+  /** The two award facts a collection can't imply — signup rank and rep teams.
+   *  Omitted in the admin read-only view, where my_rep_teams() would answer for
+   *  the admin rather than the member being looked at. */
+  awardFacts?: { memberNumber: number | null; repTeams: string[] };
 }) {
   // Shared with the public /shelf/<slug> page so a collector's own profile and
   // the link they hand out always agree on the numbers.
   const stats = computeShelfStats(countByTeamSlug, totalByTeamSlug);
-  const { totalOwned, siteTotal, pctComplete, teamsStarted, slotsEmpty } = stats;
+  const { totalOwned, siteTotal, pctComplete, teamsStarted, teamsCompleted, slotsEmpty } = stats;
 
   return (
     <>
@@ -318,6 +325,28 @@ export function ProfileSections({
             {pctComplete}% complete · {teamsStarted}/{TEAMS.length} teams started ·{" "}
             {slotsEmpty} slots empty
           </p>
+        </div>
+      </section>
+
+      {/* Directly under the progress bar, because it answers the question the
+          bar raises: the bar says how far there is to go, the awards say what
+          happens along the way. Breaks out of the reading column to the same
+          width as the display case above it — it's the same furniture and it
+          would look shrunken hanging in a narrower stripe. */}
+      <section id="awards" className="mb-10 scroll-mt-6">
+        <h2 className="mb-4 text-xs font-black uppercase tracking-[0.25em] text-zinc-600">Awards</h2>
+        <div className="relative left-1/2 w-[calc(100vw-1rem)] max-w-6xl -translate-x-1/2">
+          <AwardsShelf
+            facts={{
+              totalOwned,
+              teamsStarted,
+              teamsCompleted,
+              memberNumber: awardFacts?.memberNumber ?? null,
+              repTeams: awardFacts?.repTeams ?? [],
+            }}
+            isLoading={isCollectionLoading}
+            isOtherUser={isOtherUser}
+          />
         </div>
       </section>
 

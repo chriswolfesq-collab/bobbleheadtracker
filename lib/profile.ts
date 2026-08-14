@@ -24,6 +24,68 @@ export type TeamCount = { teamSlug: string; count: number };
 // "…: admin select" RLS policies added in supabase/schema.sql.
 export type ProfileSource = { userId?: string; client?: SupabaseClient };
 
+/**
+ * The two award facts that can't be derived from a collection: where the member
+ * came in, and which teams they rep.
+ *
+ * Both are cheap single-row reads, and both are stable for the life of an
+ * account, so they load alongside the collection rather than gating it — the
+ * awards shelf renders the collection ladders immediately and fills these in
+ * when they land. `isLoading` exists so the celebration can tell "not a rep"
+ * apart from "haven't asked yet"; congratulating someone on a rep award that
+ * then vanishes would be worse than showing it a moment late.
+ *
+ * Reads profiles directly under the "profiles: owner select" policy (and the
+ * admin one, in the read-only view). member_number is null for accounts that
+ * predate supabase/awards.sql and were never backfilled.
+ */
+export function useMyAwardFacts(source?: ProfileSource) {
+  const { user } = useAuth();
+  const client = source?.client ?? supabase;
+  const userId = source?.userId ?? user?.id ?? null;
+  const [memberNumber, setMemberNumber] = useState<number | null>(null);
+  const [repTeams, setRepTeams] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Signed out: nothing to fetch, and the return below already reports
+    // isLoading false for that case rather than leaving it stuck true.
+    if (!userId) return;
+
+    let cancelled = false;
+
+    Promise.all([
+      client.from("profiles").select("member_number").eq("id", userId).maybeSingle(),
+      // Scoped to the signed-in session by auth.jwt(), so it's only meaningful
+      // for the owner's own profile. In the admin read-only view it would
+      // answer for the admin, not the member being viewed — hence the guard.
+      source?.userId ? Promise.resolve({ data: null, error: null }) : client.rpc("my_rep_teams"),
+    ]).then(([profile, reps]) => {
+      if (cancelled) return;
+
+      if (profile.error) {
+        console.error("Failed to load your member number:", profile.error.message);
+      } else {
+        setMemberNumber(profile.data?.member_number ?? null);
+      }
+
+      if (reps.error) {
+        console.error("Failed to load your rep teams:", reps.error.message);
+      } else {
+        setRepTeams((reps.data as string[] | null) ?? []);
+      }
+
+      setIsLoading(false);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId, client, source?.userId]);
+
+  return { memberNumber, repTeams, isLoading: userId ? isLoading : false };
+}
+
 // The site total per team is the curated giveaway list (static) plus any
 // community-submitted bobbleheads that have been approved for that team.
 export function useSiteBobbleheadCounts() {

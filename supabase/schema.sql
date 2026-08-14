@@ -307,14 +307,30 @@ end $$;
 -- The slug is deliberately NOT derived from display_name on read: it's minted
 -- once and then frozen. Renaming yourself must not break links other people
 -- have already posted, which is the whole point of the feature.
+-- member_number is a permanent 1-based signup rank, assigned in
+-- sync_profile_from_auth and never reissued. It exists because the founding
+-- member awards need signup ORDER and created_at here can't supply it: this
+-- table was backfilled from auth.users long after the earliest accounts, so
+-- those rows all share one backfill timestamp. See supabase/awards.sql.
 create table if not exists public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   slug text unique,
   display_name text not null default 'Member',
   is_public boolean not null default false,
+  member_number integer,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table public.profiles
+  add column if not exists member_number integer;
+
+-- Unique but deliberately not NOT NULL: a numbering hiccup must never turn into
+-- a failed signup. A null number just means no founding award.
+create unique index if not exists profiles_member_number_key
+  on public.profiles (member_number);
+
+create sequence if not exists public.profiles_member_number_seq;
 
 -- Keyed by (team_slug, bobblehead_id): curated ids ("hello-kitty-2019",
 -- "spider-man-2019") repeat across teams, so the bare id is not unique.
@@ -1244,11 +1260,26 @@ security definer
 set search_path = public
 as $$
 begin
-  insert into public.profiles (id, display_name)
-  values (new.id, public.display_name_of(new.raw_user_meta_data))
-  on conflict (id) do update
-    set display_name = excluded.display_name,
-        updated_at = now();
+  -- The existence check is load-bearing. This trigger also fires on every
+  -- display-name change, and nextval() is evaluated even when an insert
+  -- conflicts — so a bare `insert ... on conflict do update` would burn a
+  -- member number every time anyone renamed themselves, and "first 1,000
+  -- users" would stop meaning a thousand people. See supabase/awards.sql.
+  if not exists (select 1 from public.profiles where id = new.id) then
+    insert into public.profiles (id, display_name, member_number)
+    values (
+      new.id,
+      public.display_name_of(new.raw_user_meta_data),
+      nextval('public.profiles_member_number_seq')
+    )
+    on conflict (id) do nothing;
+  end if;
+
+  update public.profiles
+     set display_name = public.display_name_of(new.raw_user_meta_data),
+         updated_at = now()
+   where id = new.id;
+
   return new;
 end;
 $$;
@@ -1348,8 +1379,18 @@ $$;
 -- Returns no rows for an unknown slug or an opted-out shelf, which the page
 -- renders as a 404; there's no way to tell the two apart from outside, and no
 -- way to enumerate who has a shelf.
-create or replace function public.get_public_shelf(p_slug text)
-returns table (display_name text, counts jsonb)
+-- member_number and rep_teams ride along so a visitor sees the same awards
+-- shelf the owner does; both are facts that exist to be displayed on a shelf
+-- someone chose to share. See supabase/awards.sql.
+drop function if exists public.get_public_shelf(text);
+
+create function public.get_public_shelf(p_slug text)
+returns table (
+  display_name text,
+  counts jsonb,
+  member_number integer,
+  rep_teams text[]
+)
 language sql
 stable
 security definer
@@ -1379,10 +1420,47 @@ as $$
         ) t
       ),
       '{}'::jsonb
+    ),
+    p.member_number,
+    -- Reps are keyed by email, which lives in auth.users and is reachable only
+    -- from a definer function like this one. The email itself never leaves —
+    -- only the team slugs the account reps, which are what the award shows.
+    coalesce(
+      (
+        select array_agg(r.team_slug order by r.team_slug)
+        from public.team_reps r
+        join auth.users u on u.id = p.id
+        where lower(r.email) = lower(u.email)
+      ),
+      '{}'::text[]
     )
   from public.profiles p
   where p.slug = p_slug and p.is_public;
 $$;
+
+-- The signed-in member's own rep teams. my_editable_teams() looks similar but
+-- answers the admin console's question ("which teams may I edit"), and returns
+-- nothing for a full admin who reps no team. The awards shelf wants the literal
+-- question, so it gets its own function rather than reinterpreting that one.
+create or replace function public.my_rep_teams()
+returns text[]
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select coalesce(
+    (
+      select array_agg(r.team_slug order by r.team_slug)
+      from public.team_reps r
+      where lower(r.email) = lower(coalesce(auth.jwt() ->> 'email', ''))
+    ),
+    '{}'::text[]
+  );
+$$;
+
+revoke all on function public.my_rep_teams() from public, anon;
+grant execute on function public.my_rep_teams() to authenticated;
 
 revoke all on function public.enable_public_shelf() from public, anon;
 revoke all on function public.disable_public_shelf() from public, anon;

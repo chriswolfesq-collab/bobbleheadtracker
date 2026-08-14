@@ -2,18 +2,21 @@
 
 import { useState } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { AwardCelebration } from "@/components/AwardCelebration";
 import { CaseBanner } from "@/components/CaseBanner";
 import { ProfileSections } from "@/components/ProfileSections";
 import { ProfileWelcomeModal } from "@/components/ProfileWelcomeModal";
 import { getDisplayName, MAX_DISPLAY_NAME_LENGTH, useAuth } from "@/lib/auth";
 import {
   useCollectionSummary,
+  useMyAwardFacts,
   useMyFavorites,
   useMyShelf,
   useMySubmissions,
   useMyWanted,
   useSiteBobbleheadCounts,
 } from "@/lib/profile";
+import { computeShelfStats } from "@/lib/shelfStats";
 
 export function ProfilePageClient() {
   const { user, isLoading: isAuthLoading, updateDisplayName } = useAuth();
@@ -27,6 +30,11 @@ export function ProfilePageClient() {
   // the same row — and, worse, hold its own copy of isPublic to disagree over.
   // (The fuller sharing card, with the link and the preview, is on /settings.)
   const sharing = useMyShelf();
+  const awardFacts = useMyAwardFacts();
+  // The same stats the profile body computes, needed a level up so the
+  // celebration can see the team ladders too — one shopping trip can clear a
+  // count rung and a team rung together.
+  const stats = computeShelfStats(countByTeamSlug, totalByTeamSlug);
   const [isEditingName, setIsEditingName] = useState(false);
   const [nameDraft, setNameDraft] = useState("");
   const [isSavingName, setIsSavingName] = useState(false);
@@ -57,6 +65,21 @@ export function ProfilePageClient() {
         // profile lines up with it rather than sitting in a narrower stripe.
         <div className="mx-auto w-full max-w-6xl px-4 pb-24 pt-2 sm:px-6">
           <ProfileWelcomeModal userId={user.id} />
+
+          {/* Only on the owner's own profile: the admin read-only view renders
+              ProfileSections directly, so nobody gets congratulated for someone
+              else's shelf. */}
+          <AwardCelebration
+            userId={user.id}
+            facts={{
+              totalOwned: stats.totalOwned,
+              teamsStarted: stats.teamsStarted,
+              teamsCompleted: stats.teamsCompleted,
+              memberNumber: awardFacts.memberNumber,
+              repTeams: awardFacts.repTeams,
+            }}
+            isLoading={isCollectionLoading || isSiteTotalLoading || awardFacts.isLoading}
+          />
 
           {/* The display case carries the profile header: name inside the lit
               recess, owned count on the card. The name is the edit affordance,
@@ -183,6 +206,7 @@ export function ProfilePageClient() {
             submissions={submissions}
             isSubmissionsLoading={isSubmissionsLoading}
             submissionsError={submissionsError}
+            awardFacts={awardFacts}
           />
         </div>
       )}

@@ -5,6 +5,8 @@ export type ShelfStats = {
   siteTotal: number;
   pctComplete: number;
   teamsStarted: number;
+  /** Teams where every listing is owned. Requires a non-empty checklist — see below. */
+  teamsCompleted: number;
   teamCount: number;
   slotsEmpty: number;
 };
@@ -28,12 +30,21 @@ export function computeShelfStats(
   const totalOwned = TEAMS.reduce((sum, team) => sum + (countByTeamSlug[team.slug] ?? 0), 0);
   const siteTotal = TEAMS.reduce((sum, team) => sum + (totalByTeamSlug[team.slug] ?? 0), 0);
   const teamsStarted = TEAMS.filter((team) => (countByTeamSlug[team.slug] ?? 0) > 0).length;
+  // The `total > 0` guard is load-bearing, not defensive: a team whose whole
+  // checklist has been deleted has 0 owned of 0, and `owned >= total` would
+  // quietly award it as complete. Finishing a team nobody can collect isn't an
+  // achievement, and it would hand out the completion awards for free.
+  const teamsCompleted = TEAMS.filter((team) => {
+    const total = totalByTeamSlug[team.slug] ?? 0;
+    return total > 0 && (countByTeamSlug[team.slug] ?? 0) >= total;
+  }).length;
 
   return {
     totalOwned,
     siteTotal,
     pctComplete: siteTotal > 0 ? Math.round((totalOwned / siteTotal) * 100) : 0,
     teamsStarted,
+    teamsCompleted,
     teamCount: TEAMS.length,
     slotsEmpty: Math.max(siteTotal - totalOwned, 0),
   };

@@ -6,6 +6,7 @@ import { useAuth } from "@/lib/auth";
 import {
   useCollectionSummary,
   useGallerySharing,
+  useMyAwardFacts,
   useMyFavorites,
   useMyOwned,
   useMyShelf,
@@ -28,6 +29,9 @@ export function ShelfPreviewClient() {
   const gallery = useGallerySharing();
   const ownedResult = useMyOwned();
   const favoritesResult = useMyFavorites();
+  // Read the same two facts get_public_shelf returns, so the preview's awards
+  // shelf matches what a visitor would actually see.
+  const awardFacts = useMyAwardFacts();
 
   const { shelf } = sharing;
 
@@ -115,6 +119,8 @@ export function ShelfPreviewClient() {
           totalByTeamSlug={site.totalByTeamSlug}
           stats={stats}
           galleryItems={galleryItems}
+          memberNumber={awardFacts.memberNumber}
+          repTeams={awardFacts.repTeams}
         />
       )}
     </div>
