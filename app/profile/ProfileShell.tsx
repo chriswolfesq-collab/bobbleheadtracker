@@ -1,16 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Avatar } from "@/components/Avatar";
 import { AwardCelebration } from "@/components/AwardCelebration";
 import { AwardsIntroBanner } from "@/components/AwardsIntroBanner";
 import { CaseBanner } from "@/components/CaseBanner";
-import { ProfileSections } from "@/components/ProfileSections";
 import { ProfileWelcomeModal } from "@/components/ProfileWelcomeModal";
+import { ShelfVisibilityPill } from "@/components/ShelfVisibilityPill";
 import { getDisplayName, MAX_DISPLAY_NAME_LENGTH, useAuth } from "@/lib/auth";
 import { AVATAR_ACCEPT, getAvatarUrl, removeAvatar, uploadAvatar } from "@/lib/avatar";
 import {
+  type MyFavorite,
+  type MySubmission,
+  type MyWanted,
+  type ShelfSharing,
   useCollectionSummary,
   useMyAwardFacts,
   useMyFavorites,
@@ -21,20 +27,66 @@ import {
 } from "@/lib/profile";
 import { computeShelfStats } from "@/lib/shelfStats";
 
-export function ProfilePageClient() {
+// The profile's tabs, one route per tab. What used to be one long page of
+// sections with a jump nav is now a page per tab; the shell around them (case
+// banner, name and photo, this row) lives in the layout, so it doesn't remount
+// when you switch.
+const TABS = [
+  { href: "/profile", label: "Collection" },
+  { href: "/profile/awards", label: "Awards" },
+  { href: "/profile/favorites", label: "Favorites" },
+  { href: "/profile/wanted", label: "Wanted" },
+  { href: "/profile/submissions", label: "Submissions" },
+  { href: "/profile/refer", label: "Refer" },
+] as const;
+
+// Everything the tab pages read. Fetched once here in the layout rather than
+// per tab page: the layout survives tab navigation, so switching tabs never
+// refetches, and single-flighting useMyShelf keeps the share buttons and the
+// visibility pill from each holding their own copy of isPublic to disagree
+// over. (The fuller sharing card, with the link and the preview, is on
+// /settings.)
+type ProfileData = {
+  displayName: string;
+  countByTeamSlug: Record<string, number>;
+  totalByTeamSlug: Record<string, number>;
+  /** Collection and site counts still loading, combined: the consumers (share
+   *  button, awards shelf) go live only when both sides of n/total exist. */
+  isCollectionLoading: boolean;
+  sharing: ShelfSharing;
+  favorites: MyFavorite[];
+  isFavoritesLoading: boolean;
+  favoritesError: string | null;
+  wanted: MyWanted[];
+  isWantedLoading: boolean;
+  wantedError: string | null;
+  submissions: MySubmission[];
+  isSubmissionsLoading: boolean;
+  submissionsError: string | null;
+  awardFacts: ReturnType<typeof useMyAwardFacts>;
+};
+
+const ProfileDataContext = createContext<ProfileData | null>(null);
+
+export function useProfileData(): ProfileData {
+  const data = useContext(ProfileDataContext);
+  // Only reachable outside the provider by a bug: the shell renders the tab
+  // pages (its children) exclusively inside the signed-in branch below.
+  if (!data) throw new Error("useProfileData must be used within ProfileShell");
+  return data;
+}
+
+export function ProfileShell({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
   const { user, isLoading: isAuthLoading, updateDisplayName } = useAuth();
   const { countByTeamSlug, totalOwned, isLoading: isCollectionLoading } = useCollectionSummary();
   const { totalByTeamSlug, siteTotal, isLoading: isSiteTotalLoading } = useSiteBobbleheadCounts();
   const { submissions, isLoading: isSubmissionsLoading, error: submissionsError } = useMySubmissions();
   const { favorites, isLoading: isFavoritesLoading, error: favoritesError } = useMyFavorites();
   const { wanted, isLoading: isWantedLoading, error: wantedError } = useMyWanted();
-  // Called once here and passed down: both share buttons and the visibility
-  // pill under the jump nav need it, and each calling the hook would refetch
-  // the same row — and, worse, hold its own copy of isPublic to disagree over.
-  // (The fuller sharing card, with the link and the preview, is on /settings.)
   const sharing = useMyShelf();
   const awardFacts = useMyAwardFacts();
-  // The same stats the profile body computes, needed a level up so the
+  // The same stats the Collection and Awards tabs compute, needed here so the
   // celebration can see the team ladders too — one shopping trip can clear a
   // count rung and a team rung together.
   const stats = computeShelfStats(countByTeamSlug, totalByTeamSlug);
@@ -45,6 +97,8 @@ export function ProfilePageClient() {
   const [isSavingAvatar, setIsSavingAvatar] = useState(false);
   const [avatarError, setAvatarError] = useState<string | null>(null);
 
+  const activeTab = TABS.find((tab) => tab.href === pathname) ?? TABS[0];
+
   return (
     <div
       className="flex min-h-full flex-1 flex-col"
@@ -54,7 +108,17 @@ export function ProfilePageClient() {
           out of the sign-in prompt too. Its column matches the signed-in
           content below. */}
       <div className="mx-auto w-full max-w-6xl px-4 pt-4 sm:px-6">
-        <Breadcrumbs items={[{ href: "/", label: "Home" }, { label: "My Shelf" }]} />
+        <Breadcrumbs
+          items={
+            activeTab.href === "/profile"
+              ? [{ href: "/", label: "Home" }, { label: "My Shelf" }]
+              : [
+                  { href: "/", label: "Home" },
+                  { href: "/profile", label: "My Shelf" },
+                  { label: activeTab.label },
+                ]
+          }
+        />
       </div>
 
       {isAuthLoading ? null : !user ? (
@@ -83,8 +147,9 @@ export function ProfilePageClient() {
           />
 
           {/* Only on the owner's own profile: the admin read-only view renders
-              ProfileSections directly, so nobody gets congratulated for someone
-              else's shelf. */}
+              the same sections directly, so nobody gets congratulated for
+              someone else's shelf. In the layout rather than a tab so a rung
+              cleared while you're on any tab still gets its moment. */}
           <AwardCelebration
             userId={user.id}
             facts={{
@@ -267,23 +332,54 @@ export function ProfilePageClient() {
             {nameError ? <p className="mt-1 text-xs font-semibold text-red-400">{nameError}</p> : null}
           </header>
 
-          <ProfileSections
-            countByTeamSlug={countByTeamSlug}
-            totalByTeamSlug={totalByTeamSlug}
-            displayName={getDisplayName(user)}
-            sharing={sharing}
-            isCollectionLoading={isCollectionLoading || isSiteTotalLoading}
-            favorites={favorites}
-            isFavoritesLoading={isFavoritesLoading}
-            favoritesError={favoritesError}
-            wanted={wanted}
-            isWantedLoading={isWantedLoading}
-            wantedError={wantedError}
-            submissions={submissions}
-            isSubmissionsLoading={isSubmissionsLoading}
-            submissionsError={submissionsError}
-            awardFacts={awardFacts}
-          />
+          {/* The visibility switch shares the row but not the nav: it changes
+              who can see the shelf rather than moving you around it, so it sits
+              outside the <nav> landmark while `contents` lets the links flow in
+              the same flex row. */}
+          <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
+            <nav aria-label="Profile sections" className="contents">
+              {TABS.map(({ href, label }) => {
+                const isCurrent = href === activeTab.href;
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    aria-current={isCurrent ? "page" : undefined}
+                    className={`rounded-full border px-4 py-2 text-xs font-black uppercase tracking-wide transition ${
+                      isCurrent
+                        ? "border-accent bg-accent/10 text-accent"
+                        : "border-black/10 bg-black/[0.04] text-zinc-700 hover:border-accent hover:text-accent-hover"
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+            </nav>
+            <ShelfVisibilityPill sharing={sharing} />
+          </div>
+
+          <ProfileDataContext.Provider
+            value={{
+              displayName: getDisplayName(user),
+              countByTeamSlug,
+              totalByTeamSlug,
+              isCollectionLoading: isCollectionLoading || isSiteTotalLoading,
+              sharing,
+              favorites,
+              isFavoritesLoading,
+              favoritesError,
+              wanted,
+              isWantedLoading,
+              wantedError,
+              submissions,
+              isSubmissionsLoading,
+              submissionsError,
+              awardFacts,
+            }}
+          >
+            {children}
+          </ProfileDataContext.Provider>
         </div>
       )}
     </div>

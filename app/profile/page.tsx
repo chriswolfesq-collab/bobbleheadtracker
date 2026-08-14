@@ -1,12 +1,8 @@
-import type { Metadata } from "next";
-import { ProfilePageClient } from "./ProfilePageClient";
+import { CollectionTab } from "./tabs";
 
-export const metadata: Metadata = {
-  title: "My Profile — BobbleShelf",
-  description: "Your bobblehead collection, favorites, wanted list, and submissions.",
-  robots: { index: false },
-};
+// Title, description, and robots come from the layout: /profile is the
+// profile's front tab, so the layout's "My Profile" is its name too.
 
-export default function ProfilePage() {
-  return <ProfilePageClient />;
+export default function ProfileCollectionPage() {
+  return <CollectionTab />;
 }
