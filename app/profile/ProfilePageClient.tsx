@@ -65,12 +65,18 @@ export function ProfilePageClient() {
         // this page and it hangs at the teams wall's width, so the rest of the
         // profile lines up with it rather than sitting in a narrower stripe.
         <div className="mx-auto w-full max-w-6xl px-4 pb-24 pt-2 sm:px-6">
-          <ProfileWelcomeModal userId={user.id} />
+          {/* Closing the tour also marks the awards announcement seen: the tour
+              covers awards, so someone taking it on a new device shouldn't then
+              get the banner about it. */}
+          <ProfileWelcomeModal userId={user.id} onDismiss={awardFacts.acknowledgeIntro} />
 
-          {/* For members who were here before awards were. Renders nothing for
-              anyone who hasn't had the tour yet — that now covers awards
-              itself, and being told twice is worse than not being told here. */}
-          <AwardsIntroBanner userId={user.id} />
+          {/* For members who were here before awards were. Dismissal is stored
+              on the account, so it doesn't reappear on their other devices. */}
+          <AwardsIntroBanner
+            userId={user.id}
+            acknowledged={awardFacts.introAcknowledged}
+            onAcknowledge={awardFacts.acknowledgeIntro}
+          />
 
           {/* Only on the owner's own profile: the admin read-only view renders
               ProfileSections directly, so nobody gets congratulated for someone

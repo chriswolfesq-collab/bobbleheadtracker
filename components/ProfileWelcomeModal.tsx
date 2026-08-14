@@ -62,7 +62,17 @@ const FEATURES: { icon: string; title: string; body: string }[] = [
 // the page is mounted, so subscribe is a no-op.
 const noopSubscribe = () => () => {};
 
-export function ProfileWelcomeModal({ userId }: { userId: string }) {
+export function ProfileWelcomeModal({
+  userId,
+  onDismiss,
+}: {
+  userId: string;
+  /** Called when the tour is closed. The profile uses it to record the awards
+   *  announcement as seen: this modal now covers awards, so a member who takes
+   *  the tour on a new device must not then get the banner about it on their
+   *  next visit. */
+  onDismiss?: () => void;
+}) {
   const seen = useSyncExternalStore(
     noopSubscribe,
     () => {
@@ -79,6 +89,7 @@ export function ProfileWelcomeModal({ userId }: { userId: string }) {
 
   function dismiss() {
     setDismissed(true);
+    onDismiss?.();
     try {
       window.localStorage.setItem(profileWelcomeSeenKey(userId), "1");
     } catch {

@@ -13,32 +13,45 @@ import { profileWelcomeSeenKey } from "@/components/ProfileWelcomeModal";
 // used the site for months — this says the one new thing and gets out of the
 // way.
 //
-// Deliberately client-only state, like RepWelcomeBanner: there is no
-// notifications table, and missing this (private browsing, a new device) costs
-// nothing.
-const ACK_KEY_PREFIX = "bht:awards-intro-ack:";
-
+// Whether it's been dismissed lives on the account (profiles.awards_intro_ack_at,
+// see supabase/awards_intro_ack.sql), not in localStorage. A device-local flag
+// would make "once" a property of a browser: dismiss it on a laptop and it
+// still shows up on the phone, which is the nag this banner exists to avoid.
+//
+// Whether the member has taken the profile tour is still device-local, and
+// that's correct — it's the modal's own state, and it only gates this banner so
+// the two don't appear on screen together.
+//
 // localStorage is external mutable state, so useSyncExternalStore reads it the
-// way React intends: it returns "don't show" during SSR and the first client
-// render, then re-renders once from the real snapshot. Reading it in a
-// useState initializer instead is a hydration mismatch — the server renders
-// nothing and the client renders a banner. The flag never changes for other
-// reasons while the page is mounted, so subscribe is a no-op.
+// way React intends: it returns "not seen" during SSR and the first client
+// render, then re-renders once from the real snapshot. Reading it in a useState
+// initializer instead is a hydration mismatch — the server renders nothing and
+// the client renders a banner. The flag never changes for other reasons while
+// the page is mounted, so subscribe is a no-op.
 const noopSubscribe = () => () => {};
 
-export function AwardsIntroBanner({ userId }: { userId: string }) {
-  const shouldShow = useSyncExternalStore(
+export function AwardsIntroBanner({
+  userId,
+  acknowledged,
+  onAcknowledge,
+}: {
+  userId: string;
+  /** From the account. Null while it's still loading, which renders nothing —
+   *  "don't know yet" must not look like "hasn't seen it". */
+  acknowledged: boolean | null;
+  onAcknowledge: () => void;
+}) {
+  // The tour covers awards itself now, so anyone who hasn't taken it is about
+  // to be told there. Telling them twice in two different ways — and stacking a
+  // banner under the open modal — is worse than not telling them here.
+  const hasTakenTour = useSyncExternalStore(
     noopSubscribe,
     () => {
       try {
-        if (window.localStorage.getItem(ACK_KEY_PREFIX + userId)) return false;
-        // The whole point is to catch people the tour can't reach. Anyone who
-        // hasn't taken it yet is about to, and it now covers awards — telling
-        // them twice in two different ways is worse than not telling them here.
-        if (!window.localStorage.getItem(profileWelcomeSeenKey(userId))) return false;
-        return true;
+        return window.localStorage.getItem(profileWelcomeSeenKey(userId)) !== null;
       } catch {
-        // Storage unavailable — say nothing rather than nag on every visit.
+        // Storage unavailable: the modal can't track itself either, so it will
+        // show. Stay out of its way.
         return false;
       }
     },
@@ -46,15 +59,11 @@ export function AwardsIntroBanner({ userId }: { userId: string }) {
   );
   const [dismissed, setDismissed] = useState(false);
 
-  if (!shouldShow || dismissed) return null;
+  if (acknowledged !== false || !hasTakenTour || dismissed) return null;
 
   const dismiss = () => {
     setDismissed(true);
-    try {
-      window.localStorage.setItem(ACK_KEY_PREFIX + userId, "1");
-    } catch {
-      // Nothing to persist to; hiding it for this session is enough.
-    }
+    onAcknowledge();
   };
 
   return (

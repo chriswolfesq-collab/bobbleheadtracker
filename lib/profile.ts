@@ -45,6 +45,10 @@ export function useMyAwardFacts(source?: ProfileSource) {
   const userId = source?.userId ?? user?.id ?? null;
   const [memberNumber, setMemberNumber] = useState<number | null>(null);
   const [repTeams, setRepTeams] = useState<string[]>([]);
+  // Not an award fact, but it lives on the same profiles row this hook already
+  // reads — carrying it here costs nothing where its own hook would be a second
+  // round trip on every profile load just to decide whether to show a banner.
+  const [introAcknowledged, setIntroAcknowledged] = useState<boolean | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -55,7 +59,11 @@ export function useMyAwardFacts(source?: ProfileSource) {
     let cancelled = false;
 
     Promise.all([
-      client.from("profiles").select("member_number").eq("id", userId).maybeSingle(),
+      client
+        .from("profiles")
+        .select("member_number, awards_intro_ack_at")
+        .eq("id", userId)
+        .maybeSingle(),
       // Scoped to the signed-in session by auth.jwt(), so it's only meaningful
       // for the owner's own profile. In the admin read-only view it would
       // answer for the admin, not the member being viewed — hence the guard.
@@ -65,8 +73,12 @@ export function useMyAwardFacts(source?: ProfileSource) {
 
       if (profile.error) {
         console.error("Failed to load your member number:", profile.error.message);
+        // Leave introAcknowledged null on failure. The banner treats null as
+        // "don't know yet" and stays hidden, so a flaky read can't produce an
+        // announcement for someone who already dismissed it.
       } else {
         setMemberNumber(profile.data?.member_number ?? null);
+        setIntroAcknowledged(profile.data?.awards_intro_ack_at !== null);
       }
 
       if (reps.error) {
@@ -83,7 +95,22 @@ export function useMyAwardFacts(source?: ProfileSource) {
     };
   }, [userId, client, source?.userId]);
 
-  return { memberNumber, repTeams, isLoading: userId ? isLoading : false };
+  // Optimistic: the banner hides the moment it's clicked rather than waiting on
+  // the round trip, and a failed write only means it reappears next visit.
+  const acknowledgeIntro = useCallback(() => {
+    setIntroAcknowledged(true);
+    supabase.rpc("ack_awards_intro").then(({ error }) => {
+      if (error) console.error("Failed to record the awards intro:", error.message);
+    });
+  }, []);
+
+  return {
+    memberNumber,
+    repTeams,
+    introAcknowledged,
+    acknowledgeIntro,
+    isLoading: userId ? isLoading : false,
+  };
 }
 
 // The site total per team is the curated giveaway list (static) plus any

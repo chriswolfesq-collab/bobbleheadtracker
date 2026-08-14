@@ -325,6 +325,13 @@ create table if not exists public.profiles (
 alter table public.profiles
   add column if not exists member_number integer;
 
+-- When this member dismissed the one-time "awards exist now" banner. Null
+-- means they haven't. Stored per account rather than in localStorage so the
+-- announcement doesn't reappear on every device they own — see
+-- supabase/awards_intro_ack.sql.
+alter table public.profiles
+  add column if not exists awards_intro_ack_at timestamptz;
+
 -- Unique but deliberately not NOT NULL: a numbering hiccup must never turn into
 -- a failed signup. A null number just means no founding award.
 create unique index if not exists profiles_member_number_key
@@ -1461,6 +1468,25 @@ $$;
 
 revoke all on function public.my_rep_teams() from public, anon;
 grant execute on function public.my_rep_teams() to authenticated;
+
+-- Records that the caller has seen the awards announcement. SECURITY DEFINER
+-- because profiles has no update policy; this is the narrowest opening it
+-- could be — one column, the caller's own row, no arguments. coalesce keeps
+-- the first acknowledgement so a double-click can't rewrite it.
+create or replace function public.ack_awards_intro()
+returns void
+language sql
+security definer
+set search_path = public
+as $$
+  update public.profiles
+     set awards_intro_ack_at = coalesce(awards_intro_ack_at, now()),
+         updated_at = now()
+   where id = auth.uid();
+$$;
+
+revoke all on function public.ack_awards_intro() from public, anon;
+grant execute on function public.ack_awards_intro() to authenticated;
 
 revoke all on function public.enable_public_shelf() from public, anon;
 revoke all on function public.disable_public_shelf() from public, anon;

@@ -397,6 +397,7 @@ export type Database = {
           gallery_public: boolean
           id: string
           is_public: boolean
+          awards_intro_ack_at: string | null
           member_number: number | null
           referral_code: string | null
           slug: string | null
@@ -414,6 +415,7 @@ export type Database = {
           gallery_public?: boolean
           id: string
           is_public?: boolean
+          awards_intro_ack_at?: string | null
           member_number?: number | null
           referral_code?: string | null
           slug?: string | null
@@ -431,6 +433,7 @@ export type Database = {
           gallery_public?: boolean
           id?: string
           is_public?: boolean
+          awards_intro_ack_at?: string | null
           member_number?: number | null
           referral_code?: string | null
           slug?: string | null
@@ -1034,6 +1037,7 @@ export type Database = {
         }[]
       }
       my_rep_teams: { Args: never; Returns: string[] }
+      ack_awards_intro: { Args: never; Returns: undefined }
       admin_referral_leaderboard: { Args: never; Returns: Json }
       admin_referral_stats: { Args: never; Returns: Json }
       claim_referral: { Args: { p_code: string }; Returns: string }
