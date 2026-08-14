@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AwardCelebration } from "@/components/AwardCelebration";
+import { AwardsIntroBanner } from "@/components/AwardsIntroBanner";
 import { CaseBanner } from "@/components/CaseBanner";
 import { ProfileSections } from "@/components/ProfileSections";
 import { ProfileWelcomeModal } from "@/components/ProfileWelcomeModal";
@@ -65,6 +66,11 @@ export function ProfilePageClient() {
         // profile lines up with it rather than sitting in a narrower stripe.
         <div className="mx-auto w-full max-w-6xl px-4 pb-24 pt-2 sm:px-6">
           <ProfileWelcomeModal userId={user.id} />
+
+          {/* For members who were here before awards were. Renders nothing for
+              anyone who hasn't had the tour yet — that now covers awards
+              itself, and being told twice is worse than not being told here. */}
+          <AwardsIntroBanner userId={user.id} />
 
           {/* Only on the owner's own profile: the admin read-only view renders
               ProfileSections directly, so nobody gets congratulated for someone

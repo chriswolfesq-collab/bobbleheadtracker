@@ -11,11 +11,32 @@ import { useState, useSyncExternalStore } from "react";
 // enough and avoids a round-trip on every profile load.
 const SEEN_KEY_PREFIX = "bht:profile-welcome-seen:";
 
+/**
+ * Where "this member has had the tour" is recorded.
+ *
+ * Exported because AwardsIntroBanner is the other half of the same decision:
+ * the tour covers awards for anyone new, so the banner only exists to catch
+ * members who dismissed it before awards existed. Both reading the same key is
+ * what stops a brand-new account being told twice.
+ */
+export function profileWelcomeSeenKey(userId: string): string {
+  return SEEN_KEY_PREFIX + userId;
+}
+
+// In the same order as the sections on the profile itself, so the tour reads
+// as a walk down the page rather than a list to reconcile with it.
 const FEATURES: { icon: string; title: string; body: string }[] = [
   {
-    icon: "🏆",
+    icon: "⚾",
     title: "Track your collection",
     body: "Mark the bobbleheads you own across every team and watch your progress fill in.",
+  },
+  {
+    // The trophy moved here from the collection row above: it means something
+    // specific now, and two of them in one modal would read as one feature.
+    icon: "🏆",
+    title: "Earn awards",
+    body: "Unlock awards as you go — your first bobblehead, your hundredth, your first finished team.",
   },
   {
     icon: "♥",
@@ -46,7 +67,7 @@ export function ProfileWelcomeModal({ userId }: { userId: string }) {
     noopSubscribe,
     () => {
       try {
-        return window.localStorage.getItem(SEEN_KEY_PREFIX + userId) ? "1" : "";
+        return window.localStorage.getItem(profileWelcomeSeenKey(userId)) ? "1" : "";
       } catch {
         // localStorage unavailable (private mode / disabled) — skip the intro.
         return "1";
@@ -59,7 +80,7 @@ export function ProfileWelcomeModal({ userId }: { userId: string }) {
   function dismiss() {
     setDismissed(true);
     try {
-      window.localStorage.setItem(SEEN_KEY_PREFIX + userId, "1");
+      window.localStorage.setItem(profileWelcomeSeenKey(userId), "1");
     } catch {
       // Nothing to persist to — the modal is already closed for this session.
     }
@@ -80,8 +101,10 @@ export function ProfileWelcomeModal({ userId }: { userId: string }) {
         onClick={(event) => event.stopPropagation()}
       >
         <div className="mb-5 flex flex-col items-center gap-3 text-center">
+          {/* Not the trophy — that now belongs to the awards row below, and the
+              same glyph twice in one modal reads as the same thing twice. */}
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-lg font-black text-accent-fg">
-            🏆
+            👋
           </div>
           <div>
             <h2 id="profile-welcome-title" className="text-lg font-black text-zinc-900">
