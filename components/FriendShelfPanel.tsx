@@ -43,7 +43,6 @@ export function FriendShelfPanel({
               You and {displayName} are friends
             </p>
             <p className="mx-auto mt-1 max-w-md text-xs text-zinc-600">
-              Friends see the whole shelf — every bobblehead, favorites, and the wanted list.
               Manage your friends from your{" "}
               <Link href="/profile/friends" className="font-semibold underline underline-offset-2">
                 profile
@@ -59,7 +58,17 @@ export function FriendShelfPanel({
             <div className="relative left-1/2 w-[calc(100vw-1rem)] max-w-6xl -translate-x-1/2 px-2 sm:px-4">
               <PublicGallery displayName={displayName} items={friendItems} />
             </div>
-          ) : null}
+          ) : (
+            // Being friends is no longer enough on its own: the friend gallery
+            // is gated on the owner's "Show my items" setting too, and that's
+            // off by default. Saying so beats an empty space under a banner
+            // that just promised a shelf.
+            <p className="mx-auto mt-6 max-w-md text-center text-sm leading-6 text-zinc-600">
+              {displayName} hasn&rsquo;t turned on <span className="font-semibold">Show my items</span>,
+              so their individual bobbleheads stay hidden — you see the totals above. It&rsquo;s a
+              switch on their settings page, not something a friend request unlocks.
+            </p>
+          )}
         </>
       ) : (
         <div className="rounded-2xl border border-border-soft bg-surface p-6 text-center">
@@ -68,10 +77,14 @@ export function FriendShelfPanel({
               ? `${displayName} wants to be friends`
               : `Friends see ${displayName}'s full shelf`}
           </p>
+          {/* Deliberately conditional language: whether a friend actually sees
+              the items depends on the owner's "Show my items" setting, which is
+              off by default. Promising the full shelf outright would be a lie
+              on most shelves. */}
           <p className="mx-auto mt-1.5 max-w-sm text-sm text-zinc-600">
             {status === "pending_in"
-              ? "Accept and you'll each see the other's whole collection — every bobblehead, favorites, and wanted lists."
-              : "Every bobblehead, favorites, and the wanted list — not just the totals. Friendship goes both ways: they'll see your full shelf too."}
+              ? "Accept and you'll each see the other's wanted list, and their individual bobbleheads if they've turned on Show my items."
+              : "Friends can see each other's individual bobbleheads and wanted lists, rather than just the totals — as far as each of you has turned on Show my items. It goes both ways."}
           </p>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
             {status === "signed-out" ? (
