@@ -488,10 +488,14 @@ person per listing.
 
 Members befriend each other from a shared shelf link — Add Friend on any
 `/shelf/<slug>` page, or paste a link on the profile's Friends tab. Once a
-request is accepted, each side sees the other's FULL shelf (every owned
-bobblehead, favorites, and the wanted list) instead of just the summary.
+request is accepted, each side sees the other's owned bobbleheads, favorites
+and wanted list instead of just the summary.
 
 1. In the SQL Editor, run `friends.sql` (needs `schema.sql` and `avatars.sql`).
+2. Then run `friends_visibility.sql` (needs `friends.sql`). Without it, what a
+   friend sees is gated on the *public* "Show my items" switch, which is off on
+   most shelves — so accepting a request grants almost nothing but a wanted
+   list.
 
 Nothing to deploy. Friendship upgrades what a shelf shows, never what it hides:
 every friend read still passes through the owner's `is_public`, which
@@ -502,6 +506,33 @@ are rate-limited; declining deletes the row, so nobody has to explain a "no"
 and asking again later works. The friendships table has RLS with no policies:
 everything goes through security definer RPCs, which is also what joins
 friends' names and avatars past profiles' owner-only RLS.
+
+### Who sees which items
+
+Two switches on `/settings`, one per audience, because publishing to anyone
+holding a link and showing the people whose requests you accepted are different
+decisions:
+
+| | public shelf | accepted friends |
+|---|---|---|
+| owned + favorites | `gallery_public` ("Show my items") | either switch on |
+| wanted list | never — no public form exists | friendship alone |
+
+`friends_see_items` ("Show my friends more") defaults **on** where
+`gallery_public` defaults off, because it only ever applies to someone the owner
+personally accepted — mutual, affirmative, revocable. That default is only
+defensible while the Accept screen states what accepting grants, including that
+it covers items the shelf keeps private from the public. If that copy in
+`components/FriendShelfPanel.tsx` ever drifts from this table, it is the copy
+that is wrong.
+
+Owned and favorites open on *either* switch rather than the friends one alone:
+hiding from a friend what any stranger with the link can already see would make
+the friend view narrower than logging out. The wanted list carries no item gate
+in either direction — it backs the trade alerts, `get_public_gallery` cannot
+emit it, and hanging it off a display switch would mean someone who stops
+showing friends their collection also silently stops showing what they're
+hunting for.
 
 ## Every shelf is public
 
