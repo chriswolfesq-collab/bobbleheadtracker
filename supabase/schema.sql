@@ -42,7 +42,9 @@ grant execute on function public.is_admin() to anon, authenticated;
 -- Seed admin-mode accounts here. The email must already exist as a Supabase
 -- Auth account — sign up for it once at /admin (its "Need admin credentials?
 -- Sign up" link) — then add it below and re-run this file. Safe to re-run.
-insert into public.admins (email) values ('chriswolfesq@gmail.com')
+insert into public.admins (email) values
+  ('chriswolfesq@gmail.com'),
+  ('kylesigler7@hotmail.com')
 on conflict (email) do nothing;
 
 -- ---------------------------------------------------------------------------
