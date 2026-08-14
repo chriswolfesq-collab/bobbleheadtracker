@@ -401,6 +401,30 @@ strip even when out-voted so it can win back, and votes are rate-limited and
 swept by `admin_delete_bobblehead` (recreated here — the current version now
 lives in this file).
 
+## Team Rep Chatroom (recommended)
+
+A live room at `/admin/chat` for admins and team reps, beside the forum rather
+than replacing it: the forum keeps anything worth finding again, the room takes
+the quick question.
+
+1. In the SQL Editor, run `chat.sql` (needs `schema.sql`, `team_reps.sql`,
+   `mod_forum.sql`, `avatars.sql`).
+
+Nothing to deploy. This is the project's first use of Supabase Realtime — the
+file adds `chat_messages` to the `supabase_realtime` publication itself, so
+there's nothing to click in the dashboard. Subscribers still pass the table's
+moderator SELECT policy, so a signed-in non-moderator listening on the channel
+receives nothing.
+
+The socket is deliberately not load-bearing: an insert event only nudges the
+client to refetch through the same RPC everything else reads from, so a dropped
+socket degrades to catching up on tab focus instead of showing an empty room.
+Chat has its own rate limit (120/hour) and its own `(author_id, created_at)`
+index — wiring it into the forum's shared 40/hour counter would have let a busy
+afternoon in the room lock reps out of the forum. The room carries an unread
+count on the admin dashboard, and history reads back through a cursor, which is
+what answers `mod_forum.sql`'s original objection to live chat.
+
 ## Description edit requests (recommended)
 
 Any signed-in member can suggest a rewrite of a listing's "About This
