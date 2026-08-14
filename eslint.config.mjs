@@ -12,6 +12,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The second dev server's build output (NEXT_DIST_DIR / dev:alt) — same
+    // generated code as .next, same reason to ignore it.
+    ".next-alt/**",
+    // Parallel-session worktrees under .claude are copies of this repo; linting
+    // them double-reports every finding against paths nobody is editing here.
+    ".claude/worktrees/**",
   ]),
 ]);
 
