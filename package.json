@@ -9,7 +9,8 @@
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
-    "verify-deploy": "node scripts/verify-deploy.mjs"
+    "verify-deploy": "node scripts/verify-deploy.mjs",
+    "dev:alt": "NEXT_DIST_DIR=.next-alt next dev"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.3",

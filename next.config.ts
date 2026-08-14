@@ -8,6 +8,11 @@ const supabaseHostname = process.env.NEXT_PUBLIC_SUPABASE_URL
   : undefined;
 
 const nextConfig: NextConfig = {
+  // `next dev` holds an exclusive lock on the dist dir, so a second dev server
+  // in this repo (a parallel Claude session, usually) can't start at all.
+  // Pointing it at its own dist dir via NEXT_DIST_DIR sidesteps the lock;
+  // unset, everything stays in .next as before.
+  ...(process.env.NEXT_DIST_DIR ? { distDir: process.env.NEXT_DIST_DIR } : {}),
   // The OG image reads its fonts with readFile(join(process.cwd(), "assets/…")),
   // a path built at runtime that the static trace can't see — so the fonts were
   // left out of the deployed bundle and the route 500'd on Vercel while working
