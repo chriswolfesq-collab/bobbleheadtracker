@@ -372,9 +372,10 @@ export function useOwnedKeys(): {
 }
 
 export type MyShelf = {
-  /** null until the user has enabled sharing at least once. */
+  /** Minted at signup (see supabase/all_shelves_public.sql). null only for the
+   *  brief window before the mint lands, or if slugify had nothing to work
+   *  with. */
   slug: string | null;
-  isPublic: boolean;
   /** The name shown at the top of the public shelf — profiles.display_name,
    *  the same source get_public_shelf uses, so a preview matches the live page
    *  even if an admin has edited the name away from the auth metadata. */
@@ -382,29 +383,25 @@ export type MyShelf = {
 };
 
 // Returned by useMyShelf. Named so the profile page can call the hook once and
-// hand the result to both the privacy toggle and the share buttons, rather than
-// each calling the hook and refetching the same row.
+// hand the result to every share surface, rather than each calling the hook
+// and refetching the same row.
 export type ShelfSharing = {
   shelf: MyShelf;
   isLoading: boolean;
-  isSaving: boolean;
-  setPublic: (isPublic: boolean) => Promise<{ error: string | null }>;
 };
 
-// The signed-in user's public-shelf settings. Reads profiles directly (allowed
-// by the "profiles: owner select" policy) but writes through the
-// enable/disable RPCs, because profiles has no update policy — the client must
-// not be able to pick its own slug and squat someone else's shelf URL.
+// The signed-in user's shelf link. Every shelf is public; the slug is minted
+// server-side at signup, and there is deliberately no client write path —
+// profiles has no update policy, so nobody can pick their own slug and squat
+// someone else's shelf URL.
 //
-// No ProfileSource here, unlike the hooks above: this is a settings surface for
-// your own account, and there's deliberately no admin path to publish someone
-// else's shelf on their behalf.
+// No ProfileSource here, unlike the hooks above: this is a settings surface
+// for your own account only.
 export function useMyShelf(): ShelfSharing {
   const { user } = useAuth();
   const userId = user?.id ?? null;
-  const [shelf, setShelf] = useState<MyShelf>({ slug: null, isPublic: false, displayName: "" });
+  const [shelf, setShelf] = useState<MyShelf>({ slug: null, displayName: "" });
   const [isLoading, setIsLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     if (!userId) return;
@@ -413,7 +410,7 @@ export function useMyShelf(): ShelfSharing {
 
     supabase
       .from("profiles")
-      .select("slug, is_public, display_name")
+      .select("slug, display_name")
       .eq("id", userId)
       .maybeSingle()
       .then(({ data, error }) => {
@@ -424,7 +421,6 @@ export function useMyShelf(): ShelfSharing {
         } else {
           setShelf({
             slug: data?.slug ?? null,
-            isPublic: data?.is_public ?? false,
             displayName: data?.display_name ?? "",
           });
         }
@@ -437,36 +433,9 @@ export function useMyShelf(): ShelfSharing {
     };
   }, [userId]);
 
-  async function setPublic(isPublic: boolean): Promise<{ error: string | null }> {
-    if (!userId) return { error: "Not signed in." };
-
-    setIsSaving(true);
-    const { data, error } = isPublic
-      ? await supabase.rpc("enable_public_shelf")
-      : await supabase.rpc("disable_public_shelf");
-    setIsSaving(false);
-
-    if (error) {
-      console.error("Failed to update your shelf settings:", error.message);
-      return { error: "Couldn't update your shelf. Try again." };
-    }
-
-    // enable_public_shelf returns the slug, minting it on the first call;
-    // disable returns nothing and leaves the slug alone, so the URL survives a
-    // round trip through private and back.
-    setShelf((current) => ({
-      slug: isPublic ? ((data as string | null) ?? current.slug) : current.slug,
-      isPublic,
-      displayName: current.displayName,
-    }));
-    return { error: null };
-  }
-
   return {
-    shelf: userId ? shelf : { slug: null, isPublic: false, displayName: "" },
+    shelf: userId ? shelf : { slug: null, displayName: "" },
     isLoading: userId ? isLoading : false,
-    isSaving,
-    setPublic,
   };
 }
 

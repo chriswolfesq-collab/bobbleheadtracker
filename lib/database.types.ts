@@ -1035,7 +1035,6 @@ export type Database = {
         Returns: undefined
       }
       can_edit_team: { Args: { p_team_slug: string }; Returns: boolean }
-      disable_public_shelf: { Args: never; Returns: undefined }
       display_name_of: { Args: { p_meta: Json }; Returns: string }
       enable_public_shelf: { Args: never; Returns: string }
       forum_author: {

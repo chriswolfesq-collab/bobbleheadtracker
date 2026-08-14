@@ -9,7 +9,6 @@ import { AwardCelebration } from "@/components/AwardCelebration";
 import { AwardsIntroBanner } from "@/components/AwardsIntroBanner";
 import { CaseBanner } from "@/components/CaseBanner";
 import { ProfileWelcomeModal } from "@/components/ProfileWelcomeModal";
-import { ShelfVisibilityPill } from "@/components/ShelfVisibilityPill";
 import { getDisplayName, MAX_DISPLAY_NAME_LENGTH, useAuth } from "@/lib/auth";
 import { AVATAR_ACCEPT, getAvatarUrl, removeAvatar, uploadAvatar } from "@/lib/avatar";
 import { useFriendships } from "@/lib/friends";
@@ -45,10 +44,9 @@ const TABS = [
 
 // Everything the tab pages read. Fetched once here in the layout rather than
 // per tab page: the layout survives tab navigation, so switching tabs never
-// refetches, and single-flighting useMyShelf keeps the share buttons and the
-// visibility pill from each holding their own copy of isPublic to disagree
-// over. (The fuller sharing card, with the link and the preview, is on
-// /settings.)
+// refetches, and single-flighting useMyShelf keeps both share buttons off a
+// second copy of the same row. (The shelf link itself, with the preview, is
+// on /settings.)
 type ProfileData = {
   displayName: string;
   countByTeamSlug: Record<string, number>;
@@ -339,39 +337,35 @@ export function ProfileShell({ children }: { children: ReactNode }) {
             {nameError ? <p className="mt-1 text-xs font-semibold text-red-400">{nameError}</p> : null}
           </header>
 
-          {/* The visibility switch shares the row but not the nav: it changes
-              who can see the shelf rather than moving you around it, so it sits
-              outside the <nav> landmark while `contents` lets the links flow in
-              the same flex row. */}
-          <div className="mb-8 flex flex-wrap items-center justify-center gap-2">
-            <nav aria-label="Profile sections" className="contents">
-              {TABS.map(({ href, label }) => {
-                const isCurrent = href === activeTab.href;
-                return (
-                  <Link
-                    key={href}
-                    href={href}
-                    aria-current={isCurrent ? "page" : undefined}
-                    className={`rounded-full border px-4 py-2 text-xs font-black uppercase tracking-wide transition ${
-                      isCurrent
-                        ? "border-accent bg-accent/10 text-accent"
-                        : "border-black/10 bg-black/[0.04] text-zinc-700 hover:border-accent hover:text-accent-hover"
-                    }`}
-                  >
-                    {label}
-                    {/* A waiting friend request is the one thing on this page
-                        someone else is waiting on — it gets the only count. */}
-                    {href === "/profile/friends" && friendships.incoming.length > 0 ? (
-                      <span className="ml-1.5 inline-flex min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-black tabular-nums text-accent-fg">
-                        {friendships.incoming.length}
-                      </span>
-                    ) : null}
-                  </Link>
-                );
-              })}
-            </nav>
-            <ShelfVisibilityPill sharing={sharing} />
-          </div>
+          <nav
+            aria-label="Profile sections"
+            className="mb-8 flex flex-wrap items-center justify-center gap-2"
+          >
+            {TABS.map(({ href, label }) => {
+              const isCurrent = href === activeTab.href;
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  aria-current={isCurrent ? "page" : undefined}
+                  className={`rounded-full border px-4 py-2 text-xs font-black uppercase tracking-wide transition ${
+                    isCurrent
+                      ? "border-accent bg-accent/10 text-accent"
+                      : "border-black/10 bg-black/[0.04] text-zinc-700 hover:border-accent hover:text-accent-hover"
+                  }`}
+                >
+                  {label}
+                  {/* A waiting friend request is the one thing on this page
+                      someone else is waiting on — it gets the only count. */}
+                  {href === "/profile/friends" && friendships.incoming.length > 0 ? (
+                    <span className="ml-1.5 inline-flex min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-black tabular-nums text-accent-fg">
+                      {friendships.incoming.length}
+                    </span>
+                  ) : null}
+                </Link>
+              );
+            })}
+          </nav>
 
           <ProfileDataContext.Provider
             value={{

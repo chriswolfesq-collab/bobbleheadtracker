@@ -2,13 +2,9 @@ import Link from "next/link";
 
 // Scoped to /shelf/<slug> rather than using the site-wide 404, because this one
 // has a specific visitor: someone who followed a shared link that no longer
-// resolves — a slug that never existed, or a shelf whose owner has since gone
-// private. They came here to look at a collection, so the ask is the same as on
+// resolves — a slug that never existed, or an account that's since been
+// removed. They came here to look at a collection, so the ask is the same as on
 // a live shelf even though there's nothing to show them.
-//
-// The copy deliberately doesn't say which of the two happened. Saying "this
-// collector went private" would confirm the account exists, which is exactly
-// what get_public_shelf refuses to reveal.
 export default function ShelfNotFound() {
   return (
     <div
@@ -20,7 +16,7 @@ export default function ShelfNotFound() {
       </p>
       <h1 className="mt-3 text-2xl font-black text-zinc-900">This shelf isn&apos;t here</h1>
       <p className="mt-2 max-w-sm text-sm text-zinc-600">
-        The link may be wrong, or its owner has made their shelf private.
+        The link may be wrong, or its owner is no longer here.
       </p>
 
       <Link

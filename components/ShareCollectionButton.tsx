@@ -65,7 +65,7 @@ export function ShareCollectionButton({
   countByTeamSlug: Record<string, number>;
   totalByTeamSlug: Record<string, number>;
   stats: ShelfStats;
-  /** Lifted to the profile page so the toggle and both share buttons share one fetch. */
+  /** Lifted to the profile page so both share buttons share one fetch. */
   sharing: ShelfSharing;
   /** Counts still loading. The button would otherwise share an empty 0/0 shelf. */
   isLoading?: boolean;
@@ -80,7 +80,7 @@ export function ShareCollectionButton({
   const [didCopy, setDidCopy] = useState(false);
   const { showError } = useToast();
 
-  const { shelf, isSaving, setPublic } = sharing;
+  const { shelf } = sharing;
 
   useEffect(() => {
     if (!isOpen) return;
@@ -99,8 +99,10 @@ export function ShareCollectionButton({
     return () => clearTimeout(timer);
   }, [didCopy]);
 
+  // slug is minted at signup, so this is only null for the brief window
+  // before the profile row loads.
   const shelfUrl =
-    shelf.isPublic && shelf.slug && typeof window !== "undefined"
+    shelf.slug && typeof window !== "undefined"
       ? `${window.location.origin}/shelf/${shelf.slug}`
       : null;
 
@@ -186,11 +188,6 @@ export function ShareCollectionButton({
       return;
     }
     showError("Couldn't copy. Select the link below and copy it manually.");
-  }
-
-  async function handleMakePublic() {
-    const { error } = await setPublic(true);
-    if (error) showError(error);
   }
 
   const canNativeShare = typeof navigator !== "undefined" && Boolean(navigator.share);
@@ -286,28 +283,16 @@ export function ShareCollectionButton({
                 <p className="mt-3 select-all truncate text-[11px] text-zinc-500">{shelfUrl}</p>
               </>
             ) : (
-              <>
-                <p className="mt-4 text-sm text-zinc-600">
-                  Your shelf is private. Turn it on to get a link that shows your collection and
-                  your count.
-                </p>
-                <button
-                  type="button"
-                  onClick={handleMakePublic}
-                  disabled={isSaving}
-                  className="mt-4 w-full rounded-lg bg-accent px-3 py-2.5 text-[11px] font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover disabled:opacity-60"
-                >
-                  {isSaving ? "Turning on…" : "Make my shelf public"}
-                </button>
-                <button
-                  type="button"
-                  onClick={handleSaveImage}
-                  disabled={isBusy}
-                  className="mt-2 w-full rounded-lg border border-black/10 px-3 py-2.5 text-[11px] font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover disabled:opacity-60"
-                >
-                  {isBusy ? "Building…" : "Just save the image"}
-                </button>
-              </>
+              // No slug yet (still loading, or the mint never landed): the
+              // image is the only thing there is to share.
+              <button
+                type="button"
+                onClick={handleSaveImage}
+                disabled={isBusy}
+                className="mt-4 w-full rounded-lg border border-black/10 px-3 py-2.5 text-[11px] font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover disabled:opacity-60"
+              >
+                {isBusy ? "Building…" : "Save image"}
+              </button>
             )}
           </div>
         </div>
@@ -353,7 +338,7 @@ export function ShareCollectionButton({
             {/* The image travels without its link on Instagram and the like, so
                 the address rides along inside the picture. */}
             <p className="px-8 pt-2 text-center text-[11px] font-black uppercase tracking-[0.2em] text-zinc-500">
-              {shelf.isPublic && shelf.slug ? `bobbleshelf.com/shelf/${shelf.slug}` : "bobbleshelf.com"}
+              {shelf.slug ? `bobbleshelf.com/shelf/${shelf.slug}` : "bobbleshelf.com"}
             </p>
           </div>
         </div>

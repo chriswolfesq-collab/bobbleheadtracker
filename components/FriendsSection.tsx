@@ -20,8 +20,6 @@ function FriendRow({
   friendship: Friendship;
   children: React.ReactNode;
 }) {
-  const canLink = friendship.isPublic && friendship.slug;
-
   return (
     <li className="flex items-center gap-3 rounded-lg border border-black/10 bg-white p-3">
       <Avatar
@@ -31,7 +29,7 @@ function FriendRow({
       />
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-bold text-zinc-900">{friendship.displayName}</p>
-        {canLink ? (
+        {friendship.slug ? (
           <Link
             href={`/shelf/${friendship.slug}`}
             className="text-xs font-semibold text-accent underline-offset-2 hover:underline"
@@ -39,9 +37,7 @@ function FriendRow({
             View shelf
           </Link>
         ) : (
-          // A friend who turned sharing off keeps the friendship but not the
-          // link — their kill switch outranks the relationship.
-          <p className="text-xs text-zinc-400">Shelf not currently shared</p>
+          <p className="text-xs text-zinc-400">No shelf yet</p>
         )}
       </div>
       <div className="flex shrink-0 items-center gap-2">{children}</div>

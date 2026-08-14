@@ -17,11 +17,9 @@ export type Friendship = {
   userId: string;
   displayName: string;
   avatarPath: string | null;
-  /** The other person's shelf slug — null until they first shared a shelf. */
+  /** The other person's shelf slug. Minted at signup, so null only on the odd
+   *  account whose mint never landed. */
   slug: string | null;
-  /** Whether their shelf is currently shared; a friends-list entry only links
-   *  out when it is. */
-  isPublic: boolean;
   direction: "incoming" | "outgoing";
   status: "pending" | "accepted";
   createdAt: string;
@@ -42,7 +40,6 @@ function toFriendship(row: {
   display_name: string;
   avatar_path: string | null;
   slug: string | null;
-  is_public: boolean;
   direction: string;
   status: string;
   created_at: string;
@@ -52,7 +49,6 @@ function toFriendship(row: {
     displayName: row.display_name,
     avatarPath: row.avatar_path,
     slug: row.slug,
-    isPublic: row.is_public,
     direction: row.direction === "incoming" ? "incoming" : "outgoing",
     status: row.status === "accepted" ? "accepted" : "pending",
     createdAt: row.created_at,

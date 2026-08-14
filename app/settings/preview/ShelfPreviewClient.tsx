@@ -17,10 +17,10 @@ import { computeShelfStats } from "@/lib/shelfStats";
 
 // An owner-only preview of the public /shelf/<slug> page. It renders the exact
 // same PublicShelfView the live page uses, but from the signed-in user's own
-// data (readable via the owner RLS policies) rather than the public RPCs — so it
-// works even while the shelf is private, which is the whole point: seeing what
-// you'd be sharing before you flip it public. Everything is assembled to match
-// get_public_shelf / get_public_gallery so the preview can't drift from reality.
+// data (readable via the owner RLS policies) rather than the public RPCs — so
+// it reflects edits before the shelf page's cache catches up. Everything is
+// assembled to match get_public_shelf / get_public_gallery so the preview
+// can't drift from reality.
 export function ShelfPreviewClient() {
   const { user, isLoading: isAuthLoading } = useAuth();
   const sharing = useMyShelf();
@@ -35,11 +35,9 @@ export function ShelfPreviewClient() {
 
   const { shelf } = sharing;
 
-  // The gallery is gated exactly like the live page: shown only when the shelf
-  // is public AND the owner turned the gallery on (is_public AND gallery_public).
-  // While the shelf is private the public sees nothing, so the preview mirrors
-  // that by staying counts-only until sharing is actually on.
-  const showGallery = shelf.isPublic && gallery.enabled;
+  // Gated exactly like the live page: every shelf is public, so the gallery
+  // flag alone decides whether items show or the shelf stays counts-only.
+  const showGallery = gallery.enabled;
   const galleryItems: PublicGalleryItem[] = showGallery
     ? [
         ...ownedResult.owned.map((item) => ({ kind: "owned" as const, ...item })),
@@ -97,9 +95,7 @@ export function ShelfPreviewClient() {
               Preview
             </span>
             <p className="text-xs font-semibold text-zinc-600">
-              {shelf.isPublic
-                ? "Live — exactly what anyone with your link sees."
-                : "Private — this is what the public would see if you turn sharing on."}
+              Live — exactly what anyone with your link sees.
             </p>
           </div>
         </div>

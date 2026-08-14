@@ -4,13 +4,11 @@ import { useToast } from "@/components/Toast";
 import type { GallerySharing } from "@/lib/profile";
 
 // The opt-in to show your actual owned bobbleheads and favorites on your public
-// shelf, not just the counts (see supabase/gallery.sql). Same shape as
-// ShelfSharingToggle / EmailAlertsToggle: the switch flipping is the success
-// feedback, and the toast is error-only.
+// shelf, not just the counts (see supabase/gallery.sql). The switch flipping is
+// the success feedback, and the toast is error-only.
 //
-// Only meaningful once the shelf is public, so SettingsPageClient renders this
-// beneath ShelfSharingToggle and only when sharing is on — there's no public
-// page for a gallery to appear on otherwise.
+// Rendered right under the shelf link on the settings page: it decides what
+// that link shows, so the two read as one setting.
 export function GalleryToggle({ gallery }: { gallery: GallerySharing }) {
   const { enabled, isLoading, isSaving, setEnabled } = gallery;
   const { showError } = useToast();

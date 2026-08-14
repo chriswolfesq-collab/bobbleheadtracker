@@ -5,7 +5,7 @@ import type { EmailPreferenceKind, EmailPreferences } from "@/lib/profile";
 
 // The email opt-outs: a master switch plus one row per kind of automated mail
 // the site sends (see supabase/email_preferences.sql). Same interaction shape as
-// ShelfSharingToggle — the switch flipping is the success feedback, and the toast
+// GalleryToggle — the switch flipping is the success feedback, and the toast
 // is error-only.
 //
 // Admin-composed one-off emails aren't listed because they aren't governed by

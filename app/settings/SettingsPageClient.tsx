@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CollectionTransfer } from "@/components/CollectionTransfer";
 import { EmailAlertsToggle } from "@/components/EmailAlertsToggle";
 import { GalleryToggle } from "@/components/GalleryToggle";
-import { ShelfSharingToggle } from "@/components/ShelfSharingToggle";
+import { ShelfLinkCard } from "@/components/ShelfLinkCard";
 import { useAuth } from "@/lib/auth";
 import { useEmailPreferences, useGallerySharing, useMyShelf } from "@/lib/profile";
 
@@ -40,10 +40,10 @@ export function SettingsPageClient() {
             </p>
           </header>
 
-          <ShelfSharingToggle sharing={sharing} />
-          {/* The gallery only has an effect on a public shelf, so it appears as a
-              sub-option: shown right under sharing, and only once sharing is on. */}
-          {sharing.shelf.isPublic ? <GalleryToggle gallery={gallery} /> : null}
+          <ShelfLinkCard sharing={sharing} />
+          {/* Right under the link card: the gallery decides what that link
+              shows, so the two read as one setting. */}
+          <GalleryToggle gallery={gallery} />
           <EmailAlertsToggle alerts={alerts} />
           <CollectionTransfer />
         </div>

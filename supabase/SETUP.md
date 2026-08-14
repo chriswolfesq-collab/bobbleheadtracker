@@ -430,12 +430,31 @@ bobblehead, favorites, and the wanted list) instead of just the summary.
 
 1. In the SQL Editor, run `friends.sql` (needs `schema.sql` and `avatars.sql`).
 
-Nothing to deploy. Friendship upgrades a shared shelf, never resurrects a
-private one: every friend read still requires the owner's `is_public`, so
-turning sharing off hides everything from everyone, friends included.
+Nothing to deploy. Friendship upgrades what a shelf shows, never what it hides:
+every friend read still passes through the owner's `is_public`, which
+`all_shelves_public.sql` (below) makes permanently true.
 Collection details (condition, price paid, notes) stay owner-only — the friend
 gallery projects the same three id columns as `get_public_gallery`. Requests
 are rate-limited; declining deletes the row, so nobody has to explain a "no"
 and asking again later works. The friendships table has RLS with no policies:
 everything goes through security definer RPCs, which is also what joins
 friends' names and avatars past profiles' owner-only RLS.
+
+## Every shelf is public
+
+The public/private toggle is gone. Shelves no longer opt in: the slug is minted
+at signup, so every member has a working `/shelf/<slug>` link from day one.
+
+1. In the SQL Editor, run `all_shelves_public.sql` (needs `avatars.sql` — it
+   recreates `sync_profile_from_auth` from that file's version, adding the slug
+   mint, so running it before `avatars.sql` would lose the avatar mirror).
+
+Nothing to deploy. The file backfills a slug onto every profile that never
+flipped the old toggle, sets `is_public` true everywhere and defaults it true,
+and drops `disable_public_shelf()` — with no toggle in the app, leaving that
+RPC installed would let any signed-in session hide itself from the browser
+console. `profiles.is_public` stays as a column because `get_public_shelf`,
+`get_public_gallery` and the friends RPCs all filter on it; it is simply always
+true now, so none of those functions changed. `enable_public_shelf()` stays too:
+a browser still running a cached bundle from before this change calls it, and
+it is now a harmless no-op that returns the existing slug.

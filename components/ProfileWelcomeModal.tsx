@@ -144,17 +144,16 @@ export function ProfileWelcomeModal({
           ))}
         </ul>
 
-        {/* The privacy choice gets its own highlighted callout — it's the one
+        {/* The shelf link gets its own highlighted callout — it's the one
             feature that lives on a different page and the one members most need
             to know exists. */}
         <div className="mt-4 rounded-xl border border-accent/30 bg-accent/10 p-4">
           <h3 className="flex items-center gap-2 text-sm font-black text-accent">
-            <span aria-hidden>🔒</span> Public or private?
+            <span aria-hidden>🔗</span> Your shelf has a link
           </h3>
           <p className="mt-1.5 text-xs leading-5 text-accent/80">
-            Your profile is private by default. On the{" "}
-            <span className="font-bold">Settings</span> page you can make it public to get a
-            shareable link — or keep it just for you.
+            Every shelf gets a shareable link that shows your collection and your counts. Find
+            yours on the <span className="font-bold">Settings</span> page.
           </p>
         </div>
 
