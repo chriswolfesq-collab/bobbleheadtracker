@@ -149,6 +149,16 @@ $$;
 -- Everything since the caller's last known message. Called on a realtime
 -- insert nudge and on tab-focus catch-up. Capped so a tab left open over a
 -- weekend can't ask for the whole room in one go.
+--
+-- The window reaches back before the cursor on purpose. created_at defaults to
+-- now(), which is TRANSACTION START time, and a row only becomes visible at
+-- commit — so a slow send can land a message whose timestamp is older than one
+-- a client has already caught up past. With a strict `> p_since` that message
+-- is skipped, and skipped permanently: the cursor only ever moves forward, so
+-- nothing asks for it again short of a reload. The overlap re-reads a few
+-- seconds either side instead, and the client merges by id (lib/chat.ts), so
+-- re-delivering a message it already holds costs one map write and changes
+-- nothing on screen.
 create or replace function public.chat_new_messages(p_since timestamptz)
 returns table (
   id uuid,
@@ -167,7 +177,7 @@ as $$
   from public.chat_messages m
   left join public.profiles p on p.id = m.author_id
   where public.is_moderator()
-    and m.created_at > p_since
+    and m.created_at > p_since - interval '10 seconds'
   order by m.created_at
   limit 200;
 $$;
