@@ -15,6 +15,7 @@ import { PhotoGallery } from "@/components/PhotoGallery";
 import { PhotoVotePill } from "@/components/PhotoVotePill";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
+import { SuggestEditButton } from "@/components/SuggestEditDialog";
 import { TagList } from "@/components/TagList";
 import { useToast } from "@/components/Toast";
 import { WantedButton } from "@/components/WantedButton";
@@ -201,9 +202,13 @@ export function CommunityBobbleheadPage({
     ...(city ? [["City", city] as [string, string]] : []),
     ...(quantity?.trim() ? [["Quantity Issued", quantity] as [string, string]] : []),
   ];
-  const story = `This ${primaryName} bobblehead was added by the community for ${cityName} ${team.name} fans${
-    date && date !== "N/A" ? ` and given away on ${date}` : year !== "Unknown" ? ` in ${year}` : ""
-  }${quantity?.trim() ? `, with ${quantity} issued` : ""}.`;
+  // A published community edit replaces the computed sentence. See
+  // supabase/description_edits.sql.
+  const story =
+    giveaway.description ??
+    `This ${primaryName} bobblehead was added by the community for ${cityName} ${team.name} fans${
+      date && date !== "N/A" ? ` and given away on ${date}` : year !== "Unknown" ? ` in ${year}` : ""
+    }${quantity?.trim() ? `, with ${quantity} issued` : ""}.`;
 
   // Owned and wanted are mutually exclusive: you don't want what's already on
   // your shelf, and something you're still hunting for isn't on it. Whichever
@@ -443,9 +448,17 @@ export function CommunityBobbleheadPage({
             ) : null}
 
             <div className="rounded-xl border border-border-soft bg-surface p-5">
-              <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
-                About This Bobblehead
-              </h2>
+              <div className="flex items-baseline justify-between gap-3">
+                <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
+                  About This Bobblehead
+                </h2>
+                <SuggestEditButton
+                  teamSlug={team.slug}
+                  bobbleheadId={giveaway.id}
+                  source="community"
+                  currentText={story}
+                />
+              </div>
               <p className="mt-2 text-sm leading-6 text-zinc-700">{story}</p>
             </div>
 

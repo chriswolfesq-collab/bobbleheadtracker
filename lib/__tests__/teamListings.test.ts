@@ -25,6 +25,7 @@ const override = (over: Partial<BobbleheadOverride> = {}): BobbleheadOverride =>
   city: null,
   rarity: null,
   rarityNote: null,
+  description: null,
   deleted: false,
   photoHidden: false,
   ...over,

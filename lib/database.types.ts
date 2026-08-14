@@ -84,6 +84,7 @@ export type Database = {
         Row: {
           bobblehead_id: string
           city: string | null
+          description: string | null
           date: string | null
           deleted: boolean
           nickname: string | null
@@ -100,6 +101,7 @@ export type Database = {
         Insert: {
           bobblehead_id: string
           city?: string | null
+          description?: string | null
           date?: string | null
           deleted?: boolean
           nickname?: string | null
@@ -116,6 +118,7 @@ export type Database = {
         Update: {
           bobblehead_id?: string
           city?: string | null
+          description?: string | null
           date?: string | null
           deleted?: boolean
           nickname?: string | null
@@ -135,6 +138,7 @@ export type Database = {
         Row: {
           approved_by: string | null
           city: string | null
+          description: string | null
           created_at: string
           date: string
           id: string
@@ -150,6 +154,7 @@ export type Database = {
         Insert: {
           approved_by?: string | null
           city?: string | null
+          description?: string | null
           created_at?: string
           date?: string
           id: string
@@ -165,6 +170,7 @@ export type Database = {
         Update: {
           approved_by?: string | null
           city?: string | null
+          description?: string | null
           created_at?: string
           date?: string
           id?: string
@@ -224,6 +230,42 @@ export type Database = {
           status?: string
           team_slug?: string
           title?: string | null
+        }
+        Relationships: []
+      }
+      description_edit_requests: {
+        Row: {
+          bobblehead_id: string
+          created_at: string
+          id: string
+          proposed: string
+          requested_by: string
+          reviewed_at: string | null
+          source: string
+          status: string
+          team_slug: string
+        }
+        Insert: {
+          bobblehead_id: string
+          created_at?: string
+          id?: string
+          proposed: string
+          requested_by: string
+          reviewed_at?: string | null
+          source?: string
+          status?: string
+          team_slug: string
+        }
+        Update: {
+          bobblehead_id?: string
+          created_at?: string
+          id?: string
+          proposed?: string
+          requested_by?: string
+          reviewed_at?: string | null
+          source?: string
+          status?: string
+          team_slug?: string
         }
         Relationships: []
       }

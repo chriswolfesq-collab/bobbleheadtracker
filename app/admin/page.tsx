@@ -122,6 +122,19 @@ export default function AdminPage() {
             </p>
           </Link>
 
+          {/* Outside the isAdmin block, like reports: a description belongs to
+              one team's listing, so its rep rules on it. */}
+          <Link href="/admin/edit-requests" className={cardClass}>
+            <NotificationBadge count={counts.descriptionEdits} />
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900">
+              Description edits
+            </p>
+            <p className="mt-2 text-sm text-zinc-600">
+              Publish or reject rewrites members suggested for a listing&apos;s description
+              {isRep ? " on your team" : ""}.
+            </p>
+          </Link>
+
           {/* Outside the isAdmin block on purpose: the board is the one place
               reps and admins talk to each other, so it has to be reachable
               from a rep's dashboard too. */}

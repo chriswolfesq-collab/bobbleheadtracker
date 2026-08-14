@@ -28,6 +28,8 @@ import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 export type AdminQueueCounts = {
   submissions: number;
   reports: number;
+  /** Suggested rewrites of a listing's description, awaiting a ruling. */
+  descriptionEdits: number;
   /** Forum threads with activity this account hasn't read. */
   forumUnread: number;
   deadImages: number;
@@ -48,6 +50,7 @@ type AdminQueueCountsValue = AdminQueueCounts & {
 const NO_COUNTS: Omit<AdminQueueCounts, "forumUnread"> = {
   submissions: 0,
   reports: 0,
+  descriptionEdits: 0,
   deadImages: 0,
   scrapedGiveaways: 0,
   tagRequests: 0,
@@ -107,6 +110,15 @@ export function AdminQueueCountsProvider({ children }: { children: React.ReactNo
           .select("id", { count: "exact", head: true })
           .eq("status", "pending"),
       ),
+      // Team-scoped by RLS too: a description belongs to one team's listing, so
+      // reps rule on their own without waiting on the admin.
+      countOf(
+        "pending description edits",
+        supabase
+          .from("description_edit_requests")
+          .select("id", { count: "exact", head: true })
+          .eq("status", "pending"),
+      ),
       // The rest are site-wide admin tools. Skipped for a rep, who has no tile
       // to click through to.
       isAdmin
@@ -145,10 +157,28 @@ export function AdminQueueCountsProvider({ children }: { children: React.ReactNo
               .eq("status", "new"),
           )
         : 0,
-    ]).then(([submissions, reports, deadImages, scrapedGiveaways, tagRequests, messages]) => {
-      if (cancelled) return;
-      setCounts({ submissions, reports, deadImages, scrapedGiveaways, tagRequests, messages });
-    });
+    ]).then(
+      ([
+        submissions,
+        reports,
+        descriptionEdits,
+        deadImages,
+        scrapedGiveaways,
+        tagRequests,
+        messages,
+      ]) => {
+        if (cancelled) return;
+        setCounts({
+          submissions,
+          reports,
+          descriptionEdits,
+          deadImages,
+          scrapedGiveaways,
+          tagRequests,
+          messages,
+        });
+      },
+    );
 
     return () => {
       cancelled = true;

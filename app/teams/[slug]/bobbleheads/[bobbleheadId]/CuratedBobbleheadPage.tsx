@@ -14,6 +14,7 @@ import { PhotoGallery } from "@/components/PhotoGallery";
 import { PhotoVotePill } from "@/components/PhotoVotePill";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
+import { SuggestEditButton } from "@/components/SuggestEditDialog";
 import { TagList } from "@/components/TagList";
 import { useToast } from "@/components/Toast";
 import { WantedButton } from "@/components/WantedButton";
@@ -254,7 +255,12 @@ export function CuratedBobbleheadPage({
     ...(quantity?.trim() ? [["Quantity Issued", quantity] as [string, string]] : []),
   ];
 
+  // A published community edit outranks the seed story, which outranks the
+  // sentence computed from the facts on the row. See
+  // supabase/description_edits.sql — the seed carries no story today, so most
+  // listings show the computed line until someone writes a better one.
   const story =
+    override?.description ??
     giveaway.story ??
     `This ${primaryName} bobblehead was given away to ${cityName} ${team.name} fans${
       date && date !== "N/A" ? ` on ${date}` : year !== "Unknown" ? ` in ${year}` : ""
@@ -526,9 +532,19 @@ export function CuratedBobbleheadPage({
             ) : null}
 
             <div className="rounded-xl border border-border-soft bg-surface p-5">
-              <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
-                About This Bobblehead
-              </h2>
+              <div className="flex items-baseline justify-between gap-3">
+                <h2 className="font-display text-base font-bold uppercase tracking-wide text-navy">
+                  About This Bobblehead
+                </h2>
+                {/* Same header-button placement as the Tags card's "Request a
+                    tag": asking is open to any member, publishing isn't. */}
+                <SuggestEditButton
+                  teamSlug={team.slug}
+                  bobbleheadId={giveaway.id}
+                  source="curated"
+                  currentText={story}
+                />
+              </div>
               <p className="mt-2 text-sm leading-6 text-zinc-700">{story}</p>
             </div>
 

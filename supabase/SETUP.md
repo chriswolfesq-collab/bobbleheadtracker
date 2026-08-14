@@ -401,6 +401,26 @@ strip even when out-voted so it can win back, and votes are rate-limited and
 swept by `admin_delete_bobblehead` (recreated here — the current version now
 lives in this file).
 
+## Description edit requests (recommended)
+
+Any signed-in member can suggest a rewrite of a listing's "About This
+Bobblehead" text from the listing page; the team's rep or the admin publishes
+or rejects it at `/admin/edit-requests`.
+
+1. In the SQL Editor, run `description_edits.sql` (needs `schema.sql`).
+
+Nothing to deploy. The text gets a real home for the first time — a
+`description` column on `bobblehead_overrides` (curated) and
+`community_bobbleheads` (community). Both already have revalidate triggers, so
+a published edit rebuilds the prerendered page with no extra plumbing; a
+separate table would have needed its own trigger or gone stale forever.
+Unlike tag requests (admin-only, one site-wide vocabulary), ruling here is
+`can_edit_team`-scoped: a description belongs to one team's listing, so its rep
+can publish without waiting on the admin, and the same head count gives a rep
+their team's badge number and the admin the site-wide one. Suggestions are
+rate-limited (10/hour, 50/day, SQLSTATE BB429) and one open suggestion per
+person per listing.
+
 ## Friends (recommended)
 
 Members befriend each other from a shared shelf link — Add Friend on any

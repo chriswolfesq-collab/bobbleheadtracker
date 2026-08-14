@@ -15,6 +15,10 @@ export type CommunityBobblehead = Giveaway & {
   city?: string | null;
   rarity?: RarityTier | null;
   rarityNote?: string | null;
+  /** The About This Bobblehead text, once a community edit request has been
+   *  published (supabase/description_edits.sql). Null falls back to the
+   *  computed sentence the page has always shown. */
+  description?: string | null;
 };
 
 export function useCommunityBobbleheads(teamSlug: string) {
@@ -170,7 +174,7 @@ export function useCommunityBobblehead(teamSlug: string, bobbleheadId: string) {
 
     supabase
       .from("community_bobbleheads")
-      .select("id, title, nickname, quantity, year, date, image_url, city, rarity, rarity_note")
+      .select("id, title, nickname, quantity, year, date, image_url, city, rarity, rarity_note, description")
       .eq("team_slug", teamSlug)
       .eq("id", bobbleheadId)
       .maybeSingle()
@@ -193,6 +197,7 @@ export function useCommunityBobblehead(teamSlug: string, bobbleheadId: string) {
             city: data.city,
             rarity: parseRarityTier(data.rarity),
             rarityNote: data.rarity_note,
+            description: data.description,
             community: true,
           });
         }
