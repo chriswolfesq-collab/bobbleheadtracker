@@ -10,6 +10,7 @@ import {
   useState,
 } from "react";
 import { useAdminAuth } from "@/lib/adminAuth";
+import { useChatUnreadCount } from "@/lib/chat";
 import { useForumUnreadCount } from "@/lib/forum";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 
@@ -32,6 +33,8 @@ export type AdminQueueCounts = {
   descriptionEdits: number;
   /** Forum threads with activity this account hasn't read. */
   forumUnread: number;
+  /** Chatroom messages posted since this account last opened the room. */
+  chatUnread: number;
   deadImages: number;
   scrapedGiveaways: number;
   tagRequests: number;
@@ -47,7 +50,7 @@ type AdminQueueCountsValue = AdminQueueCounts & {
 
 // Module-level so the "nothing to count" path can set it without handing React
 // a fresh object (and a re-render) every time.
-const NO_COUNTS: Omit<AdminQueueCounts, "forumUnread"> = {
+const NO_COUNTS: Omit<AdminQueueCounts, "forumUnread" | "chatUnread"> = {
   submissions: 0,
   reports: 0,
   descriptionEdits: 0,
@@ -82,11 +85,15 @@ export function AdminQueueCountsProvider({ children }: { children: React.ReactNo
   // Unread is a join against this reader's own marks, so it comes from the
   // forum's own RPC rather than a head count like the rest.
   const { count: forumUnread, refresh: refreshForum } = useForumUnreadCount();
+  // Same reason as the forum's: unread is measured against this reader's own
+  // mark, so it comes from its own RPC rather than a head count.
+  const { count: chatUnread, refresh: refreshChat } = useChatUnreadCount();
 
   const refresh = useCallback(() => {
     setNonce((current) => current + 1);
     refreshForum();
-  }, [refreshForum]);
+    refreshChat();
+  }, [refreshForum, refreshChat]);
 
   useEffect(() => {
     if (isLoading || !canAccess) return;
@@ -220,14 +227,16 @@ export function AdminQueueCountsProvider({ children }: { children: React.ReactNo
   const value = useMemo<AdminQueueCountsValue>(() => {
     // Gated here rather than cleared in the effect: whoever just signed out (or
     // lost their grant) shouldn't leave their numbers behind on the way.
-    const all = canAccess ? { ...counts, forumUnread } : { ...NO_COUNTS, forumUnread: 0 };
+    const all = canAccess
+      ? { ...counts, forumUnread, chatUnread }
+      : { ...NO_COUNTS, forumUnread: 0, chatUnread: 0 };
 
     return {
       ...all,
       total: Object.values(all).reduce((sum, count) => sum + count, 0),
       refresh,
     };
-  }, [canAccess, counts, forumUnread, refresh]);
+  }, [canAccess, counts, forumUnread, chatUnread, refresh]);
 
   return (
     <AdminQueueCountsContext.Provider value={value}>{children}</AdminQueueCountsContext.Provider>

@@ -12,7 +12,15 @@ import { useAdminAuth } from "@/lib/adminAuth";
 // The gate is a courtesy, not the enforcement. Every read here goes through a
 // SECURITY DEFINER RPC that checks is_moderator() for itself, so a signed-in
 // non-moderator who routes around this sees an empty board, not a private one.
-export function ModeratorGate({ children }: { children: React.ReactNode }) {
+export function ModeratorGate({
+  children,
+  what = "The Team Rep Forum",
+}: {
+  children: React.ReactNode;
+  /** What the refusal names, for the pages beyond the board that ask this same
+   *  question — the chatroom. Defaults to the forum, its first caller. */
+  what?: string;
+}) {
   const { user, isAdmin, isRep, isLoading, signOut } = useAdminAuth();
 
   if (isLoading) return null;
@@ -29,9 +37,7 @@ export function ModeratorGate({ children }: { children: React.ReactNode }) {
     return (
       <main className="min-h-full bg-slate-50 px-4 py-10 text-center text-zinc-900">
         <p className="text-sm font-black uppercase tracking-wide">Not authorized</p>
-        <p className="mt-2 text-sm text-zinc-600">
-          The Team Rep Forum is for admins and team reps.
-        </p>
+        <p className="mt-2 text-sm text-zinc-600">{what} is for admins and team reps.</p>
         <button
           type="button"
           onClick={() => signOut()}

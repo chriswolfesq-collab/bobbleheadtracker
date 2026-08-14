@@ -148,6 +148,18 @@ export default function AdminPage() {
             </p>
           </Link>
 
+          {/* Next to the forum, for the same reason it's outside the isAdmin
+              block: the room is the other half of reps talking to each other. */}
+          <Link href="/admin/chat" className={cardClass}>
+            <NotificationBadge count={counts.chatUnread} />
+            <p className="text-sm font-black uppercase tracking-wide text-zinc-900">
+              Team Rep Chatroom
+            </p>
+            <p className="mt-2 text-sm text-zinc-600">
+              The live room, for the quick question that doesn&apos;t need a thread.
+            </p>
+          </Link>
+
           {isAdmin ? (
             <>
               <Link href="/admin/dead-images" className={cardClass}>

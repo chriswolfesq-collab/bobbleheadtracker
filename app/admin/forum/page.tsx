@@ -197,10 +197,23 @@ function Board() {
             { label: "Team Rep Forum" },
           ]}
         />
-        <h1 className="mt-3 text-2xl font-black uppercase tracking-wide">Team Rep Forum</h1>
+        <div className="mt-3 flex flex-wrap items-baseline justify-between gap-2">
+          <h1 className="text-2xl font-black uppercase tracking-wide">Team Rep Forum</h1>
+          <Link
+            href="/admin/chat"
+            className="text-[11px] font-black uppercase tracking-wide text-accent transition hover:text-accent-hover"
+          >
+            Open the chatroom →
+          </Link>
+        </div>
         <p className="mt-1 text-sm text-zinc-600">
           A private board for admins and team reps — questions about the queue, how we&apos;re
           tagging things, a promo that ran in two cities. Everyone who moderates sees every thread.
+          For something quicker, there&apos;s{" "}
+          <Link href="/admin/chat" className="font-semibold text-accent hover:underline">
+            the chatroom
+          </Link>
+          .
         </p>
 
         <div className="mt-6">

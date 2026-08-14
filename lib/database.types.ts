@@ -185,6 +185,45 @@ export type Database = {
         }
         Relationships: []
       }
+      chat_messages: {
+        Row: {
+          author_id: string | null
+          author_name: string | null
+          body: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          author_id?: string | null
+          author_name?: string | null
+          body: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          author_id?: string | null
+          author_name?: string | null
+          body?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      chat_reads: {
+        Row: {
+          read_at: string
+          user_id: string
+        }
+        Insert: {
+          read_at?: string
+          user_id: string
+        }
+        Update: {
+          read_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       dead_images: {
         Row: {
           bobblehead_id: string
@@ -1131,6 +1170,42 @@ export type Database = {
         Returns: undefined
       }
       forum_unread_count: { Args: never; Returns: number }
+      chat_list_messages: {
+        Args: { p_before?: string }
+        Returns: {
+          author_avatar_path: string
+          author_id: string
+          author_name: string
+          body: string
+          created_at: string
+          id: string
+        }[]
+      }
+      chat_new_messages: {
+        Args: { p_since: string }
+        Returns: {
+          author_avatar_path: string
+          author_id: string
+          author_name: string
+          body: string
+          created_at: string
+          id: string
+        }[]
+      }
+      chat_send: {
+        Args: { p_body: string }
+        Returns: {
+          author_avatar_path: string
+          author_id: string
+          author_name: string
+          body: string
+          created_at: string
+          id: string
+        }[]
+      }
+      chat_delete_message: { Args: { p_id: string }; Returns: undefined }
+      chat_mark_read: { Args: never; Returns: undefined }
+      chat_unread_count: { Args: never; Returns: number }
       cancel_friend_request: { Args: { p_addressee: string }; Returns: undefined }
       friend_shelf_status: {
         Args: { p_slug: string }
