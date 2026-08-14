@@ -77,14 +77,16 @@ export function FriendShelfPanel({
               ? `${displayName} wants to be friends`
               : `Friends see ${displayName}'s full shelf`}
           </p>
-          {/* Deliberately conditional language: whether a friend actually sees
-              the items depends on the owner's "Show my items" setting, which is
-              off by default. Promising the full shelf outright would be a lie
-              on most shelves. */}
+          {/* Accepting is the moment consent is given, so this says what it
+              actually grants rather than the reassuring version. Friends see
+              items whenever EITHER visibility switch is on, and the friends one
+              is on unless someone turned it off — so for a shelf that's private
+              to the public, accepting is what opens it. Understating that here
+              would be the one place it really matters. */}
           <p className="mx-auto mt-1.5 max-w-sm text-sm text-zinc-600">
             {status === "pending_in"
-              ? "Accept and you'll each see the other's wanted list, and their individual bobbleheads if they've turned on Show my items."
-              : "Friends can see each other's individual bobbleheads and wanted lists, rather than just the totals — as far as each of you has turned on Show my items. It goes both ways."}
+              ? "Accept and you'll each see the other's bobbleheads, favorites and wanted list — including the items your shelf keeps private from everyone else. Either of you can turn that off in settings."
+              : "Friends see each other's bobbleheads, favorites and wanted lists rather than just the totals — including items a shelf keeps private from the public. It goes both ways, and either of you can turn it off in settings."}
           </p>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
             {status === "signed-out" ? (

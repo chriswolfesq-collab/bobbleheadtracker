@@ -79,13 +79,14 @@ export function FriendsSection({
           Add a Friend
         </h2>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-700">
-          Friends see each other&rsquo;s wanted lists, and each other&rsquo;s individual
-          bobbleheads as far as each of you has turned on{" "}
+          Friends see each other&rsquo;s bobbleheads, favorites and wanted lists rather than just
+          the totals — including items a shelf keeps private from the public. It goes both ways,
+          and you can turn off what friends see under{" "}
           <Link href="/settings" className="font-semibold text-accent hover:underline">
-            Show my items
-          </Link>{" "}
-          — rather than just the totals. Paste a collector&rsquo;s shelf link (or visit their shelf
-          and tap <span className="font-semibold">Add friend</span> there).
+            Show my friends more
+          </Link>
+          . Paste a collector&rsquo;s shelf link (or visit their shelf and tap{" "}
+          <span className="font-semibold">Add friend</span> there).
         </p>
         <form
           className="mt-4 flex flex-wrap items-center gap-2"
