@@ -3,15 +3,22 @@
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CollectionTransfer } from "@/components/CollectionTransfer";
 import { EmailAlertsToggle } from "@/components/EmailAlertsToggle";
+import { FriendVisibilityToggle } from "@/components/FriendVisibilityToggle";
 import { GalleryToggle } from "@/components/GalleryToggle";
 import { ShelfLinkCard } from "@/components/ShelfLinkCard";
 import { useAuth } from "@/lib/auth";
-import { useEmailPreferences, useGallerySharing, useMyShelf } from "@/lib/profile";
+import {
+  useEmailPreferences,
+  useFriendVisibility,
+  useGallerySharing,
+  useMyShelf,
+} from "@/lib/profile";
 
 export function SettingsPageClient() {
   const { user, isLoading: isAuthLoading } = useAuth();
   const sharing = useMyShelf();
   const gallery = useGallerySharing();
+  const friendVisibility = useFriendVisibility();
   const alerts = useEmailPreferences();
 
   return (
@@ -44,6 +51,10 @@ export function SettingsPageClient() {
           {/* Right under the link card: the gallery decides what that link
               shows, so the two read as one setting. */}
           <GalleryToggle gallery={gallery} />
+          {/* Directly under the public switch: the two answer the same question
+              for different audiences, and reading them together is the only way
+              to see what each one covers. */}
+          <FriendVisibilityToggle visibility={friendVisibility} />
           <EmailAlertsToggle alerts={alerts} />
           <CollectionTransfer />
         </div>

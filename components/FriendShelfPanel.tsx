@@ -23,7 +23,8 @@ export function FriendShelfPanel({
   publicGalleryShown: boolean;
 }) {
   const { openAuthModal } = useAuth();
-  const { status, items, isGalleryLoading, send, accept, cancel } = useFriendShelf(slug);
+  const { status, items, isGalleryLoading, ownerSharesWithFriends, send, accept, cancel } =
+    useFriendShelf(slug);
 
   if (status === "loading" || status === "self") return null;
 
@@ -58,17 +59,16 @@ export function FriendShelfPanel({
             <div className="relative left-1/2 w-[calc(100vw-1rem)] max-w-6xl -translate-x-1/2 px-2 sm:px-4">
               <PublicGallery displayName={displayName} items={friendItems} />
             </div>
-          ) : (
-            // Being friends is no longer enough on its own: the friend gallery
-            // is gated on the owner's "Show my items" setting too, and that's
-            // off by default. Saying so beats an empty space under a banner
-            // that just promised a shelf.
+          ) : !ownerSharesWithFriends ? (
+            // The owner turned friends-only visibility off. Say so rather than
+            // leaving an empty space under a banner about being friends — and
+            // say it's theirs to change, since a friend request can't.
             <p className="mx-auto mt-6 max-w-md text-center text-sm leading-6 text-zinc-600">
-              {displayName} hasn&rsquo;t turned on <span className="font-semibold">Show my items</span>,
-              so their individual bobbleheads stay hidden — you see the totals above. It&rsquo;s a
-              switch on their settings page, not something a friend request unlocks.
+              {displayName} keeps their individual bobbleheads private, friends included, so you
+              see the totals above. That&rsquo;s a switch on their settings, not something a friend
+              request unlocks.
             </p>
-          )}
+          ) : null}
         </>
       ) : (
         <div className="rounded-2xl border border-border-soft bg-surface p-6 text-center">

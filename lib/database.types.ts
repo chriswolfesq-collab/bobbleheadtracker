@@ -531,6 +531,7 @@ export type Database = {
           email_submission_updates: boolean
           email_wishlist_alerts: boolean
           gallery_public: boolean
+          friends_see_items: boolean
           id: string
           is_public: boolean
           awards_intro_ack_at: string | null
@@ -550,6 +551,7 @@ export type Database = {
           email_submission_updates?: boolean
           email_wishlist_alerts?: boolean
           gallery_public?: boolean
+          friends_see_items?: boolean
           id: string
           is_public?: boolean
           awards_intro_ack_at?: string | null
@@ -569,6 +571,7 @@ export type Database = {
           email_submission_updates?: boolean
           email_wishlist_alerts?: boolean
           gallery_public?: boolean
+          friends_see_items?: boolean
           id?: string
           is_public?: boolean
           awards_intro_ack_at?: string | null
@@ -1211,6 +1214,7 @@ export type Database = {
         Args: { p_slug: string }
         Returns: {
           owner_id: string
+          owner_shares_with_friends: boolean
           status: string
         }[]
       }
@@ -1312,6 +1316,7 @@ export type Database = {
         Returns: undefined
       }
       send_forum_digest: { Args: { p_hours?: number }; Returns: number }
+      set_friends_see_items: { Args: { p_enabled: boolean }; Returns: undefined }
       set_gallery_public: { Args: { p_enabled: boolean }; Returns: undefined }
       send_rep_activity_digest: { Args: { p_hours?: number }; Returns: number }
       set_email_preference: {

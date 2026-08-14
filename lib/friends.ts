@@ -161,6 +161,10 @@ export function useFriendShelf(slug: string) {
   const { showError } = useToast();
   const [fetchedStatus, setFetchedStatus] = useState<FriendShelfStatus>("loading");
   const [ownerId, setOwnerId] = useState<string | null>(null);
+  // Whether this shelf's owner shows friends more than the public — the reason
+  // a friend can be looking at an empty gallery, so the panel can say which
+  // switch is off instead of guessing (supabase/friends_visibility.sql).
+  const [ownerSharesWithFriends, setOwnerSharesWithFriends] = useState(true);
   // Keyed by slug so a stale gallery can't flash under a different shelf, and
   // so loading is *derived* (key mismatch) rather than its own flag — the
   // effects below then never need a synchronous setState.
@@ -193,6 +197,7 @@ export function useFriendShelf(slug: string) {
       const row = (data ?? [])[0];
       setFetchedStatus((row?.status as FriendShelfStatus) ?? "none");
       setOwnerId(row?.owner_id ?? null);
+      setOwnerSharesWithFriends(row?.owner_shares_with_friends ?? true);
     });
 
     return () => {
@@ -275,5 +280,5 @@ export function useFriendShelf(slug: string) {
     refresh();
   }, [ownerId, refresh, showError]);
 
-  return { status, items, isGalleryLoading, send, accept, cancel };
+  return { status, items, isGalleryLoading, ownerSharesWithFriends, send, accept, cancel };
 }

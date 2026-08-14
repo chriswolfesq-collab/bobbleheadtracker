@@ -574,6 +574,75 @@ export function useEmailPreferences(): EmailPreferences {
   };
 }
 
+/** The friends-only half of item visibility — see supabase/friends_visibility.sql.
+ *  Same shape as GallerySharing, and deliberately a separate switch: showing the
+ *  whole internet and showing people whose friend requests you accepted are
+ *  different decisions. */
+export type FriendVisibility = GallerySharing;
+
+export function useFriendVisibility(): FriendVisibility {
+  const { user } = useAuth();
+  const userId = user?.id ?? null;
+  // Optimistic default matches the column default (on) — unlike the public
+  // gallery's, because this one only ever applies to someone you accepted.
+  const [enabled, setEnabledState] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    let cancelled = false;
+
+    supabase
+      .from("profiles")
+      .select("friends_see_items")
+      .eq("id", userId)
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load your friend settings:", error.message);
+        } else {
+          setEnabledState(data?.friends_see_items ?? true);
+        }
+
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
+
+  async function setEnabled(next: boolean): Promise<{ error: string | null }> {
+    if (!userId) return { error: "Not signed in." };
+
+    // Optimistic; reverted below if the save fails.
+    const previous = enabled;
+    setEnabledState(next);
+    setIsSaving(true);
+    const { error } = await supabase.rpc("set_friends_see_items", { p_enabled: next });
+    setIsSaving(false);
+
+    if (error) {
+      console.error("Failed to update your friend settings:", error.message);
+      setEnabledState(previous);
+      return { error: "Couldn't update that. Try again." };
+    }
+
+    return { error: null };
+  }
+
+  return {
+    enabled: userId ? enabled : true,
+    isLoading: userId ? isLoading : false,
+    isSaving,
+    setEnabled,
+  };
+}
+
 export type GallerySharing = {
   enabled: boolean;
   isLoading: boolean;
