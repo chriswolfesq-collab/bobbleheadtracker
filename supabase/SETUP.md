@@ -1,8 +1,47 @@
+# Run order
+
+Read this before running any .sql file against a database that is already
+live. The files below are ordered, and re-running an earlier one silently
+undoes a later one.
+
+`schema.sql` is the only file that is dangerous to repeat. Its tables and
+inserts are idempotent, but its **function** definitions are not: `create or
+replace` reinstates the old version of anything a later file extended, returns
+success, and logs nothing. The damage surfaces on the next signup, not on the
+run.
+
+One function is currently owned by three files. `sync_profile_from_auth` is
+born in `schema.sql`, gains the member number in `awards.sql`, gains the
+`avatar_path` mirror in `avatars.sql`, and gains the shelf-slug mint in
+`all_shelves_public.sql`. **The last two together are the live definition.**
+Losing the mirror is worse than it sounds — the forum's read RPCs and the
+chatroom both join `profiles.avatar_path` for every post and message, so every
+byline on the site loses its picture, not just the profile page.
+
+So:
+
+- To add a table, an admin, or a seed row, run **only that statement**, never
+  the whole file.
+- If `schema.sql` does get run against a live database, immediately re-run
+  `avatars.sql`, then `all_shelves_public.sql`, in that order.
+- Then verify, because the CLI reports nothing useful on success:
+
+```sql
+select (select prosrc like '%avatar_path%' from pg_proc
+          where proname='sync_profile_from_auth') as keeps_avatar,
+       (select prosrc like '%assign_shelf_slug%' from pg_proc
+          where proname='sync_profile_from_auth') as mints_slug,
+       to_regproc('public.disable_public_shelf') is null as disable_dropped;
+```
+
+All three must come back true.
+
 # One-time setup
 
 1. Create a free project at supabase.com. From Settings > API, copy the
    **Project URL** and **anon public key**.
-2. In the Supabase SQL Editor, run `schema.sql` (this repo, same folder).
+2. In the Supabase SQL Editor, run `schema.sql` (this repo, same folder). On a
+   fresh project only — see "Run order" above.
 3. Add the URL/key as GitHub Actions repo secrets: `SUPABASE_URL`,
    `SUPABASE_ANON_KEY` (Settings > Secrets and variables > Actions).
 4. For local dev, copy `.env.local.example` to `.env.local` and fill in the

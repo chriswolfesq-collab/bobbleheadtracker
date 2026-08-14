@@ -1,6 +1,24 @@
 -- Bobblehead tracker schema.
 -- Run this once in the Supabase SQL editor (Project > SQL Editor > New query).
--- Safe to re-run: uses `if not exists` / `on conflict do nothing` throughout.
+--
+-- DO NOT re-run this file against a database that has had the later files
+-- applied. Every table and insert here is idempotent, but the function
+-- definitions are not: `create or replace` silently reinstates THIS file's
+-- version of anything a later file has since extended, and reports success.
+--
+-- Two casualties, both silent until the next signup:
+--   * sync_profile_from_auth (below) — avatars.sql adds the avatar_path
+--     mirror and all_shelves_public.sql adds the shelf-slug mint. Reverting it
+--     stops profile photos syncing and leaves new members with no shelf link,
+--     and drains the picture out of every forum and chatroom byline, which
+--     join profiles.avatar_path live.
+--   * disable_public_shelf (below) — all_shelves_public.sql drops it on
+--     purpose; reinstating it lets any signed-in session hide its own shelf
+--     from the browser console, with no UI left that should allow that.
+--
+-- To add a table or an admin, run just the statement you need. If the whole
+-- file does get run, immediately re-run avatars.sql then all_shelves_public.sql,
+-- in that order. See supabase/SETUP.md, "Run order".
 
 -- ---------------------------------------------------------------------------
 -- Admin check
@@ -41,7 +59,9 @@ grant execute on function public.is_admin() to anon, authenticated;
 
 -- Seed admin-mode accounts here. The email must already exist as a Supabase
 -- Auth account — sign up for it once at /admin (its "Need admin credentials?
--- Sign up" link) — then add it below and re-run this file. Safe to re-run.
+-- Sign up" link) — then add it below and run ONLY the insert that follows.
+-- Do not re-run the whole file to pick up a new admin: see the header. The
+-- insert itself is safe to repeat.
 insert into public.admins (email) values
   ('chriswolfesq@gmail.com'),
   ('kylesigler7@hotmail.com')
