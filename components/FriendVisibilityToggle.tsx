@@ -47,7 +47,7 @@ export function FriendVisibilityToggle({ visibility }: { visibility: FriendVisib
           type="button"
           role="switch"
           aria-checked={enabled}
-          aria-label="Show my items to friends"
+          aria-label="Show my friends more than the public sees"
           disabled={isSaving}
           onClick={handleToggle}
           className={`relative h-6 w-11 flex-shrink-0 rounded-full transition disabled:opacity-60 ${
