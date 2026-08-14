@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { Avatar } from "@/components/Avatar";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { ForumImage } from "@/components/ForumImage";
+import { ForumImagePicker } from "@/components/ForumImagePicker";
 import { ModeratorGate } from "@/components/ModeratorGate";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { avatarPublicUrl } from "@/lib/avatar";
@@ -22,6 +24,7 @@ import {
   type ForumReply,
   type ForumTopic,
 } from "@/lib/forum";
+import { removeForumImages, uploadForumImage } from "@/lib/forumImages";
 import { TEAMS } from "@/lib/teams";
 
 // One thread: the opening post, its replies in order, and the box to add
@@ -72,6 +75,7 @@ function Thread({ topicId }: { topicId: string }) {
   const [busy, setBusy] = useState(false);
 
   const [replyBody, setReplyBody] = useState("");
+  const [replyImageFile, setReplyImageFile] = useState<File | null>(null);
   // Which post is open in an editor, and the draft in it. One at a time: two
   // simultaneous edits on the same page is a conflict nobody asked for.
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -117,9 +121,24 @@ function Thread({ topicId }: { topicId: string }) {
   async function submitReply(event: React.FormEvent) {
     event.preventDefault();
     const body = replyBody;
+    const imageFile = replyImageFile;
     await run(async () => {
-      await postReply(topicId, body);
+      // Image first so the reply row can carry its path; sweep the upload if
+      // the reply itself is refused, so a retry doesn't stack orphans.
+      let imagePath: string | null = null;
+      if (imageFile && user) {
+        const uploaded = await uploadForumImage(user.id, imageFile);
+        if (uploaded.error) throw new Error(uploaded.error);
+        imagePath = uploaded.path;
+      }
+      try {
+        await postReply(topicId, body, imagePath);
+      } catch (caught) {
+        if (imagePath) void removeForumImages([imagePath]);
+        throw caught;
+      }
       setReplyBody("");
+      setReplyImageFile(null);
     });
   }
 
@@ -244,6 +263,12 @@ function Thread({ topicId }: { topicId: string }) {
                 />
               </div>
               <PostBody body={topic.body} />
+              {topic.image_path ? (
+                <ForumImage
+                  path={topic.image_path}
+                  alt={`Image attached by ${topic.author_name ?? "someone"}`}
+                />
+              ) : null}
             </>
           )}
 
@@ -363,6 +388,12 @@ function Thread({ topicId }: { topicId: string }) {
                       editedAt={reply.edited_at}
                     />
                     <PostBody body={reply.body} />
+                    {reply.image_path ? (
+                      <ForumImage
+                        path={reply.image_path}
+                        alt={`Image attached by ${reply.author_name ?? "someone"}`}
+                      />
+                    ) : null}
                     {canEdit(reply.author_id) ? (
                       <div className="mt-3 flex gap-2">
                         <button
@@ -429,6 +460,7 @@ function Thread({ topicId }: { topicId: string }) {
               maxLength={8000}
               className="w-full resize-y rounded border border-black/15 px-3 py-2 text-sm leading-6 outline-none focus:border-accent"
             />
+            <ForumImagePicker file={replyImageFile} onSelect={setReplyImageFile} disabled={busy} />
             <div className="mt-3 flex justify-end">
               <button
                 type="submit"

@@ -364,3 +364,22 @@ path, mirrored from auth `user_metadata` into `profiles.avatar_path` by the
 same trigger that mirrors the display name. Run it *before* deploying the app
 code — until the bucket and the recreated forum RPCs exist, photo uploads fail
 with an error and forum bylines simply show initials.
+
+## Images on forum posts (recommended)
+
+Lets a moderator attach one image to a Team Rep Forum topic or reply — the
+picker sits under the composer's text box, and the picture renders in the
+thread, click to enlarge.
+
+1. In the SQL Editor, run `forum_images.sql` (needs `mod_forum.sql`, then
+   `avatars.sql` — it recreates the forum read RPCs *with* the avatar column
+   they added).
+
+Nothing to deploy. Unlike avatars the new `forum-images` bucket is **private**:
+the board is private, so the app reads pictures through hour-long signed URLs
+minted against the viewer's moderator session, and only moderators can upload
+(into their own folder) or delete. Images are resized to at most 1600px in the
+browser before upload. Deleting a post returns the orphaned paths to the client,
+which sweeps the files best-effort; a missed sweep leaks an unreachable file,
+nothing more. Run it *before* deploying the app code — the recreated write RPCs
+change signature, so an old database with new code refuses every new post.

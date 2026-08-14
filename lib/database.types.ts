@@ -262,6 +262,7 @@ export type Database = {
           created_at: string
           edited_at: string | null
           id: string
+          image_path: string | null
           topic_id: string
         }
         Insert: {
@@ -272,6 +273,7 @@ export type Database = {
           created_at?: string
           edited_at?: string | null
           id?: string
+          image_path?: string | null
           topic_id: string
         }
         Update: {
@@ -282,6 +284,7 @@ export type Database = {
           created_at?: string
           edited_at?: string | null
           id?: string
+          image_path?: string | null
           topic_id?: string
         }
         Relationships: [
@@ -303,6 +306,7 @@ export type Database = {
           created_at: string
           edited_at: string | null
           id: string
+          image_path: string | null
           last_activity_at: string
           locked: boolean
           pinned: boolean
@@ -318,6 +322,7 @@ export type Database = {
           created_at?: string
           edited_at?: string | null
           id?: string
+          image_path?: string | null
           last_activity_at?: string
           locked?: boolean
           pinned?: boolean
@@ -333,6 +338,7 @@ export type Database = {
           created_at?: string
           edited_at?: string | null
           id?: string
+          image_path?: string | null
           last_activity_at?: string
           locked?: boolean
           pinned?: boolean
@@ -951,11 +957,16 @@ export type Database = {
         }[]
       }
       forum_create_topic: {
-        Args: { p_body: string; p_team_slug?: string; p_title: string }
+        Args: {
+          p_body: string
+          p_image_path?: string
+          p_team_slug?: string
+          p_title: string
+        }
         Returns: string
       }
-      forum_delete_reply: { Args: { p_id: string }; Returns: undefined }
-      forum_delete_topic: { Args: { p_id: string }; Returns: undefined }
+      forum_delete_reply: { Args: { p_id: string }; Returns: string[] }
+      forum_delete_topic: { Args: { p_id: string }; Returns: string[] }
       forum_edit_reply: {
         Args: { p_body: string; p_id: string }
         Returns: undefined
@@ -974,6 +985,7 @@ export type Database = {
           created_at: string
           edited_at: string
           id: string
+          image_path: string
           last_activity_at: string
           locked: boolean
           pinned: boolean
@@ -992,6 +1004,7 @@ export type Database = {
           created_at: string
           edited_at: string
           id: string
+          image_path: string
           topic_id: string
         }[]
       }
@@ -1005,6 +1018,7 @@ export type Database = {
           created_at: string
           edited_at: string
           id: string
+          image_path: string
           last_activity_at: string
           locked: boolean
           pinned: boolean
@@ -1016,7 +1030,7 @@ export type Database = {
       }
       forum_mark_read: { Args: { p_topic_id: string }; Returns: undefined }
       forum_reply: {
-        Args: { p_body: string; p_topic_id: string }
+        Args: { p_body: string; p_image_path?: string; p_topic_id: string }
         Returns: string
       }
       forum_set_locked: {

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useAdminAuth } from "@/lib/adminAuth";
+import { removeForumImages } from "@/lib/forumImages";
 import { submissionError } from "@/lib/rateLimit";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 
@@ -14,6 +15,9 @@ export type ForumTopic = {
   id: string;
   title: string;
   body: string;
+  /** Path of the attached image in the private forum-images bucket, if any —
+   *  render it through <ForumImage>, which mints the signed URL. */
+  image_path: string | null;
   author_id: string | null;
   author_name: string | null;
   /** A path in the public avatars bucket — render it via avatarPublicUrl().
@@ -38,6 +42,8 @@ export type ForumReply = {
   id: string;
   topic_id: string;
   body: string;
+  /** Same attached-image path as ForumTopic's. */
+  image_path: string | null;
   author_id: string | null;
   author_name: string | null;
   /** Same live-joined avatar path as ForumTopic's. */
@@ -85,6 +91,7 @@ export async function createTopic(input: {
   title: string;
   body: string;
   teamSlug?: string | null;
+  imagePath?: string | null;
 }): Promise<string> {
   const { data, error } = await supabase.rpc("forum_create_topic", {
     p_title: input.title,
@@ -92,15 +99,21 @@ export async function createTopic(input: {
     // Omitted rather than sent as null: the RPC's p_team_slug defaults to null
     // already, and supabase-js types an optional argument as `string | undefined`.
     p_team_slug: input.teamSlug ?? undefined,
+    p_image_path: input.imagePath ?? undefined,
   });
   if (error) throw submissionError(error);
   return data as string;
 }
 
-export async function postReply(topicId: string, body: string): Promise<string> {
+export async function postReply(
+  topicId: string,
+  body: string,
+  imagePath?: string | null,
+): Promise<string> {
   const { data, error } = await supabase.rpc("forum_reply", {
     p_topic_id: topicId,
     p_body: body,
+    p_image_path: imagePath ?? undefined,
   });
   if (error) throw submissionError(error);
   return data as string;
@@ -120,14 +133,18 @@ export async function editReply(id: string, body: string): Promise<void> {
   if (error) throw submissionError(error);
 }
 
+// Both deletes hand back the orphaned image paths (SQL can drop the rows but
+// not the files), swept here best-effort — the post is already gone either way.
 export async function deleteTopic(id: string): Promise<void> {
-  const { error } = await supabase.rpc("forum_delete_topic", { p_id: id });
+  const { data, error } = await supabase.rpc("forum_delete_topic", { p_id: id });
   if (error) throw submissionError(error);
+  void removeForumImages((data ?? []) as string[]);
 }
 
 export async function deleteReply(id: string): Promise<void> {
-  const { error } = await supabase.rpc("forum_delete_reply", { p_id: id });
+  const { data, error } = await supabase.rpc("forum_delete_reply", { p_id: id });
   if (error) throw submissionError(error);
+  void removeForumImages((data ?? []) as string[]);
 }
 
 export async function setTopicPinned(id: string, pinned: boolean): Promise<void> {

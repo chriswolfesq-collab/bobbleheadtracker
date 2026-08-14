@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { Avatar } from "@/components/Avatar";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { ForumImagePicker } from "@/components/ForumImagePicker";
 import { ModeratorGate } from "@/components/ModeratorGate";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { avatarPublicUrl } from "@/lib/avatar";
 import { createTopic, formatForumTime, listTopics, type ForumTopicListing } from "@/lib/forum";
+import { removeForumImages, uploadForumImage } from "@/lib/forumImages";
 import { TEAMS } from "@/lib/teams";
 
 // The board: every thread admins and team reps can see, newest activity first
@@ -31,11 +33,12 @@ function Chip({ children, tone = "muted" }: { children: React.ReactNode; tone?: 
 }
 
 function Composer({ onPosted }: { onPosted: () => void }) {
-  const { editableTeams, isAdmin } = useAdminAuth();
+  const { user, editableTeams, isAdmin } = useAdminAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [teamSlug, setTeamSlug] = useState("");
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -48,6 +51,7 @@ function Composer({ onPosted }: { onPosted: () => void }) {
     setTitle("");
     setBody("");
     setTeamSlug("");
+    setImageFile(null);
     setError(null);
   }
 
@@ -57,7 +61,22 @@ function Composer({ onPosted }: { onPosted: () => void }) {
     setError(null);
 
     try {
-      await createTopic({ title, body, teamSlug: teamSlug || null });
+      // The image goes up first so the topic row can carry its path. If the
+      // topic insert then fails, sweep the fresh upload — otherwise retrying
+      // the post would stack orphans in the bucket.
+      let imagePath: string | null = null;
+      if (imageFile && user) {
+        const uploaded = await uploadForumImage(user.id, imageFile);
+        if (uploaded.error) throw new Error(uploaded.error);
+        imagePath = uploaded.path;
+      }
+
+      try {
+        await createTopic({ title, body, teamSlug: teamSlug || null, imagePath });
+      } catch (caught) {
+        if (imagePath) void removeForumImages([imagePath]);
+        throw caught;
+      }
       reset();
       setIsOpen(false);
       onPosted();
@@ -98,6 +117,8 @@ function Composer({ onPosted }: { onPosted: () => void }) {
         maxLength={8000}
         className="mt-3 w-full resize-y rounded border border-black/15 px-3 py-2 text-sm leading-6 text-zinc-800 outline-none focus:border-accent"
       />
+
+      <ForumImagePicker file={imageFile} onSelect={setImageFile} disabled={isSaving} />
 
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <label className="text-[11px] font-black uppercase tracking-wide text-zinc-500">
