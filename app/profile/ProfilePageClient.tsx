@@ -93,6 +93,9 @@ export function ProfilePageClient() {
               teamsCompleted: stats.teamsCompleted,
               memberNumber: awardFacts.memberNumber,
               repTeams: awardFacts.repTeams,
+              approvedSubmissions: awardFacts.approvedSubmissions,
+              qualifyingReferrals: awardFacts.qualifyingReferrals,
+              streakMonths: awardFacts.streakMonths,
             }}
             isLoading={isCollectionLoading || isSiteTotalLoading || awardFacts.isLoading}
           />

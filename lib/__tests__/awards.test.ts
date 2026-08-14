@@ -1,6 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { AWARDS, type AwardFacts, NO_AWARD_FACTS, evaluateAwards } from "@/lib/awards";
+import {
+  AWARDS,
+  type AwardFacts,
+  NO_AWARD_FACTS,
+  computeCollectingStreak,
+  evaluateAwards,
+} from "@/lib/awards";
 import { TEAMS } from "@/lib/teams";
+
+// Mid-month, so nothing here depends on the run date.
+const NOW = new Date(Date.UTC(2026, 7, 13)); // 2026-08-13
 
 function facts(overrides: Partial<AwardFacts> = {}): AwardFacts {
   return { ...NO_AWARD_FACTS, ...overrides };
@@ -73,6 +82,105 @@ describe("evaluateAwards — team ladders", () => {
 
     expect(earned).toContain(`teams-started-${TEAMS.length}`);
     expect(earned).toContain(`teams-completed-${TEAMS.length}`);
+  });
+});
+
+describe("computeCollectingStreak", () => {
+  it("is zero for a collection that was never added to", () => {
+    expect(computeCollectingStreak([], NOW)).toBe(0);
+  });
+
+  it("counts consecutive months ending in the current one", () => {
+    expect(computeCollectingStreak(["2026-08", "2026-07", "2026-06"], NOW)).toBe(3);
+  });
+
+  it("keeps the streak alive when the current month is still empty", () => {
+    // August is days old. A ten-month run must not evaporate because the new
+    // month hasn't been shopped in yet.
+    expect(computeCollectingStreak(["2026-07", "2026-06", "2026-05"], NOW)).toBe(3);
+  });
+
+  it("breaks once a whole month has been skipped", () => {
+    // Last add was June: July passed with nothing, so the run is over.
+    expect(computeCollectingStreak(["2026-06", "2026-05", "2026-04"], NOW)).toBe(0);
+  });
+
+  it("counts only the run at the end, not the best run ever", () => {
+    // A twelve-month run in 2025 is history; what's live is Jul–Aug.
+    const months = ["2026-08", "2026-07", "2025-06", "2025-05", "2025-04", "2025-03"];
+    expect(computeCollectingStreak(months, NOW)).toBe(2);
+  });
+
+  it("crosses a year boundary", () => {
+    const january = new Date(Date.UTC(2026, 0, 9));
+    expect(computeCollectingStreak(["2026-01", "2025-12", "2025-11"], january)).toBe(3);
+  });
+
+  it("ignores duplicate and unordered months", () => {
+    // collecting_months() returns distinct values, but nothing downstream
+    // should depend on that, or on the order they arrive in.
+    expect(computeCollectingStreak(["2026-06", "2026-08", "2026-07", "2026-08"], NOW)).toBe(3);
+  });
+
+  it("ignores months in the future", () => {
+    // A clock-skewed client could write one. It must not extend a streak, and
+    // must not anchor one either.
+    expect(computeCollectingStreak(["2026-11"], NOW)).toBe(0);
+    expect(computeCollectingStreak(["2026-11", "2026-08", "2026-07"], NOW)).toBe(2);
+  });
+});
+
+describe("evaluateAwards — contributions, referrals, streak", () => {
+  it("awards approved submissions", () => {
+    const earned = idsOf(evaluateAwards(facts({ approvedSubmissions: 5 })));
+    expect(earned).toContain("contributions-1");
+    expect(earned).toContain("contributions-5");
+    expect(earned).not.toContain("contributions-10");
+  });
+
+  it("awards qualifying referrals", () => {
+    const earned = idsOf(evaluateAwards(facts({ qualifyingReferrals: 3 })));
+    expect(earned).toContain("referrals-1");
+    expect(earned).toContain("referrals-3");
+    expect(earned).not.toContain("referrals-5");
+  });
+
+  it("awards streak months", () => {
+    const earned = idsOf(evaluateAwards(facts({ streakMonths: 6 })));
+    expect(earned).toContain("streak-3");
+    expect(earned).toContain("streak-6");
+    expect(earned).not.toContain("streak-12");
+  });
+
+  it("counts each ladder down in its own units", () => {
+    // The earlier ladders have to be maxed out first: `next` is the first
+    // unearned award in shelf order, and collection and teams come before these.
+    const past = {
+      totalOwned: 5000,
+      teamsStarted: TEAMS.length,
+      teamsCompleted: TEAMS.length,
+    };
+
+    expect(evaluateAwards(facts({ ...past, approvedSubmissions: 3 })).next).toMatchObject({
+      progressLabel: "2 submissions to go",
+    });
+    expect(
+      evaluateAwards(facts({ ...past, approvedSubmissions: 50, qualifyingReferrals: 4 })).next,
+    ).toMatchObject({ progressLabel: "1 friend to go" });
+    expect(
+      evaluateAwards(
+        facts({ ...past, approvedSubmissions: 50, qualifyingReferrals: 25, streakMonths: 1 }),
+      ).next,
+    ).toMatchObject({ progressLabel: "2 months to go" });
+  });
+
+  it("shows these ladders locked rather than hiding them", () => {
+    // Unlike founding and rep, these are things anyone can go and do — so a
+    // member with none of them still sees what's on offer.
+    const progress = evaluateAwards(facts());
+    for (const categoryId of ["contributions", "referrals", "streak"] as const) {
+      expect(progress.categories.some((category) => category.id === categoryId)).toBe(true);
+    }
   });
 });
 
@@ -170,6 +278,9 @@ describe("evaluateAwards — shape", () => {
       "collection",
       "teams-started",
       "teams-completed",
+      "contributions",
+      "referrals",
+      "streak",
     ]);
 
     const decorated = evaluateAwards(facts({ memberNumber: 3, repTeams: ["cubs"] }));
@@ -177,6 +288,9 @@ describe("evaluateAwards — shape", () => {
       "collection",
       "teams-started",
       "teams-completed",
+      "contributions",
+      "referrals",
+      "streak",
       "honors",
     ]);
   });
@@ -204,6 +318,9 @@ describe("evaluateAwards — shape", () => {
         totalOwned: 5000,
         teamsStarted: TEAMS.length,
         teamsCompleted: TEAMS.length,
+        approvedSubmissions: 500,
+        qualifyingReferrals: 500,
+        streakMonths: 500,
         memberNumber: 1,
         repTeams: ["cubs"],
       }),
@@ -222,7 +339,14 @@ describe("evaluateAwards — shape", () => {
   it("keeps each countable ladder in ascending order", () => {
     // countdown() parses the threshold out of the id, so a ladder that fell out
     // of order would silently mis-rank the next award to chase.
-    for (const categoryId of ["collection", "teams-started", "teams-completed"] as const) {
+    for (const categoryId of [
+      "collection",
+      "teams-started",
+      "teams-completed",
+      "contributions",
+      "referrals",
+      "streak",
+    ] as const) {
       const thresholds = AWARDS.filter((award) => award.categoryId === categoryId).map((award) =>
         Number.parseInt(award.id.slice(award.id.lastIndexOf("-") + 1), 10),
       );

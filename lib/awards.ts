@@ -3,7 +3,14 @@ import { TEAMS } from "@/lib/teams";
 export type AwardTier = "bronze" | "silver" | "gold" | "platinum" | "diamond";
 
 /** Which shelf an award hangs on. */
-export type AwardCategoryId = "collection" | "teams-started" | "teams-completed" | "honors";
+export type AwardCategoryId =
+  | "collection"
+  | "teams-started"
+  | "teams-completed"
+  | "contributions"
+  | "referrals"
+  | "streak"
+  | "honors";
 
 /**
  * How an award is decided, which is a different question from where it hangs.
@@ -55,6 +62,12 @@ export type AwardFacts = {
   memberNumber: number | null;
   /** Team slugs this member reps. Empty for everyone else. */
   repTeams: string[];
+  /** Submissions of theirs an admin has approved. Pending and rejected don't count. */
+  approvedSubmissions: number;
+  /** Referrals that clear the raffle's own bar, not raw signups. */
+  qualifyingReferrals: number;
+  /** Consecutive months, ending now, in which they added something. */
+  streakMonths: number;
 };
 
 export const NO_AWARD_FACTS: AwardFacts = {
@@ -63,7 +76,54 @@ export const NO_AWARD_FACTS: AwardFacts = {
   teamsCompleted: 0,
   memberNumber: null,
   repTeams: [],
+  approvedSubmissions: 0,
+  qualifyingReferrals: 0,
+  streakMonths: 0,
 };
+
+/** A UTC 'YYYY-MM' stamp, matching what collecting_months() returns. */
+function monthKey(date: Date): string {
+  return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}`;
+}
+
+/** The same key, `offset` months before `date`. */
+function monthKeyBefore(date: Date, offset: number): string {
+  return monthKey(new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() - offset, 1)));
+}
+
+/**
+ * How many consecutive months, ending now, a member has added something.
+ *
+ * Lives here rather than in SQL because it's calendar logic with edge cases
+ * worth testing, and because the profile and the public shelf must agree — both
+ * run this over the same 'YYYY-MM' list (see collecting_months() in
+ * supabase/awards_activity.sql).
+ *
+ * The current month not having anything in it yet does NOT break a streak: the
+ * month isn't over. Someone who added a bobblehead in July and checks their
+ * shelf on 1 August should not watch a ten-month run vanish because the new
+ * month is a few hours old. So the run is allowed to end either this month or
+ * last, and only a gap before that stops it.
+ *
+ * Everything is UTC, matching the SQL side, so a member near midnight in either
+ * direction gets the same answer from both surfaces rather than a streak that
+ * changes depending on which page they opened.
+ */
+export function computeCollectingStreak(months: readonly string[], now: Date): number {
+  const seen = new Set(months);
+  if (seen.size === 0) return 0;
+
+  // Where the run is allowed to end. Anchoring on last month when the current
+  // one is empty is what keeps an unfinished month from counting as a gap.
+  const thisMonth = monthKey(now);
+  const lastMonth = monthKeyBefore(now, 1);
+  const anchorOffset = seen.has(thisMonth) ? 0 : seen.has(lastMonth) ? 1 : -1;
+  if (anchorOffset === -1) return 0;
+
+  let streak = 0;
+  while (seen.has(monthKeyBefore(now, anchorOffset + streak))) streak += 1;
+  return streak;
+}
 
 const TEAM_COUNT = TEAMS.length;
 
@@ -167,6 +227,69 @@ const FOUNDING_THRESHOLDS: {
   { threshold: 1000, name: "First 1,000", blurb: "Beat the crowd here.", icon: "🕰️", tier: "silver" },
 ];
 
+/**
+ * What you've given back — submissions an admin approved.
+ *
+ * Approved, not submitted, and that distinction is the whole design: paying out
+ * on submission alone rewards volume, and the one thing a community-sourced
+ * checklist cannot afford is an incentive to file junk. This rewards the
+ * contribution that survived review.
+ */
+const CONTRIBUTION_THRESHOLDS: {
+  threshold: number;
+  name: string;
+  blurb: string;
+  icon: string;
+  tier: AwardTier;
+}[] = [
+  { threshold: 1, name: "First Contribution", blurb: "You added to the record.", icon: "📷", tier: "bronze" },
+  { threshold: 5, name: "Shutterbug", blurb: "Five listings the better for you.", icon: "📸", tier: "silver" },
+  { threshold: 10, name: "Staff Photographer", blurb: "Ten approved and counting.", icon: "🎞️", tier: "gold" },
+  { threshold: 25, name: "The Archivist", blurb: "Filling in the gaps nobody else did.", icon: "🗂️", tier: "platinum" },
+  { threshold: 50, name: "Site Historian", blurb: "Fifty pieces of the record are yours.", icon: "📚", tier: "diamond" },
+];
+
+/**
+ * Who you brought in.
+ *
+ * Counted against the same bar the raffle uses — the friend confirmed their
+ * email and started a shelf of their own — rather than raw signups. An award
+ * for creating empty accounts would be an award for gaming it.
+ */
+const REFERRAL_THRESHOLDS: {
+  threshold: number;
+  name: string;
+  blurb: string;
+  icon: string;
+  tier: AwardTier;
+}[] = [
+  { threshold: 1, name: "Word of Mouth", blurb: "You brought someone in.", icon: "🗣️", tier: "bronze" },
+  { threshold: 3, name: "Recruiter", blurb: "Three shelves that wouldn't exist.", icon: "🤝", tier: "silver" },
+  { threshold: 5, name: "Ambassador", blurb: "Five collectors, thanks to you.", icon: "📣", tier: "gold" },
+  { threshold: 10, name: "Talent Scout", blurb: "Ten found and signed.", icon: "🔭", tier: "platinum" },
+  { threshold: 25, name: "Franchise Builder", blurb: "You built a wing of this place.", icon: "🏗️", tier: "diamond" },
+];
+
+/**
+ * Months in a row you added something.
+ *
+ * The only ladder that can go backwards, and the only one that rewards pace
+ * rather than total — which is the point. A collection of 800 says what you did
+ * once; a twelve-month streak says you're still doing it.
+ */
+const STREAK_THRESHOLDS: {
+  threshold: number;
+  name: string;
+  blurb: string;
+  icon: string;
+  tier: AwardTier;
+}[] = [
+  { threshold: 3, name: "Warming Up", blurb: "Three months on the trot.", icon: "🔥", tier: "bronze" },
+  { threshold: 6, name: "Half a Year", blurb: "Six straight months of finds.", icon: "📆", tier: "silver" },
+  { threshold: 12, name: "Year-Rounder", blurb: "Twelve months, no gaps.", icon: "🗓️", tier: "gold" },
+  { threshold: 24, name: "Two Seasons Deep", blurb: "Two years without missing a month.", icon: "⏳", tier: "platinum" },
+];
+
 export const AWARD_CATEGORIES: {
   id: AwardCategoryId;
   label: string;
@@ -176,6 +299,9 @@ export const AWARD_CATEGORIES: {
   { id: "collection", label: "Collection", plaque: "Collection" },
   { id: "teams-started", label: "Teams started", plaque: "Teams Started" },
   { id: "teams-completed", label: "Teams completed", plaque: "Teams Completed" },
+  { id: "contributions", label: "Contributions", plaque: "Contributions" },
+  { id: "referrals", label: "Referrals", plaque: "Referrals" },
+  { id: "streak", label: "Streak", plaque: "Streak" },
   { id: "honors", label: "Honors", plaque: "Honors" },
 ];
 
@@ -219,6 +345,36 @@ export const AWARDS: Award[] = [
     tier: rung.tier,
     requirement:
       rung.threshold === TEAM_COUNT ? "All 30 finished" : `${plural(rung.threshold, "team")} finished`,
+  })),
+  ...CONTRIBUTION_THRESHOLDS.map<Award>((rung) => ({
+    id: `contributions-${rung.threshold}`,
+    categoryId: "contributions",
+    kind: "count",
+    name: rung.name,
+    blurb: rung.blurb,
+    icon: rung.icon,
+    tier: rung.tier,
+    requirement: `${plural(rung.threshold, "submission")} approved`,
+  })),
+  ...REFERRAL_THRESHOLDS.map<Award>((rung) => ({
+    id: `referrals-${rung.threshold}`,
+    categoryId: "referrals",
+    kind: "count",
+    name: rung.name,
+    blurb: rung.blurb,
+    icon: rung.icon,
+    tier: rung.tier,
+    requirement: plural(rung.threshold, "friend"),
+  })),
+  ...STREAK_THRESHOLDS.map<Award>((rung) => ({
+    id: `streak-${rung.threshold}`,
+    categoryId: "streak",
+    kind: "count",
+    name: rung.name,
+    blurb: rung.blurb,
+    icon: rung.icon,
+    tier: rung.tier,
+    requirement: `${plural(rung.threshold, "month")} in a row`,
   })),
   ...FOUNDING_THRESHOLDS.map<Award>((rung) => ({
     id: `founding-${rung.threshold}`,
@@ -309,6 +465,9 @@ export function evaluateAwards(facts: AwardFacts): AwardProgress {
   const owned = clampCount(facts.totalOwned);
   const started = clampCount(facts.teamsStarted);
   const completed = clampCount(facts.teamsCompleted);
+  const submissions = clampCount(facts.approvedSubmissions);
+  const referrals = clampCount(facts.qualifyingReferrals);
+  const streak = clampCount(facts.streakMonths);
   const memberNumber =
     facts.memberNumber !== null && Number.isFinite(facts.memberNumber) && facts.memberNumber > 0
       ? Math.floor(facts.memberNumber)
@@ -336,6 +495,12 @@ export function evaluateAwards(facts: AwardFacts): AwardProgress {
         return countdown(award, started, "team");
       case "teams-completed":
         return countdown(award, completed, "team");
+      case "contributions":
+        return countdown(award, submissions, "submission");
+      case "referrals":
+        return countdown(award, referrals, "friend");
+      case "streak":
+        return countdown(award, streak, "month");
       default:
         return countdown(award, owned, "");
     }

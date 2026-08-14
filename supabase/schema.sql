@@ -232,6 +232,14 @@ create table if not exists public.user_collections (
   primary key (user_id, team_slug, bobblehead_id)
 );
 
+-- When an item first went on the shelf, for the streak awards. Written by the
+-- column default on insert and by nothing else — the upserts that maintain this
+-- table list their columns explicitly and never include it, so re-marking an
+-- item can't rewrite its history. updated_at can't serve this purpose: every
+-- ownership toggle overwrites it. See supabase/awards_activity.sql.
+alter table public.user_collections
+  add column if not exists added_at timestamptz default now();
+
 alter table public.user_collections
   add column if not exists condition text,
   add column if not exists acquired_on date,
@@ -1391,6 +1399,9 @@ $$;
 -- someone chose to share. See supabase/awards.sql.
 drop function if exists public.get_public_shelf(text);
 
+-- Note: supabase/awards_activity.sql replaces this with a wider version that
+-- also returns submission, referral and streak facts. That can't live here —
+-- it reads public.referrals, which referrals.sql creates *after* this file.
 create function public.get_public_shelf(p_slug text)
 returns table (
   display_name text,
@@ -1487,6 +1498,11 @@ $$;
 
 revoke all on function public.ack_awards_intro() from public, anon;
 grant execute on function public.ack_awards_intro() to authenticated;
+
+-- The award activity functions (approved_submission_count,
+-- qualifying_referral_count, collecting_months, my_award_activity) live in
+-- supabase/awards_activity.sql rather than here: they read public.referrals,
+-- which referrals.sql creates after this file runs.
 
 revoke all on function public.enable_public_shelf() from public, anon;
 revoke all on function public.disable_public_shelf() from public, anon;

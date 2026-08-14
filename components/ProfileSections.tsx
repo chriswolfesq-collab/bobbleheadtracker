@@ -246,7 +246,13 @@ export function ProfileSections({
   /** The two award facts a collection can't imply — signup rank and rep teams.
    *  Omitted in the admin read-only view, where my_rep_teams() would answer for
    *  the admin rather than the member being looked at. */
-  awardFacts?: { memberNumber: number | null; repTeams: string[] };
+  awardFacts?: {
+    memberNumber: number | null;
+    repTeams: string[];
+    approvedSubmissions: number;
+    qualifyingReferrals: number;
+    streakMonths: number;
+  };
 }) {
   // Shared with the public /shelf/<slug> page so a collector's own profile and
   // the link they hand out always agree on the numbers.
@@ -343,6 +349,9 @@ export function ProfileSections({
               teamsCompleted,
               memberNumber: awardFacts?.memberNumber ?? null,
               repTeams: awardFacts?.repTeams ?? [],
+              approvedSubmissions: awardFacts?.approvedSubmissions ?? 0,
+              qualifyingReferrals: awardFacts?.qualifyingReferrals ?? 0,
+              streakMonths: awardFacts?.streakMonths ?? 0,
             }}
             isLoading={isCollectionLoading}
             isOtherUser={isOtherUser}

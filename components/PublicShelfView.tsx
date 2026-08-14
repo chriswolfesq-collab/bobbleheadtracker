@@ -23,6 +23,9 @@ export type PublicShelfViewProps = {
   memberNumber: number | null;
   /** Team slugs this collector reps, for the team-rep award. */
   repTeams: string[];
+  approvedSubmissions: number;
+  qualifyingReferrals: number;
+  streakMonths: number;
   /**
    * Off by default because the preview is captured with html-to-image for the
    * share card — a nav trail has no business in the exported picture. The live
@@ -39,6 +42,9 @@ export default function PublicShelfView({
   galleryItems,
   memberNumber,
   repTeams,
+  approvedSubmissions,
+  qualifyingReferrals,
+  streakMonths,
   showBreadcrumbs = false,
 }: PublicShelfViewProps) {
   return (
@@ -100,6 +106,9 @@ export default function PublicShelfView({
               teamsCompleted: stats.teamsCompleted,
               memberNumber,
               repTeams,
+              approvedSubmissions,
+              qualifyingReferrals,
+              streakMonths,
             }}
             isOtherUser
           />

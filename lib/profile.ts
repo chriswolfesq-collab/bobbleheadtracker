@@ -4,6 +4,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useToast } from "@/components/Toast";
 import { useAuth } from "@/lib/auth";
+import { computeCollectingStreak } from "@/lib/awards";
 import {
   type BobbleheadIdentity,
   bobbleheadHref,
@@ -49,6 +50,9 @@ export function useMyAwardFacts(source?: ProfileSource) {
   // reads — carrying it here costs nothing where its own hook would be a second
   // round trip on every profile load just to decide whether to show a banner.
   const [introAcknowledged, setIntroAcknowledged] = useState<boolean | null>(null);
+  const [approvedSubmissions, setApprovedSubmissions] = useState(0);
+  const [qualifyingReferrals, setQualifyingReferrals] = useState(0);
+  const [streakMonths, setStreakMonths] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -68,7 +72,13 @@ export function useMyAwardFacts(source?: ProfileSource) {
       // for the owner's own profile. In the admin read-only view it would
       // answer for the admin, not the member being viewed — hence the guard.
       source?.userId ? Promise.resolve({ data: null, error: null }) : client.rpc("my_rep_teams"),
-    ]).then(([profile, reps]) => {
+      // Same auth.uid() scoping as my_rep_teams, so it's owner-only too. In the
+      // admin read-only view it would answer for the admin rather than the
+      // member being looked at, which is why it's skipped there.
+      source?.userId
+        ? Promise.resolve({ data: null, error: null })
+        : client.rpc("my_award_activity"),
+    ]).then(([profile, reps, activity]) => {
       if (cancelled) return;
 
       if (profile.error) {
@@ -85,6 +95,22 @@ export function useMyAwardFacts(source?: ProfileSource) {
         console.error("Failed to load your rep teams:", reps.error.message);
       } else {
         setRepTeams((reps.data as string[] | null) ?? []);
+      }
+
+      if (activity.error) {
+        console.error("Failed to load your award activity:", activity.error.message);
+      } else {
+        // Returns at most one row, and none at all when unauthenticated.
+        const row = (
+          activity.data as
+            | { approved_submissions: number; qualifying_referrals: number; months: string[] }[]
+            | null
+        )?.[0];
+        setApprovedSubmissions(row?.approved_submissions ?? 0);
+        setQualifyingReferrals(row?.qualifying_referrals ?? 0);
+        // Same function the public shelf runs over the same month list, so a
+        // collector's own streak and the one on their shared link agree.
+        setStreakMonths(computeCollectingStreak(row?.months ?? [], new Date()));
       }
 
       setIsLoading(false);
@@ -107,6 +133,9 @@ export function useMyAwardFacts(source?: ProfileSource) {
   return {
     memberNumber,
     repTeams,
+    approvedSubmissions,
+    qualifyingReferrals,
+    streakMonths,
     introAcknowledged,
     acknowledgeIntro,
     isLoading: userId ? isLoading : false,

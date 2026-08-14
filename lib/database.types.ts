@@ -660,6 +660,7 @@ export type Database = {
       user_collections: {
         Row: {
           acquired_on: string | null
+          added_at: string | null
           bobblehead_id: string
           condition: string | null
           notes: string | null
@@ -671,6 +672,7 @@ export type Database = {
         }
         Insert: {
           acquired_on?: string | null
+          added_at?: string | null
           bobblehead_id: string
           condition?: string | null
           notes?: string | null
@@ -682,6 +684,7 @@ export type Database = {
         }
         Update: {
           acquired_on?: string | null
+          added_at?: string | null
           bobblehead_id?: string
           condition?: string | null
           notes?: string | null
@@ -1040,6 +1043,17 @@ export type Database = {
           display_name: string
           member_number: number | null
           rep_teams: string[]
+          approved_submissions: number
+          qualifying_referrals: number
+          collecting_months: string[]
+        }[]
+      }
+      my_award_activity: {
+        Args: never
+        Returns: {
+          approved_submissions: number
+          qualifying_referrals: number
+          months: string[]
         }[]
       }
       my_rep_teams: { Args: never; Returns: string[] }

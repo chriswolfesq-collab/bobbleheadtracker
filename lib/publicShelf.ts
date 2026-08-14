@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { cache } from "react";
+import { computeCollectingStreak } from "@/lib/awards";
 import { buildBobbleheadResolver } from "@/lib/bobbleheadIdentity";
 import type { Database } from "@/lib/database.types";
 import { getGiveawaysByTeamSlug } from "@/lib/bobbleheads";
@@ -16,6 +17,10 @@ export type PublicShelf = {
   memberNumber: number | null;
   /** Team slugs this collector reps, for the team-rep award. */
   repTeams: string[];
+  approvedSubmissions: number;
+  qualifyingReferrals: number;
+  /** Consecutive months, ending now, in which they added something. */
+  streakMonths: number;
 };
 
 export type PublicGalleryItem = {
@@ -71,6 +76,9 @@ export const getPublicShelf = cache(async (slug: string): Promise<PublicShelf | 
           counts: Record<string, number>;
           member_number: number | null;
           rep_teams: string[] | null;
+          approved_submissions: number | null;
+          qualifying_referrals: number | null;
+          collecting_months: string[] | null;
         }[]
       | null
   )?.[0];
@@ -115,6 +123,11 @@ export const getPublicShelf = cache(async (slug: string): Promise<PublicShelf | 
     stats: computeShelfStats(countByTeamSlug, totalByTeamSlug),
     memberNumber: row.member_number ?? null,
     repTeams: row.rep_teams ?? [],
+    approvedSubmissions: row.approved_submissions ?? 0,
+    qualifyingReferrals: row.qualifying_referrals ?? 0,
+    // The same function the profile runs over the same month list, so a
+    // collector's own streak and the one on their shared link never disagree.
+    streakMonths: computeCollectingStreak(row.collecting_months ?? [], new Date()),
   };
 });
 

@@ -121,6 +121,9 @@ export function ShelfPreviewClient() {
           galleryItems={galleryItems}
           memberNumber={awardFacts.memberNumber}
           repTeams={awardFacts.repTeams}
+          approvedSubmissions={awardFacts.approvedSubmissions}
+          qualifyingReferrals={awardFacts.qualifyingReferrals}
+          streakMonths={awardFacts.streakMonths}
         />
       )}
     </div>
