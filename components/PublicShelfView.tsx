@@ -32,6 +32,13 @@ export type PublicShelfViewProps = {
    * page turns it on.
    */
   showBreadcrumbs?: boolean;
+  /**
+   * The friendship strip (button + friend-only full gallery), passed in by the
+   * live page only. The settings preview leaves it out — it shows what the
+   * *public* sees, and the friend view would put cards in the share capture
+   * that a stranger will never get.
+   */
+  friendSection?: React.ReactNode;
 };
 
 export default function PublicShelfView({
@@ -46,6 +53,7 @@ export default function PublicShelfView({
   qualifyingReferrals,
   streakMonths,
   showBreadcrumbs = false,
+  friendSection,
 }: PublicShelfViewProps) {
   return (
     <div
@@ -123,6 +131,8 @@ export default function PublicShelfView({
             <PublicGallery displayName={displayName} items={galleryItems} />
           </div>
         ) : null}
+
+        {friendSection}
 
         {/* The whole reason the page is public. Whoever is reading this arrived
             from someone else's post, so the ask is to go build their own. */}

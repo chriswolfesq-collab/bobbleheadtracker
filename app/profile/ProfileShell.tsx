@@ -12,6 +12,7 @@ import { ProfileWelcomeModal } from "@/components/ProfileWelcomeModal";
 import { ShelfVisibilityPill } from "@/components/ShelfVisibilityPill";
 import { getDisplayName, MAX_DISPLAY_NAME_LENGTH, useAuth } from "@/lib/auth";
 import { AVATAR_ACCEPT, getAvatarUrl, removeAvatar, uploadAvatar } from "@/lib/avatar";
+import { useFriendships } from "@/lib/friends";
 import {
   type MyFavorite,
   type MySubmission,
@@ -37,6 +38,8 @@ const TABS = [
   { href: "/profile/favorites", label: "Favorites" },
   { href: "/profile/wanted", label: "Wanted" },
   { href: "/profile/submissions", label: "Submissions" },
+  // Friends sits next to Refer on purpose: both are the "other people" tabs.
+  { href: "/profile/friends", label: "Friends" },
   { href: "/profile/refer", label: "Refer" },
 ] as const;
 
@@ -64,6 +67,9 @@ type ProfileData = {
   isSubmissionsLoading: boolean;
   submissionsError: string | null;
   awardFacts: ReturnType<typeof useMyAwardFacts>;
+  /** Fetched here rather than in the Friends tab so the incoming-request count
+   *  on the tab pill is known before the tab is ever opened. */
+  friendships: ReturnType<typeof useFriendships>;
 };
 
 const ProfileDataContext = createContext<ProfileData | null>(null);
@@ -86,6 +92,7 @@ export function ProfileShell({ children }: { children: ReactNode }) {
   const { wanted, isLoading: isWantedLoading, error: wantedError } = useMyWanted();
   const sharing = useMyShelf();
   const awardFacts = useMyAwardFacts();
+  const friendships = useFriendships();
   // The same stats the Collection and Awards tabs compute, needed here so the
   // celebration can see the team ladders too — one shopping trip can clear a
   // count rung and a team rung together.
@@ -352,6 +359,13 @@ export function ProfileShell({ children }: { children: ReactNode }) {
                     }`}
                   >
                     {label}
+                    {/* A waiting friend request is the one thing on this page
+                        someone else is waiting on — it gets the only count. */}
+                    {href === "/profile/friends" && friendships.incoming.length > 0 ? (
+                      <span className="ml-1.5 inline-flex min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-black tabular-nums text-accent-fg">
+                        {friendships.incoming.length}
+                      </span>
+                    ) : null}
                   </Link>
                 );
               })}
@@ -376,6 +390,7 @@ export function ProfileShell({ children }: { children: ReactNode }) {
               isSubmissionsLoading,
               submissionsError,
               awardFacts,
+              friendships,
             }}
           >
             {children}

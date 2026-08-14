@@ -24,7 +24,9 @@ export type PublicShelf = {
 };
 
 export type PublicGalleryItem = {
-  kind: "owned" | "favorite";
+  /** "wanted" never comes out of the public RPC — only the friend-gated
+   *  gallery (lib/friends.ts) produces it. Public shelves stay owned+favorite. */
+  kind: "owned" | "favorite" | "wanted";
   bobbleheadId: string;
   teamSlug: string;
   title: string;

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
+import { FriendShelfPanel } from "@/components/FriendShelfPanel";
 import PublicShelfView from "@/components/PublicShelfView";
 import { getPublicGallery, getPublicShelf } from "@/lib/publicShelf";
 
@@ -68,6 +69,16 @@ export default async function ShelfPage({ params }: ShelfPageProps) {
         approvedSubmissions={approvedSubmissions}
         qualifyingReferrals={qualifyingReferrals}
         streakMonths={streakMonths}
+        // A client island: sessions live in the browser, so the server can't
+        // know whether the viewer is this shelf's friend — the panel finds out
+        // after hydration and upgrades the page in place.
+        friendSection={
+          <FriendShelfPanel
+            slug={slug}
+            displayName={displayName}
+            publicGalleryShown={galleryItems.length > 0}
+          />
+        }
       />
     </>
   );

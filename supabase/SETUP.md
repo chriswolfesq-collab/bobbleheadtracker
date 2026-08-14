@@ -400,3 +400,22 @@ gallery rather than vanishing, the curated seed photo stays in the thumbnail
 strip even when out-voted so it can win back, and votes are rate-limited and
 swept by `admin_delete_bobblehead` (recreated here — the current version now
 lives in this file).
+
+## Friends (recommended)
+
+Members befriend each other from a shared shelf link — Add Friend on any
+`/shelf/<slug>` page, or paste a link on the profile's Friends tab. Once a
+request is accepted, each side sees the other's FULL shelf (every owned
+bobblehead, favorites, and the wanted list) instead of just the summary.
+
+1. In the SQL Editor, run `friends.sql` (needs `schema.sql` and `avatars.sql`).
+
+Nothing to deploy. Friendship upgrades a shared shelf, never resurrects a
+private one: every friend read still requires the owner's `is_public`, so
+turning sharing off hides everything from everyone, friends included.
+Collection details (condition, price paid, notes) stay owner-only — the friend
+gallery projects the same three id columns as `get_public_gallery`. Requests
+are rate-limited; declining deletes the row, so nobody has to explain a "no"
+and asking again later works. The friendships table has RLS with no policies:
+everything goes through security definer RPCs, which is also what joins
+friends' names and avatars past profiles' owner-only RLS.

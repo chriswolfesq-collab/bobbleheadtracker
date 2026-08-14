@@ -53,10 +53,13 @@ export default function PublicGallery({
 }) {
   const owned = items.filter((item) => item.kind === "owned");
   const favorites = items.filter((item) => item.kind === "favorite");
+  // Only ever present in the friend-gated view (lib/friends.ts) — the public
+  // RPC never returns wanted rows, so public shelves can't render this section.
+  const wanted = items.filter((item) => item.kind === "wanted");
 
   // getPublicGallery only returns items when the owner opted in, so the page
-  // already guards on items.length; nothing to show if somehow both are empty.
-  if (owned.length === 0 && favorites.length === 0) return null;
+  // already guards on items.length; nothing to show if somehow all are empty.
+  if (owned.length === 0 && favorites.length === 0 && wanted.length === 0) return null;
 
   return (
     <div className="mt-12 space-y-10">
@@ -83,6 +86,18 @@ export default function PublicGallery({
             </span>
           </div>
           <GalleryGrid items={favorites} />
+        </section>
+      ) : null}
+
+      {wanted.length > 0 ? (
+        <section>
+          <div className="mb-3 flex items-baseline justify-between gap-3">
+            <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-600">
+              Wanted
+            </h2>
+            <span className="text-xs font-black tabular-nums text-amber-500">{wanted.length}</span>
+          </div>
+          <GalleryGrid items={wanted} />
         </section>
       ) : null}
     </div>

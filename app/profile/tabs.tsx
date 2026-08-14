@@ -7,6 +7,7 @@ import {
   SubmissionsSection,
   WantedSection,
 } from "@/components/ProfileSections";
+import { FriendsSection } from "@/components/FriendsSection";
 import { ReferAFriend } from "@/components/ReferAFriend";
 import { useProfileData } from "./ProfileShell";
 
@@ -59,6 +60,11 @@ export function SubmissionsTab() {
       error={submissionsError}
     />
   );
+}
+
+export function FriendsTab() {
+  const { friendships } = useProfileData();
+  return <FriendsSection friendships={friendships} />;
 }
 
 export function ReferTab() {

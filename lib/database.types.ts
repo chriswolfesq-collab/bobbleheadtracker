@@ -227,6 +227,30 @@ export type Database = {
         }
         Relationships: []
       }
+      friendships: {
+        Row: {
+          addressee_id: string
+          created_at: string
+          requester_id: string
+          responded_at: string | null
+          status: string
+        }
+        Insert: {
+          addressee_id: string
+          created_at?: string
+          requester_id: string
+          responded_at?: string | null
+          status?: string
+        }
+        Update: {
+          addressee_id?: string
+          created_at?: string
+          requester_id?: string
+          responded_at?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
       forum_reads: {
         Row: {
           read_at: string
@@ -1066,6 +1090,41 @@ export type Database = {
         Returns: undefined
       }
       forum_unread_count: { Args: never; Returns: number }
+      cancel_friend_request: { Args: { p_addressee: string }; Returns: undefined }
+      friend_shelf_status: {
+        Args: { p_slug: string }
+        Returns: {
+          owner_id: string
+          status: string
+        }[]
+      }
+      get_friend_gallery: {
+        Args: { p_slug: string }
+        Returns: {
+          bobblehead_id: string
+          kind: string
+          team_slug: string
+        }[]
+      }
+      list_friendships: {
+        Args: never
+        Returns: {
+          avatar_path: string
+          created_at: string
+          direction: string
+          display_name: string
+          is_public: boolean
+          slug: string
+          status: string
+          user_id: string
+        }[]
+      }
+      remove_friend: { Args: { p_user_id: string }; Returns: undefined }
+      respond_friend_request: {
+        Args: { p_accept: boolean; p_requester: string }
+        Returns: undefined
+      }
+      send_friend_request: { Args: { p_slug: string }; Returns: string }
       get_public_gallery: {
         Args: { p_slug: string }
         Returns: {
