@@ -130,11 +130,20 @@ drop function if exists public.disable_public_shelf();
 -- gallery_public, unlike get_public_gallery. That was survivable while
 -- is_public was a real switch — turning sharing off hid a shelf from everyone,
 -- friends included. With is_public permanently true that escape hatch is gone,
--- and a friend would see the full owned list, favorites AND the wanted list
--- even from an owner who had "Show my items" switched off. Gating on the same
--- flag the public gallery uses puts that back under the owner's control, and
--- keeps one switch governing every surface that shows items rather than two
--- that disagree.
+-- and a friend would otherwise see owned items and favorites even from an
+-- owner who had "Show my items" switched off — a surface strictly wider than
+-- the public one.
+--
+-- The gate is per-branch, NOT on the owner CTE, and the difference matters.
+-- "Show my items" is described to members as controlling what their PUBLIC
+-- shelf shows (see GalleryToggle and supabase/gallery.sql), and owned and
+-- favorites are exactly what get_public_gallery serves — so a friend seeing
+-- them should ride on the same switch. The wanted list is not public and never
+-- has been: get_public_gallery cannot emit it at all, and it is the whole
+-- payoff the refer page promises ("wanted lists only work when there's someone
+-- on the other end"). Gating it on a public-shelf switch would be a category
+-- error, and with that flag off on 42 of 47 profiles it made friendship grant
+-- nothing at all. So: items follow "Show my items", wants follow friendship.
 create or replace function public.get_friend_gallery(p_slug text)
 returns table (bobblehead_id text, team_slug text, kind text)
 language sql
@@ -143,11 +152,10 @@ security definer
 set search_path = public
 as $$
   with owner as (
-    select p.id
+    select p.id, p.gallery_public
     from public.profiles p
     where p.slug = p_slug
       and p.is_public
-      and p.gallery_public
       and exists (
         select 1 from public.friendships f
         where f.status = 'accepted'
@@ -157,11 +165,11 @@ as $$
   )
   select c.bobblehead_id, c.team_slug, 'owned'::text
   from public.user_collections c join owner o on o.id = c.user_id
-  where c.owned
+  where c.owned and o.gallery_public
   union all
   select f.bobblehead_id, f.team_slug, 'favorite'::text
   from public.user_favorites f join owner o on o.id = f.user_id
-  where f.favorited
+  where f.favorited and o.gallery_public
   union all
   select w.bobblehead_id, w.team_slug, 'wanted'::text
   from public.user_wants w join owner o on o.id = w.user_id
