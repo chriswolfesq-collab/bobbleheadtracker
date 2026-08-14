@@ -11,6 +11,7 @@ import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/Ed
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { ListingNavControls, ListingNavCounter } from "@/components/ListingNavControls";
 import { PhotoGallery } from "@/components/PhotoGallery";
+import { PhotoVotePill } from "@/components/PhotoVotePill";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { TagList } from "@/components/TagList";
@@ -28,6 +29,7 @@ import { copyText } from "@/lib/clipboard";
 import { extractYear } from "@/lib/extractYear";
 import type { ListingNav } from "@/lib/listingNav";
 import { publicAsset } from "@/lib/paths";
+import { usePhotoVotes } from "@/lib/photoVotes";
 import { getRarity } from "@/lib/rarity";
 import { siteUrl } from "@/lib/siteUrl";
 import type { Team } from "@/lib/teams";
@@ -141,6 +143,7 @@ export function CuratedBobbleheadPage({
   const { ownedById, isLoggedIn, isLoading: isCollectionLoading, setOwned } = useUserCollection(team.slug);
   const { favoritedById, isLoggedIn: isLoggedInForFavorites, setFavorited } = useUserFavorites(team.slug);
   const { wantedById, isLoggedIn: isLoggedInForWanted, setWanted } = useUserWanted(team.slug);
+  const photoVotes = usePhotoVotes(team.slug, giveaway.id);
 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isManagingPhotos, setIsManagingPhotos] = useState(false);
@@ -209,10 +212,16 @@ export function CuratedBobbleheadPage({
   const isCommunityPhoto = hasRealPhoto && !seedPhotoUrl;
   const placeholderSrc = publicAsset(`/bobbleheads/${team.slug}.png`);
   const imageSrc = selectedPhotoUrl ?? defaultPhotoUrl ?? placeholderSrc;
-  // Thumbnails: the profile photo plus every distinct gallery photo.
+  // Thumbnails: the profile photo plus every distinct gallery photo. The seed
+  // photo stays in the strip even when an approved photo (admin-set or
+  // vote-promoted) overrides it — it has no gallery row to fall back into, and
+  // keeping it visible is what lets it be voted back to the top.
   const thumbnails = [
     ...(defaultPhotoUrl ? [defaultPhotoUrl] : []),
-    ...galleryPhotos.map((photo) => photo.imageUrl).filter((url) => url !== defaultPhotoUrl),
+    ...(seedPhotoUrl && seedPhotoUrl !== defaultPhotoUrl ? [seedPhotoUrl] : []),
+    ...galleryPhotos
+      .map((photo) => photo.imageUrl)
+      .filter((url) => url !== defaultPhotoUrl && url !== seedPhotoUrl),
   ];
   // Don't show the photo twice when it's standing in as the profile image —
   // except while managing, where hiding it was the reason a listing whose only
@@ -487,21 +496,31 @@ export function CuratedBobbleheadPage({
             </div>
 
             {thumbnails.length > 1 ? (
+              // More than one photo means there's a choice to make, so each
+              // thumbnail carries its vote pill — the top-voted photo becomes
+              // the listing's main photo (supabase/photo_votes.sql).
               <div className="flex gap-2 overflow-x-auto pb-1">
                 {thumbnails.map((url) => (
-                  <button
-                    key={url}
-                    type="button"
-                    onClick={() => setSelectedPhotoUrl(url)}
-                    aria-label="Show this photo"
-                    aria-pressed={url === imageSrc}
-                    className={`h-20 w-20 shrink-0 overflow-hidden rounded-lg border-2 bg-white transition ${
-                      url === imageSrc ? "border-accent" : "border-border-soft hover:border-accent/50"
-                    }`}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={url} alt="" className="h-full w-full object-contain" />
-                  </button>
+                  <div key={url} className="flex shrink-0 flex-col items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPhotoUrl(url)}
+                      aria-label="Show this photo"
+                      aria-pressed={url === imageSrc}
+                      className={`h-20 w-20 shrink-0 overflow-hidden rounded-lg border-2 bg-white transition ${
+                        url === imageSrc ? "border-accent" : "border-border-soft hover:border-accent/50"
+                      }`}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={url} alt="" className="h-full w-full object-contain" />
+                    </button>
+                    <PhotoVotePill
+                      votes={photoVotes.votesByUrl[url] ?? 0}
+                      isMine={photoVotes.myVoteUrl === url}
+                      isLoggedIn={photoVotes.isLoggedIn}
+                      onToggle={() => photoVotes.toggleVote(url)}
+                    />
+                  </div>
                 ))}
               </div>
             ) : null}

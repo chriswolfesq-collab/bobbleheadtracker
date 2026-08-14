@@ -383,3 +383,20 @@ browser before upload. Deleting a post returns the orphaned paths to the client,
 which sweeps the files best-effort; a missed sweep leaks an unreachable file,
 nothing more. Run it *before* deploying the app code — the recreated write RPCs
 change signature, so an old database with new code refuses every new post.
+
+## Photo voting (recommended)
+
+On any listing with more than one photo, each thumbnail carries a vote pill.
+Signed-in members get one vote per listing; the top-voted photo automatically
+becomes the listing's main photo — the first "the users decide" feature.
+
+1. In the SQL Editor, run `photo_votes.sql` (needs `schema.sql`).
+
+Nothing to deploy. Promotion writes `approved_photos`, so the existing
+revalidate triggers regenerate the static pages only when the winner actually
+changes; tallies live in a `photo_votes` table read through RPCs (counts are
+public, who-voted-what is not). An outgoing main photo is demoted into the
+gallery rather than vanishing, the curated seed photo stays in the thumbnail
+strip even when out-voted so it can win back, and votes are rate-limited and
+swept by `admin_delete_bobblehead` (recreated here — the current version now
+lives in this file).

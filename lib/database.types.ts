@@ -390,6 +390,30 @@ export type Database = {
         }
         Relationships: []
       }
+      photo_votes: {
+        Row: {
+          bobblehead_id: string
+          image_url: string
+          team_slug: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bobblehead_id: string
+          image_url: string
+          team_slug: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bobblehead_id?: string
+          image_url?: string
+          team_slug?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_path: string | null
@@ -1075,6 +1099,26 @@ export type Database = {
       admin_referral_leaderboard: { Args: never; Returns: Json }
       admin_referral_stats: { Args: never; Returns: Json }
       claim_referral: { Args: { p_code: string }; Returns: string }
+      cast_photo_vote: {
+        Args: { p_bobblehead_id: string; p_image_url: string; p_team_slug: string }
+        Returns: undefined
+      }
+      get_photo_votes: {
+        Args: { p_bobblehead_id: string; p_team_slug: string }
+        Returns: {
+          image_url: string
+          my_vote: boolean
+          votes: number
+        }[]
+      }
+      promote_top_photo: {
+        Args: { p_bobblehead_id: string; p_team_slug: string }
+        Returns: undefined
+      }
+      retract_photo_vote: {
+        Args: { p_bobblehead_id: string; p_team_slug: string }
+        Returns: undefined
+      }
       is_admin: { Args: never; Returns: boolean }
       is_moderator: { Args: never; Returns: boolean }
       is_team_rep: { Args: never; Returns: boolean }
