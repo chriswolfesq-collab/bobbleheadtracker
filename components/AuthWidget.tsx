@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { Avatar } from "@/components/Avatar";
 import { getDisplayName, useAuth } from "@/lib/auth";
+import { getAvatarUrl } from "@/lib/avatar";
 
 // A single account control. When signed in, everything (profile, settings,
 // sign out) collapses behind one avatar+name button that opens a menu, so the
@@ -48,7 +50,6 @@ export function AuthWidget({
 
   if (user) {
     const name = getDisplayName(user);
-    const initial = name.trim().charAt(0).toUpperCase() || "?";
     const itemClass =
       "flex w-full items-center gap-2.5 px-4 py-2.5 text-left text-xs font-black uppercase tracking-wide text-foreground transition hover:bg-black/[0.06]";
 
@@ -61,9 +62,7 @@ export function AuthWidget({
           onClick={() => setIsOpen((current) => !current)}
           className="flex shrink-0 items-center gap-2 rounded-full border border-black/15 py-1 pl-1 pr-2.5 text-sm font-semibold text-foreground transition hover:border-accent sm:pr-3"
         >
-          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-accent text-xs font-black text-accent-fg">
-            {initial}
-          </span>
+          <Avatar name={name} url={getAvatarUrl(user)} className="h-7 w-7 text-xs" />
           <span className="hidden max-w-[9rem] truncate sm:inline">{name}</span>
           <svg
             aria-hidden

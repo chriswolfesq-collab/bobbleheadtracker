@@ -386,6 +386,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          avatar_path: string | null
           created_at: string
           display_name: string
           email_enabled: boolean
@@ -404,6 +405,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          avatar_path?: string | null
           created_at?: string
           display_name?: string
           email_enabled?: boolean
@@ -422,6 +424,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          avatar_path?: string | null
           created_at?: string
           display_name?: string
           email_enabled?: boolean
@@ -961,6 +964,7 @@ export type Database = {
       forum_get_topic: {
         Args: { p_id: string }
         Returns: {
+          author_avatar_path: string
           author_id: string
           author_name: string
           body: string
@@ -978,6 +982,7 @@ export type Database = {
       forum_list_replies: {
         Args: { p_topic_id: string }
         Returns: {
+          author_avatar_path: string
           author_id: string
           author_name: string
           body: string
@@ -990,6 +995,7 @@ export type Database = {
       forum_list_topics: {
         Args: never
         Returns: {
+          author_avatar_path: string
           author_id: string
           author_name: string
           body: string

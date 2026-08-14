@@ -16,6 +16,11 @@ export type ForumTopic = {
   body: string;
   author_id: string | null;
   author_name: string | null;
+  /** A path in the public avatars bucket — render it via avatarPublicUrl().
+   *  Joined live from profiles (unlike author_name, which is stamped at write
+   *  time), so a changed photo follows its owner onto old posts and a deleted
+   *  account comes back null. */
+  author_avatar_path: string | null;
   team_slug: string | null;
   pinned: boolean;
   locked: boolean;
@@ -35,6 +40,8 @@ export type ForumReply = {
   body: string;
   author_id: string | null;
   author_name: string | null;
+  /** Same live-joined avatar path as ForumTopic's. */
+  author_avatar_path: string | null;
   created_at: string;
   edited_at: string | null;
 };

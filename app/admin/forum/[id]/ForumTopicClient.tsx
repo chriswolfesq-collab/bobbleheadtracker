@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { Avatar } from "@/components/Avatar";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ModeratorGate } from "@/components/ModeratorGate";
 import { useAdminAuth } from "@/lib/adminAuth";
+import { avatarPublicUrl } from "@/lib/avatar";
 import {
   deleteReply,
   deleteTopic,
@@ -33,22 +35,27 @@ const buttonClass =
 
 function Byline({
   name,
+  avatarPath,
   when,
   editedAt,
 }: {
   name: string | null;
+  avatarPath: string | null;
   when: string;
   editedAt: string | null;
 }) {
   return (
-    <p className="text-xs text-zinc-500">
-      <span className="font-semibold text-zinc-700">{name ?? "Someone"}</span>
-      {" · "}
-      {formatForumTime(when)}
-      {/* An edited post says so. Silently rewriting what someone replied to is
-          the one thing a small trusted board can't afford. */}
-      {editedAt ? <span className="text-zinc-400"> · edited</span> : null}
-    </p>
+    <div className="flex items-center gap-2">
+      <Avatar name={name} url={avatarPublicUrl(avatarPath)} className="h-6 w-6 text-[10px]" />
+      <p className="text-xs text-zinc-500">
+        <span className="font-semibold text-zinc-700">{name ?? "Someone"}</span>
+        {" · "}
+        {formatForumTime(when)}
+        {/* An edited post says so. Silently rewriting what someone replied to is
+            the one thing a small trusted board can't afford. */}
+        {editedAt ? <span className="text-zinc-400"> · edited</span> : null}
+      </p>
+    </div>
   );
 }
 
@@ -231,6 +238,7 @@ function Thread({ topicId }: { topicId: string }) {
               <div className="mt-1">
                 <Byline
                   name={topic.author_name}
+                  avatarPath={topic.author_avatar_path}
                   when={topic.created_at}
                   editedAt={topic.edited_at}
                 />
@@ -350,6 +358,7 @@ function Thread({ topicId }: { topicId: string }) {
                   <>
                     <Byline
                       name={reply.author_name}
+                      avatarPath={reply.author_avatar_path}
                       when={reply.created_at}
                       editedAt={reply.edited_at}
                     />

@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { Avatar } from "@/components/Avatar";
 import { AwardCelebration } from "@/components/AwardCelebration";
 import { AwardsIntroBanner } from "@/components/AwardsIntroBanner";
 import { CaseBanner } from "@/components/CaseBanner";
 import { ProfileSections } from "@/components/ProfileSections";
 import { ProfileWelcomeModal } from "@/components/ProfileWelcomeModal";
 import { getDisplayName, MAX_DISPLAY_NAME_LENGTH, useAuth } from "@/lib/auth";
+import { AVATAR_ACCEPT, getAvatarUrl, removeAvatar, uploadAvatar } from "@/lib/avatar";
 import {
   useCollectionSummary,
   useMyAwardFacts,
@@ -40,6 +42,8 @@ export function ProfilePageClient() {
   const [nameDraft, setNameDraft] = useState("");
   const [isSavingName, setIsSavingName] = useState(false);
   const [nameError, setNameError] = useState<string | null>(null);
+  const [isSavingAvatar, setIsSavingAvatar] = useState(false);
+  const [avatarError, setAvatarError] = useState<string | null>(null);
 
   return (
     <div
@@ -155,6 +159,63 @@ export function ProfilePageClient() {
           />
 
           <header className={isEditingName || nameError ? "mb-8 text-center" : "mb-8"}>
+            {/* The photo control hangs under the case rather than inside its
+                overlay for the same reason the name editor does: the artwork's
+                text recess barely fits the name. The picture itself pays off
+                elsewhere — the header menu, and forum bylines. */}
+            <div className="mt-4 flex items-center justify-center gap-4">
+              <Avatar
+                name={getDisplayName(user)}
+                url={getAvatarUrl(user)}
+                className="h-16 w-16 text-2xl"
+              />
+              <div className="flex flex-col items-start gap-1.5">
+                <label className="cursor-pointer rounded border border-accent px-3 py-1.5 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent hover:text-accent-fg">
+                  {isSavingAvatar
+                    ? "Uploading…"
+                    : getAvatarUrl(user)
+                      ? "Change photo"
+                      : "Add profile photo"}
+                  <input
+                    type="file"
+                    accept={AVATAR_ACCEPT}
+                    disabled={isSavingAvatar}
+                    className="sr-only"
+                    onChange={async (event) => {
+                      const file = event.target.files?.[0];
+                      // Cleared immediately so picking the same file twice
+                      // still fires a change event (e.g. retrying after an
+                      // error).
+                      event.target.value = "";
+                      if (!file) return;
+                      setAvatarError(null);
+                      setIsSavingAvatar(true);
+                      const result = await uploadAvatar(user, file);
+                      setIsSavingAvatar(false);
+                      if (result.error) setAvatarError(result.error);
+                      // No success handling needed: updateUser fires an auth
+                      // event and the new photo renders through it.
+                    }}
+                  />
+                </label>
+                {getAvatarUrl(user) && !isSavingAvatar ? (
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      setAvatarError(null);
+                      const result = await removeAvatar(user);
+                      if (result.error) setAvatarError(result.error);
+                    }}
+                    className="text-[11px] font-semibold text-zinc-500 underline-offset-2 transition hover:text-zinc-700 hover:underline"
+                  >
+                    Remove photo
+                  </button>
+                ) : null}
+              </div>
+            </div>
+            {avatarError ? (
+              <p className="mt-2 text-center text-xs font-semibold text-red-400">{avatarError}</p>
+            ) : null}
             {isEditingName ? (
               <form
                 className="mt-4 flex flex-wrap items-center justify-center gap-2"

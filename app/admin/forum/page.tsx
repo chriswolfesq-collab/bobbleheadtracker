@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { Avatar } from "@/components/Avatar";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ModeratorGate } from "@/components/ModeratorGate";
 import { useAdminAuth } from "@/lib/adminAuth";
+import { avatarPublicUrl } from "@/lib/avatar";
 import { createTopic, formatForumTime, listTopics, type ForumTopicListing } from "@/lib/forum";
 import { TEAMS } from "@/lib/teams";
 
@@ -238,14 +240,21 @@ function Board() {
                         {topic.team_slug ? <Chip>{teamName(topic.team_slug)}</Chip> : null}
                         {topic.unread ? <span className="sr-only">Unread</span> : null}
                       </div>
-                      <p className="mt-1 text-xs text-zinc-500">
-                        {topic.author_name ?? "Someone"}
-                        {" · "}
-                        {topic.reply_count === 0
-                          ? "no replies"
-                          : `${topic.reply_count} ${topic.reply_count === 1 ? "reply" : "replies"}`}
-                        {" · "}
-                        {formatForumTime(topic.last_activity_at)}
+                      <p className="mt-1 flex items-center gap-1.5 text-xs text-zinc-500">
+                        <Avatar
+                          name={topic.author_name}
+                          url={avatarPublicUrl(topic.author_avatar_path)}
+                          className="h-5 w-5 text-[9px]"
+                        />
+                        <span className="truncate">
+                          {topic.author_name ?? "Someone"}
+                          {" · "}
+                          {topic.reply_count === 0
+                            ? "no replies"
+                            : `${topic.reply_count} ${topic.reply_count === 1 ? "reply" : "replies"}`}
+                          {" · "}
+                          {formatForumTime(topic.last_activity_at)}
+                        </span>
                       </p>
                     </div>
                   </div>

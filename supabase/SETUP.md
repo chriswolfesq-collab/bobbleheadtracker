@@ -347,3 +347,20 @@ person-threads it built messages for, and 0 means everyone is caught up.
 Like `weekly_digest.sql`, this file recreates `wants_email` and
 `set_email_preference` in full to add the `forum_digest` kind. Both fail closed
 on an unknown kind, so a new switch has to go inside them rather than alongside.
+
+## Profile photos (recommended)
+
+Lets members add a profile picture from `/profile`. It shows in the site
+header's account button and next to the author's name on every Team Rep Forum
+topic and reply.
+
+1. In the SQL Editor, run `avatars.sql` (needs `awards.sql` for
+   `sync_profile_from_auth`, and `mod_forum.sql` for the forum read RPCs it
+   recreates).
+
+Nothing to deploy. The image lands in a new public `avatars` bucket, resized to
+a 256px JPEG in the browser before upload; the database stores only the object
+path, mirrored from auth `user_metadata` into `profiles.avatar_path` by the
+same trigger that mirrors the display name. Run it *before* deploying the app
+code — until the bucket and the recreated forum RPCs exist, photo uploads fail
+with an error and forum bylines simply show initials.
