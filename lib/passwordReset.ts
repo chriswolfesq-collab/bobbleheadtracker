@@ -41,8 +41,12 @@ export function validateNewPassword(password: string, confirmation: string): str
  * an account, so a caller can't use this to probe who has one. That means a
  * "sent" result is not proof the person exists.
  */
-export async function sendPasswordReset(email: string): Promise<{ error: string | null }> {
+export async function sendPasswordReset(
+  email: string,
+  captchaToken?: string,
+): Promise<{ error: string | null }> {
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    captchaToken,
     redirectTo: `${window.location.origin}${RESET_PASSWORD_PATH}`,
   });
 

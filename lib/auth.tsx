@@ -20,8 +20,20 @@ type AuthContextValue = {
   openAuthModal: (mode?: AuthModalMode) => void;
   closeAuthModal: () => void;
   clearOauthError: () => void;
-  signIn: (email: string, password: string) => Promise<{ error: string | null }>;
-  signUp: (email: string, password: string, displayName: string) => Promise<{ error: string | null }>;
+  // captchaToken is undefined until NEXT_PUBLIC_TURNSTILE_SITE_KEY is set, and
+  // Supabase ignores it until CAPTCHA protection is switched on at its end —
+  // see lib/turnstile.ts for why both halves have to be true.
+  signIn: (
+    email: string,
+    password: string,
+    captchaToken?: string,
+  ) => Promise<{ error: string | null }>;
+  signUp: (
+    email: string,
+    password: string,
+    displayName: string,
+    captchaToken?: string,
+  ) => Promise<{ error: string | null }>;
   signInWithGoogle: () => Promise<{ error: string | null }>;
   signInWithGithub: () => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
@@ -178,11 +190,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       openAuthModal,
       closeAuthModal,
       clearOauthError,
-      signIn: async (email, password) => {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+      signIn: async (email, password, captchaToken) => {
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+          options: { captchaToken },
+        });
         return { error: authErrorMessage(error) };
       },
-      signUp: async (email, password, displayName) => {
+      signUp: async (email, password, displayName, captchaToken) => {
         // Enforced here rather than only at the input, so every caller is bound
         // by it — Supabase Auth applies no constraints of its own to
         // user_metadata.
@@ -202,6 +218,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           email,
           password,
           options: {
+            captchaToken,
             data: {
               display_name: displayName.trim(),
               ...(referralCode ? { referral_code: referralCode } : {}),

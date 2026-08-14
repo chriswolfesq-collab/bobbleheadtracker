@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { useCallback, useState } from "react";
+import { TurnstileWidget } from "@/components/TurnstileWidget";
 import { MAX_DISPLAY_NAME_LENGTH, useAuth, validateDisplayName } from "@/lib/auth";
 import { sendPasswordReset } from "@/lib/passwordReset";
+import { captchaEnabled } from "@/lib/turnstile";
 import { useDialog } from "@/lib/useDialog";
 
 export function AuthModal() {
@@ -31,6 +33,11 @@ export function AuthModal() {
   // into it, so it stays local like confirmationSent.
   const [isForgotMode, setIsForgotMode] = useState(false);
   const [resetSent, setResetSent] = useState(false);
+  // Null until the challenge passes, and again the moment it's spent or expires.
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  // Bumped after a failed attempt to trade the consumed token for a fresh one.
+  const [captchaResetSignal, setCaptchaResetSignal] = useState(0);
+  const [captchaUnavailable, setCaptchaUnavailable] = useState(false);
 
   const resetAndClose = useCallback(() => {
     closeAuthModal();
@@ -42,6 +49,8 @@ export function AuthModal() {
     setConfirmationSent(false);
     setIsForgotMode(false);
     setResetSent(false);
+    setCaptchaToken(null);
+    setCaptchaUnavailable(false);
   }, [closeAuthModal]);
 
   // Escape/focus-trap/restore. Called before the early return so the hook order
@@ -56,6 +65,38 @@ export function AuthModal() {
   // A failed OAuth redirect surfaces its reason through context; a form attempt
   // sets the local error. Either one should show in the same spot.
   const displayError = error ?? oauthError;
+
+  // With no site key configured this is always false and nothing below changes.
+  const awaitingCaptcha = captchaEnabled && !captchaToken;
+
+  // Crossing between the sign-in and forgot-password forms unmounts one widget
+  // and mounts another, so the old instance's token is dropped and the new
+  // instance issues its own. Safe only across that boundary — see the note on
+  // the sign-in/sign-up toggle, which does not remount.
+  const forgetCaptcha = () => {
+    setCaptchaToken(null);
+    setCaptchaUnavailable(false);
+  };
+
+  // Turnstile tokens are single-use. A rejected attempt has already spent this
+  // one, so the challenge has to be re-run before a retry can succeed.
+  const retireSpentCaptcha = () => setCaptchaResetSignal((signal) => signal + 1);
+
+  const captchaField = captchaEnabled ? (
+    <div className="grid gap-1.5">
+      <TurnstileWidget
+        onToken={setCaptchaToken}
+        onUnavailable={() => setCaptchaUnavailable(true)}
+        resetSignal={captchaResetSignal}
+      />
+      {captchaUnavailable ? (
+        <p className="text-xs font-semibold text-red-400">
+          Couldn&rsquo;t load the bot check. If you use an ad blocker, allow
+          challenges.cloudflare.com and reload the page.
+        </p>
+      ) : null}
+    </div>
+  ) : null;
 
   const handleOAuth = async () => {
     setError(null);
@@ -75,12 +116,13 @@ export function AuthModal() {
     clearOauthError();
     setIsSubmitting(true);
 
-    const result = await sendPasswordReset(email.trim());
+    const result = await sendPasswordReset(email.trim(), captchaToken ?? undefined);
 
     setIsSubmitting(false);
 
     if (result.error) {
       setError(result.error);
+      retireSpentCaptcha();
       return;
     }
 
@@ -91,6 +133,7 @@ export function AuthModal() {
     setError(null);
     clearOauthError();
     setIsForgotMode(false);
+    forgetCaptcha();
   };
 
   return (
@@ -170,13 +213,15 @@ export function AuthModal() {
                 />
               </div>
 
+              {captchaField}
+
               {displayError ? (
                 <p className="text-xs font-semibold text-red-400">{displayError}</p>
               ) : null}
 
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || awaitingCaptcha}
                 className="mt-1 rounded-lg bg-accent px-3 py-2.5 text-sm font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover disabled:opacity-60"
               >
                 {isSubmitting ? "Sending…" : "Send reset link"}
@@ -247,15 +292,17 @@ export function AuthModal() {
                 clearOauthError();
                 setIsSubmitting(true);
 
+                const token = captchaToken ?? undefined;
                 const result =
                   mode === "sign-in"
-                    ? await signIn(email, password)
-                    : await signUp(email, password, displayName.trim());
+                    ? await signIn(email, password, token)
+                    : await signUp(email, password, displayName.trim(), token);
 
                 setIsSubmitting(false);
 
                 if (result.error) {
                   setError(result.error);
+                  retireSpentCaptcha();
                   return;
                 }
 
@@ -304,6 +351,7 @@ export function AuthModal() {
                         setError(null);
                         clearOauthError();
                         setIsForgotMode(true);
+                        forgetCaptcha();
                       }}
                       className="text-xs font-bold text-accent hover:text-accent-hover"
                     >
@@ -343,10 +391,11 @@ export function AuthModal() {
                   </span>
                 </label>
               ) : null}
+              {captchaField}
               {displayError ? <p className="text-xs font-semibold text-red-400">{displayError}</p> : null}
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || awaitingCaptcha}
                 className="mt-1 rounded-lg bg-accent px-3 py-2.5 text-sm font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover disabled:opacity-60"
               >
                 {isSubmitting ? "Please wait…" : "Continue"}
@@ -357,6 +406,9 @@ export function AuthModal() {
               {mode === "sign-in" ? "Don't have an account?" : "Already have an account?"}{" "}
               <button
                 type="button"
+                // No captcha reset here on purpose: sign-in and sign-up share
+                // one <form>, so the widget stays mounted and would never fire
+                // its callback again. The token is unspent and still good.
                 onClick={() => {
                   setError(null);
                   clearOauthError();
