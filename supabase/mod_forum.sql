@@ -678,6 +678,10 @@ grant execute on function public.forum_unread_count() to authenticated;
 alter table public.profiles
   add column if not exists email_forum_digest boolean not null default true;
 
+-- NOTE: supabase/notification_emails_off.sql recreates this function with the
+-- site-wide pause check added. Re-running THIS file drops that check and every
+-- notification email starts flowing again, silently — run
+-- notification_emails_off.sql afterwards.
 create or replace function public.wants_email(p_user_id uuid, p_kind text)
 returns boolean
 language sql

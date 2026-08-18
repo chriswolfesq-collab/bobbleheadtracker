@@ -463,6 +463,12 @@ export type EmailPreferences = {
   /** The forum digest goes to admins *and* team reps — everyone who can read
    *  the board. A wider audience than isAdmin, hence its own flag. */
   isModerator: boolean;
+  /** The site-wide switch from supabase/notification_emails_off.sql is off, so
+   *  none of these preferences currently sends anything. Kept separate from the
+   *  per-user values because it isn't this account's choice and flipping a
+   *  switch here won't change it — Settings says so rather than showing seven
+   *  toggles that quietly do nothing. */
+  notificationsPaused: boolean;
   setPreference: (
     kind: EmailPreferenceKind,
     enabled: boolean,
@@ -494,6 +500,9 @@ export function useEmailPreferences(): EmailPreferences {
   const [savingKind, setSavingKind] = useState<EmailPreferenceKind | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isModerator, setIsModerator] = useState(false);
+  // Optimistically "not paused" so the panel doesn't flash a pause notice at
+  // everyone on every load if the switch is ever turned back on.
+  const [notificationsPaused, setNotificationsPaused] = useState(false);
 
   useEffect(() => {
     if (!userId) return;
@@ -514,28 +523,43 @@ export function useEmailPreferences(): EmailPreferences {
       // gated server-side, so a wrong answer here can't leak anything.
       supabase.rpc("is_admin"),
       supabase.rpc("is_moderator"),
-    ]).then(([{ data, error }, { data: adminData }, { data: moderatorData }]) => {
-      if (cancelled) return;
+      // The site-wide pause (supabase/notification_emails_off.sql). Read here
+      // rather than in the component so the panel gets it in the same pass as
+      // the switches and renders one settled state.
+      supabase.rpc("notification_emails_enabled"),
+    ]).then(
+      ([
+        { data, error },
+        { data: adminData },
+        { data: moderatorData },
+        { data: enabledData },
+      ]) => {
+        if (cancelled) return;
 
-      if (error) {
-        console.error("Failed to load your email settings:", error.message);
-      } else if (data) {
-        const row = data as Record<string, boolean | null>;
-        setValues({
-          all: row.email_enabled ?? true,
-          wanted_alerts: row.email_wishlist_alerts ?? true,
-          submission_updates: row.email_submission_updates ?? true,
-          rep_digest: row.email_rep_digest ?? true,
-          weekly_digest: row.email_weekly_digest ?? true,
-          forum_digest: row.email_forum_digest ?? true,
-          messages: row.email_messages ?? true,
-        });
-      }
+        if (error) {
+          console.error("Failed to load your email settings:", error.message);
+        } else if (data) {
+          const row = data as Record<string, boolean | null>;
+          setValues({
+            all: row.email_enabled ?? true,
+            wanted_alerts: row.email_wishlist_alerts ?? true,
+            submission_updates: row.email_submission_updates ?? true,
+            rep_digest: row.email_rep_digest ?? true,
+            weekly_digest: row.email_weekly_digest ?? true,
+            forum_digest: row.email_forum_digest ?? true,
+            messages: row.email_messages ?? true,
+          });
+        }
 
-      setIsAdmin(adminData === true);
-      setIsModerator(moderatorData === true);
-      setIsLoading(false);
-    });
+        setIsAdmin(adminData === true);
+        setIsModerator(moderatorData === true);
+        // Only an explicit false pauses the panel. A failed RPC comes back null,
+        // and claiming "we're sending you nothing" on a network blip is the one
+        // wrong answer here — the switches above it are still the truth.
+        setNotificationsPaused(enabledData === false);
+        setIsLoading(false);
+      },
+    );
 
     return () => {
       cancelled = true;
@@ -573,6 +597,7 @@ export function useEmailPreferences(): EmailPreferences {
     savingKind,
     isAdmin,
     isModerator,
+    notificationsPaused,
     setPreference,
   };
 }

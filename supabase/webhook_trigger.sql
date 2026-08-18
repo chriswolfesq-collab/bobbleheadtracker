@@ -8,6 +8,10 @@
 -- file; there is nothing to substitute here any more. See that file for why:
 -- the hand-substitution this replaces is what left every mailer silently broken.
 
+-- NOTE: supabase/notification_emails_off.sql recreates this function with the
+-- site-wide pause check added. Re-running THIS file drops that check and every
+-- notification email starts flowing again, silently — run
+-- notification_emails_off.sql afterwards.
 create or replace function public.notify_new_submission()
 returns trigger
 language plpgsql
@@ -45,6 +49,10 @@ create trigger on_submission_created
 -- `table` field below). Requires the function to be redeployed with the
 -- `listing_reports` handling in supabase/functions/notify-new-submission.
 
+-- NOTE: supabase/notification_emails_off.sql recreates this function with the
+-- site-wide pause check added. Re-running THIS file drops that check and every
+-- notification email starts flowing again, silently — run
+-- notification_emails_off.sql afterwards.
 create or replace function public.notify_new_report()
 returns trigger
 language plpgsql

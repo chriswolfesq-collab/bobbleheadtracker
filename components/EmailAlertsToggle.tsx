@@ -99,7 +99,15 @@ function Switch({
 }
 
 export function EmailAlertsToggle({ alerts }: { alerts: EmailPreferences }) {
-  const { values, isLoading, savingKind, isAdmin, isModerator, setPreference } = alerts;
+  const {
+    values,
+    isLoading,
+    savingKind,
+    isAdmin,
+    isModerator,
+    notificationsPaused,
+    setPreference,
+  } = alerts;
   const { showError } = useToast();
 
   async function toggle(kind: EmailPreferenceKind, next: boolean) {
@@ -108,6 +116,27 @@ export function EmailAlertsToggle({ alerts }: { alerts: EmailPreferences }) {
   }
 
   if (isLoading) return null;
+
+  // The site-wide switch is off (supabase/notification_emails_off.sql), so
+  // every row below would be a promise the site doesn't keep. Say that plainly
+  // instead of rendering seven toggles that send nothing — a switch you can flip
+  // that changes nothing is worse than no switch. The stored preferences are
+  // untouched and come back as they were if the switch is turned on again.
+  if (notificationsPaused) {
+    return (
+      <div className="mb-8 rounded-2xl border border-black/10 bg-black/[0.04] p-4">
+        <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-600">
+          Email notifications
+        </h2>
+        <p className="mt-1.5 text-sm text-zinc-600">
+          Bobble Shelf doesn&rsquo;t send notification emails. Everything happens
+          on the site — check your inbox here for messages, and the pages you
+          follow for what&rsquo;s new. You&rsquo;ll still get essential account
+          email, like a password reset.
+        </p>
+      </div>
+    );
+  }
 
   const allOff = !values.all;
   const rows = ROWS.filter(

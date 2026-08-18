@@ -1623,6 +1623,8 @@ export type Database = {
       }
       is_admin: { Args: never; Returns: boolean }
       is_moderator: { Args: never; Returns: boolean }
+      notification_emails_enabled: { Args: never; Returns: boolean }
+      set_notification_emails: { Args: { p_enabled: boolean }; Returns: boolean }
       is_team_rep: { Args: never; Returns: boolean }
       my_editable_teams: { Args: never; Returns: string[] }
       my_referral: {

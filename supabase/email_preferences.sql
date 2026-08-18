@@ -57,6 +57,10 @@ alter table public.profiles
 -- sync_profile_from_auth, and a missing one means "we have no opt-out on
 -- record", not "opted out". Same reasoning as the coalesce(...) defaults that
 -- were already in the wishlist trigger.
+-- NOTE: supabase/notification_emails_off.sql recreates this function with the
+-- site-wide pause check added. Re-running THIS file drops that check and every
+-- notification email starts flowing again, silently — run
+-- notification_emails_off.sql afterwards.
 create or replace function public.wants_email(p_user_id uuid, p_kind text)
 returns boolean
 language sql
@@ -93,6 +97,10 @@ grant execute on function public.wants_email(uuid, text) to authenticated;
 -- Same question, asked by email address. The team-rep welcome is triggered off
 -- team_reps, which is keyed by email and may name someone who hasn't signed up
 -- yet — in which case there's no preference to honor and the mail should go.
+-- NOTE: supabase/notification_emails_off.sql recreates this function with the
+-- site-wide pause check added. Re-running THIS file drops that check and every
+-- notification email starts flowing again, silently — run
+-- notification_emails_off.sql afterwards.
 create or replace function public.wants_email_by_address(p_email text, p_kind text)
 returns boolean
 language sql

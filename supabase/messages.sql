@@ -763,6 +763,10 @@ $$;
 -- later means editing THIS copy; a re-run of email_preferences.sql or
 -- weekly_digest.sql will silently drop 'messages' and fail closed, which reads
 -- as "message email quietly stopped working".
+-- NOTE: supabase/notification_emails_off.sql recreates this function with the
+-- site-wide pause check added. Re-running THIS file drops that check and every
+-- notification email starts flowing again, silently — run
+-- notification_emails_off.sql afterwards.
 create or replace function public.wants_email(p_user_id uuid, p_kind text)
 returns boolean
 language sql

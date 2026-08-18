@@ -552,3 +552,52 @@ console. `profiles.is_public` stays as a column because `get_public_shelf`,
 true now, so none of those functions changed. `enable_public_shelf()` stays too:
 a browser still running a cached bundle from before this change calls it, and
 it is now a harmless no-op that returns the existing slug.
+
+## The site sends no notification email
+
+Decided 2026-08-18: the only mail Bobble Shelf sends is the Supabase Auth
+confirm-signup message when someone joins, plus password reset. Every automated
+notification — submission approvals, wanted alerts, new-message alerts, the
+team-rep welcome, the contact-form and review-queue nudges to admins, and all
+three digests — is switched off site-wide.
+
+1. In the SQL Editor, run `notification_emails_off.sql` (needs
+   `email_preferences.sql`, `webhook_trigger.sql` and `notification_throttle.sql`
+   — it recreates `wants_email`, `wants_email_by_address`,
+   `notify_new_submission` and `notify_new_report` from those files' versions).
+
+Nothing is deleted: the ten senders, the three cron jobs and the per-user
+preference columns all stay exactly as they were and stop at one boolean in
+`public.notification_emails`. To bring every notification back as it was, an
+admin runs `select public.set_notification_emails(true);` — the stored
+per-user preferences were never cleared, so everyone resumes on whatever they
+had chosen.
+
+Two things stay outside the switch on purpose. `admin-send-email` is a one-off
+an admin composes to a specific person — direct correspondence, not a
+notification, and the same reasoning that kept it outside the per-user opt-outs
+keeps it outside this. And Supabase Auth mail is account mail: someone who reads
+"no emails" must still be able to reset a password.
+
+**The one way to break this.** `wants_email` is recreated by
+`email_preferences.sql`, `messages.sql`, `weekly_digest.sql` and
+`mod_forum.sql`; `wants_email_by_address` by `email_preferences.sql`; the two
+admin notifiers by `webhook_trigger.sql`. Running any of those drops the pause
+check and email starts flowing again with no warning — `net.http_post` is
+fire-and-forget, so nothing surfaces. Each of those files now carries a pointer
+saying to re-run `notification_emails_off.sql` afterwards. Verify with:
+
+```sql
+select count(*) from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+where n.nspname = 'public'
+  and p.proname in ('wants_email', 'wants_email_by_address',
+                    'notify_new_submission', 'notify_new_report')
+  and p.prosrc like '%notification_emails_enabled%';
+```
+
+Four is correct. Anything less means a sender is live again.
+
+While the switch is off, Settings replaces the seven email toggles with a line
+saying the site doesn't send notification email — `useEmailPreferences` reads
+`notification_emails_enabled()` for that. A switch you can flip that changes
+nothing is worse than no switch.

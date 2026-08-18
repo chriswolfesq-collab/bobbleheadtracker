@@ -22,6 +22,10 @@ alter table public.profiles
 -- patched, because both enumerate the known kinds and an unlisted kind fails
 -- closed by design — adding the column without adding it here would leave a
 -- preference nobody can turn off and a digest that never sends.
+-- NOTE: supabase/notification_emails_off.sql recreates this function with the
+-- site-wide pause check added. Re-running THIS file drops that check and every
+-- notification email starts flowing again, silently — run
+-- notification_emails_off.sql afterwards.
 create or replace function public.wants_email(p_user_id uuid, p_kind text)
 returns boolean
 language sql
