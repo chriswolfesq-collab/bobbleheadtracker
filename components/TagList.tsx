@@ -14,7 +14,12 @@ import { useBobbleheadTags, useMyTagRequests, useTagVocabulary } from "@/lib/use
 // theirs. Everyone else signed in requests: their picker files a tag_requests
 // row for the admin to rule on at /admin/tag-requests, and their asks sit here
 // as muted "pending" chips until then. Knowing a bobblehead is a Star Wars
-// bobblehead doesn't take a rep, so this isn't gated on the team.
+// bobblehead doesn't take a rep, so asking isn't gated on the team.
+//
+// Taking a tag off is: this team's rep gets the × as well as the admin. The
+// halves are asymmetric on purpose (see supabase/rep_tag_removal.sql) — adding
+// decides something about the shared vocabulary, removing only decides what one
+// listing on the rep's own team says.
 //
 // Chips link to the tag page rather than running a search, so "Star Wars" is a
 // place you can link someone to rather than a query they have to retype.
@@ -36,11 +41,14 @@ export function TagList({
 }) {
   const { tags, isLoading, addTag, removeTag } = useBobbleheadTags(teamSlug, bobbleheadId);
   const { pending, requestTag } = useMyTagRequests(teamSlug, bobbleheadId, source);
-  const { isAdmin } = useAdminAuth();
+  const { isAdmin, canEditTeam } = useAdminAuth();
   const { user } = useAuth();
   // Everyone else signed in requests rather than writes; the admin writes.
   const canRequest = !isAdmin && Boolean(user);
-  const canEdit = isAdmin || canRequest;
+  // canEditTeam already folds the admin in, so this is "admin, or this team's
+  // rep" without spelling it out twice.
+  const canRemove = canEditTeam(teamSlug);
+  const canEdit = canRemove || canRequest;
   const [isEditing, setIsEditing] = useState(false);
 
   // Nothing to show and no way to add: the section would be an empty heading.
@@ -58,7 +66,7 @@ export function TagList({
             onClick={() => setIsEditing((current) => !current)}
             className="cursor-pointer text-xs font-black uppercase tracking-wide text-accent transition hover:text-accent-hover"
           >
-            {isEditing ? "Done" : isAdmin ? "Edit" : "Request a tag"}
+            {isEditing ? "Done" : canRemove ? "Edit" : "Request a tag"}
           </button>
         ) : null}
       </div>
@@ -67,7 +75,7 @@ export function TagList({
         <ul className="mt-3 flex flex-wrap gap-2">
           {tags.map((tag) => (
             <li key={tag.slug}>
-              {isEditing && isAdmin ? (
+              {isEditing && canRemove ? (
                 <span className={CHIP_CLASS}>
                   {tag.label}
                   <button

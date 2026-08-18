@@ -40,9 +40,15 @@ const ACTION_LABELS: Record<string, string> = {
   submission_rejected: "Rejected a submission",
   report_resolved: "Resolved a report",
   report_dismissed: "Dismissed a report",
+  tag_removed: "Removed a tag",
 };
 
-const DESTRUCTIVE = new Set(["listing_deleted", "photo_removed", "submission_rejected"]);
+const DESTRUCTIVE = new Set([
+  "listing_deleted",
+  "photo_removed",
+  "submission_rejected",
+  "tag_removed",
+]);
 
 // A deleted listing's detail page 404s (see the bobblehead route), so the one
 // entry that names a target you can't visit doesn't become a link.

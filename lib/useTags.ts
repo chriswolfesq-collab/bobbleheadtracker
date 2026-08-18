@@ -474,15 +474,21 @@ export function useBobbleheadTags(teamSlug: string, bobbleheadId: string) {
       // Scoped to the team as well as the id, because the two together are
       // what name a listing — 36 bobblehead ids are shared between teams, so
       // an unscoped delete would take "Sesame Street" off all five Elmos.
-      const { error } = await supabase
+      //
+      // Selecting the deleted row back is how a refusal is noticed at all: RLS
+      // turns a delete the caller may not make into zero rows and no error, so
+      // without this a rep whose grant doesn't cover this team would watch the
+      // chip vanish and come back on the next load.
+      const { data, error } = await supabase
         .from("bobblehead_tags")
         .delete()
         .eq("bobblehead_id", bobbleheadId)
         .eq("team_slug", teamSlug)
-        .eq("tag_slug", slug);
+        .eq("tag_slug", slug)
+        .select("tag_slug");
 
-      if (error) {
-        console.error("Failed to remove the tag:", error.message);
+      if (error || (data ?? []).length === 0) {
+        console.error("Failed to remove the tag:", error?.message ?? "no row was removed");
         setTags(previous);
         showError("Couldn't remove that tag. Please try again.");
         return false;

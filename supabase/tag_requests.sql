@@ -132,7 +132,7 @@ create policy "tag_requests: admin delete"
   using (public.is_admin());
 
 -- ---------------------------------------------------------------------------
--- Tighten the tag tables themselves: adds and removals are admin-only now.
+-- Tighten the tag tables themselves: minting and applying are admin-only now.
 -- These replace the editor policies created in tags.sql.
 -- ---------------------------------------------------------------------------
 
@@ -150,11 +150,12 @@ create policy "bobblehead_tags: admin insert"
   to authenticated
   with check (public.is_admin());
 
--- Removal too: a rep who could strip an approved tag could undo the review
--- this table exists for.
+-- Removal is not: supabase/rep_tag_removal.sql later reopened it to the team's
+-- own rep, since taking a wrong tag off one listing decides nothing about the
+-- shared vocabulary. Restated here so re-running this file doesn't undo that.
 drop policy if exists "bobblehead_tags: editor delete" on public.bobblehead_tags;
 drop policy if exists "bobblehead_tags: admin delete" on public.bobblehead_tags;
-create policy "bobblehead_tags: admin delete"
+create policy "bobblehead_tags: editor delete"
   on public.bobblehead_tags for delete
   to authenticated
-  using (public.is_admin());
+  using (public.can_edit_team(team_slug));

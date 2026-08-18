@@ -107,8 +107,8 @@ create policy "bobblehead_tags: public read"
   to anon, authenticated
   using (true);
 
--- Applying and removing tags is admin-only too (a rep who could strip an
--- approved tag could undo the review). A rep's route is a tag_requests row.
+-- Applying a tag is admin-only (a rep who could apply one could route around
+-- the review the vocabulary is curated by). A rep's route is a tag_requests row.
 drop policy if exists "bobblehead_tags: editor insert" on public.bobblehead_tags;
 drop policy if exists "bobblehead_tags: admin insert" on public.bobblehead_tags;
 create policy "bobblehead_tags: admin insert"
@@ -116,12 +116,15 @@ create policy "bobblehead_tags: admin insert"
   to authenticated
   with check (public.is_admin());
 
+-- Removing one is the team's rep as well as the admin — see
+-- supabase/rep_tag_removal.sql for why the two halves aren't symmetric. Kept in
+-- step here so re-running this file doesn't quietly close it again.
 drop policy if exists "bobblehead_tags: editor delete" on public.bobblehead_tags;
 drop policy if exists "bobblehead_tags: admin delete" on public.bobblehead_tags;
-create policy "bobblehead_tags: admin delete"
+create policy "bobblehead_tags: editor delete"
   on public.bobblehead_tags for delete
   to authenticated
-  using (public.is_admin());
+  using (public.can_edit_team(team_slug));
 
 -- ---------------------------------------------------------------------------
 -- Counts
