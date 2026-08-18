@@ -678,6 +678,41 @@ export type Database = {
         }
         Relationships: []
       }
+      inbound_message_replies: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          message_id: string
+          sent_by: string | null
+          sent_to: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          message_id: string
+          sent_by?: string | null
+          sent_to: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          message_id?: string
+          sent_by?: string | null
+          sent_to?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inbound_message_replies_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "inbound_messages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       scraped_giveaways: {
         Row: {
           approved_community_id: string | null
@@ -1026,7 +1061,13 @@ export type Database = {
       }
       admin_list_inbound_messages: {
         Args: { p_kind?: string | null }
-        Returns: Database["public"]["Tables"]["inbound_messages"]["Row"][]
+        Returns: (Database["public"]["Tables"]["inbound_messages"]["Row"] & {
+          replies: Json
+        })[]
+      }
+      admin_record_inbound_reply: {
+        Args: { p_body: string; p_message_id: string }
+        Returns: string
       }
       admin_list_team_reps: {
         Args: never

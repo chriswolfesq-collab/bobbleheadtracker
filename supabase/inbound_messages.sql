@@ -134,6 +134,12 @@ create trigger rate_limit_inbound_messages
 -- ---------------------------------------------------------------------------
 -- The admin console reads through an RPC rather than selecting the table, to
 -- match admin_list_team_reps and friends.
+--
+-- inbound_message_replies.sql REPLACES this function with one that also returns
+-- each message's replies, and owns it from then on. It can't live here: its body
+-- reads a table that file creates. Re-running this file on a live database
+-- reinstalls the version below and the console loses the replies it renders --
+-- run inbound_message_replies.sql again after, if you ever do.
 create or replace function public.admin_list_inbound_messages(p_kind text default null)
 returns setof public.inbound_messages
 language sql

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { sendAdminEmail } from "@/lib/adminEmail";
 import { useDialog } from "@/lib/useDialog";
 
@@ -36,17 +36,37 @@ export function AdminEmailComposer({
   target,
   onClose,
   onSent,
+  title = "Send email",
+  initialSubject = "",
+  initialBody = "",
 }: {
   target: EmailTarget;
   onClose: () => void;
-  onSent: (count: number) => void;
+  onSent: (count: number, sent: { subject: string; body: string }) => void;
+  /** Both editable. A reply arrives with the subject and the quoted original
+   * already filled in, so answering a message is one field of typing. */
+  title?: string;
+  initialSubject?: string;
+  initialBody?: string;
 }) {
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
+  const [subject, setSubject] = useState(initialSubject);
+  const [message, setMessage] = useState(initialBody);
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const panelRef = useDialog<HTMLDivElement>(true, onClose);
+  const bodyRef = useRef<HTMLTextAreaElement | null>(null);
+
+  // A reply opens with the sender's own message already quoted in the box. The
+  // caret belongs above the quote, not after it, which is the one thing plain
+  // autoFocus gets wrong here.
+  useEffect(() => {
+    if (!initialBody) return;
+    const box = bodyRef.current;
+    if (!box) return;
+    box.focus();
+    box.setSelectionRange(0, 0);
+  }, [initialBody]);
 
   const send = async () => {
     if (!subject.trim() || !message.trim()) {
@@ -69,7 +89,7 @@ export function AdminEmailComposer({
             : { ...base, recipientIds: target.recipients.map((r) => r.id) };
 
       const { sent } = await sendAdminEmail(args);
-      onSent(sent);
+      onSent(sent, base);
     } catch (sendError) {
       setError(sendError instanceof Error ? sendError.message : "Could not send the email.");
     } finally {
@@ -92,7 +112,7 @@ export function AdminEmailComposer({
       >
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h2 id="admin-email-title" className="text-lg font-black uppercase tracking-wide">Send email</h2>
+            <h2 id="admin-email-title" className="text-lg font-black uppercase tracking-wide">{title}</h2>
             <p className="mt-1 text-sm text-zinc-600">
               To <span className="font-semibold text-accent">{recipientLabel(target)}</span>
             </p>
@@ -121,7 +141,7 @@ export function AdminEmailComposer({
           <label className="block text-sm">
             <span className="font-black uppercase tracking-wide text-zinc-700">Subject</span>
             <input
-              autoFocus
+              autoFocus={!initialSubject}
               type="text"
               required
               value={subject}
@@ -133,6 +153,7 @@ export function AdminEmailComposer({
           <label className="block text-sm">
             <span className="font-black uppercase tracking-wide text-zinc-700">Message</span>
             <textarea
+              ref={bodyRef}
               required
               rows={8}
               value={message}

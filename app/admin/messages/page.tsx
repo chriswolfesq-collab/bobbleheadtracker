@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { AdminEmailComposer } from "@/components/AdminEmailComposer";
 import { AdminLoginForm } from "@/components/AdminLoginForm";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useAdminAuth } from "@/lib/adminAuth";
@@ -11,6 +12,18 @@ import { TEAMS } from "@/lib/teams";
 // applications (see supabase/inbound_messages.sql). The email notification is the
 // prompt; this page is the record, so a message that got lost in a spam folder is
 // still here.
+//
+// Answering happens here too, rather than by finding the notification email and
+// hitting Reply: the reply goes out through admin-send-email and is written down
+// against the message (supabase/inbound_message_replies.sql), so the record
+// covers both halves of the conversation instead of just the incoming half.
+
+type InboundReply = {
+  id: string;
+  body: string;
+  sent_to: string;
+  created_at: string;
+};
 
 type InboundMessage = {
   id: string;
@@ -22,6 +35,8 @@ type InboundMessage = {
   status: string;
   created_at: string;
   handled_at: string | null;
+  // Aggregated by admin_list_inbound_messages; [] for a message never answered.
+  replies: InboundReply[] | null;
 };
 
 type Filter = "all" | "contact" | "rep_application";
@@ -43,6 +58,25 @@ function formatWhen(iso: string): string {
   });
 }
 
+const senderLabel = (message: InboundMessage) => message.name || message.email;
+
+function replySubject(message: InboundMessage): string {
+  return message.kind === "rep_application" && message.team_slug
+    ? `Re: your ${teamName(message.team_slug)} team rep application`
+    : "Re: your message to Bobble Shelf";
+}
+
+// The reply lands in their inbox from alerts@bobbleshelf.com, possibly days after
+// they wrote in, so it carries their own message back with it. Editable like the
+// rest of the draft — this is a starting point, not a wrapper.
+function quotedOriginal(message: InboundMessage): string {
+  const quoted = message.message
+    .split("\n")
+    .map((line) => `> ${line}`)
+    .join("\n");
+  return `\n\n---\nYou wrote on ${formatWhen(message.created_at)}:\n${quoted}\n`;
+}
+
 export default function AdminMessagesPage() {
   const { user, isAdmin, isLoading, signOut } = useAdminAuth();
   const [messages, setMessages] = useState<InboundMessage[]>([]);
@@ -50,10 +84,14 @@ export default function AdminMessagesPage() {
   const [filter, setFilter] = useState<Filter>("all");
   const [busyId, setBusyId] = useState<string | null>(null);
   const [confirmingDeleteId, setConfirmingDeleteId] = useState<string | null>(null);
+  const [replyTo, setReplyTo] = useState<InboundMessage | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // Returns the read so a caller can report on it afterwards: the success path
+  // clears the banner, which would otherwise swallow a message set beforehand.
   const load = useCallback(() => {
-    supabase
+    return supabase
       .rpc("admin_list_inbound_messages", { p_kind: filter === "all" ? null : filter })
       .then(({ data, error: rpcError }) => {
         if (rpcError) {
@@ -84,6 +122,29 @@ export default function AdminMessagesPage() {
       return;
     }
     load();
+  }
+
+  // Called once admin-send-email has accepted the reply, so the mail is already
+  // gone by the time we get here. This writes it down against the message — and
+  // marks the message handled, which the RPC does in the same statement. A
+  // failure here is bookkeeping, not delivery, and the notice says which.
+  async function recordReply(message: InboundMessage, body: string) {
+    const { error: rpcError } = await supabase.rpc("admin_record_inbound_reply", {
+      p_message_id: message.id,
+      p_body: body,
+    });
+
+    await load();
+
+    if (rpcError) {
+      setNotice(null);
+      setError(
+        `Your reply was sent to ${message.email}, but saving it against the message failed: ${rpcError.message}`,
+      );
+    } else {
+      setError(null);
+      setNotice(`Replied to ${senderLabel(message)} — you're BCC'd, and it's saved below.`);
+    }
   }
 
   // Spam and test submissions have no reason to sit in the queue forever, and
@@ -142,9 +203,10 @@ export default function AdminMessagesPage() {
         />
         <h1 className="mt-3 text-2xl font-black uppercase tracking-wide">Messages</h1>
         <p className="mt-1 text-sm text-zinc-600">
-          Contact-form messages and team-rep applications. Reply straight from the notification
-          email — its reply-to is the sender&apos;s address. Mark one handled to move it out of the
-          way, or delete it outright if it&apos;s spam.
+          Contact-form messages and team-rep applications. Reply from here and the answer is
+          emailed to the sender, BCC&apos;d to you, and kept with the message — replying marks it
+          handled. Mark one handled by hand to move it out of the way, or delete it outright if
+          it&apos;s spam.
         </p>
 
         <div className="mt-6 flex gap-2">
@@ -168,6 +230,7 @@ export default function AdminMessagesPage() {
         </div>
 
         {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
+        {notice ? <p className="mt-4 text-sm font-semibold text-green-700">{notice}</p> : null}
 
         {isLoadingMessages ? (
           <p className="mt-6 text-sm text-zinc-600">Loading…</p>
@@ -177,6 +240,7 @@ export default function AdminMessagesPage() {
           <ul className="mt-6 space-y-3">
             {messages.map((message) => {
               const isHandled = message.status === "handled";
+              const replies = message.replies ?? [];
               return (
                 <li
                   key={message.id}
@@ -187,10 +251,15 @@ export default function AdminMessagesPage() {
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-zinc-900">
-                        {message.name || message.email}
+                        {senderLabel(message)}
                         {message.kind === "rep_application" && message.team_slug ? (
                           <span className="ml-2 rounded bg-accent/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-accent">
                             {teamName(message.team_slug)} rep
+                          </span>
+                        ) : null}
+                        {replies.length > 0 ? (
+                          <span className="ml-2 rounded bg-green-600/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-green-700">
+                            {replies.length === 1 ? "Replied" : `${replies.length} replies`}
                           </span>
                         ) : null}
                       </p>
@@ -206,6 +275,17 @@ export default function AdminMessagesPage() {
                       </p>
                     </div>
                     <div className="flex shrink-0 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setNotice(null);
+                          setReplyTo(message);
+                        }}
+                        disabled={busyId === message.id}
+                        className="rounded border border-accent px-3 py-1.5 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg disabled:opacity-50"
+                      >
+                        {replies.length > 0 ? "Reply again" : "Reply"}
+                      </button>
                       <button
                         type="button"
                         onClick={() => toggleHandled(message)}
@@ -227,11 +307,25 @@ export default function AdminMessagesPage() {
                   <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-zinc-700">
                     {message.message}
                   </p>
+                  {replies.length > 0 ? (
+                    <div className="mt-3 space-y-3 border-l-2 border-accent/40 pl-3">
+                      {replies.map((reply) => (
+                        <div key={reply.id}>
+                          <p className="text-[11px] font-black uppercase tracking-wide text-zinc-500">
+                            You replied to {reply.sent_to} · {formatWhen(reply.created_at)}
+                          </p>
+                          <p className="mt-1 whitespace-pre-wrap text-sm leading-6 text-zinc-700">
+                            {reply.body}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
                   {confirmingDeleteId === message.id ? (
                     <div className="mt-3 rounded border border-red-500/40 bg-red-50 p-3">
                       <p className="text-xs font-bold text-red-700">
-                        Delete this message for good? It won&apos;t be in the queue any more — the
-                        notification email is the only copy left.
+                        Delete this message for good? It won&apos;t be in the queue any more — any
+                        replies you sent go with it, and the emails are the only copies left.
                       </p>
                       <div className="mt-3 flex gap-2">
                         <button
@@ -259,6 +353,25 @@ export default function AdminMessagesPage() {
           </ul>
         )}
       </div>
+
+      {replyTo ? (
+        <AdminEmailComposer
+          title="Reply"
+          target={{
+            kind: "addresses",
+            emails: [replyTo.email],
+            label: senderLabel(replyTo),
+          }}
+          initialSubject={replySubject(replyTo)}
+          initialBody={quotedOriginal(replyTo)}
+          onClose={() => setReplyTo(null)}
+          onSent={(_count, sent) => {
+            const message = replyTo;
+            setReplyTo(null);
+            recordReply(message, sent.body);
+          }}
+        />
+      ) : null}
     </main>
   );
 }
