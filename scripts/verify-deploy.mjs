@@ -7,11 +7,25 @@
 //
 // Why this exists: on 2026-08-04 a push to main (4d14cfa) was silently dropped
 // by Vercel's GitHub App — no deployment record, no queue entry, no failure.
-// Production kept serving the previous commit. Watching the commit *status* for
-// that push was useless: a build that never starts posts no status, so "no
-// deployment" and "still building" both look like silence. This polls the thing
-// that actually distinguishes them — whether a deployment record exists at all —
-// and only then waits on its outcome.
+// Production kept serving the previous commit. The trap is that the rollup
+// `commits/<sha>/status` reports "pending" both for a build in flight and for a
+// push nothing ever picked up, so the two look identical there.
+//
+// They are not identical one level down. Vercel posts a *pending commit status*
+// within seconds of a push it has accepted, so the question "was this push picked
+// up at all" is answered by whether any Vercel status exists — not by how long
+// we have been waiting. Measured over the 94 pushes on record (2026-08-18):
+//
+//   push -> first Vercel status   p50 2s, p90 3s, max 5s, on 93 of 94
+//   the 94th is 4d14cfa, which has no status and no deployment record, forever
+//
+// So an unacknowledged push is recognisable in about a minute and a half rather
+// than by timing out. Waiting on the deployment *record* to make that call is
+// what the earlier version did, and it cannot work: Vercel creates the record
+// when the build finishes, not when it starts (measured record -> success: 0s),
+// so "no record yet" is the normal state for the entire length of a build. With
+// push -> record running p50 181s / max 581s against a 5m grace, roughly one
+// healthy deploy in ten was announced as "likely dropped".
 //
 // The delivery log that would show the dropped webhook belongs to Vercel, not to
 // this repo (there are no repo webhooks; it's a GitHub App), so it can't be read
@@ -22,14 +36,18 @@
 // without a real browser — verify that by loading the site and reading the
 // `?dpl=` id on its script tags.
 //
-// Exit codes:  0 deployed and succeeded    2 no deployment was ever created
+// Exit codes:  0 deployed and succeeded    2 the push was never picked up
 //              1 the build failed          3 still building when time ran out
 
 import { execFileSync } from "node:child_process";
 
 // Overridable so the slow paths can be exercised without waiting them out.
 const num = (name, fallback) => Number(process.env[name]) || fallback;
-const GRACE_MS = num("VERIFY_DEPLOY_GRACE_MS", 5 * 60_000); // a healthy build is recorded well inside this
+// How long to allow for Vercel to acknowledge the push at all. The slowest
+// acknowledgement on record is 5s, so this is ~18x the observed worst case: long
+// enough that a hiccup doesn't read as a drop, short enough to be worth waiting
+// for before reaching for the empty-commit remedy.
+const ACK_MS = num("VERIFY_DEPLOY_ACK_MS", 90_000);
 const BUDGET_MS = num("VERIFY_DEPLOY_BUDGET_MS", 20 * 60_000); // total wait, including the build itself
 const POLL_MS = num("VERIFY_DEPLOY_POLL_MS", 15_000);
 
@@ -69,6 +87,18 @@ function latestState(repo, deploymentId) {
   return decisive ? decisive.state : "pending";
 }
 
+// Vercel's own statuses on the commit, newest first — the acknowledgement signal.
+// GitHub Actions reports through the Checks API rather than this one, so on this
+// repo the statuses list is Vercel's alone; the filter is there so that a second
+// status provider added later can't stand in for Vercel having picked the push up.
+function vercelStatuses(repo, sha) {
+  const statuses = gh(`repos/${repo}/commits/${sha}/statuses?per_page=100`);
+  return {
+    mine: statuses.filter((status) => /vercel/i.test(status.context ?? "")),
+    anyContext: statuses.map((status) => status.context),
+  };
+}
+
 async function main() {
   const ref = process.argv[2] ?? "HEAD";
   const sha = git("rev-parse", ref);
@@ -90,18 +120,29 @@ async function main() {
   }
 
   const startedAt = Date.now();
-  let warnedAboutGrace = false;
+  let announcedPickup = false;
 
   for (;;) {
-    const deployments = gh(`repos/${repo}/deployments?sha=${sha}&per_page=10`);
     const elapsed = Date.now() - startedAt;
+    // Re-read every poll rather than latching: this is the acknowledgement
+    // signal *and* the outcome signal, and a build that fails ten minutes in
+    // needs to be caught on the poll it fails, not on the one that saw it start.
+    const { mine, anyContext } = vercelStatuses(repo, sha);
 
-    if (deployments.length === 0) {
-      if (elapsed > BUDGET_MS) {
-        console.error(`\n✗ No deployment was ever created for ${short}.`);
-        console.error("  Vercel's GitHub App did not pick up the push — this is the");
-        console.error("  silent-drop case, not a slow build. Nothing is queued, so it");
+    if (mine.length === 0) {
+      if (elapsed > ACK_MS) {
+        console.error(`\n✗ Vercel never picked up the push of ${short}.`);
+        console.error(
+          `  No Vercel commit status after ${Math.round(elapsed / 1000)}s, and it normally`,
+        );
+        console.error("  posts one within five seconds of a push it accepted. This is the");
+        console.error("  silent-drop case, not a slow build — nothing is queued, so it");
         console.error("  will not resolve on its own.");
+        if (anyContext.length > 0) {
+          console.error(`\n  Statuses that DO exist: ${anyContext.join(", ")}.`);
+          console.error("  If Vercel's status context was renamed, this script is looking");
+          console.error("  for the wrong one — check that before pushing an empty commit.");
+        }
         console.error("\n  Re-trigger with an empty commit (no code change):");
         console.error("    git commit --allow-empty -m 'Re-trigger the deploy Vercel missed'");
         console.error("    git push origin main");
@@ -109,38 +150,48 @@ async function main() {
         console.error("  tree, which may hold other sessions' uncommitted work.");
         process.exit(2);
       }
-      if (elapsed > GRACE_MS && !warnedAboutGrace) {
-        warnedAboutGrace = true;
-        const mins = Math.round(elapsed / 60_000);
-        console.log(`  … still no deployment record after ${mins}m — a healthy build`);
-        console.log("    is usually recorded within a minute. Likely dropped; waiting");
-        console.log("    out the rest of the budget before calling it.");
-      } else if (!warnedAboutGrace) {
-        console.log("  … waiting for a deployment record");
-      }
+      console.log("  … waiting for Vercel to pick up the push");
       await sleep(POLL_MS);
       continue;
     }
 
-    const deployment = deployments[0];
-    const state = latestState(repo, deployment.id);
-
-    if (state === "success") {
-      console.log(`\n✓ ${short} deployed (${deployment.environment}).`);
-      console.log(`  Confirm what's serving by loading the site and reading the`);
-      console.log(`  \`?dpl=\` id on its script tags.`);
-      process.exit(0);
+    if (!announcedPickup) {
+      announcedPickup = true;
+      console.log("  … picked up by Vercel; building");
     }
+
+    const state = mine[0].state;
+
     if (state === "failure" || state === "error") {
       console.error(`\n✗ The build for ${short} ended in "${state}".`);
-      console.error("  The deployment exists, so this is a real build failure, not a");
-      console.error("  dropped push. Check the logs:");
-      console.error(`    gh api repos/${repo}/commits/${short}/status --jq '.statuses[0].target_url'`);
+      console.error("  Vercel picked the push up, so this is a real build failure, not");
+      console.error("  a dropped push. Check the logs:");
+      console.error(`    ${mine[0].target_url ?? `gh api repos/${repo}/commits/${short}/status`}`);
       process.exit(1);
     }
+
+    if (state === "success") {
+      // The record carries the environment name, and Vercel creates it as the
+      // build lands — so it is normally here by now. If this particular poll
+      // caught the gap, the status is still decisive; just say less.
+      const deployments = gh(`repos/${repo}/deployments?sha=${sha}&per_page=10`);
+      const deployment = deployments[0];
+      const environment =
+        deployment && latestState(repo, deployment.id) === "success"
+          ? ` (${deployment.environment})`
+          : "";
+
+      console.log(`\n✓ ${short} deployed${environment}.`);
+      console.log("  Confirm what's serving by loading the site and reading the");
+      console.log("  `?dpl=` id on its script tags.");
+      process.exit(0);
+    }
+
     if (elapsed > BUDGET_MS) {
-      console.error(`\n✗ Timed out: ${short} is still "${state}" after ${Math.round(BUDGET_MS / 60_000)}m.`);
-      console.error("  The deployment exists, so it wasn't dropped — it's just slow or stuck.");
+      console.error(
+        `\n✗ Timed out: ${short} is still "${state}" after ${Math.round(BUDGET_MS / 60_000)}m.`,
+      );
+      console.error("  Vercel picked it up, so it wasn't dropped — it's slow or stuck.");
       process.exit(3);
     }
 
@@ -148,7 +199,6 @@ async function main() {
     await sleep(POLL_MS);
   }
 }
-
 main().catch((error) => {
   console.error(`\n✗ ${error.message}`);
   if (String(error.message).includes("ENOENT")) {
