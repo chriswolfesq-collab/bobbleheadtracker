@@ -12,20 +12,25 @@
 // push nothing ever picked up, so the two look identical there.
 //
 // They are not identical one level down. Vercel posts a *pending commit status*
-// within seconds of a push it has accepted, so the question "was this push picked
-// up at all" is answered by whether any Vercel status exists — not by how long
-// we have been waiting. Measured over the 94 pushes on record (2026-08-18):
+// on a push it has accepted, long before the build ends, so the question "was
+// this push picked up at all" is answered by whether any Vercel status exists —
+// not by how long we have been waiting. Of the 94 pushes on record, 93 have one;
+// the 94th is 4d14cfa, which has no status and no deployment record, forever.
 //
-//   push -> first Vercel status   p50 2s, p90 3s, max 5s, on 93 of 94
-//   the 94th is 4d14cfa, which has no status and no deployment record, forever
-//
-// So an unacknowledged push is recognisable in about a minute and a half rather
-// than by timing out. Waiting on the deployment *record* to make that call is
-// what the earlier version did, and it cannot work: Vercel creates the record
-// when the build finishes, not when it starts (measured record -> success: 0s),
-// so "no record yet" is the normal state for the entire length of a build. With
+// Waiting on the deployment *record* to make that call is what the earlier
+// version did, and it cannot work: Vercel creates the record when the build
+// finishes, not when it starts (measured record -> success: 0s, 1s), so "no
+// record yet" is the normal state for the entire length of a build. With
 // push -> record running p50 181s / max 581s against a 5m grace, roughly one
 // healthy deploy in ten was announced as "likely dropped".
+//
+// On how long acknowledgement takes, trust little: deriving it from the GitHub
+// events API gives push -> status of p50 2s / max 5s, and those numbers are not
+// real. That API does not timestamp the push instant — one sample comes out at
+// -462s (a status before its own push) and four more at under a second, which no
+// webhook round trip achieves. The one measurement taken against a clock we
+// control, the push of cad6fb9, was 46s. So ACK_MS is set with a wide margin
+// rather than a tight multiple of a distribution that can't be trusted.
 //
 // The delivery log that would show the dropped webhook belongs to Vercel, not to
 // this repo (there are no repo webhooks; it's a GitHub App), so it can't be read
@@ -43,11 +48,18 @@ import { execFileSync } from "node:child_process";
 
 // Overridable so the slow paths can be exercised without waiting them out.
 const num = (name, fallback) => Number(process.env[name]) || fallback;
-// How long to allow for Vercel to acknowledge the push at all. The slowest
-// acknowledgement on record is 5s, so this is ~18x the observed worst case: long
-// enough that a hiccup doesn't read as a drop, short enough to be worth waiting
-// for before reaching for the empty-commit remedy.
-const ACK_MS = num("VERIFY_DEPLOY_ACK_MS", 90_000);
+// How long to allow for Vercel to acknowledge the push at all. Deliberately
+// generous: the cost of firing early is telling someone to push an empty commit
+// over a deploy that was fine, while the cost of firing late is a few more
+// minutes of waiting on a case that never resolves anyway. A healthy push has
+// acknowledged (46s observed) and usually finished deploying (2m39s) well inside
+// this, so in practice a green run exits before the deadline is ever consulted.
+//
+// Same number as the grace it replaces, and worth being clear that the number is
+// not the fix — the signal is. At 5m the old check was still waiting on a record
+// that normally doesn't exist yet; this one is waiting on a status that arrives
+// before the build does.
+const ACK_MS = num("VERIFY_DEPLOY_ACK_MS", 5 * 60_000);
 const BUDGET_MS = num("VERIFY_DEPLOY_BUDGET_MS", 20 * 60_000); // total wait, including the build itself
 const POLL_MS = num("VERIFY_DEPLOY_POLL_MS", 15_000);
 
@@ -133,11 +145,11 @@ async function main() {
       if (elapsed > ACK_MS) {
         console.error(`\n✗ Vercel never picked up the push of ${short}.`);
         console.error(
-          `  No Vercel commit status after ${Math.round(elapsed / 1000)}s, and it normally`,
+          `  No Vercel commit status after ${Math.round(elapsed / 1000)}s. It posts one`,
         );
-        console.error("  posts one within five seconds of a push it accepted. This is the");
-        console.error("  silent-drop case, not a slow build — nothing is queued, so it");
-        console.error("  will not resolve on its own.");
+        console.error("  well before a build finishes — under a minute, in the last case");
+        console.error("  measured — so this is the silent-drop case, not a slow build.");
+        console.error("  Nothing is queued, so it will not resolve on its own.");
         if (anyContext.length > 0) {
           console.error(`\n  Statuses that DO exist: ${anyContext.join(", ")}.`);
           console.error("  If Vercel's status context was renamed, this script is looking");
