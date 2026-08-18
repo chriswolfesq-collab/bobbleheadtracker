@@ -114,7 +114,9 @@ describe("AuthModal with CAPTCHA enabled", () => {
 
     await screen.findByText(/isn't right/i);
     expect(screen.getByTestId("challenge-round").textContent).toBe("1");
-    expect(submitButton().hasAttribute("disabled")).toBe(true);
+    // The widget drops the spent token from an effect, so the button re-disables
+    // a render after the error text lands rather than in the same one.
+    await waitFor(() => expect(submitButton().hasAttribute("disabled")).toBe(true));
 
     // And the retry carries the new token, not the spent one.
     passChallenge();
