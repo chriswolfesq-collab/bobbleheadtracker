@@ -1,14 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { Avatar } from "@/components/Avatar";
+import { MemberSearch } from "@/components/MemberSearch";
 import { avatarPublicUrl } from "@/lib/avatar";
-import { sendFriendRequest, type Friendship, type useFriendships } from "@/lib/friends";
+import { useMemberSearch, type Friendship, type useFriendships } from "@/lib/friends";
 
-// The Friends tab: add by shelf link, answer what's waiting, see who you've
-// got. Prop-driven from the shell's single useFriendships() call so the tab
-// pill's count and these lists can never disagree.
+// The Friends tab: find someone, answer what's waiting, see who you've got.
+// Prop-driven from the shell's single useFriendships() call so the tab pill's
+// count and these lists can never disagree.
+//
+// Adding used to be a bare "paste a shelf link" box, because a link was the only
+// way to find anyone. MemberSearch supersedes that box rather than sitting next
+// to it: the search matches slugs too, so a pasted link still resolves — it just
+// shows you whose shelf it is, name and avatar, before you ask.
 
 const actionClass =
   "rounded border border-black/15 px-2.5 py-1 text-[11px] font-black uppercase tracking-wide text-zinc-600 transition hover:border-accent hover:text-accent-hover";
@@ -45,32 +50,13 @@ function FriendRow({
   );
 }
 
-/** Pulls the slug out of whatever got pasted: a bare slug, a full shelf URL,
- *  or a URL with trailing slash or query noise. */
-function slugFromInput(raw: string): string {
-  const trimmed = raw.trim();
-  const afterShelf = trimmed.includes("/shelf/")
-    ? (trimmed.split("/shelf/")[1] ?? "")
-    : trimmed;
-  return afterShelf.split(/[/?#]/)[0]?.trim() ?? "";
-}
-
-const SENT_MESSAGES: Record<string, string> = {
-  pending: "Request sent. They'll see it on their profile.",
-  accepted: "They'd already asked you — you're friends now!",
-  already_pending: "You've already asked — still waiting on them.",
-  already_friends: "You're already friends.",
-};
-
 export function FriendsSection({
   friendships,
 }: {
   friendships: ReturnType<typeof useFriendships>;
 }) {
   const { friends, incoming, outgoing, isLoading, respond, cancel, remove, refresh } = friendships;
-  const [draft, setDraft] = useState("");
-  const [isSending, setIsSending] = useState(false);
-  const [sendResult, setSendResult] = useState<{ ok: boolean; message: string } | null>(null);
+  const search = useMemberSearch(refresh);
 
   return (
     <div className="space-y-8">
@@ -85,54 +71,12 @@ export function FriendsSection({
           <Link href="/settings" className="font-semibold text-accent hover:underline">
             Show my friends more
           </Link>
-          . Paste a collector&rsquo;s shelf link (or visit their shelf and tap{" "}
-          <span className="font-semibold">Add friend</span> there).
+          . Search for a collector by name below, paste their shelf link, or visit their shelf
+          and tap <span className="font-semibold">Add friend</span> there.
         </p>
-        <form
-          className="mt-4 flex flex-wrap items-center gap-2"
-          onSubmit={async (event) => {
-            event.preventDefault();
-            const slug = slugFromInput(draft);
-            if (!slug) return;
-            setIsSending(true);
-            setSendResult(null);
-            try {
-              const status = await sendFriendRequest(slug);
-              setSendResult({ ok: true, message: SENT_MESSAGES[status] ?? "Request sent." });
-              setDraft("");
-              refresh();
-            } catch (caught) {
-              setSendResult({
-                ok: false,
-                message: caught instanceof Error ? caught.message : "Couldn't send that request.",
-              });
-            } finally {
-              setIsSending(false);
-            }
-          }}
-        >
-          <input
-            type="text"
-            value={draft}
-            onChange={(event) => setDraft(event.target.value)}
-            placeholder="bobbleshelf.com/shelf/…"
-            className="w-72 max-w-full rounded border border-black/15 px-3 py-2 text-sm text-zinc-900 outline-none focus:border-accent"
-          />
-          <button
-            type="submit"
-            disabled={isSending || !slugFromInput(draft)}
-            className="rounded bg-accent px-4 py-2 text-xs font-black uppercase tracking-wide text-accent-fg transition hover:bg-accent-hover disabled:opacity-50"
-          >
-            {isSending ? "Sending…" : "Send request"}
-          </button>
-        </form>
-        {sendResult ? (
-          <p
-            className={`mt-2 text-xs font-semibold ${sendResult.ok ? "text-green-700" : "text-red-600"}`}
-          >
-            {sendResult.message}
-          </p>
-        ) : null}
+        <div className="mt-4">
+          <MemberSearch search={search} />
+        </div>
       </section>
 
       {incoming.length > 0 ? (
@@ -192,8 +136,8 @@ export function FriendsSection({
           <p className="text-sm text-zinc-600">Loading…</p>
         ) : friends.length === 0 ? (
           <p className="max-w-xl text-sm leading-6 text-zinc-600">
-            No friends yet. Get someone&rsquo;s shelf link and send a request above — or share
-            yours and have them tap <span className="font-semibold">Add friend</span> on it.
+            No friends yet. Search for a collector by name above — or share your shelf link and
+            have them tap <span className="font-semibold">Add friend</span> on it.
           </p>
         ) : (
           <ul className="space-y-2">

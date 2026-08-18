@@ -1286,6 +1286,16 @@ export type Database = {
         Returns: undefined
       }
       send_friend_request: { Args: { p_slug: string }; Returns: string }
+      search_members: {
+        Args: { p_query: string }
+        Returns: {
+          avatar_path: string | null
+          display_name: string
+          slug: string
+          status: string
+          user_id: string
+        }[]
+      }
       get_public_gallery: {
         Args: { p_slug: string }
         Returns: {
