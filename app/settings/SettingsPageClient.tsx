@@ -5,6 +5,7 @@ import { CollectionTransfer } from "@/components/CollectionTransfer";
 import { EmailAlertsToggle } from "@/components/EmailAlertsToggle";
 import { FriendVisibilityToggle } from "@/components/FriendVisibilityToggle";
 import { GalleryToggle } from "@/components/GalleryToggle";
+import { SearchListingToggle } from "@/components/SearchListingToggle";
 import { ShelfLinkCard } from "@/components/ShelfLinkCard";
 import { useAuth } from "@/lib/auth";
 import {
@@ -12,6 +13,7 @@ import {
   useFriendVisibility,
   useGallerySharing,
   useMyShelf,
+  useSearchListing,
 } from "@/lib/profile";
 
 export function SettingsPageClient() {
@@ -19,6 +21,7 @@ export function SettingsPageClient() {
   const sharing = useMyShelf();
   const gallery = useGallerySharing();
   const friendVisibility = useFriendVisibility();
+  const searchListing = useSearchListing();
   const alerts = useEmailPreferences();
 
   return (
@@ -55,6 +58,10 @@ export function SettingsPageClient() {
               for different audiences, and reading them together is the only way
               to see what each one covers. */}
           <FriendVisibilityToggle visibility={friendVisibility} />
+          {/* After the two "what can they see" switches, because this one is a
+              different question — who can find you at all, rather than what a
+              given audience gets. */}
+          <SearchListingToggle listing={searchListing} />
           <EmailAlertsToggle alerts={alerts} />
           <CollectionTransfer />
         </div>

@@ -643,6 +643,77 @@ export function useFriendVisibility(): FriendVisibility {
   };
 }
 
+/** Whether this member turns up in member search — see
+ *  supabase/member_search_opt_out.sql. Same shape as the other two switches.
+ *
+ *  Not a privacy setting for the shelf itself: shelves are public and this
+ *  doesn't change that. It stops name browsing, which is the part a member can
+ *  actually be surprised by. */
+export type SearchListing = GallerySharing;
+
+export function useSearchListing(): SearchListing {
+  const { user } = useAuth();
+  const userId = user?.id ?? null;
+  // Optimistic default matches the column default (on). Search shipped listing
+  // everyone, so "on" is also the truth for anyone who hasn't touched it.
+  const [enabled, setEnabledState] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    let cancelled = false;
+
+    supabase
+      .from("profiles")
+      .select("listed_in_search")
+      .eq("id", userId)
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load your search setting:", error.message);
+        } else {
+          setEnabledState(data?.listed_in_search ?? true);
+        }
+
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
+
+  async function setEnabled(next: boolean): Promise<{ error: string | null }> {
+    if (!userId) return { error: "Not signed in." };
+
+    // Optimistic; reverted below if the save fails.
+    const previous = enabled;
+    setEnabledState(next);
+    setIsSaving(true);
+    const { error } = await supabase.rpc("set_listed_in_search", { p_enabled: next });
+    setIsSaving(false);
+
+    if (error) {
+      console.error("Failed to update your search setting:", error.message);
+      setEnabledState(previous);
+      return { error: "Couldn't update that. Try again." };
+    }
+
+    return { error: null };
+  }
+
+  return {
+    enabled: userId ? enabled : true,
+    isLoading: userId ? isLoading : false,
+    isSaving,
+    setEnabled,
+  };
+}
+
 export type GallerySharing = {
   enabled: boolean;
   isLoading: boolean;
