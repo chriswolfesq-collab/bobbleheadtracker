@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Avatar } from "@/components/Avatar";
+import { MessageMemberButton } from "@/components/MessageMemberButton";
 import { avatarPublicUrl } from "@/lib/avatar";
 import { MIN_MEMBER_QUERY, type MemberResult, type useMemberSearch } from "@/lib/friends";
 
@@ -51,6 +52,9 @@ function MemberRow({
         {failure ? <p className="mt-1 text-xs font-semibold text-red-600">{failure}</p> : null}
       </div>
       <div className="flex shrink-0 items-center gap-2">
+        {/* Messaging doesn't wait on a friendship: the two are independent, and
+            "I have a question about your shelf" shouldn't need a request first. */}
+        <MessageMemberButton slug={member.slug} displayName={member.displayName} />
         {member.status === "none" ? (
           <button
             type="button"

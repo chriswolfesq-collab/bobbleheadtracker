@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Avatar } from "@/components/Avatar";
+import { MessageMemberButton } from "@/components/MessageMemberButton";
 import { MemberSearch } from "@/components/MemberSearch";
 import { avatarPublicUrl } from "@/lib/avatar";
 import { useMemberSearch, type Friendship, type useFriendships } from "@/lib/friends";
@@ -143,6 +144,15 @@ export function FriendsSection({
           <ul className="space-y-2">
             {friends.map((friendship) => (
               <FriendRow key={friendship.userId} friendship={friendship}>
+                {/* Only accepted friends get this here; a pending request's row is
+                    about answering the request, and messaging is reachable from
+                    search anyway. A friend with no slug is unaddressable. */}
+                {friendship.slug ? (
+                  <MessageMemberButton
+                    slug={friendship.slug}
+                    displayName={friendship.displayName}
+                  />
+                ) : null}
                 <button
                   type="button"
                   onClick={() => remove(friendship.userId)}

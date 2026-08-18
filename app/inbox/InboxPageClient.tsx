@@ -7,7 +7,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ConversationThread } from "@/components/ConversationThread";
 import { avatarPublicUrl } from "@/lib/avatar";
 import { useAuth } from "@/lib/auth";
-import { formatMessageTime, messageAdmin, useInbox } from "@/lib/messages";
+import { blockMember, formatMessageTime, messageAdmin, useInbox } from "@/lib/messages";
 
 // Every member's inbox. Stage 1 has one kind of thread in it — yours with the
 // admins — so the list looks thin on purpose; Stage 2 fills it with
@@ -26,6 +26,8 @@ export function InboxPageClient() {
   const [draft, setDraft] = useState("");
   const [isStarting, setIsStarting] = useState(false);
   const [startError, setStartError] = useState<string | null>(null);
+  const [confirmingBlock, setConfirmingBlock] = useState(false);
+  const [blockError, setBlockError] = useState<string | null>(null);
 
   // Open the newest thread on a wide screen so the pane isn't empty on arrival.
   // Narrow screens keep the list, since the thread would cover it.
@@ -42,7 +44,27 @@ export function InboxPageClient() {
   }, [conversations, selectedId]);
 
   const selected = conversations.find((c) => c.conversation_id === selectedId) ?? null;
+  const [confirmingFor, setConfirmingFor] = useState<string | null>(null);
+  if (confirmingFor !== selectedId) {
+    setConfirmingFor(selectedId);
+    if (confirmingBlock) setConfirmingBlock(false);
+    if (blockError) setBlockError(null);
+  }
   const hasAdminThread = conversations.some((c) => c.kind === "admin");
+
+  // Blocking is where the conversation is, because that's where you decide you've
+  // had enough of it. Two clicks: it's quiet and reversible, but it does stop both
+  // sides sending, and that shouldn't happen on a mis-tap.
+  const block = async (slug: string) => {
+    setBlockError(null);
+    try {
+      await blockMember(slug);
+      setConfirmingBlock(false);
+      await reload();
+    } catch (caught) {
+      setBlockError(caught instanceof Error ? caught.message : "Couldn't block them.");
+    }
+  };
 
   const startAdminThread = async () => {
     const body = draft.trim();
@@ -196,14 +218,56 @@ export function InboxPageClient() {
                   <h2 className="font-display text-lg font-bold uppercase tracking-wide text-navy">
                     {selected.title}
                   </h2>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedId(null)}
-                    className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover lg:hidden"
-                  >
-                    Back
-                  </button>
+                  <div className="flex shrink-0 items-center gap-2">
+                    {/* Only a member can be blocked. There is no version of this
+                        that makes sense pointed at the admin thread. */}
+                    {selected.kind === "direct" && selected.other_slug ? (
+                      <button
+                        type="button"
+                        onClick={() => setConfirmingBlock((current) => !current)}
+                        className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-600 transition hover:border-red-500 hover:text-red-600"
+                      >
+                        Block
+                      </button>
+                    ) : null}
+                    <button
+                      type="button"
+                      onClick={() => setSelectedId(null)}
+                      className="rounded border border-black/15 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover lg:hidden"
+                    >
+                      Back
+                    </button>
+                  </div>
                 </div>
+
+                {confirmingBlock && selected.other_slug ? (
+                  <div className="mt-3 rounded border border-red-500/40 bg-red-50 p-3">
+                    <p className="text-xs font-bold text-red-700">
+                      Block {selected.title}? Neither of you will be able to send in this
+                      conversation. They aren&apos;t told, nothing already sent is deleted, and you
+                      can undo this in Settings.
+                    </p>
+                    {blockError ? (
+                      <p className="mt-2 text-xs font-semibold text-red-700">{blockError}</p>
+                    ) : null}
+                    <div className="mt-3 flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => void block(selected.other_slug!)}
+                        className="rounded bg-red-600 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-white transition hover:bg-red-500"
+                      >
+                        Block them
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setConfirmingBlock(false)}
+                        className="rounded border border-black/15 px-3 py-1.5 text-xs font-bold text-zinc-700 transition hover:border-accent"
+                      >
+                        Never mind
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
                 <ConversationThread
                   conversationId={selected.conversation_id}
                   otherLabel={selected.title}

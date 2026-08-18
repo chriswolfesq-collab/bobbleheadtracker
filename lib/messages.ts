@@ -81,6 +81,43 @@ export async function messageAdmin(body: string): Promise<string> {
   return data as string;
 }
 
+export type MessageBlock = {
+  slug: string;
+  display_name: string | null;
+  avatar_path: string | null;
+  created_at: string;
+};
+
+/**
+ * Opens a thread with another member, or continues the one that already exists —
+ * the database keys a direct conversation by the pair, so pressing Message twice
+ * can't make two. Returns the conversation id.
+ *
+ * Every way this can be refused reads the same on purpose (see
+ * supabase/direct_messages.sql): an unknown slug, messages switched off, and a
+ * block in either direction all raise one sentence, so the button can't be used
+ * to work out which.
+ */
+export async function startDirectConversation(slug: string, body: string): Promise<string> {
+  const { data, error } = await supabase.rpc("start_direct_conversation", {
+    p_slug: slug,
+    p_body: body,
+  });
+  if (error) throw submissionError(error);
+  if (!data) throw new Error("The message didn't send. Try again.");
+  return data as string;
+}
+
+export async function blockMember(slug: string): Promise<void> {
+  const { error } = await supabase.rpc("block_member", { p_slug: slug });
+  if (error) throw submissionError(error);
+}
+
+export async function unblockMember(slug: string): Promise<void> {
+  const { error } = await supabase.rpc("unblock_member", { p_slug: slug });
+  if (error) throw submissionError(error);
+}
+
 /** Fire-and-forget, like markChatRead: it gates no render, and a failed mark
  *  just means the badge lingers one visit longer. */
 export function markConversationRead(conversationId: string): void {
@@ -340,6 +377,49 @@ export function useConversation(conversationId: string | null) {
     send,
     loadOlder,
   };
+}
+
+/** The caller's own block list. Only ever theirs — who blocked THEM is not
+ *  something any RPC returns. */
+export function useMessageBlocks() {
+  const { user, isLoading: isLoadingAuth } = useAuth();
+  const [blocks, setBlocks] = useState<MessageBlock[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const load = useCallback(
+    () =>
+      supabase.rpc("list_message_blocks").then(({ data, error: loadError }) => {
+        if (loadError) {
+          setError(submissionError(loadError).message);
+        } else {
+          setError(null);
+          setBlocks((data ?? []) as MessageBlock[]);
+        }
+        setIsLoading(false);
+      }),
+    [],
+  );
+
+  useEffect(() => {
+    if (isLoadingAuth || !user) return;
+    void load();
+  }, [isLoadingAuth, user, load]);
+
+  const unblock = useCallback(
+    async (slug: string) => {
+      setError(null);
+      try {
+        await unblockMember(slug);
+        await load();
+      } catch (caught) {
+        setError(caught instanceof Error ? caught.message : "Couldn't unblock them.");
+      }
+    },
+    [load],
+  );
+
+  return { blocks, isLoading: isLoadingAuth || isLoading, error, unblock, reload: load };
 }
 
 /** Unread messages across the reader's own threads — the header badge. Same

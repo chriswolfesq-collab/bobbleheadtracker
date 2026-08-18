@@ -12,6 +12,14 @@ import type { MemberResult, useMemberSearch } from "@/lib/friends";
 
 vi.mock("@/lib/avatar", () => ({ avatarPublicUrl: () => null }));
 
+// Each result row now carries a Message button, which reads the auth context for
+// whether to open a composer or the sign-in modal. Stubbed rather than wrapped in
+// AuthProvider: this file is about the search rows, and a real provider would drag
+// a Supabase session in with it.
+vi.mock("@/lib/auth", () => ({
+  useAuth: () => ({ user: { id: "searcher-1" }, openAuthModal: vi.fn() }),
+}));
+
 afterEach(cleanup);
 
 function member(overrides: Partial<MemberResult> = {}): MemberResult {

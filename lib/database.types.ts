@@ -725,24 +725,30 @@ export type Database = {
       conversations: {
         Row: {
           created_at: string
+          created_by: string | null
           id: string
           kind: string
           last_message_at: string
           member_id: string | null
+          pair_key: string | null
         }
         Insert: {
           created_at?: string
+          created_by?: string | null
           id?: string
           kind: string
           last_message_at?: string
           member_id?: string | null
+          pair_key?: string | null
         }
         Update: {
           created_at?: string
+          created_by?: string | null
           id?: string
           kind?: string
           last_message_at?: string
           member_id?: string | null
+          pair_key?: string | null
         }
         Relationships: []
       }
@@ -1302,9 +1308,34 @@ export type Database = {
         Args: never
         Returns: number
       }
+      block_member: {
+        Args: { p_slug: string }
+        Returns: undefined
+      }
+      direct_pair_key: {
+        Args: { p_a: string; p_b: string }
+        Returns: string
+      }
+      list_message_blocks: {
+        Args: never
+        Returns: {
+          avatar_path: string | null
+          created_at: string
+          display_name: string | null
+          slug: string
+        }[]
+      }
       message_admin: {
         Args: { p_body: string }
         Returns: string
+      }
+      start_direct_conversation: {
+        Args: { p_body: string; p_slug: string }
+        Returns: string
+      }
+      unblock_member: {
+        Args: { p_slug: string }
+        Returns: undefined
       }
       set_accepts_messages: {
         Args: { p_enabled: boolean }

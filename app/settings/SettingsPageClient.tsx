@@ -5,11 +5,13 @@ import { CollectionTransfer } from "@/components/CollectionTransfer";
 import { EmailAlertsToggle } from "@/components/EmailAlertsToggle";
 import { FriendVisibilityToggle } from "@/components/FriendVisibilityToggle";
 import { GalleryToggle } from "@/components/GalleryToggle";
+import { MessagePrivacyToggle } from "@/components/MessagePrivacyToggle";
 import { SearchListingToggle } from "@/components/SearchListingToggle";
 import { ShelfLinkCard } from "@/components/ShelfLinkCard";
 import { useAuth } from "@/lib/auth";
 import {
   useEmailPreferences,
+  useMessagePrivacy,
   useFriendVisibility,
   useGallerySharing,
   useMyShelf,
@@ -23,6 +25,7 @@ export function SettingsPageClient() {
   const friendVisibility = useFriendVisibility();
   const searchListing = useSearchListing();
   const alerts = useEmailPreferences();
+  const messagePrivacy = useMessagePrivacy();
 
   return (
     <div
@@ -62,6 +65,7 @@ export function SettingsPageClient() {
               different question — who can find you at all, rather than what a
               given audience gets. */}
           <SearchListingToggle listing={searchListing} />
+          <MessagePrivacyToggle privacy={messagePrivacy} />
           <EmailAlertsToggle alerts={alerts} />
           <CollectionTransfer />
         </div>

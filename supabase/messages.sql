@@ -446,6 +446,11 @@ grant execute on function public.inbox_unread_count() to authenticated;
 -- ---------------------------------------------------------------------------
 -- Returns the stored row in the reader's shape, so the sender sees their own
 -- line immediately even if the socket never delivers the echo.
+--
+-- direct_messages.sql REPLACES this function and owns it from Stage 2 on, adding
+-- the block check that a direct thread needs. Re-running this file on a live
+-- database reinstalls the version below, and blocking silently stops applying to
+-- replies -- run direct_messages.sql again after, if you ever do.
 create or replace function public.conversation_send(p_conversation_id uuid, p_body text)
 returns table (
   id uuid,
@@ -461,6 +466,13 @@ language plpgsql
 security definer
 set search_path = public
 as $$
+-- Every name in this function's RETURNS TABLE (id, conversation_id, body,
+-- sender_id, sender_role, sender_name, created_at) is also a column name in the
+-- tables it touches, which makes an unqualified reference ambiguous — a 42702
+-- raised at runtime on the *successful* path, where a test that only checks
+-- refusals never reaches it. This directive resolves such names to the column,
+-- which is what every statement below means; nothing here uses them as variables.
+#variable_conflict use_column
 declare
   v_is_participant boolean;
   v_role text;
@@ -477,9 +489,12 @@ begin
     raise exception 'That conversation isn''t yours.';
   end if;
 
+  -- Aliased throughout: this function's RETURNS TABLE puts `id`, `conversation_id`
+  -- and `sender_id` in scope as plpgsql variables, so any unqualified reference to
+  -- a column of the same name is ambiguous and raises 42702 at runtime.
   select exists (
-    select 1 from public.conversation_participants
-    where conversation_id = p_conversation_id and user_id = auth.uid()
+    select 1 from public.conversation_participants cp
+    where cp.conversation_id = p_conversation_id and cp.user_id = auth.uid()
   ) into v_is_participant;
 
   -- Staff is whoever is answering a thread they are not in. An admin writing in
@@ -487,7 +502,7 @@ begin
   -- showing the owner talking to themselves in two voices.
   v_role := case when v_is_participant then 'member' else 'admin' end;
 
-  select display_name into v_name from public.profiles where id = auth.uid();
+  select pr.display_name into v_name from public.profiles pr where pr.id = auth.uid();
 
   insert into public.conversation_messages
     (conversation_id, sender_id, sender_role, sender_name, body)
@@ -496,7 +511,7 @@ begin
   returning conversation_messages.id into v_id;
 
   -- Sending is reading: your own message must not come back to you as unread.
-  insert into public.conversation_reads (conversation_id, user_id, read_at)
+  insert into public.conversation_reads as r (conversation_id, user_id, read_at)
   values (p_conversation_id, auth.uid(), now())
   on conflict (conversation_id, user_id) do update set read_at = now();
 
@@ -571,7 +586,7 @@ begin
     raise exception 'That conversation isn''t yours.';
   end if;
 
-  insert into public.conversation_reads (conversation_id, user_id, read_at)
+  insert into public.conversation_reads as r (conversation_id, user_id, read_at)
   values (p_conversation_id, auth.uid(), now())
   on conflict (conversation_id, user_id) do update set read_at = now();
 end;

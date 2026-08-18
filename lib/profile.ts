@@ -646,6 +646,74 @@ export function useFriendVisibility(): FriendVisibility {
   };
 }
 
+/** Whether other members may start a conversation with this one — see
+ *  supabase/messages.sql. Same shape as the other switches, and deliberately does
+ *  NOT govern the admin thread: being unreachable by the site owner is not what
+ *  anyone means by switching this off. */
+export type MessagePrivacy = GallerySharing;
+
+export function useMessagePrivacy(): MessagePrivacy {
+  const { user } = useAuth();
+  const userId = user?.id ?? null;
+  // Optimistic default matches the column default (on).
+  const [enabled, setEnabledState] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    let cancelled = false;
+
+    supabase
+      .from("profiles")
+      .select("accepts_messages")
+      .eq("id", userId)
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load your message settings:", error.message);
+        } else {
+          setEnabledState(data?.accepts_messages ?? true);
+        }
+
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
+
+  async function setEnabled(next: boolean): Promise<{ error: string | null }> {
+    if (!userId) return { error: "Not signed in." };
+
+    // Optimistic; reverted below if the save fails.
+    const previous = enabled;
+    setEnabledState(next);
+    setIsSaving(true);
+    const { error } = await supabase.rpc("set_accepts_messages", { p_enabled: next });
+    setIsSaving(false);
+
+    if (error) {
+      console.error("Failed to update your message settings:", error.message);
+      setEnabledState(previous);
+      return { error: "Couldn't update that. Try again." };
+    }
+
+    return { error: null };
+  }
+
+  return {
+    enabled: userId ? enabled : true,
+    isLoading: userId ? isLoading : false,
+    isSaving,
+    setEnabled,
+  };
+}
+
 /** Whether this member turns up in member search — see
  *  supabase/member_search_opt_out.sql. Same shape as the other two switches.
  *
