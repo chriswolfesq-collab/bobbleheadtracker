@@ -525,7 +525,9 @@ export type Database = {
           created_at: string
           display_name: string
           email_enabled: boolean
+          accepts_messages: boolean
           email_forum_digest: boolean
+          email_messages: boolean
           email_rep_digest: boolean
           email_weekly_digest: boolean
           email_submission_updates: boolean
@@ -546,7 +548,9 @@ export type Database = {
           created_at?: string
           display_name?: string
           email_enabled?: boolean
+          accepts_messages?: boolean
           email_forum_digest?: boolean
+          email_messages?: boolean
           email_rep_digest?: boolean
           email_weekly_digest?: boolean
           email_submission_updates?: boolean
@@ -567,7 +571,9 @@ export type Database = {
           created_at?: string
           display_name?: string
           email_enabled?: boolean
+          accepts_messages?: boolean
           email_forum_digest?: boolean
+          email_messages?: boolean
           email_rep_digest?: boolean
           email_weekly_digest?: boolean
           email_submission_updates?: boolean
@@ -715,6 +721,141 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      conversations: {
+        Row: {
+          created_at: string
+          id: string
+          kind: string
+          last_message_at: string
+          member_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          kind: string
+          last_message_at?: string
+          member_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          kind?: string
+          last_message_at?: string
+          member_id?: string | null
+        }
+        Relationships: []
+      }
+      conversation_participants: {
+        Row: {
+          conversation_id: string
+          joined_at: string
+          user_id: string
+        }
+        Insert: {
+          conversation_id: string
+          joined_at?: string
+          user_id: string
+        }
+        Update: {
+          conversation_id?: string
+          joined_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversation_participants_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      conversation_reads: {
+        Row: {
+          conversation_id: string
+          notified_at: string | null
+          read_at: string
+          user_id: string
+        }
+        Insert: {
+          conversation_id: string
+          notified_at?: string | null
+          read_at?: string
+          user_id: string
+        }
+        Update: {
+          conversation_id?: string
+          notified_at?: string | null
+          read_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversation_reads_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      conversation_messages: {
+        Row: {
+          body: string
+          conversation_id: string
+          created_at: string
+          id: string
+          sender_id: string | null
+          sender_name: string | null
+          sender_role: string
+        }
+        Insert: {
+          body: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          sender_id?: string | null
+          sender_name?: string | null
+          sender_role: string
+        }
+        Update: {
+          body?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          sender_id?: string | null
+          sender_name?: string | null
+          sender_role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversation_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      message_blocks: {
+        Row: {
+          blocked_id: string
+          blocker_id: string
+          created_at: string
+        }
+        Insert: {
+          blocked_id: string
+          blocker_id: string
+          created_at?: string
+        }
+        Update: {
+          blocked_id?: string
+          blocker_id?: string
+          created_at?: string
+        }
+        Relationships: []
       }
       scraped_giveaways: {
         Row: {
@@ -1071,6 +1212,103 @@ export type Database = {
       admin_record_inbound_reply: {
         Args: { p_body: string; p_message_id: string }
         Returns: string
+      }
+      admin_list_conversations: {
+        Args: never
+        Returns: {
+          conversation_id: string
+          last_message_at: string
+          last_message_preview: string | null
+          last_sender_role: string | null
+          member_avatar_path: string | null
+          member_email: string | null
+          member_id: string | null
+          member_name: string | null
+          member_slug: string | null
+          message_count: number
+          unread_count: number
+        }[]
+      }
+      admin_unread_conversation_count: {
+        Args: never
+        Returns: number
+      }
+      can_read_conversation: {
+        Args: { p_conversation_id: string }
+        Returns: boolean
+      }
+      can_start_direct: {
+        Args: { p_target_id: string }
+        Returns: boolean
+      }
+      conversation_list_messages: {
+        Args: { p_before?: string | null; p_conversation_id: string }
+        Returns: {
+          body: string
+          conversation_id: string
+          created_at: string
+          id: string
+          sender_avatar_path: string | null
+          sender_id: string | null
+          sender_name: string | null
+          sender_role: string
+        }[]
+      }
+      conversation_mark_read: {
+        Args: { p_conversation_id: string }
+        Returns: undefined
+      }
+      conversation_new_messages: {
+        Args: { p_conversation_id: string; p_since: string }
+        Returns: {
+          body: string
+          conversation_id: string
+          created_at: string
+          id: string
+          sender_avatar_path: string | null
+          sender_id: string | null
+          sender_name: string | null
+          sender_role: string
+        }[]
+      }
+      conversation_send: {
+        Args: { p_body: string; p_conversation_id: string }
+        Returns: {
+          body: string
+          conversation_id: string
+          created_at: string
+          id: string
+          sender_avatar_path: string | null
+          sender_id: string | null
+          sender_name: string | null
+          sender_role: string
+        }[]
+      }
+      inbox_list: {
+        Args: never
+        Returns: {
+          conversation_id: string
+          kind: string
+          last_message_at: string
+          last_message_preview: string | null
+          last_sender_role: string | null
+          other_avatar_path: string | null
+          other_slug: string | null
+          title: string
+          unread_count: number
+        }[]
+      }
+      inbox_unread_count: {
+        Args: never
+        Returns: number
+      }
+      message_admin: {
+        Args: { p_body: string }
+        Returns: string
+      }
+      set_accepts_messages: {
+        Args: { p_enabled: boolean }
+        Returns: undefined
       }
       admin_list_team_reps: {
         Args: never

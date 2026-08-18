@@ -32,7 +32,9 @@ export default function ContactPage() {
           </p>
           <p>
             For anything else — account questions, photo takedown requests, or general feedback —
-            send a message below and we&apos;ll reply by email.
+            send a message below. Signed in, it becomes a thread in your{" "}
+            <Link href="/inbox" className="font-semibold text-accent hover:text-accent-hover">inbox</Link>{" "}
+            and we reply there; signed out, we reply to the email address you give us.
           </p>
           <p>
             See also the <Link href="/terms" className="font-semibold text-accent hover:text-accent-hover">Terms of Service</Link>{" "}
@@ -50,10 +52,11 @@ export default function ContactPage() {
             Send a message
           </h2>
           <p className="mb-5 mt-1 text-sm text-zinc-600">
-            We read everything that comes in and reply to the address you give us.
+            We read everything that comes in, and we reply.
           </p>
           <InboundMessageForm
             kind="contact"
+            allowSignedInThread
             messageLabel="How can we help?"
             messagePlaceholder="Tell us what's going on…"
             submitLabel="Send message"

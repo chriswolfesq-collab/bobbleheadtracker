@@ -450,7 +450,8 @@ export type EmailPreferenceKind =
   | "submission_updates"
   | "rep_digest"
   | "weekly_digest"
-  | "forum_digest";
+  | "forum_digest"
+  | "messages";
 
 export type EmailPreferences = {
   values: Record<EmailPreferenceKind, boolean>;
@@ -477,6 +478,7 @@ const DEFAULT_PREFERENCES: Record<EmailPreferenceKind, boolean> = {
   rep_digest: true,
   weekly_digest: true,
   forum_digest: true,
+  messages: true,
 };
 
 // The signed-in user's email preferences: the master switch plus one per kind of
@@ -504,7 +506,7 @@ export function useEmailPreferences(): EmailPreferences {
         // Spelled out rather than derived from the kind list: a computed select
         // string erases the row type supabase-js infers from it.
         .select(
-          "email_enabled, email_wishlist_alerts, email_submission_updates, email_rep_digest, email_weekly_digest, email_forum_digest",
+          "email_enabled, email_wishlist_alerts, email_submission_updates, email_rep_digest, email_weekly_digest, email_forum_digest, email_messages",
         )
         .eq("id", userId)
         .maybeSingle(),
@@ -526,6 +528,7 @@ export function useEmailPreferences(): EmailPreferences {
           rep_digest: row.email_rep_digest ?? true,
           weekly_digest: row.email_weekly_digest ?? true,
           forum_digest: row.email_forum_digest ?? true,
+          messages: row.email_messages ?? true,
         });
       }
 

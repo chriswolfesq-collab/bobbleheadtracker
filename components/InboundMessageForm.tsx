@@ -1,8 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { useAuth } from "@/lib/auth";
 import { type InboundMessageKind, sendInboundMessage } from "@/lib/inboundMessages";
+import { messageAdmin } from "@/lib/messages";
 import { TEAMS } from "@/lib/teams";
 
 // The form behind both /contact and "Become a team rep" — the same four fields
@@ -15,6 +18,17 @@ import { TEAMS } from "@/lib/teams";
 // shared or admin browser put a real personal address on screen — and into the
 // message — without anyone choosing to send it. Typing it is cheap; the
 // surprise wasn't.
+//
+// A signed-in visitor on /contact gets a different form entirely
+// (allowSignedInThread): their message opens a thread in their inbox rather than
+// an email round trip, so the reply lands somewhere they can find it and the
+// name and email fields have nothing to ask. Anyone not signed in keeps the
+// email path exactly as it was — the whole point of the form is that it works
+// without an account, and a stranger has no inbox to read.
+//
+// Rep applications stay on the email path either way: /admin/reps assigns a rep
+// by email address, often before they have signed up, so routing an application
+// into a thread would answer it somewhere the assignment flow can't see.
 
 const INPUT_CLASS =
   "mt-1 w-full rounded border border-border-soft bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-accent";
@@ -32,6 +46,7 @@ export function InboundMessageForm({
   messagePlaceholder,
   submitLabel,
   onSent,
+  allowSignedInThread,
 }: {
   kind: InboundMessageKind;
   defaultTeamSlug?: string;
@@ -40,7 +55,15 @@ export function InboundMessageForm({
   submitLabel: string;
   /** Called after a successful send, for a dialog that wants to close itself. */
   onSent?: () => void;
+  /**
+   * Route a signed-in sender into their admin thread instead of the email path.
+   * Set by /contact only; the rep application dialog leaves it off on purpose.
+   */
+  allowSignedInThread?: boolean;
 }) {
+  const { user } = useAuth();
+  // Anonymous senders, and every rep application, keep the email path.
+  const asThread = Boolean(allowSignedInThread && user && kind === "contact");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [teamSlug, setTeamSlug] = useState(defaultTeamSlug ?? "");
@@ -53,7 +76,11 @@ export function InboundMessageForm({
     setError(null);
     setIsSending(true);
     try {
-      await sendInboundMessage({ kind, name, email, message, teamSlug: teamSlug || null });
+      if (asThread) {
+        await messageAdmin(message);
+      } else {
+        await sendInboundMessage({ kind, name, email, message, teamSlug: teamSlug || null });
+      }
       setDidSend(true);
       onSent?.();
     } catch (sendError) {
@@ -74,8 +101,17 @@ export function InboundMessageForm({
         <p className="mt-2">
           {kind === "rep_application"
             ? "Thanks — we'll be in touch at the address you gave us."
-            : "Thanks — we'll reply to the address you gave us."}
+            : asThread
+              ? "Thanks — the reply will land in your inbox here on the site."
+              : "Thanks — we'll reply to the address you gave us."}
         </p>
+        {asThread ? (
+          <p className="mt-3">
+            <Link href="/inbox" className="font-semibold text-accent hover:text-accent-hover">
+              Go to your inbox
+            </Link>
+          </p>
+        ) : null}
       </div>
     );
   }
@@ -88,6 +124,7 @@ export function InboundMessageForm({
         submit();
       }}
     >
+      {asThread ? null : (
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
           <span className={LABEL_CLASS}>Your name</span>
@@ -111,6 +148,17 @@ export function InboundMessageForm({
           />
         </label>
       </div>
+      )}
+
+      {asThread ? (
+        <p className="rounded border border-accent/30 bg-accent/[0.06] px-3 py-2 text-xs leading-5 text-zinc-700">
+          You&apos;re signed in, so this becomes a thread in your{" "}
+          <Link href="/inbox" className="font-semibold text-accent hover:text-accent-hover">
+            inbox
+          </Link>{" "}
+          — no email address needed, and the reply stays on the site.
+        </p>
+      ) : null}
 
       {kind === "rep_application" ? (
         <label className="block">

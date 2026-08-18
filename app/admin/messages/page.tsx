@@ -4,7 +4,9 @@ import { useCallback, useEffect, useState } from "react";
 import { AdminEmailComposer } from "@/components/AdminEmailComposer";
 import { AdminLoginForm } from "@/components/AdminLoginForm";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { ConversationThread } from "@/components/ConversationThread";
 import { useAdminAuth } from "@/lib/adminAuth";
+import { formatMessageTime } from "@/lib/messages";
 import { supabaseAdmin as supabase } from "@/lib/supabaseAdmin";
 import { TEAMS } from "@/lib/teams";
 
@@ -17,6 +19,19 @@ import { TEAMS } from "@/lib/teams";
 // hitting Reply: the reply goes out through admin-send-email and is written down
 // against the message (supabase/inbound_message_replies.sql), so the record
 // covers both halves of the conversation instead of just the incoming half.
+//
+// Two queues, because there are two kinds of sender and only one of them has an
+// inbox to read (see supabase/messages.sql):
+//
+//   Threads  a signed-in member wrote in. Answered right here, on the site, and
+//            they see it in /inbox. This is where /contact sends anyone signed
+//            in, so over time it becomes the busier of the two.
+//   Email    someone with no account, and every rep application. Still answered
+//            with the email composer, still recorded against the row.
+//
+// They are deliberately not merged into one list: the reply mechanism differs,
+// and a single stream would invite answering a stranger in a thread they can
+// never open.
 
 type InboundReply = {
   id: string;
@@ -37,6 +52,19 @@ type InboundMessage = {
   handled_at: string | null;
   // Aggregated by admin_list_inbound_messages; [] for a message never answered.
   replies: InboundReply[] | null;
+};
+
+type MemberThread = {
+  conversation_id: string;
+  member_id: string | null;
+  member_name: string | null;
+  member_slug: string | null;
+  member_email: string | null;
+  last_message_at: string;
+  last_message_preview: string | null;
+  last_sender_role: string | null;
+  message_count: number;
+  unread_count: number;
 };
 
 type Filter = "all" | "contact" | "rep_application";
@@ -84,6 +112,9 @@ export default function AdminMessagesPage() {
   const [filter, setFilter] = useState<Filter>("all");
   const [busyId, setBusyId] = useState<string | null>(null);
   const [confirmingDeleteId, setConfirmingDeleteId] = useState<string | null>(null);
+  const [threads, setThreads] = useState<MemberThread[]>([]);
+  const [isLoadingThreads, setIsLoadingThreads] = useState(true);
+  const [openThreadId, setOpenThreadId] = useState<string | null>(null);
   const [replyTo, setReplyTo] = useState<InboundMessage | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -104,10 +135,24 @@ export default function AdminMessagesPage() {
       });
   }, [filter]);
 
+  const loadThreads = useCallback(
+    () =>
+      supabase.rpc("admin_list_conversations").then(({ data, error: rpcError }) => {
+        if (rpcError) {
+          setError(rpcError.message);
+        } else {
+          setThreads((data ?? []) as MemberThread[]);
+        }
+        setIsLoadingThreads(false);
+      }),
+    [],
+  );
+
   useEffect(() => {
     if (!isAdmin) return;
     load();
-  }, [isAdmin, load]);
+    void loadThreads();
+  }, [isAdmin, load, loadThreads]);
 
   async function toggleHandled(message: InboundMessage) {
     setBusyId(message.id);
@@ -203,10 +248,111 @@ export default function AdminMessagesPage() {
         />
         <h1 className="mt-3 text-2xl font-black uppercase tracking-wide">Messages</h1>
         <p className="mt-1 text-sm text-zinc-600">
-          Contact-form messages and team-rep applications. Reply from here and the answer is
-          emailed to the sender, BCC&apos;d to you, and kept with the message — replying marks it
-          handled. Mark one handled by hand to move it out of the way, or delete it outright if
-          it&apos;s spam.
+          Everything the public has sent in, split by how it can be answered: threads with
+          signed-in members, and email from people without an account.
+        </p>
+
+        <section className="mt-8">
+          <h2 className="text-lg font-black uppercase tracking-wide">Threads</h2>
+          <p className="mt-1 text-sm text-zinc-600">
+            Members who wrote in while signed in. Answer here and it lands in their inbox on the
+            site — no email round trip, and they can write back in the same thread.
+          </p>
+
+          {isLoadingThreads ? (
+            <p className="mt-4 text-sm text-zinc-600">Loading…</p>
+          ) : threads.length === 0 ? (
+            <p className="mt-4 text-sm text-zinc-600">No member threads yet.</p>
+          ) : (
+            <ul className="mt-4 space-y-3">
+              {threads.map((thread) => {
+                const isOpen = openThreadId === thread.conversation_id;
+                const name = thread.member_name || thread.member_email || "A collector";
+                return (
+                  <li
+                    key={thread.conversation_id}
+                    className={`rounded-lg border bg-white p-4 ${
+                      thread.unread_count > 0 ? "border-accent/30" : "border-black/10"
+                    }`}
+                  >
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <p className="text-sm font-semibold text-zinc-900">
+                          {name}
+                          {thread.unread_count > 0 ? (
+                            <span className="ml-2 rounded bg-accent/10 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-accent">
+                              {thread.unread_count} new
+                            </span>
+                          ) : null}
+                        </p>
+                        <p className="text-xs text-zinc-500">
+                          {thread.member_slug ? (
+                            <>
+                              <a
+                                href={`/shelf/${thread.member_slug}`}
+                                className="font-semibold text-accent hover:text-accent-hover"
+                              >
+                                their shelf
+                              </a>
+                              {" · "}
+                            </>
+                          ) : null}
+                          {thread.member_email ?? "no address on file"}
+                          {" · "}
+                          {thread.message_count} {thread.message_count === 1 ? "message" : "messages"}
+                          {" · "}
+                          {formatMessageTime(thread.last_message_at)}
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setNotice(null);
+                          setOpenThreadId(isOpen ? null : thread.conversation_id);
+                          // Opening the thread marks it read, so drop the badge
+                          // now rather than waiting for a refetch to say so. The
+                          // next load confirms it; nothing here decides anything
+                          // the database doesn't already agree with.
+                          if (!isOpen) {
+                            setThreads((current) =>
+                              current.map((row) =>
+                                row.conversation_id === thread.conversation_id
+                                  ? { ...row, unread_count: 0 }
+                                  : row,
+                              ),
+                            );
+                          }
+                        }}
+                        className="shrink-0 rounded border border-accent px-3 py-1.5 text-xs font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg"
+                      >
+                        {isOpen ? "Close" : thread.unread_count > 0 ? "Read and reply" : "Open"}
+                      </button>
+                    </div>
+
+                    {isOpen ? (
+                      <ConversationThread
+                        conversationId={thread.conversation_id}
+                        otherLabel={name}
+                        className="mt-3 max-h-[28rem]"
+                        onSent={() => void loadThreads()}
+                      />
+                    ) : (
+                      <p className="mt-3 line-clamp-2 text-sm leading-6 text-zinc-700">
+                        {thread.last_sender_role === "admin" ? "You: " : ""}
+                        {thread.last_message_preview ?? "No messages yet"}
+                      </p>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </section>
+
+        <h2 className="mt-10 text-lg font-black uppercase tracking-wide">Email</h2>
+        <p className="mt-1 text-sm text-zinc-600">
+          Contact-form messages and rep applications from people without an account. These can only
+          be answered by email — Reply sends it and keeps a copy against the message.
         </p>
 
         <div className="mt-6 flex gap-2">

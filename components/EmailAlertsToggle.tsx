@@ -39,6 +39,12 @@ const ROWS: Row[] = [
     off: "Turn this on to hear back when a photo or bobblehead you submitted is reviewed.",
   },
   {
+    kind: "messages",
+    label: "New messages",
+    on: "We'll email you when someone sends you a message on the site, at most once every 15 minutes per conversation.",
+    off: "Turn this on to hear by email when someone messages you on the site. Your inbox still collects them either way.",
+  },
+  {
     kind: "weekly_digest",
     label: "Weekly roundup",
     on: "Once a week you'll get an email listing the bobbleheads added for the teams you collect. Quiet weeks send nothing.",

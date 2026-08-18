@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Avatar } from "@/components/Avatar";
 import { getDisplayName, useAuth } from "@/lib/auth";
 import { getAvatarUrl } from "@/lib/avatar";
+import { useInboxUnreadCount } from "@/lib/messages";
 
 // A single account control. When signed in, everything (profile, settings,
 // sign out) collapses behind one avatar+name button that opens a menu, so the
@@ -19,6 +20,10 @@ export function AuthWidget({
   hideSettingsLink?: boolean;
 }) {
   const { user, isLoading, openAuthModal, signOut } = useAuth();
+  // Counted here rather than in the header itself: this is the one control every
+  // page shows a signed-in member, so it's where a waiting message has to be
+  // visible without opening anything.
+  const { count: unreadMessages } = useInboxUnreadCount();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -62,8 +67,21 @@ export function AuthWidget({
           onClick={() => setIsOpen((current) => !current)}
           className="flex shrink-0 items-center gap-2 rounded-full border border-black/15 py-1 pl-1 pr-2.5 text-sm font-semibold text-foreground transition hover:border-accent sm:pr-3"
         >
-          <Avatar name={name} url={getAvatarUrl(user)} className="h-7 w-7 text-xs" />
+          <span className="relative shrink-0">
+            <Avatar name={name} url={getAvatarUrl(user)} className="h-7 w-7 text-xs" />
+            {unreadMessages > 0 ? (
+              <span
+                aria-hidden
+                className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border border-surface bg-accent"
+              />
+            ) : null}
+          </span>
           <span className="hidden max-w-[9rem] truncate sm:inline">{name}</span>
+          {unreadMessages > 0 ? (
+            <span className="sr-only">
+              {unreadMessages} unread {unreadMessages === 1 ? "message" : "messages"}
+            </span>
+          ) : null}
           <svg
             aria-hidden
             viewBox="0 0 24 24"
@@ -87,6 +105,28 @@ export function AuthWidget({
               {name}
             </p>
             <div className="border-t border-border-soft" />
+
+            <Link href="/inbox" role="menuitem" className={itemClass} onClick={() => setIsOpen(false)}>
+              <svg
+                aria-hidden
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-4 w-4 shrink-0"
+              >
+                <path d="M4 4h16v16H4z" />
+                <path d="M4 8l8 5 8-5" />
+              </svg>
+              Inbox
+              {unreadMessages > 0 ? (
+                <span className="ml-auto rounded-full bg-accent px-2 py-0.5 text-[10px] font-black text-accent-fg">
+                  {unreadMessages}
+                </span>
+              ) : null}
+            </Link>
 
             {hideProfileLink ? null : (
               <Link href="/profile" role="menuitem" className={itemClass} onClick={() => setIsOpen(false)}>
