@@ -4,7 +4,11 @@ import { bobbleheadHref } from "@/lib/bobbleheadIdentity";
 import { publicAsset } from "@/lib/paths";
 import { getTeamBySlug } from "@/lib/teams";
 import { UpcomingCountdown } from "@/components/UpcomingCountdown";
-import { formatUpcomingDate, type UpcomingGiveaway } from "@/lib/upcomingGiveaways";
+import {
+  formatCountdown,
+  formatUpcomingDate,
+  type UpcomingGiveaway,
+} from "@/lib/upcomingGiveaways";
 
 // One scheduled giveaway as a card. Shared by the homepage strip and the full
 // /upcoming list so the two can't drift apart — they're the same list, one
@@ -38,9 +42,11 @@ export function UpcomingCard({ item, now }: { item: UpcomingGiveaway; now: numbe
       <div className="flex flex-1 flex-col gap-1 p-3">
         <p className="text-[11px] font-black uppercase tracking-wide text-accent">
           {formatUpcomingDate(item.time)}
+          {/* Computed here, on the server, and handed over as text — see
+              UpcomingCountdown for why it can't be derived on the client. */}
           <UpcomingCountdown
             time={item.time}
-            now={now}
+            label={formatCountdown(item.time, now)}
             className="ml-1.5 font-semibold text-zinc-500"
           />
         </p>

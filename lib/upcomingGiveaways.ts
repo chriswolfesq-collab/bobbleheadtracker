@@ -10,25 +10,59 @@ export type UpcomingGiveaway = Giveaway & {
   teamSlug: string;
   /** Curated listings have a detail page; community ones live elsewhere. */
   isCurated: boolean;
-  /** Local midnight on the giveaway's date, for sorting and grouping. */
+  /**
+   * UTC midnight on the giveaway's date — an anchor for a calendar day, not an
+   * instant. Read it back with the UTC getters (see startOfUtcDay); the local
+   * ones re-bucket it into whatever day it happens to be in the reader's zone.
+   */
   time: number;
 };
 
-// Local midnight today. A giveaway happening this afternoon is still upcoming
-// — comparing against `now` would drop it from the strip halfway through the
-// morning of the day people most want to see it.
-export function startOfDay(now: number): number {
+// A giveaway date is a calendar day, not a moment: "August 21, 2026" is the 21st
+// wherever you read it from. So `time` is anchored at UTC midnight and every
+// reader agrees which day it names.
+//
+// This pairs with startOfLocalDay below, and the pairing is the whole point.
+// Vercel runs the server in UTC and the reader's browser does not, so anything
+// that mixes the two scales disagrees across the wire: the countdown used to
+// take local midnight on both sides, which meant the server measured from a UTC
+// day and the browser re-measured the same instant from its own — every card
+// west of UTC came out a day short, and the resulting text mismatch cost a
+// whole-tree re-render on first paint (React #418).
+export function startOfUtcDay(time: number): number {
+  const date = new Date(time);
+  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+}
+
+// The reader's own calendar day, put on that same UTC-anchored scale so the two
+// can be subtracted. Their zone decides which day "today" is — that part has to
+// stay local — but the answer is expressed as a day number, not as an instant.
+//
+// A giveaway happening this afternoon is still upcoming: comparing against `now`
+// rather than the day it falls in would drop it from the strip halfway through
+// the morning of the day people most want to see it.
+export function startOfLocalDay(now: number): number {
   const date = new Date(now);
-  return new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+  return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
 // The catalog stores dates as human-readable strings ("April 11, 2026"), and
 // plenty of entries have none — "N/A", "Unknown", or a year with no day. Only a
 // date that parses to a real day can be scheduled, so everything else is out:
 // a bobblehead we can't place on a calendar can't be coming up on one.
+//
+// Date.parse resolves the two families it gets against different zones: an ISO
+// form is UTC by spec, while a human-readable one lands on the *runtime's* local
+// midnight. Read each back with the matching getters, so the calendar day the
+// string names survives whichever zone the server happens to run in, and only
+// then re-anchor it at UTC.
+const ISO_DATE = /^\d{4}(-\d{2}){0,2}$/;
+
 export function giveawayDayTime(date: string): number | null {
   const parsed = Date.parse(date);
-  return Number.isNaN(parsed) ? null : parsed;
+  if (Number.isNaN(parsed)) return null;
+
+  return ISO_DATE.test(date.trim()) ? startOfUtcDay(parsed) : startOfLocalDay(parsed);
 }
 
 export function selectUpcoming(
@@ -36,7 +70,7 @@ export function selectUpcoming(
   now: number,
   limit?: number,
 ): UpcomingGiveaway[] {
-  const floor = startOfDay(now);
+  const floor = startOfLocalDay(now);
   const upcoming: UpcomingGiveaway[] = [];
 
   for (const giveaway of giveaways) {
@@ -53,12 +87,14 @@ export function selectUpcoming(
 }
 
 // "Sat, Apr 11" — enough to plan around without the year, which is redundant on
-// a list that only ever looks forward.
+// a list that only ever looks forward. Read in UTC, the zone `time` is anchored
+// in: left to the local zone this renders the day before for half the world.
 export function formatUpcomingDate(time: number): string {
   return new Date(time).toLocaleDateString(undefined, {
     weekday: "short",
     month: "short",
     day: "numeric",
+    timeZone: "UTC",
   });
 }
 
@@ -67,8 +103,12 @@ export function formatUpcomingDate(time: number): string {
 // list, but a prerendered page outlives the clock it was rendered against, and
 // a card that has gone stale should say nothing rather than call yesterday
 // "today".
+//
+// Note which scale each argument is read on: `time` names a fixed calendar day
+// (UTC), `now` is a clock whose day depends on where it's read (local). Mixing
+// those up is the #418 bug described on startOfUtcDay.
 export function formatCountdown(time: number, now: number): string {
-  const days = Math.round((startOfDay(time) - startOfDay(now)) / 86_400_000);
+  const days = Math.round((startOfUtcDay(time) - startOfLocalDay(now)) / 86_400_000);
   if (days < 0) return "";
   if (days === 0) return "today";
   if (days === 1) return "tomorrow";

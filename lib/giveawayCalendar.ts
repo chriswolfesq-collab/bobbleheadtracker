@@ -20,11 +20,15 @@ export type CalendarEvent = {
 // stadium giveaway is — it happens on the 17th wherever you're reading from.
 // Deriving it from local parts rather than toISOString avoids the UTC shift
 // that would move an evening game to the following day.
+// A VALUE=DATE property is a bare calendar day, which is exactly what `time`
+// anchors — so read it in UTC. The local getters would hand a subscriber west of
+// UTC the day before, and adding 24h for DTEND below only lands on the next
+// midnight cleanly on a scale that has no DST in it.
 function toIcsDate(time: number): string {
   const date = new Date(time);
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${date.getFullYear()}${month}${day}`;
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  return `${date.getUTCFullYear()}${month}${day}`;
 }
 
 function toIcsTimestamp(time: number): string {
