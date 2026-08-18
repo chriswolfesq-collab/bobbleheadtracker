@@ -17,14 +17,26 @@ import { useDialog } from "@/lib/useDialog";
 // off, blocked either way, no such member all read alike), so this component
 // shows what it's told and never guesses at a reason.
 
+const DEFAULT_BUTTON_CLASS =
+  "rounded border border-black/15 px-3 py-1.5 text-[11px] font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover";
+
 export function MessageMemberButton({
   slug,
   displayName,
   className,
+  buttonClassName,
 }: {
   slug: string;
   displayName: string | null;
+  /** Appended to the default look — for rows that just need spacing tweaks. */
   className?: string;
+  /**
+   * REPLACES the default look. Needed where the surrounding buttons set the same
+   * utilities (the shelf panel's pills set rounded/padding too), because two
+   * conflicting Tailwind classes on one element are resolved by stylesheet order
+   * rather than by which was written last.
+   */
+  buttonClassName?: string;
 }) {
   const { user, openAuthModal } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +76,10 @@ export function MessageMemberButton({
     return (
       <Link
         href="/inbox"
-        className={`rounded border border-accent px-3 py-1.5 text-[11px] font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg ${className ?? ""}`}
+        className={
+          buttonClassName ??
+          `rounded border border-accent px-3 py-1.5 text-[11px] font-black uppercase tracking-wide text-accent transition hover:bg-accent-hover hover:text-accent-fg ${className ?? ""}`
+        }
       >
         In your inbox
       </Link>
@@ -83,7 +98,7 @@ export function MessageMemberButton({
           }
           setIsOpen(true);
         }}
-        className={`rounded border border-black/15 px-3 py-1.5 text-[11px] font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover ${className ?? ""}`}
+        className={buttonClassName ?? `${DEFAULT_BUTTON_CLASS} ${className ?? ""}`}
       >
         Message
       </button>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { MessageMemberButton } from "@/components/MessageMemberButton";
 import PublicGallery from "@/components/PublicGallery";
 import { useAuth } from "@/lib/auth";
 import { useFriendShelf } from "@/lib/friends";
@@ -10,6 +11,12 @@ import { useFriendShelf } from "@/lib/friends";
 // the wanted list). A client island under the server-rendered summary because
 // this site's sessions live in the browser: the server can't know who's
 // looking, so anything viewer-specific has to hydrate in.
+//
+// Messaging lives here too, for that reason and one more: this component already
+// resolves "is this my own shelf" (status 'self' renders nothing), so a Message
+// button placed here cannot offer to message yourself. It sits beside the friend
+// controls without depending on them — asking someone about a bobblehead on their
+// shelf shouldn't require being their friend first.
 export function FriendShelfPanel({
   slug,
   displayName,
@@ -50,6 +57,13 @@ export function FriendShelfPanel({
               </Link>
               .
             </p>
+            <div className="mt-4 flex justify-center">
+              <MessageMemberButton
+                slug={slug}
+                displayName={displayName}
+                buttonClassName={quietButtonClass}
+              />
+            </div>
           </div>
           {isGalleryLoading ? (
             <p className="mt-6 text-center text-sm text-zinc-600">Loading the full shelf…</p>
@@ -111,6 +125,11 @@ export function FriendShelfPanel({
                 Accept friend request
               </button>
             )}
+            <MessageMemberButton
+              slug={slug}
+              displayName={displayName}
+              buttonClassName={quietButtonClass}
+            />
           </div>
         </div>
       )}
