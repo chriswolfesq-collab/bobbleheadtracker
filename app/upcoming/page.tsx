@@ -22,8 +22,14 @@ export const revalidate = 3600;
 
 // "April 2026" — the strip's cards carry the weekday and day, so the heading
 // only has to say which month you've scrolled into.
+// UTC, matching the zone `time` is anchored in — otherwise a giveaway on the 1st
+// groups under the previous month for readers west of UTC.
 function monthLabel(time: number): string {
-  return new Date(time).toLocaleDateString(undefined, { month: "long", year: "numeric" });
+  return new Date(time).toLocaleDateString(undefined, {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 }
 
 export default async function UpcomingPage() {

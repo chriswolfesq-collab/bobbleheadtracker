@@ -21,6 +21,13 @@
       "runtimeArgs": ["run", "start"],
       "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "dev-utc",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:utc"],
+      "port": 3000,
+      "autoPort": true
     }
   ]
 }
