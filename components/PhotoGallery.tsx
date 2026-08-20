@@ -1,100 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import type { GalleryPhoto } from "@/lib/bobbleheadGallery";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
 import { PhotoLightbox } from "@/components/PhotoLightbox";
-
-// One photo's edit controls, spelled out rather than hung on the thumbnail as
-// glyphs. The corner ✕ this replaces was unlabeled and — because it rendered
-// for anyone with edit rights, all the time — read as a broken-image marker
-// sitting on every photo.
-function ManageControls({
-  photo,
-  isCurrentMain,
-  onDelete,
-  onSetAsMain,
-  onReplace,
-}: {
-  photo: GalleryPhoto;
-  isCurrentMain: boolean;
-  onDelete?: (photo: GalleryPhoto) => void;
-  onSetAsMain?: (photo: GalleryPhoto) => void;
-  onReplace?: (photo: GalleryPhoto, file: File) => void;
-}) {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  // Removing a photo is confirmed in the page, the way deleting a listing is
-  // (see the isConfirmingDelete block in EditBobbleheadDialog). It used to call
-  // window.confirm, which is not a control we own: a browser that suppresses
-  // JS dialogs — an iOS "Block Alerts from this webpage" that the user can't
-  // easily undo, or an in-app webview like Facebook's or Gmail's — hands back
-  // false, so the click returned before it ever reached the database and the
-  // button looked simply dead. Reported by the Padres rep, on whose phone
-  // Remove did nothing at all while working everywhere we tried it.
-  const [isConfirmingRemove, setIsConfirmingRemove] = useState(false);
-  const buttonClass =
-    "rounded border border-border-soft bg-white px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wide text-navy transition hover:border-accent hover:text-accent";
-  const dangerClass =
-    "rounded border border-red-400/60 bg-red-50 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wide text-red-500 transition hover:bg-red-500 hover:text-white";
-
-  if (isConfirmingRemove && onDelete) {
-    return (
-      <div className="mt-1 flex w-20 flex-wrap justify-center gap-1">
-        <p className="w-full text-center text-[10px] font-black uppercase tracking-wide text-red-500">
-          Remove for everyone?
-        </p>
-        <button
-          type="button"
-          onClick={() => {
-            setIsConfirmingRemove(false);
-            onDelete(photo);
-          }}
-          className={dangerClass}
-        >
-          Yes
-        </button>
-        <button type="button" onClick={() => setIsConfirmingRemove(false)} className={buttonClass}>
-          No
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <div className="mt-1 flex w-20 flex-wrap justify-center gap-1">
-      {onSetAsMain && !isCurrentMain ? (
-        <button type="button" onClick={() => onSetAsMain(photo)} className={buttonClass}>
-          Main
-        </button>
-      ) : null}
-      {onReplace ? (
-        <>
-          <button type="button" onClick={() => fileInputRef.current?.click()} className={buttonClass}>
-            Swap
-          </button>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={(event) => {
-              const file = event.target.files?.[0];
-              // Reset so picking the same file twice still fires a change.
-              event.target.value = "";
-              if (file) onReplace(photo, file);
-            }}
-          />
-        </>
-      ) : null}
-      {onDelete ? (
-        <button type="button" onClick={() => setIsConfirmingRemove(true)} className={dangerClass}>
-          Remove
-        </button>
-      ) : null}
-    </div>
-  );
-}
+import { PhotoManageControls } from "@/components/PhotoManageControls";
 
 export function PhotoGallery({
   photos,
@@ -144,12 +55,11 @@ export function PhotoGallery({
             />
           </button>
           {isManaging ? (
-            <ManageControls
-              photo={photo}
+            <PhotoManageControls
               isCurrentMain={photo.imageUrl === currentMainUrl}
-              onDelete={onDelete}
-              onSetAsMain={onSetAsMain}
-              onReplace={onReplace}
+              onSetAsMain={onSetAsMain ? () => onSetAsMain(photo) : undefined}
+              onReplace={onReplace ? (file) => onReplace(photo, file) : undefined}
+              onDelete={onDelete ? () => onDelete(photo) : undefined}
             />
           ) : null}
         </div>

@@ -32,6 +32,7 @@ export function EditBobbleheadDialog({
   onSave,
   onDelete,
   onRemovePhoto,
+  currentPhotoUrl,
   cityOptions,
 }: {
   onClose: () => void;
@@ -43,8 +44,12 @@ export function EditBobbleheadDialog({
   cityOptions?: readonly string[];
   // Only passed when a photo is actually on screen to remove. For a curated
   // listing with both an approved photo and a seed photo it takes two removals:
-  // the first reveals the seed, the second clears it.
+  // the first reveals the seed, the second clears it — which is why this
+  // dialog stays open afterwards rather than closing between them.
   onRemovePhoto?: () => Promise<void>;
+  // The photo on the listing right now, so it's clear what "replace" replaces.
+  // Updates as photos are removed while the dialog is open.
+  currentPhotoUrl?: string | null;
 }) {
   const [title, setTitle] = useState(initial.title);
   const [nickname, setNickname] = useState(initial.nickname);
@@ -230,6 +235,20 @@ export function EditBobbleheadDialog({
           </div>
           <div className="grid gap-1.5">
             <label className="text-xs font-bold text-zinc-700">Replace photo</label>
+            {currentPhotoUrl ? (
+              <div className="flex items-center gap-2">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={currentPhotoUrl}
+                  alt=""
+                  className="h-14 w-14 shrink-0 rounded border border-black/10 bg-white object-contain"
+                />
+                <p className="text-[11px] leading-4 text-zinc-500">
+                  On the listing now. Pick a file below to replace it — you don&apos;t need to remove
+                  it first.
+                </p>
+              </div>
+            ) : null}
             <input
               type="file"
               accept="image/*"
@@ -245,8 +264,12 @@ export function EditBobbleheadDialog({
                   setIsRemovingPhoto(true);
 
                   try {
+                    // Deliberately stays open. Closing here is what made
+                    // clearing a curated listing's two stacked photos — the
+                    // approved one, then the seed underneath — three trips
+                    // through the dialog, and it threw away an unsaved edit
+                    // sitting in the fields above.
                     await onRemovePhoto();
-                    onClose();
                   } catch (removeError) {
                     setError(
                       removeError instanceof Error ? removeError.message : "Could not remove the photo.",

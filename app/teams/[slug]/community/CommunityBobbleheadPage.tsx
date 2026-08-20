@@ -11,8 +11,8 @@ import { EditBobbleheadDialog, type EditBobbleheadValues } from "@/components/Ed
 import { extractYear } from "@/lib/extractYear";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { ListingNavControls, ListingNavCounter } from "@/components/ListingNavControls";
+import { ListingPhotoStrip, type StripPhoto } from "@/components/ListingPhotoStrip";
 import { PhotoGallery } from "@/components/PhotoGallery";
-import { PhotoVotePill } from "@/components/PhotoVotePill";
 import { ReportListingButton } from "@/components/ReportListingDialog";
 import { SubmitPhotoButton } from "@/components/SubmitPhotoDialog";
 import { SuggestEditButton } from "@/components/SuggestEditDialog";
@@ -21,7 +21,7 @@ import { useToast } from "@/components/Toast";
 import { WantedButton } from "@/components/WantedButton";
 import { NamePlate } from "@/components/ui/NamePlate";
 import { useAdminAuth } from "@/lib/adminAuth";
-import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, replaceGalleryPhoto, saveCommunityBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
+import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, replaceGalleryPhoto, replaceMainPhoto, saveCommunityBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { ATHLETICS_CITIES, hasCityChoice, resolveAthleticsCity } from "@/lib/athleticsCity";
 import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
@@ -170,14 +170,26 @@ export function CommunityBobbleheadPage({
   // (admin-set or vote-promoted) overrides it — like the curated seed photo, it
   // has no gallery row, and staying visible is what lets it be voted back.
   const communityOriginalUrl = mainPhotoRemoved ? null : (giveaway.imageUrl ?? null);
-  const thumbnails = [
-    ...(defaultPhotoUrl ? [defaultPhotoUrl] : []),
+  //
+  // Each entry carries where the photo lives, not just its URL, because with
+  // management on this strip is what edits it — and the same thumbnail is a
+  // gallery row here and the profile photo there. A listing with no photo of
+  // its own shows its first gallery photo in the big frame; that one stays a
+  // gallery row.
+  const stripPhotos: StripPhoto[] = [
+    ...(removableMainPhotoUrl
+      ? [{ url: removableMainPhotoUrl, kind: "main" as const }]
+      : galleryPhotos[0]
+        ? [{ url: galleryPhotos[0].imageUrl, kind: "gallery" as const, photo: galleryPhotos[0] }]
+        : []),
     ...(communityOriginalUrl && communityOriginalUrl !== defaultPhotoUrl
-      ? [communityOriginalUrl]
+      ? [{ url: communityOriginalUrl, kind: "underlay" as const, locked: true }]
       : []),
     ...galleryPhotos
-      .map((photo) => photo.imageUrl)
-      .filter((url) => url !== defaultPhotoUrl && url !== communityOriginalUrl),
+      .filter(
+        (photo) => photo.imageUrl !== defaultPhotoUrl && photo.imageUrl !== communityOriginalUrl,
+      )
+      .map((photo) => ({ url: photo.imageUrl, kind: "gallery" as const, photo })),
   ];
   // Don't show the photo twice when it's standing in as the profile image —
   // except while managing, where hiding it was the reason a listing whose only
@@ -265,6 +277,26 @@ export function CommunityBobbleheadPage({
     setMainPhotoRemoved(true);
   };
 
+  // Swaps the profile photo for a new upload in one step — no "remove it first,
+  // then reopen the dialog and upload".
+  const handleReplaceMainPhoto = async (file: File) => {
+    if (!adminUser) return;
+
+    const imageUrl = await replaceMainPhoto({
+      user: adminUser,
+      teamSlug: team.slug,
+      bobbleheadId: giveaway.id,
+      // Same precedence as removableMainPhotoUrl, minus the listing's own
+      // image_url: a just-swapped photo is the one to clean up, and the
+      // listing's column is still pointing at its file (it shows underneath).
+      previousUrl: localImageUrl ?? photoUrlById[giveaway.id] ?? null,
+      file,
+    });
+    setLocalImageUrl(imageUrl);
+    setMainPhotoRemoved(false);
+    setSelectedPhotoUrl(null);
+  };
+
   // Confirmed in the gallery's own controls, not by window.confirm — see the
   // note on ManageControls in components/PhotoGallery.tsx.
   const handleDeleteGalleryPhoto = async (photo: GalleryPhoto) => {
@@ -319,6 +351,41 @@ export function CommunityBobbleheadPage({
       if (demotedPhoto) addPhotoLocally(demotedPhoto);
     } catch (promoteError) {
       showError(promoteError instanceof Error ? promoteError.message : "Could not set the profile photo.");
+    }
+  };
+
+  // The strip's three buttons, routed by where the photo actually lives. Only a
+  // gallery row can be promoted, and the listing's own image_url is locked (see
+  // StripPhoto), so those never reach here.
+  const handleStripSetAsMain = (photo: StripPhoto) => {
+    if (photo.photo) handleSetGalleryPhotoAsMain(photo.photo);
+  };
+
+  const handleStripReplace = async (photo: StripPhoto, file: File) => {
+    if (photo.kind === "gallery" && photo.photo) {
+      await handleReplaceGalleryPhoto(photo.photo, file);
+      return;
+    }
+
+    try {
+      await handleReplaceMainPhoto(file);
+    } catch (replaceError) {
+      showError(replaceError instanceof Error ? replaceError.message : "Could not replace the photo.");
+    }
+  };
+
+  const handleStripRemove = async (photo: StripPhoto) => {
+    if (photo.kind === "gallery" && photo.photo) {
+      await handleDeleteGalleryPhoto(photo.photo);
+      return;
+    }
+
+    try {
+      await handleRemoveMainPhoto();
+      // Otherwise the big frame keeps showing the photo we just removed.
+      if (photo.url === selectedPhotoUrl) setSelectedPhotoUrl(null);
+    } catch (removeError) {
+      showError(removeError instanceof Error ? removeError.message : "Could not remove the photo.");
     }
   };
 
@@ -417,33 +484,40 @@ export function CommunityBobbleheadPage({
               )}
             </div>
 
-            {thumbnails.length > 1 ? (
-              // More than one photo means there's a choice to make, so each
-              // thumbnail carries its vote pill — the top-voted photo becomes
-              // the listing's main photo (supabase/photo_votes.sql).
-              <div className="flex gap-2 overflow-x-auto pb-1">
-                {thumbnails.map((url) => (
-                  <div key={url} className="flex shrink-0 flex-col items-center gap-1">
+            {/* More than one photo means there's a choice to make, so each
+                thumbnail carries its vote pill — the top-voted photo becomes
+                the listing's main photo (supabase/photo_votes.sql). A rep
+                editing photos gets the strip even at one photo, since that
+                single photo is often the wrong one. */}
+            {stripPhotos.length > 1 || (canEdit && stripPhotos.length > 0) ? (
+              <div className="flex flex-col gap-2">
+                {canEdit ? (
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-xs font-semibold text-zinc-500">
+                      {isManagingPhotos
+                        ? "Swap or remove any photo here, or make one the main photo."
+                        : ""}
+                    </p>
                     <button
                       type="button"
-                      onClick={() => setSelectedPhotoUrl(url)}
-                      aria-label="Show this photo"
-                      aria-pressed={url === imageSrc}
-                      className={`h-20 w-20 shrink-0 overflow-hidden rounded-lg border-2 bg-white transition ${
-                        url === imageSrc ? "border-accent" : "border-border-soft hover:border-accent/50"
-                      }`}
+                      onClick={() => setIsManagingPhotos((current) => !current)}
+                      className="shrink-0 cursor-pointer text-xs font-black uppercase tracking-wide text-navy transition hover:text-accent"
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={url} alt="" className="h-full w-full object-contain" />
+                      {isManagingPhotos ? "Done" : "Manage photos"}
                     </button>
-                    <PhotoVotePill
-                      votes={photoVotes.votesByUrl[url] ?? 0}
-                      isMine={photoVotes.myVoteUrl === url}
-                      isLoggedIn={photoVotes.isLoggedIn}
-                      onToggle={() => photoVotes.toggleVote(url)}
-                    />
                   </div>
-                ))}
+                ) : null}
+                <ListingPhotoStrip
+                  photos={stripPhotos}
+                  selectedUrl={imageSrc}
+                  onSelect={setSelectedPhotoUrl}
+                  votes={photoVotes}
+                  isManaging={canEdit && isManagingPhotos}
+                  currentMainUrl={defaultPhotoUrl}
+                  onSetAsMain={handleStripSetAsMain}
+                  onReplace={handleStripReplace}
+                  onRemove={handleStripRemove}
+                />
               </div>
             ) : null}
 
@@ -674,6 +748,7 @@ export function CommunityBobbleheadPage({
           onSave={handleEditSave}
           onDelete={handleDelete}
           onRemovePhoto={removableMainPhotoUrl ? handleRemoveMainPhoto : undefined}
+          currentPhotoUrl={removableMainPhotoUrl}
           cityOptions={hasCityChoice(team.slug) ? ATHLETICS_CITIES : undefined}
         />
       ) : null}

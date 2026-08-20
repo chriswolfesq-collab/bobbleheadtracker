@@ -74,6 +74,37 @@ async function savePhoto(user: User, teamSlug: string, bobbleheadId: string, fil
   return imageUrl;
 }
 
+// Swaps the listing's profile photo for a new upload in one step. Nothing has
+// to be removed first — approved_photos is keyed by (team_slug, bobblehead_id)
+// and the upload upserts straight over whatever row is there. `previousUrl` is
+// the photo coming off screen; its file is deleted only when we own it, which
+// is what makes this safe to call with a curated seed or an off-bucket URL
+// showing (removeApprovedFile no-ops on those, and the seed stays in the strip
+// underneath with its own Remove).
+export async function replaceMainPhoto({
+  user,
+  teamSlug,
+  bobbleheadId,
+  previousUrl,
+  file,
+}: {
+  user: User;
+  teamSlug: string;
+  bobbleheadId: string;
+  previousUrl: string | null;
+  file: File;
+}) {
+  const imageUrl = await savePhoto(user, teamSlug, bobbleheadId, file);
+
+  // Only after the replacement is safely in the row — a failure above should
+  // leave the old photo intact rather than the listing with none.
+  if (previousUrl && previousUrl !== imageUrl) {
+    await removeApprovedFile(previousUrl);
+  }
+
+  return imageUrl;
+}
+
 export async function saveCuratedBobblehead({
   user,
   teamSlug,
