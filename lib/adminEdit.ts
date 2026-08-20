@@ -255,6 +255,71 @@ export async function setGalleryPhotoAsMain({
   return { demotedPhoto };
 }
 
+// Promotes the photo showing *underneath* the profile photo — a curated seed
+// image, or a community listing's own image_url — by taking away the layer on
+// top of it. There is no row to promote (having none is what makes it an
+// underlay), so instead the current profile photo is demoted into the gallery
+// and its approved_photos row deleted, which is what lets the one underneath
+// show through again.
+//
+// Deliberately no upsert of the underlay's own URL into approved_photos: that
+// would copy a build-time asset path into a table of uploads, and the next
+// rebuild that moves the seed photo would leave the row pointing at a file
+// that no longer exists.
+//
+// The demoted file stays in storage — the gallery row now points at it. Demote
+// first, so a failure leaves the current profile photo untouched.
+export async function setUnderlayPhotoAsMain({
+  user,
+  teamSlug,
+  bobbleheadId,
+  previousMainUrl,
+}: {
+  user: User;
+  teamSlug: string;
+  bobbleheadId: string;
+  previousMainUrl: string | null;
+}): Promise<{ demotedPhoto: GalleryPhoto | null }> {
+  let demotedPhoto: GalleryPhoto | null = null;
+
+  if (previousMainUrl) {
+    const { data, error: demoteError } = await supabase
+      .from("bobblehead_gallery_photos")
+      .insert({
+        bobblehead_id: bobbleheadId,
+        team_slug: teamSlug,
+        image_url: previousMainUrl,
+        approved_by: user.id,
+      })
+      .select("id, image_url, created_at")
+      .single();
+
+    if (demoteError) {
+      throw new Error(demoteError.message);
+    }
+
+    demotedPhoto = { id: data.id, imageUrl: data.image_url, createdAt: data.created_at };
+  }
+
+  const { data: deletedRows, error } = await supabase
+    .from("approved_photos")
+    .delete()
+    .eq("team_slug", teamSlug)
+    .eq("bobblehead_id", bobbleheadId)
+    .select();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  // A filtered delete here leaves the demoted copy sitting in the gallery with
+  // the profile photo unchanged, so this has to be loud rather than silent —
+  // the rep can remove that copy, but only if they know it happened.
+  assertPersisted(deletedRows, "The photo change");
+
+  return { demotedPhoto };
+}
+
 // Swaps one gallery photo for a freshly uploaded file. Done as insert-then-
 // delete rather than an update because the gallery table grants admins and reps
 // insert and delete but no update — the update would be filtered to zero rows

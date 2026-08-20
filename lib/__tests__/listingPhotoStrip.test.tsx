@@ -78,13 +78,24 @@ describe("listing photo strip controls", () => {
     expect(screen.getByRole("button", { name: "Remove" })).toBeDefined();
   });
 
-  it("lets the seed photo underneath be cleared, and nothing else", () => {
+  it("lets the seed photo underneath be promoted or cleared, but not swapped", () => {
     renderStrip([MAIN, SEED], { onSetAsMain: vi.fn(), onReplace: vi.fn(), onRemove: vi.fn() });
 
     // One Swap (the profile photo's) — the seed has none, since uploading over
     // it would just write the profile photo.
     expect(screen.getAllByRole("button", { name: "Swap" })).toHaveLength(1);
     expect(screen.getAllByRole("button", { name: "Remove" })).toHaveLength(2);
+    // The seed's — the profile photo shows a label instead.
+    expect(screen.getAllByRole("button", { name: "Main" })).toHaveLength(1);
+  });
+
+  it("promotes the photo it was asked about", () => {
+    const onSetAsMain = vi.fn();
+    renderStrip([MAIN, SEED], { onSetAsMain });
+
+    fireEvent.click(screen.getByRole("button", { name: "Main" }));
+
+    expect(onSetAsMain).toHaveBeenCalledWith(SEED);
   });
 
   it("removes the photo it was asked about, after the confirmation", () => {
@@ -98,10 +109,14 @@ describe("listing photo strip controls", () => {
     expect(onRemove).toHaveBeenCalledWith(SEED);
   });
 
-  it("gives a locked photo no controls", () => {
-    renderStrip([{ ...SEED, locked: true }], { onRemove: vi.fn() });
+  it("still promotes a photo that can't be removed on its own", () => {
+    const onSetAsMain = vi.fn();
+    renderStrip([{ ...SEED, removable: false }], { onSetAsMain, onRemove: vi.fn() });
 
+    // Removing this one would take the photo layered above it too, so there's
+    // no Remove — but making it the main photo only drops that layer.
     expect(screen.queryByRole("button", { name: "Remove" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Main" })).toBeDefined();
   });
 
   it("shows no controls at all when management is off", () => {

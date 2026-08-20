@@ -21,7 +21,7 @@ import { useToast } from "@/components/Toast";
 import { WantedButton } from "@/components/WantedButton";
 import { NamePlate } from "@/components/ui/NamePlate";
 import { useAdminAuth } from "@/lib/adminAuth";
-import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, replaceGalleryPhoto, replaceMainPhoto, saveCommunityBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
+import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, replaceGalleryPhoto, replaceMainPhoto, saveCommunityBobblehead, setGalleryPhotoAsMain, setUnderlayPhotoAsMain } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { ATHLETICS_CITIES, hasCityChoice, resolveAthleticsCity } from "@/lib/athleticsCity";
 import { useBobbleheadGallery, type GalleryPhoto } from "@/lib/bobbleheadGallery";
@@ -114,6 +114,10 @@ export function CommunityBobbleheadPage({
   const [localOverride, setLocalOverride] = useState<EditBobbleheadValues | null>(null);
   const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
   const [mainPhotoRemoved, setMainPhotoRemoved] = useState(false);
+  // The approved photo has been dropped but the listing's own image_url is
+  // still there — what promoting the photo underneath leaves behind. Distinct
+  // from mainPhotoRemoved, which clears both layers in one write.
+  const [approvedPhotoCleared, setApprovedPhotoCleared] = useState(false);
   const [selectedPhotoUrl, setSelectedPhotoUrl] = useState<string | null>(null);
 
   if (isLoading) {
@@ -154,11 +158,18 @@ export function CommunityBobbleheadPage({
   // The era-aware team name — see the curated page for why TEAMS' single city
   // isn't enough on the Athletics.
   const cityName = city ?? team.city;
-  // A community listing's photo is always admin-removable: either an
-  // approved_photos row or the row's own image_url.
+  // Two layers, the same shape as the curated page's: an approved_photos row
+  // sits on top and is dropped on its own when the photo underneath is
+  // promoted; the listing's own image_url is underneath. Removing the profile
+  // photo outright clears both in one write, which is what mainPhotoRemoved
+  // covers.
+  const approvedMainPhotoUrl =
+    mainPhotoRemoved || approvedPhotoCleared
+      ? null
+      : (localImageUrl ?? photoUrlById[giveaway.id] ?? null);
   const removableMainPhotoUrl = mainPhotoRemoved
     ? null
-    : (localImageUrl ?? photoUrlById[giveaway.id] ?? giveaway.imageUrl ?? null);
+    : (approvedMainPhotoUrl ?? giveaway.imageUrl ?? null);
   // With no profile photo of its own, a listing borrows its first gallery
   // photo as the profile image rather than showing the team placeholder.
   const galleryFallbackUrl = galleryPhotos[0]?.imageUrl ?? null;
@@ -183,7 +194,7 @@ export function CommunityBobbleheadPage({
         ? [{ url: galleryPhotos[0].imageUrl, kind: "gallery" as const, photo: galleryPhotos[0] }]
         : []),
     ...(communityOriginalUrl && communityOriginalUrl !== defaultPhotoUrl
-      ? [{ url: communityOriginalUrl, kind: "underlay" as const, locked: true }]
+      ? [{ url: communityOriginalUrl, kind: "underlay" as const, removable: false }]
       : []),
     ...galleryPhotos
       .filter(
@@ -258,6 +269,7 @@ export function CommunityBobbleheadPage({
     if (imageUrl) {
       setLocalImageUrl(imageUrl);
       setMainPhotoRemoved(false);
+      setApprovedPhotoCleared(false);
     }
   };
 
@@ -286,14 +298,14 @@ export function CommunityBobbleheadPage({
       user: adminUser,
       teamSlug: team.slug,
       bobbleheadId: giveaway.id,
-      // Same precedence as removableMainPhotoUrl, minus the listing's own
-      // image_url: a just-swapped photo is the one to clean up, and the
-      // listing's column is still pointing at its file (it shows underneath).
-      previousUrl: localImageUrl ?? photoUrlById[giveaway.id] ?? null,
+      // The approved layer only: the listing's own column is still pointing
+      // at its file (it shows underneath), so that one isn't ours to delete.
+      previousUrl: approvedMainPhotoUrl,
       file,
     });
     setLocalImageUrl(imageUrl);
     setMainPhotoRemoved(false);
+    setApprovedPhotoCleared(false);
     setSelectedPhotoUrl(null);
   };
 
@@ -347,6 +359,7 @@ export function CommunityBobbleheadPage({
       });
       setLocalImageUrl(photo.imageUrl);
       setMainPhotoRemoved(false);
+      setApprovedPhotoCleared(false);
       removePhotoLocally(photo.id);
       if (demotedPhoto) addPhotoLocally(demotedPhoto);
     } catch (promoteError) {
@@ -354,11 +367,33 @@ export function CommunityBobbleheadPage({
     }
   };
 
-  // The strip's three buttons, routed by where the photo actually lives. Only a
-  // gallery row can be promoted, and the listing's own image_url is locked (see
-  // StripPhoto), so those never reach here.
-  const handleStripSetAsMain = (photo: StripPhoto) => {
-    if (photo.photo) handleSetGalleryPhotoAsMain(photo.photo);
+  // The strip's three buttons, routed by where the photo actually lives. The
+  // photo that is already the main one shows a label rather than a button, so
+  // only the other two kinds arrive at the promote handler.
+  const handleStripSetAsMain = async (photo: StripPhoto) => {
+    if (photo.kind === "gallery" && photo.photo) {
+      await handleSetGalleryPhotoAsMain(photo.photo);
+      return;
+    }
+
+    if (!adminUser) return;
+
+    try {
+      // Promoting the listing's own photo means dropping the approved one
+      // layered over it. That photo isn't lost — it moves into the gallery.
+      const { demotedPhoto } = await setUnderlayPhotoAsMain({
+        user: adminUser,
+        teamSlug: team.slug,
+        bobbleheadId: giveaway.id,
+        previousMainUrl: approvedMainPhotoUrl,
+      });
+      setLocalImageUrl(null);
+      setApprovedPhotoCleared(true);
+      setSelectedPhotoUrl(null);
+      if (demotedPhoto) addPhotoLocally(demotedPhoto);
+    } catch (promoteError) {
+      showError(promoteError instanceof Error ? promoteError.message : "Could not set the profile photo.");
+    }
   };
 
   const handleStripReplace = async (photo: StripPhoto, file: File) => {

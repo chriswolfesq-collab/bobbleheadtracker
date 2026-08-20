@@ -20,7 +20,7 @@ import { useToast } from "@/components/Toast";
 import { WantedButton } from "@/components/WantedButton";
 import { NamePlate } from "@/components/ui/NamePlate";
 import { useAdminAuth } from "@/lib/adminAuth";
-import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, hideCuratedSeedPhoto, replaceGalleryPhoto, replaceMainPhoto, saveCuratedBobblehead, setGalleryPhotoAsMain } from "@/lib/adminEdit";
+import { deleteBobblehead, deleteGalleryPhoto, deleteMainPhoto, hideCuratedSeedPhoto, replaceGalleryPhoto, replaceMainPhoto, saveCuratedBobblehead, setGalleryPhotoAsMain, setUnderlayPhotoAsMain } from "@/lib/adminEdit";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
 import { ATHLETICS_CITIES, hasCityChoice, resolveAthleticsCity } from "@/lib/athleticsCity";
 import type { Giveaway } from "@/lib/bobbleheads";
@@ -436,11 +436,34 @@ export function CuratedBobbleheadPage({
     }
   };
 
-  // The strip's three buttons, routed by where the photo actually lives. Only
-  // a gallery row can be promoted, so "Main" is the one that never reaches
-  // here for the other kinds (see ListingPhotoStrip).
-  const handleStripSetAsMain = (photo: StripPhoto) => {
-    if (photo.photo) handleSetGalleryPhotoAsMain(photo.photo);
+  // The strip's three buttons, routed by where the photo actually lives. The
+  // photo that is already the main one shows a label rather than a button, so
+  // only the other two kinds arrive here.
+  const handleStripSetAsMain = async (photo: StripPhoto) => {
+    if (photo.kind === "gallery" && photo.photo) {
+      await handleSetGalleryPhotoAsMain(photo.photo);
+      return;
+    }
+
+    if (!adminUser) return;
+
+    try {
+      // Promoting the seed means dropping the approved photo layered over it,
+      // which is the same state change as removing that photo — except the
+      // photo isn't lost, it moves down into the gallery.
+      const { demotedPhoto } = await setUnderlayPhotoAsMain({
+        user: adminUser,
+        teamSlug: team.slug,
+        bobbleheadId: giveaway.id,
+        previousMainUrl: approvedMainPhotoUrl,
+      });
+      setLocalImageUrl(null);
+      setMainPhotoRemoved(true);
+      setSelectedPhotoUrl(null);
+      if (demotedPhoto) addPhotoLocally(demotedPhoto);
+    } catch (promoteError) {
+      showError(promoteError instanceof Error ? promoteError.message : "Could not set the profile photo.");
+    }
   };
 
   const handleStripReplace = async (photo: StripPhoto, file: File) => {

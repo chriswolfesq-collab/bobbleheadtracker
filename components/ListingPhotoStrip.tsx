@@ -17,12 +17,12 @@ export type StripPhoto = {
   kind: "main" | "underlay" | "gallery";
   /** Set on, and only on, `kind: "gallery"`. */
   photo?: GalleryPhoto;
-  // Shows in the strip and can be voted for, but carries no edit buttons —
-  // there is no way to change this one on its own. Today that's a community
-  // listing's original image_url with an approved photo over it: removing the
-  // main photo clears both in the same write, so a Remove here would quietly
-  // take the photo above it too.
-  locked?: boolean;
+  // Defaults to removable. Cleared for a community listing's original
+  // image_url with an approved photo over it: removing the profile photo
+  // clears both in the same write, so a Remove here would quietly take the
+  // photo above it too. It can still be made the main photo — that only takes
+  // the layer above it away.
+  removable?: boolean;
 };
 
 export type StripVotes = {
@@ -85,20 +85,18 @@ export function ListingPhotoStrip({
             isLoggedIn={votes.isLoggedIn}
             onToggle={() => votes.toggleVote(photo.url)}
           />
-          {isManaging && !photo.locked ? (
+          {isManaging ? (
             <PhotoManageControls
+              // Every photo can be made the main one; the control shows a label
+              // instead of a button for the photo that already is.
               isCurrentMain={photo.url === currentMainUrl}
-              // Only a gallery row can be promoted: making the main photo the
-              // main photo is a no-op, and an underlay has no row to promote.
-              onSetAsMain={
-                onSetAsMain && photo.kind === "gallery" ? () => onSetAsMain(photo) : undefined
-              }
+              onSetAsMain={onSetAsMain ? () => onSetAsMain(photo) : undefined}
               // An underlay isn't swapped in place — uploading over it would
               // just write the main photo, which is the "Swap" one row over.
               onReplace={
                 onReplace && photo.kind !== "underlay" ? (file) => onReplace(photo, file) : undefined
               }
-              onDelete={onRemove ? () => onRemove(photo) : undefined}
+              onDelete={onRemove && photo.removable !== false ? () => onRemove(photo) : undefined}
             />
           ) : null}
         </div>
