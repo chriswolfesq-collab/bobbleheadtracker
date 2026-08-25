@@ -47,6 +47,45 @@ export function useTeamGalleryPhotos(teamSlug: string, seed?: Record<string, str
   return photoUrlById;
 }
 
+// Every team's gallery at once, reduced the same way but keyed by
+// "team_slug/bobblehead_id" — curated ids ("hello-kitty-2019") repeat across
+// teams, so the bare id is ambiguous once a grid spans all of them. The
+// counterpart to useAllApprovedPhotos (lib/approvedPhotos.ts), and read through
+// useAllListingPhotos (lib/listingPhotos.ts) rather than directly.
+export function useAllGalleryPhotos() {
+  const [photoUrlByListing, setPhotoUrlByListing] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    let cancelled = false;
+
+    supabase
+      .from("bobblehead_gallery_photos")
+      .select("team_slug, bobblehead_id, image_url")
+      .order("created_at", { ascending: true })
+      .then(({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load gallery photos:", error.message);
+          return;
+        }
+
+        const byListing: Record<string, string> = {};
+        for (const row of data ?? []) {
+          const key = `${row.team_slug}/${row.bobblehead_id}`;
+          if (!(key in byListing)) byListing[key] = row.image_url;
+        }
+        setPhotoUrlByListing(byListing);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return photoUrlByListing;
+}
+
 export function useBobbleheadGallery(teamSlug: string, bobbleheadId: string) {
   const [photos, setPhotos] = useState<GalleryPhoto[]>([]);
   const [isLoading, setIsLoading] = useState(true);

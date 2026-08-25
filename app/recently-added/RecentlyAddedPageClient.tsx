@@ -4,10 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RecentlyAddedCard } from "@/components/RecentlyAddedCard";
 import { ToggleChip } from "@/components/ToggleChip";
-import { useAllApprovedPhotos } from "@/lib/approvedPhotos";
 import { bobbleheadHref } from "@/lib/bobbleheadIdentity";
 import { useAllCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { extractYear, UNKNOWN_YEAR } from "@/lib/extractYear";
+import { useAllListingPhotos } from "@/lib/listingPhotos";
 import { saveListingTrail } from "@/lib/listingTrail";
 import { getTeamBySlug } from "@/lib/teams";
 import { useMyOwnedLookup } from "@/lib/userCollections";
@@ -72,11 +72,13 @@ export function RecentlyAddedPageClient() {
   // as the total ("of 200") while there were 226. The homepage strip next door
   // genuinely does want the newest ten; this is the page that holds all of them.
   const { communityBobbleheads, isLoading } = useAllCommunityBobbleheads();
-  // Same reason the search grid loads these: a listing's own image_url is only
-  // one of its photos, and not the one the listing page shows. An admin can
-  // approve a better photo — or replace one whose file has since gone — and
-  // until this map is consulted the cards here keep pointing at the old URL.
-  const photoUrlByListing = useAllApprovedPhotos();
+  // Same reason the search grid resolves these: a listing's own image_url is
+  // only one of its photos, and not the one the listing page shows. An admin
+  // can approve a better photo — or replace one whose file has since gone —
+  // and a listing added photoless keeps a null image_url even after someone
+  // photographs it, because that first photo lands in approved_photos or the
+  // gallery instead.
+  const photoUrlFor = useAllListingPhotos();
   const { wantedByKey, isLoggedIn: isLoggedInForWanted, setWanted } = useMyWantedLookup();
   const { ownedByKey, isLoggedIn: isLoggedInForOwned, setOwned } = useMyOwnedLookup();
   const [query, setQuery] = useState("");
@@ -409,7 +411,7 @@ export function RecentlyAddedPageClient() {
                     bobblehead={bobblehead}
                     // `visible` is a prefix of `sorted`, so the index lines up.
                     onNavigate={() => saveListingTrail("Recently Added", trailEntries, index)}
-                    photoUrl={photoUrlByListing[`${bobblehead.teamSlug}/${bobblehead.id}`]}
+                    photoUrl={photoUrlFor(bobblehead) ?? undefined}
                     isWanted={isWanted}
                     isLoggedIn={isLoggedInForWanted}
                     onToggleWanted={() => {

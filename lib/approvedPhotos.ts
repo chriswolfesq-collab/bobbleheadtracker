@@ -7,9 +7,10 @@ type ApprovedPhotoMap = Record<string, string>;
 
 // Every team's approved photos at once, keyed by "team_slug/bobblehead_id" —
 // curated ids ("hello-kitty-2019") repeat across teams, so the bare id is
-// ambiguous. Used by the search results page, whose grid spans all teams — the
-// curated build-time data mostly has no imageUrl of its own, so without this
-// the results are all placeholders.
+// ambiguous. Behind the cross-team grids (search, /recently-added), whose rows
+// span all teams — the curated build-time data mostly has no imageUrl of its
+// own, so without this those results are all placeholders. Read through
+// useAllListingPhotos (lib/listingPhotos.ts), which layers the gallery under it.
 export function useAllApprovedPhotos() {
   const [photoUrlByListing, setPhotoUrlByListing] = useState<ApprovedPhotoMap>({});
 

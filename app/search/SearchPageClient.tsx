@@ -5,8 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { BobbleheadImage } from "@/components/BobbleheadImage";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { useAllApprovedPhotos } from "@/lib/approvedPhotos";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
+import { useAllListingPhotos } from "@/lib/listingPhotos";
 import { saveListingTrail } from "@/lib/listingTrail";
 import { publicAsset } from "@/lib/paths";
 import { searchGiveaways, type SearchResult } from "@/lib/search";
@@ -84,7 +84,11 @@ export function SearchPageClient() {
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
 
   const index = useSearchIndex(team ? team.slug : undefined);
-  const photoUrlByListing = useAllApprovedPhotos();
+  // A listing's own image_url is only one of its photos, and not always the one
+  // its page shows: the curated build-time data mostly has no imageUrl at all,
+  // and a listing submitted photoless keeps a null one even after someone
+  // photographs it. This resolves the layers the listing page resolves.
+  const photoUrlFor = useAllListingPhotos();
   // The index itself is the only ceiling — a search can't match more listings
   // than exist, so this is "everything that matched" with a finite number.
   const results = useMemo(() => searchGiveaways(index, query, index.length), [index, query]);
@@ -235,7 +239,7 @@ export function SearchPageClient() {
                 <ResultCard
                   key={`${result.source}-${result.teamSlug}-${result.id}`}
                   result={result}
-                  photoUrl={photoUrlByListing[`${result.teamSlug}/${result.id}`]}
+                  photoUrl={photoUrlFor(result) ?? undefined}
                   onNavigate={() => saveListingTrail(trailLabel, trailEntries, index)}
                 />
               ))}

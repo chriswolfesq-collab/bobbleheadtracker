@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { bobbleheadHref } from "@/lib/bobbleheadIdentity";
 import { useRecentCommunityBobbleheads } from "@/lib/communityBobbleheads";
 import { isUnoptimizedImage } from "@/lib/imageOptimization";
+import { useListingPhotos } from "@/lib/listingPhotos";
 import { saveListingTrail } from "@/lib/listingTrail";
 import { publicAsset } from "@/lib/paths";
 import { getTeamBySlug } from "@/lib/teams";
@@ -24,6 +25,12 @@ const PANEL =
 
 export default function RecentlyAdded({ className }: { className?: string }) {
   const { communityBobbleheads, isLoading } = useRecentCommunityBobbleheads(RECENT_LIMIT);
+  // A listing submitted without a photo keeps a null image_url even after
+  // someone photographs it — the photo goes to approved_photos, or to the
+  // gallery. Without this the newest additions, which are exactly the ones
+  // most likely to be waiting on a photo, sat here as team placeholders while
+  // their own pages showed the real thing.
+  const photoUrlFor = useListingPhotos(communityBobbleheads);
 
   // The chain a clicked card's prev/next arrows will follow — this strip, in
   // the order it's shown.
@@ -80,7 +87,7 @@ export default function RecentlyAdded({ className }: { className?: string }) {
         {communityBobbleheads.map((bobblehead, index) => {
           const team = getTeamBySlug(bobblehead.teamSlug);
           const placeholderSrc = publicAsset(`/bobbleheads/${bobblehead.teamSlug}.png`);
-          const imageSrc = bobblehead.imageUrl ?? placeholderSrc;
+          const imageSrc = photoUrlFor(bobblehead) ?? placeholderSrc;
           const href = `/teams/${bobblehead.teamSlug}/community/${encodeURIComponent(bobblehead.id)}`;
 
           return (
