@@ -54,6 +54,14 @@ export function useSearchIndex(teamSlug?: string): SearchResult[] {
           nickname: override.nickname ?? result.nickname,
           year: override.year ?? result.year,
           date: override.date ?? result.date,
+          // A removed seed photo can't be deleted out of the build-time data,
+          // so it's suppressed with a flag instead — and a result that keeps
+          // its imageUrl goes on showing a photo an admin took down, since
+          // nothing downstream can tell it from a live one. Same suppression
+          // as lib/teamListings.ts and lib/giveawayFeed.ts. Whatever replaced
+          // it (an approved photo, or a gallery photo underneath) is layered
+          // back on by useAllListingPhotos, which outranks this field.
+          imageUrl: override.photoHidden ? null : result.imageUrl,
           tags,
         };
       },
