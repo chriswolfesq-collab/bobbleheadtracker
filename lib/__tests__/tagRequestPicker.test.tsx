@@ -9,7 +9,8 @@ import { TagList } from "@/components/TagList";
 // a requester can see their own asks while they wait. The admin's path is
 // tagDuplicateWarning.test.tsx.
 
-const addTag = vi.fn<(label: string) => Promise<boolean>>();
+const createTag = vi.fn<(label: string) => Promise<boolean>>();
+const applyTag = vi.fn<(tag: { slug: string; label: string }) => Promise<boolean>>();
 const removeTag = vi.fn();
 const requestTag = vi.fn<(label: string) => Promise<boolean>>();
 
@@ -30,7 +31,8 @@ vi.mock("@/lib/useTags", () => ({
   useBobbleheadTags: () => ({
     tags: [{ slug: "star-wars", label: "Star Wars" }],
     isLoading: false,
-    addTag: (label: string) => addTag(label),
+    applyTag: (tag: { slug: string; label: string }) => applyTag(tag),
+    createTag: (label: string) => createTag(label),
     removeTag,
   }),
   useTagVocabulary: () => ({
@@ -42,7 +44,8 @@ vi.mock("@/lib/useTags", () => ({
 }));
 
 beforeEach(() => {
-  addTag.mockReset().mockResolvedValue(true);
+  createTag.mockReset().mockResolvedValue(true);
+  applyTag.mockReset().mockResolvedValue(true);
   removeTag.mockReset();
   requestTag.mockReset().mockResolvedValue(true);
   pending = [];
@@ -74,8 +77,9 @@ describe("a signed-in user's tag controls", () => {
     fireEvent.click(screen.getByRole("button", { name: "Request" }));
 
     await waitFor(() => expect(requestTag).toHaveBeenCalledWith("Sugar Skull"));
-    // The whole point: the gesture must not reach the vocabulary.
-    expect(addTag).not.toHaveBeenCalled();
+    // The whole point: the gesture must not reach the tag tables.
+    expect(createTag).not.toHaveBeenCalled();
+    expect(applyTag).not.toHaveBeenCalled();
   });
 
   // The × on a chip is the admin's; anyone who could strip an approved tag

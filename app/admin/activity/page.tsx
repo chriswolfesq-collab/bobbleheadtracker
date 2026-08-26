@@ -40,6 +40,7 @@ const ACTION_LABELS: Record<string, string> = {
   submission_rejected: "Rejected a submission",
   report_resolved: "Resolved a report",
   report_dismissed: "Dismissed a report",
+  tag_added: "Added a tag",
   tag_removed: "Removed a tag",
 };
 

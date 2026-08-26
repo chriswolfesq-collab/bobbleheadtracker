@@ -5,21 +5,23 @@ import { useState } from "react";
 import { useAdminAuth } from "@/lib/adminAuth";
 import { useAuth } from "@/lib/auth";
 import type { TagRequestSource } from "@/lib/tagRequests";
-import { matchTags, type TagWithCount, tagHref } from "@/lib/tags";
+import { matchTags, type Tag, type TagWithCount, tagHref, validateTagLabel } from "@/lib/tags";
 import { describeSimilarity, findSimilarTags, type SimilarTag } from "@/lib/tagSimilarity";
 import { useBobbleheadTags, useMyTagRequests, useTagVocabulary } from "@/lib/useTags";
 
 // The tags on one bobblehead. Everyone sees the chips; what the controls do
-// depends on who's looking. The admin edits directly — the vocabulary is
-// theirs. Everyone else signed in requests: their picker files a tag_requests
-// row for the admin to rule on at /admin/tag-requests, and their asks sit here
-// as muted "pending" chips until then. Knowing a bobblehead is a Star Wars
-// bobblehead doesn't take a rep, so asking isn't gated on the team.
+// depends on who's looking, and the line they fall on is mint vs apply rather
+// than add vs remove:
 //
-// Taking a tag off is: this team's rep gets the × as well as the admin. The
-// halves are asymmetric on purpose (see supabase/rep_tag_removal.sql) — adding
-// decides something about the shared vocabulary, removing only decides what one
-// listing on the rep's own team says.
+//   admin              mints new labels and applies them, both directly
+//   this team's rep    applies and removes any tag already in the vocabulary;
+//                      a new label goes to the admin as a request
+//   anyone else        requests, whatever they type
+//
+// That middle row is the point (see supabase/rep_tag_apply.sql). Minting "Star
+// Wars" is a decision about all thirty teams and stays reviewed. Whether *this*
+// Dodgers bobblehead is a Star Wars bobblehead is one listing on the rep's own
+// team, and routing it through review bought nothing but a queue.
 //
 // Chips link to the tag page rather than running a search, so "Star Wars" is a
 // place you can link someone to rather than a query they have to retype.
@@ -39,16 +41,21 @@ export function TagList({
   bobbleheadId: string;
   source?: TagRequestSource;
 }) {
-  const { tags, isLoading, addTag, removeTag } = useBobbleheadTags(teamSlug, bobbleheadId);
+  const { tags, isLoading, applyTag, createTag, removeTag } = useBobbleheadTags(
+    teamSlug,
+    bobbleheadId,
+  );
   const { pending, requestTag } = useMyTagRequests(teamSlug, bobbleheadId, source);
   const { isAdmin, canEditTeam } = useAdminAuth();
   const { user } = useAuth();
-  // Everyone else signed in requests rather than writes; the admin writes.
-  const canRequest = !isAdmin && Boolean(user);
   // canEditTeam already folds the admin in, so this is "admin, or this team's
-  // rep" without spelling it out twice.
-  const canRemove = canEditTeam(teamSlug);
-  const canEdit = canRemove || canRequest;
+  // rep" without spelling it out twice. It gates both halves of editing one
+  // listing's tags — putting an approved one on, and taking one off.
+  const canEditListing = canEditTeam(teamSlug);
+  // Everyone else signed in requests. So does a rep, for a label the vocabulary
+  // doesn't have yet; the admin never does, since they'd be asking themselves.
+  const canRequest = !isAdmin && Boolean(user);
+  const canEdit = canEditListing || canRequest;
   const [isEditing, setIsEditing] = useState(false);
 
   // Nothing to show and no way to add: the section would be an empty heading.
@@ -66,7 +73,7 @@ export function TagList({
             onClick={() => setIsEditing((current) => !current)}
             className="cursor-pointer text-xs font-black uppercase tracking-wide text-accent transition hover:text-accent-hover"
           >
-            {isEditing ? "Done" : canRemove ? "Edit" : "Request a tag"}
+            {isEditing ? "Done" : canEditListing ? "Edit" : "Request a tag"}
           </button>
         ) : null}
       </div>
@@ -75,7 +82,7 @@ export function TagList({
         <ul className="mt-3 flex flex-wrap gap-2">
           {tags.map((tag) => (
             <li key={tag.slug}>
-              {isEditing && canRemove ? (
+              {isEditing && canEditListing ? (
                 <span className={CHIP_CLASS}>
                   {tag.label}
                   <button
@@ -115,9 +122,10 @@ export function TagList({
 
       {isEditing ? (
         <TagPicker
-          onAdd={isAdmin ? addTag : requestTag}
+          onApply={canEditListing ? applyTag : null}
+          onCreate={isAdmin ? createTag : requestTag}
+          createIsRequest={!isAdmin}
           existing={[...tags.map((tag) => tag.slug), ...pending.map((tag) => tag.slug)]}
-          isRequest={!isAdmin}
         />
       ) : null}
     </div>
@@ -125,15 +133,21 @@ export function TagList({
 }
 
 function TagPicker({
-  onAdd,
+  onApply,
+  onCreate,
+  createIsRequest,
   existing,
-  isRequest,
 }: {
-  onAdd: (label: string) => Promise<boolean>;
+  // Applying a tag the vocabulary already has. Null for someone with no write
+  // on this listing, which is what sends every submit down onCreate instead.
+  onApply: ((tag: Tag) => Promise<boolean>) | null;
+  // Everything the vocabulary doesn't have yet: the admin's mint, or the
+  // request a rep files. Takes the raw label, since there's no tag to pass.
+  onCreate: (label: string) => Promise<boolean>;
+  // A rep's new label files a request instead of minting, so the wording has to
+  // promise review rather than an add that already happened.
+  createIsRequest: boolean;
   existing: string[];
-  // A rep's submit files a request instead of writing the tag, so the wording
-  // has to promise review rather than an add that already happened.
-  isRequest: boolean;
 }) {
   const { tags: vocabulary, reload } = useTagVocabulary();
   const [query, setQuery] = useState("");
@@ -150,10 +164,26 @@ function TagPicker({
   const taken = new Set(existing);
   const suggestions = matchTags(vocabulary, query).filter((tag) => !taken.has(tag.slug));
 
+  // The tag this label already names, if any. Matched on the slug rather than
+  // the text, so "star wars" and "Star Wars" find the same one — and the
+  // vocabulary's own label comes back, which is the casing that gets written.
+  const known = (label: string): Tag | undefined => {
+    const validated = validateTagLabel(label);
+    if ("error" in validated) return undefined;
+    const match = vocabulary.find((tag) => tag.slug === validated.slug);
+    // Narrowed to the two fields that get written. The picker's listing count
+    // is display only, and threading it into the listing's own tag state would
+    // park a number there that nothing reads and the next write makes wrong.
+    return match ? { slug: match.slug, label: match.label } : undefined;
+  };
+
   const submit = async (label: string) => {
     if (!label.trim() || isSaving) return;
     setIsSaving(true);
-    const added = await onAdd(label);
+    // An invalid label falls through to onCreate, which is where the message
+    // explaining what's wrong with it gets raised.
+    const match = known(label);
+    const added = match && onApply ? await onApply(match) : await onCreate(label);
     setIsSaving(false);
     if (added) {
       setQuery("");
@@ -168,6 +198,15 @@ function TagPicker({
   // this is the same information as a question that has to be answered, and
   // only when the answer matters (the label would mint something new).
   const attempt = (label: string) => {
+    // Typing the exact name of a tag that exists is picking it, so it gets the
+    // same one-click path as clicking it below. Nothing is being minted, and
+    // "All-Star looks like it's already covered by All-Star Game" is a strange
+    // thing to be asked about a tag called All-Star.
+    if (known(label)) {
+      submit(label);
+      return;
+    }
+
     const matches = findSimilarTags(label, vocabulary);
     if (matches.length === 0) {
       submit(label);
@@ -176,11 +215,19 @@ function TagPicker({
     setMaybeDuplicate({ label, matches });
   };
 
+  // What the button promises has to follow what this particular text will do:
+  // for a rep the same control both adds and asks, and which one is decided by
+  // whether the vocabulary already has what they've typed.
+  const willRequest = createIsRequest && !known(query);
+  const verb = willRequest ? "Request" : "Add";
+
   return (
     <div className="mt-4 border-t border-border-soft pt-4">
-      {isRequest ? (
+      {createIsRequest ? (
         <p className="mb-3 text-xs text-zinc-500">
-          Tag requests go to the site admin for review — they&apos;ll appear here once approved.
+          {onApply
+            ? "Pick a tag that already exists and it goes on straight away. A brand new tag goes to the site admin for review first."
+            : "Tag requests go to the site admin for review — they'll appear here once approved."}
         </p>
       ) : null}
       <form
@@ -200,7 +247,7 @@ function TagPicker({
             setMaybeDuplicate(null);
           }}
           placeholder="Star Wars, Sugar Skull…"
-          aria-label={isRequest ? "Request a tag" : "Add a tag"}
+          aria-label={onApply ? "Add a tag" : "Request a tag"}
           maxLength={40}
           className="w-full rounded-lg border border-border-soft bg-white px-3 py-2 text-sm text-zinc-900 outline-none transition focus:border-accent"
         />
@@ -209,7 +256,7 @@ function TagPicker({
           disabled={isSaving || !query.trim()}
           className="cursor-pointer rounded-lg bg-accent px-4 py-2 font-display text-sm font-bold uppercase tracking-wider text-accent-fg transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isRequest ? "Request" : "Add"}
+          {verb}
         </button>
       </form>
 
@@ -240,15 +287,15 @@ function TagPicker({
           <div className="mt-3 flex flex-wrap items-center gap-3">
             {/* Deliberately still possible: two tags that look alike sometimes
                 are two tags, and whoever is holding the bobblehead knows that
-                better than the matcher does. It lands in the admin review queue
-                either way. */}
+                better than the matcher does. This half is always a new label,
+                so it lands in the admin's queue whoever clicks it. */}
             <button
               type="button"
               disabled={isSaving}
               onClick={() => submit(maybeDuplicate.label)}
               className="cursor-pointer text-xs font-black uppercase tracking-wide text-amber-900 underline transition hover:text-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {isRequest ? "Request" : "Create"} {maybeDuplicate.label} anyway
+              {createIsRequest ? "Request" : "Create"} {maybeDuplicate.label} anyway
             </button>
             <button
               type="button"

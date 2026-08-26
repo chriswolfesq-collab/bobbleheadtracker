@@ -5,10 +5,15 @@ import { submissionError } from "@/lib/rateLimit";
 import { validateTagLabel } from "@/lib/tags";
 
 // The request half of the admin-curated vocabulary. Nobody but the admin can
-// write to tags or bobblehead_tags (see supabase/tag_requests.sql); what any
-// signed-in user can do is file a request, which the admin approves or rejects
-// from /admin/tag-requests. Approving does what the rep's picker used to do —
-// mint-if-new, then apply — under the admin's own credentials.
+// write to tags — the vocabulary is the reviewed thing (see
+// supabase/tag_requests.sql) — so what any signed-in user can do about a label
+// that doesn't exist yet is file a request, which the admin approves or rejects
+// from /admin/tag-requests. Approving mints it and applies it under the admin's
+// own credentials.
+//
+// Applying a label that *does* exist is no longer this path for a team rep:
+// supabase/rep_tag_apply.sql lets them write bobblehead_tags on their own team
+// directly, so what reaches this queue from a rep is only ever a new label.
 
 export type TagRequestSource = "curated" | "community";
 

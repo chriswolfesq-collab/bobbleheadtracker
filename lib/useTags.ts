@@ -367,10 +367,17 @@ export function useTaggedListings(tagSlug: string): {
   return { listings, isLoading };
 }
 
-// One listing's tags, with the add/remove the admin needs. Writes are
-// authorized by RLS (is_admin — see supabase/tag_requests.sql, which took this
-// away from reps), so a failure here surfaces as a toast rather than being
-// second-guessed in the client. A rep's path is useMyTagRequests below.
+// One listing's tags, and the three writes over them. The split follows the
+// policies in supabase/rep_tag_apply.sql rather than restating them:
+//
+//   applyTag   put a tag the vocabulary already has on this listing — the
+//              team's rep as well as the admin
+//   removeTag  take one off — likewise (supabase/rep_tag_removal.sql)
+//   createTag  mint a new label and apply it — the admin alone
+//
+// All three are authorized by RLS, so a refusal surfaces as a toast rather than
+// being second-guessed in the client. A rep's route to a *new* label is
+// useMyTagRequests below.
 export function useBobbleheadTags(teamSlug: string, bobbleheadId: string) {
   const { user } = useAuth();
   const { showError } = useToast();
@@ -411,10 +418,43 @@ export function useBobbleheadTags(teamSlug: string, bobbleheadId: string) {
     };
   }, [teamSlug, bobbleheadId]);
 
-  // Takes a label rather than a slug: adding a tag and minting one are the same
-  // gesture from the picker, and which of the two happened depends on whether
-  // the vocabulary already has it.
-  const addTag = useCallback(
+  // Writes the join row and nothing else. Takes a whole Tag rather than a label
+  // because the caller picked it out of the vocabulary — re-slugging a label to
+  // find the tag it came from would be doing the same work twice and getting it
+  // wrong on the casing.
+  const applyTag = useCallback(
+    async (tag: Tag): Promise<boolean> => {
+      if (!user) return false;
+      if (tags.some((existing) => existing.slug === tag.slug)) return true;
+
+      const previous = tags;
+      setTags(sortTags([...tags, tag]));
+
+      const { error } = await supabase.from("bobblehead_tags").insert({
+        bobblehead_id: bobbleheadId,
+        team_slug: teamSlug,
+        tag_slug: tag.slug,
+        created_by: user.id,
+      });
+
+      if (error) {
+        // A refused insert errors rather than reporting zero rows the way a
+        // refused delete does, so unlike removeTag this needs no select-back.
+        console.error("Failed to add the tag:", error.message);
+        setTags(previous);
+        showError("Couldn't add that tag. Please try again.");
+        return false;
+      }
+
+      return true;
+    },
+    [user, tags, teamSlug, bobbleheadId, showError],
+  );
+
+  // Mint and apply in one gesture, which is how the picker's submit reads when
+  // what was typed isn't in the vocabulary yet. Admin-only by RLS: a rep's
+  // equivalent is a tag_requests row.
+  const createTag = useCallback(
     async (label: string): Promise<boolean> => {
       if (!user) return false;
 
@@ -426,9 +466,9 @@ export function useBobbleheadTags(teamSlug: string, bobbleheadId: string) {
 
       if (tags.some((tag) => tag.slug === validated.slug)) return true;
 
-      // Upsert with ignoreDuplicates, so applying a tag another team already
-      // minted keeps their label rather than quietly overwriting it with this
-      // one's casing.
+      // Upsert with ignoreDuplicates, so a label that raced into the vocabulary
+      // between the picker's read and this write keeps the casing it landed
+      // with rather than being quietly overwritten by this one's.
       const { error: vocabularyError } = await supabase
         .from("tags")
         .upsert({ slug: validated.slug, label: validated.label, created_by: user.id }, {
@@ -442,26 +482,9 @@ export function useBobbleheadTags(teamSlug: string, bobbleheadId: string) {
         return false;
       }
 
-      const previous = tags;
-      setTags(sortTags([...tags, { slug: validated.slug, label: validated.label }]));
-
-      const { error } = await supabase.from("bobblehead_tags").insert({
-        bobblehead_id: bobbleheadId,
-        team_slug: teamSlug,
-        tag_slug: validated.slug,
-        created_by: user.id,
-      });
-
-      if (error) {
-        console.error("Failed to add the tag:", error.message);
-        setTags(previous);
-        showError("Couldn't add that tag. Please try again.");
-        return false;
-      }
-
-      return true;
+      return applyTag({ slug: validated.slug, label: validated.label });
     },
-    [user, tags, teamSlug, bobbleheadId, showError],
+    [user, tags, showError, applyTag],
   );
 
   const removeTag = useCallback(
@@ -501,11 +524,13 @@ export function useBobbleheadTags(teamSlug: string, bobbleheadId: string) {
 
   const slugs = useMemo(() => new Set(tags.map((tag) => tag.slug)), [tags]);
 
-  return { tags, slugs, isLoading, addTag, removeTag };
+  return { tags, slugs, isLoading, applyTag, createTag, removeTag };
 }
 
-// A rep's side of the admin-curated vocabulary: the requests they have pending
-// on this listing, and the way to file another. Reads only this user's rows —
+// The request side of the admin-curated vocabulary: the asks this user has
+// pending on this listing, and the way to file another. For a rep that's now
+// only ever a label the vocabulary doesn't have — an existing one they apply
+// themselves through useBobbleheadTags. Reads only this user's rows —
 // RLS would enforce that anyway, but asking precisely keeps a busy queue from
 // leaking into every listing page's payload.
 export function useMyTagRequests(

@@ -107,14 +107,17 @@ create policy "bobblehead_tags: public read"
   to anon, authenticated
   using (true);
 
--- Applying a tag is admin-only (a rep who could apply one could route around
--- the review the vocabulary is curated by). A rep's route is a tag_requests row.
-drop policy if exists "bobblehead_tags: editor insert" on public.bobblehead_tags;
+-- Applying a tag the vocabulary already has is the team's rep as well as the
+-- admin — see supabase/rep_tag_apply.sql. The foreign key above is what holds
+-- the line: a rep can only point at a slug the admin has already minted, so
+-- applying one routes around no review. A new label is still a tag_requests
+-- row. Kept in step here so re-running this file doesn't quietly close it.
 drop policy if exists "bobblehead_tags: admin insert" on public.bobblehead_tags;
-create policy "bobblehead_tags: admin insert"
+drop policy if exists "bobblehead_tags: editor insert" on public.bobblehead_tags;
+create policy "bobblehead_tags: editor insert"
   on public.bobblehead_tags for insert
   to authenticated
-  with check (public.is_admin());
+  with check (public.can_edit_team(team_slug));
 
 -- Removing one is the team's rep as well as the admin — see
 -- supabase/rep_tag_removal.sql for why the two halves aren't symmetric. Kept in

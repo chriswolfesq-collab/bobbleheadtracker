@@ -7,10 +7,13 @@ import { TagList } from "@/components/TagList";
 // behind it is stubbed — what's covered is whether the warning appears when it
 // should, what each answer does, and that nothing is written while it's up.
 //
-// Signed in as the admin, who is the only one who can mint now; the rep's side
-// of the same picker is tagRequestPicker.test.tsx.
+// Signed in as the admin, who is the only one who can mint now. A label the
+// vocabulary already has isn't minted at all — it's applied — so those cases
+// land on applyTag. The rep's side of the same picker is repTagRemoval.test.tsx
+// and the plain requester's is tagRequestPicker.test.tsx.
 
-const addTag = vi.fn<(label: string) => Promise<boolean>>();
+const createTag = vi.fn<(label: string) => Promise<boolean>>();
+const applyTag = vi.fn<(tag: { slug: string; label: string }) => Promise<boolean>>();
 const reload = vi.fn();
 
 const VOCABULARY = [
@@ -30,7 +33,8 @@ vi.mock("@/lib/useTags", () => ({
   useBobbleheadTags: () => ({
     tags: [],
     isLoading: false,
-    addTag: (label: string) => addTag(label),
+    applyTag: (tag: { slug: string; label: string }) => applyTag(tag),
+    createTag: (label: string) => createTag(label),
     removeTag: vi.fn(),
   }),
   useTagVocabulary: () => ({ tags: VOCABULARY, isLoading: false, reload }),
@@ -38,7 +42,8 @@ vi.mock("@/lib/useTags", () => ({
 }));
 
 beforeEach(() => {
-  addTag.mockReset().mockResolvedValue(true);
+  createTag.mockReset().mockResolvedValue(true);
+  applyTag.mockReset().mockResolvedValue(true);
   reload.mockReset();
 });
 
@@ -63,7 +68,8 @@ describe("minting a tag the vocabulary may already cover", () => {
     expect(screen.getByRole("button", { name: /Use Sugar Skull/ })).toBeDefined();
     // Nothing is written while the question is open — that's the whole point of
     // asking before minting rather than cleaning up after.
-    expect(addTag).not.toHaveBeenCalled();
+    expect(createTag).not.toHaveBeenCalled();
+    expect(applyTag).not.toHaveBeenCalled();
   });
 
   it("applies the existing tag when that's what was meant", async () => {
@@ -72,7 +78,9 @@ describe("minting a tag the vocabulary may already cover", () => {
     fireEvent.click(screen.getByRole("button", { name: "Add" }));
     fireEvent.click(await screen.findByRole("button", { name: /Use Sugar Skull/ }));
 
-    await waitFor(() => expect(addTag).toHaveBeenCalledWith("Sugar Skull"));
+    await waitFor(() =>
+      expect(applyTag).toHaveBeenCalledWith({ slug: "sugar-skull", label: "Sugar Skull" }),
+    );
   });
 
   // Two tags that look alike sometimes are two tags, and whoever is holding the
@@ -83,7 +91,7 @@ describe("minting a tag the vocabulary may already cover", () => {
     fireEvent.click(screen.getByRole("button", { name: "Add" }));
     fireEvent.click(await screen.findByRole("button", { name: /Create Sugar Skulls anyway/ }));
 
-    await waitFor(() => expect(addTag).toHaveBeenCalledWith("Sugar Skulls"));
+    await waitFor(() => expect(createTag).toHaveBeenCalledWith("Sugar Skulls"));
   });
 
   it("drops the question if the text changes under it", async () => {
@@ -102,7 +110,7 @@ describe("minting a tag the vocabulary may already cover", () => {
     type("Turn Ahead the Clock");
     fireEvent.click(screen.getByRole("button", { name: "Add" }));
 
-    await waitFor(() => expect(addTag).toHaveBeenCalledWith("Turn Ahead the Clock"));
+    await waitFor(() => expect(createTag).toHaveBeenCalledWith("Turn Ahead the Clock"));
     expect(screen.queryByText(/looks like it's already covered/)).toBeNull();
   });
 
@@ -112,7 +120,9 @@ describe("minting a tag the vocabulary may already cover", () => {
     type("star");
     fireEvent.click(screen.getByRole("button", { name: /Star Wars/ }));
 
-    await waitFor(() => expect(addTag).toHaveBeenCalledWith("Star Wars"));
+    await waitFor(() =>
+      expect(applyTag).toHaveBeenCalledWith({ slug: "star-wars", label: "Star Wars" }),
+    );
     expect(screen.queryByText(/looks like it's already covered/)).toBeNull();
   });
 });

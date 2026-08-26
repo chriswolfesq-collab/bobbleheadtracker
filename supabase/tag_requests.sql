@@ -2,9 +2,11 @@
 -- apply tags themselves ("tags: editor insert" in tags.sql), which is how the
 -- duplicate-tags queue filled up — this replaces that direct write with a
 -- request the admin approves or rejects from /admin/tag-requests. Asking is
--- open to any signed-in user, not just reps; the admin is the only writer
--- either way. Idempotent — safe to run more than once. Paste into the Supabase
--- SQL editor.
+-- open to any signed-in user, not just reps. (Since supabase/rep_tag_apply.sql
+-- the queue is narrower than it started: a team rep applies an existing tag to
+-- their own team's listing directly, and files a request only for a label the
+-- vocabulary doesn't have yet.) Idempotent — safe to run more than once. Paste
+-- into the Supabase SQL editor.
 
 -- 1. The queue. One row per (listing, proposed tag, requester). label/slug are
 --    validated to the same shape as tags itself so an approval can't fail the
@@ -132,8 +134,9 @@ create policy "tag_requests: admin delete"
   using (public.is_admin());
 
 -- ---------------------------------------------------------------------------
--- Tighten the tag tables themselves: minting and applying are admin-only now.
--- These replace the editor policies created in tags.sql.
+-- Tighten the tag tables themselves: minting is admin-only now. (Applying was
+-- too when this file was written; rep_tag_apply.sql later gave it back to the
+-- team's rep, and the restatements below are that file's, not this one's.)
 -- ---------------------------------------------------------------------------
 
 drop policy if exists "tags: editor insert" on public.tags;
@@ -143,16 +146,19 @@ create policy "tags: admin insert"
   to authenticated
   with check (public.is_admin());
 
-drop policy if exists "bobblehead_tags: editor insert" on public.bobblehead_tags;
+-- Applying is not, any more: supabase/rep_tag_apply.sql later reopened it to
+-- the team's own rep, since the FK to tags means a rep can only apply a label
+-- the admin already approved. Restated here so re-running this file doesn't
+-- undo that. What a rep files a tag_requests row for now is a *new* label.
 drop policy if exists "bobblehead_tags: admin insert" on public.bobblehead_tags;
-create policy "bobblehead_tags: admin insert"
+drop policy if exists "bobblehead_tags: editor insert" on public.bobblehead_tags;
+create policy "bobblehead_tags: editor insert"
   on public.bobblehead_tags for insert
   to authenticated
-  with check (public.is_admin());
+  with check (public.can_edit_team(team_slug));
 
--- Removal is not: supabase/rep_tag_removal.sql later reopened it to the team's
--- own rep, since taking a wrong tag off one listing decides nothing about the
--- shared vocabulary. Restated here so re-running this file doesn't undo that.
+-- Removal likewise, from supabase/rep_tag_removal.sql — taking a wrong tag off
+-- one listing decides nothing about the shared vocabulary either.
 drop policy if exists "bobblehead_tags: editor delete" on public.bobblehead_tags;
 drop policy if exists "bobblehead_tags: admin delete" on public.bobblehead_tags;
 create policy "bobblehead_tags: editor delete"
