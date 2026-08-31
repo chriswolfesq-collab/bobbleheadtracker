@@ -5,6 +5,7 @@ import { MessageMemberButton } from "@/components/MessageMemberButton";
 import PublicGallery from "@/components/PublicGallery";
 import { useAuth } from "@/lib/auth";
 import { useFriendShelf } from "@/lib/friends";
+import type { PublicGalleryItem } from "@/lib/publicShelf";
 
 // The friendship strip on a public /shelf/<slug> page: the ask/accept button,
 // and — once friends — the full shelf (every owned bobblehead, favorites, and
@@ -20,14 +21,16 @@ import { useFriendShelf } from "@/lib/friends";
 export function FriendShelfPanel({
   slug,
   displayName,
-  publicGalleryShown,
+  publicKinds,
 }: {
   slug: string;
   displayName: string;
-  /** Whether the server already rendered the opt-in public gallery above —
-   *  friends then only gain the wanted list, and re-rendering owned/favorites
-   *  here would show every card twice. */
-  publicGalleryShown: boolean;
+  /** Which kinds of item the server already rendered in the public gallery
+   *  above. Friends only gain what the owner's public switches leave out, and
+   *  re-rendering a kind that's already up there would show every one of those
+   *  cards twice. Each switch is separate — a shelf can publish its wanted list
+   *  and nothing else — so this is a list of kinds, not one flag. */
+  publicKinds: PublicGalleryItem["kind"][];
 }) {
   const { openAuthModal } = useAuth();
   const { status, items, isGalleryLoading, ownerSharesWithFriends, send, accept, cancel } =
@@ -40,7 +43,7 @@ export function FriendShelfPanel({
   const quietButtonClass =
     "rounded-full border border-black/15 px-5 py-2.5 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover";
 
-  const friendItems = publicGalleryShown ? items.filter((item) => item.kind === "wanted") : items;
+  const friendItems = items.filter((item) => !publicKinds.includes(item.kind));
 
   return (
     <div className="mt-10">

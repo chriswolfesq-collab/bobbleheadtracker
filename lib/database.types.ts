@@ -533,6 +533,7 @@ export type Database = {
           email_submission_updates: boolean
           email_wishlist_alerts: boolean
           gallery_public: boolean
+          wanted_public: boolean
           friends_see_items: boolean
           listed_in_search: boolean
           id: string
@@ -556,6 +557,7 @@ export type Database = {
           email_submission_updates?: boolean
           email_wishlist_alerts?: boolean
           gallery_public?: boolean
+          wanted_public?: boolean
           friends_see_items?: boolean
           listed_in_search?: boolean
           id: string
@@ -579,6 +581,7 @@ export type Database = {
           email_submission_updates?: boolean
           email_wishlist_alerts?: boolean
           gallery_public?: boolean
+          wanted_public?: boolean
           friends_see_items?: boolean
           listed_in_search?: boolean
           id?: string
@@ -1644,6 +1647,7 @@ export type Database = {
       set_friends_see_items: { Args: { p_enabled: boolean }; Returns: undefined }
       set_listed_in_search: { Args: { p_enabled: boolean }; Returns: undefined }
       set_gallery_public: { Args: { p_enabled: boolean }; Returns: undefined }
+      set_wanted_public: { Args: { p_enabled: boolean }; Returns: undefined }
       send_rep_activity_digest: { Args: { p_hours?: number }; Returns: number }
       set_email_preference: {
         Args: { p_kind: string; p_enabled: boolean }

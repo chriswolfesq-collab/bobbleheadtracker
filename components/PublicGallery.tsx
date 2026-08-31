@@ -5,11 +5,12 @@ import { publicAsset } from "@/lib/paths";
 import { TEAMS } from "@/lib/teams";
 
 // The opt-in browsable gallery shown below the shelf's counts on a public
-// /shelf/<slug> page, when its owner has turned the gallery on (see
-// supabase/gallery.sql). A plain server component: the items are resolved in
-// getPublicGallery on the server, so there's nothing to hydrate. Splits the
-// owner's items into what they own and what they've favorited, each a grid of
-// cards linking through to the bobblehead.
+// /shelf/<slug> page. Two switches feed it, each on its own: the gallery one
+// (supabase/gallery.sql) for owned and favorites, the wanted-list one
+// (supabase/public_wanted_list.sql) for what they're still after — so any of
+// the three sections below can be the only one that renders. A plain server
+// component: the items are resolved in getPublicGallery on the server, so
+// there's nothing to hydrate.
 function GalleryGrid({ items }: { items: PublicGalleryItem[] }) {
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
@@ -53,8 +54,8 @@ export default function PublicGallery({
 }) {
   const owned = items.filter((item) => item.kind === "owned");
   const favorites = items.filter((item) => item.kind === "favorite");
-  // Only ever present in the friend-gated view (lib/friends.ts) — the public
-  // RPC never returns wanted rows, so public shelves can't render this section.
+  // Public when the owner turned the wanted-list switch on, and always present
+  // in the friend-gated view (lib/friends.ts).
   const wanted = items.filter((item) => item.kind === "wanted");
 
   // getPublicGallery only returns items when the owner opted in, so the page
@@ -92,9 +93,19 @@ export default function PublicGallery({
       {wanted.length > 0 ? (
         <section>
           <div className="mb-3 flex items-baseline justify-between gap-3">
-            <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-600">
-              Wanted
-            </h2>
+            <div className="min-w-0">
+              <h2 className="text-xs font-black uppercase tracking-[0.25em] text-zinc-600">
+                Wanted
+              </h2>
+              {/* The reason this list is worth publishing: whoever opened the
+                  link may be standing in front of one of these deciding
+                  whether to buy it, and half of them have never used the site.
+                  Say what the section is for rather than making them infer it
+                  from the heading. */}
+              <p className="mt-1 text-xs text-zinc-500">
+                Still hunting for these — {displayName} doesn&rsquo;t have them yet.
+              </p>
+            </div>
             <span className="text-xs font-black tabular-nums text-amber-500">{wanted.length}</span>
           </div>
           <GalleryGrid items={wanted} />

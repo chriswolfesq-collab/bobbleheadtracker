@@ -28,7 +28,7 @@ vi.mock("@/lib/friends", () => ({
 }));
 
 const panel = () =>
-  render(<FriendShelfPanel slug="dana" displayName="Dana" publicGalleryShown={false} />);
+  render(<FriendShelfPanel slug="dana" displayName="Dana" publicKinds={[]} />);
 
 beforeEach(() => {
   status = "none";

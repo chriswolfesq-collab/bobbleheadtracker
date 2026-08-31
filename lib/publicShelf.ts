@@ -24,8 +24,10 @@ export type PublicShelf = {
 };
 
 export type PublicGalleryItem = {
-  /** "wanted" never comes out of the public RPC — only the friend-gated
-   *  gallery (lib/friends.ts) produces it. Public shelves stay owned+favorite. */
+  /** Which of the owner's opt-ins put this item here: owned/favorite come from
+   *  the gallery switch, wanted from the separate wanted-list one
+   *  (supabase/public_wanted_list.sql). The friend-gated gallery
+   *  (lib/friends.ts) produces the same three kinds. */
   kind: "owned" | "favorite" | "wanted";
   bobbleheadId: string;
   teamSlug: string;
@@ -134,10 +136,11 @@ export const getPublicShelf = cache(async (slug: string): Promise<PublicShelf | 
 });
 
 /**
- * The owned and favorited items a collector has opted to show on their public
- * shelf, resolved to title/image/href. Empty unless the owner has both shared
- * their shelf and turned the gallery on — get_public_gallery enforces that, so
- * a private or un-opted-in shelf simply yields no items and no gallery renders.
+ * The items a collector has opted to show on their public shelf, resolved to
+ * title/image/href: owned + favorites behind the gallery switch, and the wanted
+ * list behind its own (supabase/public_wanted_list.sql). Empty unless the owner
+ * turned at least one of them on — get_public_gallery enforces that per kind, so
+ * a shelf with neither switch on simply yields no items and no gallery renders.
  *
  * Identity resolution mirrors useMyFavorites in lib/profile.ts: each row is a
  * bobblehead_id + team_slug that's either a curated giveaway (static list) or a
@@ -162,7 +165,14 @@ export const getPublicGallery = cache(async (slug: string): Promise<PublicGaller
 
   return rows
     .map((row) => ({
-      kind: row.kind === "favorite" ? ("favorite" as const) : ("owned" as const),
+      // Same three-way map as the friend gallery in lib/friends.ts, so an item
+      // lands in the same section whichever route it arrived by.
+      kind:
+        row.kind === "favorite"
+          ? ("favorite" as const)
+          : row.kind === "wanted"
+            ? ("wanted" as const)
+            : ("owned" as const),
       ...resolve(row.team_slug, row.bobblehead_id),
     }))
     // A shelf someone shares shouldn't hand its visitors a 404: deleting a

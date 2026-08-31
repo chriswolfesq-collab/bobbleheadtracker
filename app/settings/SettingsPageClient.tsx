@@ -8,6 +8,7 @@ import { GalleryToggle } from "@/components/GalleryToggle";
 import { MessagePrivacyToggle } from "@/components/MessagePrivacyToggle";
 import { SearchListingToggle } from "@/components/SearchListingToggle";
 import { ShelfLinkCard } from "@/components/ShelfLinkCard";
+import { WantedListToggle } from "@/components/WantedListToggle";
 import { useAuth } from "@/lib/auth";
 import {
   useEmailPreferences,
@@ -16,12 +17,14 @@ import {
   useGallerySharing,
   useMyShelf,
   useSearchListing,
+  useWantedSharing,
 } from "@/lib/profile";
 
 export function SettingsPageClient() {
   const { user, isLoading: isAuthLoading } = useAuth();
   const sharing = useMyShelf();
   const gallery = useGallerySharing();
+  const wanted = useWantedSharing();
   const friendVisibility = useFriendVisibility();
   const searchListing = useSearchListing();
   const alerts = useEmailPreferences();
@@ -57,6 +60,10 @@ export function SettingsPageClient() {
           {/* Right under the link card: the gallery decides what that link
               shows, so the two read as one setting. */}
           <GalleryToggle gallery={gallery} />
+          {/* Its own switch rather than part of the one above: what you own and
+              what you're still after are opposite disclosures, and the wish-list
+              use case is publishing only the second. */}
+          <WantedListToggle wanted={wanted} />
           {/* Directly under the public switch: the two answer the same question
               for different audiences, and reading them together is the only way
               to see what each one covers. */}

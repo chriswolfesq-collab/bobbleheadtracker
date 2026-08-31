@@ -10,7 +10,9 @@ import {
   useMyFavorites,
   useMyOwned,
   useMyShelf,
+  useMyWanted,
   useSiteBobbleheadCounts,
+  useWantedSharing,
 } from "@/lib/profile";
 import type { PublicGalleryItem } from "@/lib/publicShelf";
 import { computeShelfStats } from "@/lib/shelfStats";
@@ -27,23 +29,32 @@ export function ShelfPreviewClient() {
   const collection = useCollectionSummary();
   const site = useSiteBobbleheadCounts();
   const gallery = useGallerySharing();
+  const wantedSharing = useWantedSharing();
   const ownedResult = useMyOwned();
   const favoritesResult = useMyFavorites();
+  const wantedResult = useMyWanted();
   // Read the same two facts get_public_shelf returns, so the preview's awards
   // shelf matches what a visitor would actually see.
   const awardFacts = useMyAwardFacts();
 
   const { shelf } = sharing;
 
-  // Gated exactly like the live page: every shelf is public, so the gallery
-  // flag alone decides whether items show or the shelf stays counts-only.
+  // Gated exactly like the live page: every shelf is public, so the two item
+  // flags alone decide what shows — and they're independent, so a shelf can
+  // preview as counts plus a wanted list and nothing else.
   const showGallery = gallery.enabled;
-  const galleryItems: PublicGalleryItem[] = showGallery
-    ? [
-        ...ownedResult.owned.map((item) => ({ kind: "owned" as const, ...item })),
-        ...favoritesResult.favorites.map((item) => ({ kind: "favorite" as const, ...item })),
-      ]
-    : [];
+  const showWanted = wantedSharing.enabled;
+  const galleryItems: PublicGalleryItem[] = [
+    ...(showGallery
+      ? [
+          ...ownedResult.owned.map((item) => ({ kind: "owned" as const, ...item })),
+          ...favoritesResult.favorites.map((item) => ({ kind: "favorite" as const, ...item })),
+        ]
+      : []),
+    ...(showWanted
+      ? wantedResult.wanted.map((item) => ({ kind: "wanted" as const, ...item }))
+      : []),
+  ];
 
   const stats = computeShelfStats(collection.countByTeamSlug, site.totalByTeamSlug);
 
@@ -54,7 +65,9 @@ export function ShelfPreviewClient() {
         collection.isLoading ||
         site.isLoading ||
         gallery.isLoading ||
-        (showGallery && (ownedResult.isLoading || favoritesResult.isLoading))));
+        wantedSharing.isLoading ||
+        (showGallery && (ownedResult.isLoading || favoritesResult.isLoading)) ||
+        (showWanted && wantedResult.isLoading)));
 
   if (isAuthLoading) return null;
 

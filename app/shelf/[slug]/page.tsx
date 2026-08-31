@@ -76,7 +76,7 @@ export default async function ShelfPage({ params }: ShelfPageProps) {
           <FriendShelfPanel
             slug={slug}
             displayName={displayName}
-            publicGalleryShown={galleryItems.length > 0}
+            publicKinds={Array.from(new Set(galleryItems.map((item) => item.kind)))}
           />
         }
       />

@@ -886,6 +886,81 @@ export function useGallerySharing(): GallerySharing {
   };
 }
 
+export type WantedSharing = {
+  enabled: boolean;
+  isLoading: boolean;
+  isSaving: boolean;
+  setEnabled: (enabled: boolean) => Promise<{ error: string | null }>;
+};
+
+// The signed-in user's opt-in to show their wanted list on their public shelf
+// (see supabase/public_wanted_list.sql). Separate from useGallerySharing above
+// because the two disclose opposite things — what you have, and what you're
+// still after — and a collector using their shelf link as a wish list may well
+// want only the second one public. Reads profiles directly, writes through
+// set_wanted_public, for the same reason as every other switch here.
+export function useWantedSharing(): WantedSharing {
+  const { user } = useAuth();
+  const userId = user?.id ?? null;
+  // Optimistic default matches the column default (off).
+  const [enabled, setEnabledState] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    let cancelled = false;
+
+    supabase
+      .from("profiles")
+      .select("wanted_public")
+      .eq("id", userId)
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (cancelled) return;
+
+        if (error) {
+          console.error("Failed to load your wanted list settings:", error.message);
+        } else {
+          setEnabledState(data?.wanted_public ?? false);
+        }
+
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [userId]);
+
+  async function setEnabled(next: boolean): Promise<{ error: string | null }> {
+    if (!userId) return { error: "Not signed in." };
+
+    // Optimistic; reverted below if the save fails.
+    const previous = enabled;
+    setEnabledState(next);
+    setIsSaving(true);
+    const { error } = await supabase.rpc("set_wanted_public", { p_enabled: next });
+    setIsSaving(false);
+
+    if (error) {
+      console.error("Failed to update your wanted list settings:", error.message);
+      setEnabledState(previous);
+      return { error: "Couldn't update your wanted list. Try again." };
+    }
+
+    return { error: null };
+  }
+
+  return {
+    enabled: userId ? enabled : false,
+    isLoading: userId ? isLoading : false,
+    isSaving,
+    setEnabled,
+  };
+}
+
 export type MySubmission = {
   id: string;
   kind: "photo_for_existing" | "new_bobblehead";
