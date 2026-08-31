@@ -11,7 +11,7 @@ import { TEAMS } from "@/lib/teams";
 // the three sections below can be the only one that renders. A plain server
 // component: the items are resolved in getPublicGallery on the server, so
 // there's nothing to hydrate.
-function GalleryGrid({ items }: { items: PublicGalleryItem[] }) {
+export function GalleryGrid({ items }: { items: PublicGalleryItem[] }) {
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
       {items.map((item) => {
@@ -45,12 +45,27 @@ function GalleryGrid({ items }: { items: PublicGalleryItem[] }) {
   );
 }
 
+/** How many wanted cards the shelf page shows before handing off to the full
+ *  list. Only the wanted section is capped: what you own is bounded by what you
+ *  physically have, but a wanted list is the one people mark exhaustively —
+ *  every bobblehead they don't own — and the longest on the site is near a
+ *  thousand items, which is a lot of shelf page for a section that exists to be
+ *  skimmed. Five columns at the widest breakpoint, so this is a whole number of
+ *  rows at every size. */
+const WANTED_PREVIEW_LIMIT = 60;
+
 export default function PublicGallery({
   displayName,
   items,
+  wantedHref,
 }: {
   displayName: string;
   items: PublicGalleryItem[];
+  /** The shelf's full wanted list, when one is public. Given it, a long wanted
+   *  section is cut to WANTED_PREVIEW_LIMIT and links onward; without it the
+   *  section renders whole, which is what the friend-gated view does — those
+   *  items aren't public, so there's no page to send anyone to. */
+  wantedHref?: string;
 }) {
   const owned = items.filter((item) => item.kind === "owned");
   const favorites = items.filter((item) => item.kind === "favorite");
@@ -61,6 +76,12 @@ export default function PublicGallery({
   // getPublicGallery only returns items when the owner opted in, so the page
   // already guards on items.length; nothing to show if somehow all are empty.
   if (owned.length === 0 && favorites.length === 0 && wanted.length === 0) return null;
+
+  // Null unless there's both somewhere to send people and something left to
+  // see there — which also narrows the href for the Link below.
+  const overflowHref =
+    wantedHref && wanted.length > WANTED_PREVIEW_LIMIT ? wantedHref : null;
+  const shownWanted = overflowHref ? wanted.slice(0, WANTED_PREVIEW_LIMIT) : wanted;
 
   return (
     <div className="mt-12 space-y-10">
@@ -108,7 +129,20 @@ export default function PublicGallery({
             </div>
             <span className="text-xs font-black tabular-nums text-amber-500">{wanted.length}</span>
           </div>
-          <GalleryGrid items={wanted} />
+          <GalleryGrid items={shownWanted} />
+          {overflowHref ? (
+            // The count in the header already says how many there are; this is
+            // the way to the rest of them, and it's below the grid because
+            // that's where someone runs out of cards and looks for more.
+            <div className="mt-5 text-center">
+              <Link
+                href={overflowHref}
+                className="inline-block rounded-full border border-black/15 px-5 py-2.5 text-xs font-black uppercase tracking-wide text-zinc-700 transition hover:border-accent hover:text-accent-hover"
+              >
+                See all {wanted.length} wanted
+              </Link>
+            </div>
+          ) : null}
         </section>
       ) : null}
     </div>

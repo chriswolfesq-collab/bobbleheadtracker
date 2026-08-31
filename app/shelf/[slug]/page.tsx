@@ -64,6 +64,7 @@ export default async function ShelfPage({ params }: ShelfPageProps) {
         totalByTeamSlug={totalByTeamSlug}
         stats={stats}
         galleryItems={galleryItems}
+        wantedHref={`/shelf/${slug}/wanted`}
         memberNumber={memberNumber}
         repTeams={repTeams}
         approvedSubmissions={approvedSubmissions}

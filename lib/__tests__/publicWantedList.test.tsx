@@ -102,6 +102,44 @@ describe("the public wanted section", () => {
     expect(document.body.textContent ?? "").toMatch(/still hunting for these/i);
     expect(screen.getByText("ryne-sandberg")).toBeTruthy();
   });
+
+  // A wanted list is the one list people mark exhaustively — the longest on the
+  // site is near a thousand items — so the shelf shows a preview and sends the
+  // rest to its own page.
+  const many = (n: number) =>
+    Array.from({ length: n }, (_, i) => item("wanted", `wanted-${i}`));
+  const cards = () =>
+    screen.getAllByRole("link").filter((el) => el.getAttribute("href")?.includes("/bobbleheads/"));
+
+  it("cuts a long list to a preview and links to the rest, counting the whole list", () => {
+    render(
+      <PublicGallery displayName="Dana" items={many(61)} wantedHref="/shelf/dana/wanted" />,
+    );
+
+    expect(cards()).toHaveLength(60);
+    const seeAll = screen.getByRole("link", { name: /see all 61 wanted/i });
+    expect(seeAll.getAttribute("href")).toBe("/shelf/dana/wanted");
+    // The header count is the real total, not the number of cards on screen.
+    expect(screen.getByText("61")).toBeTruthy();
+  });
+
+  it("leaves a list that fits alone, with nothing to click through to", () => {
+    render(
+      <PublicGallery displayName="Dana" items={many(60)} wantedHref="/shelf/dana/wanted" />,
+    );
+
+    expect(cards()).toHaveLength(60);
+    expect(screen.queryByRole("link", { name: /see all/i })).toBeNull();
+  });
+
+  it("shows a friend the whole list, since their view has no page to link to", () => {
+    // No wantedHref: these items are friend-only, so /shelf/dana/wanted would
+    // 404 on them. Truncating with nowhere to go would just hide cards.
+    render(<PublicGallery displayName="Dana" items={many(61)} />);
+
+    expect(cards()).toHaveLength(61);
+    expect(screen.queryByRole("link", { name: /see all/i })).toBeNull();
+  });
 });
 
 vi.mock("@/components/PublicGallery", async (importOriginal) => {

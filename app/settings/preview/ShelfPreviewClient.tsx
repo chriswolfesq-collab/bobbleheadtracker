@@ -128,6 +128,7 @@ export function ShelfPreviewClient() {
           totalByTeamSlug={site.totalByTeamSlug}
           stats={stats}
           galleryItems={galleryItems}
+          wantedHref={shelf.slug ? `/shelf/${shelf.slug}/wanted` : undefined}
           memberNumber={awardFacts.memberNumber}
           repTeams={awardFacts.repTeams}
           approvedSubmissions={awardFacts.approvedSubmissions}

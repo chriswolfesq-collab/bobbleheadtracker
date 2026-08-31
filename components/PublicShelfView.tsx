@@ -19,6 +19,10 @@ export type PublicShelfViewProps = {
   totalByTeamSlug: Record<string, number>;
   stats: ShelfStats;
   galleryItems: PublicGalleryItem[];
+  /** Where a long wanted list continues, when the owner publishes one. Passed
+   *  down so the shelf shows a preview and links onward instead of hanging a
+   *  thousand cards under the display case. */
+  wantedHref?: string;
   /** Signup rank, for the founding-member award. Null hides it. */
   memberNumber: number | null;
   /** Team slugs this collector reps, for the team-rep award. */
@@ -47,6 +51,7 @@ export default function PublicShelfView({
   totalByTeamSlug,
   stats,
   galleryItems,
+  wantedHref,
   memberNumber,
   repTeams,
   approvedSubmissions,
@@ -128,7 +133,11 @@ export default function PublicShelfView({
             page's other main event, and looked starved at 2xl under a 6xl wall. */}
         {galleryItems.length > 0 ? (
           <div className="relative left-1/2 w-[calc(100vw-1rem)] max-w-6xl -translate-x-1/2 px-2 sm:px-4">
-            <PublicGallery displayName={displayName} items={galleryItems} />
+            <PublicGallery
+              displayName={displayName}
+              items={galleryItems}
+              wantedHref={wantedHref}
+            />
           </div>
         ) : null}
 
