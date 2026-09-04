@@ -1571,6 +1571,14 @@ export type Database = {
           user_id: string
         }[]
       }
+      get_team_reps: {
+        Args: { p_team_slug: string }
+        Returns: {
+          avatar_path: string | null
+          display_name: string
+          slug: string
+        }[]
+      }
       get_public_gallery: {
         Args: { p_slug: string }
         Returns: {

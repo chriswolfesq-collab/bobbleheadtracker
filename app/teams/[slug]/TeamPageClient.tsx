@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { TeamRepsCard } from "@/components/TeamRepsCard";
 import { ButtonLink } from "@/components/ui/Button";
 import { ProgressRing } from "@/components/ui/ProgressRing";
 import { useApprovedPhotos } from "@/lib/approvedPhotos";
@@ -504,6 +505,10 @@ export function TeamPageClient({
                   </button>
                 </div>
               )}
+
+              {/* Who already has the job, then the pitch to take it on where no
+                  one has. The card renders nothing when the team has no rep. */}
+              <TeamRepsCard teamSlug={team.slug} teamName={team.name} />
 
               {/* The pitch lands hardest on a team page, where someone is already
                   looking at the checklist they'd be looking after. The team is
