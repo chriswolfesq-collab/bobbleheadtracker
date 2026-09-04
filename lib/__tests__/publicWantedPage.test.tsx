@@ -38,6 +38,7 @@ function shelf(): PublicShelf {
       teamsStarted: 0,
       teamsCompleted: 0,
       teamCount: 30,
+      slotsEmpty: 0,
     },
     memberNumber: null,
     repTeams: [],
