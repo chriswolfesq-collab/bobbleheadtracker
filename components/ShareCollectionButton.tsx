@@ -106,8 +106,9 @@ export function ShareCollectionButton({
       ? `${window.location.origin}/shelf/${shelf.slug}`
       : null;
 
-  // Stated flatly rather than as a boast or a dare. The number is the provocation.
-  const shareText = `I've got ${stats.totalOwned} MLB bobbleheads on my shelf.`;
+  // A dare, not a status update — the point of sharing is to goad someone into
+  // building a shelf of their own to answer it.
+  const shareText = `I've got ${stats.totalOwned} MLB bobbleheads on my shelf. Think you've got more?`;
 
   async function buildImage(): Promise<Blob | null> {
     try {
@@ -336,8 +337,11 @@ export function ShareCollectionButton({
             </div>
 
             {/* The image travels without its link on Instagram and the like, so
-                the address rides along inside the picture. */}
-            <p className="px-8 pt-2 text-center text-[11px] font-black uppercase tracking-[0.2em] text-zinc-500">
+                the dare and the address ride along inside the picture. */}
+            <p className="px-8 pt-2 text-center text-[11px] font-black uppercase tracking-[0.2em] text-amber-400">
+              Think you&apos;ve got more? Prove it
+            </p>
+            <p className="px-8 pt-1 text-center text-[11px] font-black uppercase tracking-[0.2em] text-zinc-500">
               {shelf.slug ? `bobbleshelf.com/shelf/${shelf.slug}` : "bobbleshelf.com"}
             </p>
           </div>

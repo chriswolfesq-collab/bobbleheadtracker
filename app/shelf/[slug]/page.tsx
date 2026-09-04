@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: ShelfPageProps): Promise<Meta
   if (!shelf) return { title: "Shelf not found" };
 
   const { displayName, stats } = shelf;
-  const title = `${displayName} has ${stats.totalOwned} MLB bobbleheads`;
-  const description = `${stats.totalOwned} of ${stats.siteTotal} stadium giveaway bobbleheads, across ${stats.teamsStarted} of ${stats.teamCount} teams. How many have you got?`;
+  const title = `${displayName} has ${stats.totalOwned} MLB bobbleheads. Think you've got more?`;
+  const description = `${stats.totalOwned} stadium giveaway bobbleheads across ${stats.teamsStarted} of ${stats.teamCount} teams. Build your own shelf and prove you've got the bigger collection.`;
 
   return {
     title,

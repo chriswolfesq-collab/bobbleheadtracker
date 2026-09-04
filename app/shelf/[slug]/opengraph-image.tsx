@@ -127,8 +127,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
               mostly empty track reads "barely started" — the opposite of what a
               shared card should say. The numbers survive as a quiet text line. */}
           <div style={{ display: "flex", marginTop: 12, fontSize: 24, fontWeight: 400, color: "#a1a1aa" }}>
-            {stats.totalOwned} of {stats.siteTotal} · {stats.teamsStarted} of {stats.teamCount} teams
-            started
+            {stats.teamsStarted} of {stats.teamCount} teams started · {stats.siteTotal} to collect
           </div>
         </div>
 
@@ -161,16 +160,42 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           </div>
         ) : null}
 
+        {/* The dare. This is what turns a brag card into a recruitment card:
+            the viewer isn't just shown a number, they're challenged to beat it.
+            An amber pill so it reads as the card's one button-shaped thing even
+            at feed-thumbnail size. */}
         <div
           style={{
             display: "flex",
-            fontSize: 22,
-            fontWeight: 900,
-            letterSpacing: "0.2em",
-            color: "#71717a",
+            alignItems: "center",
+            gap: 14,
+            padding: "14px 36px",
+            borderRadius: 999,
+            backgroundImage: "linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%)",
           }}
         >
-          BOBBLESHELF.COM
+          <div
+            style={{
+              display: "flex",
+              fontSize: 24,
+              fontWeight: 900,
+              letterSpacing: "0.06em",
+              color: "#0e1626",
+            }}
+          >
+            THINK YOU&apos;VE GOT MORE? PROVE IT
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 24,
+              fontWeight: 900,
+              letterSpacing: "0.06em",
+              color: "#7c3d09",
+            }}
+          >
+            BOBBLESHELF.COM
+          </div>
         </div>
       </div>
     ),
